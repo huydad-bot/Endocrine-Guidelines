@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로락틴종 진단·치료 가이드라인 (Pituitary Society 2023)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* Prolactinoma 테마 — 뇌하수체(보라) 기반 */
+    --pit: #6b3fa0;     /* 뇌하수체 — 보라 */
+    --dopa: #1a7f6e;    /* 도파민/치료 — 청록 */
+    --onco: #9b1c2e;    /* 악성/공격성 — 진홍 */
+    --preg: #c47d00;    /* 임신/특수상황 — 황금 */
+    --s0: #6b7280;
+    --s1: #d97706;
+    --s2: #ea7d1a;
+    --s3: #c2410c;
+    --s4: #9b1c2e;
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-prl {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-prl span:nth-child(1) { background: var(--pit);  color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-prl span:nth-child(2) { background: var(--dopa); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--pit); border-bottom-color: var(--pit); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-pit     { background: #f3e8ff; border-left: 3px solid var(--pit);   color: #5b2a8c; }
+  .alert-dopa    { background: #e0f4f1; border-left: 3px solid var(--dopa);  color: #0f5549; }
+  .alert-onco    { background: #fce8eb; border-left: 3px solid var(--onco);  color: var(--onco); }
+  .alert-preg    { background: #fff3cd; border-left: 3px solid var(--preg); color: #7d4e00; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+
+  /* ── 위험도 히트맵 ── */
+  .risk-low   { background: #d4edda; color: #155724; font-weight: 600; text-align: center; }
+  .risk-mod   { background: #fff3cd; color: #856404; font-weight: 600; text-align: center; }
+  .risk-high  { background: #ffd8a8; color: #7d3b00; font-weight: 600; text-align: center; }
+  .risk-vhigh { background: #f5c6cb; color: #721c24; font-weight: 600; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── STAGE / SIZE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .s0 { background: #e5e7eb; color: var(--s0); border: 1px solid #9ca3af; }
+  .s1 { background: #fef3c7; color: #92400e; border: 1px solid #d97706; }
+  .s2 { background: #ffedd5; color: #7c2d12; border: 1px solid #ea7d1a; }
+  .s3 { background: #fee2e2; color: #7f1d1d; border: 1px solid #c2410c; }
+  .s4 { background: #fce8eb; color: var(--onco); border: 1px solid var(--onco); }
+  .s4b { background: #f3e8ff; color: #5b21b6; border: 1px solid #7c3aed; }
+
+  /* ── GRADE 배지 (Strong / Weak) + hover tooltip ── */
+  .grade-wrap { position: relative; display: inline-block; }
+  .grade { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; cursor: help; border: 1px solid transparent; }
+  .grade-strong { background: #dafbe1; color: #116329; border-color: #1a7f37; }
+  .grade-weak   { background: #fff3cd; color: #7d4e00; border-color: #d97706; }
+  .grade-tip {
+    display: none; position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+    background: #1f2328; color: #fff; font-size: calc(10.5px * var(--fscale, 1)); font-weight: 500;
+    padding: 6px 9px; border-radius: 6px; white-space: normal; width: 220px; line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25); z-index: 50; text-align: left;
+  }
+  .grade-tip::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:#1f2328; }
+  .grade-wrap:hover .grade-tip { display: block; }
+
+  /* ── PILL / DRUG ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-caber { background: #f3e8ff; color: #5b21b6; }
+  .drug-bromo { background: #ddf4ff; color: #0550ae; }
+  .drug-quin  { background: #dafbe1; color: #116329; }
+  .drug-surg  { background: #fce8eb; color: var(--onco); }
+  .drug-rt    { background: #fff3cd; color: #7d4e00; }
+  .drug-tmz   { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+  .drug-hrt   { background: #fce7f3; color: #831843; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── PATHWAY (병태생리 흐름) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-pit   { background: #f3e8ff; border: 1.5px solid var(--pit);  color: #5b2a8c; }
+  .gear-dopa  { background: #e0f4f1; border: 1.5px solid var(--dopa); color: #0f5549; }
+  .gear-onco  { background: #fce8eb; border: 1.5px solid var(--onco); color: var(--onco); }
+  .gear-preg  { background: #fff3cd; border: 1.5px solid var(--preg); color: #7d4e00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── FLOW STEP (알고리즘 흐름) ── */
+  .flow-step { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .flow-box { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .flow-arrow { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); flex-shrink:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-prl">
+        <span>PRL</span><span>OMA</span>
+      </div>
+      <h1>프로락틴종 진단 및 치료 가이드라인</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://doi.org/10.1038/s41574-023-00886-5" class="source-link" target="_blank">Pituitary Society International Consensus Statement · Nat Rev Endocrinol 2023;19:722–740 ↗</a>
+      <span style="color:var(--text2)"> · Petersenn S, Fleseriu M, Casanueva FF, et al. · Dec 2023</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by the Pituitary Society</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단</div>
+    <div class="tab" onclick="showTab('imaging')">🧠 영상</div>
+    <div class="tab" onclick="showTab('treatment')">💊 치료</div>
+    <div class="tab" onclick="showTab('special')">⚡ 특수상황</div>
+    <div class="tab" onclick="showTab('aggressive')">🔥 공격성·저항성</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--pit)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--pit)">50%</div><div class="stat-lbl">전체 뇌하수체<br>선종 중 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--dopa)">5–10:1</div><div class="stat-lbl">여:남 비율<br>(25–44세)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--onco)">&gt;40mm</div><div class="stat-lbl">Giant<br>prolactinoma 기준</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--preg)">93%</div><div class="stat-lbl">미세선종<br>수술 완치율</div></div>
+  </div>
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 프로락틴종 정의 및 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-pit">
+        <span>🧠</span>
+        <div><strong>프로락틴종(Prolactinoma)</strong> = lactotroph(젖분비세포) 기원의 양성 뇌하수체 선종으로, 과도한 프로락틴 분비로 <strong>성선기능저하증·생식 장애·종괴 효과</strong>를 일으킴.<br>
+        전체 뇌하수체 선종의 50%를 차지하는 가장 흔한 호르몬 분비 선종. 대부분 散發性(sporadic) 단클론 신생물.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-pit">
+          <div class="gear-title">🟣 크기 분류</div>
+          미세선종 &lt;10mm<br>
+          대선종 ≥10mm<br>
+          <small>Giant &gt;40mm (남:여 9:1)</small>
+        </div>
+        <div class="gear-box gear-dopa">
+          <div class="gear-title">🟢 1차 치료</div>
+          도파민 효능제(DA)<br>
+          <small>카베르골린 우선 선택</small>
+        </div>
+        <div class="gear-box gear-onco">
+          <div class="gear-title">🔴 비율</div>
+          여성 Macro:Micro = 1:8<br>
+          남성 Macro:Micro = 4:1<br>
+          <small>남성에서 더 큰·침습적 종양</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>미세선종은 거의 대선종으로 진행하지 않음(강한 권고). 대선종, 특히 남성에서는 임상 경과가 다르며 <strong>더 긴밀한 추적관찰</strong> 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 병태생리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> 프로락틴 분비의 신경내분비 조절</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-step">
+        <div class="flow-box" style="background:#f3e8ff;border-color:var(--pit)"><strong>시상하부 도파민</strong> → 뇌하수체 줄기 통과 → D2 수용체(D2R) 결합 → 프로락틴 분비 <strong>억제</strong></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-arrow">↕️</div>
+        <div class="flow-box">대응 자극인자: <strong>TRH, VIP</strong>(시상하부) 및 <strong>에스트로겐</strong> → 프로락틴 분비 <strong>촉진</strong></div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div><strong>줄기 효과(Stalk effect)</strong>: 시상하부-뇌하수체 줄기를 압박하는 모든 종괴(비분비 선종 포함)는 도파민 흐름을 차단하여 경도~중등도 고프로락틴혈증 유발 가능 (보통 ULN의 6배 이하).<br>
+        <strong>신장 청소율</strong>: 프로락틴은 신장으로 청소되므로 만성 신부전에서도 상승 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 분자 병인 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 분자 병인기전</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>항목</th><th>권고/소견</th><th>등급</th></tr>
+        <tr><td>체성(somatic) 변이 검사</td><td>일상적으로 시행하지 않음</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td><em>MEN1</em> 생식세포 변이 검사</td><td>가족력 있는 경우 또는 &lt;30세 대선종에서 고려</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>SF3B1<sup>R625H</sup> 핫스팟 변이</td><td>프로락틴종의 약 20%에서 발견. 높은 프로락틴·공격적 거동과 연관 가능성</td><td>—</td></tr>
+        <tr><td><em>AIP</em> 변이 검사</td><td>매우 드물게 검출 → 일상 스크리닝 권장하지 않음</td><td>—</td></tr>
+        <tr><td>MEN1 동반 대선종</td><td>더 공격적, 치료 저항 가능성. 미세선종은 오히려 덜 공격적일 수 있음</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: 진단 ══════════════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <!-- 임상 양상 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상 양상 — 고프로락틴혈증 및 성선기능저하증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>안장(sellar) 종괴 영상 소견 → 프로락틴 평가 필수</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>유루(galactorrhoea) → 고프로락틴혈증 평가 (임신·수유 등 생리적 원인 제외). <strong>유루 없음이 고프로락틴혈증을 배제하지 않음</strong></td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>여성: 성욕 감소·불임·월경이상·무월경 / 남성: 성욕 감소·불임·발기부전 → 평가 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>비만·대사증후군 위험 증가와 연관 가능성</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div class="alert alert-pit" style="margin-top:8px">
+        <span>💡</span>
+        <div>고프로락틴혈증은 kisspeptin 신경 기능 억제 → GnRH 분비 감소 → 시상하부-뇌하수체-성선 축 억제. 보통 프로락틴 정상화 후 회복되나, <strong>남성 대선종</strong>에서는 성선기능저하증이 지속될 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기타 뇌하수체 호르몬 결핍 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫧</span> 기타 뇌하수체 호르몬 결핍 (GH·TSH·ACTH)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>종양 크기</th><th>TSH 결핍 (치료 전)</th><th>ACTH 결핍 (치료 전)</th></tr>
+        <tr><td>대선종 10–19mm</td><td>6.7%</td><td>0%</td></tr>
+        <tr><td>대선종 20–39mm</td><td>17.9%</td><td>6.9%</td></tr>
+        <tr><td>Giant ≥40mm</td><td>26.1%</td><td>33.3%</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📋</span>
+        <div><strong>스크리닝 권고</strong>: 대선종 및 6–9mm 미세선종 진단 시 GH·TSH·ACTH 평가. 수술 시행 환자는 <strong>술후 6–12주</strong> 재검사 (강한 권고). 베이스라인 결핍 있거나 종양 &gt;6mm인 경우 수술 후 전원 재검사 권고 의견 존재.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 고프로락틴혈증 원인 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 고프로락틴혈증 원인 감별</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>프로락틴 &lt;ULN 5배 → 재검사. 스트레스 영향 의심 시 cannulated 채혈 권고</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>일반적으로 선종 크기와 프로락틴 수치는 비례. 불일치 시 다른 원인 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>약물 복용력을 엄격히 검토 (약물 유발성 배제)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>원발성 갑상선저하증·신부전·간부전 → 경도 고프로락틴혈증 원인으로 인지</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>임신을 간과하지 말 것</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--pit);margin-bottom:6px">병태생리학적·약물학적 원인 분류</div>
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧠 시상하부-뇌하수체 줄기 손상</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">선종, 두개인두종, Rathke 낭종, 안장상부 종괴 확장, 수막종, 생식세포종, 시상하부/뇌하수체 전이, 육아종성 질환, 침윤성 질환, 방사선치료, 두개내압저하, 외상(줄기 절단, 안장 수술, 중증 두부손상).</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🫀 뇌하수체성 원인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">프로락틴종, 말단비대증, 대선종(압박성), 특발성, 다호르몬 분비 선종, 림프구성 뇌하수체염, 부갑상선 옆 종괴.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🏥 비뇨하수체성 원인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">이소성 프로락틴 분비, 원발성 갑상선저하증, 만성 신부전, 간경화, 가상임신, 간질발작, 영양실조, 신경성 식욕부진, 흉부 원인(신경성, 흉벽 외상, 흉부 수술, 대상포진).</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>💊 약물학적 원인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <strong>도파민 수용체 차단제</strong>: 페노치아진계, 부티로페논계(haloperidol), 메토클로프라마이드, 돔페리돈<br>
+            <strong>신경이완제</strong>: risperidone, chlorpromazine, pimozide 등<br>
+            <strong>오피오이드류</strong>: heroin, methadone, morphine<br>
+            <strong>항우울제</strong>: 삼환계, SSRI<br>
+            <strong>기타</strong>: α-메틸도파, reserpine, 항히스타민(cimetidine), 항고혈압제(verapamil), 페니토인, 에스트로겐(경구피임약, 논쟁적)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 생화학적 평가 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 생화학적 평가 — 검사 함정과 정확한 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>증상-수치 불일치 시 위양성/위음성 가능성 의심</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>표준 검사 참고치가 경도 고프로락틴혈증 인식에 불충분할 수 있음</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>상한 초과 검체는 희석 후 정확한 값 산출</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>중등도 상승(&lt;200ng/mL), 영상 불일치 시 macroprolactinaemia 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>biotin 노출·heterophilic 항체 등 검사 오류 가능성 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>Giant 선종 + 정상/경도상승 프로락틴 → 1:100 희석 재검 (hook effect 배제)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="grid2" style="gap:8px;margin-top:10px">
+        <div class="alert alert-warn">
+          <span>🪤</span>
+          <div><strong>Macroprolactinaemia</strong><br>Big-big 프로락틴(&gt;150kDa, IgG 결합형)이 검사를 방해하나 생물학적으로 비활성 → 대부분 증상 없음. 고프로락틴혈증 환자의 10–25%에서 발견. PEG 침전법으로 진성 고프로락틴혈증과 구별.</div>
+        </div>
+        <div class="alert alert-danger">
+          <span>🎣</span>
+          <div><strong>Hook Effect</strong><br>극단적으로 높은 프로락틴이 두 항체를 모두 포화시켜 샌드위치 형성을 방해 → 실제보다 <strong>낮게</strong> 측정. 현재 검사법에서는 드묾. 임상적으로 macroprolactinoma 의심 + 경도 상승 시 의심.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 진단 알고리즘 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 진단 알고리즘 (Fig. 2 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-step">
+        <div class="flow-box" style="background:#f3e8ff;border-color:var(--pit)"><strong>프로락틴 측정 지표</strong>: 임상(유루·성욕감소·불임·월경이상/ED) + 검사(성선기능저하증) + 영상(안장 종괴)</div>
+      </div>
+      <div class="flow-step"><div class="flow-arrow">⬇️</div></div>
+      <div class="grid2" style="gap:8px">
+        <div class="flow-box" style="background:#d4edda">프로락틴 ≤200 ng/mL<br><small>→ 스트레스·약물·갑상선저하증·신부전·간질환·임신 고려</small></div>
+        <div class="flow-box" style="background:#f5c6cb">프로락틴 &gt;200 ng/mL<br><small>→ 프로락틴종 가능성 높음</small></div>
+      </div>
+      <div class="flow-step" style="margin-top:6px"><div class="flow-arrow">⬇️</div></div>
+      <div class="flow-box" style="background:var(--surface2)"><strong>불일치/모호한 결과</strong> → ULN 확립 여부 재확인 · &lt;5×ULN이면 재검/cannulated 채혈 · 무증상이면 macroprolactin 배제</div>
+      <div class="flow-step" style="margin-top:6px"><div class="flow-arrow">⬇️</div></div>
+      <div class="grid2" style="gap:8px">
+        <div class="flow-box" style="background:#fff4e5">대선종 + 경도상승 프로락틴<br><small>→ High-dose hook effect 고려</small></div>
+        <div class="flow-box" style="background:#fff4e5">선종 + 중등도상승 프로락틴<br><small>→ Non-prolactinoma stalk effect 고려</small></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /diagnosis -->
+
+
+<!-- ══════════════════ TAB 3: 영상 ══════════════════ -->
+<div id="tab-imaging" class="panel">
+
+  <!-- MRI 기본 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> MRI — 진단 및 추적관찰 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>확진된 고프로락틴혈증에서 MRI 시행 (비선종 원인 배제 후). 치료 반응 평가 및 술후 3–6개월 기준선 확립</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>추적영상 주기는 임상·생화학·조직학적 요인 및 이전 영상 결과에 기반</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>치료저항성, 신증상(시야변화·두통·유루), 신규 뇌하수체기능저하, 프로락틴 재상승 시 추가 영상</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>초기 진단에 동적 gadolinium 조영증강 중요. 추적 시 macrocyclic chelate 선호(linear 대비 장기 잔류 위험 고려)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>CKD 환자에서 gadolinium 사용 주의 (신원성 전신섬유증 위험)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>공격적 거동 고위험 선종은 더 긴밀한 추적 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="alert alert-pit" style="margin-top:8px">
+        <span>🎨</span>
+        <div><strong>T2 신호강도 패턴</strong>: 프로락틴종은 T2에서 경도 고신호 강도가 일반적. 남성은 이질적 T2 신호(괴사·출혈 반영)를 보일 수 있으며 더 높은 프로락틴·낮은 DA 반응성과 연관. 여성에서 T2 저신호는 DA 저항성과 연관.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시점별 영상 타이밍 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⏱️</span> 상황별 MRI 타이밍</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#f3e8ff;border:1.5px solid var(--pit);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#5b2a8c;margin-bottom:8px">💊 약물치료 후</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li><strong>대선종</strong>: 카베르골린 시작 3–6개월 후 재촬영 (3개월째 크기 감소가 장기 반응 예측)</li>
+            <li><strong>미세선종</strong>: 임상·생화학적 추적에 따라 1년 후, 또는 DA 중단 고려 시</li>
+            <li>치료저항성 의심·프로락틴 지속상승 시 추가 영상</li>
+            <li>치료반응 양호 시 1년 이후 추가 영상 불필요 (프로락틴 지속 상승 없으면)</li>
+          </ul>
+        </div>
+        <div style="background:#e0f4f1;border:1.5px solid var(--dopa);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#0f5549;margin-bottom:8px">🔪 수술 후</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>술후 <strong>3–6개월</strong> 새 기준선 확립</li>
+            <li>DA 저항성·부분절제: 6–12개월 간격 추적</li>
+            <li>완전절제+프로락틴 정상화: 재발 시에만 재영상</li>
+            <li>미세선종 수술 후 정상화 달성 시 고프로락틴혈증 재발 시에만 영상 필요</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-preg" style="margin-top:8px">
+        <span>🤰</span>
+        <div><strong>임신 중</strong>: 두통 악화·새로운 양상의 두통 또는 시야변화 시 <strong>비조영 MRI</strong> 시행. 미세선종에서도 졸중(apoplexy) 보고 있음 → 우려 증상 시 영상 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DA 중단 시 영상 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 도파민 효능제 중단 고려 시 영상 소견 의미</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div>MRI상 <strong>잔여 선종 소실</strong>은 중단 후 재발 없을 양호한 예후 인자. 중단 시도 시 프로락틴은 첫해 3개월마다, 이후 매년 측정. 고프로락틴혈증 재발 시 MRI 재시행.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div>불일치 결과 흔함: 프로락틴 정상화 + 종양 크기 불변, 또는 종양 현저 축소 + 프로락틴 불완전 정상화. 첫 6개월 내 정상화가 흔하나 일부는 수년간 서서히 축소.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 신규 영상 전략 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 신규 영상 전략 (기능적 영상)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>일상 임상에서 신규 영상 전략의 역할은 제한적</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>기능적 영상으로 DA 치료반응 예측 가능성</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>Hybrid MRI 기법의 기능적 영상이 일부 환자에서 술전 국소화 향상 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>🔍</span>
+        <div><strong>¹¹C-methionine PET</strong>: MRI에서 불확실한 경우 de novo 및 잔존 프로락틴종 국소화에 보조적 역할 가능 (특히 DA 불내성/저항성으로 수술 예정인 미세선종).</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /imaging -->
+
+
+<!-- ══════════════════ TAB 4: 치료 ══════════════════ -->
+<div id="tab-treatment" class="panel">
+
+  <!-- 치료 알고리즘 개요 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 1차 치료 선택 (Fig. 3a 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#fef9ec;border:1.5px solid var(--s1);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#92400e;margin-bottom:8px">미세선종 / Knosp 0–1 대선종</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li><span class="drug drug-caber">도파민 효능제</span> 또는 <span class="drug drug-surg">수술</span> — 다학제 논의 후 결정</li>
+            <li>경험 많은 신경외과 의사의 수술은 치료적 가능성 높고 비용효율적</li>
+            <li>폐경 후 무증상 정상선기능 → <strong>관찰</strong>도 가능</li>
+            <li>임신 무관 폐경전 여성 + 정상선기능 → <strong>호르몬대체요법(HRT)</strong> 단독도 옵션</li>
+          </ul>
+        </div>
+        <div style="background:#fce8eb;border:1.5px solid var(--onco);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--onco);margin-bottom:8px">Knosp ≥2 대선종</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li><span class="drug drug-caber">카베르골린</span> 치료 — 강한 권고</li>
+            <li>수술 가능성 낮음 → 약물치료 선호</li>
+            <li>고려요소: 젊은 연령·급속 시야소실·GH 혼합 분비·정신과 질환 → 수술 선호 인자</li>
+            <li>고려요소: 남성·소아 → 약물치료 선호 인자</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 도파민 효능제: 효능 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 도파민 효능제 — 효능</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>DA는 프로락틴 정상화, 임상증상 개선, 선종 축소에 매우 효과적</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td><span class="drug drug-caber">카베르골린</span>이 우선 선택 (장반감기·고효능·양호한 내약성)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>Knosp 0–1: 약물치료 전 수술의 치료가능성·위험 다학제 논의</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>Knosp ≥2: 카베르골린 치료</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>타 DA 저항/불내성 → 카베르골린으로 전환</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>장기치료 필요성 및 영구치유 가능성 제한을 환자와 논의</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>임신 비희망 여성: DA 시작 시 기계적 피임 권고 (월경 재개 전 임신 가능)</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="sec-sep"></div>
+      <div class="grid3" style="gap:8px">
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center">
+          <div class="drug drug-caber" style="font-size:13px;padding:4px 10px">카베르골린</div>
+          <div style="font-size: calc(12px * var(--fscale, 1));margin-top:6px">0.5–3.5mg/주<br><small>(FDA 승인 최대 2mg/주)</small></div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center">
+          <div class="drug drug-bromo" style="font-size:13px;padding:4px 10px">브로모크립틴</div>
+          <div style="font-size: calc(12px * var(--fscale, 1));margin-top:6px">2.5–15mg/일</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;text-align:center">
+          <div class="drug drug-quin" style="font-size:13px;padding:4px 10px">퀴나골리드</div>
+          <div style="font-size: calc(12px * var(--fscale, 1));margin-top:6px">75–300μg/일</div>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>📊</span>
+        <div><strong>반응 예측 지표</strong>: 치료 시작 6개월 내 가장 큰 호전 — 3–6개월에 반응 없으면 이후 반응 가능성 낮음. 3개월째 종양 25% 이상 축소 + 정상프로락틴혈증 → 장기반응 예측. 6개월째 프로락틴 수치: ULN 이하 100% 정상화 / 3×ULN 이하 61% / 3×ULN 초과 39% 정상화.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 도파민 효능제: 부작용 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 도파민 효능제 — 부작용</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>치료 전 흔한 경증 부작용(위장관 증상·현기증·피로) 설명</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>부작용은 보통 시간이 지나며 개선되나, 일부 환자에서 지속·장애 유발 가능</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>효과적 치료에도 일부 환자 삶의 질 저하 지속</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>저용량 시작 후 천천히 증량, 취침 전·식사와 함께 복용 시 내약성 개선 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>카베르골린 불내성 지속 시 퀴나골리드 시도 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td><strong>신경정신과적 부작용</strong>(충동구매·도박·공격성·기분변화·과성욕, 특히 남성) 발생 시 중단/용량조정</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>장기·고용량 치료 시 심장 판막 변화 가능성 정보 제공, 기저선/추적 심초음파 시행</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>침습적 대선종에서 약물치료로 인한 CSF 비루 발생 가능 → β2-transferrin 측정, 확인 시 수술</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>약물 유발 졸중(급격한 종양 축소) 발생 시 시야 변화 → 수술적 처치 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="alert alert-onco" style="margin-top:8px">
+        <span>🧠</span>
+        <div><strong>충동조절장애 모니터링</strong>: PHQ-9 및 Barratt 충동성 척도 사용 권장. 환자가 도박 등 충동적 행동을 숨길 수 있어 <strong>배우자/가족과 직접 논의</strong> 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 심장 판막 스크리닝 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 심장 판막 질환 스크리닝</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>카베르골린 용량</th><th>스크리닝 주기</th><th>등급</th></tr>
+        <tr><td>&gt;2.0mg/주, 장기 치료 예상</td><td>치료 전 또는 초기 수개월 내 기저선 심초음파</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>&gt;2.0mg/주</td><td>2–3년마다 반복 심초음파 (매년 검진은 불필요 의견 다수)</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>≤2.0mg/주</td><td>5–6년 후 심초음파 (&lt;1.0mg/주는 무증상 시 불필요 의견)</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>심잡음 발견</td><td>즉시 심초음파</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">※ British Society of Echocardiography·British Heart Valve Society·Society for Endocrinology 공동 가이드라인 기반. 이전 권고와 다소 차이 있음.</div>
+    </div>
+  </div>
+
+  <!-- DA 중단 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 도파민 효능제 중단(Withdrawal)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>약 1/5 환자는 중단 후에도 관해 유지 — 양호한 예측인자 평가 후 정기적으로 감량/중단 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>양호한 예측인자: 저용량 유지, 치료기간 &gt;2년, 현저한 종양 축소</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>중단 성공 환자는 평생 프로락틴 평가(매년 이상, 증상 재발 시 더 자주) 및 재발 증상 교육</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>중단 후 재발 시 DA 재투여로 대부분 성공적 치료 가능</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>재투여 후 장기 정상화 환자 → 재차 중단 시도 재평가 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>폐경 또는 출산 후 영구 관해 가능성 증가 → 중단 시도 고려</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📈</span>
+        <div>최적 후보: 비침습적 소형 선종 + 정상 프로락틴 + 저용량 카베르골린(0.25–0.50mg/주) 2년 이상 + 현저한 크기 축소. 이 조건 충족 시 미세선종 ~55%, 대선종 ~43% 영구 관해. 전체 치료환자 중 약 1/3만이 이 기준 충족.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수술 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 경비강 경접형골 수술(TSS)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>경험 많은 신경외과 의사의 미세선종·Knosp 0–1 대선종 수술 → 높은 치유율, 비용효율적, 장기 DA 회피 → 1차 옵션으로 약물치료와 함께 논의</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>Knosp ≥2: 약물치료가 1차 선호 옵션 (수술 관해율 낮음)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>급속 진행성 시야소실·종괴효과·졸중 → 수술이 약물치료보다 우선 고려</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>장기 DA 불내성/저항성 환자 → 수술 제안 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>젊은 여성: 수십 년간 DA 치료 회피 위해 수술 선호 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>임신 희망 환자에서 대선종 디벌킹 수술 → 임신 중 종괴 증대 위험 감소 대안</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>자발성 CSF 비루 → 수술적 복원 시행</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div class="stat-box" style="background:#e0f4f1">
+          <div class="stat-val" style="color:var(--dopa)">82–93%</div>
+          <div class="stat-lbl">미세선종 정상프로락틴화율<br>(전체경험 82% / 숙련술자 최대 93%)</div>
+        </div>
+        <div class="stat-box" style="background:#fce8eb">
+          <div class="stat-val" style="color:var(--onco)">44–75%</div>
+          <div class="stat-lbl">대선종 정상프로락틴화율<br>(선별환자 75% / 비선별 44%)</div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>📉</span>
+        <div><strong>재발률</strong>: 술후 정상화 후 약 20% 재발 (미세선종 10% / 비선별 대선종 25%). 술전 프로락틴 ≤200ng/mL → 미세선종 관해율 92% vs &gt;200ng/mL 40%. 침습성 대선종 관해율 23.5% vs 비침습성 70.4%. 해면정맥동 침습·안장상부 확장·남성·고프로락틴혈증이 불량한 예측인자.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 방사선치료 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> 방사선치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>DA 반응 불충분 + 수술 후 절제불가 잔존 또는 수술 금기 → 방사선치료 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>정위적 방사선치료(SRS) 기법이 표준치료로 자리잡음</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>반응이 수년에 걸쳐 나타날 수 있음을 설명</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>치료 수년 후 발생 가능한 부작용(뇌하수체기능저하증·시신경병증·뇌신경마비·이차종양) 설명, 평생 추적 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">가장 적게 사용되는 치료법. 주로 약물·수술 실패 후, 진행성·공격적 선종 또는 프로락틴 분비 악성종양에 적용.</div>
+    </div>
+  </div>
+
+</div><!-- /treatment -->
+
+
+<!-- ══════════════════ TAB 5: 특수상황 ══════════════════ -->
+<div id="tab-special" class="panel">
+
+  <!-- 낭성 프로락틴종 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💧</span> 낭성(Cystic) 프로락틴종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>DA 치료에 반응 가능 — 시신경 교차 감압이 응급하지 않은 경우 유효한 옵션</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>줄기 압박에 의한 고프로락틴혈증을 동반한 낭성 병변(DA 반응 가능성 낮음) 배제 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>시야 결손 없으면 6개월 추적영상이 적절</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">낭성 프로락틴종은 동일 크기 고형종양보다 프로락틴이 낮음(50–150ng/mL) → 비분비 낭성병변과 감별 어려움.</div>
+    </div>
+  </div>
+
+  <!-- 남성 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>♂️</span> 남성에서의 프로락틴종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>성선기능저하증 + 여성형유방·성욕감소·ED·불임 또는 유루 시 고프로락틴혈증·프로락틴종 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>남성 대선종은 더 공격적·DA 반응률 낮음 — 다중치료(DA+수술+/-방사선) 빈번히 필요, 긴밀한 추적 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>충동조절장애가 남성에서 더 흔함 — 치료 전 환자·배우자/가족과 충분한 논의</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div class="alert alert-onco" style="margin-top:8px">
+        <span>📌</span>
+        <div>남성 진단은 흔히 지연됨 (성욕감소·ED는 노화 탓으로 오인). 미치료 시 골다공증 위험. 남성 대선종 80–85% 프로락틴 정상화, 90% 현저한 종양 축소 (DA 치료 시). 시야장애 환자의 85–95%에서 시야 호전.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GH 혼합 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> GH-프로락틴 혼합 분비 선종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>GH 과다분비 동반 고프로락틴혈증 → 다른 치료적 접근 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>말단비대증+고프로락틴혈증: 줄기효과 vs 선종 동시분비 구별 (크기·추적 고려)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>순수 somatotroph 선종과 mammosomatotroph/somatotroph-lactotroph 선종 조직학적 구별 — 예후 차이 존재</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>고프로락틴혈증 환자 기저선에서 IGF-1로 자율적 GH 분비 평가 (말단비대증 증상 가려질 수 있음)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>추적 중 IGF-1 상승 + 시야변화 없으면 DA 4주 중단 후 GH 과분비 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Giant -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🐘</span> Giant 프로락틴종 (&gt;40mm)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>희귀하며 주로 남성에서 발생 — DA 반응 양호하므로 약물치료로 관리</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>이병율·사망률 위험 증가 → 수술적 절제는 졸중·CSF 누출 또는 최적 치료에도 진행성 성장 시로 제한</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">정의: 직경&gt;40mm, 안장외 확장 현저, 프로락틴 보통 &gt;1,000μg/L, GH/ACTH 동반분비 없음. 남:여=9:1. 양성이나 진단이 신경학적 합병증(뇌신경마비·수두증·측두엽 간질·안구돌출) 발생 후 지연되는 경향. 70%에서 프로락틴 정상화.</div>
+    </div>
+  </div>
+
+  <!-- 임신 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 및 가임력</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>임신 고려 환자에게 약물·수술 양쪽 옵션 모두 설명</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>수술 전 가임력 평가 환자는 뇌하수체기능저하증 위험 및 가임력 영향 설명</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>태아 노출 감소 위해 임신 확인 즉시 DA 중단</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>대선종에서는 DA 유지도 옵션</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>대선종: 임신 전 DA 반응 확인 필요. 반응 없으면 임신 전 수술 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>미세선종 임신 중 3개월마다 임상 추적</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>대선종은 매월 추적 + 시야 3개월마다 평가 (종괴 증대·졸중 위험 있음)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td><strong>임신 중 프로락틴 측정은 종양 성장 평가에 사용하지 않음</strong></td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>증상 의심 시 비조영(gadolinium 없이) MRI</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>임신 중 임상적 종양 성장 시 중단했던 DA 재개 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>수유는 일반적으로 금기 아님 (종괴 관리 위한 재치료 필요성에 따라 기간 결정)</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div class="alert alert-preg" style="margin-top:8px">
+        <span>👶</span>
+        <div>임신 전 TSS 시행 시 대선종 증대 위험 21%→4.7%로 감소. 안전성 데이터 축적으로 임신 시도 시 브로모크립틴 전환보다 <strong>카베르골린 최저유효용량 유지</strong> 선호 경향 증가 (단, 카베르골린 지속군에서 유산율 다소 높았다는 일부 보고 있음).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소아청소년 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 소아·청소년 프로락틴종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>지연 사춘기(저성선자극호르몬 성선기능저하 동반) → 고프로락틴혈증 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>성인보다 졸중·공격적 거동 흔함 → 높은 의심지수로 신속 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>대선종 환자는 <em>MEN1</em>·<em>AIP</em> 생식세포 변이 검사</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>DA 저용량 시작 (예: 카베르골린 0.25mg/주)</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>소아는 부작용 민감도 증가로 천천히 증량</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>시야위협·중증신경증상·CSF누출·DA저항성 → 수술 고려</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>미세선종에서 장기 약물치료 회피 위해 수술 고려 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 정신과적 질환 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 기저 정신과 질환 동반 환자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>내분비내과·신경외과·정신과 협진 필요</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>항정신병제 시작 전 프로락틴 측정</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>ULN 10배 이상 상승은 항정신병제 단독으로는 드묾 → 프로락틴종 의심</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>aripiprazole 등 prolactin-sparing 약제로 전환 시 대부분 감별 가능</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>정신질환 환자에서 DA 시작은 안전할 가능성 높으나 주의 및 정신과 협진 필요</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>항정신병제 복용 환자에서 DA 효능 감소 가능 → 고용량 필요</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 폐경/트랜스젠더/신부전 -->
+  <div class="grid3" style="gap:10px">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="ch-title"><span>🌸</span> 폐경기</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body collapsed">
+        <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:14px;line-height:1.8">
+          <li>잘 조절된 미세선종 + 폐경 진입 → DA 중단 시도 <span class="grade-wrap"><span class="grade grade-strong" style="font-size:9px">Strong</span><span class="grade-tip">중등도~고품질 근거</span></span></li>
+          <li>대선종은 종양 성장 억제 목표로 지속 치료 <span class="grade-wrap"><span class="grade grade-strong" style="font-size:9px">Strong</span><span class="grade-tip">중등도~고품질 근거</span></span></li>
+          <li>무증상 폐경 후 미세선종 정상화는 대사·골밀도·유방암 위험 개선 목적상 불필요 <span class="grade-wrap"><span class="grade grade-weak" style="font-size:9px">Weak</span><span class="grade-tip">낮은 품질 근거</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="ch-title"><span>🏳️‍⚧️</span> 트랜스젠더</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body collapsed">
+        <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:14px;line-height:1.8">
+          <li>에스트라디올+cyproterone 병용 → 경도·무증상 고프로락틴혈증 흔함 <span class="grade-wrap"><span class="grade grade-strong" style="font-size:9px">Strong</span><span class="grade-tip">중등도~고품질 근거</span></span></li>
+          <li>현저한 상승·종괴효과·유루 시 프로락틴종 고려 <span class="grade-wrap"><span class="grade grade-weak" style="font-size:9px">Weak</span><span class="grade-tip">낮은 품질 근거</span></span></li>
+          <li>성호르몬 치료와 프로락틴종 발생 증가의 명확한 인과관계는 입증되지 않음 <span class="grade-wrap"><span class="grade grade-weak" style="font-size:9px">Weak</span><span class="grade-tip">낮은 품질 근거</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="ch-title"><span>🫘</span> 신부전(CKD)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body collapsed">
+        <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:14px;line-height:1.8">
+          <li>CKD 환자 고프로락틴혈증 평가는 증상·성선기능저하 여부에 따라 개별화 <span class="grade-wrap"><span class="grade grade-weak" style="font-size:9px">Weak</span><span class="grade-tip">낮은 품질 근거</span></span></li>
+          <li>증상 따라 DA 또는 성호르몬대체요법 고려 <span class="grade-wrap"><span class="grade grade-weak" style="font-size:9px">Weak</span><span class="grade-tip">낮은 품질 근거</span></span></li>
+          <li>크레아티닌 &gt;6.8mg/dL에서 77%, 혈액투석 환자 78%에서 고프로락틴혈증. 신이식으로 가역적</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /special -->
+
+
+<!-- ══════════════════ TAB 6: 공격성·저항성 ══════════════════ -->
+<div id="tab-aggressive" class="panel">
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 용어 정의 — 저항성 / 불응성 / 공격성 / 암종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div style="background:var(--surface2);border-radius:6px;padding:10px">
+          <div style="font-weight:700;color:var(--preg);margin-bottom:4px">저항성(Resistance)</div>
+          <div style="font-size: calc(12px * var(--fscale, 1))">표준용량 DA(브로모크립틴 7.5–10mg/일 또는 카베르골린 2.0mg/주) 6개월 이상 치료에도 프로락틴 정상화 실패 또는 최대직경 30% 미만 축소</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px">
+          <div style="font-weight:700;color:var(--s2);margin-bottom:4px">불응성(Refractory)</div>
+          <div style="font-size: calc(12px * var(--fscale, 1))">최대내약용량으로 증량해도 조절 안 되어 디벌킹 수술 고려 상태</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px">
+          <div style="font-weight:700;color:var(--onco);margin-bottom:4px">공격성(Aggressive)</div>
+          <div style="font-size: calc(12px * var(--fscale, 1))">최대내약 DA 치료에도 지속적인 종양 증식이 있는 경우</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px">
+          <div style="font-weight:700;color:var(--red);margin-bottom:4px">암종(Carcinoma)</div>
+          <div style="font-size: calc(12px * var(--fscale, 1))">원격 전이가 있어야 정의됨. 극히 드물지만 lactotroph 기원이 전체 뇌하수체암종의 30%로 가장 흔함</div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>저항성 자체가 항상 치료 변경을 요구하지는 않음 — 종괴효과 없는 환자, 위치상 축소 불필요한 환자, 성선기능저하를 호르몬대체로 관리 중인 환자는 DA 지속도 적절한 선택.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 권고사항 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔥</span> 공격적 프로락틴종 및 치료 저항성 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>공격적 프로락틴종 = 비정상적으로 빠른 성장 또는 최대내약 DA에도 임상적으로 의미있는 성장 지속</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>카베르골린으로 안정적이던 환자에서 프로락틴 재상승 → 공격적 선종 또는 (드물게) 암종 발생 의심</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>부위특이 증상(신경학적결손·요통) 또는 프로락틴-종괴 명백한 불일치 → 전이(암종) 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>영상상 침습성 + 조직학적 증식지표 → 선종 거동 예측에 유용</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>모든 치료 방법 소진 후 지속 성장 시 <strong>테모졸로마이드</strong> 권고</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>테모졸로마이드 반응은 3개월 후 평가, 반응 있으면 최소 6개월 지속</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>면역관문억제제는 테모졸로마이드 실패 후 옵션 가능</td><td><span class="grade-wrap"><span class="grade grade-weak">Weak</span><span class="grade-tip">낮은 품질 근거 기반 권고</span></span></td></tr>
+      </table>
+
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--onco);margin-bottom:6px">치료 단계 (Step-up)</div>
+      <div class="flow-step"><div class="flow-box" style="background:#fef9ec">① 카베르골린 최대내약용량 증량</div></div>
+      <div class="flow-step"><div class="flow-arrow">⬇️</div></div>
+      <div class="flow-step"><div class="flow-box" style="background:#fff4e5">② 수술적 디벌킹 (술후 약물조절 개선 목적) ± 보조 방사선치료</div></div>
+      <div class="flow-step"><div class="flow-arrow">⬇️</div></div>
+      <div class="flow-step"><div class="flow-box" style="background:#fce8eb"><span class="drug drug-tmz">테모졸로마이드</span> — 약 40% 적어도 부분반응. 6개월 이상·조기 사용·방사선 병합 시 결과 개선 가능</div></div>
+      <div class="flow-step"><div class="flow-arrow">⬇️</div></div>
+      <div class="flow-step"><div class="flow-box" style="background:#f3e8ff">면역관문억제제(ipilimumab+nivolumab) — 프로락틴 분비 암종에서 종괴축소 반응 보고. 기타: everolimus, bevacizumab, lapatinib, tamoxifen, 펩타이드 수용체 방사성핵종치료</div></div>
+
+      <div class="alert alert-pit" style="margin-top:8px">
+        <span>🏥</span>
+        <div>예후 예측: 남성·젊은 연령·침습성 → DA 저항성 위험 증가. 침습성(MRI·수술·조직학) + 증식(Ki-67≥3%, 분열수 &gt;2/10 HPF, p53 양성)을 결합한 분류가 공격성 거동 예측에 유용. 다학제 <strong>뇌하수체종양 우수센터(Pituitary Tumor Centre of Excellence)</strong>에서 추적 권고.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 골질환 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골질환 합병증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>권고 사항</th><th>등급</th></tr>
+        <tr><td>골절 위험 증가는 프로락틴종의 임상적 합병증으로 인지</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>요통 또는 신장 감소 있는 환자 → 단순방사선 형태계측 검사 시작</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+        <tr><td>연령·고프로락틴혈증/성선기능저하 기간 및 위험인자에 따라 DXA로 골밀도 변화 평가</td><td><span class="grade-wrap"><span class="grade grade-strong">Strong</span><span class="grade-tip">중등도~고품질 근거 기반 권고</span></span></td></tr>
+      </table>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">장기간(&gt;6개월) 성선기능저하 의심 또는 폐경·이전 척추골절 등 위험인자 있는 모든 프로락틴종 환자에서 기저선 DXA 권고.</div>
+    </div>
+  </div>
+
+  <!-- 결론 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📢</span> 결론 및 향후 과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>1️⃣ 국제 환자 레지스트리 구축 필요</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">희귀질환 특성상 시리즈 간 결과 비교를 위한 표준화된 치료반응 평가 체계 및 국제 레지스트리 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>2️⃣ 불응성 프로락틴종 추가 치료옵션 미충족 수요</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">카베르골린 저항은 드물지만, 발생 시 표준화된 단계적 접근(수술→방사선→테모졸로마이드→면역치료)의 근거 강화 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>3️⃣ 장기 DA 사용의 대안 전략 탐색</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">장기 약물 부작용·비용 고려, 선택된 환자에서 1차 수술의 역할 재평가 — 최근 문헌은 미세선종·Knosp 0–1 대선종에서 수술 관해율·저합병증률 개선 시사.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>4️⃣ 분자병인 및 공격성 예측 바이오마커 개발</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">SF3B1 변이 등 분자기전 추가 규명, Ki-67·p53·침습성 결합한 예측모델 정교화 필요.</div>
+        </div>
+      </div>
+
+      <div class="alert alert-pit" style="margin-top:10px">
+        <span>💬</span>
+        <div><strong>핵심 메시지</strong>: 대부분의 프로락틴종은 도파민 효능제로 매우 효과적으로 관리되나, <strong>개별화된 1차 치료 선택(약물 vs 수술), 적절한 시점의 약물 중단 시도, 특수상황별 맞춤 관리</strong>가 장기적 환자 결과와 삶의 질을 결정합니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /aggressive -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"ACTH",  def:"Adrenocorticotrophic Hormone — 부신피질자극호르몬" },
+  { term:"AIP",   def:"Aryl-hydrocarbon-interacting Protein — 뇌하수체선종 관련 생식세포 변이 유전자" },
+  { term:"CSF",   def:"Cerebrospinal Fluid — 뇌척수액 (비루: CSF rhinorrhoea)" },
+  { term:"DA",    def:"Dopamine Agonist — 도파민 효능제 (카베르골린·브로모크립틴·퀴나골리드)" },
+  { term:"D2R",   def:"Dopamine 2 Receptor — 도파민 2형 수용체" },
+  { term:"DXA",   def:"Dual-energy X-ray Absorptiometry — 이중에너지 X선 흡수계측법 (골밀도)" },
+  { term:"eGFR",  def:"estimated Glomerular Filtration Rate — 추정 사구체여과율" },
+  { term:"ESE",   def:"European Society of Endocrinology — 유럽내분비학회" },
+  { term:"GH",    def:"Growth Hormone — 성장호르몬" },
+  { term:"GnRH",  def:"Gonadotrophin-Releasing Hormone — 성선자극호르몬분비호르몬" },
+  { term:"HRT",   def:"Hormone Replacement Therapy — 호르몬대체요법" },
+  { term:"IGF-1", def:"Insulin-like Growth Factor 1 — 인슐린유사성장인자-1" },
+  { term:"Knosp", def:"Knosp Classification — 해면정맥동 침습 정도에 따른 뇌하수체선종 분류 (Grade 0–4)" },
+  { term:"MEN1",  def:"Multiple Endocrine Neoplasia type 1 — 다발성 내분비종양증 1형" },
+  { term:"MRI",   def:"Magnetic Resonance Imaging — 자기공명영상" },
+  { term:"PCOS",  def:"Polycystic Ovary Syndrome — 다낭성난소증후군" },
+  { term:"PEG",   def:"Polyethylene Glycol — macroprolactin 침전 검사에 사용되는 시약" },
+  { term:"PET",   def:"Positron Emission Tomography — 양전자방출단층촬영 (¹¹C-methionine PET)" },
+  { term:"PIT1",  def:"Pituitary-specific Positive Transcription Factor 1 — 뇌하수체 전사인자 (lactotroph 계열 표지)" },
+  { term:"SRS",   def:"Stereotactic Radiosurgery — 정위적 방사선수술" },
+  { term:"TRH",   def:"Thyrotrophin-Releasing Hormone — 갑상선자극호르몬분비호르몬" },
+  { term:"TSH",   def:"Thyroid-Stimulating Hormone — 갑상선자극호르몬" },
+  { term:"TSS",   def:"Transsphenoidal Surgery — 경비강 경접형골 수술" },
+  { term:"ULN",   def:"Upper Limit of Normal — 정상 상한치" },
+  { term:"VIP",   def:"Vasoactive Intestinal Peptide — 혈관활성장펩타이드" },
+];
+
+// 약어 초기 렌더
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+// 탭 전환
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// 카드 토글
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// 아코디언 토글
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// 약어 검색
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

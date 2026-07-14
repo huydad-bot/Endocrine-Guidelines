@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임신과 뇌하수체 선종 가이드라인 (ESE 2024)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 4질환 테마 */
+    --nfa: #4a5568;      /* 비기능선종 — 슬레이트그레이 */
+    --prl: #6b3fa0;      /* 프로락틴종 — 보라 */
+    --gh: #1a7f6e;        /* 말단비대증 — 청록 */
+    --cd: #9b1c2e;        /* 쿠싱병 — 진홍 */
+    --preg: #c47d00;      /* 임신 일반 — 황금 */
+    --s0: #6b7280;
+    --s1: #d97706;
+    --s2: #ea7d1a;
+    --s3: #c2410c;
+    --s4: #9b1c2e;
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-preg {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-preg span:nth-child(1) { background: var(--preg); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-preg span:nth-child(2) { background: var(--prl);  color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--preg); border-bottom-color: var(--preg); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-prl     { background: #f3e8ff; border-left: 3px solid var(--prl);   color: #5b2a8c; }
+  .alert-gh      { background: #e0f4f1; border-left: 3px solid var(--gh);    color: #0f5549; }
+  .alert-cd      { background: #fce8eb; border-left: 3px solid var(--cd);    color: var(--cd); }
+  .alert-preg    { background: #fff3cd; border-left: 3px solid var(--preg); color: #7d4e00; }
+  .alert-nfa     { background: #eceff3; border-left: 3px solid var(--nfa);  color: #2d3748; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+
+  /* ── 위험도 히트맵 ── */
+  .risk-low   { background: #d4edda; color: #155724; font-weight: 600; text-align: center; }
+  .risk-mod   { background: #fff3cd; color: #856404; font-weight: 600; text-align: center; }
+  .risk-high  { background: #ffd8a8; color: #7d3b00; font-weight: 600; text-align: center; }
+  .risk-vhigh { background: #f5c6cb; color: #721c24; font-weight: 600; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── 권고번호 배지 ── */
+  .rec-id { display: inline-block; background: var(--text); color:#fff; font-weight:700; font-size: calc(10.5px * var(--fscale, 1)); padding: 1px 7px; border-radius: 4px; margin-right:6px; font-family:'Courier New',monospace; flex-shrink:0; }
+
+  /* ── GRADE 배지 (Strong / Weak) + hover tooltip ── */
+  .grade-wrap { position: relative; display: inline-block; }
+  .grade { display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; cursor: help; border: 1px solid transparent; }
+  .grade-strong { background: #dafbe1; color: #116329; border-color: #1a7f37; }
+  .grade-weak   { background: #fff3cd; color: #7d4e00; border-color: #d97706; }
+  .grade-ungraded { background: #f3f4f6; color: #4b5563; border-color: #9ca3af; }
+  .grade-tip {
+    display: none; position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+    background: #1f2328; color: #fff; font-size: calc(10.5px * var(--fscale, 1)); font-weight: 500;
+    padding: 6px 9px; border-radius: 6px; white-space: normal; width: 220px; line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25); z-index: 50; text-align: left;
+  }
+  .grade-tip::after { content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:#1f2328; }
+  .grade-wrap:hover .grade-tip { display: block; }
+
+  /* ── REC BOX (권고 박스: 번호+본문+등급) ── */
+  .rec-box { display:flex; align-items:flex-start; gap:8px; padding:8px 10px; border-radius:6px; background:var(--surface2); margin-bottom:6px; font-size: calc(12px * var(--fscale, 1)); line-height:1.55; }
+  .rec-box .rec-text { flex:1; }
+  .rec-box .rec-grade { flex-shrink:0; margin-left:auto; padding-left:8px; }
+
+  /* ── EVIDENCE QUALITY 배지 ── */
+  .evid { display:inline-block; padding:1px 6px; border-radius:3px; font-size: calc(9.5px * var(--fscale, 1)); font-weight:700; }
+  .evid-vlow { background:#f3f4f6; color:#6b7280; }
+  .evid-low  { background:#fef3c7; color:#92400e; }
+  .evid-mod  { background:#dbeafe; color:#1e40af; }
+  .evid-high { background:#dafbe1; color:#116329; }
+
+  /* ── STAGE / SIZE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .s0 { background: #e5e7eb; color: var(--s0); border: 1px solid #9ca3af; }
+  .s1 { background: #fef3c7; color: #92400e; border: 1px solid #d97706; }
+  .s2 { background: #ffedd5; color: #7c2d12; border: 1px solid #ea7d1a; }
+  .s3 { background: #fee2e2; color: #7f1d1d; border: 1px solid #c2410c; }
+  .s4 { background: #fce8eb; color: var(--cd); border: 1px solid var(--cd); }
+
+  /* ── PILL / DRUG ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-caber { background: #f3e8ff; color: #5b21b6; }
+  .drug-bromo { background: #ddf4ff; color: #0550ae; }
+  .drug-octr  { background: #dafbe1; color: #116329; }
+  .drug-pegvi { background: #fff3cd; color: #7d4e00; }
+  .drug-surg  { background: #fce8eb; color: var(--cd); }
+  .drug-keto  { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+  .drug-mety  { background: #fce7f3; color: #831843; }
+  .drug-hc    { background: #fff7ed; color: #9a3412; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── TIMELINE (임신 시기별) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-pre   { background: #f3f4f6; border: 1.5px solid var(--nfa); color: #2d3748; }
+  .gear-t1    { background: #fff3cd; border: 1.5px solid var(--preg); color: #7d4e00; }
+  .gear-t2    { background: #e0f4f1; border: 1.5px solid var(--gh);  color: #0f5549; }
+  .gear-t3    { background: #fce8eb; border: 1.5px solid var(--cd);  color: var(--cd); }
+  .gear-pp    { background: #f3e8ff; border: 1.5px solid var(--prl); color: #5b2a8c; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── FLOW STEP ── */
+  .flow-step { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .flow-box { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .flow-arrow { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); flex-shrink:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-preg">
+        <span>PIT</span><span>PREG</span>
+      </div>
+      <h1>임신과 기능성·비기능성 뇌하수체 선종 가이드라인</h1>
+    </div>
+    <div class="meta-line">
+      <a href="#" class="source-link" target="_blank">ESE Clinical Practice Guideline · Luger A, Broersen LHA, Biermasz NR, et al. ↗</a>
+      <span style="color:var(--text2)"> · European Society of Endocrinology</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ESE</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('general')">📋 일반 권고</div>
+    <div class="tab" onclick="showTab('nfa')">⚪ 비기능선종</div>
+    <div class="tab" onclick="showTab('prl')">🟣 프로락틴종</div>
+    <div class="tab" onclick="showTab('gh')">🟢 말단비대증</div>
+    <div class="tab" onclick="showTab('cd')">🔴 쿠싱병</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--preg)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--preg)">12mm</div><div class="stat-lbl">정상 뇌하수체<br>임신 말기 최대 높이</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--prl)">1/500</div><div class="stat-lbl">가임기 여성<br>프로락틴종 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--gh)">7.0%</div><div class="stat-lbl">말단비대증<br>임신 중 증상성 성장</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--cd)">60%</div><div class="stat-lbl">임신 중 쿠싱증후군<br>=부신 기원 비율</div></div>
+  </div>
+
+  <!-- 가이드라인 소개 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 가이드라인 개요 및 핵심 메시지</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-preg">
+        <span>🤰</span>
+        <div>뇌하수체 선종 여성의 임신은 <strong>희귀</strong>함 — 분비성 아형(프로락틴종·쿠싱병)의 호르몬 과다 또는 종괴 압박/수술/방사선치료로 인한 뇌하수체 호르몬 결핍이 원인. 임신 전 상담부터 산후 재평가까지 <strong>다학제 접근</strong>이 핵심.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box" style="background:#eceff3;border:1.5px solid var(--nfa);color:#2d3748">
+          <div class="gear-title">⚪ 비기능선종(NFA)</div>
+          시야장애 위험<br>
+          <small>대선종에서 증상성 성장 37.5%</small>
+        </div>
+        <div class="gear-box gear-pp">
+          <div class="gear-title">🟣 프로락틴종</div>
+          가장 흔한 임신 동반 선종<br>
+          <small>대선종 증상성 성장 30.5%</small>
+        </div>
+        <div class="gear-box gear-t2">
+          <div class="gear-title">🟢 말단비대증</div>
+          임신 중 증상 호전 경향<br>
+          <small>증상성 성장 7.0%</small>
+        </div>
+        <div class="gear-box gear-t3">
+          <div class="gear-title">🔴 쿠싱병</div>
+          극히 드물고 모체·태아 위험 ↑↑<br>
+          <small>활성 질환 시 임신 비권고</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>방법론</strong>: GRADE 기반. "권고(recommend)"=강한 권고, "제안(suggest)"=약한 권고. 근거수준은 매우낮음/낮음/중등도/높음으로 분류. 5개 핵심 임상질문에 대해서만 정식 등급화하였고, 나머지는 임상경험 기반(ungraded) 권고.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임신 중 뇌하수체-내분비 생리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> 임신 중 뇌하수체 및 내분비계 생리적 변화</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-step">
+        <div class="flow-box" style="background:#fff3cd;border-color:var(--preg)"><strong>뇌하수체 크기</strong>: lactotroph 증식으로 임신 1개월부터 증가 → 임신 말기·분만 직후 최대(높이 최대 12mm) → 분만 후 6개월 내 정상화</div>
+      </div>
+      <div class="flow-step"><div class="flow-arrow">⬇️</div></div>
+      <div class="grid2" style="gap:8px">
+        <div class="flow-box" style="background:#f3e8ff">🟣 <strong>PRL</strong>: 에스트라디올 자극으로 2·3분기에 ULN의 6배·10배까지 상승</div>
+        <div class="flow-box" style="background:#e0f4f1">🟢 <strong>GH/IGF-1</strong>: 임신 24주 이후 뇌하수체 GH 억제(태반 GH로 대체), IGF-1은 비임신 기준치 상회</div>
+      </div>
+      <div class="flow-step" style="margin-top:6px">
+        <div class="flow-box" style="background:#fce8eb">🔴 <strong>HPA축</strong>: 태반 CRH 대량생산(3분기 기하급수 증가) → ACTH·코티솔(total/free) 상승, 24시간 요유리코티솔도 증가하나 일중리듬은 유지</div>
+      </div>
+      <div class="flow-step" style="margin-top:6px">
+        <div class="flow-box" style="background:var(--surface2)">⚡ 기타: hCG가 TSH 수용체 자극(1분기 hCG↑↔TSH↓ 역상관) · TBG↑로 총T4/T3↑(fT4는 정상하단으로 감소) · 태반 vasopressinase↑로 일시적 요붕증 유발 가능</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 임상질문 요약 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 체계적 문헌고찰 핵심 결과 (5대 임상질문)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>질문</th><th>포함 연구/환자</th><th>핵심 결과</th></tr>
+        <tr><td><strong>Q1.</strong> 프로락틴종 약물치료 안전성</td><td>51편, 임신 837건(생존아 762)</td><td>기형 발생률 2.2% — 일반인구(2.4%)와 차이 없음</td></tr>
+        <tr><td><strong>Q2.</strong> 말단비대증 약물치료 안전성</td><td>47편, 159건 임신(생존아 159)</td><td>기형 발생률 1.3% — 일반인구 대비 증가 없음</td></tr>
+        <tr><td><strong>Q3.</strong> 쿠싱병 약물치료 안전성</td><td>10편, 12건 임신</td><td>모성 이상반응 60%, 신생아 이상반응 58% — 표본 적어 결론 제한적</td></tr>
+        <tr><td><strong>Q4.</strong> 임신 중 종양 성장 발생률</td><td>NFA 1편/PRL 18편/GH 4편</td><td>대선종에서 증상성 성장: NFA 37.5%, PRL 30.5%, GH 4.1%(대선종)</td></tr>
+        <tr><td><strong>Q5.</strong> 임신 중 뇌하수체 수술 안전성</td><td>28편, 33건 수술</td><td>증상 호전 89.3%, 모성 이상반응 9건, 신생아 이상반응 28.1%(주로 쿠싱병)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: 일반 권고 ══════════════════ -->
+<div id="tab-general" class="panel">
+
+  <!-- 임신 전 단계 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 임신 전(Preconception) 단계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.1.1</span>가임기 여성 뇌하수체선종 진단 시 가능한 한 빨리 가임력 및 임신 예후에 대해 상담</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded — 임상경험 기반)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.1.2</span>기능성·비기능성 뇌하수체선종 가임기 여성이 임신을 고려할 경우 내분비내과 전문의가 관리</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.1.3</span>대선종(&gt;1cm)·쿠싱병·말단비대증 가임기 여성이 임신을 고려할 경우 다학제팀에서 논의</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.1.4</span>뇌하수체선종 + 뇌하수체기능저하증 여성은 임신 전 호르몬대체요법을 최적화 또는 시작</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-info">
+        <span>📋</span>
+        <div><strong>임신 고려 시 워크업</strong>: 병력·신체검진(BMI·혈압) · 기본검사(전해질·혈당·간/신기능·지질·요검사) · 뇌하수체 호르몬 평가(기상 코티솔·ACTH·fT4·TSH·E2·LH·FSH·황체기 프로게스테론·SHBG·PRL·IGF-1·DHEA-S·테스토스테론·AMH) · 종양 크기(MRI) · 신경안과적 평가(시신경교차 근접 시)</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div>뇌하수체기능저하증 여성의 가임력: 47–76% (분리성 성선자극호르몬결핍은 ART 후 80% 이상). 소아기 발병 환자는 가임력 현저히 낮음. GH 보충을 임신 3개월 이상 전 최적화하면 ART/배란유도 성공률 향상. <strong>GnRH 작용제(배란유도용 triptorelin)</strong> 투여 후 뇌하수체 졸중 보고 있음 — 미진단 성선자극호르몬종 의심 시 주의.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임신 중 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 임신 중 일반 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.1</span>대선종(&gt;1cm)·쿠싱병·말단비대증 또는 뇌하수체결핍 있는 임신부는 내분비내과·전담간호사 추적 (빈도는 개별화)</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.2</span>뇌하수체기능저하증 임신부는 정기적인 임상·호르몬 추적</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.3</span>환자와 배우자에게 스트레스용량 글루코코르티코이드 및 부신위기 예방/관리 교육 제공</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.4</span>종양 진행 또는 졸중 증상 시 <strong>비조영(가돌리늄 없이)</strong> MRI 시행</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.5</span>시신경교차 압박 선종 또는 진행/졸중 의심 시 신경안과 검사 시행</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.6</span>종양증대로 인한 시력저하·안구마비·중증두통 + 약물치료 불가/무효 시 수술 고려</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.7</span>수술 필요 시 임상경과가 허용하면 <strong>2분기(중기)</strong>에 경비강 경접형골 수술 시행 제안</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.2.8</span>임신 중 방사선치료는 시행하지 않음</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div class="alert alert-danger">
+          <span>🚨</span>
+          <div><strong>부신위기 대응</strong>: 지속적 오심·구토·심한 피로는 정상 임신 증상과 부신위기 징후가 중첩 — 경계 필요. 위기 발생 시 0.9% 생리식염수 수액 + <strong>하이드로코르티손 100mg 즉시 비경구(IV/IM/SC)</strong> 투여, 태아 모니터링 동반.</div>
+        </div>
+        <div class="alert alert-info">
+          <span>🧲</span>
+          <div><strong>MRI 원칙</strong>: 임신 중 MRI 자체는 안전하나 적응증이 강할 때만 시행. 가돌리늄은 태반 통과 가능 → 특히 1분기 회피. 대부분 비조영 T1/T2로 충분한 정보 획득. <strong>정기 추적 MRI는 권고하지 않음.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 호르몬 대체요법 용량조절 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 임신 중 호르몬대체요법 용량 조절</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>호르몬</th><th>조절 원칙</th></tr>
+        <tr><td><strong>레보티록신</strong></td><td>최대 50% 증량 필요 가능. <strong>fT4로 모니터링</strong>(TSH는 뇌하수체질환에서 신뢰도 낮음). 1·2분기에 임신단계·검사법 특이 참고치로 확인</td></tr>
+        <tr><td><strong>글루코코르티코이드</strong></td><td>임신 전반기는 대개 용량 변경 불필요. <strong>22–24주부터 20–40% 증량</strong>. 하이드로코르티손 선호(프레드니손도 가능, 태반 통과 안 함). <strong>덱사메타손은 회피</strong>(태반 11β-HSD1에 불활성화 안 됨 → 태아 위해 가능)</td></tr>
+        <tr><td><strong>바소프레신(데스모프레신)</strong></td><td>3분기 태반 vasopressinase 활성 증가로 증량 필요할 수 있음. 다뇨·데스모프레신 증량 시 저나트륨혈증 예방 위해 혈중나트륨 확인</td></tr>
+        <tr><td><strong>GH 보충</strong></td><td>임신 확인 후 또는 1분기 말 <strong>중단</strong> (이익-위험 평가 불가). 대규모 관찰연구에서 임신결과와의 연관성 없음</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 분만 및 수유 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 분만 및 수유</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.3.1</span>뇌하수체선종 임신부는 표준 산과적 관리를 받으나 모체·태아 면밀한 감시 권고</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.3.2</span>일반적으로 수유는 가능하며 금기가 아님</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-nfa">
+        <span>📊</span>
+        <div>뇌하수체기능저하증 여성 31건 임신 분석: 신생아 합병증·선천기형 없음, 단 제왕절개·횡위·부당경량아 비율은 대조군보다 높음. NFA 여성도 제왕절개율 높음(RR 2.06). 임신 유발 고혈압·전자간증·조산·사산 증가의 명확한 근거는 없음.</div>
+      </div>
+      <div class="alert alert-preg" style="margin-top:6px">
+        <span>💉</span>
+        <div><strong>ACTH 결핍 환자 분만 시 스트레스용량</strong>: 활성 분만/제왕절개 전 <strong>하이드로코르티손 100mg IV</strong> 시작, 이후 분만 전 과정 동안 지속 정맥주입(200mg/24h) 또는 더 낮은 용량 사용(위원회 다수 의견). 분만 후 임신 전 용량으로 점진적 감량.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /general -->
+
+
+<!-- ══════════════════ TAB 3: 비기능선종 ══════════════════ -->
+<div id="tab-nfa" class="panel">
+
+  <div class="alert alert-nfa">
+    <span>⚪</span>
+    <div>임신 전 진단된 NFA 여성은 일반 권고(R.1.1–R.3.2)가 그대로 적용됨. 아래는 NFA 특이적 추가 권고.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> NFA 특이 권고 (R.4.1–R.4.5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.4.1</span>시신경교차 근처 NFA + 임신 계획 → 시신경교차 압박 위험 감소 및 가임력 향상 위해 수술 고려 가능</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.4.2</span>안장내 비기능 미세선종 + 무사건 임신 → <strong>정기 내분비 추적 불필요</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.4.3</span>대선종 및/또는 안장외 NFA는 종양진행·졸중 증상이 있을 때만 신경안과/MRI 검사</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.4.4</span>임신 중 종양 부피 감소가 임상적으로 필요한 경우 <strong>수술이 선호 옵션</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.4.5</span>뇌하수체 영상·기능 재평가는 분만 및 수유 종료 후까지 대기</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 크기별 임신 중 경과 차이</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#f3f4f6;border:1.5px solid var(--nfa);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#2d3748;margin-bottom:8px">미세선종 (안장내)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>이전 치료된 NFA는 대부분 임신 중 증대하지 않음</li>
+            <li>65명, 111회 임신 코호트: 미세선종 환자는 4회 만삭임신까지도 시야장애 발생 0건</li>
+            <li>신규 뇌하수체 호르몬결핍 발생도 드묾</li>
+          </ul>
+        </div>
+        <div style="background:#fce8eb;border:1.5px solid var(--cd);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--cd);margin-bottom:8px">대선종 (1.2–2.5cm)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>초산모 8명 중 <strong>6명</strong>에서 시야장애 발생 (동일 코호트)</li>
+            <li>시신경교차에 접하거나 근접 시 계획적 시야검사 필요</li>
+            <li>검사 빈도·OCT 병행 여부는 지역 관행에 따라 개별화</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div><strong>수술 결정 시 고려사항</strong>: 시야장애 없는 NFA 대선종 + 임신 희망 여성에서 수술 전 결정에 성선자극호르몬 결핍 여부 고려 가능 — 수술이 약 30% 환자에서 뇌하수체기능 회복(특히 ACTH·코티솔·PRL 정상화)을 가져옴. 단, 수술 후 신규 성선자극호르몬결핍 위험 및 전뇌하수체기능저하증 위험(14%)도 함께 고지.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /nfa -->
+
+
+<!-- ══════════════════ TAB 4: 프로락틴종 ══════════════════ -->
+<div id="tab-prl" class="panel">
+
+  <div class="alert alert-prl">
+    <span>🟣</span>
+    <div>프로락틴종은 가임기 여성 <strong>1/500</strong>에서 발생하며 불임과 흔히 연관. 매우 높은 PRL은 무월경, 경도 상승은 황체기능부전·희발월경 유발. 규칙적 월경 중에도 비정상 PRL이 착상에 영향 가능.</div>
+  </div>
+
+  <!-- 권고 R5.1-5.4 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 치료 원칙 — 임신 시도 단계 (R.5.1–R.5.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.1</span>임신을 적극적으로 원하는 프로락틴종 여성은 도파민효능제로 치료하여 <strong>PRL 정상화 및 규칙적 排卵周期 회복</strong>을 목표</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.2</span>임신을 적극적으로 원하는 환자에서 <strong>약물치료가 1차 선택</strong>; 개별 사례에서 경접형골 수술 고려 가능</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.3</span><strong>카베르골린을 최저 유효용량</strong>으로 임신 확인 시까지 사용</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.4</span>임신 확립 시 도파민효능제 중단; 단 특정 상황에서는 더 긴 기간 투여 가능</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div>도파민효능제는 미세·대선종 80–90%에서 배란 회복. 카베르골린이 브로모크립틴보다 <strong>내약성·PRL 정상화 효능·종양축소 효과 우수</strong>하여 선호. 수술은 미세선종 70–80%, 대선종 30–40%에서만 지속적 정상화 — 약물치료보다 효율 낮으나, 대선종에서 향후 임신 시 종양증대 위험을 줄이고 이후 DA 치료반응을 최적화할 수 있음. 수술 후 뇌하수체결핍 위험은 매우 제한적.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 안전성 데이터 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 카베르골린 임신 노출 안전성 데이터 (n=1272)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>결과지표</th><th>발생률 (95% CI)</th></tr>
+        <tr><td>자연유산</td><td>9.0% (7.4–10.7%)</td></tr>
+        <tr><td>저체중출생</td><td>5.7% (4.4–7.3%)</td></tr>
+        <tr><td>부당경량아(SGA)</td><td>1.8% (1.1–2.7%)</td></tr>
+        <tr><td>조산</td><td>8.0% (6.4–9.8%)</td></tr>
+        <tr><td><strong>선천기형</strong></td><td><strong>3.3% (2.3–4.6%)</strong></td></tr>
+        <tr><td>기형으로 인한 임신중단</td><td>1.1% (0.6–1.8%)</td></tr>
+        <tr><td>신생아 사망</td><td>0.1% (0.0–0.5%)</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>브로모크립틴과 안전성·기형발생률 명확한 차이 없음. 카베르골린 노출아 12년까지 추적 시 발달·대사 이상 위험 증가 시사 없음. <strong>퀴나골리드</strong>는 제조사 데이터(176건 임신) 상 자연유산 24건, 사산 1건, 기형 9건으로 <strong>상대적으로 안전성 낮음</strong> — 데이터 제한적.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임신 중 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 중 관리 (R.5.5–R.5.8)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.5</span>임신 중 <strong>PRL 측정을 권고하지 않음</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.6</span>안장내 소형 미세선종 + 임신 전 정상 뇌하수체기능 → 정기 내분비 추적 불필요</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.7</span>대형 대선종 또는 시신경교차 근접 선종 → 종양성장에 대한 신중하고 정기적인 모니터링</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.8</span>진행성 종양성장 증상 시 도파민효능제 재시작 고려; 수술은 약물치료 실패 또는 증상성 졸중에만 사용</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-danger">
+        <span>⚠️</span>
+        <div><strong>PRL 측정을 안 하는 이유</strong>: 정상 임신에서도 PRL이 약 10배 상승(말기 150–300μg/L). 프로락틴종 환자도 유사하게(때로 더 큰 폭) 상승하지만, <strong>일부 환자는 임신 중 추가 상승이 없어 PRL이 종양진행의 신뢰할 만한 지표가 아님.</strong> PRL은 모유수유 가능성도 예측하지 못함.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>📈</span>
+        <div><strong>대선종 증상성 성장 위험</strong>: 전체 프로락틴종 9.0% vs <strong>대선종 30.5%</strong>. 임신 전 수술·방사선 또는 충분한 DA 치료로 종양이 충분히 축소된 경우는 위험 1–4%로 급감. 85명 대선종 코호트: 9명(19.6%)에서 성장관련 증상, 이 중 3명 졸중.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수유 및 산후 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 수유 및 산후 재평가 (R.5.9–R.5.10)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.9</span>수유는 대개 가능하고 금기 아님; 종양 크기·증상 등 개별 상황 고려 권고</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.5.10</span>매 임신 후 치료 재시작 고려 전 프로락틴종 상태 재평가</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div class="alert alert-success">
+          <span>📉</span>
+          <div><strong>임신·수유 후 자연 관해</strong>: 17–68%(평균 40%, 중앙 22개월)에서 종양 퇴축. 미세선종 관해율(46%) &gt; 대선종(26%). 생화학적 관해가 종양소실과 일치할 수 있으나 잔여조직 남을 수도 있음.</div>
+        </div>
+        <div class="alert alert-warn">
+          <span>🔄</span>
+          <div><strong>재평가 시점</strong>: 수유 종료 1–3개월 후 임상평가·PRL 측정 ± MRI(이전 대선종 病史 시). 관해 시 6개월·이후 매년 추적 — <strong>재발률 최대 65%</strong>이므로 지속적 모니터링 필요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /prl -->
+
+
+<!-- ══════════════════ TAB 5: 말단비대증 ══════════════════ -->
+<div id="tab-gh" class="panel">
+
+  <div class="alert alert-gh">
+    <span>🟢</span>
+    <div>말단비대증은 여러 기전(뇌하수체기능저하증, GH-PRL 혼합분비, 줄기압박 고프로락틴혈증)으로 불임 연관. GH/IGF-1 과다는 시상하부 GnRH 분비에 직접 영향 또는 다낭성난소양 상태 유발 가능.</div>
+  </div>
+
+  <!-- 임신 전 평가 및 1차 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임신 전 평가 및 1차 치료 (R.6.1–R.6.3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.1</span>임신을 고려하는 말단비대증 여성 → 질병활성도·동반질환·가임력 상태 평가</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.2</span>새로 진단된 말단비대증 + 임신 희망 → <strong>수술이 1차 치료</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.3</span>경증 말단비대증 + 동반질환 없음 + 규칙적 배란주기 → 임신 안전, <strong>약물/수술치료를 분만 후로 연기 가능</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>경도 상승 IGF-1 환자(신규진단 또는 수술 후)는 임신 중 모성 IGF-1이 보통 더 <strong>감소</strong>하며 일부는 1분기 동안 증상 호전 경험. 증상성 종양성장 위험도 매우 낮음(7.0%). 단, <strong>불임이 있는 경우</strong> 배란주기 정상·PRL 정상이어도 가임력 회복 목적의 말단비대증 치료가 유용할 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약물치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 약물치료 옵션 및 안전성 (R.6.4–R.6.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.4</span>수술이 불가하고 약물치료 적응증이 있는 경우 임신 확인 전까지 <span class="drug drug-octr">옥트레오타이드</span> 또는 <span class="drug drug-caber">카베르골린</span> 사용 가능; <span class="drug drug-pegvi">페그비소만트</span>는 선택된 미조절 사례에 한정</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.5</span>임신 확립 시 말단비대증 약물 <strong>중단 고려</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.6</span>임신 중 <strong>GH 및 IGF-1 측정을 권고하지 않음</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <table class="tbl">
+        <tr><th>약물</th><th>임신 중 안전성 데이터</th></tr>
+        <tr><td><span class="drug drug-caber">카베르골린</span> / 1세대 SSA(옥트레오타이드·란레오타이드)</td><td>기형발생률 증가 근거 없음. 1세대 SSA의 약 70%는 1분기 종료 전 중단, 일부는 임신 전 기간 지속 — 대부분 무사건 임신, 정상 체중·신장 신생아 출산</td></tr>
+        <tr><td><span class="drug drug-pegvi">페그비소만트</span></td><td>35건 임신(모성노출 27, 부성노출 8) — 임신확인 즉시 중단 시 불량결과 시사 없음. 데이터 제한적이라 중증 미조절 증상 외 권고 어려움</td></tr>
+        <tr><td>파시레오타이드(2세대)</td><td>데이터 불충분 — 권고 불가</td></tr>
+      </table>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>📊</span>
+        <div>전체 말단비대증 약물치료 기형발생률 <strong>1.3%</strong> — 일반인구(2.4%)보다 높지 않음. 임신확인 전까지만 사용군과 더 긴 기간 사용군 간 안전성·기형발생 차이 불명확.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>💡</span>
+        <div><strong>GH/IGF-1을 측정하지 않는 이유</strong>: 태반이 면역측정법에서 뇌하수체 GH와 교차반응하는 GH 변이체(hPGH) 생성. IGF-1은 1분기 약 30% 감소 후 37주에 비임신 대비 2배까지 증가(일부 환자는 이 피크 없음) — 임상적으로 유용한 정보를 제공하지 못함.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임신 중 모니터링 및 재치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️</span> 임신 중 모니터링 및 재치료 (R.6.7–R.6.8)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.7</span>대선종 또는 시신경교차 근접 선종 → 정기 신경안과 검사, 필요 시 뇌하수체 MRI</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.8</span>종양조절 및 말단비대증 관련 중증 임상증상에 대해 약물치료 시작/재시작 고려</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="alert alert-warn">
+        <span>📐</span>
+        <div>정상 임신에서도 뇌하수체 크기가 1분기에 최대 45%까지 증가 가능 — 압박 증상 소인. 임신이 기존 GH분비 선종 성장을 유발하는지 불명확하나, <strong>SSA 중단이 종양 재성장을 유발</strong>할 수 있음(증례 보고). 시야장애는 드물고 두통이 더 흔함.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>💊</span>
+        <div>증상성 종양 확대 + 시력손실/신경학적 합병증 시 <span class="drug drug-octr">옥트레오타이드</span>/란레오타이드를 1차 약물로 제안 (2분기 수술도 일반적으로 안전). 도파민효능제도 사용된 바 있으나 효과는 낮은 편. 고혈당·고혈압 치료는 일반 임신부 가이드라인 준수.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수유 및 산후 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 수유 및 산후 재평가 (R.6.9–R.6.10)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.9</span>수유는 가능하고 금기 아님; 약물사용·질병활성도 등 개별 상황 고려 권고</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.6.10</span>임신 후 질병활성도 재평가</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>분만 직후 <strong>질병활성도 반등(rebound)</strong>이 흔히 관찰됨 — 조기 치료 재개 필요할 수 있음. 대부분 환자에서 산후 MRI 권고(중증도·잔여종양에 따라 시점 결정). <strong>수유 중에는 가돌리늄 사용 금지.</strong> 수유부에서 SSA·페그비소만트는 안전상 회피 권고.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /gh -->
+
+
+<!-- ══════════════════ TAB 6: 쿠싱병 ══════════════════ -->
+<div id="tab-cd" class="panel">
+
+  <div class="alert alert-cd">
+    <span>🔴</span>
+    <div>고코티솔혈증은 성선기능저하증·불임을 유발 → 쿠싱병 동반 임신은 <strong>극히 드묾</strong>. 임신 중 쿠싱증후군은 비임신 시(쿠싱병 70%)와 달리 <strong>부신 기원이 60%</strong>로 더 흔함.</div>
+  </div>
+
+  <!-- 임신 권고/비권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> 활성 쿠싱증후군과 임신 (R.7.1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.1</span>활성 쿠싱증후군 여성은 <strong>임신하지 않도록 권고</strong></div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <table class="tbl">
+        <tr><th>지표</th><th>비치료(활성)</th><th>약물치료</th><th>수술치료</th></tr>
+        <tr><td>태아 손실</td><td>30.6%</td><td>20.8%</td><td>12.5%</td></tr>
+        <tr><td>조산</td><td>66.3%</td><td>76.2%</td><td>56.1%</td></tr>
+        <tr><td>저체중출생</td><td>68.3%</td><td>68.8%</td><td>73.3%</td></tr>
+      </table>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>📊</span>
+        <div>활성 vs 치유된 CS 비교: 태아손실(23.6% vs 8.5%), 전체 태아이상(33.3% vs 4.9%) — 모두 <strong>활성질환에서 현저히 높음</strong>. 치유된 CS는 모성·태아 위험이 정상화 경향. 모성 합병증: 임신성당뇨·고혈압·전자간증 빈발, 제왕절개율 51.7% vs 21.9%(치유군).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 진단의 어려움 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 임신 중 고코티솔혈증 진단의 어려움 (R.7.2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.2</span>임신 중 고코티솔혈증 평가는 어려움 — <strong>신규 쿠싱병 임상의심이 높을 때만</strong> 검사 고려 제안</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div class="alert alert-warn">
+          <span>⚠️</span>
+          <div><strong>임상소견 중첩</strong>: 고혈당·중심성체중증가·고혈압·피로·피부색소침착·안면홍조·튜선 — 정상임신에서도 발생. CS 특이 소견: 복부 외 부위 튜선, 더 넓고 진한 자색 튜선, 쉬운 멍, 피부 박화, 자발성 골절, 근위부 근병증.</div>
+        </div>
+        <div class="alert alert-danger">
+          <span>🧪</span>
+          <div><strong>검사 함정</strong>: 덱사메타손억제 둔화(정상임신 60%가 50nmol/L 이하로 억제 못함) → 1mg overnight DST <strong>비권고</strong>. UFC는 정상에서도 3배까지 증가 → 더 높은 cutoff 필요. 야간 침코티솔: 일중리듬 유지되므로 분기별 cutoff 사용 시 민감도&gt;80%·특이도&gt;93% (1분기 7.0nmol/L, 2분기 7.2, 3분기 7.9).</div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>🧠</span>
+        <div><strong>국소화 검사</strong>: 고용량 DST·CRH 검사는 데이터 불충분. ACTH 정상상단~상승 시 비조영 뇌하수체 MRI(많은 코르티코프 선종이 작아 누락 가능). 가돌리늄 MRI는 명백한 이상반응 보고 없으나 이익-위험 신중 논의. <strong>양측 하추체정맥 채혈은 방사선노출·정맥혈전 위험으로 비권고.</strong> ACTH 억제/정상하한 시 부신 초음파 또는 비조영 복부 MRI로 부신종괴 평가.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 치료 옵션 — 다학제 결정 (R.7.3–R.7.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.3</span>약물치료 중이며 임신 고려 중인 쿠싱병 여성 → 코티솔 감소 치료옵션의 장단점 신중히 고려</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.4</span>활성 또는 약물치료 중인 쿠싱병 임신부는 <strong>고위험임신 전문 다학제팀</strong>에서 관리</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--cd);margin-bottom:6px">중증 쿠싱병 발생 시 1차: 수술</div>
+          <table class="tbl">
+            <tr><th>수술방식</th><th>건수</th><th>관해율</th></tr>
+            <tr><td>경접형골 뇌하수체수술</td><td>11건</td><td rowspan="3">전체 77% 관해<br>12% 활성지속<br>10% 정보없음</td></tr>
+            <tr><td>일측 부신절제</td><td>44건</td></tr>
+            <tr><td>양측 부신절제</td><td>6건</td></tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">수술시기: 임신 17–26주(중앙 21주). 관해 달성 시 태아손실(6.7% vs 28.6%)·조산(56.1% vs 80%)·저체중(70.6% vs 100%) 모두 비관해군보다 개선.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--cd);margin-bottom:6px">약물치료 옵션 (수술금기/초기 증상조절)</div>
+          <table class="tbl">
+            <tr><th>약물</th><th>비고</th></tr>
+            <tr><td><span class="drug drug-mety">메티라폰</span></td><td>가장 흔히 사용. 고혈압 악화·칼륨감소 가능 — 혈압·칼륨 정기 모니터링</td></tr>
+            <tr><td><span class="drug drug-keto">케토코나졸</span></td><td>결과 데이터 적음</td></tr>
+            <tr><td><span class="drug drug-caber">카베르골린</span></td><td>3예 보고, 모체-태아 결과 양호하나 <strong>수유 불가</strong></td></tr>
+            <tr><td>파시레오타이드·오실로드로스타트</td><td>임신 중 보고 없음; 부작용 고려해 <strong>회피</strong></td></tr>
+            <tr><td>미페프리스톤</td><td><strong>금기</strong> — 프로게스테론 차단제로 임신중단 약물</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>치료(약물 또는 수술) 모두 주산기사망·모성합병증 위험을 낮추나 <strong>조산이나 자궁내성장지연은 예방하지 못함.</strong> 조기분만 가능성을 미리 고려하고, 모체·태아 생명위협 시 의학적 임신중단도 논의 대상.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 항응고 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 혈전예방 (R.7.5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.5</span>활성 쿠싱병 임신부 → 예방적 항응고(저분자량헤파린, LMWH) 고려 제안</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-weak">제안</span><span class="grade-tip">약한 권고</span></span><span class="evid evid-vlow" style="margin-left:4px">근거: 매우낮음</span></div>
+      </div>
+      <div style="font-size: calc(12px * var(--fscale, 1));margin-top:6px">CS는 혈전 위험을 최대 10배 증가(응고인자 증가·섬유소용해 장애). 208명 CS 코호트(89.4% 뇌하수체 기원)에서 전체 혈전율 18%. 임신 자체도 혈전위험 증가 요인 — <strong>병용 시 위험 더욱 가중</strong> 가능. 임신 중 안전성·이득에 대한 직접 데이터는 없으나, 위원회는 명백히 증가된 위험을 고려해 예방치료가 합리적이라 결론.</div>
+    </div>
+  </div>
+
+  <!-- 산후 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 산후 재평가 및 수유 (R.7.6–R.7.7)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.6</span>임신 후 질병활성도 재평가</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="rec-box">
+        <div class="rec-text"><span class="rec-id">R.7.7</span>수유는 고려 대상으로 권고</div>
+        <div class="rec-grade"><span class="grade-wrap"><span class="grade grade-strong">권고</span><span class="grade-tip">강한 권고 (Ungraded)</span></span></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>⏱️</span>
+        <div>CS 없는 여성의 임신관련 HPA축 활성화는 분만 후 수일 내 소실, 수주 내 비임신 수준 복귀. 그러나 덱사메타손억제반응 정상화는 분만 후 <strong>1개월 이상</strong> 소요 가능, CBG 상승도 산후 3개월까지 지속 가능 → <strong>산후 2–3개월</strong> 재평가 권고. 수유는 스테로이드합성억제제·파시레오타이드·카베르골린을 복용하지 않는 경우에 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 향후 연구 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📢</span> 향후 연구 과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>1️⃣ 수술 최적 시기</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">임신 중 뇌하수체수술이 필요할 때 최적 시기는? 특정 분기에 관계없이 시행 가능한가?</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>2️⃣ 경접형골 수술 안전성</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">임신 중 경접형골 수술이 안전한가에 대한 직접적 비교연구 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>3️⃣ LMWH의 효과·안전성</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">LMWH가 쿠싱병 임신부의 혈전색전 위험을 낮추는가? 모체·태아에 안전한가?</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>4️⃣ 신약(파시레오타이드·오실로드로스타트) 위험-이득</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">쿠싱병·말단비대증 임신부에서 신약의 안전성·유효성 데이터 확충 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>5️⃣ 야간 침코티솔 분기별 cutoff 검증</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">제안된 분기별 cutoff의 임신 중 추가 검증 및 쿠싱병 신규 진단 도구 개발 필요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /cd -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"ACTH",  def:"Adrenocorticotrophic Hormone — 부신피질자극호르몬" },
+  { term:"AMH",   def:"Anti-Müllerian Hormone — 항뮬러관호르몬 (난소예비력 지표)" },
+  { term:"ART",   def:"Assisted Reproductive Technology — 보조생식술" },
+  { term:"CD",    def:"Cushing's Disease — 쿠싱병 (ACTH 분비 뇌하수체선종)" },
+  { term:"CRH",   def:"Corticotropin-Releasing Hormone — 코르티코트로핀분비호르몬" },
+  { term:"CS",    def:"Cushing's Syndrome — 쿠싱증후군 (원인 무관 고코티솔혈증)" },
+  { term:"DA",    def:"Dopamine Agonist — 도파민효능제 (카베르골린·브로모크립틴)" },
+  { term:"DST",   def:"Dexamethasone Suppression Test — 덱사메타손억제검사" },
+  { term:"E2",    def:"Estradiol — 에스트라디올" },
+  { term:"ESE",   def:"European Society of Endocrinology — 유럽내분비학회" },
+  { term:"GH",    def:"Growth Hormone — 성장호르몬" },
+  { term:"GnRH",  def:"Gonadotrophin-Releasing Hormone — 성선자극호르몬분비호르몬" },
+  { term:"hCG",   def:"Human Chorionic Gonadotrophin — 인간융모성선자극호르몬" },
+  { term:"hPGH",  def:"Human Placental GH — 인간 태반 성장호르몬 변이체" },
+  { term:"HPA축", def:"Hypothalamic-Pituitary-Adrenal axis — 시상하부-뇌하수체-부신 축" },
+  { term:"IGF-1", def:"Insulin-like Growth Factor 1 — 인슐린유사성장인자-1" },
+  { term:"LMWH",  def:"Low Molecular Weight Heparin — 저분자량헤파린" },
+  { term:"NFA",   def:"Non-Functioning Adenoma — 비기능성 뇌하수체선종" },
+  { term:"OCT",   def:"Optical Coherence Tomography — 광학단층촬영 (망막신경섬유층 평가)" },
+  { term:"OS",    def:"Ovulation Stimulation — 배란유도" },
+  { term:"PRL",   def:"Prolactin — 프로락틴" },
+  { term:"PTCOE", def:"Pituitary Tumor Center of Excellence — 뇌하수체종양 우수센터" },
+  { term:"SGA",   def:"Small for Gestational Age — 부당경량아" },
+  { term:"SHBG",  def:"Sex Hormone-Binding Globulin — 성호르몬결합글로불린" },
+  { term:"SSA",   def:"Somatostatin Analogue — 소마토스타틴 유사체 (옥트레오타이드·란레오타이드)" },
+  { term:"TBG",   def:"Thyroxine-Binding Globulin — 갑상선결합글로불린" },
+  { term:"UFC",   def:"Urinary Free Cortisol — 요유리코티솔" },
+  { term:"ULN",   def:"Upper Limit of Normal — 정상 상한치" },
+];
+
+// 약어 초기 렌더
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+// 탭 전환
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// 카드 토글
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// 아코디언 토글
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// 약어 검색
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

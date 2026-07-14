@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>뇌하수체기능저하증 호르몬 대체 가이드라인 (ES 2016)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --rec1: #1a7f37;
+    --rec2: #0550ae;
+    --pp: #57606a;
+    --loe-q: #9a6700;
+    --loe-qe: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: #6639a6;
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 14px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #6639a6; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-1 { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-2 { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-ugp { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .loe-qqqq { background: #116329; color: #fff; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; font-weight: 700; white-space: nowrap; display: inline-block; }
+  .loe-qqqe { background: #1a7f37; color: #fff; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; font-weight: 700; white-space: nowrap; display: inline-block; }
+  .loe-qqee { background: #9a6700; color: #fff; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; font-weight: 700; white-space: nowrap; display: inline-block; }
+  .loe-qeee { background: #bc4c00; color: #fff; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; font-weight: 700; white-space: nowrap; display: inline-block; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: #f5eeff; border-left: 3px solid #6639a6; color: #4a2a7a; }
+
+  /* ── TABLE ── */
+  .hp-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .hp-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .hp-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .hp-table tr:last-child td { border-bottom: none; }
+  .hp-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .hp-table .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: var(--border); }
+  .acc-hdr span.sub { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-hormone { background: #f5eeff; color: #6639a6; border: 1px solid #c5a6e8; }
+  .pill-axis { background: #ddf4ff; color: #0550ae; border: 1px solid #88b4e8; }
+  .pill-warn { background: #ffebe9; color: #82071e; border: 1px solid #f5b0b4; }
+  .pill-ok { background: #dafbe1; color: #116329; border: 1px solid #85e09b; }
+
+  /* ── BADGE ── */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .badge-acth { background: #fff8c5; color: #7d4e00; }
+  .badge-tsh { background: #ddf4ff; color: #0550ae; }
+  .badge-lhfsh { background: #dafbe1; color: #116329; }
+  .badge-gh { background: #f5eeff; color: #6639a6; }
+  .badge-adh { background: #ffebe9; color: #82071e; }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: var(--accent2); }
+  .warn-text { color: var(--yellow); }
+  .purple-text { color: #6639a6; }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .dose-box { background: #f5eeff; border: 1px solid #c5a6e8; border-radius: 6px; padding: 8px 12px; margin: 6px 0; font-size: calc(12px * var(--fscale, 1)); }
+  .dose-box .dose-title { font-weight: 700; color: #6639a6; margin-bottom: 4px; font-size: calc(11px * var(--fscale, 1)); text-transform: uppercase; }
+  .interaction-box { background: #fff8c5; border: 1px solid #d4a017; border-radius: 6px; padding: 8px 12px; margin: 6px 0; font-size: calc(12px * var(--fscale, 1)); }
+  .interaction-box .int-title { font-weight: 700; color: #7d4e00; margin-bottom: 4px; font-size: calc(11px * var(--fscale, 1)); text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">ES 2016</span>
+      <h1>뇌하수체기능저하증 호르몬 대체 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.1210/jc.2016-2118" class="source-link" target="_blank">J Clin Endocrinol Metab 2016;101(11):3888–3921 ↗</a>
+      <span class="meta"> · Endocrine Society · Fleseriu M, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by the Endocrine Society</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단</div>
+    <div class="tab" onclick="showTab('treatment')">💊 치료</div>
+    <div class="tab" onclick="showTab('interactions')">⚡ 호르몬 상호작용</div>
+    <div class="tab" onclick="showTab('special')">🌟 특수상황</div>
+    <div class="tab" onclick="showTab('periop')">🏥 수술전후·임신</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;min-width:130px;max-width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">~45/100K</div><div class="stat-lbl">뇌하수체기능저하증 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">1.55×</div><div class="stat-lbl">전원인 사망률 증가 (SMR)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">15–20 mg</div><div class="stat-lbl">HC 목표 일일 교체 용량</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#6639a6">1.6 μg/kg</div><div class="stat-lbl">LT4 목표 교체 용량/day</div></div>
+  </div>
+
+  <!-- 정의 및 원인 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 뇌하수체기능저하증 정의 및 원인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>뇌하수체기능저하증 = 뇌하수체 호르몬의 <strong>완전 또는 부분 결핍</strong>. AI, 갑상선기능저하증, 성선기능저하증, GHD, (드물게) DI 포함. 유병률 약 45/100,000, 발생률 약 4/100,000/년.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-bottom:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">주요 원인</div>
+          <table class="hp-table">
+            <tr><th>분류</th><th>대표 원인</th></tr>
+            <tr><td style="font-weight:600">종양성</td><td>뇌하수체 선종, 두개인두종, 수막종, 낭종(Rathke's cleft)</td></tr>
+            <tr><td style="font-weight:600">치료 관련</td><td>수술, 방사선 치료</td></tr>
+            <tr><td style="font-weight:600">침윤성/염증성</td><td>림프구성 뇌하수체염, 사르코이드증, Langerhans 조직구증</td></tr>
+            <tr><td style="font-weight:600">혈관성</td><td>뇌하수체 졸중, Sheehan 증후군</td></tr>
+            <tr><td style="font-weight:600">외상성</td><td>두부 손상 (외상 후 뇌하수체기능저하증 ~12%)</td></tr>
+            <tr><td style="font-weight:600">약물</td><td>오피오이드(LH/FSH, ACTH, GH), 글루코코르티코이드(ACTH), CTLA-4 차단제(ACTH, TSH, LH/FSH)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">호르몬 결핍의 순서</div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>일반적 순서: <strong>GH → 성선자극호르몬 → TSH → ACTH</strong><br>단, 뇌하수체염 등에서는 예외 있음.</div>
+          </div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-top:10px;margin-bottom:6px">사망률 증가 요인</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 여성, 진단 시 젊은 연령</li>
+            <li>• 두개인두종 또는 공격적 종양</li>
+            <li>• DI 동반</li>
+            <li>• 수술 또는 방사선 치료 과거력</li>
+            <li>• 사망 원인: 악성종양, 심혈관질환, 뇌혈관질환</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임상 징후 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 호르몬 결핍별 임상 증상</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="hp-table">
+        <tr><th>증상/징후</th><th>결핍 호르몬</th></tr>
+        <tr class="section-row"><td colspan="2">전신 증상</td></tr>
+        <tr><td>피로, 쇠약감</td><td><span class="badge badge-acth">ACTH</span> <span class="badge badge-tsh">TSH</span> <span class="badge badge-lhfsh">LH/FSH</span> <span class="badge badge-gh">GH</span></td></tr>
+        <tr><td>체중 증가</td><td><span class="badge badge-tsh">TSH</span></td></tr>
+        <tr><td>체중 감소, 식욕 저하, 오심</td><td><span class="badge badge-acth">ACTH</span></td></tr>
+        <tr><td>인지 저하, 우울감</td><td><span class="badge badge-acth">ACTH</span> <span class="badge badge-tsh">TSH</span> <span class="badge badge-gh">GH</span> <span class="badge badge-lhfsh">LH/FSH</span></td></tr>
+        <tr class="section-row"><td colspan="2">심혈관·대사</td></tr>
+        <tr><td>기립성 저혈압</td><td><span class="badge badge-acth">ACTH</span></td></tr>
+        <tr><td>서맥, 고혈압</td><td><span class="badge badge-tsh">TSH</span></td></tr>
+        <tr><td>근육 감소, 체지방 증가</td><td><span class="badge badge-gh">GH</span></td></tr>
+        <tr><td>고지혈증, 인슐린 저항성</td><td><span class="badge badge-tsh">TSH</span> <span class="badge badge-gh">GH</span></td></tr>
+        <tr><td>저혈당</td><td><span class="badge badge-acth">ACTH</span></td></tr>
+        <tr class="section-row"><td colspan="2">근골격·생식</td></tr>
+        <tr><td>골다공증, 골절</td><td><span class="badge badge-acth">ACTH</span> <span class="badge badge-tsh">TSH</span> <span class="badge badge-lhfsh">LH/FSH</span> <span class="badge badge-gh">GH</span></td></tr>
+        <tr><td>희발월경/무월경, 발기부전</td><td><span class="badge badge-lhfsh">LH/FSH</span></td></tr>
+        <tr><td>불임</td><td><span class="badge badge-lhfsh">LH/FSH</span></td></tr>
+        <tr class="section-row"><td colspan="2">신장·기타</td></tr>
+        <tr><td>다뇨, 야뇨, 다음</td><td><span class="badge badge-adh">ADH</span></td></tr>
+        <tr><td>피부 창백·건조, 체모 감소</td><td><span class="badge badge-acth">ACTH</span> <span class="badge badge-tsh">TSH</span> <span class="badge badge-lhfsh">LH/FSH</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 권고 등급 안내 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 권고 등급(GRADE) 해설</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">권고 강도</div>
+          <table class="hp-table">
+            <tr><th>등급</th><th>표현</th><th>의미</th></tr>
+            <tr><td><span class="grade grade-1" data-tip="Strong Recommendation">1</span></td><td>We recommend</td><td>대부분 환자에게 적용 권고; 더 많은 이득</td></tr>
+            <tr><td><span class="grade grade-2" data-tip="Weak Recommendation">2</span></td><td>We suggest</td><td>환자 상황·가치·선호 고려 필요</td></tr>
+            <tr><td><span class="grade grade-ugp" data-tip="Ungraded Good Practice Statement">UGP</span></td><td>Good Practice</td><td>근거 등급 미부여; 임상 원칙 강조</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">근거 질</div>
+          <table class="hp-table">
+            <tr><th>표기</th><th>등급</th><th>의미</th></tr>
+            <tr><td><span class="loe-qqqq">QQQQ</span></td><td>높음</td><td>추가 연구로 신뢰도 변화 가능성 낮음</td></tr>
+            <tr><td><span class="loe-qqqe">QQQE</span></td><td>중등도</td><td>추가 연구로 신뢰도 변화 가능성</td></tr>
+            <tr><td><span class="loe-qqee">QQEE</span></td><td>낮음</td><td>추가 연구로 신뢰도 변화 가능성 높음</td></tr>
+            <tr><td><span class="loe-qeee">QEEE</span></td><td>매우 낮음</td><td>근거가 매우 불확실</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════ DIAGNOSIS ═══════════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <!-- 중추성 부신기능부전 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-acth">ACTH</span> 중추성 부신기능부전 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">아침 8–9시 혈청 코르티솔을 <strong>1차 선별 검사</strong>로 측정할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">임의 혈청 코르티솔로 AI를 진단하지 <strong class="danger-text">않도록</strong> 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">코르티솔 <strong>&lt;3 μg/dL</strong>이면 AI 가능성 높고, <strong>≥15 μg/dL</strong>이면 AI 배제 가능. 3–15 μg/dL 범위는 코르티코트로핀 자극 검사 시행.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">코르티코트로핀 자극 검사: 30분 또는 60분 최고 코르티솔 <strong>&lt;18.1 μg/dL (500 nmol/L)</strong>이면 AI 진단.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">HPA 축 검사는 마지막 HC 복용 후 <strong>최소 18–24시간</strong> 경과 후 시행. 합성 GC는 더 오랜 기간 필요.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>경구 에스트로겐은 CBG를 증가시켜 총 코르티솔 수치를 위음성으로 올릴 수 있음 → 에스트로겐 투여 중인 환자에서 해석 주의</div>
+      </div>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">표준용량(250 μg) 코르티코트로핀 자극 검사 절차</div>
+        <table class="hp-table">
+          <tr><th>단계</th><th>처치</th><th>채혈 시점</th></tr>
+          <tr><td>투여</td><td>ACTH 1-24 (코신트로핀) 250 μg IV 또는 IM</td><td>0분</td></tr>
+          <tr><td>측정</td><td>코르티솔 채혈</td><td>0, 30, 60분</td></tr>
+          <tr><td>판정</td><td>최고 코르티솔 ≥18.1 μg/dL → 정상 반응</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 중추성 갑상선기능저하증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-tsh">TSH</span> 중추성 갑상선기능저하증 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 높은 근거">1</span><span class="loe-qqqq">QQQQ</span></div>
+          <div class="rec-text">혈청 <strong>fT4와 TSH를 동시에</strong> 측정. 뇌하수체 질환 배경에서 fT4가 참고 범위 아래이고 TSH가 낮거나 정상 또는 경미하게 상승하면 중추성 갑상선기능저하증 진단.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">경한 중추성 갑상선기능저하증이 의심되는 low-normal fT4 환자: 증상이 있으면 LT4 시작, 없으면 fT4 추적관찰 — <strong>20% 이상 감소 시</strong> 치료 시작.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 중등도 근거">2</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">TRH 자극 검사는 중추성 갑상선기능저하증 진단에 <strong class="danger-text">권고하지 않는다</strong> (임상적 유용성 없음).</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>중추성 갑상선기능저하증에서는 TSH와 fT4가 상관하지 않음 → <strong>TSH만으로는 진단 불가</strong>. 유병률: 뇌하수체 선종의 43%(수술 전), 57%(수술 후).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GH 결핍 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-gh">GH</span> 성인 성장호르몬 결핍 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">GHD 의심 환자에서 <strong>GH 자극 검사</strong> 시행. 단일 GH 측정은 진단 가치 없음.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">최고 GH 반응치 평가 시 <strong>BMI-보정 기준치</strong> 적용 필수 (비만에서 GH 반응 저하).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 중등도 근거">2</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">명확한 GHD 임상 증상 + 다른 뇌하수체 호르몬 결핍 <strong>3가지 이상</strong>이 확인된 경우 생화학적 검사 없이 GHD 진단 가능.</div>
+        </li>
+      </ul>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">GH 자극 검사 비교</div>
+        <table class="hp-table">
+          <tr><th>검사</th><th>방법</th><th>정상 기준 (최고 GH)</th><th>주의</th></tr>
+          <tr><td>인슐린 내성 검사 (ITT)</td><td>인슐린 0.05–0.15 U/kg IV; 혈당 ≥40 mg/dL 저하 확인</td><td>≥3–5 μg/L (BMI 보정)</td><td>뇌전증, 허혈성 심질환 금기</td></tr>
+          <tr><td>GHRH + 아르기닌</td><td>GHRH 1 μg/kg + 아르기닌 0.5 g/kg IV</td><td>≥4 μg/L (BMI 보정)</td><td>시상하부 손상 시 위음성 가능</td></tr>
+          <tr><td>글루카곤 자극 검사</td><td>글루카곤 1 mg IM (90 kg↑: 1.5 mg)</td><td>≥3 μg/L (BMI 보정)</td><td>ITT 대체; 비만에서 반응 저하</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 중추성 성선기능저하증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-lhfsh">LH/FSH</span> 중추성 성선기능저하증 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">남성</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text"><strong>혈청 테스토스테론, FSH, LH</strong> 측정 (오전 10시 이전, 공복, 프롤락틴 동시 측정).</div>
+            </li>
+            <li class="rec-item" style="border:none;padding-top:0">
+              <div class="rec-text" style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">• 경계치 낮은 경우 동일 검사로 2회 반복 확인<br>• 오피오이드, GC, ketoconazole 등 약물 영향 확인</div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">여성</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">희발월경/무월경 시 <strong>혈청 E2, FSH, LH</span> 측정; 과프롤락틴혈증, 고안드로겐혈증, 갑상선질환 감별. 무월경 시 임신 배제.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+              <div class="rec-text">폐경 후 여성: HRT 미복용 상태에서 FSH·LH 상승 부재 → 성선자극세포 기능 이상 진단 충분.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">GnRH 자극 검사는 진단적 유용성 <strong class="danger-text">없음</strong>.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DI 진단 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-adh">ADH</span> 중추성 요붕증 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">다뇨 환자(>50 mL/kg/24h; 70 kg 기준 >3.5 L/day)에서 <strong>혈장 및 소변 삼투압을 동시에</strong> 측정.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>혈장 삼투압 &gt;295 mOsm/L → 소변 삼투압이 ~600 mOsm/L 미만 (urine/plasma 비 &lt;2)이면 DI 가능성. 소변 당 음성 확인.</div>
+      </div>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">수분 제한 검사 절차 요약</div>
+        <table class="hp-table">
+          <tr><th>단계</th><th>내용</th></tr>
+          <tr><td>수분 제한</td><td>오전 8시부터 8시간 금수; 체중·소변량 매시간 측정, 혈장·소변 삼투압 2–3시간마다</td></tr>
+          <tr><td>중단 기준</td><td>체중 3% 이상 감소 또는 혈장 삼투압 ≥305 mOsm/kg → 즉시 DDAVP 2 μg IM 투여</td></tr>
+          <tr><td>판정</td><td>DDAVP 후 소변 삼투압 ≥800 mOsm/kg → 중추성 DI; ≤300 mOsm/kg → 신성 DI</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /diagnosis -->
+
+<!-- ═══════════════ TREATMENT ═══════════════ -->
+<div id="tab-treatment" class="panel">
+
+  <!-- GC 대체 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-acth">ACTH</span> 글루코코르티코이드 대체요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text"><strong>하이드로코르티손(HC) 15–20 mg/일</strong>을 1회 또는 분할 투여 (기상 시 최고 용량, 오후 또는 점심·늦은 오후에 추가).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">장기작용 GC(프레드니솔론 등)는 순응도 불량, 불가용 등 일부 선택적 상황에서 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">모든 AI 환자에게 <strong>스트레스 용량 및 응급 GC 투여</strong>에 대해 교육; 응급카드/팔찌/목걸이, 주사용 고용량 GC 응급키트 휴대 지도.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">이차성 AI에서 <strong class="danger-text">플루드로코르티손 투여 금지</strong> (광물코르티코이드 기능은 정상).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">부신 위기 의심 시 <strong>즉시 HC 50–100 mg 근주 또는 정주</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">중추성 AI에서 대사·심혈관 위험 감소를 위해 <strong>가능한 최소 용량</strong>의 HC 유지.</div>
+        </li>
+      </ul>
+      <div class="dose-box" style="margin-top:10px">
+        <div class="dose-title">💊 GC 동등 용량 환산</div>
+        <table class="hp-table" style="margin-top:4px">
+          <tr><th>약물</th><th>동등 용량</th></tr>
+          <tr><td>하이드로코르티손(HC)</td><td>20 mg</td></tr>
+          <tr><td>프레드니솔론</td><td>5 mg</td></tr>
+          <tr><td>프레드니손</td><td>5 mg</td></tr>
+          <tr><td>덱사메타손</td><td>0.75 mg</td></tr>
+          <tr><td>메틸프레드니솔론</td><td>4 mg</td></tr>
+          <tr><td>코르티손 아세테이트</td><td>25 mg</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>과잉 대체(특히 일일 HC &gt;30 mg) → 골다공증, 대사질환, 심혈관 사망률 증가. HC ≤10 mg/일 그룹에서 QOL 최적.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 갑상선호르몬 대체 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-tsh">TSH</span> 갑상선호르몬 대체요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">LT4를 투여하여 혈청 fT4를 <strong>참고 범위의 중간~상단</strong>에 유지. 평균 목표 용량: <strong>1.6 μg/kg/일</strong> (연령, 에스트로겐 상태, fT4 수준에 따라 조정).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">LT3, 갑상선 추출물, 기타 제제는 중추성 갑상선기능저하증 치료에 <strong class="danger-text">권고하지 않는다</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">중추성 갑상선기능저하증에서 LT4 용량 조정 시 <strong class="danger-text">TSH를 지표로 사용하지 않는다</strong> — 적절히 치료받은 환자에서 TSH가 측정 불가 수준이어도 과치료로 해석하지 말 것.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div><strong>중요:</strong> LT4 시작 전 반드시 AI 배제 또는 경험적 GC 동시 투여. 갑상선호르몬은 코르티솔 제거를 가속화하여 잠재 부신기능부전을 촉발할 수 있음.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>📌</span>
+        <div>fT4 채혈은 LT4 복용 <strong>전</strong>에 시행. 경구 에스트로겐 투여 중인 여성은 TBG 증가로 LT4 요구량 증가 (평균 1.3 → 1.8 μg/kg/일).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 테스토스테론 대체 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-lhfsh">LH/FSH</span> 테스토스테론 대체요법 (남성)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">금기가 없는 중추성 성선기능저하증 성인 남성에서 테스토스테론 대체 권고: <strong>빈혈 예방, 체지방 감소, BMD·성욕·성기능·에너지·근육량 개선</strong>.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>제제 선택(경피, 근주 등)은 부작용 위험, 비용, 환자 선호에 따름. 임신을 원하는 경우 치료 전 정액 분석 권장. 테스토스테론 치료 중 임신 가능성이 있는 후천성 저성선자극호르몬 성선기능저하증 증례 보고 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 에스트로겐 대체 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-lhfsh">LH/FSH</span> 에스트로겐 대체요법 (가임기 여성)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">금기 없는 가임기 중추성 성선기능저하증 여성에서 <strong>성선호르몬 대체요법 권고</strong>. 자궁이 있는 경우 자궁내막 과증식 예방을 위해 에스트로겐-프로게스테론 병합.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>자연 폐경 평균 연령(~51세)까지 성선호르몬 대체 유지 권장. 에스트로겐 제제(경구, 경피, 질정 등)는 부작용, 비용, 환자 선호에 따라 선택. E2 혈중 농도 측정은 유용하지 않음 (일부 에스트로겐은 면역측정법에서 감지 안 됨).</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div>경구 에스트로겐은 CBG↑(총 코르티솔↑), TBG↑(LT4 요구량↑), IGF-1↓(GH 요구량↑)을 유발 → 관련 호르몬 용량 조정 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GH 대체 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-gh">GH</span> 성장호르몬 대체요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">GHD가 확인되고 금기가 없는 환자에게 GH 대체 권고.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 매우 낮은 근거">1</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">IGF-1을 정상 범위 상한 이하로 유지하며 용량 적정. 부작용 발생 시 감량.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">뇌하수체/시상하부 질환 병력이 없는 고령자에서 연령 보정 저IGF-1만으로 GH 투여 <strong class="danger-text">금지</strong>.</div>
+        </li>
+      </ul>
+      <div class="dose-box" style="margin-top:8px">
+        <div class="dose-title">💉 GH 대체 시작 용량</div>
+        <table class="hp-table" style="margin-top:4px">
+          <tr><th>연령</th><th>시작 용량</th><th>적정</th></tr>
+          <tr><td>&lt;60세</td><td>0.2–0.4 mg/일</td><td rowspan="2">6주 간격으로 0.1–0.2 mg씩 증량; IGF-1 목표 중간값 유지</td></tr>
+          <tr><td>≥60세</td><td>0.1–0.2 mg/일</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>GH 대체 모니터링:</strong> IGF-1 (6주 후, 용량 변경 후, 이후 6개월마다), 체중·혈압·BMI (6개월마다), 갑상선·부신 기능, 혈당·지질, BMD (18개월마다), 뇌하수체 MRI</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div><strong>GH 부작용 (~20%):</strong> 부종, 관절통, 근육통, 손발저림, 수근관 증후군, 수면 무호흡. 용량 과다 시 인슐린 저항성·당뇨 발생 가능. 경구 에스트로겐 투여 여성은 GH 요구량 최대 50% 증가.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DI 치료 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-adh">ADH</span> 요붕증 치료 (DDAVP)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-ugp" data-tip="Ungraded Good Practice">UGP</span></div>
+          <div class="rec-text">DDAVP 투여 시 <strong>개별 맞춤 투여 일정</strong> 적용. 부분 DI에서 다뇨가 불편하지 않은 경우 치료 없이 관찰 가능.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-ugp" data-tip="Ungraded Good Practice">UGP</span></div>
+          <div class="rec-text">저나트륨혈증 예방: 모든 DDAVP 복용 환자에게 과복용 위험 교육; <strong>최소 주 1회</strong> 다뇨기를 경험하도록.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-ugp" data-tip="Ungraded Good Practice">UGP</span></div>
+          <div class="rec-text">뇌하수체 수술 후 DI: 수술 후 수주~수개월 내 최소 1회 DDAVP 중단 시도 (후부 뇌하수체 기능 회복 여부 확인).</div>
+        </li>
+      </ul>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">DDAVP 제형별 동등 용량</div>
+        <table class="hp-table">
+          <tr><th>제형</th><th>생체이용률</th><th>동등 용량 비교</th></tr>
+          <tr><td>구강 붕해정(설하)</td><td>0.25%</td><td>60 μg = 경구 100 μg = 비강 2.5 μg</td></tr>
+          <tr><td>경구정</td><td>0.16%</td><td>100, 200, (400) μg</td></tr>
+          <tr><td>비강 분무</td><td>~6%</td><td>10 μg/분무</td></tr>
+          <tr><td>주사</td><td>—</td><td>0.5 μg = 경구 100 μg</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>저나트륨혈증은 DDAVP 치료의 주요 합병증 (~25%). 고령, 신장의 약물 감수성 증가 → 특히 주의. 무갈증성 DI: 매일 체중 측정, 주기적 혈청 나트륨 모니터링 필수.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /treatment -->
+
+<!-- ═══════════════ INTERACTIONS ═══════════════ -->
+<div id="tab-interactions" class="panel">
+
+  <div class="alert alert-purple" style="margin-bottom:12px">
+    <span>⚡</span>
+    <div>뇌하수체기능저하증에서는 여러 호르몬 대체제가 동시에 투여되므로 <strong>호르몬 간 상호작용</strong>을 숙지하고 단계적으로 평가·조정해야 한다.</div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GC ↔ GH 상호작용 <span class="sub">GH 시작 시 부신기능 재평가</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        GH는 cortisone→cortisol 전환(11β-HSD1)을 억제 → GC 대체 용량 증량 필요 또는 잠재 부신기능부전 노출 가능
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">GC 대체 없이 HPA 축이 정상으로 보이는 환자에서 GH 시작 전·후 HPA 축 기능 검사 시행.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GC ↔ 갑상선호르몬 상호작용 <span class="sub">LT4 전 AI 배제 필수</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        갑상선호르몬은 코르티솔 제거율을 증가시켜 잠재 부신기능부전을 부신 위기로 촉발할 수 있음
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">LT4 시작 전 AI 평가. 불가능한 경우 확진 전까지 <strong>경험적 GC 동시 투여</strong>.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GC ↔ 에스트로겐 상호작용 <span class="sub">경구 에스트로겐 → CBG↑ → 총 코르티솔↑</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        경구 에스트로겐은 간 초회통과 효과로 CBG를 증가시켜 총 코르티솔을 상승시킴 (경피 에스트로겐은 영향 없음)
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 중등도 근거">2</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">경구 에스트로겐 투여 중인 환자의 부신 예비능 평가 또는 HC 적절성 판단 시 총 코르티솔 상승을 고려하여 해석.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GH ↔ 갑상선호르몬 상호작용 <span class="sub">GH 시작 후 fT4 모니터링</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        GH는 T4→T3 말초 전환을 증가시켜 fT4를 감소시킴 → 이전에 정상이었던 fT4가 기준 이하로 하락 가능 (GHD가 CH를 마스킹)
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">정상 갑상선 기능의 GHD 환자에서 GH 시작 후 CH 발생 모니터링; fT4 감소 시 LT4 시작. 기존 CH 환자는 GH 시작 후 LT4 용량 증량 필요할 수 있음.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">GH 자극 검사 전 CH를 먼저 치료 (갑상선기능저하증이 GHD를 위양성 진단하게 할 수 있음).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      에스트로겐 ↔ 갑상선호르몬 상호작용 <span class="sub">에스트로겐 변경 시 fT4 재측정</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        에스트로겐은 TBG를 증가시켜 총 T4 및 LT4 요구량을 높임 (평균 1.3 → 1.8 μg/kg/일)
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">CH 환자에서 에스트로겐 요법 변경 시 fT4를 모니터링하고 목표 범위 유지를 위해 LT4 용량 조정.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GH ↔ 에스트로겐 상호작용 <span class="sub">경구 에스트로겐 → GH 요구량↑</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        경구 에스트로겐은 간의 GH 작용을 억제하여 IGF-1을 감소시킴 → GH 요구량 증가 (경피 에스트로겐은 영향 적음)
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 중등도 근거">2</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">경구 에스트로겐 투여 여성은 정상 여성이나 남성보다 <strong>더 높은 GH 용량</strong> 필요 (최대 50% 증가).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      GC ↔ DI 상호작용 <span class="sub">GC 결핍이 DI를 마스킹</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="interaction-box">
+        <div class="int-title">⚡ 메커니즘</div>
+        GC 결핍 → 신장에서 자유 수분 배설 장애 → 부분 DI에서 다뇨 마스킹. GC 대체 시작 후 DI가 현성화될 수 있음
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">GC 대체 시작 후 DI 발현 모니터링. 역으로 AI 진단 없이 DI가 호전되는 경우 AI 검사 시행.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 상호작용 요약표 -->
+  <div class="card" style="margin-top:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 호르몬 상호작용 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="hp-table">
+        <tr><th>상호작용</th><th>임상적 결과</th><th>조치</th></tr>
+        <tr><td>GH 시작 → GC</td><td>코르티솔 대사 감소 → AI 가능</td><td>HPA 축 재평가</td></tr>
+        <tr><td>LT4 시작 → GC</td><td>코르티솔 제거 증가 → 부신 위기 위험</td><td>LT4 전 AI 배제/GC 동시 투여</td></tr>
+        <tr><td>경구 에스트로겐 → GC</td><td>CBG↑ → 총 코르티솔 위양성 상승</td><td>총 코르티솔 해석 주의</td></tr>
+        <tr><td>GH 시작 → 갑상선</td><td>fT4 감소 → CH 현성화</td><td>GH 시작 6주 후 fT4 확인</td></tr>
+        <tr><td>에스트로겐 변경 → 갑상선</td><td>TBG↑ → LT4 요구량 증가</td><td>fT4 모니터링, LT4 조정</td></tr>
+        <tr><td>경구 에스트로겐 → GH</td><td>IGF-1 감소 → GH 요구량 증가</td><td>GH 용량 최대 50% 증량 고려</td></tr>
+        <tr><td>GC 결핍 → DI</td><td>자유수 배설 장애 → DI 마스킹</td><td>GC 대체 후 DI 발현 확인</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /interactions -->
+
+<!-- ═══════════════ SPECIAL ═══════════════ -->
+<div id="tab-special" class="panel">
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      쿠싱병 수술 후 관리 <span class="sub">HPA 축 회복까지 GC 대체 필수</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">ACTH 분비 종양 수술 절제 후 <strong>HPA 축 완전 회복까지 GC 대체</strong> (대부분 2년 이내 회복). 수술 후 갑상선·GH 축 재검사 후 대체 치료 결정.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>쿠싱병 수술 전 갑상선/GH 대체는 HPA 축 회복 확인 후 재검사 필요 (과잉 GC가 여러 축을 억압하므로 수술 후 재평가 필수).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      대형 프롤락틴종 치료 후 <span class="sub">도파민 효현제 성공 후 모든 호르몬 축 재평가</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">대형 프롤락틴종에서 도파민 효현제로 성공적 치료 후 <strong>모든 뇌하수체 축 재평가</strong>. 44–62%에서 성선기능 회복; 기타 축도 회복 가능 → 불필요한 평생 호르몬 대체 방지.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      치유된 말단비대증에서 GH 결핍 <span class="sub">저용량 GH 대체 고려</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">치유된 말단비대증 + GHD 확인 시 금기 없으면 <strong>저용량 GH 대체 고려</strong>. 체지방·QOL·지질 개선; 포도당 불내성 위험 없이 효과적.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      뇌하수체 졸중 관리 <span class="sub">급성 부신기능부전 즉시 처치</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">뇌하수체 졸중 모든 환자에서 <strong>급성 뇌하수체기능부전 검사</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">급성 AI는 주요 사망 원인 → 검사 결과 확보 전 <strong>즉시 GC 치료</strong> (HC 100–200 mg IV 볼루스 후 연속 주입 2–4 mg/h 또는 50–100 mg q6h).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">수술적 감압 또는 보존적 치료 후 <strong>시간 경과에 따른 뇌하수체기능저하증 발생·회복</strong> 모니터링 (>50%에서 결국 호르몬 대체 필요).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)">
+      항뇌전증약(AED) 병용 <span class="sub">AED가 여러 호르몬 대사를 가속화</span>
+      <span>▾</span>
+    </div>
+    <div class="acc-body">
+      <div class="alert alert-warn" style="margin-bottom:8px">
+        <span>⚠️</span>
+        <div>효소 유도 AED(페니토인, 카르바마제핀, 옥스카르바제핀, 토피라메이트): CYP450 활성화 → GC, LT4, 성호르몬 대사 가속화</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">비덱사메타손 GC 복용 AI 환자에서 효소 유도 AED 시작 시 AI 증상 교육.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">덱사메타손 + 효소 유도 AED 병용 시 덱사메타손 용량 증량.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">CH에서 LT4 복용 중 AED 시작 시 최소 6주 후 fT4 측정; 목표 범위 미달 시 LT4 증량.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">카르바마제핀, 옥스카르바제핀, 라모트리진, 페람파넬 등 + DDAVP 병용 시 <strong>저나트륨혈증 위험 증가</strong> → 모니터링 강화.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /special -->
+
+<!-- ═══════════════ PERIOP ═══════════════ -->
+<div id="tab-periop" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 뇌하수체 수술 전후 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">수술 전 AI 확인 환자: <strong>수술 전 스트레스 용량 GC</strong>, 수술 후 점감하며 HPA 축 재검사.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">수술 전 정상 부신 기능인 경우: HPA 축 평가 가능할 때까지 <strong>개별 맞춤 GC 투여</strong>. (수술 후 아침 코르티솔 &gt;15 μg/dL이면 GC 필요성 낮음)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">수술 전 CH 확인 환자: 비응급 수술 전 LT4 치료 최적화. 수술 중·후 LT4 계속 투여.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">수술 전 정상 갑상선 기능: <strong>수술 6–8주 후 fT4 측정</strong>으로 CH 발생 여부 확인.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">수술 직후 DI: 수성 ADH(short-acting sc) 우선 사용 (대부분 자연 회복).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 매우 낮은 근거">2</span><span class="loe-qeee">QEEE</span></div>
+          <div class="rec-text">수술 후 1주 내 DDAVP 정해진 스케줄 투여 <strong class="danger-text">금지</strong> (일시적 DI 회복 후 SIADH 발생 → 저나트륨혈증 위험; 수술 7–10일 후 SIADH 가능).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">퇴원 후 DDAVP: 구강 또는 비강 제제 사용, 명백한 다뇨 발생 시에만 복용 지시.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">뇌하수체 수술 후 <strong>6주부터 시작</strong>하여 주기적으로 모든 뇌하수체 축 재검사.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 비뇨수체 수술 시 GC 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 중등도 근거">1</span><span class="loe-qqqe">QQQE</span></div>
+          <div class="rec-text">수술 당일 <strong>수술 스트레스 강도</strong>에 따라 GC 용량 조정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">소수술~중간 수술 스트레스: <strong>HC 25–75 mg/24h</strong> (보통 1–2일).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+          <div class="rec-text">대수술: <strong>HC 100 mg IV 볼루스 → HC 200 mg/24h 지속 주입</strong> (또는 HC 50 mg q6h IV/IM).</div>
+        </li>
+      </ul>
+      <div class="dose-box" style="margin-top:8px">
+        <div class="dose-title">📊 수술 강도별 GC 스트레스 용량</div>
+        <table class="hp-table" style="margin-top:4px">
+          <tr><th>수술 강도</th><th>예시</th><th>HC 용량</th><th>기간</th></tr>
+          <tr><td>소수술</td><td>내시경, 피부 수술</td><td>25 mg/일</td><td>1일</td></tr>
+          <tr><td>중간 수술</td><td>담낭, 고관절</td><td>50–75 mg/일</td><td>1–2일</td></tr>
+          <tr><td>대수술</td><td>개심술, 개복술</td><td>100 mg 볼루스 → 200 mg/24h</td><td>회복까지</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 중 뇌하수체기능저하증 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">글루코코르티코이드</div>
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-ugp" data-tip="Ungraded Good Practice">UGP</span></div>
+              <div class="rec-text">임신 중 GC는 <strong>HC 우선 선택</strong>. 임상 경과에 따라 용량 조정; 3분기에 증량 필요 가능.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">임신 중 <strong class="danger-text">덱사메타손 금기</strong> (태반 통과, 태아 부신 억제).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">분만 활성기: 대수술에 준하는 <strong>HC 스트레스 용량</strong> 투여 (활성기 HC 50 mg IV, 제왕절개 시 HC 100 mg q6–8h).</div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">갑상선 / GH / DDAVP</div>
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-1" data-tip="Strong / 낮은 근거">1</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">임신 중 CH: <strong>fT4 또는 총 T4를 4–6주마다</strong> 모니터링, LT4 증량 필요 가능 (hCG에 의한 갑상선 자극으로 1분기는 LT4 요구량 증가가 적을 수 있음).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">임신 중 <strong>GH 중단</strong> 권고 (태반 자체 GH 생성; 안전성·유효성 불충분).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2" data-tip="Weak / 낮은 근거">2</span><span class="loe-qqee">QQEE</span></div>
+              <div class="rec-text">기존 DI: 임신 중 <strong>DDAVP 지속</strong>; 용량 조정 필요 가능 (태반 바소프레시나제 → ADH 분해 증가).</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>임신 중 총 코르티솔은 CBG 증가로 위양성 상승. fT4 면역측정법이 임신 중 부정확할 수 있으므로 총 T4(정상 상한의 1.5배 적용)를 대안으로 사용 가능.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /periop -->
+
+<!-- ═══════════════ ABBR ═══════════════ -->
+<div id="tab-abbr" class="panel" style="display:none">
+  <div style="margin-bottom:8px">
+    <input type="text" id="abbr-main-input" placeholder="약어 또는 설명으로 검색…"
+      oninput="filterAbbrMain(this.value)"
+      style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:100%;max-width:400px;outline:none;"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+  </div>
+  <div id="abbr-main-grid" class="abbr-grid-main"></div>
+</div>
+
+</div><!-- /.main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+const abbrs = [
+  ['AC','Adrenal Crisis (부신 위기) — AI 환자에서 스트레스 시 발생; 즉시 HC 50–100 mg 근주'],
+  ['ACTH','Adrenocorticotropic Hormone (부신피질자극호르몬) — 뇌하수체 전엽 분비; 코르티솔 분비 자극'],
+  ['AGHD','Adult Growth Hormone Deficiency (성인 성장호르몬 결핍증)'],
+  ['AI','Adrenal Insufficiency (부신기능부전) — 중추성(이차성) AI: ACTH 결핍으로 코르티솔 분비 부전'],
+  ['ADH','Antidiuretic Hormone (항이뇨호르몬) = 바소프레신; 신장 수분 재흡수 조절'],
+  ['AED','Antiepileptic Drug (항뇌전증약) — CYP450 유도로 여러 호르몬 대사 가속화'],
+  ['BMD','Bone Mineral Density (골밀도) — DXA로 측정; 뇌하수체기능저하증에서 감소 위험'],
+  ['BMI','Body Mass Index (체질량지수) — GH 자극 검사 판정 시 BMI-보정 기준치 적용'],
+  ['CBG','Corticosteroid-Binding Globulin (코르티코스테로이드 결합 글로불린) — 경구 에스트로겐 시 증가 → 총 코르티솔 위상승'],
+  ['CH','Central Hypothyroidism (중추성 갑상선기능저하증) — TSH 결핍으로 T4 분비 저하'],
+  ['CRH','Corticotropin-Releasing Hormone (부신피질자극호르몬 분비호르몬) — 시상하부 분비'],
+  ['DDAVP','Desmopressin (데스모프레신) — ADH 유사체; V2 수용체 작용; DI 치료'],
+  ['DI','Diabetes Insipidus (요붕증) — ADH 결핍으로 희석뇨 다량 생성'],
+  ['DXA','Dual-Energy X-ray Absorptiometry (이중에너지 X선 흡수계측) — 골밀도 측정'],
+  ['E2','Estradiol (에스트라다이올) — 주요 여성 에스트로겐'],
+  ['FSH','Follicle-Stimulating Hormone (난포자극호르몬)'],
+  ['fT3','Free Triiodothyronine (유리 T3) — CH 진단에 단독으로는 유용하지 않음'],
+  ['fT4','Free Thyroxine (유리 T4) — CH 모니터링의 핵심 지표; TSH 대신 사용'],
+  ['GC','Glucocorticoid (글루코코르티코이드) — 코르티솔 유사 스테로이드 총칭'],
+  ['GH','Growth Hormone (성장호르몬) — 뇌하수체 전엽 분비; 체지방·근육·뼈·대사 조절'],
+  ['GHD','Growth Hormone Deficiency (성장호르몬 결핍)'],
+  ['GHRH','Growth Hormone-Releasing Hormone (성장호르몬 분비호르몬) — 시상하부 분비'],
+  ['GnRH','Gonadotropin-Releasing Hormone (성선자극호르몬 분비호르몬) — 자극 검사 무용'],
+  ['HC','Hydrocortisone (하이드로코르티손) — 코르티솔과 동일; GC 대체 1차 선택약; 20 mg = 표준 동등용량'],
+  ['HPA','Hypothalamic-Pituitary-Adrenal (시상하부-뇌하수체-부신) 축'],
+  ['HRT','Hormonal Replacement Therapy (호르몬 대체요법)'],
+  ['IGF-1','Insulin-like Growth Factor-1 — GH 대체 모니터링 지표; 반감기 24–30h'],
+  ['ITT','Insulin Tolerance Test (인슐린 내성 검사) — GH·ACTH 결핍 진단 골드스탠더드'],
+  ['LC-MSMS','Liquid Chromatography-Tandem Mass Spectrometry — 스테로이드·갑상선호르몬 정밀 측정'],
+  ['LH','Luteinizing Hormone (황체형성호르몬)'],
+  ['LT4','Levothyroxine (레보티록신) — L-T4; 합성 T4; CH 1차 치료'],
+  ['LT3','Levotriiodothyronine (레보트리요도티로닌) — CH 치료에 권고하지 않음'],
+  ['MRI','Magnetic Resonance Imaging — 뇌하수체 종양·병변 평가'],
+  ['PRL','Prolactin (프롤락틴) — 고프롤락틴혈증이 성선기능저하증 유발 가능'],
+  ['QOL','Quality of Life (삶의 질) — 뇌하수체기능저하증의 주요 치료 목표'],
+  ['SHBG','Sex Hormone-Binding Globulin (성호르몬 결합 글로불린)'],
+  ['SMR','Standard Mortality Ratio (표준화 사망률비)'],
+  ['SIADH','Syndrome of Inappropriate ADH Secretion (항이뇨호르몬 부적절 분비 증후군) — 수술 7–10일 후 위험'],
+  ['TBG','Thyroid-Binding Globulin (갑상선 결합 글로불린) — 에스트로겐이 증가시킴'],
+  ['TSH','Thyroid-Stimulating Hormone (갑상선자극호르몬) — CH에서 낮거나 정상 또는 경미하게 상승; 치료 모니터링으로 사용하지 않음'],
+  ['TRH','Thyrotropin-Releasing Hormone (갑상선자극호르몬 분비호르몬) — 자극 검사 무용'],
+  ['11β-HSD1','11β-Hydroxysteroid Dehydrogenase Type 1 — cortisone→cortisol 전환; GH에 의해 억제됨'],
+  ['ACTH 자극 검사','Corticotropin Stimulation Test — 250 μg 코신트로핀 IV/IM; 30·60분 코르티솔 측정; 정상: ≥18.1 μg/dL'],
+  ['부신 위기 (AC)','Adrenal Crisis — 스트레스 시 즉시 HC 50–100 mg 근주 후 응급 이송'],
+  ['Modified-release HC','변형 방출 HC — 유럽 허가; 1일 1회; 생리적 코르티솔 프로파일 근사 (완전 재현 못함)'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+function filterAbbrMain(val) {
+  const v = val.toLowerCase().trim();
+  const items = document.querySelectorAll('#abbr-main-grid .abbr-item');
+  items.forEach(el => {
+    el.style.display = (!v || el.dataset.term.includes(v) || el.dataset.def.includes(v)) ? '' : 'none';
+  });
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+// 탭 클릭 시 abbr 탭 처리
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>저나트륨혈증 치료 기준 2024</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0550ae;
+    --accent2: #0369a1;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --teal: #0e7490;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--teal); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent);  color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-teal    { background: #e0f7fa; border-left: 3px solid var(--teal);    color: #0e7490; }
+
+  /* ── TABLE ── */
+  .hn-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .hn-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .hn-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .hn-table tr:last-child td { border-bottom: none; }
+  .hn-table tr:hover td { background: rgba(0,0,0,.02); }
+  .hn-table .section-row td { background: var(--surface2); color: var(--teal); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr .osa-sub { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); font-weight: 400; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── SP (sub-panel) ── */
+  .sp-section { margin-bottom: 6px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid var(--teal); padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; user-select: none; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .sp-body.open { max-height: 2000px; padding: 8px 0; }
+
+  /* ── BADGE / PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-severe  { background: #ffebe9; color: #82071e; }
+  .pill-moderate{ background: #fff8c5; color: #7d4e00; }
+  .pill-mild    { background: #dafbe1; color: #116329; }
+  .pill-drug    { background: #ddf4ff; color: #0550ae; }
+  .pill-caution { background: #ffe4c4; color: var(--orange); }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--teal); }
+
+  /* ── STEP BOX ── */
+  .step-box { display: flex; gap: 8px; align-items: flex-start; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; }
+  .step-num { font-weight: 800; font-size: calc(14px * var(--fscale, 1)); min-width: 22px; text-align: center; }
+
+  /* ── FLOW ── */
+  .flow-box { border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; background: var(--surface); font-size: calc(12px * var(--fscale, 1)); margin-bottom: 4px; }
+  .flow-arrow { text-align: center; color: var(--text2); font-size: calc(14px * var(--fscale, 1)); margin: 2px 0; }
+  .flow-branch { display: flex; gap: 6px; margin: 4px 0; }
+  .flow-branch-item { flex: 1; border: 1px solid var(--border); border-radius: 5px; padding: 6px 8px; font-size: calc(11px * var(--fscale, 1)); background: var(--surface2); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--teal); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .num-badge { display: inline-block; background: var(--teal); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">NDT 2024</span>
+      <h1>저나트륨혈증(Hyponatraemia) 치료 기준 2024</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.1093/ndt/gfae162" class="source-link" target="_blank">Nephrol Dial Transplant 2024;39:1583–1592 ↗</a>
+      <span class="meta"> · Spasovski G · Treatment Standard 2024</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ERA/EDTA</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요·분류</div>
+    <div class="tab" onclick="showTab('severe')">🚨 중증 치료</div>
+    <div class="tab" onclick="showTab('mild')">💧 경~중등증</div>
+    <div class="tab" onclick="showTab('siadh')">🔬 SIADH</div>
+    <div class="tab" onclick="showTab('drugs')">💊 약제 비교</div>
+    <div class="tab" onclick="showTab('overcorrection')">⚠️ 과교정 관리</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">20–35%</div><div class="stat-lbl">중환자실 입원 환자 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">50%</div><div class="stat-lbl">지주막하출혈 환자 동반율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--teal)">&lt;135</div><div class="stat-lbl">진단 기준 sNa (mmol/L)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 분류 체계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>저나트륨혈증 = 전해질 유리 수분 섭취·손실의 불균형. sNa <strong>&lt;135 mmol/L</strong>. 치료 시작 전 반드시 <strong>원인 진단 → 삼투질 농도 평가 → 체액량 평가</strong> 순서로 접근.</div>
+      </div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px">① 발생 시간별</div>
+          <table class="hn-table">
+            <tr><th>구분</th><th>기간</th><th>특징</th></tr>
+            <tr><td><span class="pill pill-severe">급성</span></td><td>&lt;48시간</td><td>수술 후 과잉 수액, 자의적 수분중독; 중증 증상 빈번</td></tr>
+            <tr><td><span class="pill pill-mild">만성</span></td><td>≥48시간 또는 불명</td><td>무증상~경증; CNS 삼투 적응</td></tr>
+          </table>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px;margin-top:10px">② 중증도별 (sNa, mmol/L)</div>
+          <table class="hn-table">
+            <tr><th>중증도</th><th>sNa</th></tr>
+            <tr><td><span class="pill pill-severe">중증(Severe)</span></td><td>&lt;120</td></tr>
+            <tr><td><span class="pill pill-moderate">중등증(Moderate)</span></td><td>120–129</td></tr>
+            <tr><td><span class="pill pill-mild">경증(Mild)</span></td><td>130–134</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px">③ 증상 중증도</div>
+          <table class="hn-table">
+            <tr><th>등급</th><th>증상</th></tr>
+            <tr><td><span class="pill pill-severe">중증</span></td><td>경련, 혼수, 호흡정지</td></tr>
+            <tr><td><span class="pill pill-moderate">경~중등도</span></td><td>두통, 기면, 피로, 현기증, 오심·구토, 혼동, 보행장애, 근경련</td></tr>
+            <tr><td><span class="pill pill-mild">무증상</span></td><td>—</td></tr>
+          </table>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px;margin-top:10px">④ 체액량별</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
+            <div style="flex:1;min-width:80px;padding:8px;background:#fff8c5;border-radius:5px;font-size: calc(11px * var(--fscale, 1));text-align:center;border:1px solid #e6c96e"><div style="font-weight:700;color:#7d4e00">저혈량</div><div style="color:var(--text2);margin-top:2px">전해질·수분 손실</div></div>
+            <div style="flex:1;min-width:80px;padding:8px;background:#e0f7fa;border-radius:5px;font-size: calc(11px * var(--fscale, 1));text-align:center;border:1px solid #80deea"><div style="font-weight:700;color:var(--teal)">정상혈량</div><div style="color:var(--text2);margin-top:2px">SIADH 주요</div></div>
+            <div style="flex:1;min-width:80px;padding:8px;background:#ffebe9;border-radius:5px;font-size: calc(11px * var(--fscale, 1));text-align:center;border:1px solid #f5a9a9"><div style="font-weight:700;color:#82071e">과혈량</div><div style="color:var(--text2);margin-top:2px">심부전·간경화·신증후군</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚗️</span> 삼투질 농도 유형 (Tonicity)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="hn-table">
+        <tr><th>유형</th><th>삼투질농도 (mOsm/kg)</th><th>임상 의의</th></tr>
+        <tr><td><strong>저장성(Hypotonic)</strong></td><td>&lt;275</td><td>진성 저나트륨혈증; 수분 과잉</td></tr>
+        <tr><td>등장성(Isotonic)</td><td>275–290</td><td>가성저나트륨혈증 (고중성지방혈증 등)</td></tr>
+        <tr><td>고장성(Hypertonic)</td><td>&gt;290</td><td>가성저나트륨혈증 (고혈당) — sNa 허위 저하</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>가성저나트륨혈증:</strong> 고혈당·고중성지방혈증 시 혈청 삼투질농도↑ → 세포외 수분 증가 → sNa 저하. 급격한 혈당 교정 시 혈청 삼투질농도↓ → 뇌부종 위험 (특히 젊은 케톤산증).</div>
+      </div>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>SIADH에서 높은 ADH 활성 존재 시, 등장성 식염수 투여 → 집합관에서 농축 소변으로 Na 배설(탈염 현상, <em>desalination</em>) → sNa 추가 저하. 등장성 식염수는 수분 과잉 장애에 <strong>비효과적·해로울 수 있음.</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧮</span> Na 결핍량 계산 및 교정 속도 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📐</span>
+        <div><strong>Na 결핍량(mmol)</strong> = (140 − sNa) × 총체수분량<br>총체수분량(TBW) = 체중(kg) × 0.6</div>
+      </div>
+      <div class="sec-sep"></div>
+      <table class="hn-table">
+        <tr><th>시점</th><th>목표 sNa 상승</th><th>비고</th></tr>
+        <tr><td>첫 6시간</td><td style="color:var(--green);font-weight:600">4–6 mmol/L</td><td>증상 대부분 소실</td></tr>
+        <tr><td>첫 24시간</td><td style="color:var(--green);font-weight:600">4–6 mmol/L 유지</td><td>추가 상승 금지</td></tr>
+        <tr><td>이후 24시간마다</td><td style="color:var(--red);font-weight:600">≤8 mmol/L</td><td>초과 시 ODS 위험</td></tr>
+        <tr><td>ODS 고위험 환자</td><td style="color:var(--red);font-weight:600">≤8 mmol/L/24h</td><td>저칼륨혈증, 알코올중독, 영양실조, 간질환</td></tr>
+        <tr><td>평균 위험</td><td>≤10 mmol/L/24h</td><td>—</td></tr>
+        <tr><td>기타</td><td>≤12 mmol/L/24h</td><td>—</td></tr>
+      </table>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div><strong>ODS 발생 위험:</strong> 첫 24h 내 sNa &gt;10 mmol/L 상승, 또는 48h 내 &gt;18 mmol/L 상승 시 삼투성 탈수초화 증후군(ODS) 위험. 중증 저나트륨혈증 &gt;2–3일 지속 시 특히 주의.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════ SEVERE ═══════════════ -->
+<div id="tab-severe" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚨</span> 중증 저나트륨혈증 치료 알고리즘</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>⚡</span>
+        <div>sNa &lt;125 mmol/L — <strong>즉각적 치료</strong> 필요. 원인 미확인 상태에서도 교정 시작. 단, 첫 24h 내 동시적 교정 조치는 자제.</div>
+      </div>
+      <div class="sec-sep"></div>
+
+      <!-- Flow diagram -->
+      <div style="max-width:520px;margin:0 auto">
+        <div class="flow-box" style="background:#ffebe9;border-color:#f5a9a9;text-align:center;font-weight:700;color:#82071e">
+          중증 저나트륨혈증 (sNa &lt; 125 mmol/L)
+        </div>
+        <div class="flow-arrow">▼</div>
+        <div class="flow-box" style="background:#fff3e0;border-color:#ffb74d">
+          <div style="font-weight:600;margin-bottom:4px">3% HSS 투여</div>
+          <div style="font-size: calc(11px * var(--fscale, 1))">볼루스: 100–150 ml (2–4 ml/kg) IV, 20–40분 투여<br>또는 지속 주입: 0.5–1 ml/kg/h</div>
+        </div>
+        <div class="flow-arrow">▼</div>
+        <div style="font-weight:600;font-size: calc(11px * var(--fscale, 1));color:var(--text2);text-align:center;margin:4px 0">Na 증가량 평가</div>
+        <div class="flow-branch">
+          <div class="flow-branch-item" style="background:#ffebe9;border-color:#f5a9a9">
+            <div style="font-weight:700;color:#82071e">Na &lt;4 mmol/L 증가</div>
+            <div style="margin-top:4px">3% HSS 볼루스 반복<br>(20–40분 간격)</div>
+          </div>
+          <div class="flow-branch-item" style="background:#dafbe1;border-color:#a8d5b1">
+            <div style="font-weight:700;color:#116329">Na 4–6 mmol/L 증가</div>
+            <div style="margin-top:4px">3% HSS 중단<br>✅ 치료 목표 달성</div>
+          </div>
+          <div class="flow-branch-item" style="background:#fff8c5;border-color:#e6c96e">
+            <div style="font-weight:700;color:#7d4e00">Na &gt;6 mmol/L 증가</div>
+            <div style="margin-top:4px">3% HSS 즉시 중단<br>→ Desmopressin 1 mcg SC/IV q8h<br>→ 5% 포도당 4 ml/kg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px">볼루스(RIB) vs 지속 주입(SCI) 비교</div>
+          <table class="hn-table">
+            <tr><th></th><th>RIB (볼루스)</th><th>SCI (지속)</th></tr>
+            <tr><td>1시간 내 목표 달성</td><td style="color:var(--green)">우수</td><td>열등</td></tr>
+            <tr><td>과교정 위험</td><td style="color:var(--yellow)">높음</td><td>낮음</td></tr>
+            <tr><td>저교정 위험</td><td>낮음</td><td style="color:var(--yellow)">높음</td></tr>
+            <tr><td>Na 변동폭</td><td>좁음</td><td>넓음</td></tr>
+            <tr><td>권고</td><td style="color:var(--teal);font-weight:600">유증상 1차 선호</td><td>저칼륨혈증 동반 시 선호</td></tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">SALSA RCT: 두 방법 모두 유효·안전. RIB는 과교정 재교정 빈도 낮음.</div>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div><strong>저칼륨혈증 동반 시:</strong> 지속 주입 선호. KCl 20 mmol/500 ml 3% HSS 추가. K 보충 → 세포 내 Na 유출 → 추가 Na 상승(overshooting) → ODS 위험. Na <strong>2시간마다</strong> 모니터링 필수.</div>
+          </div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div><strong>수분이뇨(water diuresis) 출현</strong> 시 교정 속도 급상승 가능 → 즉각 감시 강화. ODS 구제 전략 즉시 준비.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-sep"></div>
+      <div class="alert alert-teal">
+        <span>🩺</span>
+        <div><strong>심부전(CHF) 동반:</strong> 루프 이뇨제 병용. <strong>부신기능저하:</strong> 하이드로코르티손. <strong>저칼륨혈증:</strong> KCl 보충. 중증 만성 저나트륨혈증(&lt;120 mEq/L)에서도 3% HSS 15–30 ml/h 완속 주입 + 정기 추적으로 ODS 예방.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 모니터링 빈도</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="hn-table">
+        <tr><th>단계</th><th>모니터링 빈도</th></tr>
+        <tr><td>급성 중증 저나트륨혈증 치료 중</td><td style="font-weight:600;color:var(--red)">매 1시간</td></tr>
+        <tr><td>저칼륨혈증 동반 + 3% HSS 지속 주입</td><td style="font-weight:600;color:var(--red)">매 2시간</td></tr>
+        <tr><td>목표 sNa 증가 달성 후</td><td>6–12시간마다</td></tr>
+        <tr><td>저혈량성: 생리식염수 투여 중</td><td>6–8시간 후, 이후 24시간마다</td></tr>
+        <tr><td>vaptan 시작 후</td><td>4–6시간마다 (8 mmol/L 도달 시 추가 상승 방지)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /severe -->
+
+<!-- ═══════════════ MILD ═══════════════ -->
+<div id="tab-mild" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💧</span> 경~중등증 — 체액량별 치료 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span>
+        <div>경~중등증 만성 저나트륨혈증은 대개 무증상 (CNS 삼투 적응). <strong>체액량 평가</strong>가 치료 선택의 핵심. 항상 원인 치료 병행.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 저혈량 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span style="color:#7d4e00">▼</span> <span style="color:#7d4e00">저혈량성 저나트륨혈증</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn"><span>🔑</span><div>ADH의 보상반응 → 전해질·수분 손실(위장관: 설사·구토 / 신장: 이뇨제 과다, 세관병증, 부신기능저하 / 출혈). 원인 치료 + 체액 보충.</div></div>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">uNa &gt;30 mmol/L (신장성 원인)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;padding:0;line-height:1.9">
+            <li>• 이뇨제 중단</li>
+            <li>• 소변 K 낮을 경우 → <strong>플루드로코르티손</strong> 0.05–0.2 mcg/일</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">uNa &lt;30 mmol/L (비신장성 원인)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;padding:0;line-height:1.9">
+            <li>• 이뇨제 중단</li>
+            <li>• 필요 시 항구역제</li>
+            <li>• 가능 시 원인 치료</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-teal" style="margin-top:8px">
+        <span>💉</span>
+        <div><strong>체액 보충 방법:</strong><br>
+        • 정맥: NaCl 0.9% <strong>23–30 ml/kg/일</strong><br>
+        • 경구: 매일 9 g NaCl 섭취 (= 1L NaCl 0.9%에 해당); 소량 분할 식사·음료로 투여</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 과혈량 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span style="color:#82071e">▲</span> <span style="color:#82071e">과혈량성 저나트륨혈증</span> (CHF·간경화·신증후군)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger"><span>⚠️</span><div>세포외액 증가 + 혈관내 유효 순환량 감소 → ADH 부적절 분비 공통 기전. 세 질환 모두 감별진단·혈액량 지속 평가 필수.</div></div>
+      <div class="sec-sep"></div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>1차: 수분 제한 (FR)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            CHF·간부전 모두 FR 1차 선택. 갈증 날 때만 섭취 권고. 소변량 모니터링.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>2차: 루프 이뇨제 (Loop Diuretics)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            소관 전해질 투과성 제한 → 수질 삼투질농도↓ → ADH 추가 자극 억제.<br>
+            Furosemide <strong>20–40 mg q8–12h</strong>. 소금 섭취 <strong>3–5 g/일</strong>과 병용 시 효과 증대.<br>
+            uOsm &gt;350 mOsm/kg일 때 특히 효과적.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>Tolvaptan (CHF 선택 약)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            EVEREST 연구: CHF 과혈량 저나트륨혈증에서 7일간 sNa 5–6 mmol/L 안전 상승.<br>
+            초기 용량 <strong>15 mg</strong> → 완만하고 지속적인 sNa 상승; 루프이뇨제 동반 미사용 시 과교정 위험 거의 없음.<br>
+            <span style="color:var(--red)">주의: 간부전에서는 사용 금지</span> (간이식 전 수술 준비 제외). Hypertransaminasemia 부작용 가능.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>Urea (CHF 환자)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            근위세관 삼투 효과로 이뇨 증가. CHF 환자에서 <strong>15–60 g/일</strong>. 이환율·사망률 예방에 효과적·안전. NaCl 1g(34 mOsm) 대비 15g urea(250 mOsm) → 수십 배 효율.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>알부민 (간경화 고도 환자)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            저알부민혈증+낮은 순환 용적 동반 간경화에서 정당화. 교질삼투압↑ → 혈관내 용적↑ → ADH 자극↓. 정상 하한선 유지 목표.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>SGLT2i (최후 수단)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--teal);font-size: calc(12px * var(--fscale, 1))">
+            삼투 이뇨 유도. CHF에서 최후 치료 옵션으로 고려. 아직 근거 기반 권고 수준 아님.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 정상혈량 (비SIADH) -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span style="color:var(--teal)">●</span> <span style="color:var(--teal)">정상혈량성 — SIADH 외 원인 감별</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn"><span>🔍</span><div>SIADH 치료 시작 전 <strong>갑상선기능저하증, 고코르티솔혈증(부신기능저하), ADH 증가, 특정 약물, 종양 부신경절 증후군</strong> 등 원인 배제(또는 치료) 필수.</div></div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">uNa &gt;30 mmol/L</div>
+          <div style="font-size: calc(12px * var(--fscale, 1))">신장성 원인(신증후군) 또는 비신장성(이뇨제) → SIADH 탭 참조</div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">수분 제한 실패 시</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;padding:0;line-height:1.8">
+            <li>• eGFR 15–45: 루프 이뇨제</li>
+            <li>• eGFR &gt;30: Tolvaptan</li>
+            <li>• 무반응/eGFR &lt;15: 신장내과 의뢰</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /mild -->
+
+<!-- ═══════════════ SIADH ═══════════════ -->
+<div id="tab-siadh" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> SIADH 개요 및 1차 치료: 수분 제한(FR)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>SIADH = 경~중등증 정상혈량 저나트륨혈증의 <strong>가장 흔한 원인</strong>. 단, FR 효과 불충분 → SIADH 환자 <strong>약 50%는 FR에 반응 없음</strong>.</div>
+      </div>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">FR 적응증 및 전제조건</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;padding:0;line-height:1.8">
+            <li>✅ 신기능 보존 (소변량 &gt;1500 ml/일, uOsm &gt;500 mOsm/kg)</li>
+            <li>✅ 식사 중·갈증 시만 음료 섭취 원칙</li>
+            <li>✅ 초기 FR <strong>500 ml/일</strong> → sNa에 따라 조정</li>
+            <li>❌ 영양실조 환자 비권고</li>
+            <li>❌ 순응도 없는 환자</li>
+            <li>❌ IV 수액 &gt;1 L/일 필요한 환자</li>
+            <li>❌ 고온 환경</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">FR 효과 제한 증거</div>
+          <div class="alert alert-warn">
+            <span>📊</span>
+            <div>단일 RCT: FR군 2/3만이 3일 후 sNa &gt;130 달성 (vs 비치료군). 교정 속도: 1–2 mEq/L / 24–48h, 수일간만 유효. 노인에서 신기능 감소로 효과 더욱 제한.</div>
+          </div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div>후향 연구: 만성 경증 SIADH 34명에서 "갈증·식사 시만 음료" 원칙 준수 → <strong>76.5%에서 sNa 정상화.</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>FR 실패 기준:</strong> 24h 소변량 &lt;500 ml <em>또는</em> sNa 상승 &lt;2 mmol/L/24h → 2차 약제 전환.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> SIADH 2차 치료: Vaptans</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-success"><span>⭐</span><div>Vaptans = <strong>현재 가장 근거 수준이 높은</strong> SIADH 약제. 약 48h 내 sNa 정상화. 단, 비교적 고가.</div></div>
+      <div class="sec-sep"></div>
+      <table class="hn-table">
+        <tr><th>단계</th><th>sNa 모니터링 기준</th><th>조치</th></tr>
+        <tr><td>시작 용량</td><td colspan="2">Tolvaptan <strong>7.5 mg</strong> 경구</td></tr>
+        <tr><td>6시간 내 Na &gt;5 mmol/L 상승</td><td>과교정 위험</td><td>즉시 감시 강화 (4–6시간마다)</td></tr>
+        <tr><td>24h 내 Na ≤8 mmol/L 상승</td><td>충분한 교정</td><td>용량 <strong>15 mg으로 증량</strong></td></tr>
+        <tr><td>48h 후 동일 반응 불충분</td><td>—</td><td>15 mg → 최대 <strong>60 mg</strong>까지 적정</td></tr>
+      </table>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-danger">
+            <span>🚨</span>
+            <div><strong>과교정 시 'Braking' 프로토콜:</strong><br>
+            • Na ↑ ≤5 mmol/L (수 시간 내): Desmopressin <strong>2 μg SC</strong><br>
+            • Na ↑ 6–8 mmol/L: + 5% 포도당 <strong>2–3 ml/kg/h × 2–3시간</strong></div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div><strong>고위험 환자 Na 교정 상한:</strong><br>
+            저칼륨혈증·알코올·영양실조·간질환 → <strong>≤8 mmol/L</strong><br>
+            평균 위험 → ≤10 mmol/L<br>
+            기타 → ≤12 mmol/L / 24h</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:4px">
+        <span>ℹ️</span>
+        <div>12h 내 sNa 8 mmol/L 도달 → 5% 포도당과 소변량 매칭으로 추가 상승 방지. 첫 12h 도달 후 창이 있으면 desmopressin으로 재하강 가능 (뇌 병변 예방).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧂</span> SIADH 2차 치료: Urea</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="hn-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>초기 용량</td><td><strong>15 g</strong>/일 경구</td></tr>
+            <tr><td>유지 용량</td><td>0.25–0.5 g/kg/일 (<strong>15–30 g</strong>/일)</td></tr>
+            <tr><td>uOsm &gt;300 시</td><td>&gt;30 g/일로 증량 고려</td></tr>
+            <tr><td>Na 과교정 시</td><td>당일 용량 <strong>생략</strong></td></tr>
+            <tr><td>3일째 교정 불충분</td><td>용량 <strong>2배</strong>로 증가</td></tr>
+            <tr><td>최대 용량</td><td>60 g/일</td></tr>
+            <tr><td>비용</td><td>&lt;$3 / 30 g (매우 저렴)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div><strong>Urea 장점:</strong><br>
+            • ODS·과교정 위험 낮음<br>
+            • 매우 저렴 (tolvaptan 대비)<br>
+            • 장기 치료·허약 환자·간질환·30일 tolvaptan 제한 극복<br>
+            • 신기능 허위 저하 인상 → 실제 신기능 악화 아님</div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div><strong>단점:</strong> 쓴맛 → 순응도 저하. 오렌지 주스·구연산 혼합으로 개선 가능. 신규 경구 제형 개발 중.</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>📊</span>
+            <div>소규모 비교: Tolvaptan vs Urea (sNa 125 → 135 mmol/L) — 반응률·내약성 동등. Urea 선호 2차 치료로 부상 (SIADH 장기 치료).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> SIADH 신약: SGLT2 억제제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="hn-table">
+            <tr><th>약제</th><th>Empagliflozin 25 mg/일</th></tr>
+            <tr><td>입원 RCT (n=87)</td><td>4일 후 Na +10 vs +7 mmol/L (placebo)</td></tr>
+            <tr><td>외래 RCT (n=14)</td><td>sNa 131→134 mmol/L (치료군), 변화 없음 (대조군)</td></tr>
+            <tr><td>좋은 반응 인자</td><td>심한 저나트륨혈증(&lt;125), 낮은 기저 삼투질농도</td></tr>
+            <tr><td>투여 최적화</td><td>식사 당 NaCl 1–2g + 칼륨 풍부 식이 병행 시 효과↑</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div>아직 SIADH 특이 치료 권고 수준 아님. 추가 RCT 진행 중 (NCT04447911). eGFR 제한: &gt;60 ml/min.</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>작용 기전: 요당 배설 → 삼투 이뇨 → 유리 수분 배설 증가. 루프이뇨제와 다른 기전으로 병용 가능성 연구 중.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /siadh -->
+
+<!-- ═══════════════ DRUGS ═══════════════ -->
+<div id="tab-drugs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 약제 비교 요약표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+        <table class="hn-table" style="min-width:680px">
+          <tr>
+            <th>약제</th>
+            <th>적응증</th>
+            <th>용량</th>
+            <th>eGFR 제한</th>
+            <th>예상 sNa 상승</th>
+            <th>주요 주의·금기</th>
+          </tr>
+          <tr>
+            <td><span class="pill pill-drug">등장성 식염수<br>NaCl 0.9%</span></td>
+            <td>저혈량 저나트륨혈증</td>
+            <td>23–30 ml/kg/일</td>
+            <td>제한 없음</td>
+            <td>2–4 mmol/L (2일)</td>
+            <td>과혈량 금기</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-severe">3% HSS</span></td>
+            <td>중증 저나트륨혈증</td>
+            <td>볼루스 2–4 ml/kg<br>또는 0.5–1 ml/kg/h</td>
+            <td>제한 없음</td>
+            <td>4–6 mmol/L/24h</td>
+            <td>과혈량 금기</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-drug">루프 이뇨제<br>(Furosemide)</span></td>
+            <td>SIADH, 과혈량 저Na</td>
+            <td>20–40 mg q8–12h<br>Torasemide 2.5–10 mg/24h</td>
+            <td>&gt;15 ml/min</td>
+            <td>4–6 mmol/L (2–7일)</td>
+            <td>저혈량 금기</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-drug">Tolvaptan (V2 길항)</span></td>
+            <td>SIADH, CHF 과혈량</td>
+            <td>7.5–60 mg/일</td>
+            <td>&gt;30 ml/min</td>
+            <td>~48h 내 정상화</td>
+            <td>저혈량·간부전 금기; CYP3A4 상호작용; 임산부 금기; 30일 제한</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-mild">Urea</span></td>
+            <td>SIADH (2차)</td>
+            <td>15–60 g/일 경구</td>
+            <td>&gt;60 ml/min</td>
+            <td>점진적 (1–2 mmol/L/일)</td>
+            <td>저혈량; CKD·간질환 주의; 고요소혈증 허위</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-drug">SGLT2i<br>(Empagliflozin)</span></td>
+            <td>SIADH (탐색적)</td>
+            <td>10–25 mg/일</td>
+            <td>&gt;60 ml/min</td>
+            <td>~10 mmol/L (4일)</td>
+            <td>저혈량; CKD·간질환·탈수 주의</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> SIADH 단계별 치료 선택 흐름</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="font-size: calc(12px * var(--fscale, 1))">
+        <div class="step-box" style="background:#e0f7fa;border-radius:6px">
+          <span class="step-num" style="color:var(--teal)">1</span>
+          <div><strong>원인 제거 및 평가</strong> — 갑상선·부신 질환, 약물, 종양 배제</div>
+        </div>
+        <div class="step-box" style="background:#f0f2f5;border-radius:6px">
+          <span class="step-num" style="color:var(--text2)">2</span>
+          <div><strong>수분 제한 (FR)</strong> — 1차 (유럽·미국 가이드라인 권고). 갈증·식사 시만 음료. 실패 시(소변 &lt;500 ml 또는 24h Na &lt;2 mmol/L 상승) 다음 단계</div>
+        </div>
+        <div class="step-box" style="background:#ddf4ff;border-radius:6px">
+          <span class="step-num" style="color:var(--accent)">3</span>
+          <div><strong>루프 이뇨제</strong> — 2차 (uOsm &gt;350 시 효과). 단, RCT에서 furosemide+NaCl+FR = FR 단독과 동등, AKI·저칼륨혈증↑</div>
+        </div>
+        <div class="step-box" style="background:#dafbe1;border-radius:6px">
+          <span class="step-num" style="color:var(--green)">4a</span>
+          <div><strong>Tolvaptan</strong> — 가장 강한 근거; 48h 내 정상화; 고가; 30일 제한; 과교정 모니터 필수</div>
+        </div>
+        <div class="step-box" style="background:#dafbe1;border-radius:6px">
+          <span class="step-num" style="color:var(--green)">4b</span>
+          <div><strong>Urea 15–30 g/일</strong> — 유사 효과, 매우 저렴, ODS 위험 낮음, 장기 치료 적합, 간질환에서도 사용 가능</div>
+        </div>
+        <div class="step-box" style="background:#fff8c5;border-radius:6px">
+          <span class="step-num" style="color:var(--yellow)">5</span>
+          <div><strong>SGLT2i 25 mg</strong> — 탐색적 (아직 권고 수준 미달); Na+K 풍부 식이 병행 시 효과 증대</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🆕</span> 2024년 신규 개발 동향</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-text"><strong>Urea vs Tolvaptan RCT 필요:</strong> 현재 직접 비교 데이터 없음. 유사 효과, 비용 차이 크다는 점에서 비교 RCT 대기 중.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text"><strong>Tolvaptan vs FR RCT (TVFR-HypoNa):</strong> 입원 중증~중등도 저나트륨혈증에서 tolvaptan 대 FR 비교 진행 중 (ACTRN12619001683123).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text"><strong>Empagliflozin 국제 RCT (NCT04447911):</strong> 유·과혈량 저나트륨혈증 입·외원 환자 대상 진행 중.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text"><strong>저나트륨혈증 교정이 사망·재원기간 감소로 이어지는가:</strong> 국제 다기관 RCT (HIT trial) 진행 중.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text"><strong>Urea 새 제형:</strong> 경구 palatability 개선 제형 개발 완료 (이중맹검 RCT 발표). 쓴맛 → 주요 장벽 해소 기대.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /drugs -->
+
+<!-- ═══════════════ OVERCORRECTION ═══════════════ -->
+<div id="tab-overcorrection" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> ODS (삼투성 탈수초화 증후군) 예방·치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div><strong>ODS 발생 조건:</strong> 첫 24h sNa &gt;10 mmol/L 상승, 48h 내 &gt;18 mmol/L 상승 — 특히 만성 중증 저나트륨혈증(&gt;2–3일 지속) 환자.</div>
+      </div>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px">ODS 고위험군</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+        <span class="pill pill-severe">저칼륨혈증</span>
+        <span class="pill pill-severe">알코올 중독</span>
+        <span class="pill pill-severe">영양실조</span>
+        <span class="pill pill-severe">간질환</span>
+        <span class="pill pill-severe">만성 sNa &lt;120 2–3일↑</span>
+        <span class="pill pill-caution">수분이뇨 출현</span>
+      </div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:6px">과교정 구제(Rescue) 프로토콜</div>
+      <table class="hn-table">
+        <tr><th>상황</th><th>처치</th></tr>
+        <tr>
+          <td>과교정 위험/시작 (sNa 과속 상승)</td>
+          <td>
+            1. 교정 조치 즉시 중단<br>
+            2. 경구 수분 섭취 허용<br>
+            3. 5% 포도당 주사액 <strong>2–4 ml/kg/h × 4시간</strong><br>
+            4. Desmopressin <strong>1–3 μg IV 또는 SC</strong>, q8–12h
+          </td>
+        </tr>
+        <tr>
+          <td>목표: sNa 재하강 속도</td>
+          <td>~1 mmol/L/h 또는 치료 목표 내로 복귀</td>
+        </tr>
+        <tr>
+          <td>목표 미달 시</td>
+          <td>같은 처치 반복</td>
+        </tr>
+        <tr>
+          <td>구제 전략 개시 시</td>
+          <td>교정 조치 <strong>모두 중단</strong></td>
+        </tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>💡</span>
+        <div>ODS 치료 기회의 창: 과교정이 인지된 시점에 즉각 desmopressin으로 sNa 재하강 → 뇌 병변 예방 가능. 늦을수록 효과↓.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> Desmopressin 사용 지침</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--teal);margin-bottom:5px">과교정 예방/구제</div>
+          <table class="hn-table">
+            <tr><th>상황</th><th>용량</th></tr>
+            <tr><td>sNa &gt;6 mmol/L 상승 후 조절</td><td>1 mcg SC or IV, q8h</td></tr>
+            <tr><td>Vaptan 과교정 (Na ↑ ≤5 mmol/L)</td><td>2 μg SC</td></tr>
+            <tr><td>ODS 치료</td><td>2–4 μg 비경구, q6–8h</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>Desmopressin은 V2 수용체 작용제 → 집합관 수분 재흡수↑ → sNa 하강. 5% 포도당과 병용 시 Na 재하강 효과 증대. 저칼륨혈증 동반 3% HSS 투여 중 수분이뇨 시 역할 중요.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 개인 맞춤 치료 핵심 원칙 (Box 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-text">적절한 진단이 치료의 근본. 중증·급성 저나트륨혈증(sNa &lt;125, 유증상)은 즉시 치료. 이후 삼투질농도·체액량 평가로 원인 치료 진행.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text">중증: 3% HSS 볼루스 100–150 ml 또는 2–4 ml/kg IV, 20–40분 반복; 또는 지속 주입 0.5–1 ml/kg/h.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text">경~중등도 저혈량: NaCl 0.9% 정맥 23–30 ml/kg/일 또는 경구 9 g NaCl/일.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text">과혈량: FR 1차. 루프이뇨제 2차. Tolvaptan 특히 CHF에서 선택. 간경화 고도: 알부민. CHF: Urea 15–60 g/일. SGLT2i: 최후 수단.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text">SIADH: 원인 배제 후 FR 1차. 실패 시 Tolvaptan 7.5 mg 또는 Urea 15 g. SGLT2i 25 mg (탐색적). 과교정 모니터 및 desmopressin 준비.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-text"><strong>가이드라인 원칙:</strong> 검사실 정상 범위를 향한 급속 교정보다 <strong>점진적 교정 + 임상 평가</strong>가 우선.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 전체 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /overcorrection -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TAB ───
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+  const sp = hdr.querySelector('.osa-sub');
+  if (sp) sp.textContent = open ? '▸ 펼치기' : '▴ 접기';
+}
+
+// ─── SP ───
+function toggleSP(title) {
+  const body = title.nextElementSibling;
+  body.classList.toggle('open');
+  const arrow = title.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['sNa','Serum Sodium (혈청 나트륨) — 저나트륨혈증 진단·모니터링 핵심 지표; 정상 135–145 mmol/L'],
+  ['HSS','Hypertonic Saline Solution (고장성 식염수) — 3% NaCl; 중증 유증상 저나트륨혈증 1차 치료'],
+  ['FR','Fluid Restriction (수분 제한) — SIADH·과혈량 저나트륨혈증 1차 치료; 초기 500 ml/일 제한'],
+  ['SIADH','Syndrome of Inappropriate Antidiuretic Hormone (항이뇨호르몬 부적절 분비 증후군) — 정상혈량 저나트륨혈증의 가장 흔한 원인'],
+  ['ADH','Antidiuretic Hormone (항이뇨호르몬) = Vasopressin — 집합관 수분 재흡수 조절; V2 수용체 경유'],
+  ['AVP','Arginine Vasopressin = ADH'],
+  ['ODS','Osmotic Demyelination Syndrome (삼투성 탈수초화 증후군) — 급속 Na 교정 시 발생; 뇌교 및 뇌교 외 탈수초화; 이전 명칭: CPM'],
+  ['CPM','Central Pontine Myelinolysis — ODS의 이전 명칭; 뇌교 중심 탈수초화'],
+  ['TBW','Total Body Water (총체수분량) — 체중(kg) × 0.6 (남성); 여성·노인은 × 0.5'],
+  ['uNa','Urinary Sodium (소변 나트륨) — 체액량 평가 보조; >30 mmol/L = 신장성 원인, <30 = 비신장성'],
+  ['uOsm','Urine Osmolality (소변 삼투질농도) — SIADH: >100 mOsm/kg; >350 mOsm/kg 시 루프이뇨제 효과적'],
+  ['pOsm','Plasma Osmolality (혈장 삼투질농도) — 저장성: <275 mOsm/kg; SIADH 진단 기준 포함'],
+  ['ECF','Extracellular Fluid (세포외액) — 저나트륨혈증 체액량 분류 기준; 과혈량에서 증가'],
+  ['RIB','Rapid Intermittent Bolus (신속 간헐적 볼루스) — 중증 증상성 저나트륨혈증 선호 방법; SALSA RCT 근거'],
+  ['SCI','Slow Continuous Infusion (완속 지속 주입) — 3% HSS 지속 주입; 저칼륨혈증 동반 시 선호'],
+  ['CHF','Congestive Heart Failure (울혈성 심부전) — 과혈량 저나트륨혈증 흔한 원인; tolvaptan·urea 적응증'],
+  ['HF','Heart Failure (심부전)'],
+  ['Tolvaptan','V2 수용체 길항제 (Vaptan) — 집합관 AQP2 삽입 억제 → 유리 수분 배설; Samsca®; 간부전 금기'],
+  ['Vaptan','Vasopressin Receptor Antagonist (바소프레신 수용체 길항제) — Tolvaptan(V2), Satavaptan 등; aquaretics'],
+  ['V2R','Vasopressin V2 Receptor — 집합관 주세포 기저외측막 위치; cAMP↑ → AQP2 삽입 → 수분 재흡수'],
+  ['AQP2','Aquaporin-2 — 집합관 주세포 수분 채널; ADH/V2R 신호로 삽입; tolvaptan이 이를 억제'],
+  ['Urea','요소 — 경구; 근위세관 삼투 효과로 이뇨↑; 15–60 g/일; 매우 저렴; 장기 SIADH 치료 적합'],
+  ['SGLT2i','Sodium-Glucose Cotransporter 2 Inhibitor (SGLT2 억제제) — 요당 배설 → 삼투 이뇨; Empagliflozin 25 mg; SIADH 탐색적 치료'],
+  ['Empagliflozin','Jardiance® — SGLT2i; 저나트륨혈증 RCT: +10 mmol/L (4일); eGFR >60 필요'],
+  ['Desmopressin','DDAVP — V2R 완전 작용제; 과교정 구제·ODS 예방에 사용; 1–4 μg 비경구 투여'],
+  ['Furosemide','Loop 이뇨제 — 20–40 mg q8–12h; 과·정상혈량 저Na 2차; uOsm >350 시 효과; AKI·저칼륨 위험'],
+  ['Torasemide','Loop 이뇨제 — 2.5–10 mg q12–24h; Furosemide 대안'],
+  ['Fludrocortisone','Mineralocorticoid — 저혈량+소변 K 낮을 때 0.05–0.2 mcg/일; 염분 보유 효과'],
+  ['AKI','Acute Kidney Injury (급성 신손상) — Furosemide+NaCl+FR 군에서 빈도 증가 (RCT)'],
+  ['CYP3A4','Cytochrome P450 3A4 — Tolvaptan 대사 효소; 강력한 CYP3A4 억제제/유도제와 상호작용 주의'],
+  ['ICU','Intensive Care Unit (중환자실) — 노인 ICU 환자에서 저나트륨혈증 유병률 20–35%'],
+  ['NS','Nephrotic Syndrome (신증후군) — 과혈량 저나트륨혈증 원인 중 하나'],
+  ['KCl','Potassium Chloride (염화칼륨) — 저칼륨혈증 교정 시 사용; K 보충 → 세포 내 Na 유출 → 추가 Na 상승 위험'],
+  ['NaCl','Sodium Chloride (염화나트륨) — 생리식염수(0.9%), 고장성(3%) 등'],
+  ['Albumin','알부민 — 간경화 고도 저나트륨혈증에서 교질삼투압↑; 혈관내 용적↑ → ADH 자극↓'],
+  ['SALSA','Symptomatic hYponatremia trEatment with 3% sAline (SALSA RCT) — RIB vs SCI 비교; JAMA IM 2021'],
+  ['EVEREST','Efficacy of Vasopressin Antagonism in Heart Failure Outcome Study — Tolvaptan vs placebo in CHF; JAMA 2007'],
+  ['RCT','Randomized Controlled Trial (무작위 대조 시험)'],
+  ['eGFR','Estimated GFR (추정 사구체여과율) — 약제 투여 가능 여부 결정 기준; 단위 ml/min/1.73m²'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display='none'; document.getElementById('abbr-count').textContent=abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display='none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

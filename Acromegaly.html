@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>말단비대증 치료 컨센서스 2025</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --sr: #1a7f37;
+    --dr: #0550ae;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: #7a3700; color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: auto; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 120px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #7a3700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-sr { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-dr { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-hq { background: #116329; color: #fff; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; border-radius: 3px; display: inline-block; }
+  .grade-mq { background: #1a7f37; color: #fff; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; border-radius: 3px; display: inline-block; }
+  .grade-lq { background: #9a6700; color: #fff; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; border-radius: 3px; display: inline-block; }
+  .grade-vlq { background: #bc4c00; color: #fff; font-size: calc(10px * var(--fscale, 1)); padding: 1px 5px; border-radius: 3px; display: inline-block; }
+
+  /* ── TOOLTIP ── */
+  .grade::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .grade::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-brown { background: #fef3eb; border-left: 3px solid #7a3700; color: #7a3700; }
+
+  /* ── TABLE ── */
+  .ac-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ac-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .ac-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ac-table tr:last-child td { border-bottom: none; }
+  .ac-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ac-table .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr .sub { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); font-weight: 400; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-sr { background: #dafbe1; color: var(--green); border: 1px solid #85e09b; }
+  .pill-dr { background: #ddf4ff; color: var(--accent2); border: 1px solid #88b4e8; }
+  .pill-new { background: #dafbe1; color: var(--green); }
+  .pill-upd { background: #ddf4ff; color: var(--accent2); }
+  .pill-drug { background: #fef3eb; color: #7a3700; border: 1px solid #e8a87c; }
+
+  /* ── BADGE ── */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .badge-1st { background: #dafbe1; color: #116329; }
+  .badge-2nd { background: #fff8c5; color: #7d4e00; }
+  .badge-3rd { background: #ffebe9; color: #82071e; }
+  .badge-srl { background: #fef3eb; color: #7a3700; }
+  .badge-peg { background: #f4f0fe; color: #6b3fa0; }
+  .badge-cab { background: #eaf7fb; color: #0a7c8a; }
+  .badge-pas { background: #fff0f6; color: #9e1068; }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── ALGO FLOW ── */
+  .algo-box { border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); margin: 4px 0; }
+  .algo-box.surgery { background: #fff8c5; border-color: #9a6700; color: #7d4e00; font-weight: 700; text-align: center; }
+  .algo-box.first { background: #ddf4ff; border-color: #0550ae; }
+  .algo-box.second { background: #fff8c5; border-color: #9a6700; }
+  .algo-box.third { background: #ffebe9; border-color: #cf222e; }
+  .algo-arrow { text-align: center; color: var(--text2); font-size: calc(18px * var(--fscale, 1)); line-height: 1; margin: 2px 0; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: var(--accent2); }
+  .warn-text { color: var(--yellow); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">Consensus 2025</span>
+      <h1>말단비대증 치료 컨센서스</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.1038/s41574-025-01148-2" class="source-link" target="_blank">Nat Rev Endocrinol 2025;21:718–737 ↗</a>
+      <span class="meta"> · 15차 말단비대증 컨센서스 (Sep 2023) · Melmed S & Giustina A, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by the Acromegaly Consensus Group</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('outcomes')">🔬 치료 목표·판정</div>
+    <div class="tab" onclick="showTab('medical')">💊 약물 치료</div>
+    <div class="tab" onclick="showTab('algorithm')">🗺️ 치료 알고리즘</div>
+    <div class="tab" onclick="showTab('updates')">🆕 2018→2025 변경</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">~50%</div><div class="stat-lbl">수술 후 생화학적 관해율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">40%+</div><div class="stat-lbl">SRL 단독 생화학적 조절율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">&gt;90%</div><div class="stat-lbl">Pegvisomant 10년 IGF-1 정상화율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">0.4 ng/ml</div><div class="stat-lbl">초민감 GH 분석법 OGTT 기준치</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 말단비대증 개요 및 치료 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-brown" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>말단비대증 = 뇌하수체 성장호르몬 분비 선종에 의한 <strong>GH·IGF-1 과잉</strong>. 골단말 과성장, 관절·심폐·대사 합병증, 사망률 증가 초래. 치료 목표: <strong>생화학적 조절 + 선종 조절 + 합병증 관리</strong>.</div>
+      </div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">치료 목표 (Box 2)</div>
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+              <div class="rec-text">개인 맞춤 치료 — 임상·영상·병리 특성에 기반한 공유 의사결정</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+              <div class="rec-text">생화학적 치료 목표: 사용 검사법 특이 연령 참고 범위 내 <strong>IGF-1 정상화</strong> (사춘기: 성별 참고 범위 적용)</div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">치료 방법 위계</div>
+          <table class="ac-table">
+            <tr><th>단계</th><th>방법</th><th>역할</th></tr>
+            <tr><td style="font-weight:600">1차</td><td>경접형동 수술</td><td>근치 목표; 숙련 외과의 필수</td></tr>
+            <tr><td style="font-weight:600">수술 후</td><td>약물 치료</td><td>SRL → 2차·3차 조합</td></tr>
+            <tr><td style="font-weight:600">보조</td><td>방사선 수술</td><td>약물 조절 실패 시</td></tr>
+            <tr><td style="font-weight:600">희귀</td><td>Temozolomide</td><td>공격적·악성 선종</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 근거 등급 체계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">권고 강도</div>
+          <table class="ac-table">
+            <tr><th>등급</th><th>의미</th></tr>
+            <tr><td><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></td><td>강력 권고 — MQ 또는 HQ 근거 기반</td></tr>
+            <tr><td><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></td><td>재량 권고 — VLQ 또는 LQ 근거 기반; 환자 상황 고려</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">근거 질</div>
+          <table class="ac-table">
+            <tr><th>등급</th><th>정의</th></tr>
+            <tr><td><span class="grade-hq">HQ</span></td><td>높음 — 대조 연구 또는 대규모 비대조 장기 연구</td></tr>
+            <tr><td><span class="grade-mq">MQ</span></td><td>중등도 — 대규모 단일 비대조 연구 또는 메타분석</td></tr>
+            <tr><td><span class="grade-lq">LQ</span></td><td>낮음 — 소규모 비대조 연구 다수</td></tr>
+            <tr><td><span class="grade-vlq">VLQ</span></td><td>매우 낮음 — 전문가 의견 또는 소규모 연구 1–2편</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 합병증 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="ac-table">
+        <tr><th>분류</th><th>주요 합병증</th><th>생화학적 조절 후 경과</th></tr>
+        <tr><td style="font-weight:600">심혈관</td><td>고혈압, 심비대, 심부전</td><td>부분 호전; 완전 정상화 드묾</td></tr>
+        <tr><td style="font-weight:600">대사</td><td>당뇨병(15–35%), 인슐린 저항성</td><td>GH 조절 시 유의하게 개선</td></tr>
+        <tr><td style="font-weight:600">근골격</td><td>관절통(거의 전례), 골관절증 ≥2관절 90%</td><td>관절통·뻣뻣함 개선; 40–70% 잔존</td></tr>
+        <tr><td style="font-weight:600">호흡</td><td>수면 무호흡</td><td>GH 조절 시 개선</td></tr>
+        <tr><td style="font-weight:600">종양</td><td>악성 종양 위험 증가</td><td>GH 정상화로 위험 감소</td></tr>
+        <tr><td style="font-weight:600">정신</td><td>우울, 불량한 체형인식, 삶의질 저하</td><td>생화학 호전에도 QoL 완전 정상화 안 될 수 있음</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>생화학적 조절이 이루어져도 합병증의 완전 회복은 드묾 → 장기 추적·합병증 관리가 여전히 핵심</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════ OUTCOMES ═══════════════ -->
+<div id="tab-outcomes" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 생화학적 기준 (Box 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">수술 후 <strong>3개월에 기저 GH + OGTT GH nadir + IGF-1</strong> 측정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">OGTT 억제 후 GH (&lt;1 ng/ml) → 장기 관해 예측. 단, <strong>초민감 분석법 사용 시 GH 기준치 0.4 ng/ml</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">연령 보정 정상 범위 내 <strong>IGF-1 = 생화학적 조절의 지표</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">잔존 선종 지속·드물게 재발 가능 → 생화학적 추적 <strong>최소 5년</strong>; 개별 모니터링 전략 적용.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>수술 전 SRL 치료를 받은 환자: 3–6개월에 생화학 재평가로 관해 확인. 수술 후 1년 내 IGF-1은 3–6개월마다, 이후 6–12개월마다 측정. OGTT는 IGF-1 경계값 환자에서 유용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖼️</span> 영상 기준 (Box 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">술 후 영상만으로 수술 관해 정의 <strong class="danger-text">불충분</strong> — 완전 절제처럼 보여도 잔존 조직 존재 가능.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">첫 추적 MRI: 수술 후 <strong>최소 3개월 이후</strong> 시행 (초기 국소 손상·충전 조직 퇴축 대기).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">정기 MRI 추적은 모든 환자에게 필요하지 않음 → <strong>생화학 지표·임상 특성</strong>에 따라 결정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">약물 치료 시작·변경 후 <strong>6개월에 MRI</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">치료 중 <strong>급격한 성장 또는 최대 직경 증가</strong> → 선종 저항 신호 → 치료 전략 변경 필요.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">MRI로 잔존 조직 확인 불가 + 지속 GH 과분비 + 활성 병변 → <span style="font-weight:600">[¹¹C]-methionine PET</span> 고려 (이용 가능 기관 한정).</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>MRI 보고 필수 항목:</strong> 종양 직경, 안장위 확장, Knosp 분류(해면정맥동 침범도), 낭성 부분 유무, T2 강도(측두엽 회백질 대비). 표준화 프로토콜: 3T, 가돌리늄 조영, 2–3 mm 절편.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 병리·분자 예측 인자 (Box 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text"><strong>치밀과립형(densely granulated) vs. 소과립형(sparsely granulated)</strong> 구분은 SRL 반응성 판단의 최소 요건.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text"><strong>SSTR2 면역염색 강도</strong>(이용 가능 시) → 수술 후 SRL 반응성 예측에 유용.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">유전자 검사: <strong>선별 환자만</strong> — 가족성 질환, MEN1 의심, 18세 미만 발병 말단비대증·거인증.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text"><strong>GNAS 돌연변이</strong> 유무는 SRL 반응 예측에 유용하지 않음 → 알고리즘에 포함 불필요.</div>
+        </li>
+      </ul>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">SRL 반응 예측 인자 요약</div>
+        <table class="ac-table">
+          <tr><th>예측 인자</th><th>SRL 좋은 반응</th><th>SRL 나쁜 반응</th></tr>
+          <tr><td>T2 MRI 신호</td><td class="success-text">저신호(hypointense)</td><td class="danger-text">고신호(hyperintense)</td></tr>
+          <tr><td>SSTR2 발현</td><td class="success-text">높음</td><td class="danger-text">낮음</td></tr>
+          <tr><td>과립 패턴</td><td class="success-text">치밀과립형</td><td class="danger-text">소과립형</td></tr>
+          <tr><td>기저 IGF-1</td><td class="success-text">낮음</td><td class="danger-text">매우 높음</td></tr>
+          <tr><td>기저 GH</td><td class="success-text">낮음</td><td class="danger-text">높음</td></tr>
+          <tr><td>AIP 돌연변이</td><td>—</td><td class="danger-text">SRL 반응 저하</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>머신러닝 모델(SSTR2, SSTR5, 사이토케라틴 과립 패턴, 성별, 연령, 기저 GH·IGF-1 통합): SRL 반응 예측 정확도 86%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상적 기준 및 치료 저항 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">말단비대증의 임상적 관해 <strong>특이 기준 없음</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">장기 결과 개선: 생화학 조절 여부와 무관하게 <strong>합병증 최적 관리</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">치료 최적 반응 미달 환자에서 지속 합병증·증상·치료 관련 부작용 정보는 <strong>중요하게 고려</strong>해야 함.</div>
+        </li>
+      </ul>
+      <div style="margin-top:10px;font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">치료 저항 정의 기준</div>
+      <table class="ac-table">
+        <tr><th>영역</th><th>저항 판정 기준</th></tr>
+        <tr><td style="font-weight:600">생화학</td><td>IGF-1 비정상화 (연령·검사 특이 참고 범위 초과)</td></tr>
+        <tr><td style="font-weight:600">선종 질량</td><td>최대 직경 ≥20% 증가 또는 급격한 성장; 시야·운동 증상 악화</td></tr>
+        <tr><td style="font-weight:600">임상</td><td>합병증 지속, 증상 지속, 삶의질 저하, 치료 부작용</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /outcomes -->
+
+<!-- ═══════════════ MEDICAL ═══════════════ -->
+<div id="tab-medical" class="panel">
+
+  <!-- SRL -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-srl">SRL</span> 소마토스타틴 수용체 리간드 (Box 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text"><strong>정확한 주사 지침</strong> 교육 필수.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">생화학 반응: <strong>처음 3회 월 1회 주사 후 IGF-1</strong> 측정(가급적 다음 주사 직전). 이후 IGF-1 측정 간격은 감소 정도·속도에 따라 결정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">SRL 용량은 <strong>IGF-1에 따라 적정</strong> — 용량 증량 및 선별 환자에서 투여 간격 조정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">고용량 SRL: 추가 부작용 없음 → 선별 환자에서 권고 가능.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text"><strong>경구 옥트레오티드 캡슐(OOC)</strong>: 주사 SRL과 동등 효과 및 유사 부작용 → 환자 선호에 따라 권장 가능.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">정기 복부 초음파 감시 <strong class="danger-text">불필요</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">모든 SRL 환자: 공복 혈당·HbA1c 정기 측정. <strong>파시레오티드 투여 시 특히 필수</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">SRL 시작 전·투여 중 심전도(ECG) <strong class="danger-text">불필요</strong>.</div>
+        </li>
+      </ul>
+      <div style="margin-top:10px">
+        <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">SRL 제형별 비교</div>
+        <table class="ac-table">
+          <tr><th>제형</th><th>주요 SSTR 친화성</th><th>생화학 조절율</th><th>특이사항</th></tr>
+          <tr><td>옥트레오티드 LAR</td><td>SSTR2 주</td><td>17–80%</td><td>4주 1회 근주; 고용량(60 mg) 가능</td></tr>
+          <tr><td>란레오티드 오토겔</td><td>SSTR2 주</td><td>27–78%</td><td>4주 1회 피하주사; 고용량(180 mg)·단기간격(3주) 가능</td></tr>
+          <tr><td>경구 옥트레오티드 (OOC)</td><td>SSTR2 주</td><td>~58% (36주)</td><td>40–80 mg/일 경구; 주사 SRL 비열등</td></tr>
+          <tr><td>파시레오티드 LAR</td><td>SSTR1,2,3,5</td><td>31% (vs OCT 19%)</td><td>고혈당 &gt;50%; 1차·2차 SRL 실패 후 유효</td></tr>
+          <tr><td>Paltusotine (개발 중)</td><td>SSTR2 소분자 비펩타이드</td><td>비열등(탐색 연구)</td><td>경구 비펩타이드; 주사 SRL 전환 가능</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>파시레오티드 고혈당:</strong> &gt;50%에서 고혈당·당뇨 발생 (기존 당뇨 전단계에서 위험 증가). 대부분 metformin·GLP-1 RA·DPP-4i로 조절 가능. T2 고신호 선종에서는 타 SRL과 달리 더 나은 반응.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pegvisomant -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-peg">Pegvisomant</span> GH 수용체 길항제 (Box 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">Pegvisomant 투여 중 연간 정기 MRI 감시 <strong class="danger-text">더 이상 필요 없음</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">증상(특히 부종), 삶의질, 합병증 치료 중 모니터링.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">지방비대 예방 위해 <strong>주사 부위 교대 필수</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">시작 전 간기능 검사. 용량 적정 중 모니터링. <strong>트랜스아미나제 &gt;5×ULN → 중단</strong>.</div>
+        </li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:10px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:4px">효능</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 임상시험: &gt;90% 생화학 조절</li>
+            <li>• 실제 임상: 66%(5년), &gt;70%(10년)</li>
+            <li>• ACROSTUDY: IGF-1 정상화 75.4%(10년, ≥30 mg/일)</li>
+            <li>• 최대 IGF-1 감소: 고정 용량에서 4–6주 내</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:4px">임상적 이득 (ACROSTUDY)</div>
+          <table class="ac-table">
+            <tr><th>합병증</th><th>유병률 변화</th></tr>
+            <tr><td>고혈압</td><td class="success-text">51.3% → 10.5%</td></tr>
+            <tr><td>당뇨병</td><td class="success-text">32.2% → 23.8%</td></tr>
+            <tr><td>수면 무호흡</td><td class="success-text">20.8% → 2.3%</td></tr>
+            <tr><td>증상 골관절증</td><td class="success-text">21.3% → 7.6%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>당뇨병(특히 인슐린 투여) 및 비만: 더 높은 pegvisomant 용량 필요. 선종 크기 증가(중앙 판독): ~3%로 의학적 치료 미시행군과 유사. SRL 중단 후 6–12개월 내 영상 시행 고려.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabergoline -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="badge badge-cab">Cabergoline</span> 도파민 효현제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">1차 약물: <strong>IGF-1 &lt;2.0–2.5×ULN</strong> 또는 혼합 GH·프롤락틴 분비 선종에서만 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">SRL에 부분 반응 시 <strong>add-on</strong> 가능 (혈청 프롤락틴 수준·선종 프롤락틴 면역염색과 무관하게 고려).</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>장기 고용량 카베르골린: <strong>심장 판막 질환</strong>(모니터링 필요) 및 <strong>충동 조절 장애</strong> 위험. 비용·경구 투여 장점이 있으나 효능은 제한적.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 병합 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔗</span> 병합 치료 (Box 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+          <span style="display:flex;align-items:center;gap:8px"><span class="badge badge-srl">SRL</span>+<span class="badge badge-peg">Pegvisomant</span> <span class="sub"> — 가장 근거 충분한 병합</span></span><span>▸</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+              <div class="rec-text">SRL 부분 반응 환자, pegvisomant 단독 시 선종 크기 증가, 당뇨병 환자에서 유용.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+              <div class="rec-text">병합 시작 전·후 간효소 모니터링 (pegvisomant 단독 대비 간효소 상승 위험 증가).</div>
+            </li>
+          </ul>
+          <div class="alert alert-success" style="margin-top:6px">
+            <span>✅</span>
+            <div>10년 IGF-1 정상화 ~90% 유지. 선종 부피 불변 또는 감소. SRL의 포도당 대사 악화를 pegvisomant가 상쇄 → 전반적 대사 중립 효과 지속. 심장 구조·기능 개선.</div>
+          </div>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+          <span style="display:flex;align-items:center;gap:8px"><span class="badge badge-cab">Cabergoline</span>+<span class="badge badge-peg">Pegvisomant</span> <span class="sub"> — SRL 불내성 시 대안</span></span><span>▸</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+              <div class="rec-text">SRL 저항성, pegvisomant 단독으로 미조절, 카베르골린 반응성인 경우 고려 (비용 절감 가능). 단, 근거 불충분 — 확정적 결론 불가.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+          <span style="display:flex;align-items:center;gap:8px"><span class="badge badge-pas">파시레오티드</span>+<span class="badge badge-peg">Pegvisomant</span> <span class="sub"> — 3차 치료</span></span><span>▸</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item" style="padding-top:0">
+              <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+              <div class="rec-text">1·2차 치료 실패 또는 선종 질량 조절 필요 시 고려. 고비용·제한적 안전성·효능 자료 고려 → 신중히 사용.</div>
+            </li>
+          </ul>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>당뇨 발생: 기저 33% → 24주 69% → 48주 77%. 파시레오티드+페그비소만트 병합은 파시레오티드 단독 대비 고혈당 빈도 낮음·HbA1c 감소.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /medical -->
+
+<!-- ═══════════════ ALGORITHM ═══════════════ -->
+<div id="tab-algorithm" class="panel">
+
+  <div class="alert alert-brown" style="margin-bottom:10px">
+    <span>🗺️</span>
+    <div><strong>치료 원칙:</strong> 최적 치료는 임상·영상·병리 특성에 기반한 <strong>개별화된 공유 의사결정</strong>으로 결정. 아래 알고리즘은 뇌하수체 수술 후 불충분하게 조절된 말단비대증에 적용.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 수술 전 처치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">수술 전 SRL 치료가 수술 결과를 개선한다는 근거 아직 불명확 → 광범위 권고를 위해 추가 연구 필요.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>📌</span>
+        <div>일부 후향 연구·메타분석에서 장기 관해율 향상 보고. 시신경교차 압박 동반 거대선종: 란레오티드 120 mg 1개월 후 선종 축소 + 시야 개선 보고. 결론적 근거는 부재.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 1차 약물 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="algo-box first" style="margin-bottom:8px">
+        <strong>표준 1차: SRL (주사 또는 경구)</strong> <span class="grade grade-sr" data-tip="Strong Recommendation">SR</span>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">SRL은 약물 치료의 <strong>1차 표준 선택</strong>. 새로운 제형(경구·피하 데포)으로 개인화 기회 확대.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text"><strong>Cabergoline 1차 고려:</strong> IGF-1 &lt;2.0–2.5×ULN 또는 혼합 GH·PRL 분비 선종.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text"><strong>Pegvisomant 1차 고려:</strong> 중증 포도당 대사 장애 + 선종 크기 우려 없음 + SRL 반응 불량 예측(T2 고신호, 매우 높은 IGF-1).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 2차 약물 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">1차 치료 불충분 시 <strong>2차 치료 옵션 고려</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">SRL 감수성은 있으나 표준 용량으로 조절 불충분: <strong>SRL 용량 증량 및/또는 단기 투여 간격</strong> (off-label).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">SRL 반응성 있으나 IGF-1 미정상화: <strong>카베르골린 추가</strong> (프롤락틴 수치·면역염색 무관).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">기존 고혈당·당뇨: <strong>Pegvisomant 단독</strong>이 2차 치료 첫 선택.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">일 1회 주사 순응 불량, 비용 고려, 포도당 불내성, 란레오티드·옥트레오티드로 선종 축소: <strong>SRL + Pegvisomant 병합</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">SRL 불내성: <strong>Pegvisomant + Cabergoline</strong> 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text"><strong>파시레오티드 LAR</strong>: 조절 불충분 + 관련 잔존 선종 또는 성장 중인 선종 + 저혈당 위험 낮음.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 3차 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-dr" data-tip="Discretionary Recommendation">DR</span></div>
+          <div class="rec-text">단독 요법으로 조절 실패 시: <strong>파시레오티드 + Pegvisomant</strong> 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text">약물 치료로 조절 실패: <strong>정위 방사선 수술 또는 외과 재수술</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-sr" data-tip="Strong Recommendation">SR</span></div>
+          <div class="rec-text"><strong>화학 요법(Temozolomide 등)</strong>: 공격적·악성 선종에 한정. 신경종양 전문의 협진 하 방사선 치료 병행.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 알고리즘 흐름도 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 치료 알고리즘 요약 (Fig. 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="algo-box surgery">🔪 경접형동 뇌하수체 선종 절제술 (수술 전 경한 병변은 SRL 고려 가능)</div>
+      <div class="algo-arrow">↓ 수술 후 불충분한 조절</div>
+      <div style="margin-bottom:4px;font-size: calc(11px * var(--fscale, 1));color:var(--text2);font-weight:600">개별 치료 결정 요인:</div>
+      <table class="ac-table" style="margin-bottom:8px">
+        <tr><th>환자 특성</th><th>선호 치료</th></tr>
+        <tr><td>T2 저신호, 고SSTR2, 치밀과립, 낮은 기저 IGF-1/GH</td><td><span class="badge badge-srl">SRL (1차)</span></td></tr>
+        <tr><td>경도 GH/IGF-1 상승</td><td><span class="badge badge-cab">카베르골린* (1차 고려)</span></td></tr>
+        <tr><td>당뇨+선종 크기 우려 없음+SRL 반응 불량 예측</td><td><span class="badge badge-peg">Pegvisomant* (1차 고려)</span></td></tr>
+      </table>
+      <div class="algo-arrow">↓ 불충분한 조절</div>
+      <div class="algo-box second" style="margin-bottom:6px">
+        <strong>2차 치료 옵션</strong>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+          <span class="pill pill-dr">SRL 용량↑/간격↓</span>
+          <span class="pill pill-dr">SRL + 카베르골린</span>
+          <span class="pill pill-dr">SRL + Pegvisomant</span>
+          <span class="pill pill-dr">→ Pegvisomant (DM)</span>
+          <span class="pill pill-dr">→ 파시레오티드</span>
+        </div>
+      </div>
+      <div class="algo-arrow">↓ 불충분한 조절</div>
+      <div class="algo-box third">
+        <strong>3차 치료</strong>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+          <span class="pill pill-new" style="background:#ffebe9;color:#82071e;border:1px solid #f5b0b4">정위 방사선 수술 또는 재수술</span>
+          <span class="pill pill-new" style="background:#ffebe9;color:#82071e;border:1px solid #f5b0b4">파시레오티드 + Pegvisomant</span>
+          <span class="pill pill-new" style="background:#ffebe9;color:#82071e;border:1px solid #f5b0b4">Temozolomide (공격적·악성 선종)</span>
+        </div>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">*카베르골린·페그비소만트: 선별 환자에서 1차 치료 고려 가능</div>
+    </div>
+  </div>
+
+</div><!-- /algorithm -->
+
+<!-- ═══════════════ UPDATES ═══════════════ -->
+<div id="tab-updates" class="panel">
+
+  <div class="alert alert-success" style="margin-bottom:10px">
+    <span>🆕</span>
+    <div>2018년 컨센서스 대비 주요 변경 사항 (Table 1, 2). 아래 각 항목을 클릭하면 상세 내용이 표시된다.</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-upd">업데이트</span>
+        <strong>생화학 추적 — 장기 추적·개별 전략 강조</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>2018</th><th>2025</th></tr>
+        <tr><td>IGF-1 평가: 수술 후 최소 12주 대기</td><td>생화학 조절 환자에서도 재발 가능 → <strong>수 년간 추적</strong> 필요 (이질적 선종 특성 반영)</td></tr>
+        <tr><td>Pegvisomant 투여 중 GH 측정 불가(상승)</td><td>동일 (유지)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>영상·임상 기준 — 수술 영상만으로 관해 정의 불충분</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>2018</th><th>2025</th></tr>
+        <tr><td>다루지 않음</td><td>수술 후 영상 단독으로 치료 관해 정의 불충분</td></tr>
+        <tr><td>—</td><td>첫 추적 MRI: 수술 후 최소 3개월 후 시행</td></tr>
+        <tr><td>—</td><td>정기 MRI 추적: 모든 환자에 불필요 — 생화학 지표·임상 특성·선종 이질성에 따라 결정</td></tr>
+        <tr><td>—</td><td>합병증·증상 최적 관리 강조</td></tr>
+        <tr><td>—</td><td>임상 점수(SAGIT, ACRODAT) 추가 정제·검증 필요</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>SRL 반응 예측 인자 — 영상·병리·분자 지표 체계화</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>2018</th><th>2025</th></tr>
+        <tr><td>다루지 않음</td><td>MRI: 신경방사선과 전문의 감독, 표준화 프로토콜; T2 강도·Knosp 분류 보고 필수</td></tr>
+        <tr><td>—</td><td>병리 지표: SSTR2 면역염색, 치밀/소과립형 구분이 최소 요건</td></tr>
+        <tr><td>—</td><td>분자 지표: AIP 돌연변이 성인에서 극히 드묾 — 선별 환자만 검사</td></tr>
+        <tr><td>—</td><td>생화학 지표: 기저 GH·IGF-1이 약물 반응 예측 가장 중요한 표지자</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>치료 저항 정의 — 생화학·질량·임상 3요소 통합</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>2018</th><th>2025</th></tr>
+        <tr><td>다루지 않음</td><td>생화학: 연령·검사법 특이 참고 범위 내 IGF-1 정상화가 치료 목표</td></tr>
+        <tr><td>—</td><td>선종 크기: 급격한 성장 또는 최대 직경 증가 → 치료 전략 변경 필요; 표준화 기준·프로토콜 확립 촉구</td></tr>
+        <tr><td>—</td><td>임상: 합병증·증상·삶의질 저하는 치료 반응 미달 환자에서 중요 — 종종 간과됨</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-upd">업데이트</span>
+        <strong>1차 약물 치료 — 환자 개별 특성 기반으로 확장</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>2018</th><th>2025</th></tr>
+        <tr><td>SRL (옥트레오티드 LAR 또는 란레오티드 오토겔); 카베르골린 (IGF-1 &lt;2.5×ULN)</td><td>환자 필요·합병증·병 특성·잠재 부작용에 따라 결정</td></tr>
+        <tr><td>—</td><td>SRL이 여전히 1차 표준. 경구 SRL 개발로 새로운 개인화 기회</td></tr>
+        <tr><td>—</td><td>포도당 대사 장애 + 선종 크기 우려 없음: Pegvisomant</td></tr>
+        <tr><td>—</td><td>경한 수술 후 GH/IGF-1 상승: 카베르골린</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>SRL 치료 결과 — 영상 감시 기준 변경</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>영역</th><th>2025 기준</th></tr>
+        <tr><td>생화학 모니터링</td><td>IGF-1이 SRL 모니터링 최우선 지표; 처음 3회 주사 후, 이후 감소 정도·속도에 따라 측정</td></tr>
+        <tr><td>영상 감시</td><td>생화학 결과로 추적 영상 빈도 결정 가능. SRL 반응성 선종에서 성장·진행 드묾 → 정기 MRI 불필요</td></tr>
+        <tr><td>영상 촉발 기준</td><td>시각·안구 운동 증상, 치료 중단, 방사선 치료 평가 시 MRI</td></tr>
+        <tr><td>임상 반응</td><td>환자 보고 결과 측정(PROM) 증가 필요; 생화학·임상 결과 불일치 인식 중요</td></tr>
+        <tr><td>부작용 감시</td><td>정기 복부 초음파 불필요; 모든 SRL에서 공복혈당·HbA1c 모니터링; 파시레오티드에서 특히 중요</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>Pegvisomant 결과 — 연간 정기 MRI 불필요</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>영역</th><th>2025 기준</th></tr>
+        <tr><td>IGF-1 모니터링</td><td>IGF-1이 pegvisomant 모니터링 표지자; 최대 IGF-1 강하 4–6주 내 달성; 용량 적정</td></tr>
+        <tr><td>선종 크기</td><td>연간 정기 MRI 더 이상 불필요. SRL 중단 후 6–12개월 내 영상 고려</td></tr>
+        <tr><td>임상 개선</td><td>증상·QoL·합병증 개선; 수면 무호흡·고혈압·관절통·포도당 항상성 개선</td></tr>
+        <tr><td>부작용</td><td>주사 부위 교대로 지방비대 최소화; 시작 전·용량 적정 중 간기능 검사; 트랜스아미나제 &gt;5×ULN → 중단</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill pill-new">신규</span>
+        <strong>병합 치료 — 구체적 지침 신설</strong>
+      </span><span>▸</span>
+    </div>
+    <div class="osa-body">
+      <table class="ac-table">
+        <tr><th>병합</th><th>2025 위치</th></tr>
+        <tr><td>SRL + Pegvisomant</td><td>SRL 부분 반응, pegvisomant 단독 시 선종 크기 증가, 당뇨 → 유용하고 안전; 간효소 상승 위험 주의</td></tr>
+        <tr><td>Cabergoline + Pegvisomant</td><td>SRL 저항성·pegvisomant 단독 미조절·카베르골린 반응성 → 비용 절감 가능; 근거 불충분</td></tr>
+        <tr><td>파시레오티드 + Pegvisomant</td><td>1·2차 치료 실패 시 고려; 고비용·장기 안전성 자료 없음</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /updates -->
+
+<!-- ABBR TAB (hidden, search-only) -->
+<div id="tab-abbr" class="panel" style="display:none">
+  <div style="margin-bottom:8px">
+    <input type="text" id="abbr-main-input" placeholder="약어 또는 설명으로 검색…" oninput="filterAbbrMain(this.value)"
+      style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:100%;max-width:400px;outline:none;"
+      onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+  </div>
+  <div id="abbr-main-grid" class="abbr-grid-main"></div>
+</div>
+
+</div><!-- /.main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => { p.classList.remove('active'); p.style.display=''; });
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleOsaAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+const abbrs = [
+  ['GH','Growth Hormone (성장호르몬) — 뇌하수체 전엽 분비; 말단비대증에서 과잉 분비'],
+  ['IGF-1','Insulin-Like Growth Factor-1 — GH 작용 매개; 말단비대증 생화학 조절 핵심 지표; 간 생성'],
+  ['OGTT','Oral Glucose Tolerance Test (경구 포도당 부하 검사) — GH nadir 측정; 말단비대증 진단·수술 관해 판정에 사용'],
+  ['SRL','Somatostatin Receptor Ligand (소마토스타틴 수용체 리간드) — 옥트레오티드, 란레오티드, 파시레오티드 포함'],
+  ['SR','Strong Recommendation (강력 권고) — MQ 또는 HQ 근거 기반'],
+  ['DR','Discretionary Recommendation (재량 권고) — VLQ 또는 LQ 근거 기반'],
+  ['HQ','High Quality Evidence (높은 질의 근거) — 대조 연구 또는 대규모 비대조 장기 연구'],
+  ['MQ','Moderate Quality Evidence (중등도 질의 근거) — 대규모 단일 비대조 연구 또는 메타분석'],
+  ['LQ','Low Quality Evidence (낮은 질의 근거) — 소규모 비대조 연구 다수'],
+  ['VLQ','Very Low Quality Evidence (매우 낮은 질의 근거) — 전문가 의견 또는 소규모 연구 1–2편'],
+  ['LAR','Long-Acting Repeatable (장기 작용 반복 제형) — 옥트레오티드 LAR: 4주 1회 근주'],
+  ['OOC','Oral Octreotide Capsule (경구 옥트레오티드 캡슐) — 40–80 mg/일; 주사 SRL에 비열등'],
+  ['SSTR','Somatostatin Receptor Subtype (소마토스타틴 수용체 아형) — SSTR1~5; SRL 반응 예측에 SSTR2 중요'],
+  ['SSTR2','Somatostatin Receptor Subtype 2 — 주요 SRL 표적; 고발현 = SRL 좋은 반응 예측'],
+  ['SSTR5','Somatostatin Receptor Subtype 5 — 파시레오티드 표적; 소과립형·SRL 저항성 선종에서 유용'],
+  ['DG','Densely Granulated (치밀과립형) — 사이토케라틴 패턴; SRL에 더 좋은 반응'],
+  ['SG','Sparsely Granulated (소과립형) — SRL 반응 저하; 더 공격적 행태'],
+  ['T2','T2-Weighted MRI — 저신호(hypointense): SRL 좋은 반응; 고신호: SRL 반응 불량 (옥트레오티드·란레오티드); 파시레오티드는 반대'],
+  ['ULN','Upper Limit of Normal (정상 범위 상한)'],
+  ['AIP','Aryl Hydrocarbon Receptor Interacting Protein — 생식세포 돌연변이: 가족성 선종; SRL 반응 저하'],
+  ['GNAS','G Protein Alpha Subunit — 돌연변이 유무가 SRL 반응 예측에 유용하지 않음'],
+  ['MEN1','Multiple Endocrine Neoplasia Type 1 (다발내분비샘종양 1형) — 뇌하수체·부갑상선·췌장 종양'],
+  ['QoL','Quality of Life (삶의질) — 생화학 조절 후에도 완전 정상화 안 될 수 있음'],
+  ['Met-PET','[¹¹C]-Methionine PET — MRI로 잔존 조직 불명확 + 지속 GH 과분비 시 유용 (이용 가능 기관 한정)'],
+  ['Pegvisomant','GH 수용체 길항제 — GH 작용 차단 → IGF-1 감소; 선종 직접 작용 아님; ACROSTUDY에서 10년 효능 확인'],
+  ['Cabergoline','도파민 효현제 — 경구; 낮은 비용; IGF-1 경한 상승에 효과; 고용량 장기 시 심장 판막 질환·충동 조절 장애 위험'],
+  ['Pasireotide','다중 SSTR 리간드 (SSTR1,2,3,5) — SRL 저항성 선종 포함; 고혈당 &gt;50% 발생; 소과립형 선종에서 유효'],
+  ['Paltusotine','비펩타이드 소분자 SSTR2 효현제 — 경구; 주사 SRL 전환 탐색 연구 결과 긍정적'],
+  ['Knosp','해면정맥동 침범도 분류 — MRI 보고 필수 항목; 수술 관해율 예측'],
+  ['SAGIT','성장호르몬 분비 선종 임상 도구 — Signs/symptoms, Associated comorbidities, GH, IGF-1 수준, Tumor'],
+  ['ACRODAT','Acromegaly Disease Activity Tool — 다차원 임상 평가 도구'],
+  ['AcroQoL','Acromegaly Quality of Life 설문 — 유일하게 검증된 환자 보고 결과 도구'],
+  ['PASQ','Patient-Assessed Acromegaly Symptom Questionnaire'],
+  ['PAPE','Pasireotide And Pegvisomant study — 파시레오티드+페그비소만트 병합 임상 연구'],
+  ['Temozolomide','알킬화 항암제 — 공격적·악성 뇌하수체 선종에 한정; 신경종양 전문의 협진 필수'],
+  ['Radiosurgery','정위 방사선 수술 — 감마나이프·사이버나이프; 약물 조절 실패 시 3차 치료'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display='none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+function filterAbbrMain(val) {
+  const v = val.toLowerCase().trim();
+  document.querySelectorAll('#abbr-main-grid .abbr-item').forEach(el => {
+    el.style.display = (!v || el.dataset.term.includes(v) || el.dataset.def.includes(v)) ? '' : 'none';
+  });
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
