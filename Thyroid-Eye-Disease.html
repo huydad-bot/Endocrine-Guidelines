@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>갑상선 눈병증(TED) 진료지침 – ATA/ETA 2022</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --preferred: #1a7f37;
+    --acceptable: #0550ae;
+    --consider: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  .logo-badge2 {
+    background: #5b2d8e;
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky; top: 72px; z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── KP BADGE (Key Point) ── */
+  .kp { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .kp-preferred { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .kp-acceptable { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .kp-consider { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .kp-pp { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+
+  /* ── TOOLTIP ── */
+  .kp::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .kp::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .kp:hover::after, .kp:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── KEY POINT BOX ── */
+  .kp-box { background: #f0f7ff; border: 1px solid #0550ae; border-left: 4px solid #0550ae; border-radius: 6px; padding: 8px 12px; margin: 6px 0; font-size: calc(12px * var(--fscale, 1)); color: #0550ae; }
+  .kp-box strong { color: #0336a0; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+
+  /* ── TABLE ── */
+  .ted-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ted-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .ted-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ted-table tr:last-child td { border-bottom: none; }
+  .ted-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ted-table .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── SEVERITY COLORS ── */
+  .sev-mild { background: #dafbe1; color: #116329; font-weight: 600; text-align: center; padding: 3px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); display: inline-block; }
+  .sev-mod { background: #fff8c5; color: #7d4e00; font-weight: 600; text-align: center; padding: 3px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); display: inline-block; }
+  .sev-sight { background: #ffebe9; color: #82071e; font-weight: 600; text-align: center; padding: 3px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); display: inline-block; }
+  .sev-active { background: #ffe4c4; color: #bc4c00; font-weight: 600; text-align: center; padding: 3px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); display: inline-block; }
+  .sev-inactive { background: #f6f8fa; color: #57606a; font-weight: 600; text-align: center; padding: 3px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); display: inline-block; }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .osa-hdr.open .osa-arrow { transform: rotate(180deg); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-urgent { background: #ffebe9; color: var(--red); }
+  .pill-weeks { background: #fff8c5; color: var(--yellow); }
+  .pill-optional { background: #ddf4ff; color: var(--accent2); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── TREATMENT TABLE ── */
+  .tx-pref { background: #dafbe1; color: #116329; text-align: center; font-weight: 700; font-size: calc(10px * var(--fscale, 1)); padding: 3px 5px; border-radius: 3px; display: inline-block; }
+  .tx-acc  { background: #ddf4ff; color: #0550ae; text-align: center; font-weight: 700; font-size: calc(10px * var(--fscale, 1)); padding: 3px 5px; border-radius: 3px; display: inline-block; }
+  .tx-con  { background: #fff8c5; color: #7d4e00; text-align: center; font-weight: 700; font-size: calc(10px * var(--fscale, 1)); padding: 3px 5px; border-radius: 3px; display: inline-block; }
+  .tx-no   { background: #ffebe9; color: #82071e; text-align: center; font-weight: 700; font-size: calc(10px * var(--fscale, 1)); padding: 3px 5px; border-radius: 3px; display: inline-block; }
+  .tx-na   { background: #f6f8fa; color: #57606a; text-align: center; font-size: calc(10px * var(--fscale, 1)); padding: 3px 5px; border-radius: 3px; display: inline-block; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: var(--accent2); }
+  .warn-text { color: var(--yellow); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  /* ── STEP BOX ── */
+  .step-flow { display: flex; flex-direction: column; gap: 4px; }
+  .step-box { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; background: var(--surface2); border-radius: 6px; border-left: 3px solid var(--accent); }
+  .step-num { background: var(--accent2); color: #fff; font-size: calc(11px * var(--fscale, 1)); font-weight: 700; min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-content { font-size: calc(12px * var(--fscale, 1)); }
+  .step-content strong { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:8px;justify-content:center">
+      <span class="logo-badge">ATA</span>
+      <span class="logo-badge2">ETA</span>
+      <h1>갑상선 눈병증(TED) 진료지침 2022</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1089/thy.2022.0251" class="source-link" target="_blank">Thyroid 2022;32(12):1439–1470 ↗</a>
+      <span class="meta"> · Burch HB et al. ATA-ETA Consensus Statement 2022</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ATA or ETA</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('assessment')">🔍 평가</div>
+    <div class="tab" onclick="showTab('mild')">🟢 경증 치료</div>
+    <div class="tab" onclick="showTab('moderate')">🟡 중등증 치료</div>
+    <div class="tab" onclick="showTab('sight')">🔴 시력위협</div>
+    <div class="tab" onclick="showTab('surgery')">🔧 수술</div>
+    <div class="tab" onclick="showTab('drugs')">💊 약제 요약</div>
+    <div class="tab" onclick="showTab('referral')">📋 의뢰</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════ TAB 1: 개요 ═══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">40%</div><div class="stat-lbl">Graves병에서 TED 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">6%</div><div class="stat-lbl">중등증~중증 TED 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">0.5%</div><div class="stat-lbl">시력위협 TED 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">80%</div><div class="stat-lbl">GD+TED 발병 간격 2년 이내</div></div>
+  </div>
+
+  <!-- 정의 및 병인 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 병태생리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>TED는 <strong>Graves병과 밀접하게 연관된 자가면역 질환</strong>으로, 안와 섬유지방 조직의 염증과 증식으로 인해 안와 부종·돌출안·복시·각막 노출·시신경 압박이 발생한다.</div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">핵심 병태생리</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>TSH 수용체 항체(TRAb)</strong>가 주된 자가항원</li>
+            <li>• 안와 섬유모세포의 <strong>TSHR–IGF-1R 복합체</strong> 활성화</li>
+            <li>• 글리코사미노글리칸 축적 → 간질 부종</li>
+            <li>• 활성기: 림프구 침윤, 지방생성 ↑</li>
+            <li>• 비활성기: 섬유화 진행</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">자연경과 (Rundle)</div>
+          <div class="step-flow">
+            <div class="step-box"><div class="step-num">1</div><div class="step-content"><strong>활성기</strong>: 염증 소견, 점진적 악화</div></div>
+            <div class="step-box"><div class="step-num">2</div><div class="step-content"><strong>정체기</strong>: 일시적 안정</div></div>
+            <div class="step-box"><div class="step-num">3</div><div class="step-content"><strong>비활성기</strong>: 발병 후 12–18개월 이내 진입<br><small>단, 안구돌출·외안근 기능이상은 50%에서 지속</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 위험인자 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 위험인자 및 예방</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">교정 불가 위험인자</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 고령</li>
+            <li>• 남성</li>
+            <li>• 유전적 요인</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--green);margin-bottom:5px">교정 가능 위험인자</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong class="danger-text">흡연</strong> (가장 중요) → 금연 권고</li>
+            <li>• 갑상선 기능 이상 → 빠른 정상화</li>
+            <li>• 방사성 요오드(RAI) 치료 → 스테로이드 예방</li>
+            <li>• TRAb 상승 → 치료 전략 선택에 반영</li>
+            <li>• 스타틴 투여: TED 위험 감소 연관성</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>🚬</span>
+        <div><strong>흡연은 TED의 가장 중요한 교정 가능 위험인자</strong>이다. RAI 치료 시 TED 악화 위험이 증가하며, 활성 TED 환자에서는 RAI 후 스테로이드 예방요법이 필요하다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5단계 접근 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 이환율 감소를 위한 5단계 접근 (Amsterdam Declaration)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="step-flow">
+        <div class="step-box"><div class="step-num">1</div><div class="step-content"><strong>GD의 정확한 진단</strong>: TRAb 측정 (기능성 자극 항체 포함)</div></div>
+        <div class="step-box"><div class="step-num">2</div><div class="step-content"><strong>모든 GD 환자에서 매 방문 시 TED 선별</strong>: 증상·징후 확인, 위험인자 분석</div></div>
+        <div class="step-box"><div class="step-num">3</div><div class="step-content"><strong>TED 위험성 교육</strong>: "GO 조기경고 카드" 활용, 금연 독려</div></div>
+        <div class="step-box"><div class="step-num">4</div><div class="step-content"><strong>TED 발생·진행 예방</strong>: 빠른 갑상선기능 정상화, 셀레늄 보충(경증), 갑상선기능저하 방지</div></div>
+        <div class="step-box"><div class="step-num">5</div><div class="step-content"><strong>조기 전문 클리닉 의뢰</strong>: 중등증~시력위협 TED → 다학제 TED 전문팀</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 내분비과 vs 안과 역할 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤝</span> 내분비과 vs 안과: 역할 분담</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">내분비과 의사의 역할</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 갑상선 기능 이상 관리</li>
+            <li>• GD 환자에서 TED 진단</li>
+            <li>• 국소·생활습관 조치 시작</li>
+            <li>• 셀레늄·비타민D·지질 확인 (선택적)</li>
+            <li>• 진단 불확실 또는 중등증~시력위협 → 안과 의뢰</li>
+            <li>• 전신치료 시행 및 부작용 모니터링</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">안과 전문의 역할</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• TED 진단·확인</li>
+            <li>• 응급: 시력위협 TED 응급 처치</li>
+            <li>• 중등증~시력위협 → TED 전문 클리닉 의뢰</li>
+          </ul>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px;margin-top:10px">TED 전문 클리닉 역할</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• TED 진단·확인</li>
+            <li>• 중등증~시력위협 의학적·외과적 치료</li>
+            <li>• 갑상선 질환의 최적 관리 보장</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+<!-- ═══════════════════ TAB 2: 평가 ═══════════════════ -->
+<div id="tab-assessment" class="panel">
+
+  <!-- 활성도 vs 중증도 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 활성도(Activity) vs 중증도(Severity): 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--orange);margin-bottom:6px">🔥 활성도 (Activity) — CAS</div>
+          <div class="alert alert-warn" style="margin-bottom:6px">
+            <span>📌</span>
+            <div><strong>7항목 CAS ≥3/7 = 활성 TED</strong><br>과거력 또는 객관적 악화 소견도 활성의 근거</div>
+          </div>
+          <table class="ted-table">
+            <tr><th colspan="2">CAS 7항목 (각 1점)</th></tr>
+            <tr><td>1</td><td>자발적 구후통</td></tr>
+            <tr><td>2</td><td>상방·측방 주시 시 통증</td></tr>
+            <tr><td>3</td><td>안검 발적</td></tr>
+            <tr><td>4</td><td>결막 발적</td></tr>
+            <tr><td>5</td><td>안검 부종</td></tr>
+            <tr><td>6</td><td>누두·반달주름 염증</td></tr>
+            <tr><td>7</td><td>결막 부종(chemosis)</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px"><span>⚠️</span><div>CAS의 한계: 이분법적 분류, 매개변수 동등 가중치, 울혈성 안와병증(위양성), 노인·짙은 피부(위음성)</div></div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">📏 중증도 (Severity)</div>
+          <table class="ted-table">
+            <tr><th>등급</th><th>정의</th></tr>
+            <tr>
+              <td><span class="sev-sight">시력위협</span></td>
+              <td>DON(이상갑상선 시신경병증), 각막 손상, 안구 탈구 중 하나 이상</td>
+            </tr>
+            <tr>
+              <td><span class="sev-mod">중등증~중증</span></td>
+              <td>시력위협은 없으나 일상생활에 충분한 영향<br>
+                <small>• 안검 후퇴 ≥2 mm<br>• 안검·결막 연조직 침범 중등~중증<br>• 안구돌출 정상 상한치 초과 ≥3 mm<br>• 복시 Gorman score 2–3</small>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="sev-mild">경증</span></td>
+              <td>일상생활에 경미한 영향<br>
+                <small>• 안검 후퇴 &lt;2 mm, 연조직 침범 경미, 안구돌출 정상 상한치 초과 &lt;3 mm, 간헐적·없는 복시, 각막 노출(윤활제 반응)</small>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 고위험 환자 특징 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚨</span> 시력위협 TED 고위험 환자 특징</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid3">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">배경</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 남성</li>
+            <li>• 50세 초과</li>
+            <li>• 흡연자</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">병력</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 불안정 갑상선 기능</li>
+            <li>• 당뇨병</li>
+            <li>• 6개월 이내 RAI</li>
+            <li>• 진행성 TED 증상·징후</li>
+            <li>• 안와 통증</li>
+            <li>• 복시</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">진찰 소견</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 현저한 연조직 염증</li>
+            <li>• 안검 폐쇄부전 (lagophthalmos)</li>
+            <li>• 안구 운동 장애 (특히 상방)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🔴</span>
+        <div>위 소견 보유 환자는 <strong>면밀한 추적관찰</strong> 필요. 시력위협 TED 진행 가능성을 사전에 식별하는 데 활용한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 공식 안과 평가 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️</span> VISA 분류 체계 및 공식 안과 평가 항목</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>📌</span>
+        <div><strong>VISA</strong> = Vision · Inflammation · Strabismus · Appearance. 4가지 영역에서 활성도·중증도를 체계적으로 기록.</div>
+      </div>
+      <table class="ted-table">
+        <tr><th>영역</th><th>임상 측정</th><th>보조 검사</th><th>TED 연관 원인</th></tr>
+        <tr>
+          <td><strong>V</strong>isual</td>
+          <td>Snellen 시력, 색각, 시야, 동공 반사, 안저 검사</td>
+          <td>시각 유발 전위, OCT</td>
+          <td>DON, 각막 노출, 건성안, 맥락막 주름</td>
+        </tr>
+        <tr>
+          <td><strong>I</strong>nflammation</td>
+          <td>안검·결막 발적·부종, 세극등 검사, 임상 사진</td>
+          <td>EUGOGO 아틀라스</td>
+          <td>염증, 정맥 울혈, 상윤부각결막염</td>
+        </tr>
+        <tr>
+          <td><strong>S</strong>trabismus</td>
+          <td>복시(Gorman), 안구 운동 범위, 안사시 측정</td>
+          <td>사시경 검사, Fresnel 프리즘</td>
+          <td>외안근 섬유화·제한</td>
+        </tr>
+        <tr>
+          <td><strong>A</strong>ppearance</td>
+          <td>안검 후퇴(자, MRD), 안구돌출(안구돌출계), 각막 노출(세극등)</td>
+          <td>임상 사진</td>
+          <td>안검 후퇴, 안구돌출</td>
+        </tr>
+      </table>
+      <div class="kp-box" style="margin-top:8px">
+        <strong>Key Point 4.1.1</strong>: 내분비과 의사는 TED 활성도와 중증도를 평가할 수 있는 안과 검사의 기본 요소에 익숙해야 한다.<br>
+        <strong>Key Point 4.1.2</strong>: 활성도·중증도·시간 경과·일상생활 영향을 모두 평가해야 한다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 영상 검사 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📸</span> 영상 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">영상의 적응증</div>
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);margin-bottom:3px">비정형 TED — 다른 질환 감별</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.7">
+            <li>• 갑상선 기능 정상, 기왕력 없음</li>
+            <li>• 임상적으로 단측성 또는 현저한 비대칭</li>
+            <li>• 상안검 후퇴 없음</li>
+            <li>• 상안검 하수</li>
+            <li>• 비정형 사시</li>
+            <li>• 심한 안와 통증</li>
+          </ul>
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);margin-top:6px;margin-bottom:3px">확진 TED 평가</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.7">
+            <li>• 시력위협 TED</li>
+            <li>• 안와 수술 계획 시</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">영상 방식 선택</div>
+          <table class="ted-table">
+            <tr><th>방식</th><th>장점</th><th>용도</th></tr>
+            <tr><td>비조영 CT</td><td>저비용, 접근성, 골벽 평가</td><td>✅ 수술 전 계획 <strong>(선택)</strong></td></tr>
+            <tr><td>조영 CT</td><td>활성 염증 강조, 감별 진단</td><td>비정형·중증 (활동성 평가)</td></tr>
+            <tr><td>MRI</td><td>T2/STIR: 근육 내 부종 → 활성도, 연조직 해상도 우수</td><td>비정형·중증 (활동성 평가)</td></tr>
+          </table>
+          <div class="kp-box" style="margin-top:6px">
+            <strong>Key Point 4.4.1</strong>: 비정형 또는 중증 TED → 조영 CT 또는 MRI 권고<br>
+            <strong>Key Point 4.4.2</strong>: 수술 고려 시 → 비조영 CT 권고
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QOL -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💬</span> 삶의 질(QOL) 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>TED는 QOL에 현저히 부정적 영향. <strong>GO-QOL</strong>(Graves Orbitopathy QOL 설문)이 공식 권고 도구. 시각 기능 + 외모 영역 각각 100점 척도.<br>
+        Key Point 4.2.1: 신체적·심리사회적 영향을 매 환자마다 평가해야 한다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-assessment -->
+
+<!-- ═══════════════════ TAB 3: 경증 치료 ═══════════════════ -->
+<div id="tab-mild" class="panel">
+
+  <div class="alert alert-success">
+    <span>ℹ️</span>
+    <div><strong>경증 TED 치료 목표</strong>: QOL 개선, TED 관해 촉진 또는 진행 예방. 대부분 국소·생활습관 조치로 충분하며, 경과 관찰이 기본이다.</div>
+  </div>
+
+  <!-- 국소 및 생활습관 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌿</span> 국소·생활습관 조치 (모든 TED 환자 공통)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ted-table">
+        <tr><th>조치</th><th>대상</th><th>내용</th></tr>
+        <tr><td>인공눈물·윤활제</td><td>건성안, 각막 노출</td><td>sodium hyaluronate 또는 carboxymethylcellulose 함유 점안액. 야간: 안연고 + 안대·테이핑</td></tr>
+        <tr><td>두부 거상</td><td>부종 경감</td><td>베개를 추가하여 취침 시 두부 높임</td></tr>
+        <tr><td>선글라스</td><td>광과민</td><td>건성안·결막 자극 동반</td></tr>
+        <tr><td>복시 관리</td><td>복시 환자</td><td>안구 폐쇄(occlusion) 또는 Fresnel 프리즘</td></tr>
+        <tr><td>금연</td><td>전체</td><td>흡연 및 간접흡연 노출 절대 금지. 금연 지원 제공</td></tr>
+      </table>
+      <div class="kp-box" style="margin-top:8px">
+        <strong>Key Point 5.1.1</strong>: 국소 안과 조치 및 생활습관 개선은 모든 TED 환자에게 제공해야 한다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 셀레늄 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 셀레늄 요법 (경증 활성 TED)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">근거</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• 셀레늄: 항산화·면역조절 효과</li>
+            <li>• 유럽 다기관 이중맹검 RCT (selenium selenite 100 μg bid × 6개월 vs 위약)</li>
+            <li>• CAS 및 GO-QOL 유의한 개선</li>
+            <li>• 치료 중단 후 6개월간 효과 지속</li>
+            <li>• TED 개선 가능성 ↑, 진행 위험 ↓</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">처방</div>
+          <table class="ted-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>제제</td><td>Selenium selenite (원소 Se 약 45%)</td></tr>
+            <tr><td>용량</td><td><strong>100 μg 하루 2회 경구</strong></td></tr>
+            <tr><td>기간</td><td><strong>6개월</strong> (이후 연장 근거 없음)</td></tr>
+            <tr><td>적응증</td><td>경증 활성 TED, 특히 셀레늄 결핍 지역</td></tr>
+            <tr><td>주의</td><td>셀레늄 충분 지역에서 효과 불확실<br>전립선암·편평상피암·당뇨 위험 논란 있음</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 6.1.1</strong>: 셀레늄 셀레나이트 100 μg 1일 2회 6개월 투여를 경증 활성 TED에서 고려할 수 있다. 특히 셀레늄 결핍 지역에서 권고.
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div>중등증~중증 TED에서는 셀레늄 효과의 근거가 없다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경증 수술 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✂️</span> 경증 안구돌출·안검 후퇴 수술 (선택적)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>경미한 외모 변화(화남·불안 표정, 지방 탈출)도 자존감·사회적 기능에 영향 가능. 개인화된 교정 절차 적용 가능.<br>
+        <strong>Key Point 6.2.1</strong>: 외모에 대한 심리사회적 영향을 정기적으로 평가해야 한다.</div>
+      </div>
+      <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9;margin-top:6px">
+        <li>• 안검 후퇴 교정: 안검 협소화 수술</li>
+        <li>• 지방 탈출: 안검 성형술(상·하안검 피부 이완 + 지방 제거)</li>
+        <li>• 수술 종류·순서: 변화 중증도, 목표, 위험-이익 고려</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-mild -->
+
+<!-- ═══════════════════ TAB 4: 중등증 치료 ═══════════════════ -->
+<div id="tab-moderate" class="panel">
+
+  <div class="alert alert-warn">
+    <span>⚠️</span>
+    <div><strong>중등증~중증 활성 TED 치료 원칙</strong>: 활성도·중증도·기간·경과 추이·QOL·환자 나이·동반질환·약제 접근성과 비용을 종합적으로 고려한 개인화된 접근이 필요하다.</div>
+  </div>
+
+  <!-- IVGC -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 정맥 글루코코르티코이드 (IVGC) <span class="tx-pref">PREFERRED</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">핵심 적응증</div>
+          <div class="alert alert-success" style="margin-bottom:6px">
+            <span>✅</span>
+            <div><strong>활성 중등증~중증 TED</strong>에서 <strong>염증 활성이 주된 특징</strong>이고, <strong>현저한 안구돌출 또는 복시가 없는</strong> 경우 일차 선택</div>
+          </div>
+          <table class="ted-table">
+            <tr><th>항목</th><th>표준 용법</th></tr>
+            <tr><td>제제</td><td>IV Methylprednisolone (IVMP)</td></tr>
+            <tr><td>1단계</td><td><strong>0.5 g/주 × 6주</strong></td></tr>
+            <tr><td>2단계</td><td><strong>0.25 g/주 × 6주</strong></td></tr>
+            <tr><td>누적 용량</td><td><strong>4.5 g / 약 3개월</strong></td></tr>
+            <tr><td>최대 누적</td><td class="danger-text"><strong>&lt; 8.0 g (절대 초과 금지)</strong></td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">효과 / 안전성</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• CAS 개선: 58–83%</li>
+            <li>• 안구돌출 개선(≥2 mm): 20–60% (단기), 장기 효과 미미</li>
+            <li>• 복시 개선: 일부, 가변적</li>
+            <li>• 비반응/재발: 20–40%</li>
+          </ul>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:3px;margin-top:8px">주요 부작용</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.7">
+            <li>• 고혈당, 고혈압, 체중 증가</li>
+            <li>• 불면, 우울, 정신증</li>
+            <li>• 심각: 간괴사, 심근경색, 사망 (누적량 &gt;8g)</li>
+          </ul>
+          <div class="alert alert-danger" style="margin-top:6px">
+            <span>⛔</span>
+            <div>절대 금기: 활성 바이러스간염, 간기능부전, 중증 심혈관질환, 조절안된 고혈압/당뇨, 미치료 정신질환</div>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.1.1.1</strong>: IVGC는 활성 중등증~중증 TED에서 염증이 주된 소견이며 현저한 안구돌출이나 복시가 없을 때 우선 치료다.<br>
+        <strong>Key Point 7.1.1.2</strong>: 표준 용량: 누적 4.5 g / 약 3개월<br>
+        <strong>Key Point 7.1.1.3</strong>: 6주 시점 반응 불량 → 치료 중단 및 다른 치료 고려. IVMP 투여 중에도 복시 악화·DON 발생 가능<br>
+        <strong>Key Point 7.1.1.4</strong>: 누적 IVMP &gt;8.0 g 절대 금지
+      </div>
+    </div>
+  </div>
+
+  <!-- Teprotumumab -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> Teprotumumab (TEP) <span class="tx-pref">PREFERRED</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>🇺🇸</span>
+        <div>미국 FDA 승인(2020). 출판 당시 미국에서만 사용 가능. <strong>IGF-1 수용체 차단 단클론항체</strong>. 현재까지 가장 포괄적 효능을 보인 TED 치료제.</div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--green);margin-bottom:5px">임상 효능 (2건 RCT 풀분석)</div>
+          <table class="ted-table">
+            <tr><th>지표</th><th>TEP</th><th>위약</th></tr>
+            <tr><td>복합 반응률</td><td class="success-text"><strong>74%</strong></td><td>14%</td></tr>
+            <tr><td>CAS 개선</td><td class="success-text"><strong>62%</strong></td><td>22%</td></tr>
+            <tr><td>안구돌출 ≥2mm 감소</td><td class="success-text"><strong>77%</strong></td><td>15%</td></tr>
+            <tr><td>복시 개선</td><td class="success-text"><strong>70%</strong></td><td>31%</td></tr>
+            <tr><td>평균 안구돌출 감소</td><td class="success-text"><strong>3 mm</strong></td><td>&lt;0.5 mm</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">투약 방법</div>
+          <table class="ted-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>투여 경로</td><td>정맥 주사</td></tr>
+            <tr><td>1회차</td><td>10 mg/kg</td></tr>
+            <tr><td>2–8회차</td><td>20 mg/kg</td></tr>
+            <tr><td>간격</td><td>3주마다</td></tr>
+            <tr><td>총 횟수</td><td>8회 (6개월)</td></tr>
+            <tr><td>비용(미국)</td><td class="danger-text">~$300,000/코스 (IVGC의 ~2000배)</td></tr>
+          </table>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:3px;margin-top:8px">주요 부작용</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.7">
+            <li>• 근육경련 25%, 오심 17%, 탈모 13%</li>
+            <li>• <strong class="danger-text">청력 장애 10–15%</strong> (일부 비가역적)</li>
+            <li>• 고혈당(당뇨/전당뇨 환자 10%)</li>
+            <li>• 염증성 장질환 악화</li>
+            <li>• 임신·18세 미만 금기 (성장 우려)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.1.3.1</strong>: TEP는 활성 중등증~중증 TED에서 <strong>현저한 안구돌출 및/또는 복시</strong>가 있는 환자에게 가용한 경우 우선 치료다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Rituximab -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> Rituximab (RTX) <span class="tx-acc">ACCEPTABLE</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">근거 요약</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• CD20 B세포 표적 단클론항체</li>
+            <li>• 2건의 소규모 단일기관 RCT — 결과 <strong>상충</strong></li>
+            <li>• 효능 있는 RCT: TED 기간 평균 4.5개월 (짧음)</li>
+            <li>• 효능 없는 RCT: TED 기간 평균 30개월 (긴 경우)</li>
+            <li>• 주효과: 질환 비활성화 (안구돌출·복시 효과 미미)</li>
+            <li>• 1년 이상 재발률 낮음</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">처방 및 부작용</div>
+          <table class="ted-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>용량</td><td>500–2000 mg IV (500 mg 최적)<br>100 mg도 탐색 중</td></tr>
+            <tr><td>전처치</td><td>Acetaminophen + IV hydrocortisone + 항히스타민</td></tr>
+            <tr><td>비용</td><td>IVGC 대비 24–28배</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>• 주입 반응(비중증): ≥10%<br>• 일과성 시력 소실(사이토카인 방출): 5–9%<br>• 혈관염, PML(드묾)</div>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.1.4.1</strong>: RTX는 TED 비활성화 및 1년 이상 재발 예방에 효과, 특히 <strong>TED 발병 &lt;9개월</strong> 환자에서 두드러짐. 그러나 근거는 제한적·상충적.<br>
+        <strong>Key Point 7.1.4.2</strong>: RTX는 활성 중등증~중증 TED에서 <strong>현저한 연조직 침범</strong> 환자에게 acceptable한 치료다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Mycophenolate -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> Mycophenolate (MMF/MPS) <span class="tx-acc">ACCEPTABLE</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">근거 (2건 RCT — 결과 상충)</div>
+          <table class="ted-table">
+            <tr><th>RCT 1 (Ye 2017)</th><th>결과</th></tr>
+            <tr><td>MMF vs IVGC</td><td class="success-text">MMF 우위: 복합지수·CAS·안구돌출·복시·재발 모두 개선</td></tr>
+          </table>
+          <table class="ted-table" style="margin-top:6px">
+            <tr><th>RCT 2 (MINGO, Kahaly 2018)</th><th>결과</th></tr>
+            <tr><td>MMF+IVGC vs IVGC</td><td>주 평가변수: 차이 없음. 사후분석 36주 시점: MMF 병합 우위</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">투약 방법</div>
+          <table class="ted-table">
+            <tr><th>제제</th><th>용량/기간</th></tr>
+            <tr><td>Mycophenolate mofetil</td><td>500 mg bid × 24주</td></tr>
+            <tr><td>Mycophenolate sodium</td><td>360 mg bid × 24주 (+IVGC 병합)</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>EUGOGO 2021 가이드라인에서는 IVGC+MMF를 1차 치료로 권고하였으나, 본 ATA-ETA 컨센서스 태스크포스는 근거 불충분 판단.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tocilizumab -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> Tocilizumab (TCZ) <span class="tx-acc">ACCEPTABLE (GC 저항성)</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">근거</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• IL-6 수용체 차단제</li>
+            <li>• 소규모 RCT (n=32, GC 저항성 환자): TCZ 우위</li>
+            <li>• CAS 16주 개선: 93% vs 59% (위약)</li>
+            <li>• 안구돌출: 단기 개선, 40주 차이 없음</li>
+            <li>• 비용: IVGC 대비 60–85배</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">투약 방법</div>
+          <table class="ted-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>경로</td><td>IV (SC 제제도 사용 탐색 중)</td></tr>
+            <tr><td>용량</td><td>8 mg/kg</td></tr>
+            <tr><td>일정</td><td>0, 4, 8, 12주 (총 4회)</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>중증 감염, 간독성, 아나필락시스, 장 천공 위험. 간기능 이상·중증 감염 시 주의.</div>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.1.6.1</strong>: TCZ는 GC 저항성 활성 중등증~중증 TED에서 비활성화 치료로 acceptable하다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 방사선 치료 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> 안와 방사선 치료 (RT) <span class="tx-pref">PREFERRED (진행성 복시)</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">적응증 및 근거</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• 활성 중등증~중증 TED에서 <strong>진행성 복시</strong>가 주된 소견</li>
+            <li>• 안와 림프구·섬유세포 억제/제거 효과</li>
+            <li>• 안구 운동 개선: 네덜란드 2건 RCT 지지</li>
+            <li>• GC 병합 시 DON 예방 효과 가능 (후향적 연구)</li>
+            <li>• 표준: 20 Gy / 10일 분할 조사</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">금기 및 주의사항</div>
+          <div class="alert alert-danger">
+            <span>⛔</span>
+            <div>
+              <strong>상대적 금기</strong>:<br>
+              • <strong>35세 미만</strong>: 방사선 조사야 종양 발생 이론적 위험<br>
+              • <strong>당뇨병 환자</strong>: 망막증 악화 위험<br>
+              • 고혈압성 망막증 동반 시 주의
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.2.1</strong>: RT는 활성 중등증~중증 TED에서 <strong>진행성 복시</strong>가 주된 소견일 때 우선 치료다.<br>
+        <strong>Key Point 7.2.2</strong>: 당뇨 환자 주의, 35세 미만 상대적 금기.
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 매트릭스 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 중등증~중증 활성 TED 치료 선택 매트릭스</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ted-table">
+        <tr><th>임상 상황</th><th>IVGC</th><th>MMF</th><th>RT</th><th>RTX</th><th>TEP</th><th>TCZ</th></tr>
+        <tr><td>GC 불응/불내성</td><td><tx-na style="font-size: calc(10px * var(--fscale, 1));color:var(--text2)">—</tx-na></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-con">CON</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-con">미평가</span></td><td><span class="tx-acc">ACC</span></td></tr>
+        <tr><td>35세 미만</td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-no">금기</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td></tr>
+        <tr><td>만성 감염(간염·결핵)</td><td><span class="tx-no">금기</span></td><td><span class="tx-no">금기</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-no">금기</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-no">금기</span></td></tr>
+        <tr><td>간질환</td><td><span class="tx-no">금기</span></td><td><span class="tx-con">주의</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-pref">선호</span></td><td><span class="tx-pref">선호</span></td><td><span class="tx-con">주의</span></td></tr>
+        <tr><td>당뇨병</td><td><span class="tx-con">주의</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-con">주의</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-con">주의</span></td><td><span class="tx-acc">ACC</span></td></tr>
+        <tr><td>현저한 안구돌출 + 복시</td><td><span class="tx-con">효과 제한</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-no">효과 미미</span></td><td><span class="tx-pref">PREFERRED</span></td><td><span class="tx-con">CON</span></td></tr>
+        <tr><td>진행성 복시 (주된 소견)</td><td><span class="tx-pref">PREF</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-pref">PREFERRED</span></td><td><span class="tx-no">효과 미미</span></td><td><span class="tx-pref">PREF</span></td><td><span class="tx-con">CON</span></td></tr>
+        <tr><td>연조직 침범 현저</td><td><span class="tx-pref">PREFERRED</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACCEPTABLE</span></td><td><span class="tx-acc">ACC</span></td><td><span class="tx-acc">ACC</span></td></tr>
+      </table>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;font-size: calc(10px * var(--fscale, 1))">
+        <span class="tx-pref">PREFERRED</span><span>: 2건 이상 RCT 근거, 일관된 효과</span>
+        <span class="tx-acc">ACCEPTABLE</span><span>: 근거 있으나 제한적 또는 상충</span>
+        <span class="tx-con">CONSIDER</span><span>: 근거 불명확, 다른 치료 불가 시</span>
+        <span class="tx-no">상대적 금기</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-moderate -->
+
+<!-- ═══════════════════ TAB 5: 시력위협 ═══════════════════ -->
+<div id="tab-sight" class="panel">
+
+  <div class="alert alert-danger">
+    <span>🚨</span>
+    <div><strong>시력위협 TED</strong>는 응급 상황이다. DON(이상갑상선 시신경병증)·각막 손상·안구 탈구를 포함하며, 지체 없이 고용량 IVGC 치료를 시작하고 안과 응급 의뢰를 진행해야 한다.</div>
+  </div>
+
+  <!-- DON 진단 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> DON (이상갑상선 시신경병증) 진단 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">DON 임상 특징 (빈도)</div>
+          <table class="ted-table">
+            <tr><th>소견</th><th>빈도</th></tr>
+            <tr><td>색각 이상 (2판 이상 이상)</td><td class="danger-text">98%</td></tr>
+            <tr><td>중심 시력 저하 (≤20/40)</td><td class="danger-text">90%</td></tr>
+            <tr><td>상대 구심성 동공 반응 결핍 (RAPD)</td><td>50%</td></tr>
+            <tr><td>시신경 부종·창백</td><td class="success-text">드묾</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>시신경 부종·창백의 부재가 DON을 배제하지 않는다. 색각 검사가 가장 민감하다.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:5px">DON 병태생리</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• <strong>압박형(~95%)</strong>: 안와첨부에서 비대해진 외안근에 의한 시신경 압박<br>→ 의학적·수술적 감압 반응</li>
+            <li>• <strong>신전형(&lt;5%)</strong>: 안구돌출로 인한 시신경 신전<br>→ 의학적 치료 <strong>효과 없음</strong>, 수술 감압 필요</li>
+          </ul>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>📌</span>
+            <div>두 유형을 영상(CT/MRI)으로 감별해야 한다. 신전형은 IVGC 반응 없음.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 흐름 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚑</span> 시력위협 TED 치료 알고리즘</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="step-flow">
+        <div class="step-box" style="border-left-color:var(--red)">
+          <div class="step-num" style="background:var(--red)">1</div>
+          <div class="step-content">
+            <strong>즉시 고용량 IVGC 시작</strong><br>
+            IVMP 500–1000 mg/일 × 3일 연속 <em>또는</em> 격일<br>
+            <small>첫 1주 동안 투여</small>
+          </div>
+        </div>
+        <div class="step-box" style="border-left-color:var(--orange)">
+          <div class="step-num" style="background:var(--orange)">2</div>
+          <div class="step-content">
+            <strong>2주 시점 평가</strong>: 시력 기능 회복 여부 확인<br>
+            <small>시신경 부종·창백 → IVGC 반응 불량 예측인자 (but 치료 시도 포기 이유 아님)</small>
+          </div>
+        </div>
+        <div class="step-box" style="border-left-color:var(--yellow)">
+          <div class="step-num" style="background:var(--yellow);color:#333">3</div>
+          <div class="step-content">
+            <strong>반응 충분</strong>: IVGC 유지 → 경과 관찰<br>
+            <strong>반응 불충분</strong>: 즉시 <strong>안와 감압수술</strong> 고려<br>
+            <small>늦은 감압도 시력 회복에 기여하나 완전 회복은 보장 못함</small>
+          </div>
+        </div>
+        <div class="step-box" style="border-left-color:var(--green)">
+          <div class="step-num" style="background:var(--green)">4</div>
+          <div class="step-content">
+            <strong>안와 감압수술</strong>: 내측벽 + 안와하벽 감압<br>
+            경사비강 내시경 접근법 또는 경누두 접근법<br>
+            <small>수술 후 수일 내 시력 개선 가능. 중증·장기 시력 소실도 부분·완전 회복 가능.</small>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box" style="margin-top:8px">
+        <strong>Key Point 8.1.1</strong>: DON 환자 → IVGC 즉시 투여 + 면밀한 반응 모니터링. <strong>2주 시점에 시력 기능 회복 없으면 감압수술 조기 고려.</strong><br>
+        <strong>Key Point 8.3.1</strong>: 압박성 DON → 안와첨부 내측벽·하벽 감압수술로 시신경 압박 해제.
+      </div>
+    </div>
+  </div>
+
+  <!-- RT in DON -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> DON에서의 방사선 치료 역할</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 고위험 환자에서 DON <strong>예방적</strong> RT + GC 병합 가능 (후향적 근거)</li>
+        <li>• 확립된 DON에서 수술 필요성 감소 효과 가능</li>
+        <li>• 진행성 복시·안구 운동 장애 환자 = 이미 RT 적응증 → 추가 이득</li>
+      </ul>
+      <div class="kp-box" style="margin-top:6px">
+        <strong>Key Point 8.2.1</strong>: RT는 DON 예방 또는 치료 보조 수단으로 고려할 수 있다.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-sight -->
+
+<!-- ═══════════════════ TAB 6: 수술 ═══════════════════ -->
+<div id="tab-surgery" class="panel">
+
+  <div class="alert alert-info">
+    <span>📌</span>
+    <div><strong>재활 수술 원칙</strong>: 질환이 <strong>비활성 상태</strong>이며 <strong>정상 갑상선기능이 유지</strong>된 후에만 시행. 단계적 접근: <strong>안와 감압 → 사시 교정 → 안검 교정</strong> 순서.</div>
+  </div>
+
+  <!-- 안와 감압 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔧</span> 안와 감압수술</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">적응증</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• 안구돌출 교정 (외모)</li>
+            <li>• 만성 안와 울혈 (정맥 배액 개선)</li>
+            <li>• 안구 탈구</li>
+            <li>• DON <strong>(응급)</strong></li>
+          </ul>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px;margin-top:10px">효과</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>• 벽 1개 제거당 약 2 mm 돌출 감소</li>
+            <li>• 지방 2 cm³ 제거당 약 2 mm 감소</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:5px">수술 방식 선택</div>
+          <table class="ted-table">
+            <tr><th>방식</th><th>특징</th></tr>
+            <tr><td>지방 단독 감압</td><td>지방 우세형, 새로운 사시 발생률 낮음(8.6%)</td></tr>
+            <tr><td>측벽 감압</td><td>근육 우세형, 뇌척수액 누출 위험</td></tr>
+            <tr><td>내측벽+하벽</td><td>DON 주 접근, 뺨 저림·상악 마취 가능</td></tr>
+            <tr><td>복합벽</td><td>최대 감압 필요 시</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>합병증: 새로운 사시 발생 7–34% (수술 방식에 따라 다름), 뇌척수액 누출, 뺨 저림, 상악 마취</div>
+          </div>
+        </div>
+      </div>
+      <div class="kp-box">
+        <strong>Key Point 7.3.2.1</strong>: 수술 방식은 적응증(DON/안구돌출), 안와병증 유형(근육/지방 우세형), 목표 돌출 감소량에 맞게 조정.
+      </div>
+    </div>
+  </div>
+
+  <!-- 사시 수술 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👀</span> 사시 수술 및 프리즘</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info" style="margin-bottom:6px">
+        <span>📌</span>
+        <div>목표: 정면·독서 위치에서 단안 시야(binocular single vision) 회복 또는 확장. <strong>사시 측정이 최소 6개월 안정화</strong> 후 수술.</div>
+      </div>
+      <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+        <li>• 대기 중 임시 복시 관리: Fresnel 프리즘 안경렌즈</li>
+        <li>• 프리즘 교정 불가능한 경우: 가림 패치</li>
+        <li>• 대편위: 근육 단축 수술 + 조절 봉합</li>
+        <li>• 수술 후 하직근 후전술 시: 하안검 후퇴 발생 가능</li>
+      </ul>
+      <div class="kp-box">
+        <strong>Key Point 7.3.3.2</strong>: 비활성 TED에서 복시 환자 → 사시 수술 또는 영구 프리즘 안경으로 정면 단안 시야 회복 가능.
+      </div>
+    </div>
+  </div>
+
+  <!-- 안검 수술 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✂️</span> 안검 교정수술</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+        <li>• 순서: 안와 감압 → 사시 교정 <strong>→ 안검 교정 (마지막)</strong></li>
+        <li>• 상안검 후퇴: 상방 거근 전방 또는 후방 접근 단축술</li>
+        <li>• 하안검 후퇴: 자가 또는 이식 spacer 재료 사용</li>
+        <li>• 상안검 지방 탈출: 맞춤 안검성형술</li>
+        <li>• 활성기 일시적 치료: 결막하 triamcinolone 주사</li>
+        <li>• 미용: Botulinum toxin (미간 주름)</li>
+      </ul>
+      <div class="kp-box">
+        <strong>Key Point 7.3.4.1</strong>: 안검 후퇴·지방 탈출 수술은 TED 비활성화 및 정갑상선기능 달성 후, 감압·사시 수술 완료 후 시행.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-surgery -->
+
+<!-- ═══════════════════ TAB 7: 약제 요약 ═══════════════════ -->
+<div id="tab-drugs" class="panel">
+
+  <!-- 약제 비교표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 활성 중등증~중증 TED 약제 효능 비교 (RCT 근거)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+        <table class="ted-table" style="min-width:600px">
+          <tr>
+            <th>약제</th>
+            <th>복합 반응률</th>
+            <th>CAS 개선</th>
+            <th>안구돌출 ≥2mm</th>
+            <th>복시 개선</th>
+            <th>재발률</th>
+            <th>분류</th>
+          </tr>
+          <tr>
+            <td><strong>IVGC</strong></td>
+            <td>23–53%</td>
+            <td>45–83%</td>
+            <td>0–46%</td>
+            <td>0–19%</td>
+            <td>21–40% (12주)</td>
+            <td><span class="tx-pref">PREFERRED*</span></td>
+          </tr>
+          <tr>
+            <td><strong>TEP</strong></td>
+            <td class="success-text"><strong>74%</strong></td>
+            <td>62%</td>
+            <td class="success-text"><strong>77%</strong></td>
+            <td class="success-text"><strong>70%</strong></td>
+            <td>29–37% (27–51주)</td>
+            <td><span class="tx-pref">PREFERRED†</span></td>
+          </tr>
+          <tr>
+            <td><strong>MMF+IVGC</strong></td>
+            <td>63%</td>
+            <td>80%</td>
+            <td>변화 없음</td>
+            <td>변화 없음</td>
+            <td>8–11% (12–24주)</td>
+            <td><span class="tx-acc">ACCEPTABLE</span></td>
+          </tr>
+          <tr>
+            <td><strong>RTX</strong></td>
+            <td>8–60%</td>
+            <td>31–100%</td>
+            <td>변화 없음</td>
+            <td>변화 없음</td>
+            <td>0–15% (40–76주)</td>
+            <td><span class="tx-acc">ACCEPTABLE</span></td>
+          </tr>
+          <tr>
+            <td><strong>TCZ</strong></td>
+            <td>73%</td>
+            <td>93%</td>
+            <td>27%</td>
+            <td>7%</td>
+            <td>7.4% (9년 실세계)</td>
+            <td><span class="tx-acc">ACCEPTABLE</span></td>
+          </tr>
+          <tr>
+            <td><strong>위약</strong></td>
+            <td>10–22%</td>
+            <td>22–59%</td>
+            <td>변화 없음</td>
+            <td>변화 없음</td>
+            <td>0–8%</td>
+            <td>—</td>
+          </tr>
+        </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">
+        *활성이 주된 소견이며 현저한 안구돌출/복시 없는 경우. †현저한 안구돌출 및/또는 복시 있는 경우 (가용 시).
+      </div>
+    </div>
+  </div>
+
+  <!-- 비용/물류 비교 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💰</span> 약제 비용 및 투여 물류 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+        <table class="ted-table" style="min-width:550px">
+          <tr><th>약제</th><th>투여경로</th><th>기간</th><th>비용(EU)</th><th>비용(US)</th><th>IVGC 대비</th></tr>
+          <tr><td><strong>IVGC</strong></td><td>IV</td><td>3개월</td><td>€70</td><td>$172</td><td>기준(1×)</td></tr>
+          <tr><td><strong>OGC</strong></td><td>경구</td><td>3개월</td><td>€74</td><td>$440</td><td>~3×</td></tr>
+          <tr><td><strong>MMF</strong></td><td>경구</td><td>24주</td><td>€411</td><td>$1,191</td><td>6–7×</td></tr>
+          <tr><td><strong>RTX 0.5g</strong></td><td>IV</td><td>1회(2주 간격)</td><td>€1,698</td><td>$4,914</td><td>24–29×</td></tr>
+          <tr><td><strong>RTX 1g×2</strong></td><td>IV</td><td>2회</td><td>€4,308</td><td>$19,636</td><td>62–114×</td></tr>
+          <tr><td><strong>TCZ</strong></td><td>IV</td><td>12주(4회)</td><td>€4,266</td><td>$14,519</td><td>61–84×</td></tr>
+          <tr><td><strong>TEP</strong></td><td>IV</td><td>6개월(8회)</td><td class="danger-text">미허가(EU)</td><td class="danger-text">~$358,000</td><td class="danger-text">~2000×</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>💡</span>
+        <div><strong>Key Point 7.1.2</strong>: 최근 도입된 치료제의 입증된 효능과 장기 효능·안전성·비용효과에 대한 경험 부재 간의 균형을 고려해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 부작용 요약 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 주요 부작용 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div style="overflow-x:auto">
+        <table class="ted-table" style="min-width:600px">
+          <tr><th>약제</th><th>빈도 ≥10%</th><th>중증(Grade 3)</th><th>생명위협(Gr4–5)</th></tr>
+          <tr>
+            <td><strong>IVGC</strong></td>
+            <td>고혈당</td>
+            <td>감염, 우울, 고혈압, 체중증가, 정신증</td>
+            <td>사망, 간괴사, 심근경색, 뇌졸중</td>
+          </tr>
+          <tr>
+            <td><strong>MMF</strong></td>
+            <td>위장관 증상, 감염</td>
+            <td>감염, 간염</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>RTX</strong></td>
+            <td>주입 반응(비중증)</td>
+            <td>혈관염, 일과성 시력 소실</td>
+            <td>중증 주입 반응, PML(드묾)</td>
+          </tr>
+          <tr>
+            <td><strong>TEP</strong></td>
+            <td>위장관·근육경련·탈모·피로·고혈당·청력장애</td>
+            <td class="danger-text">청력 손실(10–15%, 일부 영구적), IBD 악화</td>
+            <td>뇌출혈(드묾)</td>
+          </tr>
+          <tr>
+            <td><strong>TCZ</strong></td>
+            <td>피로·고지혈증·호중구감소·감염</td>
+            <td>간염, 혈소판감소</td>
+            <td>아나필락시스, 장 천공</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-drugs -->
+
+<!-- ═══════════════════ TAB 8: 의뢰 ═══════════════════ -->
+<div id="tab-referral" class="panel">
+
+  <!-- 의뢰 기준 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 안과 의뢰 기준 및 긴급도</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="pill pill-urgent">응급 (즉시)</span>
+            <span>시력위협 TED 의심 또는 확진</span>
+          </div>
+          <span class="osa-arrow">▾</span>
+        </div>
+        <div class="osa-body">
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🔴 이상갑상선 시신경병증(DON)</li>
+            <li>🔴 각막 손상</li>
+            <li>🔴 안구 탈구</li>
+            <li>🔴 새로운 복시 발생</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="pill pill-weeks">수주 이내</span>
+            <span>중등증~중증 또는 불확실 TED</span>
+          </div>
+          <span class="osa-arrow">▾</span>
+        </div>
+        <div class="osa-body">
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🟡 악화하는 연조직 변화</li>
+            <li>🟡 불확실한 진단</li>
+            <li>🟡 갑상선기능 정상인 TED (euthyroid TED)</li>
+            <li>🟡 임상적으로 단측성 또는 현저한 비대칭</li>
+            <li>🟡 QOL에 유의한 영향</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="pill pill-optional">선택적 (비응급)</span>
+            <span>재활 수술 고려 또는 고위험 경증</span>
+          </div>
+          <span class="osa-arrow">▾</span>
+        </div>
+        <div class="osa-body">
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🔵 방사성 요오드 치료 전 활성 TED</li>
+            <li>🔵 지속적 비진행성 TED</li>
+            <li>🔵 고위험 프로파일 (흡연·50세 초과·당뇨·지속 갑상선기능이상·남성)</li>
+            <li>🔵 안구 외모·기능 잔여 결손 — 재활 수술 가능성 평가</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Points 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📌</span> 핵심 권고사항(Key Points) 전체 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 3.1">KP 3.1</span></div>
+          <div class="rec-text">TED 조기 진단 및 발생·진행 예방을 위한 단순 조치를 적극 추진해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 3.2">KP 3.2</span></div>
+          <div class="rec-text">GD를 관리하는 내분비과 의사는 환자가 TED 전문 케어에 접근할 수 있는 의뢰 경로를 확보해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 3.3">KP 3.3</span></div>
+          <div class="rec-text">안과 의사는 중등증~시력위협 TED 관리에 반드시 참여해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 4.4.1">KP 4.4.1</span></div>
+          <div class="rec-text">비정형 또는 중증 TED → 조영 CT 또는 MRI로 활성도 평가 및 다른 질환 감별.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 4.4.2">KP 4.4.2</span></div>
+          <div class="rec-text">수술 고려 환자 → 비조영 CT가 우선 영상.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-acceptable" data-tip="Key Point 6.1.1">KP 6.1.1</span></div>
+          <div class="rec-text">셀레늄 셀레나이트 100 μg 1일 2회 × 6개월: 경증 활성 TED에서 고려 가능 (특히 셀레늄 결핍 지역).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.1.1.1">KP 7.1.1.1</span></div>
+          <div class="rec-text">IVGC: 활성 중등증~중증 TED에서 <strong>염증이 주 특징, 현저한 안구돌출/복시 없는 경우</strong> 우선 치료.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.1.1.2">KP 7.1.1.2</span></div>
+          <div class="rec-text">IVGC 표준 용량: IVMP 누적 4.5 g/약 3개월 (0.5 g/주×6주 → 0.25 g/주×6주).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.1.1.3">KP 7.1.1.3</span></div>
+          <div class="rec-text">IVMP 6주 시점 반응 불량 → 치료 중단 및 다른 치료 고려. IVMP 중에도 DON/복시 악화 가능 — 경계 필요.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.1.1.4">KP 7.1.1.4</span></div>
+          <div class="rec-text"><strong class="danger-text">IVMP 누적 용량 &gt;8.0 g 절대 금지</strong> (심각한 간독성·사망 위험).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-acceptable" data-tip="Key Point 7.1.2.1">KP 7.1.2.1</span></div>
+          <div class="rec-text">GC 저항성 활성 중등증~중증 TED → RTX, TCZ 고려 가능. TEP는 이 상황에서 미평가.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.1.3.1">KP 7.1.3.1</span></div>
+          <div class="rec-text">TEP: 활성 중등증~중증 TED에서 <strong>현저한 안구돌출 및/또는 복시</strong> 시 가용한 경우 우선 치료.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-acceptable" data-tip="Key Point 7.1.4.1,2">KP 7.1.4</span></div>
+          <div class="rec-text">RTX: TED 비활성화 효과(특히 기간 &lt;9개월), 연조직 침범 환자에서 acceptable. 근거 제한적·상충.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-acceptable" data-tip="Key Point 7.1.6.1">KP 7.1.6.1</span></div>
+          <div class="rec-text">TCZ: GC 저항성 활성 중등증~중증 TED 비활성화에 acceptable.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-preferred" data-tip="Key Point 7.2.1">KP 7.2.1</span></div>
+          <div class="rec-text">RT: 활성 중등증~중증 TED에서 <strong>진행성 복시</strong>가 주된 소견일 때 우선 치료.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 7.2.2">KP 7.2.2</span></div>
+          <div class="rec-text">RT: 당뇨 환자 망막증 위험 주의. 35세 미만 상대적 금기.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 8.1.1">KP 8.1.1</span></div>
+          <div class="rec-text">DON → 즉시 IVGC. <strong>2주 시점 반응 없으면 감압수술 조기 고려.</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="kp kp-pp" data-tip="Key Point 8.3.1">KP 8.3.1</span></div>
+          <div class="rec-text">압박성 DON → 안와첨부 내측벽·하벽 감압수술로 시신경 압박 해제.</div>
+        </li>
+      </ul>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;font-size: calc(10px * var(--fscale, 1))">
+        <span class="kp kp-preferred">녹색</span><span>= Preferred (2건 이상 RCT, 일관)</span>
+        <span class="kp kp-acceptable">파랑</span><span>= Acceptable (근거 제한·상충)</span>
+        <span class="kp kp-consider">노랑</span><span>= May Consider</span>
+        <span class="kp kp-pp">회색</span><span>= Key Point / Practice Point</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 전체 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔤</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed" id="abbr-full-body">
+      <div class="abbr-grid-main" id="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-referral -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ── ABBR DATA ──
+const ABBRS = [
+  {t:'TED',d:'Thyroid Eye Disease — 갑상선 눈병증'},
+  {t:'GD',d:'Graves\' Disease — 그레이브스병'},
+  {t:'TRAb',d:'Thyrotropin Receptor Antibody — TSH 수용체 항체'},
+  {t:'TSHR',d:'TSH Receptor — TSH 수용체'},
+  {t:'IGF-1R',d:'Insulin-like Growth Factor-1 Receptor — 인슐린유사성장인자-1 수용체'},
+  {t:'CAS',d:'Clinical Activity Score — 임상 활성도 점수 (7항목)'},
+  {t:'VISA',d:'Vision · Inflammation · Strabismus · Appearance — TED 평가 체계'},
+  {t:'DON',d:'Dysthyroid Optic Neuropathy — 이상갑상선 시신경병증'},
+  {t:'GO-QOL',d:'Graves\' Orbitopathy Quality of Life — 그레이브스 안병증 삶의 질 설문'},
+  {t:'IVGC',d:'Intravenous Glucocorticoid — 정맥 글루코코르티코이드'},
+  {t:'IVMP',d:'Intravenous Methylprednisolone — 정맥 메틸프레드니솔론'},
+  {t:'OGC',d:'Oral Glucocorticoid — 경구 글루코코르티코이드'},
+  {t:'TEP',d:'Teprotumumab — 테프로투무맙 (IGF-1R 차단 단클론항체)'},
+  {t:'RTX',d:'Rituximab — 리툭시맙 (CD20 B세포 표적)'},
+  {t:'MMF',d:'Mycophenolate Mofetil — 마이코페놀레이트 모페틸'},
+  {t:'MPS',d:'Mycophenolate Sodium — 마이코페놀레이트 소디움'},
+  {t:'TCZ',d:'Tocilizumab — 토실리주맙 (IL-6R 차단제)'},
+  {t:'RT',d:'Radiotherapy — 방사선 치료 (안와 방사선 치료)'},
+  {t:'RAI',d:'Radioactive Iodine — 방사성 요오드'},
+  {t:'EOM',d:'Extraocular Muscle — 외안근'},
+  {t:'CT',d:'Computed Tomography — 전산화단층촬영'},
+  {t:'MRI',d:'Magnetic Resonance Imaging — 자기공명영상'},
+  {t:'RAPD',d:'Relative Afferent Pupillary Defect — 상대 구심성 동공 반응 결핍'},
+  {t:'OCT',d:'Optical Coherence Tomography — 광간섭단층촬영'},
+  {t:'EUGOGO',d:'European Group on Graves\' Orbitopathy — 유럽 그레이브스 안와병증 연구그룹'},
+  {t:'ATA',d:'American Thyroid Association — 미국갑상선학회'},
+  {t:'ETA',d:'European Thyroid Association — 유럽갑상선학회'},
+  {t:'RCT',d:'Randomized Controlled Trial — 무작위 대조 시험'},
+  {t:'AE',d:'Adverse Event — 이상반응'},
+  {t:'IBD',d:'Inflammatory Bowel Disease — 염증성 장질환'},
+  {t:'PML',d:'Progressive Multifocal Leukoencephalopathy — 진행성 다초점 백질뇌증'},
+  {t:'QOL',d:'Quality of Life — 삶의 질'},
+  {t:'FDA',d:'Food and Drug Administration — 미국 식품의약국'},
+  {t:'ACR',d:'Albumin-to-Creatinine Ratio — 알부민/크레아티닌 비 (여기선 임상 맥락 다름, TED에선 ACR 해당 없음)'},
+  {t:'MRD',d:'Marginal Reflex Distance — 각막반사거리 (안검 위치 측정)'},
+  {t:'STIR',d:'Short-Tau Inversion Recovery — MRI 시퀀스 (부종 강조)'},
+  {t:'T2',d:'T2-weighted MRI — T2 강조 MRI'},
+  {t:'Gorman',d:'Gorman score — 복시 중증도 점수 (0=없음, 1=간헐적, 2=비지속적, 3=지속적)'},
+  {t:'CAS 10항목',d:'10-item CAS — 7항목 + 안구돌출 증가, 안구운동 감소, 시력 감소 각 1점'},
+  {t:'GC',d:'Glucocorticoid — 글루코코르티코이드'},
+  {t:'IL-6',d:'Interleukin-6 — 인터루킨-6'},
+  {t:'IVIG',d:'Intravenous Immunoglobulin — 정맥 면역글로불린'},
+];
+
+// ── ABBR RENDER ──
+function renderAbbrs(list, target) {
+  target.innerHTML = list.map(a =>
+    `<div class="abbr-item"><span class="abbr-term">${a.t}</span><span class="abbr-def">${a.d}</span></div>`
+  ).join('');
+}
+
+const mainGrid = document.getElementById('abbr-grid-main');
+renderAbbrs(ABBRS, mainGrid);
+
+function filterAbbr(q) {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  if (!q.trim()) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const res = ABBRS.filter(a => a.t.toLowerCase().includes(q.toLowerCase()) || a.d.toLowerCase().includes(q.toLowerCase()));
+  cnt.textContent = res.length ? res.length : '';
+  if (!res.length) { grid.innerHTML = '<div style="font-size: calc(12px * var(--fscale, 1));color:var(--text2);padding:8px">검색 결과 없음</div>'; }
+  else { renderAbbrs(res, grid); }
+  // position
+  const rect = inp.getBoundingClientRect();
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(4, rect.right - 480) + 'px';
+  drop.style.display = 'block';
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// ── TAB SWITCHING ──
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── CARD TOGGLE ──
+function toggleCard(hdr) {
+  const body = hdr.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    hdr.classList.add('open');
+  } else {
+    body.classList.add('collapsed');
+    hdr.classList.remove('open');
+  }
+}
+
+// ── ACCORDION TOGGLE ──
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>

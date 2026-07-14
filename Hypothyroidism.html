@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATA 2014 갑상선기능저하증 치료지침</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --strong: #1a7f37;
+    --weak: #0550ae;
+    --noRec: #57606a;
+    --loe-hi: #1a7f37;
+    --loe-mod: #0550ae;
+    --loe-lo: #57606a;
+    --loe-ins: #bc4c00;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky; top: 64px; z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 120px; text-align: center; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.3; }
+
+  /* ── GRADE BADGES (ACP 시스템) ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  /* 강한 권고 */
+  .grade-strong-hi { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-strong-mod { background: #dafbe1; color: #116329; border: 1px solid #57a832; }
+  .grade-strong-lo { background: #e6f4ea; color: #1a7f37; border: 1px solid #8cc89a; }
+  /* 약한 권고 */
+  .grade-weak-hi { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-weak-mod { background: #ddf4ff; color: #0550ae; border: 1px solid #88b4e8; }
+  .grade-weak-lo { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  /* 근거불충분 */
+  .grade-ins { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  /* Ungraded */
+  .grade-ug { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  /* 근거질 배지 */
+  .loe { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: calc(9px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .loe-hi { background: #dafbe1; color: #116329; }
+  .loe-mod { background: #ddf4ff; color: #0550ae; }
+  .loe-lo { background: #f6f8fa; color: #57606a; }
+  .loe-ins { background: #fff8c5; color: #7d4e00; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 2px; flex-wrap: nowrap; min-width: 120px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+
+  /* ── TABLE ── */
+  .thy-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .thy-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; border-bottom: 1px solid var(--border); }
+  .thy-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: calc(11px * var(--fscale, 1)); }
+  .thy-table tr:last-child td { border-bottom: none; }
+  .thy-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .thy-table .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e4e8ec; }
+  .acc-hdr .acc-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); border-top: 1px solid var(--border); }
+
+  /* ── DRUG PILL ── */
+  .drug-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .drug-lt4 { background: #ddf4ff; color: #0550ae; border: 1px solid #88b4e8; }
+  .drug-lt3 { background: #fff8c5; color: #7d4e00; border: 1px solid #c8a400; }
+  .drug-combo { background: #ffe4c4; color: #bc4c00; border: 1px solid #d0824a; }
+  .drug-desicc { background: #f5e0fb; color: #6e10a0; border: 1px solid #b060d8; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .q-num { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; flex-shrink: 0; margin-top: 2px; }
+  ul.dot-list { padding-left: 0; list-style: none; }
+  ul.dot-list li { padding: 2px 0 2px 14px; position: relative; font-size: calc(12px * var(--fscale, 1)); line-height: 1.5; }
+  ul.dot-list li::before { content: '•'; position: absolute; left: 2px; color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">ATA 2014</span>
+      <h1>갑상선기능저하증 치료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:2px;line-height:1.4">
+      <a href="https://doi.org/10.1089/thy.2014.0028" class="source-link" target="_blank">Thyroid 2014;24(12):1670–1751 ↗</a>
+      <span class="meta"> · American Thyroid Association Task Force</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 ATA의 공식 보증을 받지 않은 참고용 요약입니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('levo')">💊 LT4 치료</div>
+    <div class="tab" onclick="showTab('special')">👥 특수집단</div>
+    <div class="tab" onclick="showTab('alternatives')">⚖️ 대체요법</div>
+    <div class="tab" onclick="showTab('hospitalized')">🏥 입원환자</div>
+    <div class="tab" onclick="showTab('analogs')">🔬 갑상선호르몬 유사체</div>
+    <div class="tab" onclick="showTab('grading')">📋 권고등급</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:500px;max-height:380px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr 1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">24</div><div class="stat-lbl">검토된 핵심 임상 질문 수</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">LT4</div><div class="stat-lbl">표준치료 (단독요법)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">0.4–4.0</div><div class="stat-lbl">목표 TSH 범위 (mIU/L)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">1.6</div><div class="stat-lbl">LT4 기준 체중 용량 (μg/kg/일)</div></div>
+  </div>
+
+  <!-- 가이드라인 개요 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 가이드라인 목적 및 범위</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>이 가이드라인의 목적은 LT4 치료의 목표, 최적 처방법, 불만족 원인, 대체 치료법 근거를 검토하는 것이다. <strong>개별 임상 판단을 대체하는 것이 아니며</strong>, 의사결정 과정을 돕기 위한 것이다.</div>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">주요 치료 범주</div>
+          <ul class="dot-list">
+            <li>Section I: <span class="drug-pill drug-lt4">LT4</span> 단독 치료</li>
+            <li>Section II: LT4 외 대체 치료 (갑상선 추출물, 병합요법, LT3 등)</li>
+            <li>Section III: 입원환자에서의 갑상선호르몬 치료</li>
+            <li>Section IV: 갑상선호르몬 유사체 사용</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">근거 수준 평가 체계 (ACP)</div>
+          <table class="thy-table">
+            <tr><th>권고 강도</th><th>근거 질</th></tr>
+            <tr><td><span class="grade grade-strong-hi" data-tip="강한 권고, 높은 근거질">Strong / High</span></td><td>RCT, 압도적 관찰연구</td></tr>
+            <tr><td><span class="grade grade-strong-mod" data-tip="강한 권고, 중등도 근거질">Strong / Moderate</span></td><td>제한이 있는 RCT</td></tr>
+            <tr><td><span class="grade grade-weak-hi" data-tip="약한 권고, 높은 근거질">Weak / High</span></td><td>이익·위험 균형 불분명</td></tr>
+            <tr><td><span class="grade grade-weak-lo" data-tip="약한 권고, 낮은 근거질">Weak / Low</span></td><td>관찰연구, 증례군</td></tr>
+            <tr><td><span class="grade grade-ins" data-tip="근거불충분 — 권고 불가">Insufficient</span></td><td>근거 부재·상충</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>이 가이드라인에서는 <strong>성인의 무증상 갑상선기능저하증(SCH)</strong>은 소아를 제외하고 다루지 않는다. 갑상선암에서의 호르몬 억제 치료도 포함되지 않는다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 결론 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 핵심 결론 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text"><span class="drug-pill drug-lt4">LT4</span>는 갑상선기능저하증 치료의 <strong>표준 치료제</strong>로 남아야 한다. 효능, 편의성, 흡수율, 긴 반감기, 저비용 측면에서 우월하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text"><span class="drug-pill drug-combo">LT4+LT3 병합요법</span> 또는 <span class="drug-pill drug-desicc">갑상선 추출물</span>이 LT4 단독보다 건강 결과 측면에서 <strong>일관되게 우월하다는 강한 근거는 없다</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-ug" data-tip="미등급">Ungraded</span></div>
+          <div class="rec-text">미래 연구 우선순위: 갑상선기능평가의 우수한 바이오마커 개발, 혈청 T3에 관한 기전 연구, 병합요법·갑상선 추출물의 장기 임상시험.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- T3/T4 생리학 기초 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> T4→T3 전환 기전 (탈요오드화효소)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="thy-table">
+        <tr><th>효소</th><th>주요 조직</th><th>기능</th><th>T3 기여율 (정상인)</th></tr>
+        <tr><td><strong>D1 (탈요오드효소 1형)</strong></td><td>간, 신장, 갑상선</td><td>T4→T3 전환 + rT3 불활성화 (혈장막)</td><td>~24%</td></tr>
+        <tr><td><strong>D2 (탈요오드효소 2형)</strong></td><td>뇌하수체, 중추신경계, 심장, 골격근</td><td>세포 내 T4→T3 (소포체), intracrine 효과</td><td>~60%</td></tr>
+        <tr><td><strong>D3 (탈요오드효소 3형)</strong></td><td>뇌, 피부, 태반</td><td>T3→T2 불활성화 (T3 제거); 저산소 상태에서 이소성 발현</td><td>불활성 (clearance)</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>LT4 단독요법 시 완전 갑상선절제 환자는 혈청 FT4가 높고 T3는 정상 하한 또는 낮을 수 있다. D2는 T4 과잉 시 ubiquitin-proteasome 경로로 활성이 하향 조절된다 — LT4 증량만으로 T3 보충이 제한되는 이유이다.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════ LT4 치료 ═══════════════ -->
+<div id="tab-levo" class="panel">
+
+  <!-- LT4 단독요법 근거 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> LT4 단독요법 — 표준 치료 근거 (Q1a)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">LT4는 갑상선기능저하증 치료의 <strong>1차 선택 약제</strong>로 권고된다: 증상 해소 효능, 경구 흡수 우수, 반감기 ~7일(1일 1회 투여), 낮은 부작용, 저비용.</div>
+        </li>
+      </ul>
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div>경구 LT4 흡수율: <strong>70–80%</strong> (공복 상태). 복용 후 4시간에 T4 피크 ~15% 상승. TSH·T4 정상화까지 약 6주 (반감기 5–6회).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 목표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> LT4 치료 목표 (Q1b)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">3대 치료 목표</div>
+          <ul class="dot-list">
+            <li>① 증상·임상징후 완전 해소 (생물학적·생리학적 지표 포함)</li>
+            <li>② 혈청 TSH 정상화 + 갑상선호르몬 수치 개선</li>
+            <li>③ <strong>과잉 치료 방지</strong> — 특히 노인·폐경 후 여성에서 의인성 갑상선중독증 예방</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">TSH 목표 범위</div>
+          <table class="thy-table">
+            <tr><th>대상</th><th>목표 TSH (mIU/L)</th></tr>
+            <tr><td>일반 성인 (1차 갑상선기능저하증)</td><td><strong>0.4–4.0</strong> (하한 0.5, 상한 3.5도 허용)</td></tr>
+            <tr><td>고령자 (70–80세 이상)</td><td><strong>4–6</strong> (상향 조정)</td></tr>
+            <tr><td>85세 이상</td><td>더 높은 범위 허용</td></tr>
+            <tr><td>임신부 1삼분기</td><td>0.1–2.5</td></tr>
+            <tr><td>임신부 2·3삼분기</td><td>0.2–3.0</td></tr>
+            <tr><td>중추성 갑상선기능저하증</td><td>FT4 정상 범위 <strong>상반부</strong></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>증상만으로 치료 적절성을 판단하지 말 것 — 증상은 <strong>민감도·특이도 모두 낮다</strong>. 반드시 TSH 수치와 함께 해석해야 한다 (Q1c).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 흡수 및 복용 시기 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⏰</span> LT4 복용 시기·흡수 (Q3a)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text">음식과 LT4 동시 복용은 흡수를 저해할 가능성이 있으므로, 가능하면 <strong>아침 식사 60분 전</strong> 또는 <strong>취침 시 (저녁 식사 3시간 이후)</strong>에 복용하도록 한다.</div>
+        </li>
+      </ul>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin:8px 0 4px">복용 시기별 TSH 비교 (효과 순서)</div>
+      <div class="alert alert-info" style="margin-bottom:0">
+        <span>📊</span>
+        <div>흡수 우수 → 불량 순서: <strong>식사 60분 전</strong> &gt; 취침 시 &gt; 식사 30분 전 &gt; 식사와 함께</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약물 상호작용 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚗️</span> LT4 흡수 방해 약물 (Q3b) 및 대사 영향 약물 (Q3e)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">흡수 감소 약물 (4시간 간격 권고) <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <table class="thy-table">
+            <tr><th>약물</th><th>기전</th><th>TSH 변화 (임상 연구)</th></tr>
+            <tr><td>탄산칼슘</td><td>산성 pH에서 LT4 흡착</td><td>1.6 → 2.7 mIU/L</td></tr>
+            <tr><td>황산철 (ferrous sulfate)</td><td>T4-Fe 복합체 형성</td><td>1.6 → 5.4 mIU/L</td></tr>
+            <tr><td>PPI (장기 복용 시)</td><td>위산 감소 → 흡수 저하</td><td>TSH 유의하게 상승</td></tr>
+            <tr><td>콜레스티라민, 코레세벨람</td><td>장내 결합</td><td>흡수 현저히 감소</td></tr>
+            <tr><td>수크랄페이트</td><td>LT4 결합</td><td>TSH 상승 보고</td></tr>
+            <tr><td>수산화알루미늄 (제산제)</td><td>LT4 흡착</td><td>TSH 2.6 → 7.2 mIU/L</td></tr>
+            <tr><td>셀라머 (인결합제)</td><td>T4 흡수 50% 감소</td><td>높은 LT4 용량 요구</td></tr>
+            <tr><td>랄록시펜, 오르리스타트</td><td>장내 결합 또는 지방 흡수 차단</td><td>TSH 현저 상승</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>4시간 간격은 전통적 권고이나 연구로 검증되지는 않았다. <span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div></div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">LT4 요구량 증가시키는 약물 (대사 증가) <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <ul class="dot-list">
+            <li>페노바르비탈, 페니토인, 카르바마제핀, 리팜핀, 서트랄린 — 간 대사 효소 유도, T4·T3 포합 증가</li>
+            <li>타이로신 키나아제 억제제 (이마티닙, 수니티닙, 소라페닙 등) — D3 활성화로 T3→rT3 전환 촉진</li>
+            <li>아미오다론 — D2 억제, 요오드 과부하</li>
+            <li>에스트로겐 — TBG 증가 → 총 T4 결합 증가</li>
+          </ul>
+          <span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span>
+          <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-left:6px">— 이 약물 시작/중단 시 4–6주 후 TSH 재측정</span>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">LT4 고용량 요구 유발 위장관 질환 (Q3c) <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <ul class="dot-list">
+            <li><strong>헬리코박터 위염</strong> — H. pylori 제균 후 LT4 용량 감소 가능 (TSH 30.5 → 4.2 mIU/L 보고)</li>
+            <li><strong>위축성 위염</strong> — LT4 요구량 최대 34% 증가 (parietal cell Ab 양성 시 더 심함)</li>
+            <li><strong>셀리악병</strong> — 글루텐 제거식이 후 LT4 용량 감소 가능</li>
+            <li>유당불내증, 장 지아르디아증도 보고됨</li>
+          </ul>
+          <span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span>
+          <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-left:6px">— 기대 이상 고용량 시 위장관 질환 평가 권고</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 용량 결정 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> LT4 용량 결정 및 시작/조정 (Q4a, Q4b)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">기준 체중 용량</div>
+          <table class="thy-table">
+            <tr><th>상황</th><th>용량</th></tr>
+            <tr><td>일반 갑상선기능저하증</td><td><strong>1.6 μg/kg/일</strong> (실제 체중 기준)</td></tr>
+            <tr><td>완전 갑상선절제 후</td><td>1.6–1.8 μg/kg/일</td></tr>
+            <tr><td>갑상선암 TSH 억제</td><td>2.1–2.7 μg/kg/일</td></tr>
+            <tr><td>신생아</td><td>10–15 μg/kg/일</td></tr>
+            <tr><td>1세 소아</td><td>4–6 μg/kg/일</td></tr>
+            <tr><td>청소년</td><td>2–4 μg/kg/일</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px"><span>💡</span><div>이상 체중이 실제 체중보다 LT4 용량을 더 잘 예측한다 (즉, <strong>제지방 체중</strong> 기반). 비만 환자에서 체중 기반 용량은 과추정될 수 있다.</div></div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">시작 및 조정 원칙</div>
+          <ul class="dot-list">
+            <li>젊고 건강한 성인: <strong>초기부터 전체 계산 용량</strong> 시작 가능</li>
+            <li>고령자·심장질환자: <strong>'낮게 시작, 천천히 증량'</strong> (12.5–25 μg/일에서 시작)</li>
+            <li>관상동맥질환자: 반드시 저용량(12.5–25 μg/일)으로 시작</li>
+            <li>TSH 재측정: 시작·변경 후 <strong>4–6주</strong></li>
+            <li>TSH 정상화 후: 4–6개월 뒤, 이후 매년</li>
+            <li>용량 조정 단위: 12.5–25 μg/일 증감</li>
+          </ul>
+          <span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 과잉/부족 치료 위험 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> LT4 과잉(Q4c) 및 부족(Q4d) 치료의 위험</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div class="alert alert-danger">
+            <span>🚫</span>
+            <div>
+              <strong>과잉 치료 (TSH &lt;0.1 mIU/L)</strong>
+              <ul class="dot-list" style="margin-top:4px">
+                <li>65세 이상 환자에서 심방세동 위험 <strong>3배 증가</strong> (10년 추적)</li>
+                <li>폐경 후 여성에서 골다공증·골절 위험 증가</li>
+                <li>심혈관 질환·부정맥·골다공증 관련 입원·사망 위험 상승</li>
+              </ul>
+            </div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:4px"><span>📊</span><div>LT4 치료 환자의 <strong>36%</strong>가 65세 이상에서 TSH 억제 상태로 과잉 치료 중임 (관찰 연구).</div></div>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div>
+              <strong>부족 치료 (TSH 지속 상승)</strong>
+              <ul class="dot-list" style="margin-top:4px">
+                <li>이상지질혈증 (LDL 상승) 지속</li>
+                <li>죽상동맥경화증·심혈관질환 진행</li>
+                <li>심부전 가능성</li>
+                <li>가역성 심근병증 (심한 갑상선기능저하 시)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제품 선택 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏷️</span> LT4 제품 선택 — 브랜드 vs 제네릭 (Q2a, Q2b, Q3d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거 (일반)">Weak / Low</span><span class="loe loe-lo" style="margin-top:2px">일반</span></div>
+          <div class="rec-text">브랜드 의약품 처방, 또는 <strong>동일 제네릭 제품 유지</strong>를 권고한다. 제품 교체 시 TSH 변동 가능 → 교체 후 반드시 재검사.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거 (취약군)">Strong / Low</span><span class="loe loe-lo" style="margin-top:2px">취약군</span></div>
+          <div class="rec-text">허약한 환자, 고위험 갑상선암 환자, 임신부: 제품 안정성 특히 중요. 소아 중증 선천성 갑상선기능저하증에서 브랜드·제네릭은 생물학적 동등성이 확립되지 않음.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text"><span class="drug-pill drug-lt4">젤 캡슐형 LT4</span>: PPI 병용 또는 커피 동시 섭취 시 더 나은 흡수 가능성 있으나, 장기 대조 연구 없음. 부형제 알레르기 의심 시 고려 가능.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>FDA는 LT4 생동성 평가에 단일 용량(600 μg) 경구투여로 AUC·Cmax를 비교하지만, TSH를 기준으로 삼지 않아 임상적 동등성이 보장되지 않는다. 2007년 이후 FDA 기준은 잠재력 95–105% 유지를 요구한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 잔존 증상 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❓</span> TSH 정상인데 증상이 지속되는 경우 (Q9b)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">TSH 정상이나 증상 지속 시: <strong>다른 원인에 대한 평가</strong>를 우선 시행하고, 환자 증상을 인정한다. 미래 임상시험에서 이 아집단에 대한 병합요법 가능성을 탐색할 것을 권장한다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn">
+        <span>💬</span>
+        <div>갑상선기능저하증 치료 환자의 약 <strong>34%</strong>가 TSH 정상에도 불구하고 심리적 건강 저하를 호소한다 (대조군 25% vs 치료군 34%). 자가면역 갑상선염 자체의 역할, 심리적 요인, 신체화 장애 가능성도 고려해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 혈청 T3 의의 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 혈청 T3의 임상적 의의 (Q7a–7d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">Q7a — T3 기준 범위 내 변동 또는 경미한 저하의 의미 <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <div class="alert alert-warn">
+            <span>📌</span>
+            <div><strong>요약 진술 (권고 없음):</strong> 기준 범위 내 혈청 T3 변동 또는 경미한 저하의 임상적 의의는 현재 불명확하다.</div>
+          </div>
+          <ul class="dot-list">
+            <li>혈청 T3(및 FT3)는 일주기 리듬에 따라 변동 (TSH 변동과 동조; 델타 14–35%)</li>
+            <li>LT4 단독요법 시 T3 피크·트로프 없이 안정적 수준 유지; LT3 투여 시 피크·트로프 발생</li>
+            <li>T3 30% 감소(기준 범위 내일 수 있음)는 PTU 연구에서 TSH 2배 상승을 유발함 — T3 항상성의 생리적 중요성 시사</li>
+            <li>T3 면역측정법과 LC/MS/MS 간 불일치 심함 — 특히 낮은 수치에서 해석 주의</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">Q7b — LT4로 TSH 정상화 시 혈청 T3도 정상화되는가? <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <div class="alert alert-warn">
+            <span>📌</span>
+            <div><strong>요약 진술:</strong> LT4로 TSH를 정상화한 환자에서 혈청 T3가 <strong>기준 범위 하한부 또는 하한 미만</strong>일 수 있다. 임상적 의의는 불명확.</div>
+          </div>
+          <ul class="dot-list">
+            <li>완전 갑상선절제 환자에서 LT4 단독요법 시 FT4/T3 비율 상승 일관되게 확인 (8개 연구)</li>
+            <li>일부 연구: TSH 0.3 mIU/L 미만에서만 T3 정상화 (Ito 2012)</li>
+            <li>Hashimoto 갑상선기능저하증 환자: 잔존 갑상선 기능으로 T3 결핍이 덜 심함</li>
+            <li>임상적 결과에의 영향: 아직 RCT로 확인되지 않음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">Q7c — 조직 갑상선 상태와 TSH 불일치 근거 <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <div class="alert alert-info">
+            <span>📌</span>
+            <div><strong>요약 진술:</strong> 뇌하수체 TSH와 다른 조직의 갑상선 상태 간 불일치가 특정 상황에서 존재한다. 임상적 의의는 불명확.</div>
+          </div>
+          <ul class="dot-list">
+            <li>D2는 뇌하수체에서 고발현 → LT4 증량 시 뇌하수체 내 T3 생성 증가 → TSH 억제가 말초 FT3 회복보다 먼저 일어남</li>
+            <li>뇌하수체-말초 조직 불일치: LT4 증량이 TSH 억제에는 효과적이나 FT3 회복에는 점점 덜 효과적 (Hoermann 2013)</li>
+            <li>동물 연구: LT4 단독 infusion 시 일부 조직(간, 근육 등) 상대적 T3 결핍 확인 (단, 대뇌피질은 유지)</li>
+            <li>LT4+LT3 병합 infusion만이 모든 조직에서 정상화 (갑상선절제 쥐 연구)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">Q7d — 비만·우울·이상지질혈증·갑상선절제 환자에서 T3 고정상치/TSH 저정상치 목표 적절한가? <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+              <div class="rec-text">비만·우울·이상지질혈증 또는 갑상선절제 환자에서 T3 고정상치 또는 TSH 저정상치를 목표로 하는 LT4 치료를 지지하는 <strong>근거가 불충분</strong>하다. 체중·BMI·웰빙 개선 없음; 콜레스테롤 약간 감소 가능 (TSH 억제 수준에서만).</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 중추성 갑상선기능저하 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 중추성(2차) 갑상선기능저하증 (Q8a–8c)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">중추성 갑상선기능저하증에서는 <strong>FT4를 정상 범위 상반부</strong>로 유지하는 것을 1차 생화학적 목표로 한다. TSH는 신뢰할 수 없으므로 용량 조정 지표로 사용하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text">임상 지표(체중, BMI, Zulewski 점수, 아킬레스건 반사 시간)는 보조 지표로 활용 가능하나 단독으로 충분하지 않다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>뇌하수체 수술 후 또는 성장호르몬 보충 치료 시작 시 LT4 요구량이 변동될 수 있다 — TSH가 아닌 FT4로 모니터링.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /levo -->
+
+<!-- ═══════════════ 특수집단 ═══════════════ -->
+<div id="tab-special" class="panel">
+
+  <!-- 고령자 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👴</span> 고령자 (Q6a)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">고령자에서는 <strong>저용량으로 시작하고 천천히 적정</strong>한다. TSH 정상 범위는 연령에 따라 상향 이동 — 65세 이상에서 TSH 97.5 백분위수는 <strong>7.5 mIU/L</strong>에 달한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">70–80세 이상: TSH 목표를 <strong>4–6 mIU/L</strong>로 상향 조정 합리적. 심방세동·골다공증 위험 증가 → 과잉치료 특히 주의.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info">
+        <span>💡</span>
+        <div>LT4 용량은 노인에서 낮아진다 — T4 대사 감소(제지방 체중 감소) 때문. 단, 흡수 감소·다약제 복용이 이를 상쇄할 수 있다. 고령자는 85세 이상 등 취약군에서 과잉/부족 치료 모두 흔하다 (36% 과잉, 상당수 부족).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임신부 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신부 (Q6b)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">임신 중 오트 갑상선기능저하증은 LT4로 치료하며, TSH를 <strong>삼분기별 기준 범위</strong>로 유지한다. 임신 전반기에는 4–6주마다 TSH 측정·용량 조정.</div>
+        </li>
+      </ul>
+      <table class="thy-table" style="margin-top:8px">
+        <tr><th>삼분기</th><th>TSH 목표 (mIU/L)</th><th>FT4 측정</th></tr>
+        <tr><td>1삼분기</td><td><strong>0.1–2.5</strong></td><td>LC/MS/MS 권장 (면역측정법 간섭 많음)</td></tr>
+        <tr><td>2삼분기</td><td><strong>0.2–3.0</strong></td><td>동일</td></tr>
+        <tr><td>3삼분기</td><td><strong>0.3–3.0</strong></td><td>동일</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>이미 LT4를 복용 중인 여성이 임신 확인 즉시: <strong>현 용량의 주 2회분 추가</strong>(현 1일 용량 × 9 = 새 주간 총량). 분만 후 임신 전 용량으로 복귀. 병합 LT4/LT3 요법은 임신 중 <strong>금기</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소아 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 신생아·소아 (Q6c, Q6d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">신생아/영아 선천성 갑상선기능저하증 <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-strong-hi" data-tip="강한 권고 / 높은 근거">Strong / High</span></div>
+              <div class="rec-text">신생아 선별검사 양성 → 확인 검사 결과를 기다리지 않고 LT4 <strong>10–15 μg/kg/일</strong> 즉시 시작. 목표: T4 정상 범위 중간~상부, TSH 정상 범위 중간~하부 (0.5–2.0 mIU/L). 생후 2–4주 내 T4 정상화 목표.</div>
+            </li>
+          </ul>
+          <div class="alert alert-info"><span>💊</span><div>LT4 정제를 물에 으깨어 모유/분유와 혼합 투여 가능 (단, 두유·철분·칼슘 콜릭 드롭과 동시 복용 피할 것). LT4 현탁액 제조는 농도 불안정으로 피해야 한다.</div></div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">소아 연령별 LT4 용량 <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <table class="thy-table">
+            <tr><th>연령</th><th>LT4 용량 (μg/kg/일)</th></tr>
+            <tr><td>신생아</td><td><strong>10–15</strong></td></tr>
+            <tr><td>1세</td><td>4–6</td></tr>
+            <tr><td>1–3세</td><td>4–6</td></tr>
+            <tr><td>3–10세</td><td>3–5</td></tr>
+            <tr><td>10–16세</td><td>2–4</td></tr>
+            <tr><td>성인</td><td>1.6</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">소아 무증상 갑상선기능저하증 (SCH) (Q6d) <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+              <div class="rec-text">TSH <strong>5–10 mIU/L</strong>: 치료 일반적으로 권고 안 함. 대부분 자연 정상화. TSH &gt;10 mIU/L + 증상/갑상선 자가항체/진행 위험인자 시 치료 고려 가능.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 불순응 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 불순응(Non-adherence) 관리 (Q6e)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">매일 복용이 어려운 경우: <strong>주 1회 전체 주간 용량</strong> 경구 투여 고려 (1일 용량 × 7). 단기 연구에서 T3는 기준 내 유지, 총 콜레스테롤만 약간 상승.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info"><span>📌</span><div>LT4 처방 환자의 <strong>자가 보고 불순응률 22%</strong>. 흡수 검사(600 μg 부하 후 T4 곡선)로 위흡수장애(pseudo-malabsorption)와 진짜 흡수 장애 감별 가능.</div></div>
+    </div>
+  </div>
+
+</div><!-- /special -->
+
+<!-- ═══════════════ 대체요법 ═══════════════ -->
+<div id="tab-alternatives" class="panel">
+
+  <!-- 갑상선 추출물 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 갑상선 추출물 (Desiccated Thyroid, DTE) (Q12)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">1차 갑상선기능저하증에서 <span class="drug-pill drug-lt4">LT4</span>를 DTE보다 우선 사용하도록 <strong>권고한다</strong>. DTE는 일부 환자의 선호도를 높일 수 있으나, 고품질 장기 결과 데이터가 부재하다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚫</span>
+        <div>
+          <strong>DTE 주요 문제점</strong>
+          <ul class="dot-list" style="margin-top:4px">
+            <li>돼지 갑상선 유래 — T4:T3 비율 <strong>4.2:1</strong> (인체 분비 비율 14:1과 상이 → T3 상대적 과잉)</li>
+            <li>복용 후 2–5시간 내 초고T3혈증 (hypertriiodothyroninemia) 발생</li>
+            <li>임신 중 사용 금기 (T4 공급 부족 → 태아 뇌 발달에 불리)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LT4+LT3 병합요법 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> LT4+LT3 병합요법 (Q13b, Q13c)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text">일반적으로 LT4+LT3 병합요법의 <strong>일상적 사용은 권고하지 않는다</strong>. 13개 RCT 메타분석에서 기분·인지·삶의 질·갑상선 증상·체중 면에서 LT4 단독 대비 <strong>일관된 우월성 없음</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-ins" data-tip="근거불충분">Insufficient</span></div>
+          <div class="rec-text">LT4 단독으로 불편감을 호소하는 환자(TSH 정상, 알레르기 없음)에서 병합요법 시도: 현재 공식 임상시험 또는 N-of-1 시험 밖에서의 일상적 시행을 지지하는 근거 <strong>불충분</strong>. 상대적으로 낮은 T3 수치 환자를 대상으로 한 미래 연구 권장.</div>
+        </li>
+      </ul>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)">13개 RCT 주요 결과 요약 <span class="acc-arrow">▾</span></div>
+        <div class="acc-body">
+          <table class="thy-table">
+            <tr><th>결과 지표</th><th>병합 vs LT4 단독</th></tr>
+            <tr><td>삶의 질·기분</td><td>이질성 큼 — 2개에서 유의한 개선, 8개에서 차이 없음</td></tr>
+            <tr><td>인지기능</td><td>1개(Bunevicius 1999) 현저 개선, 나머지 차이 없음</td></tr>
+            <tr><td>갑상선 특이 증상</td><td>7개에서 유의한 차이 없음</td></tr>
+            <tr><td>체중</td><td>TSH 억제 수준(5:1 비율)에서만 유의한 감소, 나머지 차이 없음</td></tr>
+            <tr><td>환자 선호도</td><td>교차설계 5개 중 4개에서 병합 선호 — 단, 소규모(총 128명)</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>병합요법에서 <span class="drug-pill drug-lt3">LT3</span> 제거 시 TSH 일시 상승, T3 피크·트로프 발생. 현재 지속방출형 LT3 없음. 임신 중 <strong>금기</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIO2 유전자 다형성 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> DIO2 유전자 다형성과 병합요법 (Q13a, Q13d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">현재 DIO2 유전자형 검사로 LT4+LT3 병합요법을 선택하는 것은 <strong>권고하지 않는다</strong>: (1) 확인 연구 필요, (2) 검사는 연구 단계, (3) 유전자 변이의 임상적 효과가 작음.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info">
+        <span>🔬</span>
+        <div>DIO2-Thr92Ala 다형성(인구의 9–16% 동형접합)은 심리적 안녕과 연관될 수 있다는 초기 보고(Panicker 2009)가 있으나 재현 연구에서 확인되지 않았다. 혈청 T3 수치 차이도 없어 임상 관련성 불분명.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LT3 단독요법 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚗️</span> LT3 단독요법 (Q14)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">단기 3회/일 LT3 요법은 체중·LDL·SHBG에 유리한 효과를 보였으나, 장기간·지속방출형 LT3 제형 없이는 <strong>일상적 사용을 지지할 수 없다</strong>.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>LT3 단독 문제점: 반감기 6–22시간 → TSH 정상화를 위해 혈청 T3가 2배 이상 필요, 하루 여러 번 투여 필요. 심장·골 독성 위험, 용량 조정 어려움. 지속방출형 LT3 개발 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 혼합조제약 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 혼합조제 갑상선호르몬 (Compounded) (Q16)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">혼합조제 갑상선호르몬의 <strong>일상적 사용을 권고하지 않는다</strong>: 안전성·효능 우려, 표준제품 대비 우월성 근거 없음. 부형제 알레르기로 표준 제품 대체 불가 시 예외적으로 고려.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>혼합조제 LT4 용액은 90일 기준 유효 농도 유지 불가(90일 내 90% 이하). 혼합조제 오류에 의한 갑상선중독증 사례 보고 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 건강기능식품 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌿</span> 식이보충제·건강기능식품 (Q17)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">갑상선기능저하증 치료로서 건강기능식품·식이보충제·OTC 제품의 사용을 <strong>권고하지 않는다</strong>. 특히 고용량 요오드 함유 제품(해조류 등)은 갑상선중독증·갑상선기능저하증 유발 가능.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 에티드로이드 환자에서 LT4 사용 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> 정상갑상선 환자에서 LT4/LT3 사용 (Q10, Q15)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-hi" data-tip="강한 권고 / 높은 근거">Strong / High</span></div>
+          <div class="rec-text">갑상선기능이 정상이면서 갑상선기능저하 유사 증상이 있는 환자에게 LT4를 처방하는 것은 <strong>강하게 권고하지 않는다</strong>. RCT에서 플라세보 대비 인지·심리적 개선 없음.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">정상갑상선 비만 환자에게 LT4를 처방하는 것은 권고하지 않는다 — 효능 없음 (체중의 대부분은 부종이므로, 지방 감소 없음).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">정상갑상선 환자의 비만 치료 목적으로 LT3를 사용하는 것은 권고하지 않는다 — 조절된 데이터 없음.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Wilson 증후군 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌡️</span> Wilson 증후군 (Q19)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">"Wilson 체온 증후군"의 존재를 지지하는 신뢰할 만한 과학적 근거가 없으며, T3 점진적 증량 요법은 <strong>갑상선중독증 위험</strong> 및 입증된 치료 효과 부재로 인해 권고하지 않는다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>
+          <strong>ATA 공식 성명 요약 (2005 업데이트):</strong>
+          <ul class="dot-list" style="margin-top:4px">
+            <li>Wilson 증후군의 과학적 근거 없음 — 갑상선호르몬 생리와 배치됨</li>
+            <li>진단 기준 불명확 — 만성 피로 증후군 등 다른 질환 오진 위험</li>
+            <li>권장 T3 상향 요법: 혈청 T3 이상 고농도 → 심장·골 독성 위험</li>
+            <li>혼합조제 T3 프로토콜 (7.5 μg BID에서 15 μg/일씩 증량): 심각한 갑상선중독증 사례, 의료 면허 취소 사례 보고</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /alternatives -->
+
+<!-- ═══════════════ 입원환자 ═══════════════ -->
+<div id="tab-hospitalized" class="panel">
+
+  <!-- 비중증 입원환자 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 비중증 입원환자 (Q20a–20d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q20a</span><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">기존 갑상선기능저하증 입원환자에서 TSH 상승 확인 시 → 흡수 장애·용량 누락 원인 파악 후 LT4 시작 또는 조정 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q20b</span><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">비중증 입원환자의 LT4 치료 목표는 <strong>TSH 정상화</strong>. 뇌하수체 수술 후 등 TSH 불신뢰 상황에서는 FT4 기준.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q20c</span><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">경구 LT4 우선. 경구 불가 시 다른 경장 경로 또는 <strong>정맥 LT4</strong> (경구 용량의 약 <strong>75%</strong>로 환산).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q20d</span><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">LT4 치료 시작 전 <strong>부신기능부전 가능성 배제</strong>. 임상적·생화학적 의심 시 경험적 스테로이드 치료 우선 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 점액수종 혼수 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚨</span> 점액수종 혼수 (Myxedema Coma) (Q21a–21d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div>점액수종 혼수는 치료 없이 사망 사례 있음. <strong>혈액 검사 결과를 기다리지 말고</strong> 임상적 의심만으로 즉시 치료 시작.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q21a</span><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">초기 투여: <strong>정맥 LT4 부하 200–400 μg</strong> → 이후 1.6 μg/kg/일의 75% 정맥 투여. 고령·체구 작음·관상동맥질환·부정맥 시 저용량. 임상 호전 후 경구로 전환.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q21b</span><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">LT4 투여 전에 <strong>정맥 글루코코르티코이드</strong> (스트레스 용량) 경험적 선행 투여. 기저 코르티솔 채혈 후 시작.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q21c</span><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">T4→T3 전환 저하 가능성 감안 시 <span class="drug-pill drug-lt3">정맥 LT3</span> 병합 고려 가능. 부하: <strong>5–20 μg</strong> → 유지: <strong>2.5–10 μg/8시간</strong>. 고T3 관련 사망 보고로 고용량 금지. 임상 회복 (의식 회복, 심폐 개선) 시까지 투여.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q21d</span><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">치료 목표: 정신 상태 개선, 심기능 개선, 폐기능 개선. 갑상선 지표는 1–2일 간격으로 측정; T3 과잉 시 용량 감량. TSH는 수 주에 걸쳐 서서히 정상화.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- NTIS -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 비갑상선 질환 증후군 (NTIS/Euthyroid Sick) (Q22a–22c)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q22a</span><span class="grade grade-strong-mod" data-tip="강한 권고 / 중등도 근거">Strong / Mod</span></div>
+          <div class="rec-text">중증 질환 입원환자의 NTIS에서 <span class="drug-pill drug-lt4">LT4</span> 치료 <strong>권고하지 않는다</strong>. RCT에서 생존율 개선 없음, 일부에서 해악 (급성 신부전 환자에서 사망률 증가).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q22b</span><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text">NTIS에서 <span class="drug-pill drug-lt3">LT3</span> 치료도 <strong>권고하지 않는다</strong>. 저용량은 해악 없으나 임상적 이익 입증 없음.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="q-num">Q22c</span><span class="grade grade-weak-mod" data-tip="약한 권고 / 중등도 근거">Weak / Mod</span></div>
+          <div class="rec-text">심부전 + 저T3 환자에서 LT3 <strong>일상적 투여를 권고하지 않는다</strong> — 단기 연구에서 심기능 지표 개선이 있으나, 장기·무작위 연구 부재.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info">
+        <span>🔬</span>
+        <div>NTIS 기전: D3의 이소성 발현(저산소 유도) → T3 불활성화 증가. 중추성 갑상선축 억제도 기여. 대부분의 전문가는 적응적 반응으로 해석 → 치료하지 않는다.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /hospitalized -->
+
+<!-- ═══════════════ 갑상선호르몬 유사체 ═══════════════ -->
+<div id="tab-analogs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 갑상선호르몬 유사체 — 정상갑상선 환자 (Q23)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-strong-lo" data-tip="강한 권고 / 낮은 근거">Strong / Low</span></div>
+          <div class="rec-text">현재의 갑상선호르몬 유사체를 연구 환경 외에서 정상갑상선 환자에게 사용하는 것은 <strong>권고하지 않는다</strong>: 분명한 이익 부재 또는 과도한 부작용.</div>
+        </li>
+      </ul>
+      <table class="thy-table" style="margin-top:8px">
+        <tr><th>유사체</th><th>TRβ 선택성</th><th>주요 이슈</th></tr>
+        <tr><td>에프로티롬 (Eprotirome)</td><td>22배</td><td>Phase III 중단 — 개 독성 연구에서 연골 손상, 간독성</td></tr>
+        <tr><td>소베티롬 (GC-1)</td><td>10배</td><td>X-연관 부신백질이영양증 연구 중</td></tr>
+        <tr><td>DITPA</td><td>동등</td><td>심부전 임상시험 2개 종료 — 이익 없음, 골격 부작용</td></tr>
+        <tr><td>TRIAC</td><td>2–3배</td><td>갑상선호르몬 저항 증후군(RTH)에서 소규모 사례 연구</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 갑상선호르몬 저항 증후군 (RTH) (Q24a, Q24b)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">RTH 치료 목표: TRα 신호 과잉(빈맥·진전)을 최소화하면서 TRβ 기능 저하(지질 이상) 증상을 개선.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-weak-lo" data-tip="약한 권고 / 낮은 근거">Weak / Low</span></div>
+          <div class="rec-text">RTHβ에서 TRIAC은 TSH 억제·지질 개선 효과가 소규모 사례에서 확인되었으나, 더 많은 임상 연구 필요. RTHβ 오진 후 갑상선 절제 시 LT4 초생리용량 + β차단제 조합 사용.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /analogs -->
+
+<!-- ═══════════════ 권고등급 ═══════════════ -->
+<div id="tab-grading" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> ACP 가이드라인 등급 체계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:10px">
+        <span>📌</span>
+        <div>이 가이드라인은 미국내과학회(ACP) 등급 체계를 사용한다. 권고 강도(Strong/Weak)와 근거 질(High/Moderate/Low/Insufficient)의 조합으로 표시된다.</div>
+      </div>
+      <table class="thy-table">
+        <tr>
+          <th>권고 강도</th>
+          <th>근거 질</th>
+          <th>배지</th>
+          <th>임상적 의미</th>
+        </tr>
+        <tr>
+          <td>Strong (강한)</td>
+          <td>High (높음)</td>
+          <td><span class="grade grade-strong-hi" data-tip="이익이 위험을 명확히 상회 + RCT 고품질">Strong / High</span></td>
+          <td>대부분의 환자에게 적용 가능, 예외 거의 없음</td>
+        </tr>
+        <tr>
+          <td>Strong (강한)</td>
+          <td>Moderate (중등도)</td>
+          <td><span class="grade grade-strong-mod" data-tip="이익이 위험을 명확히 상회 + 제한있는 RCT">Strong / Mod</span></td>
+          <td>대부분 적용; 상위 근거 나오면 변경 가능</td>
+        </tr>
+        <tr>
+          <td>Strong (강한)</td>
+          <td>Low (낮음)</td>
+          <td><span class="grade grade-strong-lo" data-tip="이익이 위험을 명확히 상회 + 관찰연구">Strong / Low</span></td>
+          <td>대부분 적용; 상위 근거 나오면 변경 가능</td>
+        </tr>
+        <tr>
+          <td>Weak (약한)</td>
+          <td>High (높음)</td>
+          <td><span class="grade grade-weak-hi" data-tip="이익·위험 균형 불분명 + 고품질 RCT">Weak / High</span></td>
+          <td>상황·환자 가치관에 따라 다를 수 있음</td>
+        </tr>
+        <tr>
+          <td>Weak (약한)</td>
+          <td>Moderate (중등도)</td>
+          <td><span class="grade grade-weak-mod" data-tip="이익·위험 균형 불분명 + 중등도 근거">Weak / Mod</span></td>
+          <td>공유 의사결정 필요; 개별 상황 고려</td>
+        </tr>
+        <tr>
+          <td>Weak (약한)</td>
+          <td>Low (낮음)</td>
+          <td><span class="grade grade-weak-lo" data-tip="이익·위험 추정 불확실 + 관찰연구">Weak / Low</span></td>
+          <td>매우 약한 권고; 다른 대안도 합리적</td>
+        </tr>
+        <tr>
+          <td>Insufficient</td>
+          <td>—</td>
+          <td><span class="grade grade-ins" data-tip="이익·위험 결정 불가 — 근거 불충분">Insufficient</span></td>
+          <td>공식 권고 불가; 연구 필요</td>
+        </tr>
+        <tr>
+          <td>Ungraded</td>
+          <td>—</td>
+          <td><span class="grade grade-ug" data-tip="등급 없음 — 형식적 권고 부적합">Ungraded</span></td>
+          <td>윤리적·실용적 이유로 공식 권고 불가 항목</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 미래 연구 방향 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔭</span> 미래 연구 우선과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info" style="margin-bottom:10px">
+        <span>📌</span>
+        <div>ATA Task Force가 확인한 주요 미해결 연구 과제 — 이 항목들이 해결될 때까지 해당 임상 영역의 강한 권고는 어렵다.</div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">생화학·기전 연구</div>
+          <ul class="dot-list">
+            <li>TSH 외 갑상선기능평가 바이오마커 개발 (조직 수준 반영)</li>
+            <li>혈청 T3의 연령·질병 상태에 따른 변화 이해, 연령별 기준 범위</li>
+            <li>혈청 T3와 조직 T3 농도 간 관계 규명</li>
+            <li>FT3·FT4 측정 정확도 향상 (LC/MS/MS 표준화)</li>
+            <li>지속방출형 T3 제형 개발 및 생리적 T4:T3 비율(~14:1) 병합 제형</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">임상·장기 결과 연구</div>
+          <ul class="dot-list">
+            <li>LT4+LT3 병합요법 장기 RCT (골절·심혈관 안전성 포함)</li>
+            <li>갑상선 추출물(DTE) 장기 결과 연구 (T3 급등의 결과 포함)</li>
+            <li>상대적 저T3 수치 환자를 대상으로 한 병합요법 N-of-1 시험</li>
+            <li>의인성 갑상선 질환 예방 전략</li>
+            <li>LT4 연부 젤캡슐의 적응증 및 장기 효과</li>
+            <li>호의적인 benefit/risk를 가진 갑상선호르몬 유사체 개발</li>
+            <li>갑상선 줄기세포 연구</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 권고 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📑</span> 전체 권고 요약 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li style="padding:8px 0 4px;font-weight:600;color:var(--accent2);font-size: calc(11px * var(--fscale, 1));border-bottom:1px solid var(--border);">▸ Section I — LT4 치료</li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">1a</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">LT4는 갑상선기능저하증의 표준 치료제</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">1b</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">LT4 목표: 증상 해소 + TSH 정상화 + 과잉치료 방지</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">1c</span><span class="grade grade-weak-lo" data-tip="Weak/Low">Weak/Low</span></div><div class="rec-text">증상만으로 치료 적절성 판단하지 말 것 — TSH와 함께 해석</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">1d</span><span class="grade grade-weak-lo" data-tip="Weak/Low">Weak/Low</span></div><div class="rec-text">조직 바이오마커는 일상 임상에서 권고 안 함</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">2a</span><span class="grade grade-weak-lo" data-tip="Weak/Low (일반)">Weak/Low</span></div><div class="rec-text">브랜드 또는 동일 제네릭 유지 권고; 교체 시 재검사</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">2b</span><span class="grade grade-weak-lo" data-tip="Weak/Low">Weak/Low</span></div><div class="rec-text">젤 캡슐: PPI 또는 커피 병용 시 흡수 개선 가능성 (장기 근거 불충분)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">3a</span><span class="grade grade-weak-mod" data-tip="Weak/Moderate">Weak/Mod</span></div><div class="rec-text">LT4는 아침 식사 60분 전 또는 취침 시 복용</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">3b</span><span class="grade grade-weak-lo" data-tip="Weak/Low">Weak/Low</span></div><div class="rec-text">칼슘·철분 등 흡수 방해 약물과 4시간 간격 유지</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">3c</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">기대 이상 고용량 시 위장관 질환(H. pylori, 위축성위염, 셀리악병) 평가</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">3d</span><span class="grade grade-weak-lo" data-tip="Weak/Low">Weak/Low</span></div><div class="rec-text">LT4 제품 교체 시 정상상태 달성 후 TSH 재측정</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">3e</span><span class="grade grade-strong-lo" data-tip="Strong/Low">Strong/Low</span></div><div class="rec-text">에스트로겐·안드로겐·타이로신 키나아제 억제제 등 시작 시 TSH 재측정</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">4a</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">체중·제지방 체중·연령·동반질환 등 고려하여 LT4 용량 결정</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">4b</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">전체 용량 또는 저용량 시작; 4–6주 후 TSH 재측정</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">4c</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">TSH &lt;0.1 mIU/L 특히 노인·폐경 후 여성에서 피해야 함 (심방세동·골다공증 위험)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">4d</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">현성 갑상선기능저하증에서 적절한 LT4로 TSH 정상화 필요 (지질·심혈관 개선)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">6a</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">고령자: 저용량 시작, 천천히 증량; TSH 목표 상향 조정 (70–80세 이상 4–6 mIU/L)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">6b</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">임신부: TSH 삼분기별 범위 유지; 4–6주마다 모니터링</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">6c</span><span class="grade grade-strong-hi" data-tip="Strong/High">Strong/High</span></div><div class="rec-text">신생아: 10–15 μg/kg/일 즉시 시작; 2–4주 내 T4 정상화</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">8a</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">중추성 갑상선기능저하증: FT4를 정상 범위 상반부로 유지</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">10a</span><span class="grade grade-strong-hi" data-tip="Strong/High">Strong/High</span></div><div class="rec-text">정상갑상선 증상 환자에게 LT4 처방 강하게 반대</div></li>
+        <li style="padding:8px 0 4px;font-weight:600;color:var(--accent2);font-size: calc(11px * var(--fscale, 1));border-bottom:1px solid var(--border);">▸ Section II — 대체 요법</li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">12</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">DTE보다 LT4 우선 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">13b</span><span class="grade grade-weak-mod" data-tip="Weak/Moderate">Weak/Mod</span></div><div class="rec-text">일상적인 LT4+LT3 병합요법 권고하지 않음</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">13d</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">DIO2 유전자형 검사로 병합요법 선택 현재 권고 안 함</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">14</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">LT3 단독요법: 지속방출형 없이는 일상적 사용 지지 안 함</div></li>
+        <li style="padding:8px 0 4px;font-weight:600;color:var(--accent2);font-size: calc(11px * var(--fscale, 1));border-bottom:1px solid var(--border);">▸ Section III — 입원환자</li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">21a</span><span class="grade grade-strong-lo" data-tip="Strong/Low">Strong/Low</span></div><div class="rec-text">점액수종 혼수: 정맥 LT4 200–400 μg 부하 + 글루코코르티코이드</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="q-num">22a</span><span class="grade grade-strong-mod" data-tip="Strong/Moderate">Strong/Mod</span></div><div class="rec-text">NTIS에서 LT4 권고 안 함</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="abbr-grid" id="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /grading -->
+
+</div><!-- .main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ── Tab switching ──
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  // Populate abbr grid on grading tab open
+  if(id === 'grading') renderAbbrGrid('abbr-grid-main');
+}
+
+// ── Card toggle ──
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// ── Accordion toggle ──
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// ── Abbreviations ──
+const abbrs = [
+  ['AACE','American Association of Clinical Endocrinologists'],
+  ['ACE','Angiotensin-converting enzyme'],
+  ['ACP','American College of Physicians 미국내과학회'],
+  ['AITD','Autoimmune thyroid disease 자가면역갑상선질환'],
+  ['ATA','American Thyroid Association 미국갑상선학회'],
+  ['AUC','Area under the curve 곡선하면적'],
+  ['BMI','Body mass index 체질량지수'],
+  ['CAD','Coronary artery disease 관상동맥질환'],
+  ['CH','Congenital hypothyroidism 선천성갑상선기능저하증'],
+  ['Cmax','Maximum concentration 최고혈중농도'],
+  ['D1','Type 1 deiodinase 1형 탈요오드효소'],
+  ['D2','Type 2 deiodinase 2형 탈요오드효소'],
+  ['D3','Type 3 deiodinase 3형 탈요오드효소'],
+  ['DIO2','Type 2 deiodinase gene 2형 탈요오드효소 유전자'],
+  ['DITPA','3,5-Diiodothyropropionic acid'],
+  ['DTE','Desiccated thyroid extract 건조갑상선 추출물'],
+  ['ETA','European Thyroid Association 유럽갑상선학회'],
+  ['FDA','U.S. Food and Drug Administration 미국식품의약국'],
+  ['FT3','Free triiodothyronine 유리트리요오드티로닌'],
+  ['FT4','Free thyroxine 유리티록신'],
+  ['GH','Growth hormone 성장호르몬'],
+  ['GHQ','General Health Questionnaire 일반건강설문'],
+  ['GWAS','Genome-wide association studies 전장유전체연관분석'],
+  ['HDL','High-density lipoprotein 고밀도지단백'],
+  ['ICU','Intensive care unit 중환자실'],
+  ['IRB','Institutional review board 기관심사위원회'],
+  ['LC/MS/MS','Liquid chromatography-tandem mass spectrometry'],
+  ['LDL','Low-density lipoprotein 저밀도지단백'],
+  ['LT3','Liothyronine 리오티로닌 (합성T3)'],
+  ['LT4','Levothyroxine 레보티록신 (합성T4)'],
+  ['MCT','Monocarboxylate transporter 모노카르복실산 수송체'],
+  ['NTIS','Nonthyroidal illness syndrome 비갑상선질환 증후군'],
+  ['OATP','Organic anion transporting polypeptide'],
+  ['OH','Overt hypothyroidism 현성 갑상선기능저하증'],
+  ['PPI','Proton pump inhibitor 양성자펌프억제제'],
+  ['PTU','Propylthiouracil 프로필티오우라실'],
+  ['RCT','Randomized controlled trial 무작위대조시험'],
+  ['rT3','Reverse T3 역트리요오드티로닌'],
+  ['RTH','Resistance to thyroid hormone 갑상선호르몬 저항 증후군'],
+  ['RTHa','RTH with TRα mutation TRα 돌연변이 RTH'],
+  ['RTHb','RTH with TRβ mutation TRβ 돌연변이 RTH'],
+  ['SCH','Subclinical hypothyroidism 무증상(잠재성) 갑상선기능저하증'],
+  ['SHBG','Sex hormone binding globulin 성호르몬결합글로불린'],
+  ['SNP','Single nucleotide polymorphism 단일염기다형성'],
+  ['T3','Triiodothyronine 트리요오드티로닌'],
+  ['T4','Thyroxine 티록신'],
+  ['TBG','Thyroxine binding globulin 티록신결합글로불린'],
+  ['TR','Thyroid hormone receptor 갑상선호르몬 수용체'],
+  ['TRH','Thyrotropin-releasing hormone 갑상선자극호르몬방출호르몬'],
+  ['TRIAC','3,5,3′-triiodothyroacetic acid (Tiratricol)'],
+  ['TRα','Thyroid hormone receptor-α'],
+  ['TRβ','Thyroid hormone receptor-β'],
+  ['TSH','Thyrotropin (thyroid-stimulating hormone) 갑상선자극호르몬'],
+  ['USP','United States Pharmacopeia 미국약전'],
+];
+
+function renderAbbrGrid(containerId) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  if (grid.dataset.rendered) return;
+  grid.dataset.rendered = '1';
+  grid.innerHTML = abbrs.map(([t,d]) =>
+    `<div class="abbr-item"><span class="abbr-term">${t}</span><span class="abbr-def">${d}</span></div>`
+  ).join('');
+}
+
+// ── Abbr search ──
+const input = document.getElementById('abbr-input');
+const dropdown = document.getElementById('abbr-dropdown');
+const dropGrid = document.getElementById('abbr-grid-drop');
+
+function filterAbbr(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { dropdown.style.display = 'none'; return; }
+  const hits = abbrs.filter(([t,d]) => t.toLowerCase().includes(q) || d.toLowerCase().includes(q));
+  document.getElementById('abbr-count').textContent = hits.length ? hits.length : '';
+  if (!hits.length) { dropdown.style.display = 'none'; return; }
+  dropGrid.innerHTML = hits.map(([t,d]) =>
+    `<div class="abbr-item"><span class="abbr-term">${t}</span><span class="abbr-def">${d}</span></div>`
+  ).join('');
+  // Position dropdown
+  const rect = input.getBoundingClientRect();
+  dropdown.style.top = (rect.bottom + 4) + 'px';
+  dropdown.style.left = Math.max(8, rect.right - 500) + 'px';
+  dropdown.style.display = 'block';
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    dropdown.style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// Initialize all card-headers that have 'open' class with proper state
+document.querySelectorAll('.card-header.open + .card-body').forEach(b => b.classList.remove('collapsed'));
+
+// Pre-render abbr grid immediately
+renderAbbrGrid('abbr-grid-main');
+</script>
+
+</body>
+</html>

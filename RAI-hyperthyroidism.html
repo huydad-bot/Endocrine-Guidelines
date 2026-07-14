@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025 갑상선기능항진증 방사성요오드 치료 진료권고안</title>
+<style>
+  :root {
+    --bg:#f6f8fa;--surface:#ffffff;--surface2:#f0f2f5;--border:#d0d7de;
+    --accent:#0969da;--accent2:#0550ae;--green:#1a7f37;--yellow:#9a6700;
+    --red:#cf222e;--orange:#bc4c00;--text:#1f2328;--text2:#57606a;--fscale:1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size: calc(13px * var(--fscale, 1));line-height:1.5;}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;position:sticky;top:0;z-index:100;}
+  .header-inner{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .logo-badge{background:var(--accent);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+  .source-link{color:var(--accent2);font-size: calc(11px * var(--fscale, 1));text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
+  .meta{color:var(--text2);font-size: calc(11px * var(--fscale, 1));}
+  .tab-bar{display:flex;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);padding:0;overflow-x:auto;scrollbar-width:none;}
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .font-zoom-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;margin:4px 4px 4px 6px;padding:5px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--accent2);font-size:calc(11px * var(--fscale, 1));font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s;}
+  .font-zoom-btn:hover{background:var(--border);}
+  .font-zoom-btn .fz-icon{font-size:calc(12px * var(--fscale, 1));}
+  .tab-bar-inner{width:100%;max-width:900px;display:flex;align-items:center;justify-content:center;gap:2px;}
+  .tab{padding:8px 13px;font-size: calc(12px * var(--fscale, 1));color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;user-select:none;}
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--accent2);border-bottom-color:var(--accent2);}
+  .tab-abbr-wrap{display:flex;align-items:center;padding:4px 6px;margin-left:6px;flex-shrink:0;position:relative;}
+  .main{padding:12px 16px;max-width:900px;margin:0 auto;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+  .card-header{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+  .card-header .ch-title{display:flex;align-items:center;gap:8px;}
+  .card-header .toggle{font-size: calc(14px * var(--fscale, 1));transition:transform .2s;}
+  .card-header.open .toggle{transform:rotate(180deg);}
+  .card-body{padding:10px 12px;}
+  .card-body.collapsed{display:none;}
+  .stat-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;flex:1;min-width:90px;text-align:center;}
+  .stat-val{font-size: calc(18px * var(--fscale, 1));font-weight:700;color:var(--accent2);}
+  .stat-lbl{font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:2px;}
+  .grade{display:inline-block;padding:1px 6px;border-radius:3px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap;position:relative;cursor:help;}
+  .grade-1{background:#dafbe1;color:#116329;border:1px solid #1a7f37;}
+  .grade-2{background:#ddf4ff;color:var(--accent2);border:1px solid var(--accent2);}
+  .grade-3{background:#f6f8fa;color:var(--text2);border:1px solid var(--border);}
+  .grade-4{background:#fff8c5;color:var(--yellow);border:1px solid var(--yellow);}
+  .grade::after{content:attr(data-tip);display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1f2328;color:#e6edf3;font-size: calc(11px * var(--fscale, 1));font-weight:400;line-height:1.5;padding:6px 10px;border-radius:6px;white-space:nowrap;z-index:500;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.25);}
+  .grade:hover::after{display:block;}
+  .rec-list{list-style:none;}
+  .rec-item{padding:8px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start;}
+  .rec-item:last-child{border-bottom:none;}
+  .rec-badges{display:flex;gap:4px;flex-shrink:0;margin-top:1px;}
+  .rec-text{font-size: calc(12px * var(--fscale, 1));color:var(--text);line-height:1.55;}
+  .rec-text strong{color:var(--accent2);}
+  .alert{padding:8px 12px;border-radius:6px;font-size: calc(12px * var(--fscale, 1));margin:8px 0;display:flex;gap:8px;align-items:flex-start;}
+  .alert-danger{background:#ffebe9;border-left:3px solid var(--red);color:#82071e;}
+  .alert-info{background:#ddf4ff;border-left:3px solid var(--accent2);color:#0550ae;}
+  .alert-warn{background:#fff8c5;border-left:3px solid var(--yellow);color:#7d4e00;}
+  .alert-success{background:#dafbe1;border-left:3px solid var(--green);color:#116329;}
+  .rai-table{width:100%;border-collapse:collapse;font-size: calc(11px * var(--fscale, 1));}
+  .rai-table th{background:var(--surface2);color:var(--text2);padding:6px 8px;font-size: calc(10px * var(--fscale, 1));text-transform:uppercase;letter-spacing:.3px;font-weight:600;text-align:left;white-space:nowrap;}
+  .rai-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .rai-table tr:last-child td{border-bottom:none;}
+  .rai-table tr:hover td{background:rgba(0,0,0,.02);}
+  .osa-acc{border:1px solid var(--border);border-radius:6px;margin-bottom:5px;overflow:hidden;}
+  .osa-hdr{background:var(--surface2);padding:7px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .osa-hdr:hover{background:var(--border);}
+  .osa-hdr .arr{font-size: calc(11px * var(--fscale, 1));color:var(--text2);}
+  .osa-body{display:none;padding:10px 12px;font-size: calc(12px * var(--fscale, 1));}
+  .sp-section{margin-bottom:8px;}
+  .sp-title{background:var(--surface2);border-left:3px solid var(--accent);padding:7px 10px;font-size: calc(12px * var(--fscale, 1));font-weight:600;cursor:pointer;display:flex;justify-content:space-between;border-radius:0 4px 4px 0;margin-bottom:1px;user-select:none;}
+  .sp-body{padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;}
+  .sp-body.open{max-height:3000px;padding:8px 0;}
+  .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size: calc(10px * var(--fscale, 1));font-weight:600;white-space:nowrap;}
+  .pill-rec{background:#dafbe1;color:var(--green);}
+  .pill-consider{background:#ddf4ff;color:var(--accent2);}
+  .pill-no{background:#ffebe9;color:var(--red);}
+  .ind-rec{background:#dafbe1;border-left:4px solid var(--green);padding:6px 10px;border-radius:0 4px 4px 0;margin-bottom:4px;font-size: calc(12px * var(--fscale, 1));}
+  .ind-consider{background:#ddf4ff;border-left:4px solid var(--accent2);padding:6px 10px;border-radius:0 4px 4px 0;margin-bottom:4px;font-size: calc(12px * var(--fscale, 1));}
+  .ind-no{background:#ffebe9;border-left:4px solid var(--red);padding:6px 10px;border-radius:0 4px 4px 0;margin-bottom:4px;font-size: calc(12px * var(--fscale, 1));}
+  .eye-table td,.eye-table th{padding:5px 8px;font-size: calc(11px * var(--fscale, 1));border:1px solid var(--border);text-align:center;}
+  .eye-table{border-collapse:collapse;width:100%;}
+  .cell-ok{background:#dafbe1;color:#116329;font-weight:600;}
+  .cell-consider{background:#fff8c5;color:#7d4e00;font-weight:600;}
+  .cell-no{background:#ffebe9;color:#82071e;font-weight:600;}
+  .abbr-grid-main{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px;}
+  .abbr-item{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;display:flex;flex-direction:column;gap:2px;}
+  .abbr-term{font-weight:700;color:var(--accent2);font-size: calc(12px * var(--fscale, 1));font-family:'Courier New',monospace;white-space:nowrap;}
+  .abbr-def{font-size: calc(11px * var(--fscale, 1));color:var(--text2);line-height:1.45;}
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#c8d0d9;border-radius:3px;}
+  small{color:var(--text2);font-size: calc(10px * var(--fscale, 1));}
+  .danger-text{color:var(--red);}
+  .success-text{color:var(--green);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">KTA 2025</span>
+      <h1 style="font-size:18px;font-weight:700;color:var(--text)">갑상선기능항진증 방사성요오드 치료 진료권고안</h1>
+    </div>
+    <div style="text-align:center;margin-top:2px;line-height:1.4">
+      <a href="https://doi.org/10.11106/ijt.2025.18.1.65" class="source-link" target="_blank">Int J Thyroidol 2025;18(1):65–79 ↗</a>
+      <span class="meta"> · 대한갑상선학회 · 2025년 5월</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by KTA</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('indications')">✅ 적응증</div>
+    <div class="tab" onclick="showTab('dose')">💊 용량 결정</div>
+    <div class="tab" onclick="showTab('iodine')">🥗 저요오드 식사</div>
+    <div class="tab" onclick="showTab('atd')">💉 항갑상선제</div>
+    <div class="tab" onclick="showTab('eye')">👁️ 안병증·스테로이드</div>
+    <div class="tab" onclick="showTab('followup')">📅 추적관찰</div>
+    <div class="tab" onclick="showTab('updates')">🆕 핵심 권고 요약</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;min-width:130px;max-width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">75–81%</div><div class="stat-lbl">RAI 초치료 성공률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">10–15</div><div class="stat-lbl">권장 고정 용량 (mCi)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">3–7일</div><div class="stat-lbl">치료 전 ATD 중단 기간</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">6개</div><div class="stat-lbl">핵심 임상 질문</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📌</span> 배경 및 목적</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>갑상선기능항진증의 3가지 치료법 — 항갑상선제(ATD)·방사성요오드(RAI)·수술 — 중 <strong>RAI 치료</strong>에 특화된 국내 최초 단독 진료권고안. 자가면역질환에 의한 갑상선기능항진증 대상(독성결절 제외).</div></div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">📊 국내 치료 현황</div>
+          <table class="rai-table">
+            <tr><th>치료법</th><th>2003년</th><th>2018년</th></tr>
+            <tr><td>항갑상선제</td><td>—</td><td class="success-text"><strong>97.3%</strong></td></tr>
+            <tr><td>방사성요오드</td><td>5.46%</td><td class="danger-text">2.66% ↓</td></tr>
+            <tr><td>갑상선절제술</td><td>1.43%</td><td>1.95%</td></tr>
+          </table>
+          <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">미국·유럽 대비 RAI 비율 현저히 낮음 → 표준화 지침 필요성</p>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">✅ 치료법 비교</div>
+          <table class="rai-table">
+            <tr><th>치료법</th><th>재발률</th><th>완치율</th></tr>
+            <tr><td>항갑상선제</td><td class="danger-text">34–42%</td><td>~50%</td></tr>
+            <tr><td><strong>방사성요오드</strong></td><td>21%</td><td class="success-text">75–81%</td></tr>
+            <tr><td>수술</td><td class="success-text">3–8%</td><td class="success-text">가장 높음</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 권고 수준 체계 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="rai-table">
+        <tr><th>수준</th><th>명칭</th><th>정의</th></tr>
+        <tr><td><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고/불권고: 충분하고 객관적인 근거">1</span></td><td>강력히 권고</td><td>중요한 건강상 이득·손실에 대한 충분하고 객관적인 근거 있음</td></tr>
+        <tr><td><span class="grade grade-2" data-tip="권고수준 2 — 일반적 권고/불권고: 근거 있으나 불확실하거나 간접적">2</span></td><td>일반적으로 권고</td><td>근거 있으나 불확실하거나 간접적; 일률적 시행 권고 어려움</td></tr>
+        <tr><td><span class="grade grade-3" data-tip="권고수준 3 — 전문가 합의 권고: 임상 근거 부족, 전문가 합의">3</span></td><td>전문가 합의</td><td>임상 근거 부족; 환자 상황 + 전문가 합의에 따라 권고</td></tr>
+        <tr><td><span class="grade grade-4" data-tip="권고수준 4 — 권고 보류: 찬반 근거 없거나 이견 많음">4</span></td><td>권고 보류</td><td>이득·손실 근거 없거나 이견 많아 찬성도 반대도 하지 않음</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> RAI 치료 효과 및 안전성 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">✅ 치료 효과 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• RAI 치료 후 3–12개월 내 완치율: <strong>50–90%</strong></li>
+            <li>• 국내 연구: 1년 성공률 62.8%, 2년 성공률 76.8%</li>
+            <li>• ATD 치료 2년 성공률 41% 대비 유의하게 높음</li>
+            <li>• 치료 후 갑상선 부피 감소: 6개월 후 57%, 12개월 후 71%</li>
+            <li>• 최근 메타분석: RAI 치료가 ATD 대비 전체 사망률·심혈관 사망률 감소 시사</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">⚠️ 부작용 및 안전성 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>부작용</th><th>빈도·내용</th></tr>
+            <tr><td><strong>갑상선기능저하증</strong></td><td>치료 후 1년 내 24–87%; 치료 용량 증가할수록 위험↑; 이후 연 3–5% 추가 발생</td></tr>
+            <tr><td>단기: 통증·부종·침샘염</td><td>경미하고 일시적</td></tr>
+            <tr><td>이차암 발생</td><td>메타분석(479,452명): RAI군 vs 비RAI군 전체 암 발생률 차이 없음 (HR 1.02; 0.95–1.09)<br>국내 연구: 위험비 0.96 (0.83–1.10) — 유의하지 않음</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INDICATIONS ═══ -->
+<div id="tab-indications" class="panel">
+
+  <div class="alert alert-info" style="margin-bottom:10px"><span>📌</span><div>RAI 치료 적응증은 <strong>강력 권고 / 고려 / 불권고</strong> 3개 범주로 분류. 환자 상태·동반질환·선호도를 종합적으로 고려하여 결정.</div></div>
+
+  <!-- 강력 권고 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✅</span> I.1 강력 권고 — RAI를 적극 고려해야 하는 경우</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고">1</span></div>
+          <div class="rec-text"><span class="pill pill-rec">강력 권고</span> <strong>첫 치료로 완치율이 높은 치료를 원하는 경우</strong><br><small style="color:var(--text2)">RAI 초치료 성공률 75–81% (ATD 완치율 ~50% 대비 높음). 수술 대비 무침습적 방법.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고">1</span></div>
+          <div class="rec-text"><span class="pill pill-rec">강력 권고</span> <strong>항갑상선제에 의한 중증 부작용</strong> (무과립구증·간독성·혈관염 등) 발생한 경우<br><small style="color:var(--text2)">ATD 간 교차반응 위험으로 다른 ATD로 전환 비권고. 무과립구증 후 RAI 성공률 88.8%.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고">1</span></div>
+          <div class="rec-text"><span class="pill pill-rec">강력 권고</span> <strong>ATD 치료 완치 후 재발</strong>하여 완치율 높은 치료를 원하는 경우<br><small style="color:var(--text2)">ATD 재투여 완치율 ~23% (초치료보다 낮음). 이차 RAI 성공률 약 62.8%.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고">1</span></div>
+          <div class="rec-text"><span class="pill pill-rec">강력 권고</span> <strong>충분한 ATD 치료(12–18개월)에도 갑상선기능이 잘 조절되지 않는 경우</strong><br><small style="color:var(--text2)">12–18개월 초과 ATD 치료는 완치율 유의하게 높이지 못함 (메타분석 26개 RCT).</small></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 고려 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤔</span> I.2 고려 — RAI를 고려할 수 있는 경우</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text"><span class="pill pill-consider">고려</span> <strong>ATD 복용 순응도가 낮은 경우</strong><br><small style="color:var(--text2)">장기 ATD 치료 필요하나 순응도↓. 단, RAI 후 갑상선기능저하증 시 LT4 장기 복용 필요함도 고려.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text"><span class="pill pill-consider">고려</span> <strong>갑상선기능항진증 악화 시 불안정이 우려되는 기저 질환</strong> 동반 (조절되지 않는 부정맥, 심부전 등)<br><small style="color:var(--text2)">RAI 후 기능항진 호전군: 주요 CVD 위험비 0.59, 사망률 0.5 (항갑상선제군 대비).</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-3" data-tip="권고수준 3 — 전문가 합의">3</span></div>
+          <div class="rec-text"><span class="pill pill-consider">고려</span> <strong>고용량 ATD(MMI ≥15–20 mg/일 또는 PTU ≥150–300 mg/일)가 지속적으로 필요한 경우</strong>. 특히 <strong>6개월 이후 임신을 계획 중인 여성</strong><br><small style="color:var(--text2)">고용량 ATD: 무과립구증·간독성 위험↑. RAI 후 6개월간 임신 연기 권고 (TRAb 일시 상승 고려). 6개월 이내 임신 계획 시 수술 우선 고려.</small></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 불권고 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> I.3 불권고 — RAI를 권고하지 않는 경우</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고하지 않음">1</span></div>
+          <div class="rec-text"><span class="pill pill-no">절대 금기</span> <span class="danger-text"><strong>임신 중 또는 모유 수유 중인 여성</strong></span><br><small style="color:var(--text2)">방사성요오드 → 태반 통과 → 태아 갑상선기능저하증·신경계 발달 장애 위험. 치료 최소 48h 이내 임신 여부 확인 필수. 수유 즉시 중단 필요.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고하지 않음">1</span></div>
+          <div class="rec-text"><span class="pill pill-no">금기</span> <span class="danger-text"><strong>중등도 이상의 활동성 안병증</strong></span> 동반<br><small style="color:var(--text2)">RAI: ATD 대비 갑상선 안병증 악화 위험 3.2–5.8배↑. 세부 사항 → 안병증·스테로이드 탭 참조.</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고하지 않음">1</span></div>
+          <div class="rec-text"><span class="pill pill-no">금기</span> <span class="danger-text"><strong>갑상선암</strong>이 동반된 경우</span><br><small style="color:var(--text2)">갑상선기능항진증 치료 목적의 RAI는 금기. 갑상선암의 RAI 치료는 별도 프로토콜 적용.</small></div>
+        </li>
+      </ul>
+      <div class="osa-acc" style="margin-top:8px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📋 RAI 실패율 높을 것으로 예상되는 상황 (절대 금기는 아님) <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>큰 갑상선종</strong> 동반 — RAI 치료 후 성공률 유의하게 감소 (후향 연구 388명)</li>
+            <li>• <strong>높은 TSH 수용체항체(TRAb) 농도</strong> (&gt;40 U/L) — 치료 성공률 감소</li>
+            <li>• <strong>갑상선호르몬 수치가 매우 높은 급성 갑상선중독증</strong> — RAI 후 일시 호르몬↑ 위험<br>→ ATD로 갑상선기능 정상화 후 치료. ATD 불가 시: 무기 요오드(7–10일), 리튬(혈중 농도 모니터), 혈장교환술 고려</li>
+            <li>• <strong>빠른 완치 필요 시</strong>: RAI보다 <span class="success-text">수술 우선 고려</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DOSE ═══ -->
+<div id="tab-dose" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> II. 치료 용량 결정</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">갑상선기능저하증을 유발할 만큼 충분한 <strong>고정된 용량 10–15 mCi</strong> 사용 권고<br><small style="color:var(--text2)">치료 목표: 갑상선기능항진증의 완치 (갑상선기능저하증 유도)</small></div>
+        </li>
+      </ul>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📊 용량별 성공률 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>용량 (mCi)</th><th>성공률</th><th>비고</th></tr>
+            <tr><td>5.4</td><td>61%</td><td>—</td></tr>
+            <tr><td>8.2</td><td>69%</td><td>—</td></tr>
+            <tr><td>10</td><td>69–74%</td><td>권장 최소 용량</td></tr>
+            <tr><td><strong>15</strong></td><td class="success-text"><strong>75–81%</strong></td><td>권장 기본 용량</td></tr>
+            <tr><td>15.7</td><td>86%</td><td>—</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">⚖️ 고정 용량 vs 선량 측정 방식 비교 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>방식</th><th>장점</th><th>단점</th></tr>
+            <tr><td><strong>고정 용량 (권고)</strong></td><td>시행 간편; 국내 임상 적용 현실적</td><td>개별 맞춤 불가</td></tr>
+            <tr><td>선량 측정 방식</td><td>갑상선 크기·섭취율 반영</td><td>재발·지속 빈도 더 높다는 메타분석 결과<br>국내 임상 근거 부족</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>흡수 선량 120–180 Gy 범위에서 정상 갑상선기능 유지율 더 높음 (메타분석). 향후 국내 근거 축적 시 선량 측정 방식 권고 강화 기대.</div></div>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📌 갑상선기능저하증 발생 추적 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>시점</th><th>갑상선기능저하증 누적 발생률 (그레이브스병)</th></tr>
+            <tr><td>치료 후 1년</td><td>24%</td></tr>
+            <tr><td>치료 후 10년</td><td>59%</td></tr>
+            <tr><td>치료 후 25년</td><td>82%</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>정상 갑상선기능 환자에서도 이후 연 3–5%에서 추가 갑상선기능저하증 발생. <strong>장기 추적관찰 필수.</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ IODINE ═══ -->
+<div id="tab-iodine" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🥗</span> III. 저요오드 식사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-3" data-tip="권고수준 3 — 전문가 합의">3</span></div>
+          <div class="rec-text">저요오드 식사 처방은 <strong>일반적으로 권고하지 않음</strong>. 단, 요오드 함유량이 높은 식품은 <strong>최소 1주일 전부터 피하도록</strong> 권고.</div>
+        </li>
+      </ul>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">🇰🇷 한국인 요오드 섭취 현황 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 국민건강영양조사(2013–2017): 하루 평균 요오드 섭취량 <strong>416.5 μg/일</strong> (중앙값 129.0 μg/일)</li>
+            <li>• 성인 권장 섭취량 150 μg/일의 약 <strong>3배</strong> 초과</li>
+            <li>• 김·미역·다시마 등 해조류 섭취가 빈번한 식습관</li>
+            <li>• 과잉 요오드 → 방사성요오드 치료 효과 감소 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">🔬 임상 근거 요약 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 저요오드 식사 처방군 vs 일반 식사 비교 RCT: 소변 내 요오드↓ (1주 후 23%, 2주 후 42%) 유의하게 감소</li>
+            <li>• <strong>그러나</strong> RAI 치료 6개월 후 완치율: 두 군 간 <strong>유의한 차이 없음</strong></li>
+            <li>• → 엄격한 저요오드 식사 처방이 치료 효과를 높인다는 명확한 근거 부족</li>
+          </ul>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📋 치료 전 주의해야 할 요오드 관련 식품·약물 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>종류</th><th>피해야 할 기간</th><th>예시</th></tr>
+            <tr><td><strong>고요오드 식품</strong></td><td>최소 1주일 전</td><td>김·미역·다시마 등 해조류, 고용량 요오드 건강보조식품</td></tr>
+            <tr><td><strong>요오드 조영제</strong></td><td>영향 고려 필요</td><td>CT 조영제 등 — 치료 계획 시 사전 확인</td></tr>
+            <tr><td><strong>아미오다론</strong></td><td>장기 고려 필요</td><td>반감기 길어 체내 요오드↑ 지속 — 전문의 상담 필수</td></tr>
+            <tr><td><strong>무기 요오드 제제</strong></td><td>최소 1–2주 전 중단</td><td>요오드칼륨 등 — RAI 흡수 저해</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ATD ═══ -->
+<div id="tab-atd" class="panel">
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> IV. 항갑상선제(ATD) 전후 중단 기간</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1" data-tip="권고수준 1 — 강력히 권고">1</span></div>
+          <div class="rec-text">RAI 치료 전 <strong>3–7일간 ATD 복용 중단</strong> 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">RAI 치료 전 ATD를 복용했거나 갑상선기능항진증 악화로 건강 위험성이 높은 경우: RAI 치료 후 <strong>3–7일 이내 ATD 재투여 고려</strong></div>
+        </li>
+      </ul>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">🔬 근거 — ATD와 RAI 치료 결과 (메타분석 14건, 1,306명) <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>ATD 사용 시점</th><th>갑상선기능저하증 위험</th><th>치료 실패 위험</th></tr>
+            <tr><td>RAI 치료 전까지 투여 유지</td><td class="success-text">↓ (RR 0.68)</td><td class="danger-text">↑ (RR 1.28)</td></tr>
+            <tr><td>RAI 치료 후에도 투여</td><td>—</td><td class="danger-text">↑ (RR 1.32)</td></tr>
+            <tr><td>RAI 전 중단군 (3–7일 전)</td><td>기준</td><td>기준</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div><strong>PTU 주의</strong>: 방사성 보호 효과로 RAI 효과 저하 가능. 유럽핵의학회(EANM): 최소 2주 전 중단 권고. 단, 본 위원회는 국내외 근거 불충분 → <strong>3–7일 중단 유지 권고</strong>.</div></div>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">⚡ RAI 치료 후 갑상선호르몬 변화 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>조건</th><th>치료 후 호르몬 변화</th></tr>
+            <tr><td>ATD 전처치 없이 RAI</td><td>치료 후 5일부터 FT4·FT3 유의하게 감소 → 30일째 안정화</td></tr>
+            <tr><td>ATD 전처치 후 RAI</td><td class="danger-text">치료 후 FT4 52.4%↑, FT3 61.8%↑ (일시적 상승)<br>7–14일째 최고점 도달</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>ATD 전처치 후 RAI 시: 치료 후 갑상선호르몬 일시적 급등 가능. <strong>고위험 환자</strong>(고령·심방세동·심부전·폐고혈압·당뇨 등)는 갑상선기능 충분히 조절 후 RAI 시행.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EYE ═══ -->
+<div id="tab-eye" class="panel">
+  <div class="alert alert-info" style="margin-bottom:10px"><span>ℹ️</span><div>그레이브스병 환자의 약 <strong>1/3</strong>에서 갑상선 안병증 증상·징후 발생. 이 중 약 <strong>5%</strong>는 중등도 이상의 중증 안병증. RAI는 ATD 대비 안병증 악화 위험 <strong>3.2–5.8배↑</strong>.</div></div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️</span> V. 안병증 중증도·활동성별 RAI 및 예방적 스테로이드 권고 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="eye-table">
+        <tr>
+          <th rowspan="2">활동성</th>
+          <th colspan="2">경증</th>
+          <th colspan="2">중등도–중증</th>
+        </tr>
+        <tr>
+          <th>위험인자 없음</th>
+          <th>위험인자 있음</th>
+          <th>위험인자 없음</th>
+          <th>위험인자 있음</th>
+        </tr>
+        <tr>
+          <td><strong>비활동성</strong></td>
+          <td class="cell-ok">스테로이드<br>불필요<br><span class="grade grade-1">1</span></td>
+          <td class="cell-consider">스테로이드<br>고려<br><span class="grade grade-2">2</span></td>
+          <td class="cell-ok">스테로이드<br>불필요<br><span class="grade grade-1">1</span></td>
+          <td class="cell-consider">스테로이드<br>권고<br><span class="grade grade-2">2</span></td>
+        </tr>
+        <tr>
+          <td><strong>활동성</strong></td>
+          <td class="cell-consider">스테로이드<br>고려<br><span class="grade grade-1">1</span></td>
+          <td class="cell-consider">스테로이드<br>권고<br><span class="grade grade-1">1</span></td>
+          <td class="cell-no">RAI<br><strong>금기</strong><br><span class="grade grade-1">1</span></td>
+          <td class="cell-no">RAI<br><strong>금기</strong><br><span class="grade grade-1">1</span></td>
+        </tr>
+      </table>
+      <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">※ 위험인자: 흡연, 높은 TRAb 농도<br>※ 활동성 기준(CAS ≥3): 자발적 안구 뒤 통증, 안구운동 시 통증, 눈꺼풀 발적, 결막 충혈, 내안각 부종, 눈꺼풀 부종, 결막 부종</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🔍 안병증 분류 기준 <span>▾</span></div>
+    <div class="sp-body">
+      <table class="rai-table">
+        <tr><th>분류</th><th>정의</th><th>세부 소견</th></tr>
+        <tr><td><strong>경증</strong></td><td>일상생활 영향↓, 면역치료 불필요</td><td>눈꺼풀 당김 &lt;2 mm, 경도 안구 돌출, 인공눈물로 조절 가능한 복시</td></tr>
+        <tr><td><strong>중등도–중증</strong></td><td>시력 영향 없으나 일상생활 지장, 면역치료 필요</td><td>눈꺼풀 당김 ≥2 mm, 안구 돌출 ≥3 mm, 지속·간헐적 복시</td></tr>
+        <tr><td><strong>시력 위협</strong></td><td>시신경병증 또는 각막 궤양</td><td>즉각적 치료 필요 — 수술 또는 ATD 선호</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">💊 예방적 스테로이드 용법 및 근거 <span>▾</span></div>
+    <div class="sp-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 경구 스테로이드 메타분석(850명): 안병증 악화 예방 효과 (위험비 0.14; 0.06–0.35)</li>
+        <li>• <strong>표준 요법</strong>: prednisone 0.1–0.4 mg/kg 시작 후 점진적 감량</li>
+        <li>• <strong>저용량 단기 요법 (최근 지지)</strong>: prednisone 0.1–0.2 mg/kg → 6주간 점진 감량 — 고용량(0.3–0.5 mg/kg)과 동등한 효과 (후향 코호트)</li>
+        <li>• 정주 스테로이드 저용량 요법도 제안되었으나 4주간 매주 입원 필요</li>
+        <li>• <strong>부작용</strong>: 당뇨 악화, 고혈압, 골다공증, 감염 위험↑, 바이러스성 간염 재활성화</li>
+        <li>• 갑상선 안병증 없는 환자에서 예방적 스테로이드: 추가 이점 없음</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOLLOWUP ═══ -->
+<div id="tab-followup" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📅</span> VI. 치료 후 갑상선기능검사 추적</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">RAI 치료 후 <strong>4–6주 이내</strong> TSH + 유리 T4 포함한 갑상선기능검사 시행<br><small style="color:var(--text2)">초기 갑상선기능저하증 발생 시 TSH 억제 지속 가능 → TSH+fT4 동시 측정 필수</small></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">치료 후 <strong>6개월 동안</strong> 또는 TSH 정상 범위 도달까지 <strong>2–3개월 간격</strong>으로 갑상선기능 평가</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">갑상선기능이 2번 이상 정상 확인 시 <strong>6개월–1년 간격</strong>으로 검사</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2" data-tip="권고수준 2 — 일반적으로 권고">2</span></div>
+          <div class="rec-text">갑상선기능항진증 또는 저하증 의심 증상 발생 시 <strong>즉시</strong> 갑상선기능검사 시행</div>
+        </li>
+      </ul>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📊 치료 후 기능 변화 시점 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>시점</th><th>갑상선기능저하증 발생 비율</th></tr>
+            <tr><td>치료 후 4주</td><td>일부 환자에서 이미 발생 가능</td></tr>
+            <tr><td>치료 후 8주</td><td>~40%</td></tr>
+            <tr><td>치료 후 16주</td><td>&gt;80%</td></tr>
+            <tr><td>치료 후 6개월</td><td>80–90% 이상 정상 또는 저하증 도달</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>일시적 갑상선기능저하증: 주로 치료 후 2개월 시작 → 1–4개월 지속 후 자연 회복 가능. TSH+fT4 동시 측정으로 감별 중요.</div></div>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)">📅 추적관찰 요약 흐름도 <span class="arr">▸</span></div>
+        <div class="osa-body">
+          <table class="rai-table">
+            <tr><th>시점</th><th>권장 조치</th></tr>
+            <tr><td>치료 후 4–6주</td><td>TSH + fT4 측정 (초기 평가)</td></tr>
+            <tr><td>~6개월 (또는 TSH 정상화까지)</td><td>2–3개월마다 갑상선기능검사</td></tr>
+            <tr><td>기능 2회 이상 정상 확인 후</td><td>6개월–1년마다 정기 검사</td></tr>
+            <tr><td>평생</td><td>연 1회 이상 — 연 3–5% 추가 갑상선기능저하증 발생 가능</td></tr>
+            <tr><td>항진/저하 증상 발생 시</td><td>즉시 검사</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ UPDATES ═══ -->
+<div id="tab-updates" class="panel">
+  <div class="alert alert-success" style="margin-bottom:10px"><span>✅</span><div>2025년 대한갑상선학회 최초 RAI 단독 진료권고안. 6개 핵심 질문별 권고문 요약. 각 항목 클릭 시 근거 확인 가능.</div></div>
+
+  <!-- I -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">I</span>
+        <strong>RAI 치료 적응증 — 3단계 분류 체계</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <div class="ind-rec">✅ <strong>강력 권고 (권고수준 1)</strong>: 고완치율 요구, ATD 중증 부작용, ATD 완치 후 재발, ATD 조절 실패</div>
+      <div class="ind-consider">🤔 <strong>고려 (권고수준 2–3)</strong>: ATD 순응도↓, 기저 심혈관질환 불안정, 고용량 ATD 지속 필요·임신 계획</div>
+      <div class="ind-no">🚫 <strong>불권고 (권고수준 1)</strong>: 임신·수유 중, 중등도 이상 활동성 안병증, 갑상선암 동반</div>
+    </div>
+  </div>
+
+  <!-- II -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">II</span>
+        <strong>RAI 용량: 고정 용량 10–15 mCi 권고 (권고수준 2)</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 치료 목표: 갑상선기능저하증 유도로 갑상선기능항진증 완치</li>
+        <li>• 고정 용량 vs 선량 측정: 임상 결과 차이 없음 + 선량 측정 시 재발·지속 빈도 오히려 높음</li>
+        <li>• <strong>10 mCi</strong>: 최소 권장 용량. <strong>15 mCi</strong>: 성공률 75–81%로 표준 권장 용량</li>
+        <li>• 큰 갑상선종: 15 mCi 초과 고려 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- III -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">III</span>
+        <strong>저요오드 식사: 일괄 처방 불권고; 고요오드 식품 1주일 전부터 회피 (권고수준 3)</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 한국인 평균 요오드 섭취량 416.5 μg/일 (권장의 ~3배) — 치료 효과 감소 우려</li>
+        <li>• RCT: 저요오드 식사 처방 → 소변 내 요오드↓ 유의 but 완치율 차이 없음</li>
+        <li>• <strong>실천 지침</strong>: 김·미역·다시마·고요오드 건강보조식품 1주일 전 중단. 무기 요오드 제제 1–2주 전 중단.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IV -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">IV</span>
+        <strong>항갑상선제: 치료 전 3–7일 중단 (1); 고위험 시 치료 후 3–7일 내 재투여 고려 (2)</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• ATD 중단 이유: RAI까지 유지 시 치료 실패↑ (RR 1.28), 치료 후 호르몬 급등 위험</li>
+        <li>• PTU: 방사성 보호 효과 → RAI 효과 더 저해 가능. EANM은 2주 전 중단 권고하나 국내 근거 부족으로 3–7일 유지.</li>
+        <li>• <strong>재투여 고려 대상</strong>: 고령, 심방세동·심부전·폐고혈압 동반, 신부전, 당뇨 조절 불량 등 갑상선중독증 악화 고위험군</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- V -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">V</span>
+        <strong>갑상선 안병증: 중등도 이상 활동성 금기; 경증 활동성에 예방적 스테로이드 권고 (1)</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• RAI: ATD 대비 안병증 악화 3.2–5.8배↑ (메타분석), 신규 발생 1.8배↑ (RCT)</li>
+        <li>• <strong>예방적 스테로이드</strong>: 경증 활동성 → 권고 (1). 비활동성 중등도·위험인자 → 고려 (2). 위험인자 없는 비활동성 경증 → 불필요 (1)</li>
+        <li>• 저용량(0.1–0.2 mg/kg) 6주 감량 요법 = 고용량(0.3–0.5 mg/kg)과 동등 효과</li>
+        <li>• 위험인자: 흡연, 높은 TRAb</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- VI -->
+  <div class="osa-acc">
+    <div class="osa-hdr" onclick="toggleOsaAcc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <span style="background:var(--accent);color:#fff;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">VI</span>
+        <strong>추적관찰: 4–6주 이내 → 2–3개월 간격 → 6개월–1년 간격 (모두 권고수준 2)</strong>
+      </span><span class="arr">▸</span>
+    </div>
+    <div class="osa-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 4–6주: TSH+fT4 동시 측정 (TSH 억제 지속 가능)</li>
+        <li>• 80–90%가 6개월 이내 정상 또는 저하증 도달</li>
+        <li>• RAI 1년 후에도 연 3–5%에서 추가 갑상선기능저하증 발생 → <strong>평생 추적 필요</strong></li>
+        <li>• 그레이브스병 갑상선기능저하증 누적: 1년 24% → 10년 59% → 25년 82%</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggleCard(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('collapsed');
+}
+function toggleOsaAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const spans = hdr.querySelectorAll('span');
+  const icon = spans[spans.length - 1];
+  const open = getComputedStyle(body).display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  icon.textContent = open ? '▸' : '▾';
+}
+function toggleSP(title) {
+  const body = title.nextElementSibling;
+  body.classList.toggle('open');
+  const arrow = title.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+const abbrs = [
+  ['RAI','Radioactive Iodine Therapy (방사성요오드 치료) — I-131을 이용한 갑상선 파괴 치료. 그레이브스병·독성결절 등에 사용. 완치율 75–81%.'],
+  ['ATD','Antithyroid Drug (항갑상선제) — 갑상선호르몬 합성 억제약. MMI(메티마졸), PTU(프로필티오우라실), CMZ(카비마졸). 표준 치료 기간 12–18개월.'],
+  ['MMI','Methimazole (메티마졸) — 1차 ATD; 15–20 mg/일 이상이 고용량. 고용량 시 무과립구증·간독성 위험↑. PTU보다 반감기 길어 1일 1회 가능.'],
+  ['PTU','Propylthiouracil (프로필티오우라실) — ATD. 150–300 mg/일 이상이 고용량. 방사성 보호 효과로 RAI 효과 저해 가능 → RAI 전 최소 3–7일 중단.'],
+  ['CMZ','Carbimazole (카비마졸) — ATD; 체내에서 MMI로 전환되는 전구약물.'],
+  ['GD','Graves Disease (그레이브스병) — 갑상선기능항진증의 가장 흔한 원인. 자가면역질환; TRAb에 의한 TSH 수용체 자극으로 갑상선호르몬 과생산.'],
+  ['TRAb','TSH Receptor Antibody (TSH 수용체 항체) — 그레이브스병의 진단 표지자. 높을수록 RAI 치료 성공률↓, 안병증 위험↑. RAI 후 일시 상승 가능.'],
+  ['TSH','Thyroid-Stimulating Hormone (갑상선자극호르몬) — 뇌하수체 분비; 갑상선 기능 조절. 항진증에서 억제됨(낮음).'],
+  ['fT4','Free T4 (유리 타이록신) — 갑상선 주요 호르몬. 항진증에서 상승. RAI 후 일시 급등 가능.'],
+  ['fT3','Free T3 (유리 트리요오도타이로닌) — 생물학적 활성 갑상선호르몬. ATD 전처치 후 RAI 시 치료 직후 급등(+61.8%) 가능.'],
+  ['LT4','Levothyroxine (레보타이록신) — 합성 T4. RAI 후 갑상선기능저하증 발생 시 장기 복용 필요.'],
+  ['TAO','Thyroid-Associated Ophthalmopathy (갑상선 안병증) = Graves Ophthalmopathy. RAI 후 악화 위험 3.2–5.8배↑. CAS로 활동성 평가.'],
+  ['CAS','Clinical Activity Score (임상 활동도 점수) — 갑상선 안병증 활동성 평가. 7개 항목 중 ≥3개 = 활동성. 치료 방침 결정에 핵심.'],
+  ['KTA','Korean Thyroid Association (대한갑상선학회) — 본 권고안 발행 학술단체.'],
+  ['ATA','American Thyroid Association (미국갑상선학회) — 2016 갑상선기능항진증 가이드라인 발행.'],
+  ['ETA','European Thyroid Association (유럽갑상선학회) — 2018 그레이브스병 갑상선기능항진증 가이드라인.'],
+  ['NICE','National Institute for Health and Care Excellence — 영국 임상 우수성 기관; 2019 갑상선 질환 가이드라인.'],
+  ['EANM','European Association of Nuclear Medicine — 유럽핵의학회; PTU 최소 2주 전 중단 권고(최신 가이드라인).'],
+  ['mCi','Millicurie (밀리퀴리) — 방사능 단위. RAI 고정 용량: 10–15 mCi 권고.'],
+  ['Gy','Gray (그레이) — 흡수 방사선량 단위. 120–180 Gy 범위에서 RAI 정상 갑상선기능 유지율 높음(메타분석).'],
+  ['I-131','Iodine-131 (요오드-131) — 방사성 동위원소; 반감기 8일; 갑상선에 선택적 섭취→β선 방출→갑상선 조직 파괴.'],
+  ['RAIU','Radioactive Iodine Uptake (방사성요오드 섭취율) — 갑상선의 요오드 섭취 능력 측정. 선량 측정 방식에서 용량 계산에 사용.'],
+  ['Agranulocytosis','무과립구증 — ATD 드문 중증 부작용. 발생 시 ATD 간 교차반응 위험 → 다른 ATD 전환 비권고 → RAI 또는 수술로 전환. RAI 성공률 88.8%.'],
+  ['Thyroid Storm','갑상선중독발작 — 중증 갑상선중독증. RAI 후 드물게 발생 가능. 고위험 환자(고령·부정맥·심부전 등)에서 특히 주의.'],
+  ['TFT','Thyroid Function Test (갑상선기능검사) — TSH + fT4 (+ fT3) 포함. RAI 후 추적 핵심 검사.'],
+  ['RCT','Randomized Controlled Trial (무작위 대조 시험)'],
+  ['HR','Hazard Ratio (위험비)'],
+  ['RR','Relative Risk (상대위험도)'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a => `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}"><span class="abbr-term">${a[0]}</span><span class="abbr-def">${a[1]}</span></div>`).join('');
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 460;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
