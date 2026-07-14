@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JBDS 2023 입원 저혈당 관리 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #cf222e;
+    --accent2: #82071e;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --mild: #1a7f37;
+    --moderate: #9a6700;
+    --severe: #cf222e;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 920px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 920px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 920px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── SEVERITY BADGES ── */
+  .sev { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .sev-mild { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .sev-moderate { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .sev-severe { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .sev-nbm { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .sev-enteral { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+
+  /* ── STEP LIST ── */
+  .step-list { list-style: none; counter-reset: step; }
+  .step-item {
+    counter-increment: step;
+    padding: 8px 0 8px 36px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: calc(12px * var(--fscale, 1));
+    line-height: 1.55;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-item::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    background: var(--accent);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-item strong { color: var(--accent); }
+  .step-item.warn-step::before { background: var(--yellow); }
+  .step-item.info-step::before { background: #0550ae; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid #0550ae; color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+
+  /* ── TABLE ── */
+  .hypo-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .hypo-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .hypo-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .hypo-table tr:last-child td { border-bottom: none; }
+  .hypo-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .hypo-table .section-row td { background: var(--surface2); color: var(--accent); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: var(--border); }
+  .acc-hdr span.acc-icon { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── TRAFFIC LIGHT ── */
+  .traffic-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 10px 0; }
+  @media (max-width: 700px) { .traffic-grid { grid-template-columns: 1fr; } }
+  .tlight-card { border-radius: 8px; overflow: hidden; }
+  .tlight-head { padding: 8px 12px; font-size: calc(13px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+  .tlight-body { padding: 10px 12px; font-size: calc(11.5px * var(--fscale, 1)); line-height: 1.7; }
+  .tlight-mild .tlight-head { background: #1a7f37; }
+  .tlight-mild .tlight-body { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; border-top: none; border-radius: 0 0 8px 8px; }
+  .tlight-moderate .tlight-head { background: #9a6700; }
+  .tlight-moderate .tlight-body { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; border-top: none; border-radius: 0 0 8px 8px; }
+  .tlight-severe .tlight-head { background: #cf222e; }
+  .tlight-severe .tlight-body { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; border-top: none; border-radius: 0 0 8px 8px; }
+
+  /* ── DRUG TILE ── */
+  .drug-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .drug-name { font-size: calc(14px * var(--fscale, 1)); font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .drug-sub { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); margin-bottom: 8px; }
+  .drug-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .drug-key { font-size: calc(10px * var(--fscale, 1)); font-weight: 600; color: var(--text2); min-width: 60px; }
+  .drug-val { font-size: calc(11px * var(--fscale, 1)); color: var(--text); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: #0550ae; }
+  .warn-text { color: var(--yellow); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; }
+  .pill-warn { background: #fff8c5; color: #7d4e00; }
+  .pill-danger { background: #ffebe9; color: #82071e; }
+  .pill-info { background: #ddf4ff; color: #0550ae; }
+  .pill-success { background: #dafbe1; color: #116329; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">JBDS-IP 2023</span>
+      <h1>입원 당뇨병 성인 저혈당 관리 지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://abcd.care/joint-british-diabetes-societies-jbds-inpatient-care-group" class="source-link" target="_blank">JBDS-IP JBDS 01, Revised January 2023 ↗</a>
+      <span class="meta"> · Joint British Diabetes Societies for Inpatient Care</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by JBDS-IP</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('algorithm')">🚦 처치 알고리즘</div>
+    <div class="tab" onclick="showTab('scenarios')">📋 시나리오별 대응</div>
+    <div class="tab" onclick="showTab('treatment')">💊 치료 약제·근거</div>
+    <div class="tab" onclick="showTab('prevention')">🛡️ 예방·사후관리</div>
+    <div class="tab" onclick="showTab('risk')">⚠️ 위험인자</div>
+    <div class="tab" onclick="showTab('audit')">📊 감사 기준</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">4.0</div><div class="stat-lbl">저혈당 치료 임계값 mmol/L ("4 is the floor")</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">18.4%</div><div class="stat-lbl">입원 중 저혈당 경험 환자 비율 (NaDIA 2019)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">4.1일</div><div class="stat-lbl">저혈당 경험 시 추가 입원 기간 (메타분석)</div></div>
+  </div>
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 핵심 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger" style="margin-bottom:8px">
+        <span>🚨</span>
+        <div><strong>저혈당 = 혈당 &lt;4.0 mmol/L (72 mg/dL)</strong> — 증상 유무와 무관하게 응급 처치. <strong>"4.0 is the floor"</strong> 원칙 적용.</div>
+      </div>
+      <table class="hypo-table">
+        <tr><th>분류</th><th>정의</th><th>비고</th></tr>
+        <tr><td><strong>비중증</strong></td><td>자가 치료 가능</td><td>경증 ~ 중등도</td></tr>
+        <tr><td><strong>중증</strong></td><td>제3자 도움 필요</td><td>의식 저하 · 경련 · 공격적 행동</td></tr>
+        <tr><td><strong>임박 저혈당 (Looming)</strong></td><td>혈당 4.0–6.0 mmol/L</td><td>인슐린 · SU 투여 중인 경우 선제 대응 고려</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>혈당 &gt;4.0 mmol/L이더라도 증상이 있으면 탄수화물 간식 제공. 인지 기능 장애 역치는 위로 재설정되지 <strong>않는다</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 적용 대상 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👤</span> 적용 대상</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">비임신 성인(16세 이상) 당뇨병 환자의 입원 저혈당 관리에 적용한다.</div></li>
+        <li class="rec-item"><div class="rec-text">16–18세는 성인 팀 관리 시 이 지침을 사용하고, 소아 팀 관리 시 소아 지침을 따른다.</div></li>
+        <li class="rec-item"><div class="rec-text">임신 중 저혈당은 이 지침의 범위를 벗어난다.</div></li>
+        <li class="rec-item"><div class="rec-text">인슐린 또는 설포닐우레아(SU) 사용 환자: 모든 병동에 PRN 처방(IV 포도당 ± IM 글루카곤)을 미리 처방하도록 권고한다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 중요 변경 사항 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🆕</span> 2023년 개정 주요 변경사항</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-info">구조</span></div><div class="rec-text">관리 알고리즘을 문서 앞부분으로 이동 (임상 접근성 향상)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-warn">개념</span></div><div class="rec-text">혈당 4.0–6.0 mmol/L의 "임박 저혈당(looming hypoglycaemia)" 개념 신규 도입 및 강조</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-success">용어</span></div><div class="rec-text">"포도당(glucose)"으로 IV 제제 용어 통일 (이전: dextrose)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-danger">용량</span></div><div class="rec-text">IV 포도당 용량 단일 수치로 명시 (용량 범위 제거) — 응급 상황 단순화</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-info">언어</span></div><div class="rec-text">"환자(inpatient)" 대신 "사람(person/people with diabetes)"으로 용어 통일</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-success">연령</span></div><div class="rec-text">16–18세 관리 지침 명확화</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 혈당 목표 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 입원 혈당 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="hypo-table">
+        <tr><th>기관</th><th>입원 혈당 목표</th><th>비고</th></tr>
+        <tr><td>JBDS (영국)</td><td>6.0–10.0 mmol/L</td><td>일반 입원 환자</td></tr>
+        <tr><td>ADA (미국)</td><td>7.8–10.0 mmol/L</td><td>인슐린 사용 환자 (덜 엄격)</td></tr>
+        <tr><td>NICE-SUGAR 이후</td><td>ICU: 목표 완화</td><td>4.5–6.0 mmol/L 집중 조절 → 저혈당·90일 사망 증가</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>고령·허약·다중 합병증 환자는 더 완화된 목표(~12 mmol/L)를 고려. CSII(인슐린 펌프) 또는 CGM 사용자는 4–6 mmol/L가 정상 범위일 수 있으므로 개별 상담 필수.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ═══════════════ ALGORITHM ═══════════════ -->
+<div id="tab-algorithm" class="panel">
+
+  <div class="alert alert-danger">
+    <span>🚨</span>
+    <div><strong>저혈당은 응급 상태다.</strong> 의식 수준과 무관하게 즉각 치료한다. IV 인슐린 주입 중이면 <strong>즉시 중단</strong>하고 저혈당 교정 후 용량 검토 후 재시작.</div>
+  </div>
+
+  <!-- 신호등 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚦</span> 신호등 알고리즘 요약 (Traffic Light)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="traffic-grid">
+        <!-- 경증 -->
+        <div class="tlight-card tlight-mild">
+          <div class="tlight-head">🟢 경증 (Mild) — Algorithm A</div>
+          <div class="tlight-body">
+            <strong>의식 있음 · 방향감각 정상 · 삼킬 수 있음</strong><br><br>
+            ① ABCDE 확인, IV 인슐린 중단<br>
+            ② 속효성 탄수화물 15–20g 경구 투여<br>
+            ③ 10–15분 후 CBG 재측정<br>
+            ④ &lt;4.0 반복 시 최대 3회 반복<br>
+            ⑤ 3회 후에도 &lt;4.0 → 중증 경로로 전환<br><br>
+            <strong>교정 후:</strong> 장기 탄수화물 20g + 혈당 24–48h 모니터링
+          </div>
+        </div>
+        <!-- 중등도 -->
+        <div class="tlight-card tlight-moderate">
+          <div class="tlight-head">🟡 중등도 (Moderate) — Algorithm B</div>
+          <div class="tlight-body">
+            <strong>의식 있음 · 삼킬 수 있지만 혼란/공격적</strong><br><br>
+            ① 협조 가능 시 → 알고리즘 A 동일<br>
+            ② 협조 불가 시 → 40% 포도당 젤 2튜브 (치아-잇몸 사이 짜넣기)<br>
+            ③ 젤 효과 없으면 → 글루카곤 1mg IM<br>
+            ④ 10–15분 후 CBG 재측정, 최대 3회<br>
+            ⑤ 3회 후에도 &lt;4.0 → IV 포도당 투여<br><br>
+            <strong>교정 후:</strong> 장기 탄수화물 20g (글루카곤 사용 시 40g)
+          </div>
+        </div>
+        <!-- 중증 -->
+        <div class="tlight-card tlight-severe">
+          <div class="tlight-head">🔴 중증 (Severe) — Algorithm C</div>
+          <div class="tlight-body">
+            <strong>의식 없음 · 경련 · 매우 공격적 · NBM</strong><br><br>
+            ① ABCDE (+ 산소 투여), IV 인슐린 즉시 중단<br>
+            ② <strong>의료진 즉시 호출</strong><br>
+            ③ IV 접근 가능 → 20% 포도당 100ml (400ml/h, 15분) 또는 10% 200ml (800ml/h, 15분)<br>
+            ④ IV 불가 → 글루카곤 1mg IM<br>
+            ⑤ 10분 후 CBG 재측정, 반복 가능<br>
+            ⑥ 교정 후 NBM이면 → 10% 포도당 100ml/h 유지<br><br>
+            <strong>50% 포도당 사용 금지 — 혈관 외 유출 시 조직 괴사 위험</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div><strong>교정 공통 원칙:</strong> 혈당 &gt;4.0 mmol/L 회복 후 → 장기 탄수화물 20g 투여 (글루카곤 사용 시 40g). 이후 인슐린 주사 <strong>생략하지 말 것</strong> — 저혈당 발생 시점의 인슐린은 이미 작용 완료된 경우가 대부분.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NBM 알고리즘 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> Algorithm D — 금식(NBM) 환자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ol class="step-list">
+        <li class="step-item">ABCDE 확인 후 IV 인슐린 즉시 중단</li>
+        <li class="step-item">가변속도 IV 인슐린 사용 중이면 처방에 따라 조정 + 의료진 상담. 혈당 &gt;4.0 회복 후 대부분 재시작 가능 (속도 조정 필요)</li>
+        <li class="step-item info-step">IV 포도당으로 치료 (알고리즘 C, 5번 참조)</li>
+        <li class="step-item">혈당 &gt;4.0 mmol/L 회복 후 → <strong>10% 포도당 100ml/h IV 지속 주입</strong> (금식 해제 또는 의료팀 검토까지)</li>
+        <li class="step-item warn-step">SU 또는 장기 인슐린에 의한 저혈당 → 마지막 투여 후 24–36시간 저혈당 위험 지속. 신기능 저하 시 특히 주의.</li>
+        <li class="step-item">24–48시간 CBG 모니터링 유지. 퇴원 시 외래 팀에 치료 변경 사항 전달.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 경관 영양 알고리즘 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> Algorithm E — 경관/비경구 영양 환자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>TPN 라인을 통해 저혈당 치료 약제를 투여하지 말 것. TPN 환자는 경구 또는 IV로 치료.</div>
+      </div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));margin:8px 0 4px;color:var(--text2)">경관 영양 저혈당 위험 인자</div>
+      <div class="grid2" style="gap:6px;margin-bottom:8px">
+        <div style="font-size: calc(12px * var(--fscale, 1))">• 튜브 막힘/위치 이탈<br>• 영양 처방 변경<br>• 경관 영양 중단<br>• TPN·IV 포도당 중단</div>
+        <div style="font-size: calc(12px * var(--fscale, 1))">• 식사와 무관한 약제 투여 시간<br>• 스테로이드 감량/중단<br>• 구역·구토·흡수 장애<br>• 신기능 악화 · 중증 간부전</div>
+      </div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));margin:8px 0 4px;color:var(--text2)">경관 튜브 경유 치료 (15–20g 속효성 탄수화물)</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">40% 포도당 젤 2튜브 — <strong>세경 비위관(fine bore NGT) 사용 불가</strong></div></li>
+        <li class="rec-item"><div class="rec-text">Lift 주스샷 1병(60ml), 오렌지주스 150–200ml, Fortijuce® 50–70ml (Fortisip® 불가)</div></li>
+        <li class="rec-item"><div class="rec-text">경관 영양 재시작으로 15–20g 탄수화물 신속 투여</div></li>
+        <li class="rec-item"><div class="rec-text">모든 경관 치료 후 40–50ml 물 flush (튜브 막힘 예방)</div></li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>📌</span>
+        <div>초기 치료 성공 후 → 영양 팀 및/또는 당뇨 입원 전담팀 의뢰 필수 (특히 TPN 환자)</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /algorithm -->
+
+
+<!-- ═══════════════ SCENARIOS ═══════════════ -->
+<div id="tab-scenarios" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 임상 시나리오별 처치 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="hypo-table">
+        <tr>
+          <th>시나리오</th>
+          <th>분류</th>
+          <th>1차 치료</th>
+          <th>반응 없을 시</th>
+          <th>교정 후</th>
+        </tr>
+        <tr>
+          <td>의식 있음, 삼킬 수 있음</td>
+          <td><span class="sev sev-mild">경증</span></td>
+          <td>속효성 CHO 15–20g 경구 (덱스트로즈 정·주스·설탕물)</td>
+          <td>최대 3회 반복 → 실패 시 IV/IM</td>
+          <td>장기 CHO 20g + 24–48h CBG 모니터링</td>
+        </tr>
+        <tr>
+          <td>의식 있으나 혼란/공격적, 삼킬 수 있음</td>
+          <td><span class="sev sev-moderate">중등도</span></td>
+          <td>40% 포도당 젤 2튜브 (구강 점막). 비협조적이면 글루카곤 1mg IM</td>
+          <td>3회 반복 → 실패 시 IV 포도당</td>
+          <td>장기 CHO 20g (글루카곤 시 40g)</td>
+        </tr>
+        <tr>
+          <td>의식 없음/경련/매우 공격적</td>
+          <td><span class="sev sev-severe">중증</span></td>
+          <td>IV 접근 시: 20% 포도당 100ml IV (15분). IV 불가: 글루카곤 1mg IM</td>
+          <td>10분 후 재측정, 반복 가능</td>
+          <td>의식 회복 후 장기 CHO; NBM 지속 시 10% 포도당 100ml/h</td>
+        </tr>
+        <tr>
+          <td>금식(NBM) 환자</td>
+          <td><span class="sev sev-nbm">NBM</span></td>
+          <td>IV 포도당 (알고리즘 C 기준)</td>
+          <td>10분 후 재측정</td>
+          <td>10% 포도당 100ml/h 유지 (금식 해제까지)</td>
+        </tr>
+        <tr>
+          <td>경관/비경구 영양 환자</td>
+          <td><span class="sev sev-enteral">경관</span></td>
+          <td>경관 튜브로 속효성 CHO 15–20g. TPN 환자: 경구 또는 IV</td>
+          <td>3회 반복 → IV 포도당</td>
+          <td>경관 영양 재시작; 10% 포도당 100ml/h 보조</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 구체적 처치 세부 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔢</span> 알고리즘 A 상세 단계 (경증)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ol class="step-list">
+        <li class="step-item">ABCDE 확인 (Airway, Breathing, Circulation, Disability — GCS·혈당, Exposure — 체온). 환자가 전반적으로 양호하면 빠르게 2단계로 이동.</li>
+        <li class="step-item"><strong>IV 인슐린 주입 중이면 즉시 중단.</strong> 저혈당 교정 완료 후 용량 검토 후 재시작.</li>
+        <li class="step-item">속효성 탄수화물 15–20g 환자 선호에 따라 투여:
+          <ul style="margin-top:6px;padding-left:16px;font-size: calc(12px * var(--fscale, 1));line-height:1.8">
+            <li>덱스트로즈 정제 5–7개 (또는 Lift GlucoTabs™ 4–5개)</li>
+            <li>Lift 주스샷 1병 (60ml)</li>
+            <li>순수 과일주스 150–200ml (CKD G4–G5 저칼륨 식이 시 오렌지주스 금지)</li>
+            <li>설탕 3–4 찻숟갈을 물에 녹임 (아카르보스 복용 환자에게는 비효과적 — 자당 분해 억제)</li>
+          </ul>
+        </li>
+        <li class="step-item">10–15분 후 CBG 재측정. &lt;4.0이면 3단계 반복 (최대 3회 총).</li>
+        <li class="step-item warn-step">30–45분 또는 3회 처치 후에도 &lt;4.0 → <strong>의료 지원 요청.</strong> 글루카곤 1mg IM 또는 IV 포도당을 응급 목적으로 처방 없이 투여 가능 (지역 지침 확인).</li>
+        <li class="step-item">10분 후 CBG 재측정. &lt;4.0이면 5단계 반복.</li>
+        <li class="step-item info-step">혈당 &gt;4.0 mmol/L 회복 후 — 장기 탄수화물 20g (글루카곤 사용 시 40g): 비스킷 2개, 식빵 1조각, 우유 200–300ml (두유·아몬드유 불가), 또는 식사 시간이면 정규 식사.</li>
+        <li class="step-item">CSII(인슐린 펌프) 자가 관리 환자: 초기 치료 후 펌프 설정 조정. 장기 탄수화물 불필요할 수 있음.</li>
+        <li class="step-item warn-step"><strong>다음 예정 인슐린 주사를 생략하지 말 것.</strong> 저혈당 유발 인슐린 용량이 무엇인지 파악하여 처방 검토.</li>
+        <li class="step-item">SU 또는 장기 인슐린 원인 시 → 마지막 투여 후 24–36시간 저혈당 위험 지속 (신기능 저하 시 특히).</li>
+        <li class="step-item">의무기록 기재. 24–48시간 CBG 모니터링 유지. 당뇨 입원 전담팀 의뢰. 저혈당 교육 자료 제공 (Trend Diabetes 웹사이트).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ABCDE -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔠</span> ABCDE 초기 평가 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="hypo-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td><strong>A — Airway</strong></td><td>기도 유지. 의식 없는 환자: 중증 경로에서 산소 투여</td></tr>
+        <tr><td><strong>B — Breathing</strong></td><td>호흡 확인</td></tr>
+        <tr><td><strong>C — Circulation</strong></td><td>맥박·혈압 확인</td></tr>
+        <tr><td><strong>D — Disability</strong></td><td>GCS 점수 + 혈당 측정 포함</td></tr>
+        <tr><td><strong>E — Exposure</strong></td><td>체온 등 전신 노출 평가</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>환자가 전반적으로 양호한 경우 ABCDE에 너무 많은 시간을 소비하지 말고 신속히 치료 단계로 이동할 것.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /scenarios -->
+
+
+<!-- ═══════════════ TREATMENT ═══════════════ -->
+<div id="tab-treatment" class="panel">
+
+  <!-- 경구 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍬</span> 경구 치료 옵션 및 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          탄수화물 용량 — 15g vs 20g <span class="acc-icon">▸</span>
+        </div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-text">Vindedzis et al: 15g 투여 시 1회 치료 성공률 32–63%, 20g 시 55–89%. → <strong>20g 권고.</strong></div></li>
+            <li class="rec-item"><div class="rec-text">Larsen et al (CGM): 10g 미만 투여 시 57%에서 저혈당 지속. 적정 10–20g: 30% 지속. 과잉(>20g): 26% 지속.</div></li>
+            <li class="rec-item"><div class="rec-text">과잉 치료(>20g) 역시 흔함 — T1DM에서 73%가 과잉 투여, 평균 32g 사용. 이후 반동 고혈당 유발.</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          탄수화물 종류 선택 <span class="acc-icon">▸</span>
+        </div>
+        <div class="acc-body">
+          <table class="hypo-table">
+            <tr><th>제품</th><th>권고</th><th>비고</th></tr>
+            <tr><td>포도당 정제(덱스트로즈)</td><td class="success-text">권고</td><td>가장 신뢰할 수 있는 속효성</td></tr>
+            <tr><td>순수 과일주스</td><td class="success-text">권고</td><td>오렌지주스 — CKD G4–5 제한 (칼륨)</td></tr>
+            <tr><td>40% 포도당 젤(Glucogel®)</td><td class="success-text">권고</td><td>협조 불가 환자에서 구강 점막 사용</td></tr>
+            <tr><td>설탕물</td><td class="success-text">권고</td><td>아카르보스 복용 시 <strong>비효과적</strong> (자당→포도당 분해 억제)</td></tr>
+            <tr><td>초콜릿</td><td class="danger-text">권고 안 함</td><td>지방이 탄수화물 흡수 지연시킴</td></tr>
+            <tr><td>Lucozade®</td><td class="danger-text">권고 안 함</td><td>설탕세 이후 탄수화물 함량 불안정</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          재측정 간격 <span class="acc-icon">▸</span>
+        </div>
+        <div class="acc-body">
+          <div class="alert alert-info">
+            <span>⏱️</span>
+            <div>치료 후 최소 <strong>10분</strong> 대기 후 재측정. 5분 대기 시 89% 대신 55%만 교정 성공(Vindedzis). Slama et al: 5–10분 간격 반복은 과잉 치료 유발. 입원 환자 실태: 23%만이 20분 내 재측정 시행 — 준수율 낮음.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비경구 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 비경구 치료 옵션 및 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div class="drug-tile">
+          <div class="drug-name">글루카곤 (Glucagon)</div>
+          <div class="drug-sub">근육주사(IM) — 1mg</div>
+          <div class="sec-sep"></div>
+          <div class="drug-row"><span class="drug-key">용량</span><span class="drug-val">1mg IM (1회 한정)</span></div>
+          <div class="drug-row"><span class="drug-key">발현</span><span class="drug-val">최대 15분 소요</span></div>
+          <div class="drug-row"><span class="drug-key">허가</span><span class="drug-val">인슐린 유발 저혈당에만 허가</span></div>
+          <div class="drug-row"><span class="drug-key">반복</span><span class="drug-val">2회 투여 시 1%만 반응 — 반복 투여 불가</span></div>
+          <div class="drug-row"><span class="drug-key">효과 감소</span><span class="drug-val">영양 불량, 간부전, 과음, SU 유발 저혈당</span></div>
+          <div class="drug-row"><span class="drug-key">주의</span><span class="drug-val">항응고제 복용 시 IM 주사 출혈 위험</span></div>
+          <div class="drug-row"><span class="drug-key">교정 후</span><span class="drug-val">장기 CHO <strong>40g</strong> (간 글리코겐 보충)</span></div>
+          <div style="margin-top:8px">
+            <div class="alert alert-info" style="margin:0">
+              <span>💡</span><div>비강 글루카곤(nasal glucagon): 일반인 투여 편의성 우수, 효과 IM과 동등. 영국에서는 집필 당시 미허가.</div>
+            </div>
+          </div>
+        </div>
+        <div class="drug-tile">
+          <div class="drug-name">IV 포도당 (Intravenous Glucose)</div>
+          <div class="drug-sub">10% 또는 20% — 50% 사용 금지</div>
+          <div class="sec-sep"></div>
+          <div class="drug-row"><span class="drug-key">20% 용량</span><span class="drug-val">100ml (400ml/h, 15분)</span></div>
+          <div class="drug-row"><span class="drug-key">10% 용량</span><span class="drug-val">200ml (800ml/h, 15분)</span></div>
+          <div class="drug-row"><span class="drug-key">경로</span><span class="drug-val">말초 정맥 (큰 정맥). 20%는 가능한 중심정맥 선호</span></div>
+          <div class="drug-row"><span class="drug-key">50% 금지</span><span class="drug-val">혈관 외 유출 시 조직 괴사 — 삼투압 2522 vs 506 mOsm/L</span></div>
+          <div class="drug-row"><span class="drug-key">신장/심부전</span><span class="drug-val">가능한 소량 투여</span></div>
+          <div class="drug-row"><span class="drug-key">20% 주의</span><span class="drug-val">100ml 병 전체를 걸어야 실제 75ml 전달 (주입 세트 dead space)</span></div>
+          <div style="margin-top:8px">
+            <div class="alert alert-danger" style="margin:0">
+              <span>🚫</span><div><strong>50% 포도당 사용 금지.</strong> Phlebitis → 혈관 파열 → 조직 손상. 중심정맥 접근이 없는 상황에서는 절대 금지.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top:10px">
+        <span>✅</span>
+        <div>응급 상황에서 IV 포도당 및 IM 글루카곤은 처방 없이 투여 가능 (생명 구조 목적 또는 Patient Group Directive에 근거). 단, 기관 지침 확인 필수.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hypo Box -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📦</span> Hypo Box 구성 및 운영</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>Hypo box 도입 후 저혈당 올바른 처치율 42% → 82% 향상. 현재 상업용 제품도 출시됨. 매일 내용물 확인 필수.</div>
+      </div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));margin-bottom:4px;color:var(--accent2)">경구 치료 물품</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:2;padding-left:4px;list-style:none">
+            <li>• 순수 과일주스 200ml 카톤 × 2</li>
+            <li>• 덱스트로즈 정제 2팩</li>
+            <li>• 비스킷 소포장 1개 (장기 CHO)</li>
+            <li>• 40% 포도당 젤 3튜브 (1박스)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));margin-bottom:4px;color:var(--accent2)">IV/IM 치료 물품</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:2;padding-left:4px;list-style:none">
+            <li>• 20% 포도당 100ml 바이알 + 주입 세트</li>
+            <li>• 10% 포도당 500ml 백 + 주입 세트</li>
+            <li>• 18G 캐뉼라, 16G 캐뉼라 각 1개</li>
+            <li>• 10ml 주사기, NaCl 0.9% 10ml × 3</li>
+            <li>• 21G 바늘, 소독 패드, IV 드레싱</li>
+            <li>• 글루카곤 팩 (약품 냉장고 또는 실온 18개월 유효)</li>
+            <li>• 저혈당 알고리즘 라미네이트 카드</li>
+            <li>• 감사 양식</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /treatment -->
+
+
+<!-- ═══════════════ PREVENTION ═══════════════ -->
+<div id="tab-prevention" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🛡️</span> 저혈당 예방 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">인적 접근 (Human approaches) <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-text">탄수화물 "10g 벽돌" 단위 제공으로 환자 스스로 탄수화물 계산 가능하게 함. 식사 후 인슐린 투여로 저혈당 감소.</div></li>
+            <li class="rec-item"><div class="rec-text">당뇨 비전문과 입원 시 비전문 의료진의 당뇨 지식 부족 — 입원 전담팀의 다면적 접근(온라인 의뢰, 혈당계 연동, 교육)으로 입원 기간 단축 효과.</div></li>
+            <li class="rec-item"><div class="rec-text">인슐린 또는 SU 처방 환자 모두에게 입원 초기 PRN "구조 처방(rescue prescription)" 작성 권고.</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">전산화 접근 (Computerised approaches) <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-text">전자 환자 기록에서 인구통계, 약제, 검사 결과, 시술 데이터를 활용한 저혈당 고위험군 자동 감지 알고리즘(machine learning) 개발 중.</div></li>
+            <li class="rec-item"><div class="rec-text">이전 입원 중 저혈당 이력이 가장 강력한 입원 저혈당 예측 인자.</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">CSII (인슐린 펌프) 환자 <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-text">CSII를 계속 사용하려면 자가 관리 가능할 만큼 충분히 회복되어야 함. 불가능하면 가변속도 IV 인슐린 또는 피하 인슐린으로 전환.</div></li>
+            <li class="rec-item"><div class="rec-text">CSII 사용자의 4–6 mmol/L는 공복 시 정상 범위일 수 있음. 중증 저혈당 회피를 위해 입원 중 목표 상향 상담 필요.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사후 관리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📝</span> 저혈당 교정 후 사후 관리 체크리스트</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-warn">필수</span></div><div class="rec-text">인시던트 보고 양식(DATIX 등) 작성 고려.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-warn">필수</span></div><div class="rec-text">Hypo box 사용 시 물품 즉시 보충.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-warn">필수</span></div><div class="rec-text">저혈당 원인 파악 및 기록 (Table 3 위험인자 탭 참조).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-danger">금지</span></div><div class="rec-text"><strong>다음 예정 인슐린 주사 생략 금지.</strong> VRIII(가변속도 IV 인슐린) 시작으로 "안정화" 시도 금지.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-danger">금지</span></div><div class="rec-text"><strong>고혈당 일회성 스파이크에 "stat" 속효성 인슐린 투여 금지.</strong> 패턴 확인 후 처방 조정.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-success">권고</span></div><div class="rec-text">저혈당 시점에 활성 중이던 인슐린/SU 용량 감량 검토.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-success">권고</span></div><div class="rec-text">원인 불명확하거나 중증/반복 저혈당 시 당뇨 입원 전담팀(또는 DISN) 의뢰.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-info">퇴원</span></div><div class="rec-text">퇴원 시 치료 변경이 유의미하면 1차 진료팀에 신속하게 통보. AKI 후 SU·메트포르민 중단 등 임시 변경 검토 사항 전달.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="pill pill-info">교육</span></div><div class="rec-text">환자에게 저혈당 교육 제공 또는 Trend Diabetes 웹사이트 교육자료 안내.</div></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /prevention -->
+
+
+<!-- ═══════════════ RISK FACTORS ═══════════════ -->
+<div id="tab-risk" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 저혈당 위험인자 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">의학적 요인</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:1.9;padding-left:4px;list-style:none">
+            <li>• 엄격한 혈당 조절</li>
+            <li>• 중증 저혈당 과거력</li>
+            <li>• T1DM 이환 기간 ↑</li>
+            <li>• T2DM에서 인슐린 치료 기간 ↑</li>
+            <li>• 주사 부위 지방 과형성</li>
+            <li>• 저혈당 무인지(IAH)</li>
+            <li>• 중증 간부전</li>
+            <li>• 신기능 장애 (투석 포함)</li>
+            <li>• 패혈증</li>
+            <li>• 이전 저혈당 부적절 치료</li>
+            <li>• 말기 질환</li>
+            <li>• 인지 기능 장애/치매</li>
+            <li>• C-펩타이드 음성</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">생활 습관 · 탄수화물 관련 요인</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:1.9;padding-left:4px;list-style:none">
+            <li>• 운동 증가 (평소 대비)</li>
+            <li>• 고령</li>
+            <li>• 알코올</li>
+            <li>• 초기 임신, 수유</li>
+            <li>• 혈당 모니터링 불충분</li>
+            <li>• 음식 흡수 장애 (위장염, 복강병, 위마비)</li>
+            <li>• 비만 수술 (장 절제 포함)</li>
+          </ul>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin:10px 0 6px">내분비 질환</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:1.9;padding-left:4px;list-style:none">
+            <li>• 애디슨병</li>
+            <li>• 성장호르몬 결핍증</li>
+            <li>• 갑상선기능저하증</li>
+            <li>• 뇌하수체기능저하증</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table 3 병원 내 원인 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 입원 환자 저혈당 유발 원인 (Table 3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:10px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">인슐린 처방 오류</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:1.9;padding-left:4px;list-style:none">
+            <li>• PRN 속효성 인슐린 부적절 반복 투여</li>
+            <li>• 인슐린 이름과 용량 혼동 (예: Humalog Mix25 → Humalog 25단위)</li>
+            <li>• 농도와 용량 혼동 (100단위/ml를 100단위로 오해)</li>
+            <li>• IV 주사기로 인슐린 뽑기 — 인슐린 전용 주사기 사용 필수</li>
+            <li>• 고농도 펜(200, 300단위/ml)에서 일반 주사기로 뽑기</li>
+            <li>• 단위(U) → 0 추가 오독 ("4U" → 40단위). 항상 "UNITS" 전문 표기.</li>
+            <li>• 고칼륨혈증 치료 인슐린-포도당 처방과 혈당 관리 처방 혼동</li>
+            <li>• 입원 전 미복용 약제를 입원 중 투여</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">의학적 · 탄수화물 섭취 요인</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));line-height:1.9;padding-left:4px;list-style:none">
+            <li>• 장기 코르티코스테로이드 급격한 중단</li>
+            <li>• 급성 질환/스트레스 회복 후</li>
+            <li>• 질병 후 보행 회복</li>
+            <li>• 대절단술 후</li>
+            <li>• 잘못된 인슐린 또는 경구 혈당강하제 처방</li>
+            <li>• 식사·경관 영양과 무관한 약제 투여 시간</li>
+            <li>• 인슐린 주사 부위 변경</li>
+            <li>• 식사 거름 또는 지연</li>
+            <li>• 통상보다 탄수화물 섭취 감소</li>
+            <li>• 주된 식사 시간 변경</li>
+            <li>• 취침 전·식간 간식 부재</li>
+            <li>• 장기 금식</li>
+            <li>• 구역·구토, 식욕 감퇴</li>
+            <li>• IV 인슐린 중 포도당 주입 누락</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>저혈당 유발 가능 약제 병용 주의: 와파린, 퀴닌, 살리실산, 피브레이트, 설폰아미드(코트리목사졸 포함), 리네졸리드, MAO억제제, NSAIDs, 프로베네시드, 소마토스타틴 유사체, SSRI. → 중단 말고 의료팀/약사 상의.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이환율·사망률 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💀</span> 저혈당의 이환율·사망률 영향</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">저혈당 → 혼수, 편마비, 경련 유발 가능. 장기 지속 시 영구적 신경학적 손상.</div></li>
+        <li class="rec-item"><div class="rec-text">급성 저혈당은 계획 및 멀티태스킹을 포함한 인지 기능에 심각한 영향.</div></li>
+        <li class="rec-item"><div class="rec-text">15개 연구 메타분석: 저혈당 경험 환자는 입원 기간 4.1일 연장, 원내 사망률 약 2배.</div></li>
+        <li class="rec-item"><div class="rec-text">T2DM에서 혈당 &lt;3.0 mmol/L 재발률 39%, T1DM에서 45% (17,000건 이상 입원 연구).</div></li>
+        <li class="rec-item"><div class="rec-text">중증 저혈당(포도당 &lt;2.9 mmol/L)은 야간 및 이른 아침 발생이 가장 많음. SU 치료 환자에서 야간 저혈당이 인슐린보다 더 흔함 (75.3% vs 59.3%).</div></li>
+        <li class="rec-item"><div class="rec-text">IV 인슐린 주입은 T2DM에서 저혈당 위험을 20% 미만 → 30% 초과로 증가시킴.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IAH -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔕</span> 저혈당 무인지(IAH)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>IAH(Impaired Awareness of Hypoglycaemia)는 인슐린 치료와 관련된 후천적 증후군. 저혈당 경고 증상이 약해지거나 사라져 중증 저혈당 진행 위험 증가.</div>
+      </div>
+      <table class="hypo-table" style="margin-top:8px">
+        <tr><th>증상 분류</th><th>증상</th></tr>
+        <tr><td>자율신경 증상</td><td>발한, 심계항진, 떨림, 배고픔</td></tr>
+        <tr><td>신경당결핍 증상</td><td>혼란, 졸림, 이상 행동, 언어 장애, 조화 운동 불능</td></tr>
+        <tr><td>전신 불쾌감</td><td>두통, 구역</td></tr>
+      </table>
+      <p style="font-size: calc(12px * var(--fscale, 1));margin-top:8px;color:var(--text2)">IAH 유병률은 당뇨 이환 기간에 따라 증가하며 T2DM보다 T1DM에서 더 흔하다.</p>
+    </div>
+  </div>
+
+</div><!-- /risk -->
+
+
+<!-- ═══════════════ AUDIT ═══════════════ -->
+<div id="tab-audit" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 감사 기준 (Appendix 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="hypo-table">
+        <tr><th>영역</th><th>지표</th></tr>
+        <tr class="section-row"><td colspan="2">프로세스</td></tr>
+        <tr><td><strong>프로토콜</strong></td><td>국가 표준에 기반한 당뇨 관리 지침 보유 여부 (NBM·경관 환자 포함)</td></tr>
+        <tr><td><strong>구현</strong></td><td>당뇨 전담팀과 합의된 병원 전체 경로 보유 여부</td></tr>
+        <tr><td></td><td>병동 직원 교육 프로그램 및 주기적 감사 실시 (혈당계 교정, 치료 목표 지식)</td></tr>
+        <tr><td></td><td>"Hypo box" (또는 동등 물품) 보유 병동 비율</td></tr>
+        <tr><td></td><td>환자가 스스로 저혈당 치료에 접근 가능한 비율</td></tr>
+        <tr><td><strong>전문가 검토</strong></td><td>저혈당으로 입원한 환자의 퇴원 전 전문의 또는 DISN 검토 비율</td></tr>
+        <tr class="section-row"><td colspan="2">결과 지표</td></tr>
+        <tr><td><strong>발생률</strong></td><td>지역/국가 데이터 대비 중증 저혈당 발생률 벤치마크</td></tr>
+        <tr><td><strong>재원 연장</strong></td><td>입원 저혈당 에피소드로 인한 퇴원 지연 비율</td></tr>
+        <tr><td><strong>원인 파악</strong></td><td>저혈당 원인 파악 및 기록 비율</td></tr>
+        <tr><td></td><td>재발 방지 목적 인슐린/혈당강하제 용량 조정 적절성 (월별 감사)</td></tr>
+        <tr><td><strong>해소 시간</strong></td><td>교정까지 소요 시간 (Time to recovery)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📄</span> 저혈당 감사 양식 핵심 항목</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="hypo-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>에피소드 유형</td><td>A(의식·방향감각·삼킴 정상) / B(혼란·삼킴 가능) / C(의식 없음/경련) / D(NBM) / E(경관 영양)</td></tr>
+        <tr><td>발생 혈당</td><td>mmol/L</td></tr>
+        <tr><td>10–15분 후 혈당</td><td>치료 1회 후</td></tr>
+        <tr><td>추가 치료 후 혈당</td><td>필요 시</td></tr>
+        <tr><td>지침 준수 여부</td><td>예/아니오 (아니오 시 사유 기록)</td></tr>
+        <tr><td>자가 관리 여부</td><td>예/아니오</td></tr>
+        <tr><td>회복 여부</td><td>예/아니오 (아니오 시 경과 기술)</td></tr>
+        <tr><td>원인 조사 내용</td><td>자유 기술</td></tr>
+        <tr><td>재발 방지 조치</td><td>자유 기술</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 임상 교훈 — Looming Hypoglycaemia 사례</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div style="font-size: calc(12px * var(--fscale, 1));color:var(--text2);margin-bottom:8px">혈당 4.0–6.0 mmol/L는 다음 임상 상황에서 개별화된 선제 대응이 필요하다.</div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">사례 1 — 저위험 T2DM 환자 <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <p style="font-size: calc(12px * var(--fscale, 1))">메트포르민 단독 복용 중간연령 T2DM, HbA1c ~48 mmol/mol. 혈당 4.0–6.0 mmol/L → 저혈당 위험 낮음. 특별한 조치 불필요.</p>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">사례 2 — 고위험 SU 복용 노인 <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <p style="font-size: calc(12px * var(--fscale, 1))">84세 여성, 고용량 SU 복용 중 요로감염 + AKI로 입원. 혈당 4.0–6.0 mmol/L 반복 → <strong>용량 선제 감량 필요.</strong> AKI 회복 후 SU·메트포르민 재투여 검토.</p>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">사례 3 — T1DM + 섬망 입원 환자 <span class="acc-icon">▸</span></div>
+        <div class="acc-body">
+          <p style="font-size: calc(12px * var(--fscale, 1))">HbA1c 53 mmol/mol T1DM 남성, 폐렴으로 인한 섬망 입원. 자가 관리 일시 불가. 혈당 4.0–6.0 mmol/L → <strong>인슐린 용량 감량, 목표 완화 고려.</strong> 당뇨 입원 팀 조기 개입.</p>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>💡</span>
+        <div>"One size fits all" 접근은 적절하지 않다. 4.0–6.0 mmol/L 구간에서의 개입 여부는 환자의 약제, 신기능, 인지 상태, 임상 상황을 종합하여 판단한다. CSII 또는 CGM 사용자는 이 범위가 공복 정상치일 수 있다.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /audit -->
+
+
+<!-- ═══════════════ ABBREVIATIONS ═══════════════ -->
+<div id="tab-abbreviations" class="panel">
+  <div id="abbr-main-grid" class="abbr-grid-main"></div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TAB ───
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('collapsed');
+}
+
+// ─── ACC ───
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const icon = hdr.querySelector('.acc-icon');
+  const open = getComputedStyle(body).display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (icon) icon.textContent = open ? '▸' : '▾';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['ABCDE','Airway, Breathing, Circulation, Disability, Exposure — 응급 환자 초기 평가 체계. Disability에 GCS + 혈당 측정 포함.'],
+  ['AKI','Acute Kidney Injury (급성 신손상) — SU·메트포르민 복용 환자의 저혈당 위험 증가 원인. AKI 시 SU·메트포르민 일시 중단 고려.'],
+  ['ADA','American Diabetes Association — 미국 당뇨병학회. 입원 혈당 목표 7.8–10.0 mmol/L.'],
+  ['ADPKD','Autosomal Dominant Polycystic Kidney Disease (상염색체 우성 다낭신) — CKD 원인 중 하나.'],
+  ['ARB','Angiotensin Receptor Blocker (안지오텐신수용체차단제)'],
+  ['CBG','Capillary Blood Glucose (모세혈관 혈당) — 손가락 채혈 혈당 측정. 저혈당 확인 및 모니터링 기본 방법.'],
+  ['CGM','Continuous Glucose Monitoring (지속혈당모니터링) — CSII 사용 환자에서 특히 유용. 공복 시 4–6 mmol/L가 정상일 수 있어 해석 주의.'],
+  ['CHO','Carbohydrate (탄수화물) — 저혈당 교정에 속효성(fast-acting) 15–20g, 교정 후 장기(long-acting) 20g (글루카곤 사용 시 40g).'],
+  ['CKD','Chronic Kidney Disease (만성 신장 질환) — 신기능 저하 시 SU 배설 지연 → 지속적 저혈당 위험. G4–G5에서 SU 회피 권고.'],
+  ['CSII','Continuous Subcutaneous Insulin Infusion (지속 피하 인슐린 주입) — "인슐린 펌프". 자가 관리 가능 시에만 입원 중 사용. 불가 시 VRIII 또는 피하 인슐린으로 전환.'],
+  ['DATIX','영국 의료 사고 보고 시스템 — 저혈당 에피소드 후 인시던트 보고에 사용.'],
+  ['DISN','Diabetes Inpatient Specialist Nurse (당뇨 입원 전담 간호사) — 중증/반복 저혈당, 경관 환자 저혈당, 원인 불명 저혈당 시 의뢰 대상.'],
+  ['DKA','Diabetic Ketoacidosis (당뇨병성 케톤산증) — SGLT2i 입원 중 사용 제한의 주요 이유(eugylcaemic DKA 위험).'],
+  ['DPP-4i','DPP-4 Inhibitor (DPP-4 억제제) — 입원 중 인슐린 대체 옵션; 저혈당 위험 낮음.'],
+  ['eGFR','Estimated GFR (추정 사구체여과율) — SU·메트포르민 투여 가능 여부 판단에 사용. G4–5에서 SU 회피.'],
+  ['GCS','Glasgow Coma Scale (글래스고 혼수 척도) — ABCDE D 항목에 포함. 저혈당으로 인한 의식 변화 평가.'],
+  ['GLP-1 RA','GLP-1 Receptor Agonist (GLP-1 수용체 작용제) — 단독 사용 시 저혈당 위험 낮음; GI 부작용 주의.'],
+  ['GlucoTabs™','Lift GlucoTabs™ — 속효성 탄수화물 정제. 1개당 약 4g 탄수화물. 경증 저혈당 경구 치료에 사용.'],
+  ['Glucogel®','40% 포도당 젤 — 협조 불가 환자 치아/잇몸 사이 도포. 1튜브 약 10g 탄수화물. 세경 비위관(fine bore NGT)에는 사용 불가.'],
+  ['HbA1c','Hemoglobin A1c (당화혈색소) — 입원 혈당 목표 설정 근거 중 하나. CKD에서는 신빈혈로 신뢰도 감소.'],
+  ['IAH','Impaired Awareness of Hypoglycaemia (저혈당 무인지) — 인슐린 치료 관련 후천성 증후군. 경고 증상 소실 → 중증 저혈당 위험. 당뇨 이환 기간에 비례, T1DM>T2DM.'],
+  ['IM','Intramuscular (근육주사) — 글루카곤 1mg IM. IV 접근 불가 시 중증 저혈당 대안.'],
+  ['IV','Intravenous (정맥주사) — IV 포도당: 10% 200ml (800ml/h, 15분) 또는 20% 100ml (400ml/h, 15분).'],
+  ['JBDS-IP','Joint British Diabetes Societies for Inpatient Care — 영국 입원 당뇨 진료 다학제 가이드라인 발행 기관. 6개 기관 협력.'],
+  ['JBDS 01','The Hospital Management of Hypoglycaemia in Adults with Diabetes Mellitus — 이 가이드라인의 JBDS 시리즈 코드.'],
+  ['MAO','Monoamine Oxidase Inhibitor — 저혈당 유발 가능 병용 약제.'],
+  ['metformin','메트포르민 — AKI·신기능 저하 시 일시 중단 필요. 단독 투여는 저혈당 위험 낮음.'],
+  ['mOsm/L','밀리오스몰/리터 — 삼투압 단위. 10% 포도당: 506 mOsm/L; 50% 포도당: 2522 mOsm/L → 50%는 혈관 손상 위험.'],
+  ['NaDIA','National Diabetes Inpatient Audit (영국 국가 당뇨 입원 감사) — 2019년: 입원 환자 18.4%에서 저혈당 경험. T1DM 27% 경험.'],
+  ['NBM','Nil By Mouth (금식) — 저혈당 경구 치료 불가 → Algorithm D(IV 포도당) 사용.'],
+  ['NICE-SUGAR','Normoglycaemia in Intensive Care Evaluation — SUGA Study. ICU에서 혈당 4.5–6.0 mmol/L 집중 조절 시 저혈당·90일 사망 증가 → 목표 완화 근거.'],
+  ['NSAIDs','Non-Steroidal Anti-Inflammatory Drugs — 저혈당 유발 가능 약제. 중단 말고 의료팀 상의.'],
+  ['PRN','Pro Re Nata (필요 시 처방) — 인슐린·SU 복용 입원 환자 모두에게 IV 포도당 ± IM 글루카곤 PRN 처방 권고.'],
+  ['SU','Sulfonylurea (설포닐우레아) — 글리메피리드·글리피지드·글리벤클라미드 등. 작용 지속 24–36시간; 신기능 저하 시 연장. 중증 저혈당 위험. 입원 저혈당 후 용량 감량 검토.'],
+  ['SGLT2i','SGLT2 Inhibitor — 입원 중 유지의 euDKA 위험; 저혈당 자체 위험은 낮음.'],
+  ['SSRI','Selective Serotonin Reuptake Inhibitor — 저혈당 유발 가능 병용 약제.'],
+  ['T1DM','Type 1 Diabetes Mellitus (제1형 당뇨병) — 저혈당 빈도: 경증 주 2회. 중증 연간 유병률 30–40%. IAH 더 흔함.'],
+  ['T2DM','Type 2 Diabetes Mellitus (제2형 당뇨병) — 인슐린 치료 T2DM은 입원 빈도 T1DM보다 높음. SU 저혈당 위험 과소평가 경향.'],
+  ['TPN','Total Parenteral Nutrition (전비경구 영양) — TPN 라인으로 저혈당 치료 약제 투여 금지. 경구 또는 별도 IV 라인 사용.'],
+  ['VRIII','Variable Rate Intravenous Insulin Infusion (가변속도 IV 인슐린 주입) — 가변속도 인슐린. 저혈당 후 즉시 재시작 금지; 혈당 >4.0 후 용량 검토 후 재시작. 일반 입원 환자에서 저혈당 위험 증가.'],
+  ['Trend Diabetes','trenddiabetes.online — 영국 당뇨 교육 자료 플랫폼. 저혈당 교육 리플릿 제공 (로그인 필요).'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  document.getElementById('abbr-main-grid').innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
