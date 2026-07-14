@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JBDS 12 분만·진통 중 당뇨병 및 고혈당 관리 2023</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #cf222e;
+    --accent2: #82071e;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --blue: #0550ae;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--accent); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 18px; font-weight: 700; color: var(--text); text-align: center; }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; gap: 2px; }
+  .tab { padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: auto; flex-shrink: 0; position: relative; }
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 110px; text-align: center; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid #0550ae; color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .g-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .g-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .g-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .g-table tr:last-child td { border-bottom: none; }
+  .g-table tr:hover td { background: rgba(0,0,0,.02); }
+  .g-table .section-row td { background: var(--surface2); color: var(--accent); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .vriii-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .vriii-table th { padding: 6px 8px; text-align: center; font-size: calc(11px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+  .vriii-table .col-bg { background: #82071e; }
+  .vriii-table .col-alg1 { background: #2d7d32; }
+  .vriii-table .col-alg2 { background: #e65100; }
+  .vriii-table .col-alg3 { background: #0d47a1; }
+  .vriii-table .col-alg4 { background: #37474f; }
+  .vriii-table .col-note { background: #555; font-size: calc(10px * var(--fscale, 1)); font-weight: 400; }
+  .vriii-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: center; }
+  .vriii-table tr:last-child td { border-bottom: none; }
+  .vriii-table .stop-row td { background: #ffebe9; color: #82071e; font-weight: 700; }
+  .vriii-table td:first-child { font-weight: 700; background: var(--surface2); text-align: left; }
+  .vriii-table .target-row td { background: #dafbe1; color: #116329; font-weight: 700; }
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent); }
+  .bullet-list { list-style: none; }
+  .bullet-list li { padding: 5px 0 5px 14px; border-bottom: 1px solid var(--border); font-size: calc(12px * var(--fscale, 1)); position: relative; line-height: 1.55; }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .bullet-list li strong { color: var(--accent); }
+  .step-list { list-style: none; counter-reset: step; }
+  .step-item { counter-increment: step; padding: 8px 0 8px 36px; border-bottom: 1px solid var(--border); position: relative; font-size: calc(12px * var(--fscale, 1)); line-height: 1.55; }
+  .step-item:last-child { border-bottom: none; }
+  .step-item::before { content: counter(step); position: absolute; left: 0; top: 7px; background: var(--accent); color: #fff; width: 22px; height: 22px; border-radius: 50%; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step-item strong { color: var(--accent); }
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: var(--border); }
+  .acc-hdr span.acc-icon { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .acc-body.open { display: block; }
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+  @media (max-width:700px) { .approach-grid { grid-template-columns: 1fr; } }
+  .approach-card { border-radius: 8px; overflow: hidden; }
+  .approach-head { padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+  .approach-body { padding: 10px 12px; font-size: calc(11.5px * var(--fscale, 1)); line-height: 1.7; }
+  .approach-nice .approach-head { background: #cf222e; }
+  .approach-nice .approach-body { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; border-top: none; border-radius: 0 0 8px 8px; }
+  .approach-lib .approach-head { background: #1a7f37; }
+  .approach-lib .approach-body { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; border-top: none; border-radius: 0 0 8px 8px; }
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; }
+  .pill-warn { background: #fff8c5; color: #7d4e00; }
+  .pill-danger { background: #ffebe9; color: #82071e; }
+  .pill-info { background: #ddf4ff; color: #0550ae; }
+  .pill-success { background: #dafbe1; color: #116329; }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">JBDS-IP JBDS 12</span>
+      <h1>분만·진통 중 당뇨병 및 고혈당 관리 지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://abcd.care/joint-british-diabetes-societies-jbds-inpatient-care-group" class="source-link" target="_blank">Managing diabetes and hyperglycaemia during labour and birth · February 2023 ↗</a>
+      <span class="meta"> · Joint British Diabetes Societies for Inpatient Care</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by JBDS-IP</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('targets')">🎯 혈당 목표</div>
+    <div class="tab" onclick="showTab('vriii')">💉 VRIII 프로토콜</div>
+    <div class="tab" onclick="showTab('intrapartum')">🤱 분만 중 관리</div>
+    <div class="tab" onclick="showTab('postpartum')">🍼 산후 관리</div>
+    <div class="tab" onclick="showTab('steroids')">💊 스테로이드 대응</div>
+    <div class="tab" onclick="showTab('dka')">🚨 DKA·합병증</div>
+    <div class="tab" onclick="showTab('audit')">📊 감사 기준</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══ OVERVIEW ══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">4.0–7.0</div><div class="stat-lbl">NICE 권고 분만 중 혈당 목표 (mmol/L)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">5.0–8.0</div><div class="stat-lbl">JBDS 실용적 목표 (저혈당 위험 완화)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">~50%</div><div class="stat-lbl">집중 IV 인슐린 중 산모 저혈당 발생률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--blue)">6.3/10만</div><div class="stat-lbl">임신 중 DKA 발생률 (영국)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 가이드라인 적용 범위</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>기존 당뇨병(제1형·제2형) 또는 <strong>임신성 당뇨병(GDM)</strong> 여성이 분만 병동 입원 시 적용</li>
+        <li>유도분만 및 분만 / 조산 위험 시 폐성숙 스테로이드 투여 / <strong>임신 중 DKA</strong> 관련 특이사항 포함</li>
+        <li>마취과·산과 협진 상황 및 완화 목표 허용 시나리오 포함 (Appendix 3·4 참조)</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>이 지침은 산과 병동 혈당 조절 지원을 위해 작성되었으며, 담당 의사의 임상 판단을 대체하지 않는다. 가능한 한 빨리 당뇨 전문팀에 의뢰할 것을 권고한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 주산기 당뇨 관리의 핵심 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid3">
+        <div class="stat-box" style="border-left:3px solid var(--red)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--red)">산모 고혈당 예방</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">태아 고인슐린혈증 → 신생아 저혈당 위험</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid var(--yellow)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--yellow)">산모 저혈당 방지</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">VRIII 집중 치료 시 ~50% 저혈당 발생</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid var(--blue)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--blue)">수분·전해질 균형</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">수분 과부하·저나트륨혈증·저칼륨혈증 예방</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 두 가지 혈당 목표 접근 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="approach-grid">
+        <div class="approach-card approach-nice">
+          <div class="approach-head">🔴 전통적 접근 (NICE 권고): 4.0–7.0 mmol/L</div>
+          <div class="approach-body">
+            <strong>장점:</strong><br>
+            • NICE 공식 권고, 광범위하게 사용<br><br>
+            <strong>단점:</strong><br>
+            • VRIII 사용 증가 → 자율성 제한, 자원 집중<br>
+            • 산모 저혈당 위험 증가<br>
+            • 지속적 태아 고인슐린혈증 역전에 너무 늦을 수 있음<br>
+            • 신생아 저혈당 예방 효과 불확실 (근거 제한적)
+          </div>
+        </div>
+        <div class="approach-card approach-lib">
+          <div class="approach-head">🟢 실용적 접근 (JBDS 제안): 5.0–8.0 mmol/L</div>
+          <div class="approach-body">
+            <strong>장점:</strong><br>
+            • VRIII 사용 감소 → 자율성·이동성 향상<br>
+            • 산모 저혈당 위험 감소<br>
+            • 분만실 자원 부담 감소<br><br>
+            <strong>단점:</strong><br>
+            • 근거 제한적<br>
+            • 신생아 저혈당 증가 우려 (RCT 없음)
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>어느 목표를 선택할지는 <strong>의료팀·산모·마취팀이 함께 공유 의사결정</strong>으로 결정하고 명확히 문서화한다. 두 접근 모두 허용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📌</span> 산과 병동에서 만날 수 있는 당뇨 유형</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="g-table">
+        <tr><th>유형</th><th>특징</th><th>주의사항</th></tr>
+        <tr><td><strong>제1형 당뇨병</strong></td><td>CSII·CGM 사용자 많음</td><td>저혈당·DKA 위험 높음, 산후 인슐린 요구량 급감</td></tr>
+        <tr><td><strong>제2형 당뇨병</strong></td><td>인슐린 또는 경구 약제</td><td>산후 메트포르민은 수유 중 사용 가능, 기타 경구 약제 중단</td></tr>
+        <tr><td><strong>임신성 당뇨병 (GDM)</strong></td><td>임신 중 처음 발견</td><td>태반 만출 후 모든 혈당강하제 중단, 24시간 혈당 모니터링</td></tr>
+        <tr><td><strong>기타 특이 당뇨 (MODY 등)</strong></td><td>단일유전자·낭포성섬유증·약물유발</td><td>이 지침 범위 밖 — 당뇨 전문팀 자문 필요</td></tr>
+      </table>
+    </div>
+  </div>
+</div><!-- /overview -->
+
+
+<!-- ══ TARGETS ══ -->
+<div id="tab-targets" class="panel">
+  <div class="alert alert-info">
+    <span>ℹ️</span>
+    <div>분만 중 최적 혈당 목표에 대한 고품질 RCT 근거는 없다. JBDS는 두 가지 목표를 모두 제시하며, 각 병원·팀·산모 상황에 맞게 선택할 것을 권고한다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 상황별 혈당 목표 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>상황</th><th>NICE 목표</th><th>JBDS 실용적 목표</th><th>비고</th></tr>
+        <tr><td><strong>임신 중 (일반)</strong></td><td>4.0–7.8 mmol/L</td><td>5.0–8.0 mmol/L</td><td>식전·식후 1시간 모니터링</td></tr>
+        <tr><td><strong>진통·분만 중</strong></td><td>4.0–7.0 mmol/L</td><td>5.0–8.0 mmol/L</td><td>매시간 모니터링</td></tr>
+        <tr><td><strong>스테로이드 투여 중</strong></td><td>4.0–7.8 mmol/L</td><td>5.0–8.0 mmol/L</td><td>마지막 투여 후 12시간까지</td></tr>
+        <tr><td><strong>제왕절개 (전신마취)</strong></td><td>4.0–7.0 mmol/L</td><td>5.0–8.0 mmol/L</td><td>완전 의식 회복까지 30분 간격</td></tr>
+        <tr><td><strong>산후 인슐린 사용 환자</strong></td><td>6.0–10.0 mmol/L</td><td>6.0–10.0 mmol/L</td><td>저혈당 방지 우선</td></tr>
+        <tr><td><strong>산후 GDM (메트포르민)</strong></td><td>4.0–10.0 mmol/L</td><td>—</td><td>태반 만출 후 혈당강하제 중단</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📡</span> 혈당 모니터링 방법 및 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>모든 당뇨 여성: <strong>확립된 진통 중 또는 선택 제왕절개 당일 아침부터 매시간</strong> CBG 또는 CGM 모니터링</li>
+        <li>전신마취 시 → <strong>30분 간격</strong>으로 완전 의식 회복까지</li>
+        <li>CGM은 조직간질 포도당을 측정하며 <strong>5–10분 지연</strong>이 있다</li>
+        <li><strong>CGM은 VRIII 용량 조절에 사용 불가</strong> — VRIII 중에는 반드시 finger prick CBG 사용</li>
+        <li>CGM은 자기관리 지원에는 사용 가능</li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div><strong>VRIII 중 CGM/Flash 수치로 용량을 결정하지 말 것.</strong> 반드시 손가락 채혈(finger prick CBG)을 기준으로 삼는다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> VRIII 시작 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>상황</th><th>시작 기준</th></tr>
+        <tr><td>분만 중 (NICE 목표)</td><td>BG &gt;7.0 mmol/L 연속 2회 — 두 번째 확인은 1시간 이내</td></tr>
+        <tr><td>분만 중 (실용적 목표)</td><td>BG &gt;8.0 mmol/L 연속 2회</td></tr>
+        <tr><td>제1형 당뇨, 불안정 혈당</td><td>혈당 수치와 무관하게 진통 시작 시점부터 VRIII 시작 고려</td></tr>
+        <tr><td>스테로이드 투여</td><td>목표 초과 연속 2회 → VRIII, 마지막 스테로이드 후 12시간까지 유지</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 신생아 저혈당과 분만 중 혈당 — 최신 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="bullet-list">
+        <li>신생아 저혈당 유병률: GDM ~5%, 제2형 ~20%, 제1형 ~30% (IV 포도당 치료 필요 수준)</li>
+        <li>CONCEPTT 연구: 신생아 저혈당은 임신 <strong>2·3분기 지속 고혈당</strong>과 강하게 연관. 분만 중 혈당과는 독립적.</li>
+        <li>최신 체계적 문헌 고찰 (23개 연구, 2,835명): 분만 중 혈당과 신생아 저혈당 간 유의한 연관성 없음 (연구의 절반에서)</li>
+        <li>CONCEPTT 이차분석: 분만 중 혈당과 신생아 저혈당 간 연관성 없음</li>
+        <li>결론: 분만 중 혈당 목표를 5.0–8.0으로 완화해도 신생아 저혈당 위험 증가하지 않을 수 있다</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>NICE가 4.0–7.0 mmol/L 목표를 설정했던 연구들은 1985–2000년 발표, 인슐린 유사체·인슐린 펌프·CGM 이전 시대로 중요한 교란변수를 보정하지 않았다.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /targets -->
+
+
+<!-- ══ VRIII ══ -->
+<div id="tab-vriii" class="panel">
+  <div class="alert alert-danger">
+    <span>🚨</span>
+    <div><strong>VRIII 조성:</strong> Actrapid® 또는 Humulin® S 50단위를 0.9% NaCl 49.5 mL에 희석 (1 unit/mL) — 시린지 드라이버로 투여. <strong>IV 주사기로 인슐린을 뽑지 말 것 — 반드시 인슐린 주사기 사용.</strong></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> VRIII 사용 시 잠재적 합병증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>단계</th><th>합병증</th></tr>
+        <tr><td><strong>시작 단계</strong></td><td>개시 지연 (DKA/신생아 저혈당 예방 시간 불충분) / 연결 오류 / 단방향 역류방지 밸브 미사용</td></tr>
+        <tr><td><strong>유지 단계</strong></td><td>불충분한 혈당 측정 / 하한 4.0과 저혈당 기준 사이 완충구간 없음 / 저장 용액 먼저 중단 시 저혈당 / 저나트륨혈증 / 저칼륨혈증 / 수분 과부하 / 동맥 플러시 오류로 혈당 측정 오류</td></tr>
+        <tr><td><strong>중단 단계</strong></td><td>피하 인슐린 타이밍 부정확 (기저·식전 볼루스 순서)</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>JBDS 권고: 조산사는 VRIII 관리에 최소 2시간 초기 교육 + 연 1회 보수교육 이수. 당뇨팀의 일일 회진으로 지원.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💧</span> VRIII 동반 저장 수액 (Substrate Fluid)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div><strong>권고 수액:</strong> 0.9% NaCl + 5% 포도당 + 0.15% KCl (20 mmol/L) — <strong>50 mL/h</strong>로 투여. 또는 0.3% KCl (40 mmol/L) 사용 가능.</div>
+      </div>
+      <ul class="bullet-list">
+        <li>출혈 등 추가 수액이 필요한 경우 별도 수액 투여</li>
+        <li><strong>순수 덱스트로스 용액 금지</strong> — 저나트륨혈증 위험 (NICE도 인정)</li>
+        <li>수분 과부하·저나트륨혈증·자간전증 시: 수액 없이 VRIII만 사용 고려</li>
+        <li>VRIII 6시간 이상 지속 시 전해질(U+Es) 4–6시간 간격 확인</li>
+        <li>자간전증 환자: 총 수액 <strong>80 mL/h 이하</strong> 유지 (모든 약제 포함)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 분만 중 VRIII — NICE 권고 목표 (4.0–7.0 mmol/L)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+        <table class="vriii-table">
+          <thead>
+            <tr>
+              <th class="col-bg">손가락 채혈 BG (mmol/L)</th>
+              <th class="col-alg1">Algorithm 1<br><small style="font-weight:400">대부분의 여성</small></th>
+              <th class="col-alg2">Algorithm 2<br><small style="font-weight:400">Alg1 미달 또는 &gt;80 u/일</small></th>
+              <th class="col-alg3">Algorithm 3<br><small style="font-weight:400">Alg2 미달 (전문가 후)</small></th>
+              <th class="col-alg4">Algorithm 4<br><small style="font-weight:400">개별 맞춤</small></th>
+            </tr>
+            <tr><th class="col-note" colspan="5">주입 속도 (units/h = mL/h)</th></tr>
+          </thead>
+          <tbody>
+            <tr class="stop-row"><td>&lt; 4.0</td><td colspan="4">인슐린 <strong>20분 중단</strong> — 저혈당 지침에 따라 치료 후 10분 뒤 재측정</td></tr>
+            <tr><td>4.0 – 5.5</td><td>0.2</td><td>0.5</td><td>1.0</td><td rowspan="7" style="vertical-align:middle;text-align:center;color:var(--text2);font-size: calc(11px * var(--fscale, 1))">개별<br>설정</td></tr>
+            <tr><td>5.6 – 7.0</td><td>0.5</td><td>1.0</td><td>2.0</td></tr>
+            <tr><td>7.1 – 8.5</td><td>1.0</td><td>1.5</td><td>3.0</td></tr>
+            <tr><td>8.6 – 11.0</td><td>1.5</td><td>2.0</td><td>4.0</td></tr>
+            <tr><td>11.1 – 14.0</td><td>2.0</td><td>2.5</td><td>5.0</td></tr>
+            <tr><td>14.1 – 17.0</td><td>2.5</td><td>3.0</td><td>6.0</td></tr>
+            <tr><td>17.1 – 20.0</td><td>3.0</td><td>4.0</td><td>7.0</td></tr>
+            <tr><td>&gt; 20.1</td><td>4.0</td><td>6.0</td><td>8.0</td><td>—</td></tr>
+            <tr class="target-row"><td colspan="5">목표: <strong>4.0–7.0 mmol/L</strong> | 목표 초과 & 하강 없으면 상위 Algorithm 전환 | BG &lt;4.0 또는 급속 하강 시 하위 Algorithm 전환</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:6px;font-size: calc(11px * var(--fscale, 1));color:var(--text2)"><strong>Algorithm 2 사용:</strong> 스테로이드 투여 중, 인슐린 &gt;80 u/일, Alg 1 미달 시 | <strong>Algorithm 3:</strong> 당뇨 또는 의사 검토 후에만 사용</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟢</span> 분만 중 VRIII — 실용적 목표 (5.0–8.0 mmol/L)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-success" style="margin-bottom:8px">
+        <span>🎯</span>
+        <div><strong>목표 혈당: 5.0–8.0 mmol/L</strong> | 저혈당 위험 높거나, 다중 펌프 사용 중이거나, 지역마취/전신마취 중인 여성에게 적합</div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="vriii-table">
+          <thead>
+            <tr>
+              <th class="col-bg">손가락 채혈 BG (mmol/L)</th>
+              <th class="col-alg1">Algorithm 1</th>
+              <th class="col-alg2">Algorithm 2</th>
+              <th class="col-alg3">Algorithm 3</th>
+              <th class="col-alg4">Algorithm 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="stop-row"><td>&lt; 5.0</td><td colspan="4">인슐린 <strong>20분 중단</strong> — 저혈당 지침에 따라 치료 후 10분 뒤 재측정</td></tr>
+            <tr><td>5.0 – 5.5</td><td>0.2</td><td>0.5</td><td>1.0</td><td rowspan="7" style="vertical-align:middle;text-align:center;color:var(--text2);font-size: calc(11px * var(--fscale, 1))">개별<br>설정</td></tr>
+            <tr><td>5.6 – 7.0</td><td>0.5</td><td>1.0</td><td>2.0</td></tr>
+            <tr><td>7.1 – 8.5</td><td>1.0</td><td>1.5</td><td>3.0</td></tr>
+            <tr><td>8.6 – 11.0</td><td>1.5</td><td>2.0</td><td>4.0</td></tr>
+            <tr><td>11.1 – 14.0</td><td>2.0</td><td>2.5</td><td>5.0</td></tr>
+            <tr><td>14.1 – 17.0</td><td>2.5</td><td>3.0</td><td>6.0</td></tr>
+            <tr><td>17.1 – 20.0</td><td>3.0</td><td>4.0</td><td>7.0</td></tr>
+            <tr><td>&gt; 20.1</td><td>4.0</td><td>6.0</td><td>8.0</td><td>—</td></tr>
+            <tr class="target-row"><td colspan="5">목표: <strong>5.0–8.0 mmol/L</strong> | BG &lt;4.0 또는 급속 하강 시 하위 Algorithm 전환</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- /vriii -->
+
+
+<!-- ══ INTRAPARTUM ══ -->
+<div id="tab-intrapartum" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 모든 당뇨 여성 공통 분만 중 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>모든 기존·임신성 당뇨 여성 → 당뇨·산부인과 <strong>협진 클리닉</strong>에서 분만 당뇨 관리 계획 수립·문서화</li>
+        <li>GDM 여성: <strong>태반 만출 후 모든 혈당강하제 중단</strong>됨을 미리 교육</li>
+        <li>CGM/Flash CGM 사용자: 분만 중 추가 finger prick CBG가 필요할 수 있음을 사전 안내</li>
+        <li>목표 초과 <strong>연속 2회</strong> → VRIII 시작 고려 (두 번째 확인은 1시간 이내)</li>
+        <li><strong>제1형 당뇨 + 불안정 혈당:</strong> 혈당과 무관하게 진통 시작 시 VRIII 시작 가능</li>
+        <li>전신마취 시 → 30분 간격 CBG 측정, 완전 의식 회복까지</li>
+        <li>VRIII 투여 중 식사 가능한 여성 → <strong>식사 인슐린(식전 볼루스) 유지</strong></li>
+        <li>케토산증 의심 시 혈중 케톤 측정</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 메트포르민·MDI 여성 추가 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>유도분만 전날 및 자궁경부 숙화 중: 혈당 측정·인슐린·경구 약제 <strong>평소대로 유지</strong></li>
+        <li>VRIII 시작 시 → 식사 인슐린(식전 볼루스) 및 메트포르민 <strong>중단</strong></li>
+        <li><strong>기저 인슐린 유지:</strong> Glargine (Lantus®/Toujeo®/Abasaglar®/Semglee®), Detemir (Levemir®), NPH (Insulatard®), Insuman® Basal, Humulin® I</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> CSII 사용 제1형 당뇨 여성 추가 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>대부분 자신의 인슐린 펌프를 직접 관리 (출산 파트너 도움 포함)</li>
+        <li>단극성 전기소작(unipolar diathermy) 근처에는 펌프 사용 금지 (제조사 권고)</li>
+        <li>수술 부위·패드에서 멀리 Teflon 카뉼라 사용 시 CGM·CSII 수술 중 사용 가능</li>
+        <li><strong>Steel 주입 세트는 수술 주변기 사용 불가</strong></li>
+        <li>CSII 제거는 <strong>60분을 초과하지 말 것</strong> — 초과 시 DKA 위험</li>
+      </ul>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)">제왕절개 시 CSII 관리 옵션 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <table class="g-table">
+            <tr><th>옵션</th><th>장점</th><th>잠재적 위험</th></tr>
+            <tr><td>분만 중 CSII 유지</td><td>자율성·자원 절감·VRIII보다 혈당 조절 우월 (관찰 연구)</td><td>전기소작기 근처 펌프 오작동 가능성</td></tr>
+            <tr><td>분만 중 VRIII 계획적 사용</td><td>제조사 지침 준수</td><td>침습적·자원 집약적·DKA·수액 불균형·저혈당 위험</td></tr>
+            <tr><td>경질: CSII, 수술: VRIII</td><td>제조사 지침 준수</td><td>긴급 제왕절개 시 VRIII 확보 불가 가능성</td></tr>
+            <tr><td>경질: CSII 유지, 긴급 수술: CSII 중단</td><td>제조사 지침 준수</td><td>최대 60분 중단 가능, 수술 직후 즉시 재개 필요 (DKA 예방)</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>혈당 조절 불량 (BG &gt;7.0 또는 8.0 연속 2회, 요중 케톤 ++ 이상, 혈중 케톤 &gt;1.5 mmol/L) → 즉시 VRIII(고혈당) 또는 FRIII(케토산증) 시작. CSII 중단·표지·보관.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div><strong>산후 펌프 설정:</strong> 목표 혈당 6.0–8.0 mmol/L → 기저 용량 ≥50% 감소 → 탄수화물 비율 1u:12–15g → 인슐린 감도계수 4.0 mmol/L</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 태반 만출 직후 즉각 조치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ol class="step-list">
+        <li><strong>VRIII 속도 즉시 50% 감소</strong> (또는 최저 스케일 전환) — 태반 만출 후 인슐린 요구량 급감</li>
+        <li>식사 재개 전까지 <strong>매시간 혈당 모니터링 유지</strong></li>
+        <li>식사·음료 섭취 확인 후 피하 인슐린 재개</li>
+        <li>첫 피하 식전 인슐린 주사 <strong>30–60분 후 VRIII 중단</strong></li>
+        <li>당뇨팀에 <strong>산후 인슐린 용량 검토</strong> 요청</li>
+        <li>신생아: 모든 당뇨 유형에서 출생 후 <strong>24시간 신생아 저혈당 모니터링</strong> (NICE 권고)</li>
+      </ol>
+    </div>
+  </div>
+</div><!-- /intrapartum -->
+
+
+<!-- ══ POSTPARTUM ══ -->
+<div id="tab-postpartum" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 기존 인슐린 치료 당뇨 (제1형·제2형) 산후 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn" style="margin-bottom:8px">
+        <span>⚠️</span>
+        <div>태반 만출 후 인슐린 요구량 <strong>급격히 감소</strong>. 산후 저혈당 방지가 최우선 목표 — 목표 혈당 완화 (6.0–10.0 mmol/L).</div>
+      </div>
+      <ul class="bullet-list">
+        <li>산후 인슐린 용량: 임신 전 복귀 또는 임신 1분기(12주) 용량 <strong>25% 감량</strong> 또는 임신 말기(36주) 용량 <strong>50% 감량</strong></li>
+        <li>Closed-loop 연구: 산후 평균 총 일일 용량 = 임신 말기의 약 50%</li>
+        <li>산후 인슐린 처방은 매일 당뇨팀과 함께 검토, 퇴원 전 최종 확인</li>
+        <li>VRIII → 피하 인슐린 전환: 식전 볼루스 투여 <strong>30–60분 후 VRIII 중단</strong></li>
+        <li>수유 중 제1형 당뇨: <strong>수유 전 혈당 6.0 mmol/L 이상 확인</strong>. 수유 시 또는 직전 탄수화물 간식(10–15g). 완전 수유 시 하루 최대 450 kcal 추가</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 기존 인슐린 미사용 여성 (GDM 포함) 산후 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>인슐린 주사 또는 주입 → <strong>태반 만출 즉시 중단</strong></li>
+        <li>임신 전 경구 약제 사용 여성: 첫 식사까지 4시간 간격 혈당 모니터링, 이후 식전·취침 전</li>
+        <li>메트포르민은 저혈당 유발 없으므로 목표 혈당 4.0–10.0 mmol/L; 기타 경구 약제는 6.0–10.0 mmol/L</li>
+        <li><strong>GDM:</strong> 태반 만출 후 모든 혈당강하제 즉시 중단. 식전·식후 24시간 혈당 모니터링 (공복 &gt;7.0 또는 식후 &gt;11.1 → 당뇨 가능)</li>
+        <li>저혈당식이(Low GI) 권고, 체중 관리 상담, 국가 당뇨 예방 프로그램 의뢰</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> CSII 사용자 산후 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>개인 케어 플랜에 따라 산후 설정으로 즉시 변경</li>
+        <li>펌프 중단된 경우: VRIII 중단 <strong>1시간 전</strong> 펌프 재연결</li>
+        <li>안전하게 펌프를 자가 관리할 수 있을 때만 VRIII 중단</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>💡</span>
+        <div><strong>개인 케어 플랜 없을 경우 기본 설정:</strong><br>
+        기저 용량: 0.5 u/시간 | 탄수화물 비율: 1u/15g | 인슐린 감도계수: 4.0 mmol/L | 혈당 목표: 6.0–10.0 mmol/L<br>
+        ※ 분만 후 첫 식사에는 인슐린 볼루스 불필요한 경우 많음</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 산후 추가 상담·추적관찰</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>항목</th><th>권고 내용</th></tr>
+        <tr><td><strong>피임·향후 임신 계획</strong></td><td>안전한 피임. 향후 임신 시 엽산 5mg (처방), HbA1c &lt;48 mmol/mol, 건강 체중 달성 후</td></tr>
+        <tr><td><strong>당뇨 지속 관리</strong></td><td>기존 또는 새로 발생한 당뇨 여성은 외래 당뇨 관리 계획 수립</td></tr>
+        <tr><td><strong>GDM 산후 혈당 검사</strong></td><td>산후 6–13주에 공복 혈장 포도당 검사. 13주 이전에 못 받으면 이후 HbA1c. 음성이면 매년 HbA1c</td></tr>
+        <tr><td><strong>생활습관 개선</strong></td><td>GDM 여성: 5년 내 제2형 당뇨 위험 10배. 국가 당뇨 예방 프로그램(NDPP) 의뢰 가능</td></tr>
+        <tr><td><strong>약제 검토</strong></td><td>수유 중 제2형: 메트포르민 가능, 기타 경구 약제 금지</td></tr>
+        <tr><td><strong>제1형 당뇨: 산후 갑상선염</strong></td><td>산후 3개월·6개월 TSH 검사로 산후 갑상선염 선별</td></tr>
+      </table>
+    </div>
+  </div>
+</div><!-- /postpartum -->
+
+
+<!-- ══ STEROIDS ══ -->
+<div id="tab-steroids" class="panel">
+  <div class="alert alert-warn">
+    <span>⚠️</span>
+    <div>스테로이드 투여는 <strong>2–3일간 혈당 급격히 악화</strong>시키며 DKA를 유발할 수 있다. 미리 예측하고 적극적으로 관리한다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📌</span> 적응증 및 배경</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="bullet-list">
+        <li>NICE: 조산 위험 여성 모두에서 폐성숙 스테로이드 사용 권고 (<strong>34주 0일 이전</strong>)</li>
+        <li>34+0 – 35+6주: 조산 고위험 여성에서 고려 (NNT ≈ 35명에서 신생아 호흡 이환 1건 예방)</li>
+        <li><strong>36주 이후:</strong> 신생아 저혈당 증가·태아 뇌 비생리적 활성화 위험이 호흡 이환 이익 초과 가능 → 개별 사례 판단</li>
+        <li>영국 NPID 감사: 제1형 당뇨 약 45%, 제2형 약 25%에서 37주 전 분만 → 스테로이드 사용 흔함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍽️</span> 식이 조절·경구 약제·단회/다회 인슐린 여성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ol class="step-list">
+        <li><strong>정기적 CBG 모니터링</strong> 시작</li>
+        <li>식이/메트포르민 관리 여성 → 피하 인슐린 시작 필요 가능</li>
+        <li>이미 인슐린 사용 여성 → 인슐린 총 용량 <strong>약 50% 증량</strong> (일반 원칙)</li>
+        <li>목표 혈당 초과 연속 2회 → <strong>VRIII 시작</strong> (목표: 4.0–7.8 또는 5.0–8.0)</li>
+        <li>VRIII 지속 기간: 마지막 스테로이드 투여 후 <strong>12시간까지</strong></li>
+        <li>VRIII 시작 전 U+Es 확인, 이후 24시간마다 반복</li>
+        <li>VRIII 중에도 <strong>기저 인슐린 유지</strong>; 식사 중이면 식전 볼루스도 유지</li>
+      </ol>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div><strong>저장 수액 권고:</strong> 0.9% NaCl + 5% 포도당 + 0.15% KCl — 50 mL/h. 저나트륨혈증·저칼륨혈증 예방.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 스테로이드 유발 고혈당 VRIII — NICE 목표 (4.0–7.8 mmol/L)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+        <table class="vriii-table">
+          <thead>
+            <tr>
+              <th class="col-bg">BG (mmol/L)</th>
+              <th class="col-alg1">Algorithm 1</th>
+              <th class="col-alg2">Algorithm 2</th>
+              <th class="col-alg3">Algorithm 3</th>
+              <th class="col-alg4">Algorithm 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="stop-row"><td>&lt;4</td><td colspan="4">20분 중단 — 저혈당 치료 후 10분 재측정</td></tr>
+            <tr><td>4.0–5.5</td><td>0.2</td><td>0.5</td><td>1.0</td><td rowspan="7" style="vertical-align:middle;text-align:center;color:var(--text2);font-size: calc(11px * var(--fscale, 1))">개별설정</td></tr>
+            <tr><td>5.6–7.0</td><td>0.5</td><td>1.0</td><td>2.0</td></tr>
+            <tr><td>7.1–8.5</td><td>1.0</td><td>1.5</td><td>3.0</td></tr>
+            <tr><td>8.6–11.0</td><td>1.5</td><td>2.0</td><td>4.0</td></tr>
+            <tr><td>11.1–14.0</td><td>2.0</td><td>2.5</td><td>5.0</td></tr>
+            <tr><td>14.1–17.0</td><td>2.5</td><td>3.0</td><td>6.0</td></tr>
+            <tr><td>17.1–20.0</td><td>3.0</td><td>4.0</td><td>7.0</td></tr>
+            <tr><td>&gt;20.1</td><td>4.0</td><td>6.0</td><td>8.0</td><td>—</td></tr>
+            <tr class="target-row"><td colspan="5">목표: <strong>4.0–7.8 mmol/L</strong> | 마지막 스테로이드 후 12시간까지 유지 | 매시간 BG 측정</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟢</span> 스테로이드 유발 고혈당 VRIII — 실용적 목표 (5.0–8.0 mmol/L)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div style="overflow-x:auto">
+        <table class="vriii-table">
+          <thead>
+            <tr>
+              <th class="col-bg">BG (mmol/L)</th>
+              <th class="col-alg1">Algorithm 1</th>
+              <th class="col-alg2">Algorithm 2</th>
+              <th class="col-alg3">Algorithm 3</th>
+              <th class="col-alg4">Algorithm 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="stop-row"><td>&lt;5</td><td colspan="4">20분 중단 — 저혈당 치료 후 10분 재측정</td></tr>
+            <tr><td>5.0–5.5</td><td>0.2</td><td>0.5</td><td>1.0</td><td rowspan="7" style="vertical-align:middle;text-align:center;color:var(--text2);font-size: calc(11px * var(--fscale, 1))">개별설정</td></tr>
+            <tr><td>5.6–7.0</td><td>0.5</td><td>1.0</td><td>2.0</td></tr>
+            <tr><td>7.1–8.5</td><td>1.0</td><td>1.5</td><td>3.0</td></tr>
+            <tr><td>8.6–11.0</td><td>1.5</td><td>2.0</td><td>4.0</td></tr>
+            <tr><td>11.1–14.0</td><td>2.0</td><td>2.5</td><td>5.0</td></tr>
+            <tr><td>14.1–17.0</td><td>2.5</td><td>3.0</td><td>6.0</td></tr>
+            <tr><td>17.1–20.0</td><td>3.0</td><td>4.0</td><td>7.0</td></tr>
+            <tr><td>&gt;20.1</td><td>4.0</td><td>6.0</td><td>8.0</td><td>—</td></tr>
+            <tr class="target-row"><td colspan="5">목표: <strong>5.0–8.0 mmol/L</strong> | BG &lt;5.0 또는 급속 하강 시 하위 Algorithm 전환</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> CSII 사용 여성 + 스테로이드</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="bullet-list">
+        <li>당뇨 전문팀 참여 필수</li>
+        <li>교정 볼루스·일시 기저 용량 증가로 혈당 유지 — 일반적으로 <strong>인슐린 용량 약 50% 증량</strong> 필요</li>
+        <li>목표 혈당 초과 (연속 2회 &gt;7.8 mmol/L) → VRIII로 전환 고려</li>
+        <li>VRIII 전환 시: 펌프 분리·표지·안전 보관</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 스테로이드 중 인슐린 용량 조절 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="g-table">
+        <tr><th>연구</th><th>방법</th><th>결과</th></tr>
+        <tr><td>Mathiesen 등 (Betamethasone 12mg)</td><td>Day1 야간 +25%, Day2–3 +40%, Day4 +20%, Day5 +10–20%</td><td>엄격한 4.0–7.0 유지 어려움. 개인차 큼</td></tr>
+        <tr><td>Kaushal 등 (Dexamethasone)</td><td>VRIII 추가 인슐린 (중앙값 74 u, 범위 32–88 u)</td><td>중앙 혈당 5.8–8.9 mmol/L, 75%가 4.0–10.0 범위</td></tr>
+        <tr><td>Sweeting 등 (RCT)</td><td>피하 인슐린 vs IV 프로토콜</td><td>피하 프로토콜에서 목표 달성률 우수 (GDM 유의). 저혈당 차이 없음</td></tr>
+        <tr><td>Closed-loop 연구</td><td>자동 폐쇄 루프 시스템</td><td>개인차 크나, 평균 첫 코르티코스테로이드 후 48시간 동안 50% 증량</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div><strong>JBDS 최종 권고:</strong> MDI 또는 CSII 총 용량 <strong>50–80% 증량</strong>으로 혈당 조절 시도. 목표 지속 초과 시 VRIII 사용.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /steroids -->
+
+
+<!-- ══ DKA ══ -->
+<div id="tab-dka" class="panel">
+  <div class="alert alert-danger">
+    <span>🚨</span>
+    <div><strong>임신 중 DKA는 의료 응급 상황이다.</strong> 케톤은 태아에 독성이며 태아 사망률은 16%에 달한다. 영국 임신 DKA 발생률 6.3/100,000. 주요 유발 요인: 감염·구토·스테로이드·인슐린 오류.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 임신 중 DKA 진단 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="stat-box" style="border-left:3px solid var(--red)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--red)">1. 당뇨 존재</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">모든 유형. <strong>정상 혈당에서도 DKA 발생 가능</strong> (정상혈당 DKA)</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid var(--yellow)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--yellow)">2. 케토시스</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">요중 케톤 ++ 이상, 또는 혈중 케톤 &gt;3.0 mmol/L (고위험 &gt;1.5)</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid var(--blue)">
+          <div style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--blue)">3. 산증</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">정맥 혈액 가스 pH &lt;7.3 및/또는 중탄산염 &lt;15 mmol/L (임신 중 기준치 낮음)</div>
+        </div>
+      </div>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>복통은 조산/만삭 진통의 대안 진단으로 항상 DKA를 고려하라. 정상혈당 DKA는 임신 중 더 흔하다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> DKA 치료 (JBDS 02 기반)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">1단계: 즉각 조치 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul class="bullet-list">
+            <li>의료·당뇨팀 긴급 호출</li>
+            <li>분만실 또는 중환자실(HDU) 입원 — 의료·산과 공동 관리</li>
+            <li>당뇨팀 대기 중 즉시 수액 투여 시작</li>
+            <li>CSII 사용 중이면 즉시 중단 → 고정 용량 IV 인슐린 주입 전환</li>
+            <li>분만 중 DKA → "Care of the critically ill woman in childbirth; enhanced maternal care" 원칙 적용</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">2단계: 고정 용량 인슐린 주입 (FRIII) <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul class="bullet-list">
+            <li>Humulin® S 또는 Actrapid® 50단위를 0.9% NaCl 49.5 mL에 희석 (시린지 드라이버)</li>
+            <li><strong>고정 용량: 0.1 u/kg/시간</strong> (실제 체중 기준)</li>
+            <li>최대 용량: 14 u/시간 (전문의 지시 없이 초과 불가)</li>
+            <li>반응 불충분 (1시간당 혈당 &lt;3 mmol/L 하강, 혈중 케톤 &lt;0.5 mmol/L 하강, 중탄산염 &lt;3 mmol/L 상승) → 1 u/시간 증량</li>
+            <li>매시간 CBG 측정</li>
+            <li>정상혈당 DKA: 혈당은 산증 해소의 정확한 지표가 아님 → 정맥 혈액 가스로 산증 해소 확인</li>
+            <li>기저 인슐린 (Glargine·Detemir·Degludec) 유지; 속효성 인슐린만 중단</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">3단계: 수액 및 칼륨 투여 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul class="bullet-list">
+            <li>임신 중 수액 요구량 감소 가능성 고려</li>
+            <li>첫 수액: 0.9% NaCl 1L → 60분에 투여, 이후 임상 필요에 따라</li>
+            <li>전형적 DKA: 1L 생리식염수 각각 2·2·4·4·6시간으로 투여</li>
+            <li>혈당 &lt;14 mmol/L 도달 시 → 0.9% NaCl과 함께 10% 포도당 50 mL/h 병행 (저혈당 예방)</li>
+            <li>칼륨: K+ 목표 4.0–5.5 mmol/L. 2번째 수액부터 KCl 40 mmol/L 첨가</li>
+            <li>Y 커넥터 + 단방향 역류방지 밸브 사용 시 인슐린을 IV 수액 라인과 같이 주입 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">4단계: 모니터링 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul class="bullet-list">
+            <li>CBG·혈중 케톤: 매시간</li>
+            <li>정맥 중탄산염·칼륨: 1·2·4시간 후, 이후 4시간 간격</li>
+            <li>수액 균형 모니터링</li>
+            <li>태아 지속 모니터링 — 산모 상태 호전 시 태아 심박수 이상도 호전 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 자간전증 + 당뇨 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div>제1형 당뇨에서 자간전증 발생률 10–15%. 주산기 주요 사망 원인. 다학제 접근 필수.</div>
+      </div>
+      <ul class="bullet-list">
+        <li>치료 3대 기둥: 시기적절한 분만 / 혈압 조절 (IV 마그네슘·기타 약제) / 수액 제한 (80 mL/h)</li>
+        <li>혈당 목표: 5.0–8.0 mmol/L (VRIII)</li>
+        <li>VRIII + 혈압약 IV + 마그네슘 IV 다중 펌프 + 수액 제한 + 태아 모니터링 동시 필요 → 매우 복잡</li>
+        <li>"Enhanced maternal care" 원칙 적용</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>DKA + 자간전증 동시 발생:</strong> 고위험 복잡 환자. 치료 우선순위: 1.초기 수액 소생 2.FRIII 투여 3.칼륨 투여 4.저혈당 예방 5.혈압 조절 6.수분 과부하 예방 7.시기적절한 분만 8.자간전증 합병증 모니터링</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /dka -->
+
+
+<!-- ══ AUDIT ══ -->
+<div id="tab-audit" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 기관 수준 감사 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>지표</th><th>기준</th></tr>
+        <tr><td>국가 지침 또는 자체 근거 기반 내부 지침 채택 여부</td><td>예</td></tr>
+        <tr><td>산모·신생아 결과 데이터 수집 여부</td><td>예</td></tr>
+        <tr><td>전담 DISN 운영 여부 (권고 인력 공식: 당뇨 병상 수 × 50분 / 60 / 25 = WTE)</td><td>예</td></tr>
+        <tr><td>조산사 의무 당뇨 교육 프로그램 여부</td><td>예</td></tr>
+        <tr><td>분만 중 당뇨 관리 임상 책임자 지정 여부</td><td>예</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 안전·질·효과 지표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>지표</th><th>기준</th></tr>
+        <tr class="section-row"><td colspan="2">접근성</td></tr>
+        <tr><td>분만 당뇨 관리 교육 이수 산과 직원 비율</td><td>100%</td></tr>
+        <tr><td>진통 중 1:1 간호사:산모 비율 유지</td><td>100%</td></tr>
+        <tr class="section-row"><td colspan="2">분만 중 혈당 관리</td></tr>
+        <tr><td>확립된 진통 중 시간당 CBG/CGM 모니터링 여성 비율</td><td>100%</td></tr>
+        <tr><td>모니터링 중 혈당이 목표 범위 내인 비율</td><td>80%</td></tr>
+        <tr><td>연속 2회 목표 초과 시 VRIII 시작 비율</td><td>100%</td></tr>
+        <tr><td>VRIII 중 단방향 밸브 사용 비율</td><td>100%</td></tr>
+        <tr><td>VRIII 중 CBG 시간당 모니터링 비율</td><td>100%</td></tr>
+        <tr><td>VRIII 중 저혈당 (BG &lt;4.0 mmol/L) 발생 비율</td><td>JBDS 권고 &lt;10%</td></tr>
+        <tr><td>인슐린 오투여로 인한 사망·중상</td><td>절대 없음 (Never Event)</td></tr>
+        <tr class="section-row"><td colspan="2">산후</td></tr>
+        <tr><td>GDM 여성에서 태반 만출 후 혈당강하제 중단 비율</td><td>100%</td></tr>
+        <tr><td>제1형·제2형 VRIII 여성 — 태반 만출 후 VRIII 50% 감량 비율</td><td>100%</td></tr>
+        <tr><td>분만 후 저혈당 발생 여성 비율</td><td>0%</td></tr>
+        <tr><td>신생아 저혈당 (&lt;2.2 mmol/L) 발생 비율</td><td>0%</td></tr>
+        <tr><td>GDM 여성 중 산후 혈당 검사 계획 보유 비율</td><td>100%</td></tr>
+        <tr><td>입원 중 당뇨 전문팀 방문 비율</td><td>100% (주중·주말 별도 수집 권고)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> NPSA 인슐린 안전 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="g-table">
+        <tr><th>지표</th><th>기준</th></tr>
+        <tr><td>인슐린 볼루스는 인슐린 주사기 또는 인슐린 펜으로 측정·투여 (IV 주사기 금지)</td><td>100%</td></tr>
+        <tr><td>인슐린 단위는 'units'로 기재 ('U' 또는 'IU' 약어 금지)</td><td>100%</td></tr>
+        <tr><td>인슐린 주사기·피하 바늘 항상 구비</td><td>100%</td></tr>
+        <tr><td>인슐린 IV 주입 준비 시 인슐린 펜 사용</td><td>100%</td></tr>
+        <tr><td>조산사 VRIII 교육: 초기 2시간 + 연 1시간 보수교육</td><td>100%</td></tr>
+      </table>
+    </div>
+  </div>
+</div><!-- /audit -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  {t:'ADA',d:'American Diabetes Association (미국당뇨병학회)'},
+  {t:'ARM',d:'Artificial Rupture of Membranes (인공 양막 파열)'},
+  {t:'BG',d:'Blood Glucose (혈당)'},
+  {t:'CBG',d:'Capillary Blood Glucose (모세혈관 혈당)'},
+  {t:'CEMACH',d:'Confidential Enquiry into Maternal and Child Health'},
+  {t:'CGM',d:'Continuous Glucose Monitoring (연속혈당측정)'},
+  {t:'CSII',d:'Continuous Subcutaneous Insulin Infusion (지속적 피하 인슐린 주입, 인슐린 펌프)'},
+  {t:'DKA',d:'Diabetic Ketoacidosis (당뇨병성 케토산증)'},
+  {t:'DISN',d:'Diabetes Inpatient Specialist Nurse (입원 당뇨 전문 간호사)'},
+  {t:'FRIII',d:'Fixed Rate Intravenous Insulin Infusion (고정 용량 정맥 인슐린 주입) — DKA 치료용'},
+  {t:'GDM',d:'Gestational Diabetes Mellitus (임신성 당뇨병)'},
+  {t:'GI',d:'Glycaemic Index (혈당지수)'},
+  {t:'HDU',d:'High Dependency Unit (중증 의존 병동)'},
+  {t:'HHS',d:'Hyperosmolar Hyperglycaemic State (고삼투압 고혈당 상태)'},
+  {t:'IADPSG',d:'International Association of Diabetes in Pregnancy Study Group'},
+  {t:'IOL',d:'Induction of Labour (분만 유도)'},
+  {t:'JBDS',d:'Joint British Diabetes Societies for Inpatient Care'},
+  {t:'KCl',d:'Potassium Chloride (염화칼륨)'},
+  {t:'MDI',d:'Multiple Daily Injections (다회 인슐린 주사)'},
+  {t:'MODY',d:'Maturity Onset Diabetes of the Young (청소년 발병 성숙형 당뇨병)'},
+  {t:'NaCl',d:'Sodium Chloride (염화나트륨, 생리식염수)'},
+  {t:'NICE',d:'National Institute for Health and Care Excellence (영국 국가 보건의료 우수성 연구소)'},
+  {t:'NPID',d:'National Pregnancy in Diabetes audit (국가 임신 당뇨 감사)'},
+  {t:'OGTT',d:'Oral Glucose Tolerance Test (경구 포도당 부하 검사)'},
+  {t:'PET',d:'Pre-Eclamptic Toxaemia (자간전증)'},
+  {t:'RDS',d:'Respiratory Distress Syndrome (호흡곤란 증후군)'},
+  {t:'TDD',d:'Total Daily Dose (총 일일 인슐린 용량)'},
+  {t:'TPN',d:'Total Parenteral Nutrition (완전 정맥 영양)'},
+  {t:'U+Es',d:'Urea and Electrolytes (요소 및 전해질)'},
+  {t:'VRIII',d:'Variable Rate Intravenous Insulin Infusion (가변 속도 정맥 인슐린 주입, 슬라이딩 스케일)'},
+  {t:'WHO',d:'World Health Organisation (세계보건기구)'},
+];
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + id + "'")) t.classList.add('active');
+  });
+  document.getElementById('abbr-dropdown').style.display = 'none';
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('open');
+  const icon = hdr.querySelector('.acc-icon');
+  if (icon) icon.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+function filterAbbr(q) {
+  const dd = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const count = document.getElementById('abbr-count');
+  q = q.trim().toUpperCase();
+  if (!q) { dd.style.display = 'none'; count.textContent = ''; return; }
+  const filtered = ABBR_DATA.filter(a => a.t.toUpperCase().includes(q) || a.d.toUpperCase().includes(q));
+  if (!filtered.length) { dd.style.display = 'none'; count.textContent = ''; return; }
+  grid.innerHTML = filtered.map(a => `<div class="abbr-item"><span class="abbr-term">${a.t}</span><span class="abbr-def">${a.d}</span></div>`).join('');
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  dd.style.top = (rect.bottom + window.scrollY + 4) + 'px';
+  dd.style.left = Math.max(8, rect.right - 460) + 'px';
+  dd.style.display = 'block';
+  count.textContent = filtered.length;
+}
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('abbr-input').contains(e.target) &&
+      !document.getElementById('abbr-dropdown').contains(e.target)) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

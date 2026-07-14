@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATA 2016 갑상선기능항진증 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --teal: #0a7c8a;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--teal); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* TABS */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+    position: sticky; top: 60px; z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; gap: 2px; padding: 0 8px; }
+  .tab { padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: auto; flex-shrink: 0; position: relative; }
+
+  /* MAIN */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* CARD */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* STAT */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* GRADE BADGES */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-sh { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-sm { background: #dafbe1; color: #116329; border: 1px solid #88c4a0; }
+  .grade-sl { background: #e6f4ea; color: #1a7f37; border: 1px solid #aad5b5; }
+  .grade-wh { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-wm { background: #ddf4ff; color: #0550ae; border: 1px solid #88b4e8; }
+  .grade-wl { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .grade-nr { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .grade::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .grade::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* REC LIST */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-no { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: var(--text2); flex-shrink: 0; margin-top: 2px; min-width: 32px; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-direction: column; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; flex: 1; }
+  .rec-text strong { color: var(--accent2); }
+  .rec-remarks { margin-top: 5px; font-size: calc(11px * var(--fscale, 1)); color: var(--text2); background: var(--surface2); border-radius: 4px; padding: 5px 8px; border-left: 2px solid var(--border); }
+
+  /* ALERT */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-teal { background: #e0f5f7; border-left: 3px solid var(--teal); color: #0a5c68; }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; white-space: nowrap; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .mod-oo { text-align:center; font-weight:700; color:#116329; }
+  .mod-o  { text-align:center; font-weight:600; color:#1a7f37; }
+  .mod-cau{ text-align:center; font-weight:600; color:#bc4c00; }
+  .mod-na { text-align:center; color:#9a6700; }
+  .mod-x  { text-align:center; font-weight:700; color:#cf222e; }
+
+  /* ACCORDION */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: var(--border); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.6; }
+
+  /* ABBR */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  ul.dot-list { list-style: none; padding: 0; }
+  ul.dot-list li { padding: 2px 0 2px 14px; position: relative; font-size: calc(12px * var(--fscale, 1)); line-height: 1.55; }
+  ul.dot-list li::before { content:'•'; position:absolute; left:2px; color:var(--text2); }
+  .section-title { font-size: calc(13px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); padding: 6px 0 4px; margin-bottom: 6px; border-bottom: 2px solid var(--accent2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">ATA 2016</span>
+      <h1>갑상선기능항진증 진단 및 치료 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1089/thy.2016.0229" class="source-link" target="_blank">Thyroid. 2016;26(10):1343–1421 · Ross DS et al. ↗</a>
+      <span class="meta"> · American Thyroid Association</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 ATA 공식 승인 자료가 아닙니다 · 임상 판단과 최신 원문을 우선하십시오</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요</div>
+    <div class="tab" onclick="showTab('eval',this)">🔬 진단·평가</div>
+    <div class="tab" onclick="showTab('graves',this)">⚕️ Graves병</div>
+    <div class="tab" onclick="showTab('rai',this)">☢️ 방사성요오드</div>
+    <div class="tab" onclick="showTab('atd',this)">💊 항갑상선제</div>
+    <div class="tab" onclick="showTab('surgery',this)">🔪 수술</div>
+    <div class="tab" onclick="showTab('special',this)">🤰 특수상황</div>
+    <div class="tab" onclick="showTab('others',this)">📋 기타 원인</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ 개요 ═══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">1.2%</div><div class="stat-lbl">미국 갑상선기능항진증 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--orange)">0.5%</div><div class="stat-lbl">현성 갑상선기능항진증</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">0.7%</div><div class="stat-lbl">무증상 갑상선기능항진증</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">124</div><div class="stat-lbl">총 권고안 수</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 원인 분류</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>📌</span>
+        <div><strong>갑상선중독증(Thyrotoxicosis)</strong>: 조직 내 갑상선 호르몬 과다 작용 상태 (원인 불문)<br>
+        <strong>갑상선기능항진증(Hyperthyroidism)</strong>: 갑상선에서 호르몬 합성·분비 과잉에 의한 갑상선중독증</div>
+      </div>
+      <table class="tbl" style="margin-bottom:8px">
+        <tr><th>구분</th><th>TSH</th><th>fT4 / T3</th><th>특징</th></tr>
+        <tr><td><strong>현성 갑상선기능항진증</strong></td><td>&lt;0.01 mU/L (보통 검출 불가)</td><td>↑</td><td>증상 동반</td></tr>
+        <tr><td><strong>T3 중독증</strong></td><td>저하~검출 불가</td><td>fT4 정상, T3 ↑</td><td>초기 GD 또는 자율 결절</td></tr>
+        <tr><td><strong>무증상 갑상선기능항진증</strong></td><td>낮음 (0.01–0.4 mU/L)</td><td>정상</td><td>추적·치료 여부 개별 판단</td></tr>
+      </table>
+      <div class="section-title">주요 원인</div>
+      <table class="tbl">
+        <tr><th>원인</th><th>병태</th><th>RAIU</th><th>TRAb</th></tr>
+        <tr><td><strong>Graves병 (GD)</strong></td><td>TRAb → TSH 수용체 자극; 미국 가장 흔한 원인</td><td>미만성 상승</td><td>양성</td></tr>
+        <tr><td><strong>독성 다결절성 갑상선종 (TMNG)</strong></td><td>자율 기능 결절; 고령·요오드 결핍 지역</td><td>불균일 상승</td><td>음성</td></tr>
+        <tr><td><strong>독성 선종 (TA)</strong></td><td>단일 자율 기능 결절</td><td>국소 상승, 주변 억제</td><td>음성</td></tr>
+        <tr><td>무통성/산후 갑상선염</td><td>파괴성 호르몬 방출</td><td>≈0</td><td>음성</td></tr>
+        <tr><td>아급성 갑상선염</td><td>바이러스성; 통증, ESR 상승</td><td>≈0</td><td>음성</td></tr>
+        <tr><td>아미오다론 유발 (AIT)</td><td>Type 1(요오드) / Type 2(파괴성)</td><td>다양</td><td>음성</td></tr>
+        <tr><td>TSH 분비 뇌하수체 선종</td><td>드묾; TSH 정상~↑ + 갑상선호르몬 ↑</td><td>상승</td><td>음성</td></tr>
+        <tr><td>갑상선중독증 인위</td><td>갑상선 호르몬 외부 복용; Tg 낮음</td><td>≈0</td><td>음성</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 미치료 갑상선중독증의 임상 결과</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div class="alert alert-danger"><span>💔</span><div><strong>심혈관계</strong>: 심방세동, 심부전, 혈전색전증, 폐동맥 고혈압, 심혈관 사망 위험 증가</div></div>
+          <div class="alert alert-warn"><span>🦴</span><div><strong>골격계</strong>: 골밀도 감소(특히 폐경 후 여성), 골절 위험 증가. 무증상 항진증도 hip fracture HR 1.36</div></div>
+        </div>
+        <div>
+          <div class="alert alert-warn"><span>⚡</span><div><strong>대사·신경근</strong>: 체중 감소, 근력 저하, 진전, 불안, 신경정신 증상, 인슐린 저항성</div></div>
+          <div class="alert alert-danger"><span>🌡️</span><div><strong>갑상선 위기</strong>: 사망률 8–25%. BWPS ≥45점 = 진단. 즉각적 집중 치료 필요</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> GRADE 권고 등급 체계</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl" style="margin-bottom:8px">
+        <tr><th>권고 강도</th><th>의미</th></tr>
+        <tr><td><span class="grade grade-sm">Strong</span></td><td>이익이 위험을 명확히 상회(또는 반대). 대부분 환자·상황에 적용</td></tr>
+        <tr><td><span class="grade grade-wm">Weak</span></td><td>이익과 위험이 불확실하거나 균형. 임상 상황·환자 선호에 따라 다를 수 있음</td></tr>
+        <tr><td><span class="grade grade-nr">No Rec</span></td><td>권고 또는 반대에 불충분한 근거</td></tr>
+      </table>
+      <table class="tbl">
+        <tr><th>근거 질</th><th>의미</th></tr>
+        <tr><td><strong>High</strong></td><td>비뚤림 위험 낮은 고질 RCT; 일관된 직접 근거</td></tr>
+        <tr><td><strong>Moderate</strong></td><td>방법론적 한계 있는 연구; 간접 근거</td></tr>
+        <tr><td><strong>Low</strong></td><td>증례군 또는 비체계적 임상 관찰</td></tr>
+        <tr><td><strong>Insufficient</strong></td><td>이익·위험 판단 불가</td></tr>
+      </table>
+      <div style="margin-top:8px;font-size: calc(11px * var(--fscale, 1));color:var(--text2)">
+        배지 표기:
+        <span class="grade grade-sh" data-tip="Strong / High-quality evidence">Strong/High</span>
+        <span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span>
+        <span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span>
+        <span class="grade grade-wm" data-tip="Weak / Moderate-quality evidence">Weak/Mod</span>
+        <span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span>
+        <span class="grade grade-nr" data-tip="No recommendation / Insufficient evidence">No Rec</span>
+      </div>
+    </div>
+  </div>
+</div><!-- /overview -->
+
+<!-- ═══ 진단·평가 ═══ -->
+<div id="tab-eval" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 생화학적 평가</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>TSH는 갑상선기능항진증 의심 시 <strong>가장 먼저 시행</strong>할 검사. 강력히 의심될 때는 <strong>TSH + fT4 + 총 T3</strong> 동시 시행 시 진단 정확도 향상.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>패턴</th><th>TSH</th><th>fT4</th><th>T3</th><th>해석</th></tr>
+        <tr><td>현성 항진증</td><td>&lt;0.01 mU/L</td><td>↑</td><td>↑</td><td>갑상선중독증 확진</td></tr>
+        <tr><td>T3 중독증</td><td>낮음~검출 불가</td><td>정상</td><td>↑</td><td>초기 GD 또는 자율 결절; 가장 초기 단계</td></tr>
+        <tr><td>무증상 항진증</td><td>0.01–0.4 mU/L</td><td>정상</td><td>정상</td><td>추적·치료 여부 개별 판단</td></tr>
+        <tr><td>TSH 매개 항진증</td><td>정상~↑</td><td>↑</td><td>↑</td><td>TSH 분비 뇌하수체 선종 / 갑상선호르몬 저항성</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>Biotin 주의</strong>: 고용량 biotin 복용 시 면역측정법에서 fT4 위양성↑ / TSH 위음성↓ 가능. 검사 최소 2일 전 중단 후 재측정.</div>
+      </div>
+      <!-- 이형항체 클릭 확장 패널 -->
+      <div class="heter-box" onclick="toggleHeter(this)" style="margin-top:6px;border:1.5px solid #e3a000;border-radius:7px;overflow:hidden;cursor:pointer;">
+        <div style="background:#fff8c5;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size: calc(14px * var(--fscale, 1));">⚠️</span>
+            <span style="font-size: calc(12px * var(--fscale, 1));font-weight:700;color:#7d4e00;">이형항체(Heterophilic Antibody) 간섭</span>
+            <span style="font-size: calc(10px * var(--fscale, 1));background:#e3a000;color:#fff;padding:1px 6px;border-radius:10px;font-weight:700;">클릭하여 자세히</span>
+          </div>
+          <span class="heter-arrow" style="font-size: calc(13px * var(--fscale, 1));color:#9a6700;transition:transform .2s;">▾</span>
+        </div>
+        <div class="heter-body" style="display:none;padding:12px;background:#fffdf0;border-top:1px solid #f0d060;">
+
+          <!-- 정의 -->
+          <div style="font-weight:700;color:#7d4e00;font-size: calc(12px * var(--fscale, 1));margin-bottom:6px;padding-bottom:4px;border-bottom:1.5px solid #e3a000;">📖 정의 및 종류</div>
+          <table class="tbl" style="margin-bottom:10px;">
+            <tr><th>종류</th><th>특징</th><th>발생 원인</th></tr>
+            <tr>
+              <td><strong>이형항체<br>(Heterophilic Ab)</strong></td>
+              <td>친화력이 낮은 다반응성(polyspecific) IgG·IgM·IgA. 여러 동물 단백질과 비특이적으로 반응</td>
+              <td>자연 발생 (면역 반응 초기 단계, 친화력 성숙 이전)</td>
+            </tr>
+            <tr>
+              <td><strong>HAMA</strong><br>(Human Anti-Mouse Ab)</td>
+              <td>친화력이 높은 마우스 단클론항체 특이 IgG</td>
+              <td>마우스 단클론항체를 이용한 방사면역영상·암 치료 이력, 동물(수의사·농장) 노출</td>
+            </tr>
+            <tr>
+              <td><strong>류마티스 인자 (RF)</strong></td>
+              <td>IgM으로 사람·동물 IgG의 Fc 분획에 비특이적 결합</td>
+              <td>류마티스 관절염, 기타 자가면역 질환</td>
+            </tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-bottom:10px;">
+            임상에서는 <em>heterophilic antibody</em>, <em>HAMA</em>, <em>anti-animal antibody (AAA)</em>를 혼용하는 경우가 많음. 발생률: 전체 환자의 <strong>0.05–6%</strong>, 자가면역 질환(류마티스 관절염 등)에서 더 흔함.
+          </div>
+
+          <!-- 기전 -->
+          <div style="font-weight:700;color:#7d4e00;font-size: calc(12px * var(--fscale, 1));margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #e3a000;">⚙️ 면역분석 간섭 기전 (Sandwich Immunoassay 기준)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+            <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:8px;">
+              <div style="font-weight:700;font-size: calc(11px * var(--fscale, 1));color:#856404;margin-bottom:5px;">🔴 위양성 (False Positive) — TSH 위상승</div>
+              <div style="font-size: calc(11px * var(--fscale, 1));line-height:1.6;color:#5c4000;">
+                이형항체가 <strong>capture Ab</strong>와 <strong>signal(detection) Ab</strong>를 동시에 교차결합(cross-link) → 분석물(TSH) 없이도 샌드위치 구조 형성 → 신호 발생 → <strong>TSH 위양성 상승</strong><br>
+                <span style="color:#856404">⚡ 더 흔한 유형 (대부분 플랫폼에서 위양성이 더 많음)</span>
+              </div>
+            </div>
+            <div style="background:#e8f4fd;border:1px solid #90caf9;border-radius:6px;padding:8px;">
+              <div style="font-weight:700;font-size: calc(11px * var(--fscale, 1));color:#0d47a1;margin-bottom:5px;">🔵 위음성 (False Negative) — TSH 위저하</div>
+              <div style="font-size: calc(11px * var(--fscale, 1));line-height:1.6;color:#1a237e;">
+                이형항체가 capture Ab 또는 signal Ab <strong>중 하나에만</strong> 결합하여 분석물 결합을 <strong>차단</strong> → 진짜 TSH가 있어도 검출 불가 → <strong>TSH 위음성 저하</strong><br>
+                <span style="color:#1565c0">⚡ 위음성 시 갑상선기능항진증 오진 가능</span>
+              </div>
+            </div>
+          </div>
+          <div style="background:#f8f9fa;border:1px solid var(--border);border-radius:6px;padding:8px;margin-bottom:10px;font-size: calc(11px * var(--fscale, 1));color:var(--text2);">
+            <strong>💡 핵심 원리:</strong> 상업 면역분석키트의 항체 대부분은 마우스·토끼 등 동물에서 생산됨. 환자 혈청 내 이형항체가 이 시약 항체에 결합 → 분석 신호 교란. 경쟁형(competitive) 분석법에서도 간섭 가능하나, <strong>샌드위치형에서 특히 취약</strong>.
+          </div>
+
+          <!-- 임상 의심 상황 -->
+          <div style="font-weight:700;color:#7d4e00;font-size: calc(12px * var(--fscale, 1));margin-bottom:6px;padding-bottom:4px;border-bottom:1.5px solid #e3a000;">🩺 이형항체 간섭 의심 임상 상황</div>
+          <table class="tbl" style="margin-bottom:10px;">
+            <tr><th>의심 상황</th><th>설명</th></tr>
+            <tr><td>TSH 상승 + fT4 정상 + <strong>무증상</strong></td><td>갑상선기능저하증 임상 징후 전혀 없는데 TSH 지속 상승</td></tr>
+            <tr><td>TSH 결과가 임상 양상과 <strong>불일치</strong></td><td>LT4 복용 중 TSH가 계속 높음 (치료 불순응과 감별)</td></tr>
+            <tr><td><strong>검사 기관에 따라 결과가 다름</strong></td><td>같은 혈청인데 A 기관 TSH 25 mIU/L, B 기관 TSH 0.1 mIU/L</td></tr>
+            <tr><td>TSH와 fT4가 <strong>같은 방향</strong>으로 상승</td><td>정상적으로 TSH↑ 시 fT4↓ (역의 관계)여야 함</td></tr>
+            <tr><td>마우스 단클론항체 치료 이력</td><td>방사면역스캔, 항암 면역치료 등</td></tr>
+            <tr><td>류마티스 관절염 등 <strong>자가면역 질환</strong></td><td>RF에 의한 간섭 가능성 증가</td></tr>
+          </table>
+
+          <!-- 감별·확인 방법 -->
+          <div style="font-weight:700;color:#7d4e00;font-size: calc(12px * var(--fscale, 1));margin-bottom:6px;padding-bottom:4px;border-bottom:1.5px solid #e3a000;">🔍 감별·확인 방법</div>
+          <table class="tbl" style="margin-bottom:10px;">
+            <tr><th>방법</th><th>원리</th><th>해석</th></tr>
+            <tr>
+              <td><strong>다른 플랫폼/제조사 재측정</strong></td>
+              <td>제조사마다 사용 항체 종이 다름 → 간섭 해소 여부 확인</td>
+              <td>결과 크게 다르면 간섭 의심 확정. <strong>가장 먼저 시행</strong>할 방법</td>
+            </tr>
+            <tr>
+              <td><strong>연속 희석(Serial Dilution)</strong></td>
+              <td>진짜 분석물은 희석 비율에 비례하여 감소; 간섭 시 비선형(non-linear) 패턴</td>
+              <td>희석 시 비선형성 → 간섭 강력 시사</td>
+            </tr>
+            <tr>
+              <td><strong>이형항체 차단 시약<br>(Heterophile Blocking Tube, HBT)</strong></td>
+              <td>비특이적 마우스 IgG 등 차단제로 이형항체 포화시킴</td>
+              <td>차단 후 TSH 유의하게 감소 → 이형항체 간섭 확인</td>
+            </tr>
+            <tr>
+              <td><strong>PEG 침전법</strong></td>
+              <td>폴리에틸렌글리콜(PEG)로 면역글로불린 침전 제거</td>
+              <td>침전 후 TSH 정상화 → 항체 관련 간섭 확인 (Macro-TSH 감별도 가능)</td>
+            </tr>
+            <tr>
+              <td><strong>질량분석법(LC-MS/MS)</strong></td>
+              <td>항체 간섭 없는 물리화학적 측정</td>
+              <td>금표준(Gold standard); 이형항체 영향 없음</td>
+            </tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-bottom:10px;">
+            ※ 단독 검사만으로 100% 확인 불가. <strong>플랫폼 비교 + 희석 검사 + 차단 시약</strong> 병행 시 약 90% 감별 가능 (Endocrine Reviews 2018).
+          </div>
+
+          <!-- 임상적 중요성 -->
+          <div style="font-weight:700;color:#7d4e00;font-size: calc(12px * var(--fscale, 1));margin-bottom:6px;padding-bottom:4px;border-bottom:1.5px solid #e3a000;">⚡ 임상적 중요성 — 오진 사례</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;">
+            <div style="background:#ffebe9;border:1px solid #ffb3b0;border-radius:6px;padding:8px;font-size: calc(11px * var(--fscale, 1));line-height:1.6;">
+              <strong style="color:#cf222e;">사례 ①</strong> (BSPED 2023)<br>
+              5세 여아 — 무증상인데 TSH 24 mIU/L (Abbott). LT4 치료 시작 후 TSH 2747 mIU/L까지 상승. 12개월 치료 후 재검 → Siemens 기기에서 TSH 1.82 mIU/L (정상). <strong>이형항체 간섭 확인 후 LT4 중단.</strong>
+            </div>
+            <div style="background:#ffebe9;border:1px solid #ffb3b0;border-radius:6px;padding:8px;font-size: calc(11px * var(--fscale, 1));line-height:1.6;">
+              <strong style="color:#cf222e;">사례 ②</strong> (PMC 2020)<br>
+              갑상선전절제 후 여성 — TSH 6.61 μIU/ml (Siemens). 동일 혈청을 4개 기기로 재측정 → Siemens 5.52, Abbott 0.54, Roche 0.12, Beckman &lt;0.015 μIU/ml. <strong>이형항체 차단제 투여 후 모든 플랫폼에서 정상화.</strong>
+            </div>
+          </div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);padding:6px 8px;background:#f6f8fa;border-radius:5px;border-left:3px solid #e3a000;">
+            <strong>이형항체 간섭이 영향을 미치는 기타 갑상선 검사:</strong> fT4 위상승, fT3 위상승, 갑상선글로불린(Tg) 위양성 (분화 갑상선암 추적에서 재발 오판 위험), TRAb 위양성. 간섭은 갑상선 기능 검사에 국한되지 않으며 심근 트로포닌·hCG·암표지자 등 모든 면역측정 호르몬 검사에 영향 가능.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 원인 감별 검사 (Rec 1)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 1</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            갑상선중독증의 원인을 반드시 규명해야 한다. 임상 양상·초기 검사로 불명확하다면 <strong>(1) TRAb 측정, (2) RAIU, (3) 갑상선 초음파 도플러 혈류</strong> 중 하나 이상을 시행. TA 또는 TMNG 의심 시 <sup>123</sup>I 또는 <sup>99m</sup>Tc 스캔 시행.
+            <div class="rec-remarks">
+              TRAb 비용효과적: 양성 시 GD 확진 (RAIU보다 비용 47% 절감, 진단 46% 단축). 제3세대 TRAb 민감도 96–97%, 특이도 99%.<br>
+              T3/T4 비율(ng/μg): &gt;20 → GD·독성 결절; &lt;20 → 갑상선염. 스캔 금기 시 참고 활용.
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <table class="tbl">
+        <tr><th>진단</th><th>RAIU</th><th>스캔 패턴</th><th>TRAb</th><th>기타</th></tr>
+        <tr><td><strong>Graves병</strong></td><td>↑↑ (미만)</td><td>미만성 균일 섭취</td><td>양성</td><td>안병증, 갑상선 잡음</td></tr>
+        <tr><td><strong>독성 선종 (TA)</strong></td><td>국소 ↑, 주변 억제</td><td>Hot nodule + 주변 억제</td><td>음성</td><td>단일 결절 촉지</td></tr>
+        <tr><td><strong>TMNG</strong></td><td>정상~↑</td><td>불균일 다초점</td><td>음성</td><td>다결절 갑상선종</td></tr>
+        <tr><td>무통성/산후 갑상선염</td><td>≈0</td><td>섭취 없음</td><td>음성(가끔 약양성)</td><td>TPO-Ab 양성 50%</td></tr>
+        <tr><td>아급성 갑상선염</td><td>≈0</td><td>섭취 없음</td><td>음성</td><td>통증, ESR ↑, CRP ↑</td></tr>
+        <tr><td>갑상선중독증 인위</td><td>≈0</td><td>섭취 없음</td><td>음성</td><td>Tg 매우 낮음; T4/T3 비율 높음</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 증상 조절 — 베타차단제 (Rec 2)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 2</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            증상성 갑상선중독증 환자 — 특히 <strong>고령, 안정 시 심박수 &gt;90회/분, 기존 심혈관질환 동반</strong> 시 — 모두에게 베타차단제 투여 권고.
+            <div class="rec-remarks">
+              <strong>약제 비교:</strong><br>
+              • <strong>Propranolol</strong> 10–40 mg 3–4회/일: 비선택적; 고용량 T4→T3 전환 억제; 수유모·임산부 선호<br>
+              • <strong>Atenolol</strong> 25–100 mg 1–2회/일: β1 선택적; 임신 시 회피<br>
+              • <strong>Metoprolol</strong> 25–50 mg 2–3회/일: β1 선택적<br>
+              • <strong>Nadolol</strong> 40–160 mg 1회/일: 비선택적; 1일 1회<br>
+              • <strong>Esmolol</strong> IV 50–100 μg/kg/min: 중환자실·갑상선 위기<br>
+              ※ 기관지연축 천식: 원칙적 금기. 칼슘채널차단제(verapamil, diltiazem)로 대체 가능.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> 갑상선 위기 진단·치료 (Rec 34–35)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-danger">
+        <span>🌡️</span>
+        <div><strong>BWPS(Burch-Wartofsky Point Scale)</strong>: 체온 + 심박수 + 심방세동 + 심부전 + CNS 증상 + GI/간 + 유발인자. <strong>≥45점: 갑상선 위기 / 25–44점: 임박 위기 / &lt;25점: 가능성 낮음</strong></div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 34</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">갑상선 위기는 중증 갑상선중독증 + 전신 기관 부전 환자에서 <strong>임상적으로</strong> 진단. BWPS ≥45 또는 JTA TS1/TS2(전신 부전 동반)는 적극 치료.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 35</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            다중양식 치료: <strong>β차단제, ATD, 무기 요오드, 코르티코스테로이드, 해열(아세트아미노펜), 쿨링, 수액, 호흡 관리, ICU 모니터링</strong>.
+            <div class="rec-remarks">
+              <strong>갑상선 위기 약물 용량:</strong><br>
+              • <strong>PTU</strong> 500–1,000 mg 부하 → 250 mg q4h (T4→T3 전환 차단 + 합성 차단; IV 투여도 가능)<br>
+              • <strong>MMI</strong> 60–80 mg/일 (합성 차단)<br>
+              • <strong>Propranolol</strong> 60–80 mg q4h (고용량 시 T4→T3 전환 차단 효과 추가)<br>
+              • <strong>SSKI</strong> 5 drops q6h — ATD 투여 <strong>1시간 후</strong> 시작 (ATD 선투여 필수)<br>
+              • <strong>Hydrocortisone</strong> 300 mg IV 부하 → 100 mg q8h (상대 부신 부전 예방; T4→T3 전환 억제)
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /eval -->
+
+<!-- ═══ GRAVES병 ═══ -->
+<div id="tab-graves" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚕️</span> 현성 Graves 항진증 치료 선택 (Rec 3)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 3</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            현성 Graves 항진증 환자는 <strong>RAI 치료, ATD, 수술</strong> 중 하나를 선택. 세 가지 모두 비교적 효과적이고 안전하며 장기 삶의 질은 동등.
+          </div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="section-title">치료 선택 지침 (Table 5)</div>
+      <table class="tbl">
+        <tr><th>임상 상황</th><th>RAI</th><th>ATD</th><th>수술</th></tr>
+        <tr class="section-row"><td colspan="4">RAI 선호 상황</td></tr>
+        <tr><td>수술 위험 증가 동반질환 / 기대여명 단축</td><td class="mod-oo">✓✓</td><td class="mod-o">✓</td><td class="mod-x">✗</td></tr>
+        <tr><td>ATD 주요 부작용 병력</td><td class="mod-oo">✓✓</td><td class="mod-x">✗</td><td class="mod-o">✓</td></tr>
+        <tr><td>이전 경부 수술 또는 방사선 조사</td><td class="mod-oo">✓✓</td><td class="mod-o">✓</td><td class="mod-cau">!</td></tr>
+        <tr><td>비활성 GO</td><td class="mod-oo">✓✓</td><td class="mod-o">✓</td><td class="mod-o">✓</td></tr>
+        <tr><td>간 질환</td><td class="mod-oo">✓✓</td><td class="mod-cau">!</td><td class="mod-o">✓</td></tr>
+        <tr class="section-row"><td colspan="4">ATD 선호 상황</td></tr>
+        <tr><td>관해 가능성 높음 (경증, 소갑상선종, TRAb 낮음)</td><td class="mod-o">✓</td><td class="mod-oo">✓✓</td><td class="mod-o">✓</td></tr>
+        <tr><td>임신 중</td><td class="mod-x">✗</td><td class="mod-oo">✓✓/!</td><td class="mod-o">✓/!</td></tr>
+        <tr><td>활성 중등~중증 GO</td><td class="mod-x">반대</td><td class="mod-oo">✓✓</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>신속 생화학적 조절 필요</td><td class="mod-o">✓</td><td class="mod-oo">✓✓</td><td class="mod-cau">!</td></tr>
+        <tr class="section-row"><td colspan="4">수술 선호 상황</td></tr>
+        <tr><td>임신 계획 &lt;6개월</td><td class="mod-o">✓</td><td class="mod-o">✓</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>갑상선 종괴 ≥80 g / 압박 증상</td><td class="mod-o">✓</td><td class="mod-na">–</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>갑상선 악성 확인 또는 의심</td><td class="mod-x">✗</td><td class="mod-na">–</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>결절 &gt;4 cm 또는 비기능 결절</td><td class="mod-na">–</td><td class="mod-o">✓</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>부갑상선기능항진증 동반 수술 필요</td><td class="mod-na">–</td><td class="mod-na">–</td><td class="mod-oo">✓✓</td></tr>
+        <tr><td>TRAb 매우 높음</td><td class="mod-o">✓</td><td class="mod-o">✓</td><td class="mod-oo">✓✓</td></tr>
+      </table>
+      <div style="margin-top:6px;font-size: calc(10px * var(--fscale, 1));color:var(--text2)">✓✓ 선호 / ✓ 허용 / ! 주의 사용 / – 비1선택 / ✗ 금기</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️</span> Graves 안병증 (GO) 관리 (Rec 99–108)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div><strong>GO 위험 인자</strong>: 흡연(가장 중요), RAI 치료, TRAb &gt;8.8 IU/L, 갑상선 기능 이상(저하증·항진증), RAI 후 갑상선저하증 지연 교정</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 99</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">GO 또는 안병증 위험 인자 동반 항진증 환자: <strong>신속히 정상 갑상선 기능 달성·유지</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 100</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">GD 환자에게 <strong>금연</strong> 강력 권고 및 금연 프로그램 의뢰. 간접흡연도 GO 위험 증가.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 107</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text"><strong>활성 중등~중증 또는 시력 위협 GO</strong>에서는 <strong>RAI 치료를 금기</strong>. ATD 또는 수술이 선호 치료.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="section-title">RAI 시 스테로이드 커버 방침 (Table 14)</div>
+      <table class="tbl">
+        <tr><th>GO 상태</th><th>RAI 단독</th><th>RAI + 경구 스테로이드</th></tr>
+        <tr><td>GO 없음 (비흡연)</td><td>권고</td><td>반대</td></tr>
+        <tr><td>GO 없음 (흡연자)</td><td colspan="2" style="text-align:center;color:var(--text2)">불충분한 근거 (No Rec)</td></tr>
+        <tr><td>경활성 GO (위험인자 없음)</td><td>허용</td><td>허용</td></tr>
+        <tr><td>경활성 GO (<strong>위험인자 있음</strong>)</td><td>반대</td><td><strong>권고</strong></td></tr>
+        <tr><td>중등~중증 활성 GO</td><td>반대</td><td>반대 (수술·ATD 선택)</td></tr>
+        <tr><td>비활성 GO</td><td>권고</td><td>반대</td></tr>
+      </table>
+      <div class="rec-remarks" style="margin-top:6px">
+        스테로이드 검증 용량: Prednisone 0.4–0.5 mg/kg/일, RAI 1–3일 후 시작 → 1개월 유지 → 2개월에 걸쳐 감량. 저용량(~0.2 mg/kg/일 6주)도 일부 연구에서 동등 효과. 당뇨·골다공증·정신과 질환·고감염위험 시 스테로이드 부작용 위험 고려.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👦</span> 소아·청소년 Graves병 (Rec 58–72)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 58</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            소아 GD: MMI, RAI, 수술 모두 사용 가능. <strong>RAI는 5세 미만 회피</strong>. 5–10세: 계산 활성도 &lt;10 mCi 시 허용. 수술: 5세 미만 또는 갑상선종 &gt;80 g 시 선호.
+            <div class="rec-remarks">소아에서 <strong>PTU는 금기</strong>(간부전 1/2000–4000). 심각한 MMI 부작용 시에만 단기 PTU 고려. 소아 합병증 성인보다 높음 → 반드시 고용량 전문 외과의 수술.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 59</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">소아 ATD 치료 시 <strong>MMI만</strong> 사용. 용량: 0.2–0.5 mg/kg/일 (범위 0.1–1.0 mg/kg/일). 연령별 시작 용량: 1–5세 2.5–5 mg/일, 5–10세 5–10 mg/일, 10–18세 10–20 mg/일.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 66</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">소아 1차 MMI 치료: <strong>1–2년 후</strong> 저용량으로 감량하여 자발 관해 확인 가능. 관해 불량 예측(갑상선종 &gt;2.5배 정상, 나이 &lt;12세, TRAb 지속 상승, fT4 &gt;4 ng/dL)시 RAI·수술 조기 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 무증상 갑상선기능항진증 치료 기준 (Rec 73–77)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>지속성 확인을 위해 <strong>최소 3–6개월 간격으로 반복 측정</strong> 필요. TSH &lt;0.1 mU/L가 더 높은 임상 위험도와 연관.</div>
+      </div>
+      <table class="tbl">
+        <tr><th>TSH</th><th>임상 상황</th><th>권고</th><th>강도</th></tr>
+        <tr><td rowspan="3">지속 &lt;0.1 mU/L</td><td>≥65세</td><td>치료 권고</td><td><span class="grade grade-sm">Strong/Mod</span></td></tr>
+        <tr><td>심장질환·골다공증·폐경 후(에스트로겐·비스포스포네이트 미복용)·증상 있음</td><td>치료 권고</td><td><span class="grade grade-sm">Strong/Mod</span></td></tr>
+        <tr><td>&lt;65세, 무증상, 위험인자 없음</td><td>치료 고려</td><td><span class="grade grade-wm">Weak/Mod</span></td></tr>
+        <tr><td rowspan="2">지속 0.1–0.4 mU/L</td><td>≥65세 또는 심장질환·골다공증·증상</td><td>치료 고려</td><td><span class="grade grade-wm">Weak/Mod</span></td></tr>
+        <tr><td>&lt;65세, 무증상, 동반질환 없음</td><td>관찰 가능</td><td><span class="grade grade-wl">Weak/Low</span></td></tr>
+      </table>
+    </div>
+  </div>
+</div><!-- /graves -->
+
+<!-- ═══ 방사성요오드 ═══ -->
+<div id="tab-rai" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> GD에서 RAI 치료 원칙 (Rec 8–12)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 8</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            GD에서 RAI는 <strong>1회 투여로 갑상선저하증을 유도</strong>할 수 있는 충분한 활성도 투여. 평균 용량 <strong>10–15 mCi (370–555 MBq)</strong>. 저용량은 재치료 필요율이 높아 권장하지 않음.
+            <div class="rec-remarks">목표: &gt;150 μCi/g (5.55 MBq/g) 이상 선량 전달 시 갑상선저하증 달성. 고정 용량 또는 갑상선 크기·RAIU 기반 계산 용량 모두 성적 동등. 성공률: 5 mCi 61% → 15 mCi 81–86%.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 9</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">가임 여성은 RAI 투여 <strong>48시간 이내 임신 검사 시행 및 음성 확인 후</strong> 투여.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 10</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">방사선 안전 지침을 <strong>서면으로</strong> 제공. 준수 불가 시 다른 치료 선택.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 11</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            RAI 후 <strong>1–2개월 내</strong> fT4·T3·TSH 추적. 이후 <strong>4–6주 간격</strong>으로 6개월까지 (또는 갑상선저하증 확인 후 LT4 치료 안정 시까지).
+            <div class="rec-remarks">대부분 4–8주 이내 갑상선 기능 호전. 40%는 8주 이내, &gt;80%는 16주 이내 갑상선저하증 발생. TSH는 호르몬 회복 후 1개월 이상 억제 유지 가능 → 초기에는 fT4로 모니터링. fT4 저하 확인 시 LT4 시작 (TSH 상승 기다리지 말 것).</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 12</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">RAI 후 <strong>6개월 이후에도 항진증 지속</strong> 시 재치료 권고. 3개월 반응 최소 시 추가 RAI 고려 가능.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> RAI 전처치 (Rec 4–7)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 4</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">RAI 후 일시적 항진증 악화 가능. 합병증 위험 높은 무증상 환자(고령, 동반질환)에서도 <strong>β차단제 고려</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 5</span>
+          <div class="rec-badges"><span class="grade grade-wm" data-tip="Weak / Moderate-quality evidence">Weak/Mod</span></div>
+          <div class="rec-text">악화 위험이 높은 환자(fT4 정상 상한의 2–3배, 고령, 심혈관 동반질환)에서 RAI 전 <strong>MMI 전처치 고려. MMI는 RAI 2–3일 전 중단</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 6</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">악화 위험이 높은 환자에서 RAI <strong>3–7일 후 MMI 재시작 고려</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 7</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">RAI 전 동반질환(심방세동, 심부전, 폐동맥고혈압, 신부전, 당뇨, 뇌혈관 질환 등) 최적화 치료.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚫</span>
+        <div><strong>RAI 절대 금기</strong>: 임신, 수유, 갑상선암 동반(의심 포함), 방사선 안전 지침 준수 불가. <strong>상대 금기</strong>: 임신 계획 4–6개월 이내(신중 사용)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔵</span> TMNG·TA에서 RAI (Rec 37–45)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 37</span>
+          <div class="rec-badges"><span class="grade grade-wm" data-tip="Weak / Moderate-quality evidence">Weak/Mod</span></div>
+          <div class="rec-text">현성 TMNG·TA는 <strong>RAI 또는 수술</strong> 치료. 장기 저용량 MMI는 일부 고령·수술·RAI 불가 환자에서만 허용.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 42</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">TMNG: 1회 충분한 활성도 투여. 용량 계산: 150–200 μCi/g × 24h RAIU 보정. RAIU 낮을 경우 더 높은 활성도 필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 43</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">TA: 고정 용량 10–20 mCi (370–740 MBq) 또는 결절 크기 기반 계산 용량 (150–200 μCi/g × RAIU 보정).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 44</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">TMNG·TA RAI 후 <strong>1–2개월 내</strong> fT4·T3·TSH 추적. 이후 4–6주 간격 6개월까지.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 45</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">TMNG·TA에서 RAI 후 6개월 이상 항진증 지속 시 재치료 권고. 3개월 반응 최소 시 추가 RAI 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 소아 RAI 치료 (Rec 68–69)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 68</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">소아에서 RAI 전 fT4 &gt;5 ng/dL 또는 총 T4 &gt;20 μg/dL인 경우 <strong>MMI + β차단제로 전처치 후</strong> 정상화 확인 후 RAI 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 69</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">소아 GD에서 RAI 선택 시 <strong>갑상선저하증 유도</strong>에 충분한 활성도를 1회 투여. &gt;150 μCi/g (5.55 MBq/g) 이상. 갑상선종 &gt;80 g 시 수술 선호.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /rai -->
+
+<!-- ═══ 항갑상선제 ═══ -->
+<div id="tab-atd" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> ATD 치료 원칙 (Rec 13–15)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 13</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            GD에서 ATD 치료를 선택하는 경우 <strong>임신 1삼분기(→ PTU), 갑상선 위기(→ PTU), MMI 경미 반응자 중 RAI·수술 거부 외에는 모두 MMI</strong>를 사용.
+            <div class="rec-remarks">
+              <strong>MMI 초기 용량 (fT4 기준):</strong><br>
+              &bull; fT4 정상 상한 1–1.5배 → <strong>5–10 mg/일</strong><br>
+              &bull; fT4 정상 상한 1.5–2배 → <strong>10–20 mg/일</strong><br>
+              &bull; fT4 정상 상한 2–3배 → <strong>30–40 mg/일</strong><br>
+              갑상선 크기, 증상, T3 수준 참고하여 조정. 정상화 후 30–50% 감량 → 유지 용량(보통 5–10 mg/일).<br>
+              <strong>PTU</strong>: 50–150 mg 3회/일 → 유지 50 mg 2–3회/일. 전환 비율: MMI 1 mg = PTU 20 mg.
+            </div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 14</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">ATD 시작 전 부작용 증상(발진, 황달, 복통·오심, 관절통, 발열, 인두통)을 <strong>서면으로 교육</strong>. 매 방문 시 즉시 보고 당부.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 15</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">ATD 시작 전 기저치로 <strong>전혈구검사(WBC 분류 포함) + 간기능 검사(빌리루빈·간수치)</strong> 시행. (GD 자체도 간수치·백혈구 이상을 유발할 수 있음)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> ATD 부작용 모니터링 (Rec 16–20)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div><strong>무과립구증</strong>: 드물지만 생명 위협. MMI 0.11–0.27%, PTU 0.27–0.30%. 중앙 발생 시점 36–69일. 발열·인두통 시 즉시 약물 중단 + WBC 검사. MMI↔PTU 교차 반응 위험 → 무과립구증 발생 시 다른 ATD도 금기.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 16</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">ATD 복용 중 <strong>발열성 질환 또는 인두통</strong> 발생 시 즉시 <strong>WBC 분류 계수</strong> 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 18</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">MMI·PTU 복용 중 <strong>소양감 발진, 황달, 연한색 변, 갈색 뇨, 관절통, 복통·오심, 피로</strong> 발생 시 간기능 평가.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 20</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">경미 피부 반응 → 항히스타민제 병용하며 ATD 유지 가능. 지속적 경미 부작용 → 중단 후 RAI·수술 또는 타 ATD로 전환. <strong>심각한 알레르기 반응 시 타 ATD 전환 금기.</strong></div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="section-title">주요 부작용 비교</div>
+      <table class="tbl">
+        <tr><th>부작용</th><th>MMI</th><th>PTU</th><th>비고</th></tr>
+        <tr><td>경미 피부 반응 (소양감·발진)</td><td>6%</td><td>3%</td><td>고용량 MMI(30 mg)에서 더 흔함</td></tr>
+        <tr><td>무과립구증</td><td>0.11%</td><td>0.27%</td><td>발생 즉시 중단; MMI↔PTU 교차 금기</td></tr>
+        <tr><td>간세포성 간독성</td><td>낮음</td><td>2.7%</td><td>PTU: 전격성 간괴사 → 간이식. FDA 2010 블랙박스 경고</td></tr>
+        <tr><td>담즙정체성 간독성</td><td>드묾 (특징적)</td><td>드묾</td><td>아시아 연구에서 MMI 간염 발생률도 보고됨</td></tr>
+        <tr><td>pANCA 혈관염</td><td>드묾</td><td>40% ANCA 양성 (임상 혈관염은 소수)</td><td>아시아 인종 더 흔함; 약물 중단으로 대부분 소실</td></tr>
+        <tr><td>인슐린 자가면역 증후군</td><td>드문 보고</td><td>–</td><td>저혈당 발생 가능</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 치료 기간 및 관해 예측 (Rec 21–23)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>치료 시작 후 2–6주에 fT4·T3 측정 → 용량 조절. TSH는 수개월간 억제 유지 → 초기 단독 모니터링 부적합. T3 별도 모니터링 중요 (fT4 정상화 후에도 T3 상승 시 갑상선중독증 지속 의미).</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 21</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            ATD 중단 전 <strong>TRAb 측정</strong> 권고. 정상 TRAb = 더 높은 관해 가능성.
+            <div class="rec-remarks">
+              TRAb 음성 → 재발률 20–30%, TRAb 지속 상승 → 재발률 80–100%.<br>
+              <strong>관해 불량 예측</strong>: 남성, 흡연자, 갑상선종 ≥80 g, 초기 T3/T4 비율 매우 높음.<br>
+              미국 관해율 20–30%, 유럽 50–60% (5–6년), 일본 68% (2년).
+            </div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 22</span>
+          <div class="rec-badges"><span class="grade grade-sh" data-tip="Strong / High-quality evidence">Strong/High</span></div>
+          <div class="rec-text">GD에서 MMI를 1차 치료로 선택했다면 <strong>약 12–18개월</strong> 치료 후 TSH와 TRAb 수준이 정상이면 중단.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 23</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">MMI 치료 완료 후 재발 시 RAI 또는 수술 고려. 관해 미달 환자가 선호하면 <strong>장기 저용량 MMI 유지</strong> 가능 (12–18개월 초과). 2.5–10 mg/일, 평균 14년 안전하고 효과적이라는 보고.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /atd -->
+
+<!-- ═══ 수술 ═══ -->
+<div id="tab-surgery" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 수술 전 준비 (Rec 24–26)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 24</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            GD 수술 선택 시 <strong>ATD 전처치(± β차단제)로 갑상선 기능 정상화</strong> 후 수술. 수술 직전 <strong>KI 함유 제제</strong> 투여.
+            <div class="rec-remarks">
+              <strong>KI 용량</strong>: Lugol 용액 8 mg/drop × 5–7 drops 3회/일 <em>또는</em> SSKI 50 mg/drop × 1–2 drops 3회/일; 수술 10일 전부터 투여. → 갑상선 혈류·혈관성 감소, 출혈 감소.
+            </div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 25</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">수술 전 <strong>칼슘·25-OH 비타민 D</strong> 평가·보충. 일시적/영구 부갑상선기능저하증 위험 높은 환자는 <strong>calcitriol 예방 투여</strong> 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 26</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">ATD 사용 불가 또는 긴급 수술 시 <strong>β차단제, KI, 글루코코르티코이드, (콜레스티라민) 병용</strong>으로 수술 전 준비.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✂️</span> 수술 방법 및 외과의 선택 (Rec 27–28)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 27</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            GD 수술 선택 시 <strong>전(全) 또는 전준전(near-total) 갑상선절제술</strong>이 선호 술식.
+            <div class="rec-remarks">전절제술 재발률 ≈0%. 부분절제술: 5년 재발·지속 8% 위험. 주요 합병증: 일시적/영구 부갑상선기능저하증, RLN 손상, 출혈.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 28</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">
+            <strong>고용량(high-volume) 갑상선 전문 외과의</strong>에게 의뢰 필수. 연 25건 이상 시 합병증 51% 감소.
+            <div class="rec-remarks">고용량 외과의 결과: 영구 부갑상선기능저하증 &lt;2%, 영구 RLN 손상 &lt;1%, 출혈 재수술 0.3–0.7%, 사망률 1/10,000–5/1,000,000.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩹</span> 수술 후 관리 (Rec 29–32)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 29</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">
+            전절제술 후 혈중 칼슘(± iPTH) 측정 → 결과 기반 경구 칼슘·칼시트리올 보충 또는 예방적 처방.
+            <div class="rec-remarks">iPTH &lt;10–15 pg/mL → 증상성 저칼슘혈증 예측. 퇴원 기준: 무증상 + 알부민 보정 혈중 칼슘 ≥8.0 mg/dL 이상 안정적. 퇴원 후 지속 저칼슘혈증 시 혈청 마그네슘 측정 및 보충.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 30</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">수술 시 ATD 중단. β차단제는 수술 후 점진적 감량.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 31</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">GD 갑상선절제술 후 <strong>체중 기반 레보티록신(1.6 μg/kg/일)</strong> 즉시 시작. 수술 6–8주 후 TSH 측정.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 32</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">수술 전후 다학제 팀 간 충분한 소통 필수 (갑상선 기능 정상화 확인, 비타민D 결핍 교정, 수술 소견 전달).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔧</span> TMNG·TA 수술 (Rec 46–55)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 46</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">TMNG·TA 수술 전 현성 항진증 환자는 <strong>MMI 전처치로 갑상선 기능 정상화</strong>. 수술 전 요오드 투여 <strong>금기</strong> (항진증 악화 위험).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 47</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">TMNG 수술: <strong>전 또는 전준전 갑상선절제술</strong> 시행. 재발 방지에 효과적.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 49</span>
+          <div class="rec-badges"><span class="grade grade-sm" data-tip="Strong / Moderate-quality evidence">Strong/Mod</span></div>
+          <div class="rec-text">고립 TA 수술: 수술 전 갑상선 초음파로 전체 갑상선 평가 후 <strong>동측 갑상선 엽절제술</strong> (또는 협부 절제술). 잔여 정상 갑상선 기능 보존 가능.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /surgery -->
+
+<!-- ═══ 특수상황 ═══ -->
+<div id="tab-special" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 중 갑상선기능항진증 (Rec 78–98)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>ATD와 TRAb 모두 태반 통과. 미치료 항진증은 조산, 저체중, 임신중독증, 태아소실 위험 증가. 치료 목표: <strong>fT4를 정상 상한 또는 약간 상회 수준</strong>으로 유지하는 최소 ATD 용량.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 78</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 중 갑상선기능항진증 진단은 <strong>임신 특이 TSH 참고치</strong> 또는 <strong>총 T4/T3 (임신 16주 이후 정상 상한 ×1.5)</strong> 기준 활용.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 79</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 초기 <strong>일시적 hCG 매개 TSH 억제(임신성 갑상선중독증)</strong>는 ATD로 치료하지 않는다. β차단제 단기 사용 가능.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 80</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            임신 중 현성 GD 항진증: <strong>1삼분기 → PTU 선호, 2삼분기 이후 → MMI</strong>.
+            <div class="rec-remarks">
+              <strong>ATD 기형 위험 기간</strong>: 임신 6–10주.<br>
+              MMI: 2–4% 기형 위험 (구개·식도·장 폐쇄, 복벽 이상, 안면 기형 등); 더 심각.<br>
+              PTU: 2–3% 기형 위험 (귀앞 누공·낭종, 요로 이상); 상대적으로 덜 심각.<br>
+              수유 중: <strong>MMI 선호</strong> (PTU 간독성 위험 대비). 둘 다 모유 이행 소량, 영아 갑상선 기능 정상.
+            </div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 89</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 중 GD ATD 치료: fT4를 <strong>정상 상한 또는 약간 초과 수준으로 유지하는 최소 용량</strong>. TSH 억제 유지 허용. 최소 <strong>월 1회</strong> 갑상선 기능 모니터링. 블록-보충 요법 임신 중 금기.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="section-title">임신 중 Graves병 관리 요약 (Table 11)</div>
+      <table class="tbl">
+        <tr><th>시기·상황</th><th>권고 사항</th></tr>
+        <tr><td>임신 중 신규 진단 — 1삼분기</td><td>PTU 시작. TRAb 측정 → 상승 시 18–22주, 30–34주 재측정</td></tr>
+        <tr><td>임신 중 신규 진단 — 2삼분기 이후</td><td>MMI 시작. TRAb 측정 → 상승 시 18–22주 재측정</td></tr>
+        <tr><td>임신 전 MMI 복용 중</td><td>임신 확인 즉시 PTU로 교체 또는 재발 위험 저시 ATD 중단 고려</td></tr>
+        <tr><td>임신 전 ATD 중단 후 관해</td><td>갑상선 기능 검사 확인. TRAb 불필요.</td></tr>
+        <tr><td>임신 전 RAI·수술 후</td><td>1삼분기 TRAb 측정 → 상승 시 18–22주 재측정</td></tr>
+        <tr><td>임신 중 수술 필요 시</td><td>2삼분기에 최적. 1·3삼분기 회피. ATD 실패·불내성 시에만.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> TRAb 측정 — 임신 중 (Rec 92–95)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 92</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 중 갑상선중독증 원인 불명 시 TRAb 측정.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 93</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 전 RAI·수술로 치료받은 GD 환자: <strong>1삼분기 TRAb 측정</strong> → 상승 시 18–22주 재측정. (TRAb 태반 통과 → 태아·신생아 항진증 위험)</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 94</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임신 중 GD로 ATD 치료 중: <strong>초진 또는 진단 시 TRAb 측정</strong> → 상승 시 18–22주 재측정. (TRAb 소실 = ATD 중단 고려 신호)</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 95</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">18–22주 TRAb 상승 환자: <strong>30–34주 재측정</strong> → 신생아 모니터링 계획 결정. (단, ATD 불필요한 온전한 갑상선 보유 여성 제외)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 산후 갑상선염 (Rec 96–98)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>산후 갑상선 기능 이상은 미국 임신의 최대 10%에서 발생. 삼상성 경과(갑상선중독증 → 갑상선저하증 → 회복). TPO-Ab 양성 여성에서 위험 27배.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 96</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">산후 갑상선중독증 발생 시 <strong>산후 파괴성 갑상선염 vs 산후 Graves병 감별</strong> 검사 시행 (T3/T4 비율, TRAb, Color Doppler, RAIU).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 97</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">산후 파괴성 갑상선염 증상성 갑상선중독증 → <strong>β차단제</strong> 투여. ATD 효과 없음. 수유 중: propranolol 또는 metoprolol 선호 (atenolol은 모유 농축 → 신생아 β차단 증상 가능).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /special -->
+
+<!-- ═══ 기타 원인 ═══ -->
+<div id="tab-others" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 아미오다론 유발 갑상선중독증 (AIT, Rec 111–116)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>AIT 빈도: 요오드 충분 지역 최대 6%, 결핍 지역 최대 10%. <strong>Type 1</strong>(요오드 유발, 기저 갑상선 자율기능이상) vs <strong>Type 2</strong>(파괴성, 직접 세포독성) 구분이 치료 전략 핵심. 임상적으로 혼재형(Mixed)도 흔함.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 111</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">아미오다론 시작 전, 시작 후 3개월 이내, 이후 <strong>3–6개월 간격</strong>으로 갑상선 기능 모니터링.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 112</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">AIT에서 아미오다론 중단 여부는 <strong>심장 전문의와 개별 결정</strong>. Type 2는 유지 중에도 치료 가능하나 회복 지연·재발 위험 증가.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 113</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">임상적으로 안정된 AIT 환자: Type 1 관련 질환(독성 결절, 잠복 GD) 감별을 위한 갑상선 기능 검사 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 114</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text"><strong>Type 1 AIT → MMI</strong>; <strong>Type 2 AIT → 코르티코스테로이드</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 115</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            임상적으로 불안정하거나 단독 치료 실패 또는 아형 불명확 → <strong>MMI + 코르티코스테로이드 병용</strong>.
+            <div class="rec-remarks">
+              <strong>AIT 치료 용량:</strong><br>
+              • MMI 시작 용량: 40 mg 1회/일 → 갑상선 기능 정상화 시까지 유지 (보통 3–6개월)<br>
+              • 스테로이드: Prednisone 40 mg/일 2–4주 → 2–3개월에 걸쳐 점진 감량<br>
+              Color-flow Doppler: Type 1(혈류 증가), Type 2(혈류 없음) 구분에 도움이나 완전히 신뢰할 수는 없음. Type 2 AIT: 약 20%는 자연 관해.
+            </div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 116</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">MMI + 스테로이드에 반응 없는 AIT → <strong>갑상선절제술</strong> 시행. 수술 대기 지연 시 사망률 더 높음 (수술 사망률 9%, 지연 사망률 더 높음). 국소마취 갑상선절제술 고려 가능.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔥</span> 파괴성 갑상선염 (Rec 117–119)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>파괴성 갑상선염: RAIU ≈0. ATD 효과 없음 (갑상선 합성 억제와 무관). 치료 목표: 증상 완화 + 항염증.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 117</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">
+            <strong>아급성 갑상선염</strong>: 경미 → <strong>β차단제 + NSAIDs</strong>. 중등~중증 통증 또는 NSAIDs 실패 → <strong>코르티코스테로이드</strong>.
+            <div class="rec-remarks">스테로이드: 프레드니손 40 mg/일 1–2주 → 2–4주에 걸쳐 감량. 저용량(15 mg/일)도 유효. 갑상선저하증 단계에서 LT4 사용 가능하나 3–6개월 후 중단 후 기능 회복 확인.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 118</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text"><strong>무통성 갑상선염</strong>(산후 포함): 증상성 → <strong>β차단제</strong>. ATD 효과 없음. 심한 경우에만 스테로이드 고려. 10–20%에서 영구 갑상선저하증 발생.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 119</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text"><strong>급성(화농성) 갑상선염</strong>: <strong>항생제 + 외과적 배농</strong>. 갑상선중독증 증상 → β차단제. (이상와 누공 기원이 많음)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 요오드 유발 갑상선기능항진증 (Rec 109–110)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>고위험군: 자율기능 결절, 기저 GD, GD 관해 후 환자. 단일 CT 조영제 노출 후 overt 항진증 발생률 2.8% (요오드 충분 지역). 대부분 자연 회복.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-no">Rec 109</span>
+          <div class="rec-badges"><span class="grade grade-wl" data-tip="Weak / Low-quality evidence">Weak/Low</span></div>
+          <div class="rec-text">조영제 투여 전 모든 환자에게 예방적 ATD 투여 권장하지 않음. 고위험 환자만 선별 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-no">Rec 110</span>
+          <div class="rec-badges"><span class="grade grade-sl" data-tip="Strong / Low-quality evidence">Strong/Low</span></div>
+          <div class="rec-text">현성 요오드 유발 갑상선기능항진증: <strong>β차단제 단독 또는 MMI 병용</strong>. RAI는 요오드 부하 소실 후 고려 (소변 요오드 1–2개월 내 정상화).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔮</span> 드문 원인 (Rec 120–124)</div><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">약물 유발 갑상선중독증 모니터링 (Rec 120) <span>▾</span></div>
+        <div class="acc-body"><span class="grade grade-sl">Strong/Low</span> IFN-α, IL-2, 티로신 키나아제 억제제(sunitinib, sorafenib, nilotinib), 리튬 복용 환자는 <strong>6개월 간격 갑상선 기능 모니터링</strong>. 갑상선중독증 발생 시 원인 평가 후 처치.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">TSH 분비 뇌하수체 선종 (Rec 121–122) <span>▾</span></div>
+        <div class="acc-body"><span class="grade grade-sl">Strong/Low</span> 진단: 부적절 정상~↑ TSH + fT4·T3 ↑ + MRI 뇌하수체 병변 + α-소단위 ↑ + TRH 반응 저하. 갑상선호르몬 저항성과 감별 필요. <strong>수술(경접형동 절제)이 1차 치료</strong>. 불완전 절제 시 octreotide 보조 치료. 장기 ATD·RAI·갑상선절제술은 이론적 종양 성장 우려로 원칙적 회피.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">Struma ovarii (Rec 123) <span>▾</span></div>
+        <div class="acc-body"><span class="grade grade-sl">Strong/Low</span> 이소성 갑상선 조직이 난소 기형종의 주요 성분. RAIU: 경부 거의 0 + 골반부 섭취. 갑상선 기능 정상화 후 외과적 절제. 악성(유두암 포함 최대 25%) 시 갑상선 제거 후 RAI 추가.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">갑상선중독증 인위 (Rec X7) <span>▾</span></div>
+        <div class="acc-body">갑상선 없음 + Tg 낮음 + RAIU ≈0. exogenous LT4: T3/T4 비율 ng/μg &lt;20. 리오티로닌(T3)·갑상선 추출물 복용 시 T3 불균형 상승. 정신과적 평가 및 의뢰.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">융모막암종·기능성 갑상선암 전이 (Rec 124, X8) <span>▾</span></div>
+        <div class="acc-body"><span class="grade grade-sl">Strong/Low</span> 융모막암종: 종양 유래 hCG의 TSH 수용체 교차 자극. <strong>ATD + 원발 종양 치료</strong> 병행. 기능성 갑상선암 전이: RAI + 필요 시 ATD. ATD 단독 또는 RAI 후 갑상선기능항진증 잔류 시 외과적 치료 고려.</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /others -->
+
+<div id="abbr-main-grid" style="display:none" class="abbr-grid"></div>
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleHeter(box) {
+  const body = box.querySelector('.heter-body');
+  const arrow = box.querySelector('.heter-arrow');
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  body.style.display = (body.style.display === 'block') ? 'none' : 'block';
+  const arrow = hdr.querySelector('span');
+  if (arrow) arrow.textContent = body.style.display === 'block' ? '▴' : '▾';
+}
+
+const abbrs = [
+  ['AIT','Amiodarone-Induced Thyrotoxicosis (아미오다론 유발 갑상선중독증)'],
+  ['ATD','Antithyroid Drug (항갑상선제) — MMI 또는 PTU'],
+  ['ATA','American Thyroid Association (미국 갑상선학회)'],
+  ['BWPS','Burch-Wartofsky Point Scale — 갑상선 위기 진단 점수; ≥45점 = 갑상선 위기'],
+  ['CAS','Clinical Activity Score (임상 활성도 점수) — Graves 안병증; ≥3 = 활성'],
+  ['ESR','Erythrocyte Sedimentation Rate (적혈구 침강속도) — 아급성 갑상선염 시 >50 mm/h'],
+  ['FNA','Fine Needle Aspiration (세침 흡인 세포검사)'],
+  ['fT3','Free Triiodothyronine (유리 삼요오드티로닌)'],
+  ['fT4','Free Thyroxine (유리 갑상선호르몬)'],
+  ['GD','Graves Disease (그레이브스병)'],
+  ['GO','Graves Orbitopathy (그레이브스 안병증) = Thyroid Eye Disease'],
+  ['hCG','Human Chorionic Gonadotropin (인간 융모성 생식선자극호르몬)'],
+  ['iPTH','Intact Parathyroid Hormone (온전한 부갑상선호르몬)'],
+  ['JTA','Japanese Thyroid Association — 갑상선 위기 진단 기준(TS1/TS2) 제안'],
+  ['KI','Potassium Iodide (요오드화 칼륨)'],
+  ['Lugol','Lugol 용액 — 5% 요오드 + 10% 요오드화 칼륨; 8 mg 요오드/drop'],
+  ['MMI','Methimazole (메티마졸) — 갑상선 호르몬 합성 차단; GD 1차 ATD'],
+  ['pANCA','Perinuclear ANCA — PTU 관련 소혈관 혈관염 표지자'],
+  ['PTU','Propylthiouracil (프로필티오우라실) — 임신 1삼분기 선호; T4→T3 전환 차단; 간독성 주의'],
+  ['RAI','Radioactive Iodine (방사성 요오드, ¹³¹I)'],
+  ['RAIU','Radioactive Iodine Uptake (방사성 요오드 섭취율)'],
+  ['RLN','Recurrent Laryngeal Nerve (반회후두신경)'],
+  ['SH','Subclinical Hyperthyroidism (무증상 갑상선기능항진증)'],
+  ['SSKI','Saturated Solution of Potassium Iodide — 50 mg 요오드/drop'],
+  ['T3','Triiodothyronine (삼요오드티로닌) — 활성형 갑상선 호르몬'],
+  ['T4','Thyroxine (티록신) — 주요 갑상선 호르몬; 말초에서 T3로 전환'],
+  ['TA','Toxic Adenoma (독성 선종) — 단일 자율 기능 결절'],
+  ['TBII','Thyrotropin Binding Inhibition Immunoglobulin (TSH 수용체 결합 억제 면역글로불린)'],
+  ['Tg','Thyroglobulin (갑상선글로불린) — 낮으면 외인성 T4 복용 시사'],
+  ['TMNG','Toxic Multinodular Goiter (독성 다결절성 갑상선종)'],
+  ['TRAb','Thyrotropin Receptor Antibody (TSH 수용체 항체) — GD 진단·예후 지표'],
+  ['TRH','Thyrotropin-Releasing Hormone'],
+  ['TSH','Thyroid-Stimulating Hormone (갑상선자극호르몬)'],
+  ['TSI','Thyroid-Stimulating Immunoglobulin — 자극성 TRAb'],
+  ['TPO-Ab','Thyroid Peroxidase Antibody (갑상선 퍼옥시다아제 항체)'],
+  ['CFDS','Color-Flow Doppler Sonography — AIT 아형 감별에 활용'],
+  ['AIT type1','AIT Type 1 — 요오드 유발; 기저 자율기능 갑상선질환; MMI 치료'],
+  ['AIT type2','AIT Type 2 — 파괴성 갑상선염; 아미오다론 직접 독성; 스테로이드 치료'],
+];
+
+function buildAbbr() {
+  const sorted = abbrs.slice().sort((a,b) => a[0].localeCompare(b[0]));
+  const html = sorted.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  document.getElementById('abbr-main-grid').innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 460;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
