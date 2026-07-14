@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025 AACE 비만 진료지침</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --purple: #57606a;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .logo-badge { background: #e86c00; color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: #e86c00; border-bottom-color: #e86c00; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 0; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .icon { font-size: calc(14px * var(--fscale, 1)); }
+  .card-header .toggle { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── TABLE ── */
+  .bp-table { width: 100%; border-collapse: collapse; font-size: calc(12px * var(--fscale, 1)); }
+  .bp-table th { background: var(--surface2); color: var(--text2); font-weight: 600; padding: 7px 10px; text-align: left; font-size: calc(11px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; }
+  .bp-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .bp-table tr:last-child td { border-bottom: none; }
+  .bp-table tr:hover td { background: var(--surface2); }
+
+  /* ── BADGES ── */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .badge-s1 { background: #dafbe1; color: var(--green); }
+  .badge-s2 { background: #fff8c5; color: var(--yellow); }
+  .badge-s3 { background: #ffebe9; color: var(--red); }
+  .badge-first { background: #ddf4ff; color: var(--accent2); }
+  .badge-second { background: #fff8c5; color: var(--yellow); }
+  .badge-third { background: #f6f8fa; color: var(--purple); }
+
+  /* ── DRUG TABLE ── */
+  .drug-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .drug-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; }
+  .drug-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .drug-table tr:last-child td { border-bottom: none; }
+  .drug-table tr:hover td { background: rgba(0,0,0,.02); }
+  .drug-class { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .dose { font-family: 'Courier New', monospace; font-size: calc(10px * var(--fscale, 1)); color: var(--yellow); }
+  .efficacy-high { color: var(--red); font-weight: 700; }
+  .efficacy-mid  { color: var(--orange); font-weight: 600; }
+  .efficacy-low  { color: var(--purple); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-orange  { background: #fff1e5; border-left: 3px solid var(--orange);  color: var(--orange); }
+
+  /* ── FLOW ── */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; }
+  .flow-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; text-align: center; font-size: calc(12px * var(--fscale, 1)); width: 90%; max-width: 440px; }
+  .flow-node.start  { background: #fff1e5; border-color: var(--orange); color: var(--orange); font-weight: 600; }
+  .flow-node.decision { background: #fff8c5; border-color: var(--yellow); color: #7d4e00; }
+  .flow-node.action { background: #dafbe1; border-color: var(--green); color: var(--green); }
+  .flow-node.warn   { background: #fff1e5; border-color: var(--orange); color: var(--orange); }
+  .flow-node.danger { background: #ffebe9; border-color: var(--red); color: var(--red); }
+  .flow-row { display: flex; gap: 8px; width: 90%; max-width: 440px; }
+  .flow-row .flow-node { width: 100%; }
+  .flow-arrow { font-size: calc(16px * var(--fscale, 1)); color: var(--text2); }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── SPECIAL POPULATIONS ── */
+  .sp-section { margin-bottom: 6px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid #e86c00; padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .sp-body.open { max-height: 1200px; padding: 8px 0; }
+
+  /* ── STAT BOXES ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 100px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #e86c00; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── MISC ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-new { background: #dafbe1; color: var(--green); }
+  .pill-2g  { background: #ddf4ff; color: var(--accent2); }
+  .pill-1g  { background: #f6f8fa; color: var(--purple); border: 1px solid var(--border); }
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">2025</span>
+      <h1 style="font-size:20px;font-weight:700;color:var(--text)">AACE 비만/ABCD 진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1016/j.eprac.2025.07.017" class="source-link" target="_blank">Endocrine Practice 31:1351–1394, 2025 ↗</a>
+      <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)"> · AACE Consensus Statement · Sep 2025</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by AACE</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단·병기</div>
+    <div class="tab" onclick="showTab('treatment')">🎯 치료 계획</div>
+    <div class="tab" onclick="showTab('lifestyle')">🥗 생활습관</div>
+    <div class="tab" onclick="showTab('drugs')">💊 약제표</div>
+    <div class="tab" onclick="showTab('complication')">❤️ 합병증별 치료</div>
+    <div class="tab" onclick="showTab('surgery')">🔪 수술·시술</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색"
+          oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:500px;max-height:380px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div class="abbr-grid" id="abbr-grid" style="grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════ OVERVIEW ═══════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">ABCD</div><div class="stat-lbl">새 진단 용어 (Adiposity-Based Chronic Disease)</div></div>
+    <div class="stat-box"><div class="stat-val" style="font-size: calc(15px * var(--fscale, 1))">≥15%</div><div class="stat-lbl">2세대 약제 평균 체중 감소 (excellent response)</div></div>
+    <div class="stat-box"><div class="stat-val">3단계</div><div class="stat-lbl">ABCD 임상 병기 (Stage 1–3)</div></div>
+    <div class="stat-box"><div class="stat-val">11개</div><div class="stat-lbl">알고리즘 섹션 수</div></div>
+  </div>
+
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+
+    <!-- 9대 원칙 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🔑</span> Algorithm 1 — 9대 Person-Centered 원칙</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-orange" style="margin-bottom:8px"><span>📌</span><div>이 9가지 원칙을 결여한 치료 계획은 <strong>비최적 진료(suboptimal care)</strong>로 간주됨</div></div>
+        <ol style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">1</span>비만을 <strong>만성 신경호르몬 대사 질환</strong>으로 인식하고 치료</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">2</span><strong>합병증 중심(complication-centric)</strong> 치료 목표 설정</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">3</span><strong>체중 감소보다 건강 최적화</strong>를 1차 목표로 강조</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">4</span>질환 중증도(병기)에 비례한 <strong>치료 강도 조정</strong></li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">5</span><strong>공동 의사결정</strong>으로 개인화 치료 계획 수립</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">6</span>체중 편견(weight bias)과 낙인(stigma) <strong>근절</strong></li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">7</span>내면화 체중 편견(IWB), <strong>심리 장애, 건강 사회 결정인자</strong> 평가</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">8</span><strong>장기(평생) 치료</strong> — 체중 재증가 예방 포함</li>
+          <li><span style="background:#e86c00;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size: calc(10px * var(--fscale, 1));font-weight:700;margin-right:8px;flex-shrink:0;vertical-align:middle">9</span>공감적·문화적으로 민감한 <strong>진료 전달</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ABCD 용어 정의 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">📖</span> 핵심 용어 정의 (Box A)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+          <thead><tr><th>용어</th><th>정의</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ABCD</strong></td><td>에너지 균형의 비정상적 신경내분비 조절로 인한 이질적·진행성·만성 질환. Stage 1–3으로 병기 분류</td></tr>
+            <tr><td><strong>ORCD</strong></td><td>비만 관련 합병증과 질환 통칭. 존재 시 Stage 2(경증~중등도) 또는 Stage 3(중증) 지정</td></tr>
+            <tr><td><strong>비만 합병증</strong></td><td>과도한 지방에 의한 장기 기능 장애·손상으로 직접 유발되는 결과 (HTN, T2D 등)</td></tr>
+            <tr><td><strong>비만 관련 질환</strong></td><td>비만과 동반되고 병인 공유하나 추가 병태생리 필요 (T2D, 일부 암 등)</td></tr>
+            <tr><td><strong>전임상 비만</strong></td><td>ORCD 없는 비만 = Stage 1; 치료 대상 (ORCD 발생 예방)</td></tr>
+            <tr><td><strong>임상 비만</strong></td><td>합병증 동반 비만 = Stage 2–3; 치료 강도↑</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 체중 감소 반응 분류 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📊</span> Algorithm 6 — 체중 감소 반응 범주 및 ORCD별 목표 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px;margin-bottom:10px">
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">체중 감소 반응 3단계</p>
+          <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+            <thead><tr><th>반응</th><th>체중 감소</th><th>의미</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-s3">불충분</span></td><td>≤5%</td><td>합병증 치료 불충분; 치료 변경 필요</td></tr>
+              <tr><td><span class="badge badge-s2">양호</span></td><td>>5–&lt;15%</td><td>일부 합병증 개선; 추가 목표 달성 여부 모니터링</td></tr>
+              <tr><td><span class="badge badge-s1">우수</span></td><td>≥15%</td><td>광범위한 ORCD 예방·개선 가능; 2세대 약제 평균 달성 수준</td></tr>
+            </tbody>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⏱️</span><div>치료 용량 도달 후 <strong>3개월</strong>에 반응 평가: &lt;5% 감소이면 치료 변경. 초기 반응이 장기 효과의 가장 강력한 예측 인자.</div></div>
+        </div>
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">ORCD별 체중 감소 목표 (Table 2)</p>
+          <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+            <thead><tr><th>합병증</th><th>의미 있는 이익</th><th>추가 이익</th></tr></thead>
+            <tbody>
+              <tr><td>T2D 예방</td><td>7–10%</td><td>>10%</td></tr>
+              <tr><td>T2D 관해</td><td>10%</td><td>>10%</td></tr>
+              <tr><td>고혈당 개선</td><td>5–15%</td><td>>15%</td></tr>
+              <tr><td>고혈압</td><td>5–15%</td><td>>15%</td></tr>
+              <tr><td>이상지질혈증</td><td>5–15%</td><td>>15%</td></tr>
+              <tr><td>간 지방증</td><td>5–10%</td><td>>10%</td></tr>
+              <tr><td>MASH</td><td>≥10%</td><td>≥15%</td></tr>
+              <tr><td>OSA</td><td>7–10%</td><td>>10%</td></tr>
+              <tr><td>OA</td><td>5–10%</td><td>>10%</td></tr>
+              <tr><td>PCOS</td><td>5–15%</td><td>>15%</td></tr>
+              <tr><td>ASCVD/MACE</td><td>10%</td><td>>10%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1세대 vs 2세대 약제 비교 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💊</span> 1세대 vs 2세대 비만 약제 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>항목</th><th>1세대 약제</th><th>2세대 약제</th></tr></thead>
+        <tbody>
+          <tr><td>대표 약제</td><td>Orlistat, Phentermine, Phentermine/Topiramate ER, Naltrexone/Bupropion ER, Liraglutide 3 mg</td><td><strong>Semaglutide 2.4 mg, Tirzepatide 5–15 mg</strong>, Setmelanotide (단일유전자형)</td></tr>
+          <tr><td>평균 체중 감소</td><td>&lt;10% (Phentermine/topiramate ~10%에 근접)</td><td class="efficacy-high">≥15% (Sema 16.9–17.1%, Tirz 22.5%)</td></tr>
+          <tr><td>MACE 감소 근거</td><td>Liraglutide만 T2D에서 (LEADER)</td><td><strong>Semaglutide: SELECT (비당뇨 CVD, MACE 20%↓)</strong></td></tr>
+          <tr><td>비용·접근성</td><td>상대적으로 저렴, 처방 용이</td><td>고가; 보험 미적용 시 장벽</td></tr>
+          <tr><td>Stage 1–2 사용</td><td>✅ 적절</td><td>✅ 가능 (접근 가능 시 권장)</td></tr>
+          <tr><td>Stage 3 사용</td><td>가능하나 불충분할 수 있음</td><td><strong>가능하면 우선 사용 권고</strong></td></tr>
+          <tr><td>근육 손실 모니터링</td><td>적음</td><td>중요 — 단백질 섭취·저항운동 필수</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ DIAGNOSIS ═══════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+
+    <!-- 인체 측정 진단 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">📏</span> Algorithm 3 — 인체 측정 진단</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">BMI 분류 (WHO 기준)</p>
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+          <thead><tr><th>분류</th><th>BMI (kg/m²) — 일반</th><th>BMI — 아시아계</th></tr></thead>
+          <tbody>
+            <tr><td>과체중</td><td>25.0–29.9</td><td>23.0–24.9 (일부 국가 23.0 기준)</td></tr>
+            <tr><td>비만 1단계</td><td>30.0–34.9</td><td>≥25.0 (한국·일본·인도)</td></tr>
+            <tr><td>비만 2단계</td><td>35.0–39.9</td><td>—</td></tr>
+            <tr><td>비만 3단계</td><td>≥40.0</td><td>중국: ≥28.0 비만, 24–27.9 과체중</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">허리둘레 (WC) 위험 기준</p>
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+          <thead><tr><th>인종/지역</th><th>남성</th><th>여성</th></tr></thead>
+          <tbody>
+            <tr><td>미국·캐나다</td><td>≥102 cm (≥40 in)</td><td>≥88 cm (≥34.5 in)</td></tr>
+            <tr><td>유럽·아프리카·중동</td><td>≥94 cm (≥37 in)</td><td>≥80 cm (≥31.5 in)</td></tr>
+            <tr><td>동아시아·남아시아·중남미</td><td>≥90 cm (≥35 in)</td><td>≥80 cm (≥31.5 in)</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert-info"><span>ℹ️</span><div><strong>허리-신장비(waist-to-height ratio) ≥0.5</strong>: 성별·인종에 무관하게 심혈관 위험↑. WC보다 CVD 예측력 우수.</div></div>
+        <ul style="list-style:none;padding:6px 0 0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• 남성 체지방 >25%, 여성 >32% → 비만 관련 심장대사 위험 지표</li>
+          <li>• BMI가 근육량·부종·노인 등에서 과대/과소평가 → 임상적 판단 필수</li>
+          <li>• 근감소성 비만(sarcopenic obesity): 낮은 BMI에도 지방증 가능 → DXA/임피던스 고려</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 임상 진단 및 병기 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🔬</span> Algorithm 4 — 임상 진단·ABCD 병기 (Table 1)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+          <thead><tr><th>병기</th><th>정의</th><th>치료 목표</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-s1">Stage 1</span></td>
+              <td>알려진 ORCD 없음. 장래 ORCD 발생 위험↑. 전임상 비만</td>
+              <td>추가 체중 증가 방지·ORCD 예방; 생활습관 ± 약물</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-s2">Stage 2</span></td>
+              <td>경증~중등도 ORCD 1개 이상</td>
+              <td>체중 감소로 ORCD 완화·역전; 중등도~고강도 치료</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-s3">Stage 3</span></td>
+              <td>중증 ORCD ≥1개 또는 다발성 ORCD</td>
+              <td>ORCD 역전·건강 회복; 2세대 약제·수술 우선 고려</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-warn" style="margin-bottom:8px"><span>⚠️</span><div>모든 병기에서 <strong>IWB(내면화 체중 편견), 심리 상태, 건강 사회 결정인자</strong>를 평가하고 개인화 치료 계획에 통합</div></div>
+        <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">기본 검사 항목 (Figure 3)</p>
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>🩸 공복혈당, HbA1c, 지질 패널, 혈청 크레아티닌(eGFR)</li>
+          <li>🩸 AST, ALT, 혈소판(FIB-4 계산용) — MASLD 평가</li>
+          <li>🩸 전혈구검사, 전해질/대사패널, 소변 검사</li>
+          <li>📋 심전도, 혈압, 신체 계측(BMI, WC)</li>
+          <li>⚙️ 필요 시: OGTT, TSH, ApoB, 코르티솔, 유전자 검사, 간탄성도, 수면다원검사</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORCD 목록 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📋</span> 비만 관련 합병증·질환 목록 (ORCD) — Figure 2</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid3" style="gap:8px">
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">심장대사</p>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🔴 전당뇨병·대사 증후군</li>
+            <li>🔴 제2형 당뇨병 (T2D)</li>
+            <li>🔴 이상지질혈증</li>
+            <li>🔴 고혈압 (HTN)</li>
+            <li>🔴 ASCVD (죽상경화 심혈관 질환)</li>
+            <li>🔴 HFpEF (박출률 보존 심부전)</li>
+            <li>🔴 만성 신질환 (CKD)</li>
+            <li>🔴 MASLD / MASH</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">생역학적</p>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🟡 폐쇄성 수면 무호흡 (OSA)</li>
+            <li>🟡 골관절염 (OA)</li>
+            <li>🟡 위식도 역류 (GERD)</li>
+            <li>🟡 요실금 (스트레스성)</li>
+            <li>🟡 근감소성 비만</li>
+            <li>🟡 이동 장애·기능 저하</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">기타</p>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>🟠 다낭성 난소 증후군 (PCOS)</li>
+            <li>🟠 남성 성선기능저하증</li>
+            <li>🟠 임신 합병증</li>
+            <li>🟠 비만 관련 암 (대장·식도·갑상선·다발골수종·자궁내막·유방암 등)</li>
+            <li>🟠 우울·불안·섭식 장애</li>
+            <li>🟠 통풍</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ TREATMENT ═══════════ -->
+<div id="tab-treatment" class="panel">
+
+  <!-- Algorithm 5 치료 계획 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🎯</span> Algorithm 5 — 개인화 치료 계획 수립 흐름</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow">
+        <div class="flow-node start">ABCD 병기 확인 (Stage 1–3)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node decision">IWB·심리 장애·사회 결정인자·환자 선호 평가</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-row">
+          <div class="flow-node action" style="font-size: calc(11px * var(--fscale, 1))"><strong>Stage 1</strong><br>생활습관 ± 약물<br>ORCD 예방 초점</div>
+          <div class="flow-node warn" style="font-size: calc(11px * var(--fscale, 1))"><strong>Stage 2</strong><br>생활습관 + 약물<br>중등도~고강도 치료</div>
+          <div class="flow-node danger" style="font-size: calc(11px * var(--fscale, 1))"><strong>Stage 3</strong><br>생활습관 + 2세대 약제 우선<br>수술 적극 고려</div>
+        </div>
+        <div class="flow-arrow">↓ 3개월 후 반응 평가</div>
+        <div class="flow-row">
+          <div class="flow-node action" style="font-size: calc(11px * var(--fscale, 1))">≥5% 감소 → 지속<br>ORCD 목표 달성 여부 모니터링</div>
+          <div class="flow-node danger" style="font-size: calc(11px * var(--fscale, 1))">&lt;5% 감소 → 치료 변경<br>강도 증가 또는 약제 교체·추가</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node start">장기 추적 — 체중 유지·ORCD 관리·개인화 조정</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 계획 고려 사항 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📝</span> 개인화 치료 계획 수립 시 필수 평가 7가지</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>#</th><th>평가 항목</th><th>임상적 의의</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>조기 발현 비만 (5세 미만) 또는 극심한 과식증</td><td>단일유전자·증후군성 비만 가능 → 유전자 검사 고려</td></tr>
+          <tr><td>2</td><td>이차성 원인·의인성 기여 (내분비 질환, 이동 장애)</td><td>원인 교정으로 체중 감소 도움</td></tr>
+          <tr><td>3</td><td>체중 증가 촉진 약물 사용</td><td>인슐린·SU·항정신병제·글루코코르티코이드 등 → 교체 검토</td></tr>
+          <tr><td>4</td><td>내면화 체중 편견(IWB) 영향</td><td>치료 참여도·순응도에 직접 영향</td></tr>
+          <tr><td>5</td><td>심리 장애 (우울·불안·폭식 장애)</td><td>비만과 상호 악화 → 동반 치료 필요</td></tr>
+          <tr><td>6</td><td>건강 사회 결정인자·건강 리터러시·의료 접근성</td><td>개인화 계획의 현실적 실행 가능성</td></tr>
+          <tr><td>7</td><td>환자의 치료 목표·문화적 선호</td><td>공동 결정의 핵심</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Algorithm 9 저비용 단계별 약물 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💰</span> Algorithm 9 — 저비용 단계별 약물 치료 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow">
+        <div class="flow-node start">1단계: 생활습관 집중 치료 (모든 병기)</div>
+        <div class="flow-arrow">↓ 불충분 시</div>
+        <div class="flow-node action">2단계: 1세대 약제 (비용·접근성 고려)<br><small>Phentermine/topiramate ER · Naltrexone/bupropion ER · Orlistat</small></div>
+        <div class="flow-arrow">↓ 목표 미달 또는 Stage 3</div>
+        <div class="flow-node warn">3단계: 2세대 약제 (가능하면 우선)<br><small>Semaglutide 2.4 mg SC · Tirzepatide 5–15 mg SC</small></div>
+        <div class="flow-arrow">↓ 여전히 불충분 (Stage 3 중증)</div>
+        <div class="flow-node danger">4단계: 대사·비만 수술 고려<br><small>BMI ≥40 또는 ≥35 + ORCD · 집중 다학제 팀 필수</small></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>💡</span><div>보험 미적용 시: 1세대 약제로 체중 감소 유지 가능. 2세대 약제로 초기 감소 후 1세대로 유지 전환도 옵션.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ LIFESTYLE ═══════════ -->
+<div id="tab-lifestyle" class="panel">
+
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+
+    <!-- 영양 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🥗</span> 영양 지침</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">에너지 적자 식이 목표</p>
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• 일일 500–750 kcal 적자 또는 여성 1,200–1,500 kcal / 남성 1,500–1,800 kcal</li>
+          <li>• 특정 다량영양소 비율 우월 없음 — 개인 순응도가 최우선 기준</li>
+          <li>• 지중해식·DASH·채식·저탄수화물·팔레오 등 문화적 선호에 맞게 개인화</li>
+          <li>• 초가공식품·에너지 밀도 높은 식품 최소화</li>
+        </ul>
+        <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-top:8px;margin-bottom:4px">2세대 약제 복용 중 영양 핵심 지침</p>
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>① 채소·콩류·과일 등 영양 밀도 높은 탄수화물 우선</li>
+          <li>② <strong>단백질 우선 섭취</strong>: ≥1.2 g/kg/일 (일반); ≥0.8 g/kg/일 (당뇨+CKD)</li>
+          <li>③ 복합 비타민 — 철분·칼슘 포함; 지용성 비타민 결핍 모니터링</li>
+          <li>④ 유연한 식사 대체 활용</li>
+        </ul>
+        <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>GLP-1 RA 복용 중 GI 부작용 완화: 천천히 먹기·소량 빈번 섭취·지방 과다 음식 회피·수분 충분히</div></div>
+      </div>
+    </div>
+
+    <!-- 신체 활동 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🏃</span> 신체 활동 처방 (Box B)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+          <thead><tr><th>구분</th><th>목표</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>유산소 (체중 감소)</td><td>≥150분/주 중등도 강도 또는 ≥75분/주 고강도 (≥3일/주 분산)</td><td>체중 감소 자체보다 심장대사 이익 우선</td></tr>
+            <tr><td>유산소 (체중 유지)</td><td><strong>200–300분/주</strong> 중등도 강도</td><td>체중 재증가 방지에 더 많은 운동량 필요</td></tr>
+            <tr><td>저항/근력 운동</td><td><strong>주 2–3회</strong> 전신 저항운동</td><td>근육 손실 방지 위해 우선순위 ↑ (약제·수술 병행 시 특히)</td></tr>
+            <tr><td>앉아 있는 시간 감소</td><td>비운동 활동 열발생(NEAT) 증가</td><td>짧은 보행·서 있기 등 소규모 습관 시작</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert-info"><span>💡</span><div>운동 처방 시작 원칙: <em>"낮은 강도로 시작하여 서서히 증가; 어떤 활동도 없는 것보다 낫다"</em>. 기능 제한·고령자는 의자/수중 운동·물리치료 의뢰 고려.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수면 + 심리 -->
+  <div class="grid2" style="gap:10px">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">😴</span> 수면 건강</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• 수면 부족(&lt;7–8시간/일): 식욕↑, 에너지 섭취↑, 에너지 소비↓, 심장대사 위험↑</li>
+          <li>• 수면 연장 상담 → 에너지 섭취 감소 + 체중 감소에 기여</li>
+          <li>• OSA는 비만의 흔한 합병증 — 증상·목 둘레(남 >43 cm, 여 >40 cm)·고위험 환자에서 선별 검사</li>
+          <li>• OSA 치료(CPAP 단독)는 체중 감소 효과 없음 → 비만 치료 병행 필수</li>
+          <li>• Sleep AHEAD: 생활습관 개입으로 체중 감소 시 AHI 유의 개선</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🧠</span> 편견·낙인·심리 치료</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• <strong>Person-first language</strong> — "비만 환자"가 아닌 "비만을 가진 분"</li>
+          <li>• IWB(내면화 체중 편견): IWB = 불안·우울·체불만족의 최강 예측인자</li>
+          <li>• Weight Self-Stigma Questionnaire / Weight Bias Internalization Scale 사용</li>
+          <li>• 비만·T2D에서 우울·불안·폭식 장애 유병률↑ → 인지행동치료(CBT) 고려</li>
+          <li>• 심리 전문가 협진 또는 다학제 팀 구성</li>
+          <li>• 온라인 처방 단독(임상 평가·추적 없음) = 불완전한 진료로 간주</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ DRUGS ═══════════ -->
+<div id="tab-drugs" class="panel">
+
+  <!-- 약제 비교 표 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💊</span> Algorithm 11 — FDA 승인 비만 약제 전체 비교 (성인)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="drug-table" style="table-layout:auto">
+        <thead>
+          <tr>
+            <th style="width:120px">약제</th>
+            <th style="width:60px">세대</th>
+            <th>기전</th>
+            <th>용량/용법</th>
+            <th style="width:80px">평균 감소</th>
+            <th>주요 금기/주의</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="drug-class"><td colspan="6">1세대 — 지방 흡수 억제</td></tr>
+          <tr>
+            <td><strong>Orlistat</strong></td>
+            <td><span class="pill pill-1g">1세대</span></td>
+            <td>췌장·위 지방분해효소 억제 (지방 흡수 ~30%↓)</td>
+            <td><span class="dose">처방: 120 mg tid (식전)<br>OTC: 60 mg tid</span></td>
+            <td class="efficacy-low">~5.8%</td>
+            <td>지방변·요실금·지용성 비타민↓; 흡수 장애 금기; 간·신기능 모니터링</td>
+          </tr>
+          <tr class="drug-class"><td colspan="6">1세대 — 중추 노르에피네프린 분비 촉진</td></tr>
+          <tr>
+            <td><strong>Phentermine</strong></td>
+            <td><span class="pill pill-1g">1세대</span></td>
+            <td>중추 NE 분비↑ → 식욕억제</td>
+            <td><span class="dose">8–37.5 mg/일 (1회 또는 분할)</span></td>
+            <td class="efficacy-low">5.5–7.7%</td>
+            <td>CVD·불안정 HTN·녹내장·갑상선기능항진증·약물 남용력 금기; 임신 금기</td>
+          </tr>
+          <tr class="drug-class"><td colspan="6">1세대 — 복합 작용</td></tr>
+          <tr>
+            <td><strong>Phentermine / Topiramate ER</strong></td>
+            <td><span class="pill pill-1g">1세대</span></td>
+            <td>NE↑ + GABA↑·글루타메이트↓ 식욕억제</td>
+            <td><span class="dose">시작 3.75/23 mg × 14일 → 7.5/46 mg 유지<br>필요 시 11.25/69 → 15/92 mg</span></td>
+            <td class="efficacy-mid">7.8–10.7%</td>
+            <td>임신 금기 (배아-태아 독성; REMS 필수); 녹내장; 갑상선기능항진증; 신장결석↑</td>
+          </tr>
+          <tr>
+            <td><strong>Naltrexone / Bupropion ER</strong></td>
+            <td><span class="pill pill-1g">1세대</span></td>
+            <td>시상하부 식욕 중추 + 중뇌변연계 보상 시스템 조절</td>
+            <td><span class="dose">8/90 mg × 1주 → 주당 1정 증량 → 목표 2정 bid</span></td>
+            <td class="efficacy-low">5.9–11.5%</td>
+            <td>불안정 HTN; 경련 장애; 신경성 식욕부진/폭식증; MAO억제제; 오피오이드 사용 중; 임신 금기</td>
+          </tr>
+          <tr>
+            <td><strong>Liraglutide 3.0 mg</strong></td>
+            <td><span class="pill pill-1g">1세대</span></td>
+            <td>GLP-1 RA — 시상하부·뇌간 작용 식욕↓</td>
+            <td><span class="dose">0.6 mg SC/일 시작 → 주당 0.6 mg 증량 → 3.0 mg/일</span></td>
+            <td class="efficacy-low">~8.0%</td>
+            <td>MTC·MEN2 가족력 금기; 췌장염 기왕력; 담석 위험↑; 심박수↑; T2D에서 LEADER CVOT 이득</td>
+          </tr>
+          <tr class="drug-class"><td colspan="6">2세대 — 차세대 인크레틴 기반 (고효능)</td></tr>
+          <tr>
+            <td><strong>Semaglutide 2.4 mg SC</strong></td>
+            <td><span class="pill pill-2g">2세대</span></td>
+            <td>GLP-1 RA — 강력한 식욕억제·위배출 지연</td>
+            <td><span class="dose">0.25 mg SC/주 시작 → 4주마다 증량 → 2.4 mg/주</span></td>
+            <td class="efficacy-high">16.9–17.1%</td>
+            <td>GI 부작용 흔함; MTC·MEN2 금기; 췌장염 주의; <strong>SELECT: 비당뇨 CVD에서 MACE 20%↓</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Tirzepatide 5–15 mg SC</strong></td>
+            <td><span class="pill pill-2g">2세대</span></td>
+            <td>GIP/GLP-1 이중 RA — 중추 식욕↓ + 에너지 소비↑</td>
+            <td><span class="dose">2.5 mg SC/주 시작 → 4주마다 증량 → 최대 15 mg/주</span></td>
+            <td class="efficacy-high">22.5% (15 mg, SURMOUNT-1)</td>
+            <td>GI 부작용; MTC·MEN2 금기; <strong>OSA 개선 FDA 승인 (2024.12)</strong>; MASH·HFpEF 개선; CVOT 진행 중</td>
+          </tr>
+          <tr class="drug-class"><td colspan="6">특수 적응증 — 단일유전자·증후군성 비만</td></tr>
+          <tr>
+            <td><strong>Setmelanotide</strong></td>
+            <td><span class="pill pill-2g">특수</span></td>
+            <td>MC4R 효현제 — 시상하부 에너지 균형 경로 활성화</td>
+            <td><span class="dose">0.5 mg SC/일 시작 → 최대 3 mg/일 (≥6세)</span></td>
+            <td class="efficacy-high">~25.6% (POMC/PC1 결핍)</td>
+            <td>주사 부위 반응; 피부 과색소침착; 자발적 발기/흥분; 우울·자살 사고 주의</td>
+          </tr>
+          <tr>
+            <td><strong>Cellulose hydrogel (Epitomee)</strong></td>
+            <td><span class="pill pill-1g">의료기기</span></td>
+            <td>위 용량 점유로 포만감 유도 (약물 아님, FDA 허가 기기)</td>
+            <td><span class="dose">식사 전 경구 투여</span></td>
+            <td class="efficacy-low">~4.5%</td>
+            <td>GI 장애 금기; 다른 약물 흡수 영향 가능; BMI 25–40 대상</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GLP-1 RA 부작용 관리 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚕️</span> GLP-1 RA 계열 약제 부작용 및 완화 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+        <thead><tr><th>부작용</th><th>특징</th><th>완화 전략</th></tr></thead>
+        <tbody>
+          <tr><td>오심·구토</td><td>가장 흔함; 특히 용량 증량 시</td><td>최저 용량부터 서서히 증량; 소량 빈번 식사; 지방 과다 음식 회피</td></tr>
+          <tr><td>변비·설사</td><td>흔함</td><td>수분 섭취↑; 식이섬유↑; 약물 감량</td></tr>
+          <tr><td>담석·담낭 질환</td><td>체중 감소 관련 위험↑</td><td>체중 감소 속도 조절; 증상 시 초음파</td></tr>
+          <tr><td>심박수↑ (평균 1–3 bpm)</td><td>모든 GLP-1 RA 계열</td><td>활력징후 모니터링; 구토·설사 시 탈수·신기능 주의</td></tr>
+          <tr><td>리파제·아밀라제↑</td><td>췌장염 없이 상승 가능</td><td>복통 동반 시 췌장염 감별; 기저 췌장 질환 주의</td></tr>
+          <tr><td>기분 변화·우울</td><td>FDA 주의 경고 (인과관계 불확실)</td><td>증상 모니터링; 필요 시 정신건강 평가</td></tr>
+          <tr><td>근육 손실</td><td>빠른 체중 감소 시 지방 외 제지방도 감소</td><td>단백질 ≥1.2 g/kg/일; 저항운동 병행 필수</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warn"><span>⚠️</span><div>중단 후 재투여 시 반드시 최저 용량부터 재시작. Compounded semaglutide/tirzepatide: 농도 오류·불순물·면역원성 위험 → AACE 사용 권고하지 않음</div></div>
+    </div>
+  </div>
+
+  <!-- Algorithm 10 — 약제 개인화 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🎛️</span> Algorithm 10 — ORCD별 약제 선택 (개인화 치료)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-bottom:8px">색상 코드: 🔵 이익 근거 / ⬜ 불충분하나 고려 가능 / 🟡 주의·모니터링 / 🟠 알려진 금기</p>
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>ORCD / 특성</th><th>1순위</th><th>2순위</th><th>주의·금기</th></tr></thead>
+        <tbody>
+          <tr><td>전당뇨·당뇨 예방</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Semaglutide, Tirzepatide</td><td>Liraglutide, Phentermine/Topiramate ER</td><td>Orlistat (3순위)</td></tr>
+          <tr><td>T2D 치료</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Tirzepatide, Semaglutide</td><td>Liraglutide, Phentermine/Topiramate ER</td><td>Orlistat·NB (3순위)</td></tr>
+          <tr><td>MACE 감소 (비당뇨)</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block"><strong>Semaglutide</strong> (SELECT)</td><td>Tirzepatide (CVOT 진행 중)</td><td>Orlistat·NB: 미입증</td></tr>
+          <tr><td>MASH</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Semaglutide, Tirzepatide</td><td>—</td><td>—</td></tr>
+          <tr><td>OSA</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block"><strong>Tirzepatide (FDA 승인)</strong>, Phentermine/Topiramate ER</td><td>—</td><td>—</td></tr>
+          <tr><td>HFpEF</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Tirzepatide, Semaglutide</td><td>—</td><td>—</td></tr>
+          <tr><td>고혈압</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Tirzepatide, Semaglutide, Phentermine/Topiramate ER</td><td>Liraglutide, Orlistat</td><td>Phentermine 단독: HTN 시 금기</td></tr>
+          <tr><td>CKD</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block"><strong>Semaglutide</strong> (eGFR 감소↓, FLOW 연구)</td><td>Liraglutide (LEADER)</td><td>Orlistat: 신독성; NB: 중등도 신부전 이하 사용</td></tr>
+          <tr><td>OA</td><td class="badge-first" style="background:#ddf4ff;padding:4px 8px;border-radius:4px;display:block">Semaglutide</td><td>—</td><td>—</td></tr>
+          <tr><td>폭식 장애</td><td>Topiramate, Phentermine/Topiramate ER, GLP-1 RAs</td><td>Liraglutide, Semaglutide</td><td>NB: 혼재 결과</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ COMPLICATION ═══════════ -->
+<div id="tab-complication" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">❤️</span> Algorithm 8 — 합병증별 선호 약제 계층</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:8px">
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🍬 전당뇨·대사 증후군·T2D 예방 <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <span class="badge badge-first">1순위</span> <strong>Semaglutide</strong> or <strong>Tirzepatide</strong> — 체중 감소 + 직접 혈당 효과 + 지질·혈압 개선</li>
+            <li>• <span class="badge badge-second">2순위</span> Liraglutide, Phentermine/topiramate ER</li>
+            <li>• <span class="badge badge-third">3순위</span> Orlistat</li>
+            <li>• T2D 관해에는 ≥10% 체중 감소 필요; >10%면 추가 관해 가능성↑</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">❤️ MACE 예방 (심혈관 사건 감소) <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <span class="badge badge-first">유일 근거</span> <strong>Semaglutide 2.4 mg SC</strong> — SELECT 연구: 비당뇨 비만 + CVD, 3P-MACE 20%↓ (HR 0.80)</li>
+            <li>• Tirzepatide: SURMOUNT-1 연장 후분석에서 MACE 위험비↓, CVOT(SURMOUNT-MMO) 진행 중</li>
+            <li>• Liraglutide: T2D + CVD(LEADER) — MACE↓; 비당뇨 비만에서는 근거 없음</li>
+            <li>• Orlistat, NB, Phentermine/topiramate: 심혈관 안전성 미확립 또는 CVD 이득 미입증</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🫀 HFpEF (박출률 보존 심부전) <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>Tirzepatide</strong>: SUMMIT 연구 — 증상 개선 + 신체 기능↑ + 심부전 긴급 방문/입원↓</li>
+            <li>• <strong>Semaglutide</strong>: STEP-HFpEF 연구 — 증상 개선 + 신체 기능↑</li>
+            <li>• 두 약제 모두 체중 감소 + 직접 심장 효과의 복합 기전</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🫁 MASH (대사이상 관련 지방간염) <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>Semaglutide</strong>: ESSENCE 연구(Phase 3) — 간 조직학 및 섬유화 개선</li>
+            <li>• <strong>Tirzepatide</strong>: Phase 2 연구 — 간 조직학 및 섬유화 개선</li>
+            <li>• 체중 감소 5–10% 이상이면 어떤 치료 방법으로도 간 지방증 예측 가능하게 감소</li>
+            <li>• MASH 개선에는 ≥10% 체중 감소 필요, ≥15%면 추가 이익 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">😴 OSA (폐쇄성 수면 무호흡) <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <span class="badge badge-first">1순위</span> <strong>Tirzepatide</strong> — SURMOUNT-OSA 연구: 중등~중증 OSA에서 AHI 유의 감소; <strong>FDA 승인(2024.12)</strong></li>
+            <li>• Phentermine/topiramate ER: 임상시험에서 AHI 개선 및 OSA 증상 개선 입증</li>
+            <li>• CPAP 단독은 체중 감소 없음 → 비만 치료 반드시 병행</li>
+            <li>• 체중 7–10% 감소 시 OSA 의미 있는 개선; >10% 추가 이익</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🫘 만성 신질환 (CKD) <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <span class="badge badge-first">1순위</span> <strong>Semaglutide 1 mg/주</strong> — FLOW 연구: T2D + CKD에서 eGFR 감소 속도 완화 + 신장 결과 개선</li>
+            <li>• Liraglutide 1.8 mg/일: LEADER 이차 분석 — 신장 보호 효과</li>
+            <li>• Tirzepatide: 신기능 관련 CVOT 진행 중; T2D 이전 연구 사후 분석 긍정적</li>
+            <li>• Orlistat: 신독성 보고 → CKD 시 사용 주의</li>
+            <li>• NB: 중등도~중증 신부전 시 최대 용량 절반으로 제한; 말기 신부전 금기</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🦴 골관절염 (OA) / 요실금 <span>▸</span></div>
+        <div class="sp-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>Semaglutide</strong>: STEP-9 연구 — 무릎 OA 증상 및 기능 개선</li>
+            <li>• OA: 5–10% 체중 감소 시 증상 개선; >10% 추가 이익</li>
+            <li>• 스트레스성 요실금: 5–10% 체중 감소 시 빈도 감소; 비만 수술 후 더욱 개선</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🧬 단일유전자·증후군성 비만 (Setmelanotide) <span>▸</span></div>
+        <div class="sp-body">
+          <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+            <thead><tr><th>적응증</th><th>체중 감소 결과</th></tr></thead>
+            <tbody>
+              <tr><td>POMC / Proprotein convertase 1 결핍 (≥6세)</td><td>10명 중 8명이 1년 내 ≥10% 감소; 평균 −25.6%</td></tr>
+              <tr><td>Leptin receptor 결핍 (≥6세)</td><td>11명 중 5명(45%) ≥10% 감소; 반응 가변적</td></tr>
+              <tr><td>Bardet-Biedl Syndrome (BBS) (≥6세)</td><td>52주 후 32.3%에서 ≥10% 감소</td></tr>
+              <tr><td>시상하부 비만</td><td>Setmelanotide 이익 보고 (소규모 연구)</td></tr>
+            </tbody>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>MC4R 경로 돌연변이 의심: 5세 이전 발병·극심한 과식증·양성 가족력 → 유전자 패널 검사 의뢰</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SURGERY ═══════════ -->
+<div id="tab-surgery" class="panel">
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔪</span> 대사·비만 수술 적응증 및 주요 술식</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px;margin-bottom:10px">
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">현행 수술 적응증</p>
+          <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+            <thead><tr><th>BMI 기준</th><th>조건</th></tr></thead>
+            <tbody>
+              <tr><td>≥40.0 kg/m²</td><td>ORCD 유무 불문 수술 고려</td></tr>
+              <tr><td>≥35.0 kg/m²</td><td>ORCD 동반 시 수술 권고 (ASMBS·IFSO 기준)</td></tr>
+              <tr><td>30.0–34.9 kg/m²</td><td>T2D 동반 + 경구/주사약으로 혈당 조절 불충분 시 수술 고려</td></tr>
+              <tr><td>30.0–34.9 kg/m²</td><td>중증 심장대사 질환 동반 시 (ASMBS·IFSO 확대 기준)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">주요 술식 특징</p>
+          <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+            <thead><tr><th>술식</th><th>특징·평균 체중 감소</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sleeve Gastrectomy (SG)</strong></td><td>전 세계 가장 많이 시행(~50%); 중기 안전 데이터 우수; 평균 ~25% 감소</td></tr>
+              <tr><td><strong>Roux-en-Y Gastric Bypass (RYGB)</strong></td><td>전 세계 2위(~40%); 당뇨 관해·GERD 개선 우수; 평균 ~30% 감소</td></tr>
+              <tr><td>One Anastomosis Gastric Bypass</td><td>효과 RYGB 유사; 기술적으로 단순</td></tr>
+              <tr><td>BPD-DS</td><td>가장 효과적(~35%↓); 영양 결핍 위험↑</td></tr>
+              <tr><td>Adjustable Gastric Band</td><td>장기 효과 불량으로 사용 급감</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-info"><span>💡</span><div>수술 전후 <strong>다학제 팀 필수</strong>: 영양사·심리 전문가·비만내과·수술 팀. 수술 후에도 비만 약제가 체중 재증가 방지에 유용한 도구.</div></div>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>내시경 치료(intragastric balloon 등): 단기적, 효과 제한적; 비만 약제와 병용 시 보조적 역할 가능. 현재 장기 근거 부족.</div></div>
+    </div>
+  </div>
+
+  <!-- 온라인 처방 주의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚠️</span> 온라인 처방 및 복합제제 (Compounded) 주의 사항</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger"><span>🚫</span><div><strong>AACE 입장:</strong> 임상 평가·ORCD 진단·장기 추적 없는 온라인 단독 처방은 불완전 진료. Compounded semaglutide/tirzepatide 사용 권고하지 않음.</div></div>
+      <ul style="list-style:none;padding:8px 0 0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 복합제제(Compounded): FDA 미승인 — 안전성·유효성·품질 검증 없음</li>
+        <li>• 분석 결과: 농도 표기 오류·불순물·잔류 용매·neopeptide 검출 (면역원성 위험)</li>
+        <li>• 과다 투여로 인한 입원 사례 보고 → FDA 주의 권고</li>
+        <li>• 공급 부족 해소 시 compounding 허용 조건 종료 (tirzepatide/semaglutide의 "demonstrable difficulties" 지정)</li>
+        <li>• 텔레메디신·디지털 헬스: 임상 평가·다학제 추적 포함 시 적절한 진료 가능</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + name);
+  if (panel) panel.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed', hdr.classList.contains('open'));
+  hdr.classList.toggle('open', !hdr.classList.contains('open'));
+}
+
+function toggleOsaAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const icon = hdr.querySelectorAll('span')[hdr.querySelectorAll('span').length - 1];
+  const open = body.style.display !== 'none' && body.style.display !== '';
+  body.style.display = open ? 'none' : 'block';
+  icon.textContent = open ? '▸' : '▾';
+}
+
+function toggleSp(title) {
+  const body = title.nextElementSibling;
+  const icon = title.querySelector('span');
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  icon.textContent = open ? '▸' : '▾';
+}
+
+// ── ABBREVIATIONS ──
+const abbrs = [
+  ['AACE','American Association of Clinical Endocrinology (미국 임상내분비학회) — 본 비만 알고리즘 발행 학회'],
+  ['ABCD','Adiposity-Based Chronic Disease (지방 기반 만성 질환) — AACE의 비만 진단 용어; Stage 1–3 병기 포함'],
+  ['ORCD','Obesity-Related Complications and Diseases (비만 관련 합병증 및 질환) — 비만 합병증 + 비만 관련 질환 통칭'],
+  ['BMI','Body Mass Index (체질량 지수) — 체중(kg)/신장(m²); 비만 스크리닝에 사용; 단독으로 건강 상태 판단 불가'],
+  ['WC','Waist Circumference (허리 둘레) — 중심성 지방 분포 평가; 미국 남성 ≥102 cm, 여성 ≥88 cm'],
+  ['DXA','Dual-Energy X-ray Absorptiometry — 이중 에너지 X선 흡수계측법; 체성분(지방·근육·골밀도) 정밀 측정'],
+  ['IWB','Internalized Weight Bias (내면화 체중 편견) — 자기 비하·체중 관련 부정적 자기평가; 치료 순응도↓'],
+  ['GLP-1 RA','Glucagon-Like Peptide-1 Receptor Agonist — 인크레틴 유사체; 식욕↓·위배출↓·혈당↓; Liraglutide·Semaglutide·Tirzepatide 포함'],
+  ['GIP','Glucose-Dependent Insulinotropic Polypeptide — 인크레틴 호르몬; Tirzepatide의 두 번째 작용 표적'],
+  ['T2D','Type 2 Diabetes Mellitus (제2형 당뇨병)'],
+  ['MACE','Major Adverse Cardiovascular Events (주요 심혈관 사건) — 심혈관 사망 + 비치명적 MI + 비치명적 뇌졸중'],
+  ['MASH','Metabolic dysfunction-Associated Steatohepatitis (대사이상 관련 지방간염) — 이전 NASH; 섬유화·간경변 위험'],
+  ['MASLD','Metabolic dysfunction-Associated Steatotic Liver Disease (대사이상 관련 지방간) — 이전 NAFLD'],
+  ['OSA','Obstructive Sleep Apnea (폐쇄성 수면 무호흡) — 비만의 흔한 합병증; AHI로 중증도 평가'],
+  ['HFpEF','Heart Failure with Preserved Ejection Fraction (박출률 보존 심부전) — 비만과 강한 연관; Tirzepatide/Semaglutide 개선 입증'],
+  ['HTN','Hypertension (고혈압)'],
+  ['CKD','Chronic Kidney Disease (만성 신질환)'],
+  ['OA','Osteoarthritis (골관절염) — 체중 감소로 증상 개선; Semaglutide 임상 근거'],
+  ['PCOS','Polycystic Ovary Syndrome (다낭성 난소 증후군) — 인슐린 저항성·비만과 밀접; 5–15% 감소 시 개선'],
+  ['AHI','Apnea-Hypopnea Index (무호흡-저호흡 지수) — OSA 중증도 평가; 5–15: 경증, 15–30: 중등도, >30: 중증'],
+  ['CPAP','Continuous Positive Airway Pressure — 지속 양압 기도 치료; OSA의 표준 치료; 체중 감소 없음'],
+  ['NEAT','Non-Exercise Activity Thermogenesis — 비운동 활동 열발생; 일상 활동(걷기·서 있기)으로 에너지 소비'],
+  ['MC4R','Melanocortin 4 Receptor — 시상하부 에너지 균형 핵심 수용체; 돌연변이 시 단일유전자성 비만; Setmelanotide 표적'],
+  ['POMC','Proopiomelanocortin — MC4R 경로 상류 유전자; 결핍 시 극심한 과식증·조기 발현 비만'],
+  ['BBS','Bardet-Biedl Syndrome — 다발 유전자 돌연변이 증후군; 비만·시각 장애·다지증 등; Setmelanotide 적응증'],
+  ['FIB-4','Fibrosis-4 Index — AST + 혈소판 + ALT 이용한 간섬유화 비침습적 평가 지수; MASLD 스크리닝'],
+  ['HbA1c','Hemoglobin A1c / A1C (당화혈색소) — 3개월 평균 혈당 반영; T2D 관해 기준 <6.5%'],
+  ['eGFR','Estimated Glomerular Filtration Rate — CKD 병기 및 비만 약제 용량 조절 기준'],
+  ['CBT','Cognitive Behavioral Therapy (인지행동치료) — 비만·IWB·섭식 장애·우울에 효과적'],
+  ['RYGB','Roux-en-Y Gastric Bypass — 가장 효과적 비만 수술 중 하나; 당뇨 관해·GERD 개선 우수; 평균 ~30% 감소'],
+  ['SG','Sleeve Gastrectomy (소매형 위절제술) — 전 세계 가장 많이 시행되는 비만 수술; 평균 ~25% 감소'],
+  ['BPD-DS','Biliopancreatic Diversion with Duodenal Switch — 가장 큰 체중 감소(~35%↓); 영양 결핍 위험↑'],
+  ['CVOT','Cardiovascular Outcome Trial (심혈관 결과 시험) — MACE 감소를 1차 결과로 하는 대규모 RCT'],
+  ['SELECT','Semaglutide Effects on Cardiovascular Outcomes in People with Overweight or Obesity — 비당뇨 비만 + CVD; Sema 2.4 mg; MACE 20%↓ (2023)'],
+  ['LEADER','Liraglutide Effect and Action in Diabetes: Evaluation of Cardiovascular Outcome Results — T2D + CVD; Liraglutide 1.8 mg; MACE↓ (2016)'],
+  ['SURMOUNT-1','Phase III trial of tirzepatide for obesity without T2D — 평균 22.5% 감소 (15 mg); ~40%가 ≥25% 감소 달성'],
+  ['SUMMIT','Tirzepatide in HFpEF with obesity — 증상 개선 + 신체 기능↑ + 심부전 악화 사건↓'],
+  ['STEP 1','Semaglutide Treatment Effect in People with Obesity — Sema 2.4 mg; 평균 16.9% 감소 (68주)'],
+  ['ESSENCE','Semaglutide in MASH — Phase 3; 간 조직학·섬유화 개선 입증'],
+  ['FLOW','Semaglutide in CKD with T2D — eGFR 감소 속도 완화 + 신장 복합 결과↓'],
+  ['SDOH','Social Determinants of Health (건강의 사회적 결정인자) — 식품 접근성·소득·교육 등; 비만 치료 계획에 통합 필요'],
+  ['FDA','US Food and Drug Administration — 미국 식품의약국; 비만 약제 승인 기관'],
+  ['REMS','Risk Evaluation and Mitigation Strategy — 위험 평가 및 완화 전략; Phentermine/topiramate ER에서 임신 예방 목적으로 요구됨'],
+  ['NB','Naltrexone/Bupropion (ER) — 날트렉손+부프로피온 복합 서방형; 뇌 보상 시스템 + 시상하부 식욕 조절'],
+  ['STEP-HFpEF','Semaglutide in Patients with Obesity-Related HFpEF — 증상·신체 기능 개선 입증'],
+  ['SURMOUNT-OSA','Tirzepatide for OSA in Adults with Obesity — AHI 유의 감소; FDA 승인 근거'],
+];
+
+function buildAbbr() {
+  const grid = document.getElementById('abbr-grid');
+  const sorted = abbrs.slice().sort((a,b) => a[0].localeCompare(b[0]));
+  if (grid) {
+    grid.innerHTML = sorted.map(a =>
+      `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+        <span class="abbr-term">${a[0]}</span>
+        <span class="abbr-def">${a[1]}</span>
+      </div>`
+    ).join('');
+  }
+  const countEl = document.getElementById('abbr-count');
+  if (countEl) countEl.textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 500;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('.abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.charAt(0) === v.charAt(0);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target))
+    drop.style.display = 'none';
+});
+document.getElementById('abbr-input').addEventListener('focus', () => {
+  const v = document.getElementById('abbr-input').value.trim();
+  if (v) { positionDropdown(); document.getElementById('abbr-dropdown').style.display = 'block'; }
+});
+
+// Init card headers open state
+document.querySelectorAll('.card-header').forEach(h => {
+  if (!h.classList.contains('open')) {
+    const body = h.nextElementSibling;
+    if (body) body.classList.add('collapsed');
+  }
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

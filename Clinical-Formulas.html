@@ -1,0 +1,3609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내분비대사내과 진료 참고용 공식집</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SG91M4ZJDM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SG91M4ZJDM');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #7d8590;
+    --text-dim: #484f58;
+
+    --cat-liver: #f0883e;
+    --cat-insulin: #3fb950;
+    --cat-lipid: #58a6ff;
+    --cat-cardio: #ff7b72;
+    --cat-obesity: #d2a8ff;
+    --cat-thyroid: #79c0ff;
+    --cat-renal: #56d364;
+    --cat-diabetes: #ffa657;
+
+    --accent: #58a6ff;
+    --highlight: rgba(88,166,255,0.08);
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 22px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  header p {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  /* ── Nav Tabs ── */
+  .nav-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-wrap::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.18s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-tab .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 40px;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    border-radius: 2px;
+  }
+
+  /* ── Formula Card ── */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
+    gap: 18px;
+  }
+  @media (max-width: 700px) {
+    .formula-grid { grid-template-columns: 1fr; }
+    .container { padding: 20px 16px; }
+    header { padding: 18px 20px; }
+    .nav-wrap { padding: 0 16px; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .card:hover {
+    border-color: #484f58;
+    transform: translateY(-1px);
+  }
+
+  .card-header {
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-header .badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .card-header .name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+  }
+  .card-header .desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .card-header .toggle-icon {
+    color: var(--text-dim);
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .card.open .toggle-icon { transform: rotate(180deg); }
+
+  .card-body {
+    display: none;
+    padding: 16px 18px;
+  }
+  .card.open .card-body { display: block; }
+
+  /* ── Formula Box ── */
+  .formula-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: #c9d1d9;
+    line-height: 1.9;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .formula-box .f-label {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .formula-box .f-main {
+    color: #e6edf3;
+    font-weight: 600;
+  }
+  .formula-box .f-alt {
+    color: #8b949e;
+    font-size: 11.5px;
+  }
+
+  /* ── Cut-off Table ── */
+  .cutoff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .cutoff-table th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    padding: 6px 10px;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  .cutoff-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    color: var(--text);
+  }
+  .cutoff-table tr:last-child td { border-bottom: none; }
+  .cutoff-table .tag-low { color: #3fb950; font-weight: 600; }
+  .cutoff-table .tag-mid { color: #ffa657; font-weight: 600; }
+  .cutoff-table .tag-high { color: #ff7b72; font-weight: 600; }
+
+  /* ── Calculator ── */
+  .calc-section {
+    background: rgba(88,166,255,0.04);
+    border: 1px solid rgba(88,166,255,0.15);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .calc-section .calc-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+  }
+  .input-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .input-group { display: flex; flex-direction: column; gap: 4px; }
+  .input-group label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .input-group input, .input-group select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 7px 10px;
+    transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
+  .input-group input::-webkit-outer-spin-button,
+  .input-group input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .input-group select option { background: var(--surface2); }
+
+  .calc-btn {
+    background: var(--accent);
+    color: #0d1117;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: opacity 0.15s;
+  }
+  .calc-btn:hover { opacity: 0.85; }
+
+  .result-box {
+    display: none;
+    margin-top: 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--accent);
+  }
+  .result-box.show { display: block; }
+  .result-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .result-interp {
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--text-muted);
+  }
+  .result-interp .interp-value {
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .interp-low { color: #3fb950; }
+  .interp-mid { color: #ffa657; }
+  .interp-high { color: #ff7b72; }
+
+  /* ── Note ── */
+  .note {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    line-height: 1.7;
+  }
+  .note strong { color: #c9d1d9; }
+
+  /* ── All view ── */
+  #section-all .section-title::before { background: var(--accent); }
+  #section-liver .section-title::before { background: var(--cat-liver); }
+  #section-insulin .section-title::before { background: var(--cat-insulin); }
+  #section-lipid .section-title::before { background: var(--cat-lipid); }
+  #section-cardio .section-title::before { background: var(--cat-cardio); }
+  #section-obesity .section-title::before { background: var(--cat-obesity); }
+  #section-thyroid .section-title::before { background: var(--cat-thyroid); }
+  #section-renal .section-title::before { background: var(--cat-renal); }
+  #section-diabetes .section-title::before { background: var(--cat-diabetes); }
+</style>
+
+<!-- Bright modern clinical theme override -->
+<style id="bright-modern-theme">
+  :root {
+    --bg: #f6f9fc;
+    --surface: #ffffff;
+    --surface2: #f3f8ff;
+    --border: #d9e5f2;
+    --text: #172033;
+    --text-muted: #607089;
+    --text-dim: #93a2b8;
+
+    --cat-liver: #f47b20;
+    --cat-insulin: #16a34a;
+    --cat-lipid: #2563eb;
+    --cat-cardio: #e11d48;
+    --cat-obesity: #8b5cf6;
+    --cat-thyroid: #0891b2;
+    --cat-renal: #0d9488;
+    --cat-diabetes: #ea580c;
+
+    --accent: #2563eb;
+    --highlight: rgba(37, 99, 235, 0.08);
+    --radius: 18px;
+    --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 14px 34px rgba(15, 23, 42, 0.10);
+    --shadow-blue: 0 22px 54px rgba(37, 99, 235, 0.16);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 34rem),
+      radial-gradient(circle at top right, rgba(99, 102, 241, 0.14), transparent 30rem),
+      linear-gradient(180deg, #f8fbff 0%, #f5f8fc 48%, #eef4fb 100%);
+    color: var(--text);
+    font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.035) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 65%);
+  }
+  ::selection { background: rgba(37, 99, 235, 0.18); }
+
+  header {
+    position: relative;
+    top: auto;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.96) 0%, rgba(14, 165, 233, 0.93) 48%, rgba(45, 212, 191, 0.88) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+    padding: 30px 40px 26px;
+    box-shadow: 0 12px 32px rgba(30, 64, 175, 0.18);
+    overflow: hidden;
+    text-align: center;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    right: -120px;
+    top: -190px;
+    width: 430px;
+    height: 430px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.20);
+  }
+  header::after {
+    content: '';
+    display: none;
+  }
+  header h1 {
+    position: relative;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: clamp(22px, 2.2vw, 31px);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.04em;
+    text-shadow: 0 2px 12px rgba(15, 23, 42, 0.18);
+  }
+  header p {
+    position: relative;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 12.5px;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(255, 255, 255, 0.90);
+    border-bottom: 1px solid rgba(216, 228, 240, 0.94);
+    padding: 10px 40px;
+    gap: 8px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  }
+  .nav-tab {
+    padding: 9px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    border-bottom: 1px solid transparent;
+    background: rgba(248, 251, 255, 0.76);
+    color: var(--text-muted);
+    font-weight: 700;
+    transition: all 0.18s ease;
+  }
+  .nav-tab:hover {
+    color: var(--text);
+    background: #ffffff;
+    border-color: var(--border);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-tab.active {
+    color: #1d4ed8;
+    background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+    border-color: rgba(37, 99, 235, 0.28);
+    border-bottom-color: rgba(37, 99, 235, 0.28);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.11);
+  }
+  .nav-tab .dot {
+    width: 9px;
+    height: 9px;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 4px rgba(37, 99, 235, 0.08);
+  }
+
+  .container { max-width: 1400px; padding: 24px 32px 48px; }
+  .section.active { animation: fadeIn 0.22s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+  .section-title {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    color: #0f172a;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title::before { width: 7px; height: 24px; border-radius: 999px; box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22); }
+
+  .formula-grid { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(216, 228, 240, 0.94);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .card:hover {
+    border-color: rgba(37, 99, 235, 0.30);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .card.open {
+    border-color: rgba(37, 99, 235, 0.35);
+    box-shadow: var(--shadow-blue);
+  }
+  .card-header {
+    padding: 12px 15px 11px;
+    border-bottom: 1px solid rgba(216, 228, 240, 0.72);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.86));
+    gap: 10px;
+  }
+  .card-header .badge {
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.65);
+  }
+  .card-header .name { color: var(--text); font-size: 15.5px; font-weight: 800; letter-spacing: -0.03em; }
+  .card-header .desc { color: var(--text-muted); font-size: 12.2px; line-height: 1.5; }
+  .card-header .toggle-icon { color: var(--text-dim); transition: transform 0.2s ease, color 0.2s ease; }
+  .card:hover .toggle-icon, .card.open .toggle-icon { color: var(--accent); }
+  .card-body { padding: 18px; background: #ffffff; }
+
+  .formula-box {
+    background: linear-gradient(180deg, #f8fbff 0%, #f2f7ff 100%);
+    border: 1px solid #d7e6f7;
+    border-radius: 14px;
+    padding: 15px 16px;
+    color: #334155;
+    box-shadow: inset 3px 0 0 rgba(37, 99, 235, 0.34);
+    display: none;          /* 기본 숨김 */
+    margin-bottom: 12px;
+  }
+  .formula-box.open { display: block; }
+
+  /* 공식 토글 버튼 */
+  .formula-toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  .formula-toggle:hover {
+    background: linear-gradient(135deg, #dbeafe, #dcfce7);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+  }
+  .formula-toggle .ft-icon {
+    font-size: 13px;
+    line-height: 1;
+  }
+  .formula-toggle .ft-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.04em;
+  }
+  .formula-toggle .ft-arrow {
+    font-size: 11px;
+    color: #93c5fd;
+    transition: transform 0.2s;
+    margin-left: 2px;
+  }
+  .formula-toggle.open .ft-arrow { transform: rotate(180deg); }
+  .formula-box .f-label {
+    color: #2563eb;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .formula-box .f-main { color: #172033; font-weight: 600; }
+  .formula-box .f-alt { color: #64748b; }
+
+  .cutoff-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #ffffff;
+    font-size: 12.2px;
+  }
+  .cutoff-table th {
+    background: linear-gradient(180deg, #f2f7ff 0%, #eaf3ff 100%);
+    color: #475569;
+    padding: 8px 11px;
+    font-weight: 800;
+  }
+  .cutoff-table td {
+    color: var(--text);
+    padding: 8px 11px;
+    border-bottom: 1px solid rgba(216, 228, 240, 0.72);
+  }
+  .cutoff-table tr:hover td { background: #f8fbff; }
+  .cutoff-table .tag-low, .interp-low { color: #16a34a; font-weight: 800; }
+  .cutoff-table .tag-mid, .interp-mid { color: #d97706; font-weight: 800; }
+  .cutoff-table .tag-high, .interp-high { color: #dc2626; font-weight: 800; }
+
+  .calc-section {
+    background: linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(236, 253, 245, 0.78));
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    border-radius: 16px;
+    padding: 15px 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  .calc-section .calc-title { color: var(--accent); font-weight: 900; letter-spacing: 0.11em; }
+  .input-row { gap: 11px; }
+  .input-group label { color: #536477; font-weight: 700; }
+  .input-group input, .input-group select {
+    background: #ffffff;
+    border: 1px solid #ccd9e8;
+    border-radius: 11px;
+    color: var(--text);
+    padding: 9px 10px;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .input-group input:focus, .input-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    background: #fbfdff;
+  }
+  .input-group input::placeholder { color: #a5b4c5; }
+  .input-group select option { background: #ffffff; }
+  .input-hint {
+    font-size: 10px;
+    color: #8fa3b8;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 2px;
+    letter-spacing: -0.01em;
+  }
+  .calc-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 9px 19px;
+    font-size: 12.5px;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  }
+  .calc-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 24px rgba(37, 99, 235, 0.26); filter: saturate(1.06); opacity: 1; }
+  .result-box {
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-left: 5px solid var(--accent);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+  }
+  .result-box.show { display: block; animation: resultPop 0.18s ease-out; }
+  @keyframes resultPop { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  .result-value { color: var(--accent); font-size: 23px; font-weight: 800; letter-spacing: -0.03em; }
+  .result-interp { color: var(--text-muted); }
+
+  .note {
+    color: #5f6f83;
+    background: #fbfdff;
+    border: 1px solid #dfe8f2;
+    border-radius: 14px;
+    padding: 12px 13px;
+  }
+  .note strong { color: #1e293b; }
+
+  /* ── Next Steps ── */
+  .next-steps {
+    margin-top: 10px;
+    padding: 10px 13px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #f5fff8 100%);
+    border: 1px solid rgba(37,99,235,0.14);
+    border-radius: 11px;
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: #374151;
+  }
+  .next-steps .ns-title {
+    font-weight: 800;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .next-steps .ns-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .next-steps .ns-item:last-child { margin-bottom: 0; }
+  .next-steps .ns-bullet { color: #2563eb; font-weight: 700; flex-shrink: 0; }
+  .next-steps .ns-urgent { color: #dc2626; font-weight: 700; }
+  .next-steps .ns-drug   { color: #7c3aed; font-weight: 600; }
+  .next-steps .ns-test   { color: #0369a1; font-weight: 600; }
+
+  /* ── BMI auto helper (bmiAuto 카드: NFS·METS-IR·VAI) ── */
+  .bmi-helper-row {
+    background: #f3f6ff;
+    border: 1px solid #d0d9f5;
+    border-radius: 8px;
+    padding: 10px 12px 8px;
+    margin-bottom: 10px;
+  }
+  .bmi-hr-title {
+    font-size: 9.5px; font-weight: 800; color: #3b52b0;
+    text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px;
+  }
+  .bmi-hr-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .bmi-auto-badge {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: linear-gradient(135deg,#e8f0fe,#dceeff);
+    border: 1.5px solid #bfcfff;
+    border-radius: 7px;
+  }
+  .bmi-auto-badge.show { display: flex; }
+  .bab-label { font-size: 9px; font-weight: 700; color: #3b52b0; text-transform: uppercase; letter-spacing: .06em; }
+  .bab-val   { font-size: 20px; font-weight: 800; color: #1e3a8a; font-family: 'JetBrains Mono', monospace; line-height: 1; }
+  .bab-unit  { font-size: 10px; color: #3b52b0; font-weight: 600; }
+  .bab-cat   { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+  .bmi-hint  { font-size: 9.5px; color: #aaa; font-weight: 400; font-style: italic; margin-left: 4px; }
+
+  /* ── BMI live preview (BMI 카드) ── */
+  .bmi-preview {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0 4px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+    border: 1.5px solid #bfcfff;
+    border-radius: 8px;
+  }
+  .bmi-preview.show { display: flex; }
+  .bmi-preview .bp-label {
+    font-size: 10.5px; font-weight: 700; color: #3b52b0;
+    text-transform: uppercase; letter-spacing: .05em; white-space: nowrap;
+  }
+  .bmi-preview .bp-val {
+    font-size: 22px; font-weight: 800; color: #1e3a8a;
+    font-family: 'JetBrains Mono', monospace; line-height: 1;
+  }
+  .bmi-preview .bp-unit { font-size: 11px; color: #3b52b0; font-weight: 600; }
+  .bmi-preview .bp-cat {
+    margin-left: auto; font-size: 11px; font-weight: 700;
+    padding: 2px 9px; border-radius: 20px;
+  }
+
+  /* ── External Calculator Link Button ── */
+  .ext-calc-wrap {
+    margin-top: 10px;
+  }
+  .ext-calc-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .ext-calc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    padding: 10px 20px;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.28);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    letter-spacing: -0.01em;
+  }
+  .ext-calc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(37,99,235,0.36);
+    filter: saturate(1.08);
+  }
+  .ext-calc-btn .btn-icon { font-size: 15px; }
+  .ext-calc-btn .btn-arrow {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-left: 2px;
+  }
+  .ext-calc-url {
+    display: block;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 7px;
+    word-break: break-all;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 760px) {
+    .formula-grid { grid-template-columns: 1fr; }
+    .container { padding: 22px 16px 42px; }
+    header { padding: 22px 20px 18px; }
+    header::after { display: none; }
+    .nav-wrap { padding: 9px 16px; }
+    .nav-tab { padding: 8px 12px; }
+  }
+  @media print {
+    body { background: #ffffff; }
+    body::before, header::before, header::after, .nav-wrap { display: none !important; }
+    header { position: static; background: #ffffff; box-shadow: none; border-bottom: 1px solid #ddd; }
+    header h1 { color: #111827; text-shadow: none; }
+    header p { color: #4b5563; }
+    .card, .card.open { box-shadow: none; break-inside: avoid; }
+    .card-body { display: block !important; }
+  }
+
+  /* ════════════════════════════════════════
+     GLOSSARY SEARCH BAR
+  ════════════════════════════════════════ */
+  .glossary-bar {
+    background: rgba(248,251,255,0.97);
+    border-bottom: 1px solid rgba(209,228,245,0.85);
+    padding: 10px 40px;
+    position: relative;
+    z-index: 95;
+    box-shadow: 0 3px 12px rgba(15,23,42,0.04);
+    display: flex;
+    justify-content: center;
+  }
+  .glossary-wrap {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .glossary-input-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #ffffff;
+    border: 1.5px solid #d0e3f7;
+    border-radius: 999px;
+    padding: 7px 14px 7px 16px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.05);
+  }
+  .glossary-input-row:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.10), 0 2px 8px rgba(37,99,235,0.08);
+    background: #ffffff;
+  }
+  .glossary-icon { color: #607089; font-size: 14px; flex-shrink: 0; line-height: 1; }
+  .glossary-input {
+    border: none; outline: none; background: transparent;
+    font-size: 13px; color: #172033; font-family: 'Inter','Noto Sans KR',sans-serif;
+    flex: 1; min-width: 0;
+  }
+  .glossary-input::placeholder { color: #a8b8cc; font-size: 12.5px; }
+  .glossary-label {
+    font-size: 10px; font-weight: 800; color: #2563eb;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    background: #eff6ff; padding: 2px 8px; border-radius: 999px;
+    white-space: nowrap; flex-shrink: 0;
+    border: 1px solid rgba(37,99,235,0.18);
+  }
+  .glossary-count {
+    font-size: 10.5px; color: #a8b8cc; white-space: nowrap;
+    font-weight: 600; flex-shrink: 0; font-family: 'JetBrains Mono',monospace;
+  }
+  .glossary-clear {
+    background: none; border: none; cursor: pointer;
+    color: #a8b8cc; font-size: 13px; padding: 1px 3px; line-height: 1;
+    flex-shrink: 0; display: none; border-radius: 50%;
+    transition: color 0.12s, background 0.12s;
+  }
+  .glossary-clear.show { display: flex; align-items: center; justify-content: center; }
+  .glossary-clear:hover { color: #475569; background: #f1f5f9; }
+
+  /* Results panel */
+  .glossary-results {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 660px;
+    max-width: calc(100vw - 32px);
+    background: #ffffff;
+    border: 1px solid #d0e3f7;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(15,23,42,0.13), 0 4px 12px rgba(37,99,235,0.06);
+    z-index: 300;
+    overflow: hidden;
+    animation: gloss-in 0.14s ease-out;
+  }
+  @keyframes gloss-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .glossary-results.show { display: block; }
+  .glossary-results-header {
+    padding: 9px 16px 8px;
+    font-size: 10.5px; font-weight: 800;
+    color: #607089; text-transform: uppercase; letter-spacing: 0.08em;
+    border-bottom: 1px solid #eef4fb;
+    background: linear-gradient(180deg, #f8fbff 0%, #f2f7ff 100%);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .glossary-results-list {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d0e3f7 transparent;
+  }
+  .glossary-item {
+    display: flex; align-items: center; gap: 11px;
+    padding: 8px 16px;
+    border-bottom: 1px solid rgba(216,228,240,0.5);
+    transition: background 0.1s;
+    cursor: pointer;
+  }
+  .glossary-item:last-child { border-bottom: none; }
+  .glossary-item:hover { background: #eff6ff; }
+  .glossary-item:hover .g-full { color: #2563eb; }
+  .glossary-item:hover .g-open-hint { opacity: 1; }
+  .g-badge {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.01em;
+    padding: 3px 9px; border-radius: 999px; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid currentColor; white-space: nowrap;
+    min-width: 60px; text-align: center;
+  }
+  .g-body { flex: 1; min-width: 0; display: flex; align-items: center; gap: 6px; }
+  .g-full { font-size: 12.5px; font-weight: 600; color: #172033; line-height: 1.35; transition: color 0.12s; }
+  .g-ko { display: none; }
+  .g-cat-tag {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; opacity: 0.75; margin-left: 4px;
+  }
+  .g-open-hint {
+    margin-left: auto; font-size: 10px; color: #93c5fd;
+    opacity: 0; transition: opacity 0.12s; flex-shrink: 0; font-weight: 600;
+  }
+  .glossary-highlight { background: rgba(37,99,235,0.13); border-radius: 2px; font-weight: 800; color: #1d4ed8; }
+  .glossary-no-result {
+    padding: 22px 16px; text-align: center;
+    color: #a8b8cc; font-size: 13px;
+  }
+  @media (max-width: 760px) {
+    .glossary-bar { padding: 9px 16px; }
+    .glossary-input-row { max-width: 100%; }
+    .glossary-results { width: calc(100vw - 32px); left: 0; }
+    .glossary-label { display: none; }
+  }
+
+  /* ── Glossary Detail Modal ── */
+  .gmodal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(15,23,42,0.45); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 24px 16px;
+  }
+  .gmodal-overlay.show { display: flex; animation: gmodal-bg-in 0.18s ease-out; }
+  @keyframes gmodal-bg-in { from{opacity:0} to{opacity:1} }
+  .gmodal {
+    background: #ffffff; border-radius: 22px;
+    box-shadow: 0 32px 72px rgba(15,23,42,0.22), 0 4px 16px rgba(37,99,235,0.10);
+    max-width: 580px; width: 100%; overflow: hidden;
+    animation: gmodal-in 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes gmodal-in {
+    from { opacity:0; transform:scale(0.90) translateY(12px); }
+    to   { opacity:1; transform:scale(1)    translateY(0); }
+  }
+  .gmodal-header {
+    padding: 20px 22px 16px; border-bottom: 1px solid #e8f0fb;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .gmodal-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px; font-weight: 800;
+    padding: 6px 16px; border-radius: 999px;
+    flex-shrink: 0; border: 2px solid currentColor;
+  }
+  .gmodal-title-block { flex: 1; min-width: 0; }
+  .gmodal-full { font-size: 13px; font-weight: 700; color: #172033; line-height: 1.45; margin-bottom: 5px; }
+  .gmodal-cat {
+    display: inline-block; font-size: 10px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.85;
+  }
+  .gmodal-close {
+    background: #f1f5f9; border: none; cursor: pointer;
+    width: 30px; height: 30px; border-radius: 50%;
+    font-size: 14px; color: #64748b; flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.12s, color 0.12s;
+  }
+  .gmodal-close:hover { background: #e2e8f0; color: #1e293b; }
+  .gmodal-body { padding: 18px 22px 22px; }
+  .gmodal-ko { font-size: 13.5px; color: #334155; line-height: 1.9; word-break: keep-all; }
+  .gmodal-nav {
+    display: flex; gap: 8px; margin-top: 16px;
+    padding-top: 14px; border-top: 1px solid #eef4fb;
+    align-items: center;
+  }
+  .gmodal-hint { font-size: 10.5px; color: #a8b8cc; flex: 1; }
+  .gmodal-nav-btn {
+    background: #f8fafc; border: 1px solid #dde9f6; border-radius: 999px;
+    padding: 5px 14px; font-size: 11.5px; font-weight: 700; color: #475569;
+    cursor: pointer; transition: all 0.12s;
+  }
+  .gmodal-nav-btn:hover:not(:disabled) { background: #eff6ff; border-color: #93c5fd; color: #2563eb; }
+  .gmodal-nav-btn:disabled { opacity: 0.3; cursor: default; }
+  /* ── Grouped Cutoffs (cg-*) ── */
+  .cg-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 11px;
+    margin-bottom: 14px;
+  }
+  .cg-panel {
+    border: 1.5px solid #dde9f6;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .cg-head {
+    padding: 7px 12px;
+    font-size: 10px; font-weight: 900;
+    letter-spacing: 0.04em;
+    color: #fff; flex-shrink: 0;
+  }
+  .cg-row {
+    display: flex; align-items: stretch;
+    border-bottom: 1px solid #eef4fb;
+    transition: background 0.1s;
+  }
+  .cg-row:last-child { border-bottom: none; }
+  .cg-panel > .cg-row:hover { background: #f8fbff; }
+  .cg-range {
+    width: 46%; padding: 7px 9px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 700;
+    border-right: 1px solid #eef4fb;
+    flex-shrink: 0; line-height: 1.4;
+  }
+  .cg-range.cl { color: #16a34a; }
+  .cg-range.cm { color: #d97706; }
+  .cg-range.ch { color: #dc2626; }
+  .cg-interp {
+    flex: 1; padding: 7px 9px;
+    color: #334155; line-height: 1.45; font-size: 11px;
+  }
+  .cg-sub {
+    border-top: 2px dashed #b6d4ee;
+    background: linear-gradient(135deg,#f0f9ff 0%,#f0fdf8 100%);
+  }
+  .cg-sub-head {
+    padding: 6px 12px;
+    font-size: 9.5px; font-weight: 900;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #c7e6f5;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .cg-sub .cg-row { border-bottom-color: #d8eff8; }
+  .cg-sub .cg-row:last-child { border-bottom: none; }
+  .cg-sub .cg-row:hover { background: rgba(13,148,136,0.05); }
+  .cg-sub .cg-range { font-size: 10px; border-right-color: #d8eff8; }
+  .cg-sub .cg-interp { font-size: 10.5px; color: #374151; }
+  .cg-row.has-sub .cg-range::after { content: ' \25BC'; font-size: 9px; color: #0d9488; }
+
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>📐 내분비대사내과 진료 참고용 공식집</h1>
+  <p>Endocrinology &amp; Metabolism — Clinical Formula Reference with Interactive Calculators</p>
+</header>
+
+<!-- Glossary Detail Modal -->
+<div class="gmodal-overlay" id="gmodalOverlay">
+  <div class="gmodal" id="gmodal">
+    <div class="gmodal-header">
+      <span class="gmodal-badge" id="gmodalBadge"></span>
+      <div class="gmodal-title-block">
+        <div class="gmodal-full" id="gmodalFull"></div>
+        <span class="gmodal-cat" id="gmodalCat"></span>
+      </div>
+      <button class="gmodal-close" id="gmodalClose" title="닫기">&#x2715;</button>
+    </div>
+    <div class="gmodal-body">
+      <div class="gmodal-ko" id="gmodalKo"></div>
+      <div class="gmodal-nav">
+        <span class="gmodal-hint" id="gmodalHint"></span>
+        <button class="gmodal-nav-btn" id="gmodalPrev">&#9664; 이전</button>
+        <button class="gmodal-nav-btn" id="gmodalNext">다음 &#9654;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     GLOSSARY SEARCH BAR
+════════════════════════════════════════ -->
+<div class="glossary-bar">
+  <div class="glossary-wrap">
+    <div class="glossary-input-row">
+      <span class="glossary-icon">🔍</span>
+      <input class="glossary-input" id="glossaryInput" type="text"
+             placeholder="약어·용어 검색... (예: AST, eGFR, HOMA-IR, FH)"
+             autocomplete="off" spellcheck="false">
+      <span class="glossary-label">용어/약어집</span>
+      <span class="glossary-count" id="glossaryCount"></span>
+      <button class="glossary-clear" id="glossaryClear" title="지우기">✕</button>
+    </div>
+    <div class="glossary-results" id="glossaryResults"></div>
+  </div>
+</div>
+
+
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!--  ALL  -->
+<!-- ============================================================ -->
+<div class="section active" id="section-all">
+  <!-- cards injected by JS -->
+  <div class="formula-grid" id="grid-all"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  LIVER  -->
+<!-- ============================================================ -->
+<div class="section" id="section-liver">
+  <h2 class="section-title">간 섬유화 지수 (Liver Fibrosis)</h2>
+  <div class="formula-grid" id="grid-liver"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  INSULIN  -->
+<!-- ============================================================ -->
+<div class="section" id="section-insulin">
+  <h2 class="section-title">인슐린 저항성 지수 (Insulin Resistance)</h2>
+  <div class="formula-grid" id="grid-insulin"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  LIPID  -->
+<!-- ============================================================ -->
+<div class="section" id="section-lipid">
+  <h2 class="section-title">지질 대사 지수 (Lipid Metabolism)</h2>
+  <div class="formula-grid" id="grid-lipid"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CARDIO  -->
+<!-- ============================================================ -->
+<div class="section" id="section-cardio">
+  <h2 class="section-title">심혈관 위험도 지수 (Cardiovascular Risk)</h2>
+  <div class="formula-grid" id="grid-cardio"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  OBESITY  -->
+<!-- ============================================================ -->
+<div class="section" id="section-obesity">
+  <h2 class="section-title">비만·체형 지수 (Obesity & Body Composition)</h2>
+  <div class="formula-grid" id="grid-obesity"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  THYROID  -->
+<!-- ============================================================ -->
+<div class="section" id="section-thyroid">
+  <h2 class="section-title">갑상선·부신 지수 (Thyroid & Adrenal)</h2>
+  <div class="formula-grid" id="grid-thyroid"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  RENAL  -->
+<!-- ============================================================ -->
+<div class="section" id="section-renal">
+  <h2 class="section-title">신장 기능 지수 (Renal Function)</h2>
+  <div class="formula-grid" id="grid-renal"></div>
+</div>
+
+<!-- ============================================================ -->
+<!--  DIABETES  -->
+<!-- ============================================================ -->
+<div class="section" id="section-diabetes">
+  <h2 class="section-title">당뇨·혈당 지수 (Diabetes & Glycemia)</h2>
+  <div class="formula-grid" id="grid-diabetes"></div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+/* ================================================================
+   DATA: 공식 목록
+================================================================ */
+const FORMULAS = [
+
+/* ── LIVER ── */
+{
+  id: 'fib4', cat: 'liver', catColor: '#f0883e', catLabel: 'LIVER',
+  name: 'FIB-4 Index',
+  desc: '지방간(MASLD) 및 만성 간질환 섬유화 비침습적 1차 평가',
+  formula: `FIB-4 = (나이[세] × AST[U/L]) / (혈소판[10⁹/L] × √ALT[U/L])`,
+  cutoffs: [
+    { range: '< 1.30　　(≥65세: < 2.0)', interp: '섬유화 가능성 낮음 (F0–F1)', cls: 'tag-low' },
+    { range: '1.30 – 2.67　(≥65세: 2.0 – 2.67)', interp: '불확정 → ELF/FibroScan(VCTE) 추가', cls: 'tag-mid' },
+    { range: '> 2.67', interp: '진행성 섬유화 가능성 높음 (F3–F4)', cls: 'tag-high' },
+    { range: '≥ 3.48　　[MASLD F4 rule-in]', interp: '간경변 가능성 높음 (specificity 95%) — AASLD 2023', cls: 'tag-high' },
+  ],
+  note: '【연령 보정】 ≥65세: 하한 cutoff 2.0 적용 (AASLD 2023·EASL 2024 공통). &lt;35세: 정확도 낮음 → 이차 평가 고려.\n【질환별 차이】 HCV: &lt;1.45 / &gt;3.25 / HBV: &lt;1.0 / &gt;2.65 / NAFLD(MASLD): &lt;1.30 / &gt;2.67.\n【MASLD F4 특이 cutoff — AASLD 2023】 rule-out &lt;1.67 · rule-in ≥3.48. 단, ≥3.48의 sensitivity 65% (cirrhosis 4명 중 1명 누락) — 검증 진행 중.\n【위양성 주의】 AST 상승(근육손상·용혈·갑상선기능저하), 혈소판 감소(혈액질환), 급성 질환 중에는 사용 금지.',
+  inputs: [
+    { id: 'fib4_age', label: '나이 (세)', placeholder: '58' },
+    { id: 'fib4_ast', label: 'AST (U/L)', placeholder: '42' },
+    { id: 'fib4_alt', label: 'ALT (U/L)', placeholder: '55' },
+    { id: 'fib4_plt', label: '혈소판 (10⁹/L)', placeholder: '180', hint: '200,000/µL → 200 ×10⁹/L' },
+  ],
+  calc(v) {
+    const r = (v.fib4_age * v.fib4_ast) / (v.fib4_plt * Math.sqrt(v.fib4_alt));
+    const age65 = v.fib4_age >= 65;
+    const lowCut = age65 ? 2.0 : 1.30;   // AASLD 2023 · EASL 2024
+    const ageNote = age65 ? ' (≥65세 기준 적용: 하한 2.0)' : '';
+    let cls, txt, steps;
+    if (r >= 3.48) {
+      // AASLD 2023 MASLD F4 rule-in
+      cls='interp-high'; txt='진행성 섬유화 가능성 높음 (F3–F4) / 간경변 rule-in 구간 (≥3.48)' + ageNote;
+      steps=[
+        '<span class="ns-urgent">소화기내과 즉시 의뢰</span>',
+        '<span class="ns-test">FibroScan (VCTE)</span> — 간경변 확인 (LSM ≥15 kPa)',
+        '<span class="ns-test">복부 초음파 + AFP</span> (간경변·HCC 스크리닝)',
+        '<span class="ns-test">상부위내시경</span> — 식도정맥류 여부 확인',
+        '초음파 + AFP 6개월 간격 추적 (HCC 감시)',
+        '<span class="ns-drug">MASLD 치료</span>: 체중감량 ≥7–10%, GLP-1 RA / 피오글리타존 고려',
+        '간생검 — 조직학적 병기 확인 (임상적으로 필요시)',
+        '⚠ FIB-4 ≥3.48의 sensitivity 65%: 음성이어도 cirrhosis 배제 불가',
+      ];
+    } else if (r > 2.67) {
+      cls='interp-high'; txt='진행성 섬유화 가능성 높음 (F3–F4)' + ageNote;
+      steps=[
+        '<span class="ns-urgent">소화기내과 의뢰</span>',
+        '<span class="ns-test">FibroScan (VCTE) 또는 ELF</span> — 병기 확인',
+        '<span class="ns-test">복부 초음파 + AFP</span> (간경변·HCC 스크리닝)',
+        '<span class="ns-test">상부위내시경</span> — 정맥류 여부 확인',
+        '초음파 + AFP 6개월 간격 추적',
+        '<span class="ns-drug">MASLD 치료</span>: 체중감량 ≥7–10%, GLP-1 RA / 피오글리타존 고려',
+        '간생검 — 조직학적 병기 확인 (임상적으로 필요시)',
+      ];
+    } else if (r >= lowCut) {
+      cls='interp-mid'; txt='불확정 구간 — 추가 검사 필요' + ageNote;
+      steps=[
+        '<span class="ns-test">FibroScan (VCTE)</span> 또는 <span class="ns-test">ELF 검사</span> 시행 (AASLD 2023 권고)',
+        '소화기내과 의뢰 고려',
+        '복부 초음파로 지방간·형태 이상 확인',
+        '생활습관 교정 1년 후 FIB-4 재평가 (EASL 2024)',
+        '생활습관 교정 시작: 체중감량, 금주, 유산소운동',
+      ];
+    } else {
+      cls='interp-low'; txt='섬유화 가능성 낮음 (F0–F1)' + ageNote;
+      steps=[
+        age65 ? '⚠ ≥65세: 하한 cutoff 2.0 적용 완료 — 표준(1.30) 대비 특이도 향상' : '',
+        '당뇨·비만 동반 시 1–2년마다 FIB-4 재평가 (AASLD 2023)',
+        '생활습관 교정 유지: 체중감량, 금주, 운동',
+        'MASLD 고위험인자(당뇨·비만) 동반 시 복부 초음파 병행 권고',
+      ].filter(Boolean);
+    }
+    return { value: r.toFixed(2), cls, txt, steps };
+  }
+},
+/* ── INSULIN RESISTANCE ── */
+{
+  id: 'homa_ir', cat: 'insulin', catColor: '#3fb950', catLabel: 'INSULIN',
+  name: 'HOMA-IR',
+  desc: '공복 인슐린 저항성 평가 (Matthews et al. 1985)',
+  formula: `HOMA-IR = (공복혈당[mg/dL] × 공복인슐린[μU/mL]) / 405
+
+  ※ 혈당 mmol/L 단위 시:
+  HOMA-IR = (혈당[mmol/L] × 인슐린[μU/mL]) / 22.5`,
+  cutoffs: [
+    { range: '< 1.0', interp: '인슐린 감수성 양호', cls: 'tag-low' },
+    { range: '1.0 – 2.5', interp: '정상~경미한 저항성', cls: 'tag-low' },
+    { range: '2.5 – 5.0', interp: '인슐린 저항성 의심', cls: 'tag-mid' },
+    { range: '> 5.0', interp: '명확한 인슐린 저항성', cls: 'tag-high' },
+  ],
+  note: '기준값은 인종·연구마다 차이 있음. 한국인 기준: >2.5 또는 >2.0을 사용하는 연구 많음. 공복 상태(8시간 이상) 필수.',
+  inputs: [
+    { id: 'homa_glc', label: '공복혈당 (mg/dL)', placeholder: '100' },
+    { id: 'homa_ins', label: '공복인슐린 (μU/mL)', placeholder: '10' },
+  ],
+  calc(v) {
+    const r = (v.homa_glc * v.homa_ins) / 405;
+    let cls, txt, steps;
+    if (r > 5.0) {
+      cls='interp-high'; txt='명확한 인슐린 저항성';
+      steps=[
+        '<span class="ns-test">75g OGTT</span> — 당뇨전단계/당뇨 진단',
+        '<span class="ns-test">지질검사, 혈압 측정</span> — MetS 전체 기준 평가',
+        '<span class="ns-test">FIB-4</span> — MASLD 진행 평가',
+        '<span class="ns-drug">메트포르민</span> (당뇨전단계 고위험) 또는 <span class="ns-drug">피오글리타존</span> 고려',
+        '체중감량 7-10%, 유산소운동 주 150분 이상',
+        '심혈관 위험도 산출 (SCORE2 또는 PCE)',
+      ];
+    } else if (r > 2.5) {
+      cls='interp-mid'; txt='인슐린 저항성 의심';
+      steps=[
+        '<span class="ns-test">75g OGTT</span> (공복혈당 100-125 mg/dL인 경우)',
+        '<span class="ns-test">지질검사</span> (TG, HDL-C) — MetS 평가',
+        '<span class="ns-test">FIB-4</span> — 간섬유화 스크리닝',
+        '체중감량 5-7%, 운동 강화 (집중 생활습관 중재)',
+        '6개월 후 HOMA-IR 재평가',
+      ];
+    } else if (r > 1.0) {
+      cls='interp-low'; txt='정상~경미한 저항성';
+      steps=[
+        '생활습관 교정 유지 (식이 조절, 규칙적 운동)',
+        '연 1회 공복혈당·지질 재검',
+      ];
+    } else {
+      cls='interp-low'; txt='인슐린 감수성 양호';
+      steps=[
+        '현재 생활습관 유지',
+        '연 1회 재평가',
+      ];
+    }
+    return { value: r.toFixed(2), cls, txt, steps };
+  }
+},
+{
+  id: 'homa_b', cat: 'insulin', catColor: '#3fb950', catLabel: 'INSULIN',
+  name: 'HOMA-β (β세포 기능)',
+  desc: '공복 β세포 인슐린 분비능 추정',
+  formula: `HOMA-β (%) = (20 × 공복인슐린[μU/mL]) / (공복혈당[mg/dL]/18 - 3.5)
+
+  ※ 혈당 mmol/L 단위 시:
+  HOMA-β (%) = (20 × 인슐린) / (혈당[mmol/L] - 3.5)`,
+  cutoffs: [
+    { range: '> 100%', interp: '정상 β세포 기능', cls: 'tag-low' },
+    { range: '50 – 100%', interp: 'β세포 기능 저하 가능성', cls: 'tag-mid' },
+    { range: '< 50%', interp: '유의한 β세포 기능 저하', cls: 'tag-high' },
+  ],
+  note: '공복혈당이 낮을수록 (특히 <63 mg/dL) 분모가 음수가 되어 산출 불가. 공복혈당 >100 mg/dL 환경에서 가장 신뢰도 높음.',
+  inputs: [
+    { id: 'homab_glc', label: '공복혈당 (mg/dL)', placeholder: '105' },
+    { id: 'homab_ins', label: '공복인슐린 (μU/mL)', placeholder: '10' },
+  ],
+  calc(v) {
+    const glc_mmol = v.homab_glc / 18;
+    const denom = glc_mmol - 3.5;
+    if (denom <= 0) return { value: 'N/A', cls:'interp-mid', txt:'혈당이 너무 낮아 계산 불가 (공복혈당 ≥63 mg/dL 필요)', steps:[] };
+    const r = (20 * v.homab_ins) / denom;
+    let cls, txt, steps;
+    if (r < 50) {
+      cls='interp-high'; txt='유의한 β세포 기능 저하';
+      steps=[
+        '<span class="ns-test">공복·자극 후 C-peptide</span> 측정 (내인성 분비능 정량)',
+        '<span class="ns-test">GAD65·IA-2 항체</span> — LADA 배제',
+        '<span class="ns-test">75g OGTT</span> (2시간 인슐린 분비 곡선)',
+        '<span class="ns-urgent">인슐린 치료 필요성 평가</span>',
+        '내분비내과 전문의 의뢰',
+      ];
+    } else if (r < 100) {
+      cls='interp-mid'; txt='β세포 기능 저하 가능성';
+      steps=[
+        '<span class="ns-test">공복 C-peptide</span> 측정',
+        '<span class="ns-test">75g OGTT</span> (인슐린 분비 1상/2상 평가)',
+        '당화혈색소·공복혈당 추세 관찰',
+        '6개월 후 HOMA-β 재평가',
+      ];
+    } else {
+      cls='interp-low'; txt='정상 β세포 기능';
+      steps=[
+        '현재 혈당 조절 유지',
+        '연 1회 재평가 (당뇨 고위험군)',
+      ];
+    }
+    return { value: r.toFixed(1) + '%', cls, txt, steps };
+  }
+},
+{
+  id: 'metsir', cat: 'insulin', catColor: '#3fb950', catLabel: 'INSULIN',
+  name: 'METS-IR (Metabolic Score for Insulin Resistance)',
+  desc: '비만·지질 파라미터 통합 인슐린 저항성 지수 (2018)',
+  formula: `METS-IR = [ln(2×TG[mg/dL] + 공복혈당[mg/dL]) × BMI]
+            / ln(HDL-C[mg/dL])`,
+  cutoffs: [
+    { range: '< 32.0', interp: '인슐린 감수성 정상', cls: 'tag-low' },
+    { range: '32.0 – 40.0', interp: '경계', cls: 'tag-mid' },
+    { range: '> 40.0', interp: '인슐린 저항성 시사', cls: 'tag-high' },
+  ],
+  note: '기준값은 멕시코 코호트 유래. METS-VF (내장지방 특이적) 파생 지수도 있음.',
+  inputs: [
+    { id: 'metsir_tg',  label: 'TG (mg/dL)',        placeholder: '150' },
+    { id: 'metsir_glc', label: '공복혈당 (mg/dL)',  placeholder: '100' },
+    { id: 'metsir_bmi', label: 'BMI (kg/m²)',        placeholder: '25', bmiAuto: true },
+    { id: 'metsir_hdl', label: 'HDL-C (mg/dL)',      placeholder: '50' },
+  ],
+  calc(v) {
+    const r = (Math.log(2*v.metsir_tg + v.metsir_glc) * v.metsir_bmi) / Math.log(v.metsir_hdl);
+    let cls, txt, steps;
+    if (r > 40) {
+      cls='interp-high'; txt='인슐린 저항성 시사';
+      steps=[
+        '<span class="ns-test">HOMA-IR</span> 확인 (공복 인슐린 측정)',
+        '<span class="ns-test">75g OGTT</span> — 당뇨 평가',
+        '<span class="ns-test">지질·혈압</span> — MetS 전체 기준',
+        'VAI/LAP 병행 산출 (내장지방 기능 평가)',
+        '<span class="ns-drug">TG 치료</span>: 식이 조절 + 오메가-3/피브레이트',
+        '비만 중재 프로그램 또는 GLP-1 RA 고려',
+      ];
+    } else if (r >= 32) {
+      cls='interp-mid'; txt='경계 범위';
+      steps=[
+        '체중감량 5%, 저탄수화물 식이, 운동',
+        'TG·HDL·공복혈당 3개월 후 재검',
+        'HOMA-IR 측정 고려',
+      ];
+    } else {
+      cls='interp-low'; txt='인슐린 감수성 정상';
+      steps=['생활습관 유지 · 연 1회 재평가'];
+    }
+    return { value: r.toFixed(2), cls, txt, steps };
+  }
+},
+
+/* ── LIPID ── */
+
+/* ── CARDIO ── */
+{
+  id: 'prevent', cat: 'cardio', catColor: '#ff7b72', catLabel: 'CARDIO',
+  name: 'ACC/AHA PREVENT — 10년 심혈관 위험도',
+  desc: 'Predicting Risk of CVD EVENTs (Khan et al., Circulation 2023) — PCE 대체 최신 공식',
+  formula: `CVD 10yr Risk = 1 - S₀ × exp(Σ βᵢXᵢ - mean)
+
+주요 변수 (성별 공통):
+  나이 (30–79세), TC, HDL-C, SBP, 항고혈압제 복용
+  당뇨 여부 (또는 HbA1c), 흡연, eGFR
+  스타틴 복용, 아스피린 복용 (optional)
+
+산출 지표:
+  ① 10년 ASCVD 위험 (관상동맥+뇌졸중)
+  ② 10년 CVD 위험 (ASCVD + 심부전 포함)
+  ③ 30년 CVD 위험 (선택)`,
+  cutoffs: [
+    { range: '< 3%',             interp: '저위험 (Low) — 생활습관 교정 중심',                                        cls: 'tag-low'  },
+    { range: '≥ 3% – < 5%',     interp: '경계 위험 (Borderline) — 위험 강화인자 평가; 스타틴 선택적 고려',          cls: 'tag-mid'  },
+    { range: '≥ 5% – < 10%',    interp: '중간 위험 (Intermediate) — 중등도~고강도 스타틴 치료 권고',               cls: 'tag-mid'  },
+    { range: '≥ 10%',            interp: '고위험 (High) — 고강도 스타틴 + 에제티미브/PCSK9i 추가 고려',             cls: 'tag-high' },
+  ],
+  note: `PCE(2013) 대비 주요 개선점:
+① eGFR 포함 → CKD 환자 위험 더 정확하게 반영
+② 인종/민족 변수 제거 → 더 보편적 적용
+③ 심부전 위험도 동시 산출 (CVD 복합 지표)
+④ 아시아인 과대추정 문제 개선
+⑤ 적용 연령: 30–79세 (PCE는 40–79세)`,
+  inputs: [],
+  calc: null,
+  link: 'https://huydad-bot.github.io/2026-CVD-calculator/',
+},
+/* ── OBESITY ── */
+{
+  id: 'bmi', cat: 'obesity', catColor: '#d2a8ff', catLabel: 'OBESITY',
+  name: 'BMI (Body Mass Index)',
+  desc: '체질량지수 — 전 세계 표준 비만 지표',
+  formula: `BMI [kg/m²] = 체중[kg] / 신장[m]²`,
+  cutoffs: [
+    { range: '< 18.5', interp: '저체중', cls: 'tag-low' },
+    { range: '18.5 – 22.9', interp: '정상 (아시아 기준)', cls: 'tag-low' },
+    { range: '23.0 – 24.9', interp: '과체중 (아시아 기준)', cls: 'tag-mid' },
+    { range: '25.0 – 29.9', interp: '비만 1단계', cls: 'tag-mid' },
+    { range: '≥ 30', interp: '비만 2단계 이상', cls: 'tag-high' },
+  ],
+  note: '아시아인(한국인) 기준: 비만 ≥25 kg/m². WHO 일반 기준: ≥30. 근육량 많은 사람에서 과대 추정.',
+  bmiPreview: true,
+  inputs: [
+    { id: 'bmi_wt', label: '체중 (kg)', placeholder: '70' },
+    { id: 'bmi_ht', label: '신장 (cm)', placeholder: '170' },
+  ],
+  calc(v) {
+    const h = v.bmi_ht / 100;
+    const r = v.bmi_wt / (h * h);
+    let cls, txt, steps;
+    if (r >= 30) {
+      cls='interp-high'; txt='비만 2단계 이상';
+      steps=[
+        '<span class="ns-drug">GLP-1 RA</span> (세마글루타이드/리라글루타이드) 비만 치료 적응증 평가',
+        '비만내과/내분비내과 의뢰',
+        '<span class="ns-test">공복혈당·HbA1c·지질·혈압</span> — 동반질환 전체 평가',
+        '<span class="ns-test">FIB-4</span> — MASLD 섬유화 스크리닝',
+        'BMI ≥35 + 동반질환 시 <span class="ns-urgent">비만 수술 평가</span>',
+        '이상체중(IBW) 대비 약물 용량 조정 필요 여부 확인',
+      ];
+    } else if (r >= 25) {
+      cls='interp-mid'; txt='비만 1단계 (한국인 기준)';
+      steps=[
+        '<span class="ns-test">MetS 스크리닝</span>: 공복혈당·HbA1c, 지질, 혈압, 허리둘레',
+        '<span class="ns-test">FIB-4</span> — MASLD 평가',
+        '목표 체중감량: 현재 체중의 5-10%',
+        '식이 조절 + 유산소운동 주 150분',
+        'GLP-1 RA 고려 (당뇨전단계·MASLD 동반 시)',
+      ];
+    } else if (r >= 23) {
+      cls='interp-mid'; txt='과체중 (한국인 기준)';
+      steps=[
+        '체중감량 5% 목표',
+        '공복혈당·지질·혈압 기저치 확인',
+        '생활습관 교정 (식이·운동)',
+      ];
+    } else if (r >= 18.5) {
+      cls='interp-low'; txt='정상';
+      steps=['현재 체중 유지 · 연 1회 재확인'];
+    } else {
+      cls='interp-low'; txt='저체중';
+      steps=[
+        '<span class="ns-test">영양 평가</span> (혈청 단백·알부민·미량 원소)',
+        '섭식장애 / 악성종양 / 갑상선 기능 항진 배제',
+        '영양사 상담 의뢰',
+      ];
+    }
+    return { value: r.toFixed(1), cls, txt, steps };
+  }
+},
+/* ── THYROID ── */
+{
+  id: 'arr', cat: 'thyroid', catColor: '#79c0ff', catLabel: 'ADRENAL',
+  name: 'ARR (Aldosterone-Renin Ratio)',
+  desc: '원발성 알도스테론증(PA) 1차 스크리닝 — 단위계·약물·채혈조건에 따라 해석이 크게 달라짐',
+  formula: `ARR = 알도스테론[ng/dL] / PRA[ng/mL/hr]   ← 가장 널리 사용
+  또는
+ARR = 알도스테론[ng/dL] / DRC[mIU/L]        ← 단위·절단값 완전히 다름
+
+【단위계별 대표 절단값 — 기관 로컬값 우선 적용】
+  PAC(ng/dL) / PRA(ng/mL/hr)  :  30  (범위 20–40, 문헌마다 다름)
+  PAC(ng/dL) / DRC(mIU/L)     :  2.4–3.7  (가이드라인 권고)
+  PAC(pmol/L) / PRA(μg/L/hr)  :  750–1000
+
+【알도스테론 단위 환산 (계산기에서 자동 처리)】
+  pg/mL  → ng/dL  :  ÷ 10       (예: 150 pg/mL = 15.0 ng/dL)
+  pmol/L → ng/dL  :  ÷ 27.74    (예: 415 pmol/L = 14.96 ng/dL)
+  분자량: 360.44 g/mol
+
+⚠ PRA와 DRC 기반 절단값은 절대 혼용 불가
+   PRA 1 ng/mL/hr ≈ DRC 14.1 mIU/L (상관관계 낮은 레닌 구간에서 오차 큼)`,
+  cutoffs: [
+    { range: '< 20  (ng/dL / ng/mL/hr)', interp: 'PA 가능성 낮음 — 단, 위음성 유발 약물 복용 중이라면 재검', cls: 'tag-low' },
+    { range: '20 – 30', interp: '경계 양성 — 간섭 약물 배제 후 재검 또는 확진 검사 고려', cls: 'tag-mid' },
+    { range: '≥ 30  + 알도스테론 ≥ 15 ng/dL', interp: 'PA 강력 시사 — 확진 검사 필수', cls: 'tag-high' },
+    { range: '≥ 30  + 알도스테론 < 15 ng/dL', interp: '레닌만 극도로 낮은 경우 — 위양성 가능성, 재검 권고', cls: 'tag-mid' },
+  ],
+  note: `<table class="cutoff-table" style="margin-top:6px;margin-bottom:10px;">
+  <thead><tr><th colspan="3" style="text-align:center;letter-spacing:.04em;">⚠ 약물 간섭 — ARR 해석 전 필수 확인</th></tr>
+  <tr><th>약물</th><th>ARR에 미치는 영향</th><th>조치</th></tr></thead>
+  <tbody>
+  <tr><td>β-차단제, clonidine</td><td class="tag-high">위양성 ↑ (레닌 억제)</td><td>2주 세척 후 재검</td></tr>
+  <tr><td>NSAID</td><td class="tag-high">위양성 ↑ (레닌 억제)</td><td>가능하면 중단</td></tr>
+  <tr><td>MRA (spiro·eplerenone), 이뇨제, ENaC억제제</td><td class="tag-mid">위음성 ↓ (레닌 자극)</td><td>4주 세척 후 재검</td></tr>
+  <tr><td>ACEi, ARB, DHP-CCB</td><td class="tag-mid">위음성 ↓ (레닌 자극)</td><td>2주 세척 후 재검</td></tr>
+  <tr><td style="color:#16a34a;font-weight:600;">Verapamil, doxazosin, hydralazine, moxonidine</td><td colspan="2" style="color:#16a34a;">간섭 최소 — 세척 기간 중 대체 사용 가능</td></tr>
+  </tbody>
+</table>
+<table class="cutoff-table" style="margin-bottom:6px;">
+  <thead><tr><th>항목</th><th>주의사항 및 근거</th></tr></thead>
+  <tbody>
+  <tr><td><strong>채혈 조건</strong></td><td>아침 기상 후, 1–2시간 보행 후, <strong>15분 이상 좌위</strong> 유지 후 채혈. 알도스테론·레닌은 일주기 리듬 및 자세에 민감</td></tr>
+  <tr><td><strong>저칼륨혈증</strong></td><td>K⁺ 저하 → 알도스테론 분비 억제 → <span style="color:#d97706;font-weight:600;">위음성</span>. 검사 전 반드시 K⁺ 교정 후 시행</td></tr>
+  <tr><td><strong>식이</strong></td><td>저염식 → 레닌 ↑ → <span style="color:#d97706;font-weight:600;">위음성</span>. 자유(무제한) 식이 상태에서 채혈 권고</td></tr>
+  <tr><td><strong>알도스테론 절대값</strong></td><td>ARR ≥ 30이어도 알도스테론 &lt; 15 ng/dL이면 위양성 가능. PRA ≤ 0.1일 때 ARR 수치 부풀림 주의. 억제된 레닌 + 부적절 고알도스테론 + 상승 ARR 세 가지 동시 충족 필요</td></tr>
+  <tr><td><strong>단위계</strong></td><td>PRA ↔ DRC 절단값 혼용 불가. 기관별 로컬 절단값 우선 적용. 어떤 절단값도 완벽하지 않음</td></tr>
+  <tr><td><strong>고령 (≥65세)</strong></td><td>레닌이 알도스테론보다 더 많이 감소 → ARR 상승 편향 → 연령 보정 절단값 적용 고려</td></tr>
+  <tr><td><strong>CKD / eGFR↓</strong></td><td>레닌 억제 → ARR 상승 → 실제보다 높은 ARR 산출. eGFR &lt; 90인 경우 절단값 하향 조정 권고</td></tr>
+  <tr><td><strong>재현성</strong></td><td>ARR 재현성 불량. 임상 소견과 불일치 시 반드시 재검 권고</td></tr>
+  </tbody>
+</table>`,
+  preInputsHtml: `
+    <div style="display:flex;gap:10px;margin-bottom:11px;align-items:flex-start;">
+      <div class="input-group" style="flex:0 0 160px;">
+        <label>알도스테론 단위</label>
+        <select data-inputid="arr_aldo_unit" onchange="liveCalc(this)">
+          <option value="1" selected>ng/dL  (기준)</option>
+          <option value="0.1">pg/mL  → ÷ 10</option>
+          <option value="0.036045">pmol/L → ÷ 27.74</option>
+        </select>
+        <span class="input-hint">* 단위 선택 후 수치 입력</span>
+      </div>
+      <div class="input-group" style="flex:1;">
+        <label>알도스테론 값</label>
+        <input type="number" data-inputid="arr_aldo" placeholder="20" step="any" oninput="liveCalc(this)">
+        <span class="input-hint">* 정상: 3–16 ng/dL / 30–160 pg/mL / 83–443 pmol/L</span>
+        <div class="bmi-auto-badge" data-cvtfor="arr_aldo" style="margin-top:5px;display:none;">
+          <span class="bab-label">환산값</span>
+          <span class="bab-val" data-cvtval="arr_aldo">—</span>
+          <span class="bab-unit">ng/dL</span>
+        </div>
+      </div>
+    </div>`,
+  inputs: [
+    { id: 'arr_aldo_unit', skipRender: true, type: 'select', label: '알도스테론 단위',
+      options: [
+        { value: '1',          label: 'ng/dL  (기준)',        default: true },
+        { value: '0.1',        label: 'pg/mL  → ÷ 10' },
+        { value: '0.036045',   label: 'pmol/L → ÷ 27.74' },
+      ]
+    },
+    { id: 'arr_aldo', skipRender: true, label: '알도스테론 값', placeholder: '20',
+      convertBadge: true, unitSource: 'arr_aldo_unit' },
+    { id: 'arr_pra', label: 'PRA (ng/mL/hr)', placeholder: '1.0',
+      hint: 'DRC(mIU/L) 사용 시 절단값 별도 적용' },
+  ],
+  calc(v) {
+    const aldoNgdL = v.arr_aldo * v.arr_aldo_unit;   // 단위 환산 → ng/dL
+    const r = aldoNgdL / v.arr_pra;
+    const lowRenin = v.arr_pra <= 0.1;
+    const lowAldo  = aldoNgdL < 15;
+    let cls, txt, steps;
+    if (r >= 30) {
+      if (lowAldo) {
+        cls='interp-mid'; txt='ARR 양성 — 단, 알도스테론 < 15 ng/dL: 위양성 가능성 높음';
+        steps=[
+          '<span class="ns-urgent">위양성 의심</span>: 레닌이 극도로 낮거나 알도스테론 절대값이 낮으면 ARR 단독으로 PA 진단 불가',
+          '간섭 약물(β-차단제·NSAID) 복용 여부 확인 → 2주 세척 후 재검',
+          '채혈 조건 재확인: 자세·시간대·식이·칼륨 수준',
+          '<span class="ns-test">혈청 K⁺ · 알도스테론 · PRA</span> 동시 재측정',
+          lowRenin ? '⚠ PRA ≤ 0.1 ng/mL/hr: 레닌 극저값 → ARR 수치 부풀림 — 알도스테론 절대값으로 판단' : '',
+        ].filter(Boolean);
+      } else {
+        cls='interp-high'; txt='PA 강력 시사 — 확진 검사 시행';
+        steps=[
+          '<span class="ns-urgent">확진 검사 시행</span>: 식염수부하검사(SIT), Captopril 억제검사, Fludrocortisone 억제검사 중 택 1',
+          '<span class="ns-test">부신 CT (3mm 박절편)</span> — 선종(APA) vs 양측 과증식(BAH) 감별',
+          '수술 후보: <span class="ns-test">부신정맥채혈(AVS)</span> — 편측성 여부 결정 (CT 단독으로 충분하지 않음)',
+          '약물 간섭 배제 재확인 (β-차단제 2주 / MRA·이뇨제 4주 세척)',
+          '저칼륨혈증 교정 (경구 KCl)',
+          '<span class="ns-drug">스피로놀락톤</span> 또는 에플레레논: 수술 불가 또는 양측성(BAH) 확진 시',
+        ];
+      }
+    } else if (r >= 20) {
+      cls='interp-mid'; txt='경계 양성 ARR — 간섭 약물 배제 후 재검 또는 확진 검사 고려';
+      steps=[
+        '간섭 약물 복용 중이라면 세척 후 <span class="ns-test">ARR 재측정</span>',
+        '알도스테론 절대값 확인 (≥15 ng/dL이면 확진 검사 권고)',
+        '채혈 조건(자세·시간·칼륨 교정 여부) 재확인',
+        '<span class="ns-test">혈청 K⁺</span> 측정 및 교정',
+        'ARR 재현성 불량 → 임상 의심도 높으면 확진 검사 진행',
+      ];
+    } else {
+      cls='interp-low'; txt='PA 가능성 낮음';
+      steps=[
+        '위음성 유발 약물(ACEi·ARB·이뇨제·MRA) 복용 중이라면 재검 권고',
+        '임상적으로 PA 의심도 높으면 (저칼륨성 고혈압, 부신 우연종 등) 세척 후 재검',
+        '다른 이차성 고혈압 원인 평가 (신혈관성·쿠싱증후군 등)',
+      ];
+    }
+    const unitLabel = v.arr_aldo_unit === 1 ? 'ng/dL'
+                    : v.arr_aldo_unit === 0.1 ? 'pg/mL'
+                    : 'pmol/L';
+    const convertNote = v.arr_aldo_unit !== 1
+      ? ` (입력 ${v.arr_aldo} ${unitLabel} → ${aldoNgdL.toFixed(2)} ng/dL)`
+      : '';
+    return { value: `ARR ${r.toFixed(1)}${convertNote}`, cls, txt, steps };
+  }
+},
+{
+  id: 'fti', cat: 'thyroid', catColor: '#79c0ff', catLabel: 'THYROID',
+  name: 'Free Thyroxine Index (FTI)',
+  desc: 'TBG 영향 보정 갑상선 기능 추정 지수 (구식)',
+  formula: `FTI = T4[μg/dL] × T3-Uptake[%] / 100
+  (= T3RU 사용)`,
+  cutoffs: [
+    { range: '6.0 – 10.5', interp: '정상 범위', cls: 'tag-low' },
+    { range: '> 10.5', interp: '갑상선 기능 항진 가능성', cls: 'tag-high' },
+    { range: '< 6.0', interp: '갑상선 기능 저하 가능성', cls: 'tag-mid' },
+  ],
+  note: 'Free T4 직접법 보급 이후 임상 사용 감소. TBG 이상(임신·에스트로젠·단백질 이상) 시 T4 해석 보조 목적.',
+  inputs: [
+    { id: 'fti_t4', label: 'T4 (μg/dL)', placeholder: '8.0' },
+    { id: 'fti_t3u', label: 'T3-Uptake (%)', placeholder: '30' },
+  ],
+  calc(v) {
+    const r = v.fti_t4 * v.fti_t3u / 100;
+    let cls, txt, steps;
+    if (r > 10.5) {
+      cls='interp-high'; txt='갑상선 기능 항진 가능성';
+      steps=[
+        '<span class="ns-test">TSH + Free T4 직접법</span> 확인 (FTI 보다 신뢰도 높음)',
+        '<span class="ns-test">TRAb (TSH receptor Ab)</span> — 그레이브스병 진단',
+        '<span class="ns-test">T3 (Free T3)</span> 측정 (T3 독성증 배제)',
+        '<span class="ns-test">갑상선 스캔/초음파</span> — 결절·자율 기능 열결절 확인',
+        'TSH 억제 확인 후 <span class="ns-drug">항갑상선제</span> (PTU/메티마졸) 시작 고려',
+      ];
+    } else if (r < 6.0) {
+      cls='interp-mid'; txt='갑상선 기능 저하 가능성';
+      steps=[
+        '<span class="ns-test">TSH + Free T4 직접법</span> (1차 또는 중추성 갑상선 기능 저하 감별)',
+        '<span class="ns-test">TPO Ab · Tg Ab</span> — 하시모토 갑상선염 진단',
+        '<span class="ns-test">갑상선 초음파</span>',
+        'TSH 상승 확인 후 <span class="ns-drug">레보티록신</span> 치료 시작 고려',
+      ];
+    } else {
+      cls='interp-low'; txt='정상 범위';
+      steps=['TSH 단독 측정으로 갑상선 기능 추적 권고 (FTI보다 민감)'];
+    }
+    return { value: r.toFixed(2), cls, txt, steps };
+  }
+},
+
+/* ── RENAL ── */
+{
+  id: 'ckdepi', cat: 'renal', catColor: '#56d364', catLabel: 'RENAL',
+  name: 'eGFR CKD-EPI 2021',
+  desc: 'CKD 진단·병기 결정 — 현재 표준 공식 (인종 중립)',
+  formula: `eGFR = 142 × min(Cr/κ, 1)^α × max(Cr/κ, 1)^(-1.200)
+        × 0.9938^나이 × [1.012 if 여성]
+
+κ: 남성=0.9, 여성=0.7
+α: 남성=-0.302, 여성=-0.241
+
+단위: mL/min/1.73m²`,
+  cutoffs: [
+    { range: '≥ 90', interp: 'G1: 정상 또는 증가 (다른 신장 이상 동반 시 CKD)', cls: 'tag-low' },
+    { range: '60 – 89', interp: 'G2: 경미한 감소', cls: 'tag-low' },
+    { range: '45 – 59', interp: 'G3a: 경도-중등도', cls: 'tag-mid' },
+    { range: '30 – 44', interp: 'G3b: 중등도-고도', cls: 'tag-mid' },
+    { range: '15 – 29', interp: 'G4: 고도 감소', cls: 'tag-high' },
+    { range: '< 15', interp: 'G5: 신부전', cls: 'tag-high' },
+  ],
+  note: '2021 CKD-EPI: 인종(흑인) 계수 제거. Cr: mg/dL 단위. 급성 변화 시 sCr 변동으로 부정확.',
+  inputs: [
+    { id: 'ckd_cr', label: 'sCr (mg/dL)', placeholder: '1.0' },
+    { id: 'ckd_age', label: '나이 (세)', placeholder: '55' },
+    { id: 'ckd_sex', label: '성별 (0=남, 1=여)', placeholder: '0' },
+  ],
+  calc(v) {
+    const kappa = v.ckd_sex === 0 ? 0.9 : 0.7;
+    const alpha = v.ckd_sex === 0 ? -0.302 : -0.241;
+    const ratio = v.ckd_cr / kappa;
+    const r = 142 * Math.pow(Math.min(ratio, 1), alpha) * Math.pow(Math.max(ratio, 1), -1.200)
+      * Math.pow(0.9938, v.ckd_age) * (v.ckd_sex === 1 ? 1.012 : 1);
+    let cls, txt, steps;
+    if (r < 15) {
+      cls='interp-high'; txt='G5 — 신부전';
+      steps=[
+        '<span class="ns-urgent">신장내과 즉시 의뢰</span>',
+        '<span class="ns-urgent">신대체요법</span> (혈액투석/복막투석/신이식) 즉시 준비',
+        '<span class="ns-test">투석 접근로</span> 확보 (동정맥루 또는 복막투석 카테터)',
+        '신이식 등록 고려 (적합한 환자)',
+        'PTH·Ca·인 적극 관리, ESA, 인산결합제',
+        '신독성 약물 전면 중단 (메트포르민, NSAID, 조영제)',
+      ];
+    } else if (r < 30) {
+      cls='interp-high'; txt='G4 — 고도 감소';
+      steps=[
+        '<span class="ns-urgent">신장내과 의뢰 필수</span>',
+        '<span class="ns-test">PTH·Ca·인·HCO₃·Hb</span> — 합병증 전체 평가',
+        '신대체요법 준비 교육 시작',
+        '<span class="ns-drug">ESA</span> (빈혈 치료), <span class="ns-drug">인산결합제</span>',
+        '단백 0.8g/kg/일 제한, 인·칼륨·나트륨 식이 제한',
+        '메트포르민 중단 · SGLT2i 효과 감소',
+        '3개월마다 eGFR 추적',
+      ];
+    } else if (r < 45) {
+      cls='interp-mid'; txt='G3b — 중등도-고도 감소';
+      steps=[
+        '<span class="ns-urgent">신장내과 의뢰</span>',
+        '<span class="ns-test">UACR · PTH · Ca · 인 · Hb</span> 평가',
+        '<span class="ns-drug">RAS 차단제</span> (ACEi/ARB) — 단백뇨 동반 시',
+        '<span class="ns-drug">SGLT2i</span> — 당뇨성 신장병 신보호 효과',
+        '메트포르민 용량 감량 (eGFR 30-45 주의)',
+        '혈압 목표 ≤130/80 mmHg',
+        '조영제 사용 전 수분 공급 프로토콜',
+        '3개월마다 eGFR·전해질 추적',
+      ];
+    } else if (r < 60) {
+      cls='interp-mid'; txt='G3a — 경도-중등도 감소';
+      steps=[
+        '<span class="ns-test">UACR</span> 측정 — CKD 병기 세분화',
+        '<span class="ns-drug">RAS 차단제</span> 시작 고려 (UACR >30 mg/g)',
+        '<span class="ns-drug">SGLT2i</span> — 당뇨성 신장병 (eGFR ≥20)',
+        '혈압 ≤130/80, 혈당 조절 목표 유지',
+        '신독성 약물 주의 (NSAID, 조영제)',
+        '6개월마다 eGFR 추적',
+      ];
+    } else if (r < 90) {
+      cls='interp-low'; txt='G2 — 경미한 감소';
+      steps=[
+        '<span class="ns-test">UACR</span> 측정 — 신장 손상 여부 확인',
+        '혈압·혈당·지질 조절 유지',
+        '1년마다 eGFR 추적',
+      ];
+    } else {
+      cls='interp-low'; txt='G1 — 정상 또는 증가';
+      steps=[
+        '<span class="ns-test">UACR</span> 측정 (당뇨·고혈압 환자)',
+        '연 1회 eGFR·UACR 추적',
+      ];
+    }
+    return { value: r.toFixed(1) + ' mL/min/1.73m²', cls, txt, steps };
+  }
+},
+{
+  id: 'uacr', cat: 'renal', catColor: '#56d364', catLabel: 'RENAL',
+  name: 'UACR (Urine Albumin-Creatinine Ratio)',
+  desc: '신장 손상 조기 평가 — 당뇨 신병증 스크리닝 핵심',
+  formula: `UACR [mg/g] = 요 알부민[mg/dL] / 요 크레아티닌[g/dL]
+  = 요 알부민[mg/L] / 요 크레아티닌[mmol/L] × 0.113 (SI)`,
+  cutoffs: [
+    { range: '< 30', interp: 'A1: 정상 또는 경미한 상승', cls: 'tag-low' },
+    { range: '30 – 300', interp: 'A2: 중등도 상승 (미세알부민뇨)', cls: 'tag-mid' },
+    { range: '> 300', interp: 'A3: 고도 상승 (현성 알부민뇨)', cls: 'tag-high' },
+  ],
+  note: '당뇨환자: 연 1회 UACR 측정 권고 (ADA). 검체: 아침 첫 소변 또는 무작위 spot urine.',
+  inputs: [
+    { id: 'uacr_alb', label: '요 알부민 (mg/dL)', placeholder: '5' },
+    { id: 'uacr_cr', label: '요 크레아티닌 (g/dL)', placeholder: '0.1' },
+  ],
+  calc(v) {
+    const r = v.uacr_alb / v.uacr_cr;
+    let cls, txt, steps;
+    if (r > 300) {
+      cls='interp-high'; txt='A3 — 현성 알부민뇨';
+      steps=[
+        '<span class="ns-drug">RAS 차단제</span> (ACEi 또는 ARB) 최대 내약 용량 유지',
+        '<span class="ns-drug">SGLT2i + Finerenone</span> — 당뇨성 신장병 신보호 (FIDELIO/FIGARO)',
+        '<span class="ns-urgent">신장내과 의뢰</span>',
+        '<span class="ns-test">24시간 소변 단백</span> 확인 (신증후군 범위 여부)',
+        '<span class="ns-test">eGFR 추적</span> — 3개월마다',
+        '혈압 목표 ≤130/80 mmHg · 혈당 HbA1c <7% 목표',
+        'UACR 감소율 추적 (치료 반응 지표)',
+      ];
+    } else if (r >= 30) {
+      cls='interp-mid'; txt='A2 — 미세알부민뇨';
+      steps=[
+        '<span class="ns-drug">ACEi 또는 ARB</span> 시작 (당뇨·고혈압 동반 시)',
+        '<span class="ns-drug">SGLT2i</span> 고려 — 당뇨성 신장병 1차 신보호',
+        '혈압 목표 ≤130/80 mmHg',
+        '혈당 집중 조절 (HbA1c <7%)',
+        '3개월 후 UACR 재검 (2-3회 확인 권고)',
+        '요로감염·운동·발열 등 일시적 원인 배제',
+      ];
+    } else {
+      cls='interp-low'; txt='A1 — 정상 또는 경미한 상승';
+      steps=[
+        '연 1회 UACR 재검 (당뇨·고혈압 환자)',
+        'ACEi/ARB 사용 중이라면 용량 적정 유지',
+      ];
+    }
+    return { value: r.toFixed(1) + ' mg/g', cls, txt, steps };
+  }
+},
+
+{
+  id: 'ttkg', cat: 'renal', catColor: '#56d364', catLabel: 'RENAL',
+  name: 'TTKG (Transtubular Potassium Gradient)',
+  desc: '집합관 칼륨 분비 능력 평가 — 저칼륨/고칼륨혈증 원인 감별 핵심 지표',
+  formula: `TTKG = ([K⁺]urine / [K⁺]plasma) ÷ (Uosm / Posm)
+
+[K⁺]urine : 요 칼륨 (mEq/L)
+[K⁺]plasma: 혈청 칼륨 (mEq/L)
+Uosm      : 요삼투압 (mOsm/kg)
+Posm      : 혈장삼투압 (mOsm/kg)
+
+분모(Uosm/Posm): 집합관의 수분 재흡수 배율 보정
+→ 집합관 내강에서의 실제 K⁺ 농도구배 추정
+
+【전제 조건 — 반드시 충족해야 해석 유효】
+① Uosm > Posm  (ADH 작용 확인)
+② 요중 Na⁺ ≥ 25 mEq/L  (원위 Na⁺ 전달 충분)
+
+【정상값】 정상 식이 건강인: TTKG 8–9 (문헌 범위 5–15, Ethier 1990)
+          → TTKG는 반드시 혈청 K⁺ 수준에 대입하여 해석 (절대값 단독 해석 금지)`,
+  cutoffs: [
+    { range: '정상 (K⁺ 정상, 정상 식이)', interp: 'TTKG 8 – 9 (범위 5–15)', cls: 'tag-low' },
+    { range: '저칼륨혈증 → 정상 반응', interp: 'TTKG < 3 (신장이 K⁺ 보존 중)', cls: 'tag-low' },
+    { range: '저칼륨혈증 → 신성 소실', interp: 'TTKG ≥ 3 (신장이 K⁺ 낭비 중)', cls: 'tag-high' },
+    { range: '고칼륨혈증 → 정상 반응', interp: 'TTKG > 10 (신장이 K⁺ 충분히 배설)', cls: 'tag-low' },
+    { range: '고칼륨혈증 → 신성 배설장애', interp: 'TTKG < 7 (신장의 K⁺ 배설 부전)', cls: 'tag-high' },
+  ],
+  note: `<table class="cutoff-table" style="margin-top:6px;margin-bottom:10px;">
+  <thead>
+    <tr><th colspan="3" style="text-align:center;letter-spacing:.04em;">저칼륨혈증 감별</th></tr>
+    <tr><th style="width:110px;">TTKG</th><th>원인</th><th>감별 포인트</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="tag-low" style="font-size:13px;font-weight:800;">< 3</span><br><span style="font-size:10px;color:#607089;">신외성 손실</span></td>
+      <td>위장관 손실 (구토·설사)<br>섭취 부족</td>
+      <td>요 Cl⁻ &lt;20 mEq/L → 구토<br>요 Cl⁻ &gt;20 → 이뇨제·Bartter</td>
+    </tr>
+    <tr>
+      <td><span class="tag-low" style="font-size:13px;font-weight:800;">< 3</span><br><span style="font-size:10px;color:#607089;">세포 내 이동</span></td>
+      <td>인슐린 과다, β₂ agonist<br>Alkalosis, 갑상선독성주기성마비</td>
+      <td>혈액가스분석, 갑상선기능 확인</td>
+    </tr>
+    <tr style="background:rgba(220,38,38,0.05);">
+      <td><span class="tag-high" style="font-size:13px;font-weight:800;">≥ 3</span><br><span style="font-size:10px;color:#607089;">신성 소실 ⚠</span></td>
+      <td>1차/2차 알도스테론증<br>Bartter/Gitelman 증후군<br>dRTA, Mg²⁺ 결핍<br>이뇨제 (thiazide·loop)</td>
+      <td>혈압 확인 → ARR 측정<br>혈액가스분석 (알칼리증?)<br>요 Mg²⁺·Ca²⁺ 측정</td>
+    </tr>
+  </tbody>
+</table>
+<table class="cutoff-table" style="margin-bottom:10px;">
+  <thead>
+    <tr><th colspan="3" style="text-align:center;letter-spacing:.04em;">고칼륨혈증 감별</th></tr>
+    <tr><th style="width:110px;">TTKG</th><th>원인</th><th>감별 포인트</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="tag-low" style="font-size:13px;font-weight:800;">> 10</span><br><span style="font-size:10px;color:#607089;">신외성 과부하</span></td>
+      <td>과다 섭취<br>세포 외 이동 (산증·인슐린 결핍)<br>조직 파괴 (횡문근융해·용혈)</td>
+      <td>CK·LDH·헤모글로빈 확인<br>혈액가스분석 (산증?)</td>
+    </tr>
+    <tr style="background:rgba(220,38,38,0.05);">
+      <td><span class="tag-high" style="font-size:13px;font-weight:800;">< 7</span><br><span style="font-size:10px;color:#607089;">신성 배설장애 ⚠</span></td>
+      <td><b>저알도스테론증</b>: Addison병,<br>저레닌 저알도스테론증 <span style="color:#dc2626;font-weight:700;">(당뇨신병증!)</span><br>ACEi/ARB/NSAID<br><b>알도스테론 저항성</b>: PHA,<br>spironolactone/amiloride, tacrolimus<br><b>원위 신세관 기능 장애</b></td>
+      <td>Aldosterone + Renin 동시 측정<br>아침 코르티솔 (Addison 배제)<br>약제 점검 필수</td>
+    </tr>
+  </tbody>
+</table>
+<table class="cutoff-table">
+  <thead><tr><th colspan="2" style="text-align:center;letter-spacing:.04em;">⚠ 한계 및 대안</th></tr></thead>
+  <tbody>
+    <tr><td style="width:140px;font-weight:700;">Uosm ≤ Posm</td><td>ADH 작용 없음 → TTKG <span style="color:#dc2626;font-weight:700;">완전 무효</span></td></tr>
+    <tr><td style="font-weight:700;">요 Na⁺ &lt; 25 mEq/L</td><td>원위 Na⁺ 전달 부족 → 위음성 가능</td></tr>
+    <tr><td style="font-weight:700;">고삼투압 상태</td><td>고혈당·만니톨 → 혈장삼투압 보정 부정확</td></tr>
+    <tr><td style="font-weight:700;color:#2563eb;">대안 지표</td><td>요 K⁺/Cr ratio (mEq/g Cr) — <span style="font-weight:700;">&gt; 20</span>이면 신성 소실 시사</td></tr>
+  </tbody>
+</table>`,
+  inputs: [
+    { id: 'ttkg_ku',   label: '요 K⁺ (mEq/L)',   placeholder: '20',   hint: '무작위 spot urine' },
+    { id: 'ttkg_kp',   label: '혈청 K⁺ (mEq/L)', placeholder: '3.0',  hint: '동시 채혈' },
+    { id: 'ttkg_uosm', label: '요삼투압 (mOsm/kg)', placeholder: '600', hint: '반드시 > 혈장삼투압' },
+    { id: 'ttkg_posm', label: '혈장삼투압 (mOsm/kg)', placeholder: '290', hint: '정상 285–295' },
+  ],
+  calc(v) {
+    // 전제 조건 검사
+    if (v.ttkg_uosm <= v.ttkg_posm) {
+      return {
+        value: '계산 불가',
+        cls: 'interp-high',
+        txt: '⚠ 전제 조건 미충족: 요삼투압 ≤ 혈장삼투압',
+        steps: [
+          '<span class="ns-urgent">TTKG 무효</span> — 요삼투압이 혈장삼투압보다 낮거나 같음',
+          'ADH 작용이 불충분한 상태 (요 희석 중)',
+          '수분·전해질 상태 교정 후 재측정',
+          '대안: <span class="ns-test">요 K⁺/크레아티닌 비율</span> (mEq/g Cr) 사용 — >20이면 신성 소실',
+        ]
+      };
+    }
+    const r = (v.ttkg_ku / v.ttkg_kp) / (v.ttkg_uosm / v.ttkg_posm);
+    // 저칼륨혈증 판단
+    const isHypo = v.ttkg_kp < 3.5;
+    const isHyper = v.ttkg_kp > 5.0;
+    let cls, txt, steps;
+    if (isHypo) {
+      if (r < 3) {
+        cls='interp-low'; txt='저칼륨혈증 — 신외성(Extra-renal) 손실 또는 세포 내 이동';
+        steps=[
+          '<span class="ns-test">병력 청취</span>: 구토·설사·이뇨제·완하제 남용',
+          '<span class="ns-test">혈청 Mg²⁺</span> — 저마그네슘혈증 동반 확인 (교정 필수)',
+          '<span class="ns-test">혈청 Cl⁻ · 혈액가스분석</span> — alkalosis 동반 시 구토 의심',
+          '<span class="ns-test">요 Cl⁻</span> — <20 mEq/L: 구토, >20: Bartter/이뇨제 감별',
+          '세포 내 이동 원인 확인: 인슐린 과다·β₂ agonist·갑상선독성주기성마비',
+          '<span class="ns-drug">K⁺ 보충</span>: 경증 2.5–3.5 mEq/L → 경구 KCl, 중증 <2.5 또는 증상 → 정맥 KCl',
+        ];
+      } else {
+        cls='interp-high'; txt='저칼륨혈증 — 신성(Renal) K⁺ 소실 (신장이 K⁺를 버리는 중)';
+        steps=[
+          '<span class="ns-urgent">신성 칼륨 소실 확인됨</span>',
+          '<span class="ns-test">혈압 측정</span>: 고혈압 동반 → 원발성 알도스테론증(PA) 우선 감별',
+          '<span class="ns-test">혈청 Renin + Aldosterone (ARR)</span> — PA 스크리닝',
+          '<span class="ns-test">혈액가스분석</span>: 대사성 알칼리증 → Bartter/Gitelman/이뇨제',
+          '이뇨제 복용력 재확인 (thiazide·loop · 은닉 복용 포함)',
+          '<span class="ns-test">요 Cl⁻</span> — 이뇨제 vs 토출성 알칼리증 감별',
+          'Gitelman: 저마그네슘혈증 + 저칼슘뇨증 동반 시',
+          'dRTA (Type I): 대사성 산증 + 요 pH >5.5',
+          '<span class="ns-drug">spironolactone/amiloride</span>: PA 확진 전 K⁺ 보존 이뇨제로 K⁺ 교정',
+        ];
+      }
+    } else if (isHyper) {
+      if (r > 10) {
+        cls='interp-low'; txt='고칼륨혈증 — 신외성 원인 (신장의 K⁺ 배설 능력은 정상)';
+        steps=[
+          '신장의 K⁺ 배설 능력 정상 → 신외성 원인 탐색',
+          '<span class="ns-test">위음성 배제</span>: 용혈성 검체(적혈구 파괴), 혈소판증가증, 백혈구증가증',
+          '과도한 K⁺ 섭취 (과일·채소·K⁺ 보충제·K⁺ 함유 약물) 확인',
+          '세포 외 이동 원인: <span class="ns-test">혈액가스분석</span>(산증), 인슐린 결핍, 고장성 혈증',
+          '<span class="ns-test">CK · LDH · 요산 · 헤모글로빈</span> — 조직 파괴(횡문근융해·용혈) 배제',
+          '수액 공급 및 원인 교정',
+        ];
+      } else {
+        cls='interp-high'; txt='고칼륨혈증 — 신성 K⁺ 배설 장애 (신장이 K⁺를 못 버리는 중)';
+        steps=[
+          '<span class="ns-urgent">신장의 K⁺ 배설 부전 확인</span> — 저알도스테론축/원위 세관 이상',
+          '<span class="ns-test">혈청 Aldosterone + Renin</span>: Renin↓+Aldo↓ → 저레닌 저알도스테론증(DM 신병증·NSAID·ACEi), Renin↑+Aldo↓ → Addison병',
+          '<span class="ns-test">아침 공복 코르티솔 (8시~9시)</span> — Addison병 배제 (<3 µg/dL 시 부신부전)',
+          '<span class="ns-test">eGFR · UACR</span> — 당뇨신병증(Type IV RTA) 평가',
+          '약제 점검: ACEi/ARB, K⁺ 보존 이뇨제, NSAID, tacrolimus/cyclosporine, heparin',
+          '<span class="ns-drug">Fludrocortisone</span>: 저알도스테론증 확진 시 0.1–0.2 mg/일',
+          'Kayexalate·Patiromer — 급성 K⁺ 조절 (투석 대기 시)',
+          'K⁺ > 6.0 mEq/L 또는 EKG 변화: <span class="ns-urgent">긴급 처치</span> (Ca 글루코네이트, 인슐린+포도당, NaHCO₃)',
+        ];
+      }
+    } else {
+      cls='interp-low'; txt='정상 칼륨 범위 (K⁺ 3.5–5.0 mEq/L) — 참고값으로만 해석';
+      steps=[
+        'TTKG는 전해질 이상이 있을 때 의미 있음',
+        '정상 식이 기준 TTKG 8–9 (범위 5–15) — 단, 정상 K⁺ 상태에서의 절대값 해석은 임상적 의의 제한적',
+        'TTKG 값 자체보다 임상 맥락(K⁺ 이상 존재 여부)이 우선',
+      ];
+    }
+    return { value: r.toFixed(2), cls, txt, steps };
+  }
+},
+
+/* ── DIABETES ── */
+{
+  id: 'hba1c_eag', cat: 'diabetes', catColor: '#ffa657', catLabel: 'DM',
+  name: 'HbA1c → eAG 변환',
+  desc: 'HbA1c를 평균 혈당으로 환산 (Nathan et al. 2008, ADAG study)',
+  formula: `eAG [mg/dL] = 28.7 × HbA1c[%] - 46.7
+
+eAG [mmol/L] = 1.59 × HbA1c[%] - 2.59`,
+  cutoffs: [
+    { range: 'HbA1c < 5.7%', interp: 'eAG < 117 mg/dL — 정상', cls: 'tag-low' },
+    { range: '5.7 – 6.4%', interp: 'eAG 117–137 — 당뇨전단계', cls: 'tag-mid' },
+    { range: '6.5 – 7.0%', interp: 'eAG 138–154 — 당뇨 진단/목표 수준', cls: 'tag-mid' },
+    { range: '> 8.0%', interp: 'eAG >177 — 혈당 조절 불량', cls: 'tag-high' },
+  ],
+  note: '환자 교육 시 HbA1c를 일상적 혈당 언어로 전달하는 데 효과적.',
+  inputs: [
+    { id: 'eag_a1c', label: 'HbA1c (%)', placeholder: '7.0' },
+  ],
+  calc(v) {
+    const r = 28.7 * v.eag_a1c - 46.7;
+    let cls, txt, steps;
+    if (v.eag_a1c >= 8.0) {
+      cls='interp-high'; txt='혈당 조절 불량 (eAG > 177 mg/dL)';
+      steps=[
+        '<span class="ns-urgent">현재 처방 전면 점검</span> — 용량 증량 또는 병용 약제 추가',
+        '<span class="ns-drug">GLP-1 RA</span> 또는 <span class="ns-drug">SGLT2i</span> 추가 (심혈관·신장 보호 + 혈당 강하)',
+        '<span class="ns-drug">인슐린</span> 시작 적응증 평가 (HOMA-β 저하 시)',
+        '<span class="ns-test">CGM (연속혈당측정)</span> 처방 — TAR·TBR·CV 파악',
+        '저혈당 위험 평가 및 교육',
+        '당뇨 합병증 스크리닝: UACR, eGFR, 안저검사, 발 검사',
+        '식사·운동 재교육 + 영양사 의뢰',
+      ];
+    } else if (v.eag_a1c >= 6.5) {
+      cls='interp-mid'; txt='당뇨 범위';
+      steps=[
+        '현재 처방 적절성 재확인 · 목표 HbA1c 개별 설정',
+        '3개월 후 HbA1c 재검',
+        'SGLT2i/GLP-1 RA — 심혈관·신장 위험 동반 시 우선 고려',
+        '<span class="ns-test">UACR · eGFR</span> 연 1회 확인',
+      ];
+    } else if (v.eag_a1c >= 5.7) {
+      cls='interp-mid'; txt='당뇨전단계 (eAG 117–137 mg/dL)';
+      steps=[
+        '<span class="ns-urgent">집중 생활습관 중재</span>: 체중감량 7%, 운동 주 150분',
+        '<span class="ns-drug">메트포르민</span> 고려 (BMI ≥35, 임신성 당뇨력, 고위험군)',
+        '6개월 후 HbA1c 재검',
+        '<span class="ns-test">75g OGTT</span> — 당뇨 진단 여부 확인',
+      ];
+    } else {
+      cls='interp-low'; txt='정상 (eAG < 117 mg/dL)';
+      steps=[
+        '당뇨 예방 생활습관 유지',
+        '3년마다 재검 (위험인자 없는 경우)',
+        '위험인자 있으면 연 1회 재검',
+      ];
+    }
+    return { value: `eAG: ${r.toFixed(1)} mg/dL`, cls, txt, steps };
+  }
+},
+{
+  id: 'gmi', cat: 'diabetes', catColor: '#ffa657', catLabel: 'DM',
+  name: 'GMI (Glucose Management Indicator)',
+  desc: 'CGM 평균 혈당에서 HbA1c 추정 (Bergenstal 2018)',
+  formula: `GMI [%] = 3.31 + 0.02392 × 평균 CGM 혈당[mg/dL]
+
+GMI [mmol/mol] = 12.71 + 4.70587 × 평균 CGM[mmol/L]`,
+  cutoffs: [
+    { range: '< 7.0%', interp: '혈당 관리 양호', cls: 'tag-low' },
+    { range: '7.0 – 8.0%', interp: '개선 필요', cls: 'tag-mid' },
+    { range: '> 8.0%', interp: '혈당 조절 불량', cls: 'tag-high' },
+  ],
+  note: 'CGM 14일 이상 데이터 필요. 실측 HbA1c와 차이 날 수 있음 (적혈구 수명 이상 시). Libre/Dexcom 리포트에서 자동 제공.',
+  inputs: [
+    { id: 'gmi_avg', label: '평균 CGM 혈당 (mg/dL)', placeholder: '154' },
+  ],
+  calc(v) {
+    const r = 3.31 + 0.02392 * v.gmi_avg;
+    let cls, txt, steps;
+    if (r > 8.0) {
+      cls='interp-high'; txt='혈당 조절 불량';
+      steps=[
+        '<span class="ns-urgent">처방 강화</span>: 현재 약제 용량 증량 또는 병용 추가',
+        '<span class="ns-drug">인슐린 추가</span> 또는 <span class="ns-drug">GLP-1 RA</span> 병용 고려',
+        '<span class="ns-test">CGM AGP 리포트</span> — TAR·TBR 패턴 분석',
+        'TAR 높으면 식후 혈당 관리 강화 (약제 타이밍, 식이)',
+        'TBR 높으면 저혈당 회피 위해 용량/식사 타이밍 조정',
+        '식이 교육 강화 (탄수화물 계산, 혈당 지수 낮은 식품)',
+      ];
+    } else if (r >= 7.0) {
+      cls='interp-mid'; txt='개선 필요';
+      steps=[
+        '<span class="ns-test">CGM TIR/TBR/TAR</span> 패턴 분석 — 특정 시간대 문제 파악',
+        '식이·운동 조정',
+        '약제 조정 고려 (특히 TAR 높은 경우)',
+        '4-8주 후 CGM 재평가',
+      ];
+    } else {
+      cls='interp-low'; txt='혈당 관리 양호';
+      steps=[
+        'CGM TBR <4% 목표 달성 여부 확인',
+        'CV <36% (혈당 변동성 목표) 확인',
+        '현재 치료 유지 + 정기 CGM 분석',
+      ];
+    }
+    return { value: `GMI: ${r.toFixed(2)}%`, cls, txt, steps };
+  }
+},
+{
+  id: 'tir', cat: 'diabetes', catColor: '#ffa657', catLabel: 'DM',
+  name: 'TIR / TBR / TAR (CGM 지표)',
+  desc: 'Time in Range 계열 — AGP 핵심 지표 (Battelino 2019)',
+  formula: `TIR  = % time 70–180 mg/dL  → 목표 ≥70%
+TBR1 = % time <70 mg/dL    → 목표 <4%
+TBR2 = % time <54 mg/dL    → 목표 <1%
+TAR1 = % time >180 mg/dL   → 목표 <25%
+TAR2 = % time >250 mg/dL   → 목표 <5%
+
+CV (Coefficient of Variation) = SD/Mean × 100
+→ 혈당 변동성 목표: CV < 36%`,
+  cutoffs: [],
+  cutoffGroups: [
+    {
+      label: '① TIR — Time in Range (70–180 mg/dL)',
+      accent: '#16a34a',
+      rows: [
+        { range: 'TIR ≥ 70%',   interp: '목표 달성 — T2DM·T1DM 표준 목표 (Battelino 2019)', cls: 'cl' },
+        { range: 'TIR 50–69%',  interp: '부분 달성 — 혈당 관리 강화 고려',                    cls: 'cm' },
+        { range: 'TIR < 50%',   interp: '혈당 조절 불량 — 약제·식이·생활습관 전반 재평가',   cls: 'ch' },
+      ]
+    },
+    {
+      label: '② TBR — Time Below Range',
+      accent: '#7c3aed',
+      rows: [
+        { range: 'TBR1 (<70 mg/dL) < 4%',  interp: '목표 달성 (T2DM·T1DM 공통)',                          cls: 'cl' },
+        { range: 'TBR1  4–9%',              interp: '경계 — 저혈당 경향, 야간/운동 전후 집중 모니터링',    cls: 'cm' },
+        { range: 'TBR1 ≥ 10%',             interp: '저혈당 과다 — 용량 감량·식사 타이밍 즉시 조정',      cls: 'ch' },
+        { range: 'TBR2 (<54 mg/dL) < 1%',  interp: '목표 달성 — 중증 저혈당 없음',                       cls: 'cl' },
+        { range: 'TBR2 ≥ 1%',              interp: '중증 저혈당 과다 — 즉각적 치료 조정 필요',           cls: 'ch' },
+      ]
+    },
+    {
+      label: '③ TAR — Time Above Range',
+      accent: '#ea580c',
+      rows: [
+        { range: 'TAR1 (>180 mg/dL) < 25%', interp: '목표 달성 (T2DM·T1DM 공통)',                             cls: 'cl' },
+        { range: 'TAR1  25–50%',             interp: '경도 초과 — 식후 혈당 관리 및 약제 타이밍 점검',        cls: 'cm' },
+        { range: 'TAR1 > 50%',              interp: '고혈당 과다 — 기저·식후 인슐린 또는 경구약 전반 재검토', cls: 'ch' },
+        { range: 'TAR2 (>250 mg/dL) < 5%',  interp: '목표 달성 — 중증 고혈당 없음',                          cls: 'cl' },
+        { range: 'TAR2 ≥ 5%',               interp: '중증 고혈당 과다 — 지속 고혈당·DKA 위험 평가 필요',    cls: 'ch' },
+      ]
+    },
+  ],
+  note: 'TIR 10% 증가 ≈ HbA1c 0.5% 감소. 고령·저혈당 고위험군(T1DM·인슐린 치료 T2DM)은 TBR 목표를 더 엄격히 관리. 임신 중 T1DM: TIR 목표 ≥63%, TBR1 <4%, TBR2 <1%. CV > 36%는 저혈당 위험 증가 지표.',
+  inputs: [],
+  calc: null
+},
+
+{
+  id: 'hyponatremia_dx', cat: 'renal', catColor: '#0d9488', catLabel: 'Na/Osm',
+  name: '저나트륨혈증 진단/감별 알고리즘',
+  desc: '혈청/소변 Osm·Na로 hypertonic·isotonic·hypotonic hyponatremia 감별',
+  formula: `1) 저나트륨혈증: 혈청 Na⁺ &lt; 135 mmol/L
+
+2) 혈청 Osmolality로 1차 분류
+   &gt; 295 mOsm/kg  → Hypertonic hyponatremia
+   280–295        → Isotonic hyponatremia / pseudohyponatremia 가능
+   &lt; 275          → Hypotonic hyponatremia = true hyponatremia
+
+3) 고혈당 보정 Na⁺
+   Corrected Na⁺ = measured Na⁺ + 1.6 × ((glucose - 100) / 100)
+   보조값: 2.4 × ((glucose - 100) / 100)도 함께 표시
+
+4) Hypotonic hyponatremia 감별
+   Urine Osm ≤100 mOsm/kg → ADH 억제: 과다 수분섭취/저용질 섭취
+   Urine Osm &gt;100 mOsm/kg → ADH 활성 상태 → Urine Na⁺로 다음 분류
+     Urine Na⁺ ≤30 mmol/L → 낮은 effective arterial volume 가능
+     Urine Na⁺ &gt;30 mmol/L → SIADH/이뇨제/부신부전/신질환/renal salt wasting 등`,
+  cutoffs: [],   // ← 아래 cutoffGroups 로 대체
+  cutoffGroups: [
+    {
+      label: '① 혈청 Na⁺ (Sodium)',
+      accent: '#3b82f6',
+      rows: [
+        { range: '130–134 mmol/L', interp: 'Mild hyponatremia',                                      cls: 'cl' },
+        { range: '125–129 mmol/L', interp: 'Moderate hyponatremia',                                  cls: 'cm' },
+        { range: '< 125 mmol/L',   interp: 'Profound hyponatremia — 증상 여부·교정 속도 즉시 확인', cls: 'ch' },
+      ]
+    },
+    {
+      label: '② Serum Osmolality',
+      accent: '#7c3aed',
+      rows: [
+        { range: '> 295 mOsm/kg',  interp: 'Hypertonic — 고혈당·mannitol·조영제 등 외인성 osmole', cls: 'ch' },
+        { range: '280–295 mOsm/kg',interp: 'Isotonic — pseudohyponatremia / 간접 ISE 오류 (고지질·고단백)', cls: 'cm' },
+        { range: '< 275 mOsm/kg',  interp: 'Hypotonic — 진성 저나트륨혈증', cls: 'ch', hasSub: true },
+      ],
+      subGroup: {
+        label: '③ Urine Osm · UNa — Hypotonic 감별',
+        accent: '#0d9488',
+        rows: [
+          { range: 'Uosm ≤ 100',         interp: 'ADH 억제 — polydipsia · beer potomania · 저용질 섭취',                      cls: 'cl' },
+          { range: 'Uosm > 100, UNa ≤ 30',interp: '낮은 effective arterial volume (탈수·심부전·간경변·신증후군)',              cls: 'cm' },
+          { range: 'Uosm > 100, UNa > 30', interp: 'SIADH · 이뇨제 · 부신부전 · 신질환 · renal/cerebral salt wasting',        cls: 'ch' },
+        ]
+      }
+    }
+  ],
+  note: '혈청과 spot urine 검체는 가능하면 같은 시점에 채취한다. 신경학적 중등도·중증 증상(혼돈, 경련, 의식저하, 지속 구토 등)이 있으면 원인 감별보다 3% 고장성 식염수 응급치료와 모니터링이 우선이다. 만성 또는 기간 불명 저나트륨혈증은 과교정에 따른 osmotic demyelination을 피하기 위해 교정 속도 제한이 필요하다. SIADH는 배제진단이며, 부신부전·갑상선기능저하·신부전·이뇨제/약제 원인을 먼저 확인한다. 특히 이뇨제 복용 중에는 urine Na⁺ >30만으로 SIADH를 확정하지 말고, 약제 중단/대체 후 재평가와 FE uric acid·FE urea·임상 체액량 평가를 함께 고려한다.',
+  inputs: [
+    { id: 'hypona_sna', label: '혈청 Na⁺ (mmol/L)', placeholder: '124' },
+    { id: 'hypona_sosm', label: '혈청 Osm (mOsm/kg)', placeholder: '260' },
+    { id: 'hypona_glu', label: '혈당 (mg/dL)', placeholder: '110', hint: '고혈당성/전위성 저Na 감별 및 corrected Na 계산' },
+    { id: 'hypona_uosm', label: '소변 Osm (mOsm/kg)', placeholder: '420' },
+    { id: 'hypona_una', label: '소변 Na⁺ (mmol/L)', placeholder: '55' },
+    { id: 'hypona_symptom', label: '증상 정도', type: 'select', options: [
+      { value: '0', label: '없음/경미: 무증상, 오심, 어지럼 등', default: true },
+      { value: '1', label: '중등도: 두통, 혼돈, 구토 등' },
+      { value: '2', label: '중증: 경련, 의식저하, GCS≤8, 심폐정지' },
+    ]},
+    { id: 'hypona_ecf', label: '임상적 ECF 상태', type: 'select', options: [
+      { value: '0', label: '불명확/판단 보류', default: true },
+      { value: '1', label: '감소: 기립저혈압, 탈수, 점막건조' },
+      { value: '2', label: '정상: 부종 없음, euvolemic' },
+      { value: '3', label: '증가: 부종/복수/심부전·간경변' },
+    ]},
+    { id: 'hypona_diuretic', label: '이뇨제/관련 약제', type: 'select', options: [
+      { value: '0', label: '없음/불명', default: true },
+      { value: '1', label: '있음: thiazide/loop, SSRI, carbamazepine 등' },
+    ]},
+  ],
+  calc(v) {
+    const sna  = v.hypona_sna;
+    const sosm = v.hypona_sosm;
+    const glu  = v.hypona_glu;
+    const uosm = v.hypona_uosm;
+    const una  = v.hypona_una;
+    const symptom = v.hypona_symptom;
+    const ecf = v.hypona_ecf;
+    const diuretic = v.hypona_diuretic;
+    const medFlag = diuretic === 1;
+
+    const glucoseExcess = Math.max(0, glu - 100) / 100;
+    const corr16 = sna + 1.6 * glucoseExcess;
+    const corr24 = sna + 2.4 * glucoseExcess;
+
+    let biochemical;
+    if (sna >= 135) biochemical = '저나트륨혈증 아님 또는 이미 교정된 상태';
+    else if (sna >= 130) biochemical = 'Mild hyponatremia';
+    else if (sna >= 125) biochemical = 'Moderate hyponatremia';
+    else biochemical = 'Profound hyponatremia';
+
+    let cls = 'interp-mid';
+    let txt = '';
+    const steps = [];
+    const labels = [];
+
+    if (sna >= 135) {
+      cls = 'interp-low';
+      txt = `${biochemical} — 현재 입력값 기준 혈청 Na⁺ ${sna.toFixed(1)} mmol/L`;
+      steps.push('임상적으로 저Na 의심이 지속되면 검체 오류·고혈당 보정 Na⁺·반복검사를 확인');
+      return { value: `Na⁺ ${sna.toFixed(1)} | corrected ${corr16.toFixed(1)}–${corr24.toFixed(1)}`, cls, txt, steps };
+    }
+
+    if (symptom >= 1 || sna < 120) {
+      steps.push('<span class="ns-urgent">중등도/중증 증상 또는 Na⁺ &lt;120이면 응급상황</span>: 원인 감별을 기다리지 말고 3% 고장성 식염수 bolus, 심전도/신경학적 모니터링, 혈청 Na⁺ 반복 측정');
+      steps.push('초기 목표는 증상 호전을 위한 Na⁺ 4–6 mmol/L 상승. 일반적으로 24시간 8–10 mmol/L 초과 교정은 피함');
+    }
+
+    if (glu >= 200) {
+      steps.push(`<span class="ns-test">고혈당 보정 Na⁺ 확인</span>: 1.6 보정 ${corr16.toFixed(1)}, 2.4 보정 ${corr24.toFixed(1)} mmol/L — 교정 후 정상에 가까우면 전위성/고장성 저Na 가능`);
+    }
+
+    if (sosm > 295) {
+      cls = 'interp-high';
+      labels.push('Hypertonic hyponatremia');
+      txt = `${biochemical} + Hypertonic hyponatremia — 고혈당/외인성 osmole에 의한 translocational hyponatremia 우선`;
+      steps.push('<span class="ns-test">혈당, mannitol, 조영제, maltose/sucrose, osmolar gap</span> 확인');
+      steps.push('치료는 원인 osmole 교정이 중심. 고혈당성 위기에서는 insulin/수액 치료 중 corrected Na⁺와 effective osmolality를 함께 추적');
+      steps.push('순수 저삼투성 저Na처럼 단순 수분제한/고장성 식염수만 적용하지 않도록 주의');
+      if (medFlag) steps.push('이뇨제/관련 약제는 병행 확인하되, 혈청 Osm >295에서는 먼저 고혈당·외인성 osmole에 의한 고장성 저Na를 교정/확인');
+    } else if (sosm >= 280 && sosm <= 295) {
+      cls = 'interp-mid';
+      labels.push('Isotonic hyponatremia');
+      txt = `${biochemical} + Isotonic hyponatremia — pseudohyponatremia 또는 간접 ISE 오류 가능`;
+      steps.push('<span class="ns-test">TG, total protein, paraprotein</span> 확인');
+      steps.push('<span class="ns-test">직접 ISE</span>(혈액가스/point-of-care Na⁺)로 재측정하여 pseudohyponatremia 배제');
+      steps.push('측정 serum Osm과 계산 Osm의 차이(osmolar gap)를 확인');
+      if (medFlag) steps.push('이뇨제/관련 약제는 저삼투성 저Na 원인 평가에서 중요하지만, 현재는 pseudohyponatremia 여부를 먼저 배제');
+    } else if (sosm >= 275 && sosm < 280) {
+      cls = 'interp-mid';
+      labels.push('Borderline hypotonic');
+      txt = `${biochemical} + 경계성 저삼투 — 반복 측정 및 혈당/지질/단백 보정 후 hypotonic 여부 재판정`;
+      steps.push('혈청/소변 Osm·Na⁺를 같은 시점에 재채취하고, glucose/TG/total protein을 확인');
+      if (medFlag) steps.push('이뇨제/관련 약제 복용 중이면 재검 시 약제 중단 가능성·시점과 urine Na⁺ 변동성을 함께 기록');
+    } else {
+      labels.push('Hypotonic hyponatremia');
+      if (medFlag) {
+        labels.push('약제/이뇨제 영향 고려');
+        steps.push('<span class="ns-drug">약제 영향 있음</span>: thiazide가 가장 전형적이며, loop diuretic, SSRI/SNRI, carbamazepine/oxcarbazepine, NSAID, opioid, desmopressin 등도 확인·중단/대체 고려');
+        steps.push('이뇨제 복용 중에는 urine Na⁺ 기준(≤30/>30)의 감별력이 떨어짐 — 특히 UNa⁺ >30만으로 SIADH를 확정하지 말고 약제 중단 후 재평가, FE uric acid·FE urea·임상 체액량을 함께 판단');
+      }
+      if (uosm <= 100) {
+        cls = 'interp-low';
+        txt = `${biochemical} + Hypotonic hyponatremia — Urine Osm ≤100: ADH 억제/묽은 소변`;
+        steps.push('<span class="ns-test">Primary polydipsia, beer potomania, tea-and-toast/저용질 섭취</span> 확인');
+        if (medFlag) steps.push('약제 복용력이 있어도 Uosm ≤100이면 ADH 억제 패턴이므로, 약제 단독보다는 과다 수분섭취·저용질 섭취가 동반되었는지 우선 확인');
+        steps.push('치료: 수분제한 + 단백/염분 등 solute 보충. 저용질 섭취 교정 후 빠른 aquaresis와 과교정 위험을 집중 감시');
+        steps.push('소변량 급증 또는 Na⁺ 빠른 상승 시 desmopressin clamp/저장성 수액 보충 고려');
+      } else {
+        if (una <= 30) {
+          cls = 'interp-mid';
+          txt = `${biochemical} + Hypotonic hyponatremia — Urine Osm >100 + Urine Na⁺ ≤30: 낮은 effective arterial volume 가능`;
+          if (medFlag) {
+            steps.push('이뇨제/관련 약제 복용 중인데도 UNa⁺ ≤30이면 현재 낮은 effective arterial volume 또는 저염분/저용질 섭취가 시사될 수 있음. 단, 복용 시점에 따라 UNa⁺가 변동하므로 반복 측정 권장');
+            steps.push('thiazide 관련 저Na는 hypovolemic 또는 SIADH-like 양상 모두 가능 — K⁺, uric acid, FEUA/FEUrea, 약제 시작·증량 시점 확인');
+          }
+          if (ecf === 3) {
+            steps.push('<span class="ns-test">Hypervolemic 저Na</span>: 심부전, 간경변, 신증후군 평가');
+            steps.push('치료: 수분제한, 염분제한, loop diuretic, 원인질환 치료. vaptan은 적응증·간질환 여부를 신중히 판단');
+          } else if (ecf === 1) {
+            steps.push('<span class="ns-test">Hypovolemic 저Na</span>: 구토/설사, 출혈, third spacing, 섭취부족 평가');
+            steps.push('치료: 0.9% 생리식염수로 체액 회복, 원인 손실 교정. 수액 후 ADH가 꺼지며 빠른 교정이 올 수 있어 Na⁺ 추적');
+          } else {
+            steps.push('ECF 감소형이면 구토/설사/third spacing → 0.9% 생리식염수, ECF 증가형이면 심부전/간경변/신증후군 → 수분·염분제한 및 loop diuretic');
+          }
+        } else {
+          cls = 'interp-high';
+          txt = `${biochemical} + Hypotonic hyponatremia — Urine Osm >100 + Urine Na⁺ >30: SIADH/renal salt loss/약제/내분비 원인 감별`;
+          if (medFlag) {
+            steps.push('<span class="ns-drug">이뇨제·약제성 저Na</span>: thiazide, loop, SSRI/SNRI, carbamazepine/oxcarbazepine, NSAID, opioid 등 중단/대체');
+            steps.push('Uosm >100 + UNa⁺ >30은 SIADH처럼 보일 수 있지만, 이뇨제 사용 중이면 약제성/renal salt loss와 SIADH 감별이 불완전함 — FE uric acid, FE urea, 약제 중단 후 경과를 함께 판단');
+          }
+          if (ecf === 2) {
+            if (medFlag) steps.push('<span class="ns-drug">약제성 SIADH-like 저Na 가능</span>: thiazide 또는 SSRI/SNRI 등은 euvolemic SIADH와 유사한 검사 패턴을 만들 수 있어 SIADH 확정 전 약제 중단/대체 후 재평가');
+            steps.push('<span class="ns-test">SIADH 가능</span>: euvolemia + Uosm >100 + UNa >30 패턴. 단, 배제진단임');
+            steps.push('<span class="ns-test">TSH, free T4, 8AM cortisol ± ACTH stimulation</span>으로 갑상선/부신 원인 배제');
+            steps.push('폐질환/악성종양/CNS 질환 및 유발 약제 확인. 치료: 수분제한 800–1000 mL/day, solute 보충, loop+salt/urea 고려');
+          } else if (ecf === 1) {
+            steps.push('<span class="ns-test">Renal salt wasting/부신부전/신질환</span> 평가: 혈압, K⁺, cortisol, renin/aldosterone, eGFR, 소변량');
+            steps.push('체액 감소가 확실하면 0.9% 생리식염수와 원인 치료. cerebral salt wasting은 CNS 병변 맥락에서 판단');
+          } else if (ecf === 3) {
+            steps.push('신부전 또는 이뇨제 영향이 있는 hypervolemic 저Na 가능 — eGFR, 소변량, 약제력, 심부전/간경변/신증후군 평가');
+          } else {
+            steps.push('ECF 상태와 이뇨제 여부를 다시 확인. SIADH, 부신부전, 갑상선기능저하, 신질환, renal/cerebral salt wasting을 순차 감별');
+          }
+        }
+      }
+    }
+
+    steps.push('공통: 혈청 Na⁺ 교정 속도, 소변량 변화, K⁺ 보정 여부를 함께 추적. K⁺ 보정도 혈청 Na⁺ 상승에 기여할 수 있음');
+    return {
+      value: `Na⁺ ${sna.toFixed(1)} | corrected ${corr16.toFixed(1)}–${corr24.toFixed(1)}`,
+      cls,
+      txt: txt + ` · ${labels.join(' / ')}`,
+      steps
+    };
+  }
+},
+
+]; // end FORMULAS
+
+
+/* ================================================================
+   RENDER
+================================================================ */
+function buildCard(f) {
+  const hasCutoffs = f.cutoffs && f.cutoffs.length;
+  const hasCalc = f.calc && f.inputs && f.inputs.length > 0;
+
+  const cutoffRows = hasCutoffs ? f.cutoffs.map(c =>
+    `<tr><td class="${c.cls}">${c.range}</td><td>${c.interp}</td></tr>`
+  ).join('') : '';
+
+  // ── cutoffGroups 렌더러 ──
+  const hasCutoffGroups = f.cutoffGroups && f.cutoffGroups.length;
+  function renderCutoffGroups(groups) {
+    return '<div class="cg-wrap">' + groups.map(g => {
+      const rowsHtml = g.rows.map(r => {
+        const hasSub = r.hasSub ? ' has-sub' : '';
+        return `<div class="cg-row${hasSub}">
+          <div class="cg-range ${r.cls}">${r.range}</div>
+          <div class="cg-interp">${r.interp}</div>
+        </div>`;
+      }).join('');
+      const subHtml = g.subGroup ? `<div class="cg-sub">
+        <div class="cg-sub-head" style="color:${g.subGroup.accent}">
+          <span>↳</span><span>${g.subGroup.label}</span>
+        </div>
+        ${g.subGroup.rows.map(r => `<div class="cg-row">
+          <div class="cg-range ${r.cls}">${r.range}</div>
+          <div class="cg-interp">${r.interp}</div>
+        </div>`).join('')}
+      </div>` : '';
+      return `<div class="cg-panel">
+        <div class="cg-head" style="background:${g.accent}">${g.label}</div>
+        ${rowsHtml}${subHtml}
+      </div>`;
+    }).join('') + '</div>';
+  }
+
+  // ── 입력 필드: id 제거 → data-inputid 사용, oninput 자동 계산
+  // ── bmiAuto 헬퍼: input-row 밖에 독립 블록으로 렌더링 ──
+  const bmiAutoInp = hasCalc ? f.inputs.find(i => i.bmiAuto) : null;
+  const bmiHelperHtml = bmiAutoInp ? (() => {
+    const prefix = bmiAutoInp.id.replace('_bmi', '');
+    return `
+      <div class="bmi-helper-row">
+        <div class="bmi-hr-title">🔢 신장·체중으로 BMI 자동계산 (선택)</div>
+        <div class="bmi-hr-inputs">
+          <div class="input-group">
+            <label>신장 (cm)</label>
+            <input type="number" data-inputid="${prefix}_ht" placeholder="165" step="any" oninput="liveCalc(this)">
+          </div>
+          <div class="input-group">
+            <label>체중 (kg)</label>
+            <input type="number" data-inputid="${prefix}_wt" placeholder="65" step="any" oninput="liveCalc(this)">
+          </div>
+        </div>
+        <div class="bmi-auto-badge" id="bmiAuto_${bmiAutoInp.id}">
+          <span class="bab-label">자동계산 BMI</span>
+          <span class="bab-val">—</span>
+          <span class="bab-unit">kg/m²</span>
+          <span class="bab-cat"></span>
+        </div>
+      </div>`;
+  })() : '';
+
+  // ── 입력 필드: bmiAuto 항목은 직접 입력 input-group 으로 렌더 (helper 제외) ──
+  const inputFields = hasCalc ? f.inputs.map(inp => {
+    const hintHtml = inp.hint ? `<span class="input-hint">* ${inp.hint}</span>` : '';
+    if (inp.bmiAuto) {
+      return `<div class="input-group">
+        <label>${inp.label}</label>
+        <input type="number" data-inputid="${inp.id}" placeholder="${inp.placeholder}" step="any" oninput="liveCalc(this)">
+        ${hintHtml}
+      </div>`;
+    }
+    // ── skipRender: preInputsHtml 로 대체 렌더링하는 입력
+    if (inp.skipRender) return '';
+    // ── select 타입
+    if (inp.type === 'select') {
+      const opts = inp.options.map(o =>
+        `<option value="${o.value}"${o.default ? ' selected' : ''}>${o.label}</option>`
+      ).join('');
+      return `<div class="input-group">
+        <label>${inp.label}</label>
+        <select data-inputid="${inp.id}" onchange="liveCalc(this)">${opts}</select>
+        ${hintHtml}
+      </div>`;
+    }
+    // ── convertBadge: 단위 환산 표시 배지
+    const cvtBadge = inp.convertBadge ? `
+      <div class="bmi-auto-badge" data-cvtfor="${inp.id}" style="margin-top:5px;display:none;">
+        <span class="bab-label">환산값</span>
+        <span class="bab-val" data-cvtval="${inp.id}">—</span>
+        <span class="bab-unit">ng/dL</span>
+      </div>` : '';
+    return `<div class="input-group">
+      <label>${inp.label}</label>
+      <input type="number" data-inputid="${inp.id}" placeholder="${inp.placeholder}" step="any" oninput="liveCalc(this)">
+      ${hintHtml}${cvtBadge}
+    </div>`;
+  }).join('') : '';
+
+  const preInputsHtml = f.preInputsHtml || '';
+
+  const calcSection = hasCalc ? `
+    <div class="calc-section">
+      <div class="calc-title">⟩ 계산기 — 값 입력 시 자동 계산</div>
+      ${bmiHelperHtml}
+      ${preInputsHtml}
+      <div class="input-row">${inputFields}</div>
+      ${f.bmiPreview ? `<div class="bmi-preview" id="bmiPrev_${f.id}">
+        <span class="bp-label">BMI</span>
+        <span class="bp-val" id="bmiVal_${f.id}">—</span>
+        <span class="bp-unit">kg/m²</span>
+        <span class="bp-cat" id="bmiCat_${f.id}"></span>
+      </div>` : ''}
+      <div class="result-box">
+        <div class="result-value"></div>
+        <div class="result-interp"></div>
+      </div>
+    </div>` : (f.calc === null && f.inputs.length === 0 ?
+    `<div style="font-size:11.5px;color:var(--text-muted);padding:8px 0 4px;">ℹ 복잡한 회귀 모델 — 외부 칼큘레이터 사용 권장</div>
+    ${f.link ? `<div class="ext-calc-wrap">
+      <span class="ext-calc-label">⟩ 외부 칼큘레이터</span>
+      <a class="ext-calc-btn" href="${f.link}" target="_blank" rel="noopener">
+        <span class="btn-icon">🧮</span>
+        칼큘레이터 열기
+        <span class="btn-arrow">↗</span>
+      </a>
+      <span class="ext-calc-url">${f.link}</span>
+    </div>` : ''}` : '');
+
+  // ── 카드: id 제거 → data-fid 사용 (중복 ID 버그 방지)
+  return `<div class="card" data-fid="${f.id}">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="badge" style="background:${f.catColor}22;color:${f.catColor}">${f.catLabel}</span>
+      <div>
+        <div class="name">${f.name}</div>
+        <div class="desc">${f.desc}</div>
+      </div>
+      <span class="toggle-icon">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="formula-toggle" onclick="toggleFormula(this)">
+        <span class="ft-icon">📐</span>
+        <span class="ft-label">공식 보기</span>
+        <span class="ft-arrow">▾</span>
+      </div>
+      <div class="formula-box"><span class="f-label">공식</span><span class="f-main">${f.formula}</span></div>
+      ${hasCutoffGroups ? renderCutoffGroups(f.cutoffGroups) : (hasCutoffs ? `<table class="cutoff-table"><thead><tr><th>값 범위</th><th>해석</th></tr></thead><tbody>${cutoffRows}</tbody></table>` : '')}
+      ${calcSection}
+      ${f.note ? `<div class="note"><strong>참고:</strong> ${f.note}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderAll() {
+  const cats = ['liver','insulin','lipid','cardio','obesity','thyroid','renal','diabetes'];
+  cats.forEach(cat => {
+    const g = document.getElementById('grid-' + cat);
+    if (g) g.innerHTML = FORMULAS.filter(f => f.cat === cat).map(buildCard).join('');
+  });
+  const allGrid = document.getElementById('grid-all');
+  if (allGrid) allGrid.innerHTML = FORMULAS.map(buildCard).join('');
+}
+
+function toggleCard(headerEl) {
+  const card = headerEl.closest('.card');
+  if (card) card.classList.toggle('open');
+}
+
+function toggleFormula(toggleEl) {
+  toggleEl.classList.toggle('open');
+  const box = toggleEl.nextElementSibling;
+  if (box && box.classList.contains('formula-box')) {
+    box.classList.toggle('open');
+  }
+}
+
+/* ── 자동 계산: 입력 이벤트마다 호출 ── */
+function liveCalc(inputEl) {
+  const card = inputEl.closest('.card');
+  if (!card) return;
+  const fid = card.dataset.fid;
+  const f = FORMULAS.find(x => x.id === fid);
+  if (!f || !f.calc) return;
+
+  const vals = {};
+  let valid = true;
+  f.inputs.forEach(inp => {
+    const el = card.querySelector(`[data-inputid="${inp.id}"]`);
+    const raw = el ? el.value.trim() : '';
+    const v = parseFloat(raw);
+    if (raw === '' || isNaN(v)) { valid = false; }
+    vals[inp.id] = v;
+  });
+
+  const resBox    = card.querySelector('.result-box');
+  const resVal    = card.querySelector('.result-value');
+  const resInterp = card.querySelector('.result-interp');
+
+  // ── BMI 미리보기 (bmiPreview 플래그 있는 카드) ──
+  if (f.bmiPreview) {
+    const htId = f.inputs.find(i => i.id.endsWith('_ht') || i.id === 'bmi_ht');
+    const wtId = f.inputs.find(i => i.id.endsWith('_wt') || i.id === 'bmi_wt');
+    const htEl = htId ? card.querySelector(`[data-inputid="${htId.id}"]`) : null;
+    const wtEl = wtId ? card.querySelector(`[data-inputid="${wtId.id}"]`) : null;
+    const prev = card.querySelector(`#bmiPrev_${f.id}`);
+    const bmiVal = card.querySelector(`#bmiVal_${f.id}`);
+    const bmiCat = card.querySelector(`#bmiCat_${f.id}`);
+    if (prev && htEl && wtEl) {
+      const ht = parseFloat(htEl.value), wt = parseFloat(wtEl.value);
+      if (!isNaN(ht) && !isNaN(wt) && ht > 0 && wt > 0) {
+        const bmi = wt / ((ht / 100) ** 2);
+        prev.classList.add('show');
+        bmiVal.textContent = bmi.toFixed(1);
+        let cat, bg, col;
+        if      (bmi < 18.5) { cat='저체중';    bg='#e0f2fe'; col='#0369a1'; }
+        else if (bmi < 23.0) { cat='정상';      bg='#dcfce7'; col='#166534'; }
+        else if (bmi < 25.0) { cat='과체중';    bg='#fef9c3'; col='#854d0e'; }
+        else if (bmi < 30.0) { cat='비만 1단계'; bg='#ffedd5'; col='#9a3412'; }
+        else                  { cat='비만 2단계+'; bg='#fee2e2'; col='#991b1b'; }
+        bmiCat.textContent = cat;
+        bmiCat.style.background = bg;
+        bmiCat.style.color = col;
+      } else {
+        prev.classList.remove('show');
+      }
+    }
+  }
+
+  // ── bmiAuto: 신장/체중 헬퍼 → BMI 자동계산 ──
+  const bmiAutoInp = f.inputs.find(i => i.bmiAuto);
+  if (bmiAutoInp) {
+    const prefix  = bmiAutoInp.id.replace('_bmi', '');
+    const htEl    = card.querySelector(`[data-inputid="${prefix}_ht"]`);
+    const wtEl    = card.querySelector(`[data-inputid="${prefix}_wt"]`);
+    const bmiEl   = card.querySelector(`[data-inputid="${bmiAutoInp.id}"]`);
+    const badge   = card.querySelector(`#bmiAuto_${bmiAutoInp.id}`);
+    const badgeV  = badge?.querySelector('.bab-val');
+    const badgeC  = badge?.querySelector('.bab-cat');
+    const triggeredId = inputEl.getAttribute('data-inputid');
+    const byHtWt  = triggeredId === `${prefix}_ht` || triggeredId === `${prefix}_wt`;
+
+    if (htEl && wtEl && bmiEl) {
+      const ht = parseFloat(htEl.value), wt = parseFloat(wtEl.value);
+      if (!isNaN(ht) && !isNaN(wt) && ht > 50 && wt > 5) {
+        const cbmi = (wt / ((ht / 100) ** 2)).toFixed(1);
+        // 배지 업데이트
+        if (badgeV) badgeV.textContent = cbmi;
+        if (badgeC) {
+          const b = parseFloat(cbmi);
+          let cat, bg, col;
+          if      (b < 18.5) { cat='저체중';     bg='#e0f2fe'; col='#0369a1'; }
+          else if (b < 23.0) { cat='정상';       bg='#dcfce7'; col='#166534'; }
+          else if (b < 25.0) { cat='과체중';     bg='#fef9c3'; col='#854d0e'; }
+          else if (b < 30.0) { cat='비만1단계';  bg='#ffedd5'; col='#9a3412'; }
+          else                { cat='비만2단계+'; bg='#fee2e2'; col='#991b1b'; }
+          badgeC.textContent = cat;
+          badgeC.style.background = bg;
+          badgeC.style.color = col;
+        }
+        badge?.classList.add('show');
+        // 자동채움: ht/wt 입력 트리거 AND (BMI 비어있거나 이전에 자동채워진 경우)
+        if (byHtWt && (bmiEl.value === '' || bmiEl.dataset.autoBmi === 'y')) {
+          bmiEl.value = cbmi;
+          bmiEl.dataset.autoBmi = 'y';
+        }
+      } else {
+        badge?.classList.remove('show');
+      }
+    }
+    // 사용자가 BMI 직접 수정 → 자동채움 중단
+    if (triggeredId === bmiAutoInp.id) {
+      if (bmiEl) bmiEl.dataset.autoBmi = 'n';
+    }
+  }
+
+  // ── convertBadge: 단위 환산 배지 업데이트
+  f.inputs.forEach(inp => {
+    if (!inp.convertBadge || !inp.unitSource) return;
+    const badge  = card.querySelector(`[data-cvtfor="${inp.id}"]`);
+    const valEl  = card.querySelector(`[data-cvtval="${inp.id}"]`);
+    if (!badge || !valEl) return;
+    const rawVal  = card.querySelector(`[data-inputid="${inp.id}"]`)?.value;
+    const unitEl  = card.querySelector(`[data-inputid="${inp.unitSource}"]`);
+    const num     = parseFloat(rawVal);
+    const factor  = unitEl ? parseFloat(unitEl.value) : 1;
+    if (!isNaN(num) && factor !== 1) {
+      const converted = (num * factor).toFixed(2);
+      valEl.textContent = converted;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  });
+
+  if (!valid) {
+    if (resBox) resBox.classList.remove('show');
+    return;
+  }
+
+  try {
+    const result = f.calc(vals);
+    if (resBox) resBox.classList.add('show');
+    if (resVal) resVal.textContent = result.value;
+    let html = `<span class="interp-value ${result.cls}">${result.txt}</span>`;
+    if (result.steps && result.steps.length) {
+      const rows = result.steps.map(s =>
+        `<div class="ns-item"><span class="ns-bullet">▸</span><span>${s}</span></div>`
+      ).join('');
+      html += `<div class="next-steps"><span class="ns-title">▶ 권고 조치 / Next Steps</span>${rows}</div>`;
+    }
+    if (resInterp) resInterp.innerHTML = html;
+  } catch(e) {
+    if (resBox) resBox.classList.remove('show');
+  }
+}
+
+/* ── Nav removed — always show all section ── */
+
+renderAll();
+
+/* ════════════════════════════════════════
+   GLOSSARY DATA & SEARCH ENGINE
+════════════════════════════════════════ */
+const GLOSSARY = [
+
+  { term:'SNa', full:'Serum Sodium', ko:'혈청 나트륨 농도. 저나트륨혈증은 보통 SNa <135 mmol/L', cat:'renal' },
+  { term:'Posm', full:'Plasma/Serum Osmolality', ko:'혈장/혈청 삼투질농도. 저Na 감별의 첫 단계: hypertonic/isotonic/hypotonic 분류', cat:'renal' },
+  { term:'Uosm', full:'Urine Osmolality', ko:'소변 삼투질농도. ≤100 mOsm/kg이면 ADH 억제/묽은 소변, >100이면 ADH 활성 상태를 시사', cat:'renal' },
+  { term:'UNa', full:'Urine Sodium', ko:'소변 나트륨. hypotonic hyponatremia에서 ≤30은 낮은 effective arterial volume 가능, >30은 SIADH/이뇨제/신장성 손실 등을 감별', cat:'renal' },
+  { term:'SIADH', full:'Syndrome of Inappropriate Antidiuretic Hormone Secretion', ko:'부적절 항이뇨호르몬 분비 증후군. euvolemic hypotonic hyponatremia의 중요한 원인이나 배제진단', cat:'renal' },
+
+{ term:'ECF',        full:'Extracellular Fluid',
+  ko:'세포외액. 혈장·간질액·소량의 경유액으로 구성. 총 체수분(TBW)의 약 1/3(체중 60 kg 기준 약 14 L). 저나트륨혈증 감별의 핵심 임상 평가: ECF 감소(탈수·저혈량), ECF 정상(euvolemic·SIADH), ECF 증가(심부전·간경변·신증후군). 소변 Na⁺·삼투압과 함께 원인 감별에 사용.',
+  cat:'renal' },
+
+{ term:'ISE',        full:'Ion-Selective Electrode',
+  ko:'이온 선택적 전극. Na⁺·K⁺·Cl⁻ 측정에 사용. 직접 ISE(direct ISE, 혈액가스분석기·point-of-care)는 실제 이온 농도 직접 측정. 간접 ISE(autoanalyzer)는 혈장 희석 후 측정 → 고지혈증·고단백혈증 시 가성 저나트륨혈증(pseudohyponatremia) 유발. 혈청 Osm 280–295에서 저Na 패턴이면 직접 ISE로 재확인 권고.',
+  cat:'renal' },
+
+{ term:'Osmolar gap', full:'Osmolar Gap (삼투질 농도 갭)',
+  ko:'삼투질 농도 갭. 공식: 실측 혈청 Osm − 계산 Osm (= 2×Na⁺ + 포도당/18 + BUN/2.8). 정상 <10 mOsm/kg. >10이면 측정 불가 삼투성 물질 존재를 시사: 알코올·에틸렌글리콜·메탄올·만니톨·조영제·maltose. 고장성 저나트륨혈증(Osm >295)의 원인 osmole 확인에 활용.',
+  cat:'renal' },
+
+{ term:'Pseudohyponatremia', full:'Pseudohyponatremia (가성 저나트륨혈증)',
+  ko:'가성 저나트륨혈증. 실제 혈청 Na⁺는 정상이나 간접 ISE(자동분석기)에서 낮게 측정되는 현상. 원인: 심한 고지혈증(TG >1,000 mg/dL), 심한 고단백혈증(다발성 골수종·간경변). Isotonic serum Osm(280–295 mOsm/kg) 상태에서 저Na 패턴. 직접 ISE(혈액가스분석) 또는 TG·총단백 확인으로 감별.',
+  cat:'renal' },
+
+{ term:'ODS',        full:'Osmotic Demyelination Syndrome',
+  ko:'삼투성 탈수초 증후군. 만성 저나트륨혈증을 너무 빠르게 교정할 때 발생하는 중추신경계 합병증. 교뇨 이행부(central pons)에서 흔해 central pontine myelinolysis(CPM)라고도 불림. 교정 속도 제한: 24시간 내 8–10 mmol/L, 48시간 내 18 mmol/L 초과 금지. 고위험군: 영양결핍·알코올중독·저칼륨혈증·간이식. 증상: 사지마비·연하장애·의식변화.',
+  cat:'renal' },
+
+{ term:'Tolvaptan',  full:'Tolvaptan (Samsca / Jynarque)',
+  ko:'톨밥탄. ADH V2 수용체 길항제(vaptan계). 신장 집합관 AQP2 수로 삽입 차단 → 무전해질 수분만 배설(aquaresis) → 혈청 Na⁺ 상승. SIADH·심부전·간경변 동반 euvolemic/hypervolemic 저나트륨혈증에 사용. 교정 속도 과빠름(ODS 위험) → 입원 상태에서 초기 모니터링 필수. 간경변 환자에서 사용 금기.',
+  cat:'renal' },
+
+{ term:'DDAVP',      full:'Desmopressin (1-deamino-8-D-Arginine Vasopressin)',
+  ko:'데스모프레신. 합성 ADH 유사체. V2 수용체 선택적 작용. 중추성 요붕증·야뇨증·폰빌레브란트병에 치료 사용. 저나트륨혈증에서는 과교정 방지 목적으로 "desmopressin clamp" 전략에 활용: 수분 제한·고장성 식염수로 Na⁺가 빠르게 오를 때 desmopressin 투여로 교정 속도 조절. 비강내·경구·정맥 투여 가능.',
+  cat:'renal' },
+
+{ term:'Aquaresis',  full:'Aquaresis (무전해질 수분이뇨)',
+  ko:'무전해질 수분이뇨. 전해질 손실 없이 순수 수분만 배설되는 현상. ADH 억제(primary polydipsia 치료) 또는 ADH 수용체 차단제(tolvaptan)에 의해 유발. 전통적 이뇨제(나트륨·수분 동시 배설)와 구분. Aquaresis 중에는 혈청 Na⁺가 빠르게 상승할 수 있어 ODS 위험 주의. Uosm 급감, 소변량 증가가 특징.',
+  cat:'renal' },
+
+{ term:'FEuA',       full:'Fractional Excretion of Uric Acid',
+  ko:'요산 분획 배설률. 공식: (요Uric acid × 혈장Cr) / (혈장Uric acid × 요Cr) × 100 (%). 정상 약 4–12%. SIADH에서 ≥12% (요산 배설 증가, 혈청 uric acid 저하). Hypovolemic 저Na에서 <12% (세관에서 재흡수 증가). 이뇨제 복용 중 UNa⁺ 해석의 한계를 보완하는 감별 지표.',
+  cat:'renal' },
+
+{ term:'FEurea',     full:'Fractional Excretion of Urea',
+  ko:'요소 분획 배설률. 공식: (요Urea × 혈장Cr) / (혈장BUN × 요Cr) × 100 (%). 정상 약 40–65%. FEurea <35%: 신전성 저혈량을 시사(이뇨제 복용 중에도 상대적으로 낮음). FEurea >40%: 실질 신손상 또는 SIADH. 이뇨제 사용 환자에서 FENa 해석이 불가할 때 대안 감별 지표로 유용.',
+  cat:'renal' },
+
+{ term:'SSRI',       full:'Selective Serotonin Reuptake Inhibitor',
+  ko:'선택적 세로토닌 재흡수 억제제. 플루옥세틴·세르트랄린·에스시탈로프람·파록세틴 등. 저나트륨혈증 주요 유발 약제: 세로토닌이 ADH 분비를 자극하는 SIADH 기전. 노인·이뇨제 병용·저체중 환자에서 위험 증가. 개시 2–4주 내 혈청 Na⁺ 모니터링 권고.',
+  cat:'renal' },
+
+{ term:'SNRI',       full:'Serotonin-Norepinephrine Reuptake Inhibitor',
+  ko:'세로토닌-노르에피네프린 재흡수 억제제. 벤라팍신·둘록세틴·밀나시프란 등. SSRI와 유사한 기전으로 SIADH → 저나트륨혈증 유발 가능. 발생 빈도는 SSRI와 유사. 저나트륨혈증 발생 시 SSRI/SNRI 중단·대체 후 경과 관찰 및 재평가.',
+  cat:'renal' },
+
+{ term:'GCS',        full:'Glasgow Coma Scale',
+  ko:'글래스고 혼수 척도. 의식 수준 표준 평가 도구. 눈뜨기(E, 1–4)·언어반응(V, 1–5)·운동반응(M, 1–6) 합산, 3–15점. ≤8: 중증 의식장애(삽관 고려). 저나트륨혈증 중증도 분류: GCS ≤8은 중증 신경학적 증상으로 3% 고장성 식염수 응급 투여 적응증.',
+  cat:'stats' },
+
+{ term:'CSW',        full:'Cerebral Salt Wasting',
+  ko:'뇌성 염분 소실. 뇌출혈·두부 외상·뇌수술 후 주로 발생. 신장에서 Na⁺·수분 과다 배설 → 저Na혈증 + 저혈량증. SIADH와의 핵심 감별: CSW는 ECF 감소(기립저혈압·BUN/Cr 상승·혈청 uric acid 정상 또는 상승)가 특징. 치료: Na⁺·수액 보충, fludrocortisone. SIADH로 오인 시 수분 제한이 오히려 해악.',
+  cat:'renal' },
+
+{ term:'Beer potomania', full:'Beer Potomania',
+  ko:'맥주 다음증 저나트륨혈증. 하루 6–10 L 이상의 맥주를 주식처럼 섭취 시 발생. 맥주의 극도로 낮은 용질 부하(Na⁺·K⁺·단백질 결핍) + 대량 수분 → 희석 한계 초과. Uosm ≤100 mOsm/kg, ADH 억제 패턴. 치료: 단백·염분 섭취 증가 + 수분 제한. 용질 보충 후 aquaresis가 급격히 오면 ODS 위험 주의.',
+  cat:'renal' },
+
+{ term:'Primary polydipsia', full:'Primary Polydipsia (원발성 다음증)',
+  ko:'원발성 다음증. 심한 갈증 또는 강박적 수분 섭취로 인한 저나트륨혈증. 정신과 질환(조현병·양극성 장애)·항정신병약 유발 구강건조증·시상하부 병변에서 발생. Uosm ≤100 mOsm/kg + 다뇨가 특징. ADH 자체는 정상 억제됨. 치료: 수분 제한, 원인 약제 조정. 교정 후 aquaresis 급속 발생 → ODS 위험.',
+  cat:'renal' },
+
+{ term:'Bartter',    full:'Bartter Syndrome',
+  ko:'바르터 증후군. 헨레루프 굵은 상행각(TALH)의 이온 수송체(NKCC2·ROMK·ClC-Kb 등) 결손으로 인한 원발성 신성 염분 소실 유전 질환. 저칼륨혈증 + 대사성 알칼리증 + 정상~저혈압 + 고레닌 + 고알도스테론 + 고칼슘뇨증. Loop diuretic(furosemide) 사용과 임상적으로 유사. TTKG ≥3. 치료: K⁺ 보충·인도메타신·ACEi.',
+  cat:'renal' },
+
+{ term:'Gitelman',   full:'Gitelman Syndrome',
+  ko:'기텔만 증후군. 원위 세뇨관 thiazide-감수성 NCC 채널(SLC12A3 변이) 결손. 저칼륨혈증 + 저마그네슘혈증 + 저칼슘뇨증 + 대사성 알칼리증. 바르터 증후군보다 흔하고 경증. Thiazide 사용과 임상 유사. TTKG ≥3. 치료: K⁺·Mg²⁺ 보충, 필요 시 ACEi·인도메타신.',
+  cat:'renal' },
+
+{ term:'PHA',        full:'Pseudohypoaldosteronism',
+  ko:'가성 저알도스테론증. 알도스테론 저항성으로 고칼륨혈증·나트륨 소실이 발생하나 알도스테론은 정상 이상. Type I: 신생아기 발현, ENaC(상피성 Na 채널) 또는 MR 변이. Type II(Gordon syndrome): 고혈압 + 고칼륨혈증 + 대사성 산증, WNK kinase 변이. TTKG <7이면서 알도스테론 상승 → PHA 시사. 약제성(스피로놀락톤·amiloride·tacrolimus)도 기능적 PHA 유발.',
+  cat:'renal' },
+
+{ term:'EABV',       full:'Effective Arterial Blood Volume',
+  ko:'유효 동맥 혈액량. 신장의 압수용체가 인지하는 관류 용량. 실제 총 체액량·혈장량과 다를 수 있음. EABV 감소 → ADH 분비 자극 + 신장 Na⁺ 보존 → 저나트륨혈증. 심부전·간경변·신증후군은 총 체액량 증가(부종)에도 불구하고 EABV 감소(= 혈관 내 용적 부족). 탈수·출혈에서는 실제 저혈량과 함께 EABV 감소.',
+  cat:'renal' },
+
+/* ── LIVER ── */
+{ term:'FIB-4',      full:'Fibrosis-4 Index',
+  ko:'간 섬유화 비침습적 평가 지수. 공식: (나이 × AST) / (혈소판 × √ALT). 낮을수록 섬유화 가능성 낮음. 1차 스크리닝 도구로 MASLD·당뇨 환자에서 일상적으로 사용. Cutoff: <1.30 저위험, 1.30–2.67 불확정, >2.67 고위험(F3–F4). 65세 이상은 하한을 2.0으로 조정.',
+  cat:'liver' },
+
+{ term:'NFS',        full:'NAFLD Fibrosis Score',
+  ko:'NAFLD 환자에서 진행성 간 섬유화(F3–F4)를 평가하는 복합 점수. 나이·BMI·IFG/DM·AST/ALT 비율·혈소판·알부민 6개 변수로 산출. Cutoff: <−1.455 저위험(NPV 88%), >0.676 고위험(PPV 82%). FIB-4와 병행 사용 시 신뢰도 향상.',
+  cat:'liver' },
+
+{ term:'APRI',       full:'AST-to-Platelet Ratio Index',
+  ko:'간 섬유화 간이 평가 지수. 공식: (AST / AST 정상상한) × 100 / 혈소판. 계산이 단순하나 FIB-4보다 정확도 낮음. Cutoff: <0.5 저위험, >1.5 고위험. HCV 환자 연구에서 원개발. 현재는 FIB-4 보조 지표로 주로 활용.',
+  cat:'liver' },
+
+{ term:'AST',        full:'Aspartate Aminotransferase',
+  ko:'아스파르테이트 아미노전이효소. 간세포·심근·골격근·적혈구에 분포하는 효소. 정상범위 통상 10–40 U/L. 간염·간경변·근육손상·용혈·갑상선기능저하 시 상승. ALT와 달리 간 특이적이지 않으므로 AST/ALT 비율(De Ritis ratio)로 원인 감별에 활용.',
+  cat:'liver' },
+
+{ term:'ALT',        full:'Alanine Aminotransferase',
+  ko:'알라닌 아미노전이효소. 주로 간세포에 분포하며 간 손상의 가장 특이적인 효소 지표. 정상범위 통상 7–40 U/L. 바이러스성 간염·MASLD·약물성 간손상 시 현저히 상승. ALT 상승 단독으로는 섬유화 정도를 반영하지 않으며 FIB-4 계산에 사용.',
+  cat:'liver' },
+
+{ term:'NAFLD',      full:'Non-Alcoholic Fatty Liver Disease',
+  ko:'비알코올성 지방간 질환. 알코올을 제외한 원인으로 간에 지방이 5% 이상 침착된 상태. 2023년 국제 합의에 따라 MASLD(대사 이상 관련 지방간 질환)로 명칭이 변경됨. 전 세계 성인의 약 25% 이환.',
+  cat:'liver' },
+
+{ term:'MASLD',      full:'Metabolic dysfunction-Associated Steatotic Liver Disease',
+  ko:'대사 이상 관련 지방간 질환. 2023년 NAFLD를 대체한 신명칭. 비만·당뇨·이상지질혈증·고혈압 등 대사 위험인자 ≥1개를 동반한 간 지방증으로 정의. 진행하면 MASH(간염)→섬유화→간경변→HCC 순서로 악화.',
+  cat:'liver' },
+
+{ term:'MASH',       full:'Metabolic dysfunction-Associated Steatohepatitis',
+  ko:'대사 이상 관련 지방간염. 구명칭 NASH의 2023년 신명칭. MASLD 환자 중 간세포 손상·염증·풍선 변성이 동반된 상태. 진행성 섬유화·간경변으로의 진행 위험이 높으며 적극적 치료(GLP-1 RA·피오글리타존·체중감량) 적응증.',
+  cat:'liver' },
+
+{ term:'NASH',       full:'Non-Alcoholic Steatohepatitis',
+  ko:'비알코올성 지방간염. MASLD/MASH의 구명칭. 단순 지방간(NAFL)과 달리 간세포 손상·염증·풍선 변성을 동반. 현재 학술·임상에서는 MASH로 점차 대체 중.',
+  cat:'liver' },
+
+{ term:'ELF',        full:'Enhanced Liver Fibrosis test',
+  ko:'강화 간 섬유화 혈액 검사. HA(히알루론산)·PIIINP(III형 프로콜라겐 N-말단 펩타이드)·TIMP-1 세 가지 세포외기질 마커를 조합한 알고리즘. FIB-4 불확정 구간 환자의 이차 평가에 사용. 점수 ≥9.8이면 진행성 섬유화 시사.',
+  cat:'liver' },
+
+{ term:'FibroScan',  full:'FibroScan (Transient Elastography device)',
+  ko:'Echosens사 간 탄성도 측정 기기. VCTE 방식으로 간의 경직도(LSM, kPa)를 측정하여 섬유화 병기를 추정. 비침습적·외래 시행 가능. LSM ≥8 kPa: 유의한 섬유화, ≥12 kPa: 간경변 의심. 식후·체위·염증 급성기에 과추정 가능.',
+  cat:'liver' },
+
+{ term:'VCTE',       full:'Vibration-Controlled Transient Elastography',
+  ko:'진동 조절 순간 탄성도. FibroScan의 측정 방식. 초음파와 함께 저주파 진동을 간에 전달하고 전단파 속도로 간 경직도(kPa)를 계산. FIB-4 불확정 구간 환자의 이차 평가 1순위 도구 (AASLD 2023·EASL 2024 공통 권고).',
+  cat:'liver' },
+
+{ term:'LSM',        full:'Liver Stiffness Measurement',
+  ko:'간 경직도 수치 (단위: kPa). FibroScan(VCTE)으로 측정. MASLD 기준 ≥8 kPa: 유의한 섬유화(F2 이상), ≥12 kPa: 진행성 섬유화(F3–4), ≥15 kPa: 간경변 의심. 질환·원인에 따라 기준값 차이 있음.',
+  cat:'liver' },
+
+{ term:'HCC',        full:'Hepatocellular Carcinoma',
+  ko:'간세포암. 간의 원발성 악성 종양 중 가장 흔한 형태. 간경변이 주요 위험인자. 감시 프로그램: 6개월마다 복부 초음파 + AFP 측정. AFP >400 ng/mL 또는 특징적 영상 소견으로 진단. 조기 발견 시 절제·고주파 소작·간이식 가능.',
+  cat:'liver' },
+
+{ term:'AFP',        full:'Alpha-Fetoprotein',
+  ko:'알파태아단백. HCC 스크리닝 혈청 마커. 정상 <10 ng/mL. 간경변·만성 간염에서도 경미하게 상승 가능. 단독으로는 민감도 낮으므로 복부 초음파와 병행 사용. AFP >400 ng/mL + 특징적 영상 소견 시 HCC 진단 기준 충족.',
+  cat:'liver' },
+
+{ term:'HCV',        full:'Hepatitis C Virus',
+  ko:'C형 간염 바이러스. RNA 바이러스로 혈액 매개 감염. 만성화 시 간경변·HCC 진행 위험. FIB-4 원개발 대상 질환 (HIV/HCV 중복감염 코호트). 현재 DAA(직접 항바이러스제)로 완치율 >95% 달성 가능.',
+  cat:'liver' },
+
+{ term:'HBV',        full:'Hepatitis B Virus',
+  ko:'B형 간염 바이러스. DNA 바이러스로 혈액·성접촉·수직감염 경로. 만성 B형 간염에서 간경변·HCC 발생 위험. FIB-4 적용 시 별도 cutoff 사용 (저위험 <1.0, 고위험 >2.65). 항바이러스제(테노포비르·엔테카비르)로 바이러스 억제 가능.',
+  cat:'liver' },
+
+{ term:'AASLD',      full:'American Association for the Study of Liver Diseases',
+  ko:'미국 간질환학회. MASLD/NAFLD 및 기타 간질환 임상진료 지침 발행 기관. 2023년 NAFLD→MASLD 명칭 변경 제안 공동 주도. FIB-4 cutoff, VCTE 활용, PCSK9i 적응증 등 주요 가이드라인 제공.',
+  cat:'liver' },
+
+{ term:'EASL',       full:'European Association for the Study of the Liver',
+  ko:'유럽 간학회. EASL-EASD-EASO 공동 가이드라인(2024) 발행. MASLD 환자 섬유화 평가 2단계 전략(FIB-4 → VCTE/ELF), FIB-4 65세 이상 하한 2.0 적용, 생활습관 교정 1년 후 재평가 등을 권고.',
+  cat:'liver' },
+
+{ term:'cACLD',      full:'compensated Advanced Chronic Liver Disease',
+  ko:'보상성 진행성 만성 간질환. 임상적 간경변 합병증(복수·정맥류 출혈·뇌병증) 없이 LSM ≥10 kPa인 상태. 문맥압 항진증 감시 및 식도정맥류 내시경 평가 시작 기준점. 연간 간경변 비보상화 위험 약 2–6%.',
+  cat:'liver' },
+
+{ term:'DAA',        full:'Direct-Acting Antiviral',
+  ko:'직접 작용 항바이러스제. HCV 치료 표준. 소포스부비르·레디파스비르·글레카프레비르 등. 8–12주 치료로 SVR 95% 이상 달성. 치료 후에도 간경변·HCC 위험 감소 목적으로 초음파+AFP 6개월 감시 지속 필요.',
+  cat:'liver' },
+
+{ term:'PIIIНP',     full:'N-terminal Propeptide of Type III Procollagen',
+  ko:'제3형 프로콜라겐 N-말단 프로펩타이드. ELF 검사 3대 구성 요소 중 하나. 간 활성화 성상세포가 콜라겐 합성 시 분비. 단위: ng/mL. TIMP-1·히알루론산과 함께 ELF 알고리즘 구성.',
+  cat:'liver' },
+
+{ term:'TIMP-1',     full:'Tissue Inhibitor of Metalloproteinase-1',
+  ko:'금속단백분해효소 조직 억제제-1. ELF 검사 3대 구성 요소 중 하나. 콜라겐 분해효소(MMP)를 억제해 세포외기질 축적 촉진. 간 섬유화 진행 지표. PIIIНP·히알루론산과 함께 ELF 산출.',
+  cat:'liver' },
+
+/* ── INSULIN RESISTANCE ── */
+{ term:'HOMA-IR',    full:'Homeostatic Model Assessment of Insulin Resistance',
+  ko:'공복 인슐린 저항성 추정 지수. 공식: (공복혈당 × 공복인슐린) / 405 (혈당 mg/dL 기준). 수치가 높을수록 인슐린 저항성 심함. 한국인 기준 >2.0–2.5 의미 있는 저항성. 공복 8시간 이상 필수. 신부전·임신·외인성 인슐린 투여 시 부정확.',
+  cat:'insulin' },
+
+{ term:'HOMA-β',     full:'Homeostatic Model Assessment of Beta-cell function',
+  ko:'공복 β세포 인슐린 분비능 추정 지수. 공식: (20 × 공복인슐린) / (공복혈당[mmol/L] − 3.5). 정상 >100%. 당뇨 진행 시 β세포 기능 소실 반영. 공복혈당 <63 mg/dL에서 분모가 음수가 되어 산출 불가. LADA·1형 당뇨 의심 시 C-peptide 추가 측정 필요.',
+  cat:'insulin' },
+
+{ term:'QUICKI',     full:'Quantitative Insulin Sensitivity Check Index',
+  ko:'로그 변환 기반 인슐린 감수성 지수. 공식: 1 / [log(인슐린) + log(혈당)]. HOMA-IR와 반비례 관계. 정상 >0.382, <0.331이면 명확한 저항성. 낮은 인슐린 저항성 구간에서 HOMA-IR보다 변별력 우수하다는 보고 있음.',
+  cat:'insulin' },
+
+{ term:'TyG',        full:'Triglyceride-Glucose Index',
+  ko:'인슐린 측정 없이 저항성을 추정하는 지수. 공식: ln(TG × 공복혈당 / 2). 외래에서 공복 인슐린 없이 TG·혈당만으로 계산 가능해 실용성 높음. Cutoff: <8.5 저위험, >9.0 고위험. MASLD·PCOS·심혈관 위험 예측에 유용. TyG-BMI 파생 지수도 활용.',
+  cat:'insulin' },
+
+{ term:'METS-IR',    full:'Metabolic Score for Insulin Resistance',
+  ko:'비만·지질 파라미터 통합 인슐린 저항성 지수(2018). 공식: ln(2×TG + 혈당) × BMI / ln(HDL-C). 인슐린 측정 없이 산출. Cutoff: <32 정상, >40 저항성. 멕시코 코호트에서 개발되어 한국인 적용 시 기준값 주의.',
+  cat:'insulin' },
+
+{ term:'OGTT',       full:'Oral Glucose Tolerance Test',
+  ko:'경구 당부하 검사. 75g 포도당 복용 후 2시간 혈당 측정. 당뇨 진단: 2h 혈당 ≥200 mg/dL. 내당능장애(IGT): 140–199 mg/dL. 공복혈당 단독보다 당뇨전단계 검출 민감도 높음. 인슐린 분비 1상·2상 평가에도 활용. 검사 전 3일간 정상 식이 유지 필요.',
+  cat:'insulin' },
+
+{ term:'IFG',        full:'Impaired Fasting Glucose',
+  ko:'공복혈당장애. 공복혈당 100–125 mg/dL (ADA 기준). 당뇨 발생 위험 연간 5–10%. OGTT 시행 시 약 절반에서 IGT 동반. 적극적 생활습관 교정(체중감량 5–7%, 운동)으로 당뇨 진행 위험 58% 감소 가능(DPP 연구).',
+  cat:'insulin' },
+
+{ term:'IGT',        full:'Impaired Glucose Tolerance',
+  ko:'내당능장애. OGTT 2시간 혈당 140–199 mg/dL. IFG보다 β세포 기능 저하 및 공복 후 혈당 조절 장애를 더 잘 반영. 심혈관 위험 증가와도 연관. 생활습관 중재로 당뇨 진행 예방 가능.',
+  cat:'insulin' },
+
+{ term:'LADA',       full:'Latent Autoimmune Diabetes in Adults',
+  ko:'성인 잠재성 자가면역 당뇨병 (1.5형). 성인기 발병, 초기 경구약에 반응하나 점진적으로 인슐린 의존. 진단: GAD65 항체 양성 + 발병 6개월 이상 경과 후 인슐린 비의존. HOMA-β 저하 확인. 조기 인슐린 도입이 β세포 보존에 유리.',
+  cat:'insulin' },
+
+{ term:'PCOS',       full:'Polycystic Ovary Syndrome',
+  ko:'다낭성 난소증후군. 가임기 여성의 약 10% 이환. Rotterdam 기준: 희발배란·안드로겐 과다·다낭성 난소 형태 중 2가지 이상. 인슐린 저항성이 핵심 병태생리 (VAI·TyG 상승). 메트포르민·피오글리타존·GLP-1 RA 치료에 반응.',
+  cat:'insulin' },
+
+{ term:'MetS',       full:'Metabolic Syndrome',
+  ko:'대사증후군. 복부비만·고혈당·이상지질혈증·고혈압 4가지 대사 이상이 복합된 임상군. IDF/NCEP-ATP III 기준 사용. 한국인 기준 허리둘레 남 ≥90cm·여 ≥85cm 포함. 심혈관 위험 및 T2DM 발생 위험 2–5배 증가.',
+  cat:'insulin' },
+
+{ term:'T2DM',       full:'Type 2 Diabetes Mellitus',
+  ko:'2형 당뇨병. 인슐린 저항성과 점진적 β세포 기능 저하로 발생. 전체 당뇨의 약 90% 차지. 진단: 공복혈당 ≥126 mg/dL, 또는 2h OGTT ≥200, 또는 HbA1c ≥6.5%, 또는 증상 + 무작위 혈당 ≥200 mg/dL. 심혈관·신장·망막 합병증 예방이 치료 목표.',
+  cat:'insulin' },
+
+{ term:'T1DM',       full:'Type 1 Diabetes Mellitus',
+  ko:'1형 당뇨병. 자가면역성 β세포 파괴로 절대적 인슐린 결핍 발생. GAD65·IA-2·ZnT8 항체 양성. 소아·청소년 호발하나 성인 발병(LADA)도 있음. 인슐린 치료 필수. DKA 위험 높음. C-peptide 소실로 HOMA-β 산출 불가.',
+  cat:'insulin' },
+
+{ term:'GAD65',      full:'Glutamic Acid Decarboxylase 65 Antibody',
+  ko:'GAD65 자가항체. 자가면역 당뇨 (T1DM·LADA) 진단에 가장 민감한 마커. 양성이면 β세포 자가면역 파괴 진행 중 시사. 역가(titer)가 높을수록 진행 속도 빠름. T2DM으로 오진된 LADA 환자 발굴에 중요.',
+  cat:'insulin' },
+
+{ term:'C-peptide',  full:'C-peptide (Connecting peptide)',
+  ko:'C-펩타이드. 프로인슐린 분해 시 인슐린과 등몰로 분비되는 펩타이드. 내인성 인슐린 분비능을 가장 직접적으로 반영 (외인성 인슐린 투여 영향 없음). 공복 C-peptide <0.6 ng/mL: 인슐린 의존 가능성 높음. HOMA-β 저하 시 확인 검사.',
+  cat:'insulin' },
+
+{ term:'IA-2',       full:'Islet Antigen 2 Antibody',
+  ko:'이소세포 항원-2 자가항체. T1DM·LADA 진단 마커. 단백질 타이로신 포스파타제 관련 단백에 대한 항체. GAD65 항체와 병용 시 자가면역 당뇨 민감도 향상. 소아 T1DM에서 GAD65보다 빈도 높을 수 있음.',
+  cat:'insulin' },
+
+{ term:'DKA',        full:'Diabetic Ketoacidosis',
+  ko:'당뇨병성 케톤산증. 인슐린 결핍 + 반조절 호르몬 과잉으로 지방분해 → 케톤체 축적 → 대사성 산증. 진단: 혈당 >250 mg/dL + pH <7.3 + 중탄산염 <18 mEq/L + 케톤혈증. T1DM·인슐린 중단·감염이 주요 유발 인자. 수액·인슐린·K⁺ 교정이 치료 핵심.',
+  cat:'insulin' },
+
+{ term:'IDF',        full:'International Diabetes Federation',
+  ko:'국제당뇨병연맹. 대사증후군 기준(IDF 2005)에서 복부비만을 필수 항목으로 포함. 아시아인 허리둘레 기준: 남 ≥90cm, 여 ≥80cm. 전 세계 당뇨 역학 통계(IDF Diabetes Atlas) 발간.',
+  cat:'insulin' },
+
+{ term:'DPP-4',      full:'Dipeptidyl Peptidase-4',
+  ko:'디펩티딜 펩티다제-4. 인크레틴(GLP-1·GIP)을 빠르게 분해하는 세린 프로테아제. DPP-4i(글립틴계)가 이 효소를 억제해 GLP-1 농도 유지 → 식후 인슐린 분비 자극·글루카곤 억제. T세포 표면에도 발현(CD26)되어 면역 조절에도 관여.',
+  cat:'insulin' },
+
+/* ── LIPID ── */
+{ term:'LDL-C',      full:'Low-Density Lipoprotein Cholesterol',
+  ko:'저밀도 지단백 콜레스테롤. 죽상경화의 주요 원인 지질. Friedewald 공식으로 추정하거나 직접법으로 측정. 위험도별 목표: 초고위험 <55 mg/dL, 고위험 <70 mg/dL, 중위험 <100 mg/dL. TG >400 mg/dL 시 Friedewald 부정확 → 직접법 또는 Martin-Hopkins 공식 사용.',
+  cat:'lipid' },
+
+{ term:'HDL-C',      full:'High-Density Lipoprotein Cholesterol',
+  ko:'고밀도 지단백 콜레스테롤. 말초 조직에서 간으로 콜레스테롤 역수송. 낮을수록 심혈관 위험 증가. 저HDL: 남 <40 mg/dL, 여 <50 mg/dL. 유산소운동·금연이 가장 효과적인 증가 방법. AIP·VAI 계산에 포함.',
+  cat:'lipid' },
+
+{ term:'VLDL-C',     full:'Very Low-Density Lipoprotein Cholesterol',
+  ko:'초저밀도 지단백 콜레스테롤. 추정값: TG ÷ 5 (Friedewald, TG <400 mg/dL일 때 유효). Non-HDL-C 계산에 포함. 인슐린 저항성 시 간의 VLDL 과분비로 상승. TG 극도 상승 시 직접 측정 필요.',
+  cat:'lipid' },
+
+{ term:'LDLR',       full:'LDL Receptor',
+  ko:'LDL 수용체. 간세포 표면에서 LDL을 인식·흡수하여 혈중 LDL-C를 제거. FH에서 LDLR 유전자 변이로 기능 소실 → 혈중 LDL-C 극도 상승. 스타틴이 LDLR 발현을 증가시키는 기전으로 LDL-C 감소. PCSK9이 LDLR 분해를 촉진.',
+  cat:'lipid' },
+
+{ term:'NCEP-ATP',   full:'National Cholesterol Education Program – Adult Treatment Panel',
+  ko:'미국 국가 콜레스테롤 교육 프로그램 성인 치료 패널. ATP III(2001) 기준이 대사증후군 정의에 널리 사용. LDL-C 목표 중심의 이상지질혈증 관리 지침. 이후 ACC/AHA 2013 가이드라인으로 부분 대체됨.',
+  cat:'lipid' },
+
+{ term:'CRI-I',      full:'Castelli Risk Index I (TC/HDL-C)',
+  ko:'카스텔리 위험 지수 I. 공식: TC ÷ HDL-C. 심혈관 위험 평가 비율 지표. 목표: 남 <5.0, 여 <4.5. 단순하고 공복 불필요. TC와 HDL-C 양방향 변화를 동시 반영하여 LDL-C 단독보다 잔류 위험 포착에 유리.',
+  cat:'lipid' },
+
+{ term:'CRI-II',     full:'Castelli Risk Index II (LDL-C/HDL-C)',
+  ko:'카스텔리 위험 지수 II. 공식: LDL-C ÷ HDL-C. 아테로젠성 지질과 보호 지질의 직접 비교. 목표: 남 <3.5, 여 <3.0. CRI-I보다 LDL 정보 반영이 명확. 대사증후군·인슐린 저항성 평가에 보조 지표로 활용.',
+  cat:'lipid' },
+
+{ term:'TC',         full:'Total Cholesterol',
+  ko:'총콜레스테롤. LDL-C + HDL-C + VLDL-C(≈TG/5)의 합산. 단독 지표보다 Non-HDL-C·LDL-C·비율 지표와 병행 해석. 바람직한 수준 <200 mg/dL, 경계 200–239, 고위험 ≥240 mg/dL. 비공복 검체에서도 신뢰도 비교적 유지.',
+  cat:'lipid' },
+
+{ term:'TG',         full:'Triglyceride',
+  ko:'중성지방(트리글리세라이드). 에너지 저장·운반 지질. 공복 목표 <150 mg/dL. 200–499 mg/dL: 경계~고도 상승. ≥500 mg/dL: 급성 췌장염 위험. 상승 원인: 인슐린 저항성·당뇨·음주·고탄수화물 식이·갑상선저하. 오메가-3(4g/일)·피브레이트로 감소.',
+  cat:'lipid' },
+
+{ term:'VLDL',       full:'Very Low-Density Lipoprotein',
+  ko:'초저밀도 지단백. 간에서 합성되어 TG를 말초 조직으로 운반. 혈중 TG의 주요 운반체. VLDL-C ≈ TG/5 (Friedewald 추정). 인슐린 저항성 시 간에서 VLDL 과분비 → TG 상승·HDL 저하·small dense LDL 증가.',
+  cat:'lipid' },
+
+{ term:'IDL',        full:'Intermediate-Density Lipoprotein',
+  ko:'중간밀도 지단백. VLDL에서 LDL로 전환되는 중간 단계 입자. TG와 콜레스테롤 모두 함유. 직접 측정 어려워 Non-HDL-C·Remnant-C에 포함되어 간접 평가. 죽상경화 촉진 효과 있음.',
+  cat:'lipid' },
+
+{ term:'AIP',        full:'Atherogenic Index of Plasma',
+  ko:'혈장 아테로젠성 지수. 공식: log₁₀(TG/HDL-C). Cutoff: <0.11 저위험, 0.11–0.21 중간, >0.21 고위험. 인슐린 저항성·대사증후군과 밀접. TG/HDL 비율(>3.5 고위험)의 로그 변환 버전으로 정규분포에 더 적합.',
+  cat:'lipid' },
+
+{ term:'Non-HDL-C',  full:'Non-HDL Cholesterol',
+  ko:'총콜레스테롤에서 HDL-C를 뺀 값 (= LDL + VLDL + IDL + Lp(a)). 모든 아테로젠성 지단백을 포괄. 비공복 샘플에서도 신뢰도 유지되어 LDL-C보다 실용적. LDL 목표치 + 30 mg/dL = Non-HDL 목표 (초고위험: <85, 고위험: <100 mg/dL).',
+  cat:'lipid' },
+
+{ term:'Remnant-C',  full:'Remnant Cholesterol',
+  ko:'잔류 콜레스테롤. TC − LDL-C − HDL-C. VLDL·IDL·chylomicron 잔류 입자 내 콜레스테롤 총합. 정상 <17 mg/dL. 스타틴으로 LDL을 조절한 후에도 TG 상승 시 잔여 심혈관 위험 반영. 오메가-3·피브레이트·SGLT2i로 감소.',
+  cat:'lipid' },
+
+{ term:'ApoB',       full:'Apolipoprotein B',
+  ko:'아포지단백 B. LDL·VLDL·IDL·Lp(a) 각 입자에 1분자씩 존재 → 아테로젠성 지단백 입자 수를 직접 반영. 정상 <90 mg/dL (고위험 <80, 초고위험 <65). LDL-C보다 심혈관 사건 예측력 우수. TG 높고 LDL 낮은 대사증후군 환자에서 특히 유용.',
+  cat:'lipid' },
+
+{ term:'FH',         full:'Familial Hypercholesterolemia',
+  ko:'가족성 고콜레스테롤혈증. LDL 수용체(LDLR)·ApoB·PCSK9 변이로 LDL 제거 장애. 이형접합: LDL-C 190–400 mg/dL, 동형접합: >400 mg/dL. 조기 심혈관 사건(남 <55세, 여 <60세) 위험 매우 높음. 진단: Simon Broome 또는 DLCN 기준. 가족 cascade 검사 필수.',
+  cat:'lipid' },
+
+{ term:'DLCN',       full:'Dutch Lipid Clinic Network score',
+  ko:'가족성 고콜레스테롤혈증(FH) 진단 점수 체계. LDL-C 수치·가족력·임상 소견(황색종·각막환)·유전자 검사 결과에 점수 부여. 합산: ≤2 가능성 낮음, 3–5 의심, 6–8 확진 가능성 높음, ≥9 확진. 한국 보험기준 PCSK9i 처방에도 활용.',
+  cat:'lipid' },
+
+{ term:'PCSK9',      full:'Proprotein Convertase Subtilisin/Kexin type 9',
+  ko:'전구단백질 전환효소 서브틸리신/켁신 9형. 간세포 표면 LDL 수용체를 분해하는 효소. PCSK9 억제 시 LDL 수용체 증가 → 혈중 LDL-C 50–65% 추가 감소. FH·초고위험군에서 스타틴에 추가하는 차세대 지질강하 표적.',
+  cat:'lipid' },
+
+{ term:'PCSK9i',     full:'PCSK9 Inhibitor',
+  ko:'PCSK9 억제제. 에볼로쿠맙(Repatha)·알리로쿠맙(Praluent). 2주 또는 4주 1회 피하주사. 스타틴 최대 내약 용량에 추가 시 LDL-C 60% 추가 감소. 한국 건강보험 급여: FH 확진 또는 초고위험+LDL 미도달+스타틴 내약 조건.',
+  cat:'lipid' },
+
+{ term:'ASCVD',      full:'Atherosclerotic Cardiovascular Disease',
+  ko:'죽상경화성 심혈관 질환. 관상동맥 질환(협심증·심근경색)·뇌졸중·말초동맥 질환 포함. ASCVD 기왕력 환자는 초고위험군으로 LDL-C <55 mg/dL 목표. 10년 ASCVD 위험도(PCE·PREVENT·SCORE2)로 1차예방 치료 결정.',
+  cat:'lipid' },
+
+{ term:'CRI',        full:'Castelli Risk Index',
+  ko:'카스텔리 위험 지수. Framingham 코호트 유래. CRI-I = TC/HDL-C, CRI-II = LDL-C/HDL-C. CRI-I 남 >4.4·여 >3.7 시 고위험. LDL-C·HDL-C 양방향 정보를 단일 수치로 요약. 단독 사용보다 다른 위험도 지표와 병행 해석 권고.',
+  cat:'lipid' },
+
+{ term:'ULN',        full:'Upper Limit of Normal',
+  ko:'정상상한값. 검사의 정상 참고 범위 상단. APRI 계산 시 AST ULN(통상 40 U/L)으로 나누어 정규화. 기관별 정상범위 차이가 있어 자기 기관 기준값 확인 필요.',
+  cat:'lipid' },
+
+/* ── CARDIO ── */
+{ term:'PREVENT',    full:'Predicting Risk of CVD EVENTs (ACC/AHA 2023)',
+  ko:'ACC/AHA 2023 발표 최신 심혈관 위험도 예측 공식. 기존 PCE 대비: eGFR 추가(CKD 위험 반영), 인종 변수 제거, 심부전 위험도 병행 산출. 적용 연령 30–79세. 한국인 포함 아시아인에서 PCE보다 과대추정 문제 개선. 10년·30년 CVD 위험 동시 산출.',
+  cat:'cardio' },
+
+{ term:'SCORE2',     full:'Systematic COronary Risk Evaluation 2 (ESC 2021)',
+  ko:'유럽심장학회 2021년 심혈관 위험도 평가 체계. 비당뇨 40–69세 대상. 변수: 나이·성별·흡연·수축기혈압·non-HDL-C. 지역별 보정 계수 적용(한국: low-to-moderate risk region). Cutoff: <2.5% 저위험, 5–10% 중간, ≥10% 고위험.',
+  cat:'cardio' },
+
+{ term:'SCORE2-OP',  full:'SCORE2 for Older Persons',
+  ko:'70세 이상 고령 환자용 SCORE2. 기본 SCORE2와 동일 변수이나 고령에서 보정된 별도 계수 사용. 과잉치료 방지를 위해 절대 위험 외 기대여명·허약도 함께 고려하도록 권고.',
+  cat:'cardio' },
+
+{ term:'PCE',        full:'Pooled Cohort Equations (ACC/AHA 2013)',
+  ko:'ACC/AHA 2013 ASCVD 10년 위험 예측 공식. 백인·흑인 코호트 기반으로 아시아인에서 과대추정 경향. 적용 연령 40–79세. 변수: 나이·TC·HDL-C·SBP·혈압약·흡연·당뇨. 현재 PREVENT(2023)로 점차 대체 중.',
+  cat:'cardio' },
+
+{ term:'CVD',        full:'Cardiovascular Disease',
+  ko:'심혈관 질환. 심장·혈관 관련 질환의 총칭. 좁게는 ASCVD(죽상경화성), 넓게는 심부전·부정맥·판막 질환 포함. 전 세계 1위 사망 원인. PREVENT 공식은 ASCVD + 심부전을 합친 넓은 CVD 위험도 산출.',
+  cat:'cardio' },
+
+{ term:'SBP',        full:'Systolic Blood Pressure',
+  ko:'수축기혈압. 심장 수축 시 동맥 내 최고 혈압. 정상 <120 mmHg, 고혈압 전단계 120–129, 고혈압 1기 130–139, 2기 ≥140. 심혈관 위험도 계산 시 핵심 변수. 목표: 대부분 <130 mmHg (CKD·당뇨 포함).',
+  cat:'cardio' },
+
+{ term:'DBP',        full:'Diastolic Blood Pressure',
+  ko:'이완기혈압. 심장 이완 시 동맥 내 최저 혈압. 고혈압 2기: ≥90 mmHg. 고령에서는 수축기 고혈압이 주요 위험인자. J-curve 현상: 과도한 이완기혈압 저하(특히 <60 mmHg)도 심혈관 사건 위험 증가.',
+  cat:'cardio' },
+
+{ term:'CAD',        full:'Coronary Artery Disease',
+  ko:'관상동맥 질환. 관상동맥 죽상경화로 심근 허혈 발생. 안정형 협심증·불안정형 협심증·심근경색 포함. 기왕력 시 초고위험군 분류(LDL <55 mg/dL 목표). 진단: 관상동맥 CT·핵의학·심혈관 조영술.',
+  cat:'cardio' },
+
+{ term:'HF',         full:'Heart Failure',
+  ko:'심부전. 심장이 신체 요구량에 맞는 혈액을 충분히 공급하지 못하는 상태. HFrEF(EF<40%)·HFmrEF·HFpEF로 분류. SGLT2i(다파글리플로진·엠파글리플로진)는 HFrEF·HFpEF 모두에서 입원·사망 감소 효과 입증.',
+  cat:'cardio' },
+
+{ term:'ACC',        full:'American College of Cardiology',
+  ko:'미국 심장학회. AHA와 공동으로 심혈관 임상진료 지침 발행. 고혈압·이상지질혈증·당뇨·비만 등 심혈관 위험인자 관리 가이드라인 주도.',
+  cat:'cardio' },
+
+{ term:'AHA',        full:'American Heart Association',
+  ko:'미국 심장협회. ACC와 공동 가이드라인 발행. PREVENT(2023) 심혈관 위험도 공식, Life\'s Essential 8 심혈관 건강 지표 발표 기관.',
+  cat:'cardio' },
+
+{ term:'ESC',        full:'European Society of Cardiology',
+  ko:'유럽 심장학회. SCORE2·SCORE2-OP 심혈관 위험도 공식, 이상지질혈증·고혈압·당뇨 관련 가이드라인 발행. 한국은 ESC 저~중위험 지역(low-to-moderate risk region)으로 분류.',
+  cat:'cardio' },
+
+{ term:'EMPA-REG',   full:'EMPA-REG OUTCOME trial',
+  ko:'엠파글리플로진(Empagliflozin, SGLT2i) 대규모 심혈관 결과 연구(2015). T2DM + 고위험 심혈관 환자에서 심혈관 사망 38%, 심부전 입원 35% 유의한 감소 확인. SGLT2i의 심장·신장 보호 효과를 처음 입증한 landmark 연구.',
+  cat:'cardio' },
+
+{ term:'DAPA-HF',    full:'DAPA-HF trial (Dapagliflozin and Prevention of Adverse Outcomes in Heart Failure)',
+  ko:'다파글리플로진(Dapagliflozin, SGLT2i) 심부전 결과 연구(2019). HFrEF 환자(당뇨 유무 무관)에서 심혈관 사망·악화 심부전 복합 결과 26% 유의한 감소. SGLT2i를 비당뇨 심부전 치료제로 확장한 핵심 연구.',
+  cat:'cardio' },
+
+{ term:'FIDELIO-DKD', full:'FIDELIO-DKD trial',
+  ko:'피네레논(비스테로이드성 MRA) 당뇨성 신장병 결과 연구(2020). CKD + T2DM 환자에서 신기능 저하 및 신부전 복합 결과 유의한 감소(18%). 스피로놀락톤 대비 고칼륨혈증 및 부작용 감소. Finerenone 신장 보호 근거 연구.',
+  cat:'cardio' },
+
+{ term:'FIGARO-DKD', full:'FIGARO-DKD trial',
+  ko:'피네레논 당뇨성 신장병 심혈관 결과 연구(2021). FIDELIO-DKD의 자매 연구. 심혈관 사망·비치명적 심근경색·뇌졸중·심부전 입원 복합 결과 13% 감소. FIDELIO + FIGARO 통합 분석(FIDELITY)으로 피네레논의 신장·심혈관 이중 보호 확립.',
+  cat:'cardio' },
+
+{ term:'CREDENCE',   full:'CREDENCE trial (Canagliflozin and Renal Events in Diabetes with Established Nephropathy)',
+  ko:'카나글리플로진(SGLT2i) 당뇨성 신장병 신장 결과 연구(2019). 투석·신이식·신부전 등 신장 복합 결과 30% 감소. SGLT2i를 신장 보호 목적으로 처음 설계하여 승인을 얻은 연구. eGFR ≥30인 현성 당뇨성 신병증에서 근거 확립.',
+  cat:'cardio' },
+
+/* ── OBESITY ── */
+{ term:'BMI',        full:'Body Mass Index',
+  ko:'체질량지수. 공식: 체중(kg) / 신장²(m²). 비만 기준: WHO 기준 ≥30, 한국·아시아 기준 ≥25(과체중 ≥23). 내장지방량을 직접 반영하지 않는 한계 → WHtR·WC·VAI 병행 권고. 약물 용량 조정 시 IBW 또는 ABW 사용.',
+  cat:'obesity' },
+
+{ term:'VAI',        full:'Visceral Adiposity Index',
+  ko:'내장 지방 기능장애 지수(Amato 2010). 성별 공식 상이. 변수: 허리둘레·BMI·TG·HDL-C. Cutoff: <1.0 저위험, >2.0 고위험. 복부 CT 내장지방량과 유의한 상관. T2DM·PCOS·심혈관 위험 예측. TG·HDL을 mmol/L로 변환 후 입력.',
+  cat:'obesity' },
+
+{ term:'LAP',        full:'Lipid Accumulation Product',
+  ko:'지질 축적 복합 지수. 공식: (WC − 기준값) × TG[mmol/L]. 남성 WC기준 65cm, 여성 58cm. 고위험: 남 >58.1, 여 >44.1. BMI보다 내장비만·심혈관 위험을 더 잘 반영. TG 1mmol/L = 88.57 mg/dL.',
+  cat:'obesity' },
+
+{ term:'WHR',        full:'Waist-Hip Ratio',
+  ko:'허리-엉덩이 비율. 복부비만 지표. WHO 기준 고위험: 남 ≥0.90, 여 ≥0.85. 臀부 근육량·피하지방과 복부 내장지방을 동시 반영. WHtR보다 측정 변동성 크나 내장지방 분포 감별에 유용.',
+  cat:'obesity' },
+
+{ term:'WHtR',       full:'Waist-Height Ratio',
+  ko:'허리-신장 비율. "허리둘레는 키의 절반 이하" 규칙으로 기억. Cutoff <0.5 건강, ≥0.5 복부비만 위험. BMI보다 심혈관 사건·T2DM 예측력 우수. 신장 보정으로 인종·성별 간 단일 기준 적용 가능.',
+  cat:'obesity' },
+
+{ term:'WC',         full:'Waist Circumference',
+  ko:'허리둘레. 복부비만(내장지방)의 직접 지표. 복부비만 기준: 한국인 남 ≥90cm, 여 ≥85cm (IDF 기준). MetS 진단 핵심 기준. 측정 위치: 늑골 하연~장골능 사이 중간점, 호기 말.',
+  cat:'obesity' },
+
+{ term:'IBW',        full:'Ideal Body Weight',
+  ko:'이상체중. 약물 용량 조정 기준. 공식: 남 = 50 + 2.3 × (신장[인치] − 60), 여 = 45.5 + 2.3 × (신장[인치] − 60). 실제 체중이 IBW보다 20% 이상이면 ABW 사용 권고.',
+  cat:'obesity' },
+
+{ term:'ABW',        full:'Adjusted Body Weight',
+  ko:'조정체중. 비만 환자 약물 용량 계산에 사용. 공식: IBW + 0.4 × (실제체중 − IBW). 아미노글리코사이드·Cockcroft-Gault CrCl 계산 시 적용. 실제체중과 IBW의 중간값으로 수분·지방 분포 보정.',
+  cat:'obesity' },
+
+{ term:'GLP-1 RA',   full:'Glucagon-Like Peptide-1 Receptor Agonist',
+  ko:'GLP-1 수용체 작용제. 식후 혈당 조절·식욕 억제·체중 감소 효과. 세마글루타이드(Ozempic/Wegovy)·리라글루타이드(Victoza/Saxenda). 심혈관·신장 보호 효과 입증. MASLD 섬유화 개선 근거 축적 중. 오심·구토 부작용 주의.',
+  cat:'obesity' },
+
+{ term:'GLP-1',      full:'Glucagon-Like Peptide-1',
+  ko:'글루카곤 유사 펩타이드-1. 소장 L세포에서 식사 후 분비되는 인크레틴 호르몬. 인슐린 분비 촉진·글루카곤 억제·위 배출 지연·식욕 억제 효과. 반감기 약 2분(DPP-4에 의해 분해). GLP-1 RA는 분해 저항성 유도체. DPP-4i는 내인성 GLP-1 농도 유지.',
+  cat:'obesity' },
+
+{ term:'METS-VF',    full:'Metabolic Score for Visceral Fat',
+  ko:'내장지방 대사 점수. 공식 (남·여 상이): 허리둘레·TG·혈당·혈압 등 대사 변수로 내장지방량 추정. METS-IR의 파생 지표. 복부 CT 없이 내장지방 위험 평가. 인슐린 저항성·T2DM·심혈관 위험 예측 보조.',
+  cat:'obesity' },
+
+{ term:'SGLT2i',     full:'Sodium-Glucose Cotransporter 2 Inhibitor',
+  ko:'SGLT2 억제제. 신장 근위세뇨관에서 포도당 재흡수 억제 → 요중 당배출로 혈당 감소. 엠파글리플로진·다파글리플로진·카나글리플로진. 심부전·CKD 보호 효과 입증(EMPA-REG·DAPA-HF·CREDENCE). eGFR <20 시 혈당강하 효과 감소.',
+  cat:'obesity' },
+
+/* ── THYROID / ADRENAL ── */
+{ term:'ARR',        full:'Aldosterone-Renin Ratio',
+  ko:'알도스테론-레닌 비율. 원발성 알도스테론증 1차 스크리닝 검사. 양성 기준: 일반적으로 ≥20 ng/dL / (ng/mL/hr). 이른 오전·좌위에서 채혈 권고. 베타차단제·ACEi·ARB·이뇨제가 결과에 영향 → 해석 시 고려 필요.',
+  cat:'thyroid' },
+
+{ term:'PAC',        full:'Plasma Aldosterone Concentration',
+  ko:'혈장 알도스테론 농도. ARR 계산의 분자. 단위: ng/dL 또는 pg/mL(÷10) 또는 pmol/L(÷27.74). 정상 참고치: 3–16 ng/dL (좌위·오전 기준). 원발성 알도스테론증에서 자율 분비로 상승. ARR 해석 시 PAC 절대값(≥15 ng/dL)도 동반 확인 필요.',
+  cat:'adrenal' },
+
+{ term:'DRC',        full:'Direct Renin Concentration',
+  ko:'직접 레닌 농도. 단위: mIU/L 또는 μIU/mL. PRA(혈장 레닌 활성도)와는 측정 원리가 다르며 절단값도 완전히 다름. PRA 1 ng/mL/hr ≈ DRC 14.1 mIU/L (상관관계 비선형). 자동화 면역분석법으로 측정 용이하나 ARR 절단값은 DRC 기반으로 별도 설정 필요.',
+  cat:'adrenal' },
+
+{ term:'DHP-CCB',    full:'Dihydropyridine Calcium Channel Blocker',
+  ko:'디하이드로피리딘계 칼슘 채널 차단제. 암로디핀·니페디핀·펠로디핀 등. ARR 측정 전 2주 세척 권고 (레닌 자극→ ARR 위음성 가능). Non-DHP-CCB(베라파밀)는 ARR에 간섭이 적어 ARR 검사 전 대체 약물로 사용 가능.',
+  cat:'adrenal' },
+
+{ term:'PRA',        full:'Plasma Renin Activity',
+  ko:'혈장 레닌 활성도. 단위: ng/mL/hr. ARR의 분모. 원발성 알도스테론증에서 낮음. 직접 레닌 농도(DRC)로도 측정 가능하며 이 경우 환산 계수 다름. 이뇨제 복용 시 상승, 베타차단제 복용 시 하강하여 ARR 위양성/위음성 유발.',
+  cat:'thyroid' },
+
+{ term:'AVS',        full:'Adrenal Vein Sampling',
+  ko:'부신정맥채혈. ARR 양성 후 원발성 알도스테론증 확진 시 편측성(선종) vs 양측성(과증식) 감별을 위한 표준 검사. 부신정맥에서 알도스테론·코르티솔 동시 채혈하여 편측화 지수(LI) 산출. 전문화된 중재방사선과 수기 필요.',
+  cat:'thyroid' },
+
+{ term:'TSH',        full:'Thyroid-Stimulating Hormone',
+  ko:'갑상선 자극 호르몬. 뇌하수체 전엽 분비. 갑상선 기능 평가의 1차 선별 검사. 정상범위 통상 0.5–4.5 mIU/L. 상승: 갑상선 기능 저하. 억제: 갑상선 기능 항진 또는 TSH 분비 억제 약물. 임신 중 trimester별 기준값 다름.',
+  cat:'thyroid' },
+
+{ term:'FTI',        full:'Free Thyroxine Index',
+  ko:'유리 티록신 지수. 공식: T4 × T3-Uptake / 100. TBG 이상(임신·에스트로겐·단백 이상)이 있을 때 결합형 T4를 보정. 현재는 Free T4 직접법 보급으로 임상 사용 감소. 정상범위: 6.0–10.5.',
+  cat:'thyroid' },
+
+{ term:'T4',         full:'Thyroxine',
+  ko:'티록신 (테트라요오드티로닌). 갑상선이 분비하는 주요 호르몬. 말초에서 탈요오드화 효소에 의해 활성형 T3로 전환. 총 T4 정상: 5.0–12.0 µg/dL, Free T4 정상: 0.8–1.8 ng/dL. TSH와 음성 피드백으로 조절.',
+  cat:'thyroid' },
+
+{ term:'T3',         full:'Triiodothyronine',
+  ko:'트리요오드티로닌. 생물학적 활성이 가장 강한 갑상선 호르몬. T4의 말초 전환(약 80%)과 갑상선 직접 분비(약 20%)로 공급. Free T3 정상: 2.3–4.2 pg/mL. T3 독성증: TSH 억제 + 정상 T4 + T3 상승.',
+  cat:'thyroid' },
+
+{ term:'TBG',        full:'Thyroxine-Binding Globulin',
+  ko:'티록신 결합 글로불린. 혈중 T4·T3의 70–80% 결합 운반. 임신·에스트로겐·간질환 시 증가 → 총 T4 상승(Free T4는 정상). 안드로겐·네프로제 시 감소. FTI는 TBG 이상 시 T4 보정 목적.',
+  cat:'thyroid' },
+
+{ term:'TRAb',       full:'TSH Receptor Antibody',
+  ko:'TSH 수용체 항체. 그레이브스병의 자가항체. 수용체 자극 → 갑상선 기능 항진. 양성이면 그레이브스병 확진 가능. 항갑상선제 치료 종료 전 음전화 여부로 재발 위험 예측. 임신 중 측정 시 태아 갑상선 기능 항진 위험 평가.',
+  cat:'thyroid' },
+
+{ term:'TPO Ab',     full:'Thyroid Peroxidase Antibody',
+  ko:'갑상선 과산화효소 항체. 하시모토 갑상선염의 주요 진단 마커. 자가면역 갑상선 질환에서 95% 이상 양성. 그레이브스병에서도 양성 가능. 고역가일수록 갑상선 기능 저하 진행 속도 빠름.',
+  cat:'thyroid' },
+
+{ term:'Tg Ab',      full:'Thyroglobulin Antibody',
+  ko:'티로글로불린 항체. TPO Ab와 함께 자가면역 갑상선 질환 마커. 갑상선암 수술 후 Tg 모니터링 시 간섭 유발 → Tg 측정값 위음성화 가능. 갑상선암 추적 시 Tg Ab 역가 추세 자체도 재발 지표로 활용.',
+  cat:'thyroid' },
+
+{ term:'PTU',        full:'Propylthiouracil',
+  ko:'프로필티오우라실. 항갑상선제. 갑상선 과산화효소 억제로 갑상선 호르몬 합성 차단 + T4→T3 말초 전환 억제. 임신 1분기·갑상선 위기 시 우선 선택. 간독성(드물게 전격성 간부전) 위험으로 장기 사용 시 메티마졸 선호.',
+  cat:'thyroid' },
+
+{ term:'ACEi',       full:'Angiotensin-Converting Enzyme Inhibitor',
+  ko:'ACE 억제제. 안지오텐신 I → II 전환 차단. 혈압 강하·신장 보호·심부전 개선 효과. 라미프릴·에날라프릴·리시노프릴 등. 원발성 알도스테론증 스크리닝 전 중단 필요. 기침·혈관부종 부작용 시 ARB로 교체.',
+  cat:'thyroid' },
+
+{ term:'ARB',        full:'Angiotensin Receptor Blocker',
+  ko:'안지오텐신 수용체 차단제. 안지오텐신 II의 AT1 수용체 직접 차단. 혈압 강하·신장 보호·심부전 효과 ACEi와 유사. 기침 부작용 없어 ACEi 불내성 시 대체. 로사르탄·발사르탄·이르베사르탄 등. ARR 스크리닝 전 중단 필요.',
+  cat:'thyroid' },
+
+/* ── RENAL ── */
+{ term:'eGFR',       full:'estimated Glomerular Filtration Rate',
+  ko:'추정 사구체 여과율. 신장 기능의 표준 지표 (mL/min/1.73m²). CKD-EPI 2021 공식이 현재 표준. CKD 병기: G1 ≥90, G2 60–89, G3a 45–59, G3b 30–44, G4 15–29, G5 <15. 급성 변화 시 sCr 변동으로 부정확.',
+  cat:'renal' },
+
+{ term:'CKD',        full:'Chronic Kidney Disease',
+  ko:'만성 신장병. eGFR <60 또는 신장 손상 마커(알부민뇨·혈뇨·영상 이상 등) ≥3개월 지속. 당뇨·고혈압이 주원인. CKD-MBD(미네랄 뼈 질환), 빈혈, 심혈관 위험 증가 동반. SGLT2i·finerenone으로 진행 지연.',
+  cat:'renal' },
+
+{ term:'CKD-EPI',    full:'CKD Epidemiology Collaboration equation',
+  ko:'2021 인종 중립적 eGFR 공식. 성별·sCr·나이만 사용 (흑인 계수 제거). MDRD 공식보다 eGFR 정상~경미 감소 구간에서 정확. 한국 임상에서 공식 채택. 급성 신손상 시 정확도 저하.',
+  cat:'renal' },
+
+{ term:'CrCl',       full:'Creatinine Clearance',
+  ko:'크레아티닌 청소율. Cockcroft-Gault 공식: (140−나이) × 체중 / (72 × sCr) × (여성 0.85). 단위 mL/min. 약물 용량 조정에 주로 사용(eGFR과 달리 체표면적 보정 없음). 비만 환자는 IBW 또는 ABW 적용 권고.',
+  cat:'renal' },
+
+{ term:'sCr',        full:'Serum Creatinine',
+  ko:'혈청 크레아티닌. 근육 대사 산물로 신장에서 거의 대부분 배설. 정상 남 0.7–1.2 mg/dL, 여 0.5–1.0 mg/dL. 근육량·식이·신세뇨관 분비에 영향 받음. eGFR·CrCl 계산의 기본 변수.',
+  cat:'renal' },
+
+{ term:'UACR',       full:'Urine Albumin-Creatinine Ratio',
+  ko:'요 알부민-크레아티닌 비율. 단위 mg/g. 신장 손상 조기 평가의 핵심 마커. A1 <30 정상, A2 30–300 미세알부민뇨, A3 >300 현성 알부민뇨. 당뇨 환자 연 1회 측정 권고(ADA). 아침 첫 소변 또는 무작위 spot urine 사용.',
+  cat:'renal' },
+
+{ term:'ESA',        full:'Erythropoiesis-Stimulating Agent',
+  ko:'조혈자극제. CKD 빈혈 치료에 사용. 에포에틴·다르베포에틴 등 EPO 유사체. Hb 목표: 10–12 g/dL (과교정 시 혈전·심혈관 위험 증가). 투여 전 철결핍 교정 필수. G4–G5 환자에서 주로 사용.',
+  cat:'renal' },
+
+{ term:'PTH',        full:'Parathyroid Hormone',
+  ko:'부갑상선 호르몬. CKD-MBD(만성 신장병 연관 광물 뼈 질환)의 핵심 지표. CKD 진행 시 인 축적 → PTH 상승 → 이차성 부갑상선 항진증. 목표: CKD G3–G5에서 정상상한의 2–9배 이내. 비타민 D·인산결합제·시나칼세트로 관리.',
+  cat:'renal' },
+
+{ term:'NSAID',      full:'Non-Steroidal Anti-Inflammatory Drug',
+  ko:'비스테로이드성 항염증제. COX-1/2 억제로 프로스타글란딘 합성 차단 → 신장 혈류 감소 → 급성 신손상·나트륨 저류 위험. CKD·심부전·노인 환자에서 장기 사용 금기. 이부프로펜·나프록센·인도메타신 등.',
+  cat:'renal' },
+
+{ term:'DOAC',       full:'Direct Oral Anticoagulant',
+  ko:'직접 경구 항응고제. 아픽사반·다비가트란·리바록사반·에독사반. 신장 배설 비율 차이: 다비가트란 80%, 리바록사반 35%, 아픽사반 27%. CrCl <30 시 대부분 용량 감량 또는 금기. 와파린 대비 출혈 위험 예측 용이.',
+  cat:'renal' },
+
+{ term:'RAS',        full:'Renin-Angiotensin System',
+  ko:'레닌-안지오텐신계. 혈압·나트륨·수분 항상성 조절 핵심 축. ACEi 또는 ARB로 차단 시 신장 보호·단백뇨 감소. 원발성 알도스테론증에서 안지오텐신 II 독립적 알도스테론 과분비. ARR 측정 전 ACEi·ARB·이뇨제 중단 필요.',
+  cat:'renal' },
+
+{ term:'Finerenone', full:'Finerenone (Kerendia)',
+  ko:'비스테로이드성 미네랄코르티코이드 수용체 길항제(MRA). 당뇨성 신장병에서 FIDELIO-DKD·FIGARO-DKD 연구로 eGFR 저하 및 심혈관 사건 감소 입증. 스피로놀락톤보다 부인과 부작용·고칼륨혈증 위험 낮음. UACR·eGFR 모니터링 필수.',
+  cat:'renal' },
+
+{ term:'MRA',        full:'Mineralocorticoid Receptor Antagonist',
+  ko:'미네랄코르티코이드(알도스테론) 수용체 길항제. 스테로이드성(스피로놀락톤·에플레레논)과 비스테로이드성(피네레논)으로 분류. 원발성 알도스테론증·심부전·CKD 치료에 사용. 고칼륨혈증 위험 — eGFR·K⁺ 모니터링 필수.',
+  cat:'renal' },
+
+{ term:'TTKG',       full:'Transtubular Potassium Gradient',
+  ko:'집합관 경벽 칼륨 구배. 집합관에서의 K⁺ 분비 능력을 간접 평가하는 지표. 공식: (요K⁺/혈청K⁺) ÷ (요삼투압/혈장삼투압). 전제 조건: 요삼투압>혈장삼투압, 요Na⁺≥25 mEq/L. 저칼륨혈증 시 <3=신외성 / ≥3=신성 손실. 고칼륨혈증 시 >10=신외성 / <7=신성 배설장애(저알도스테론증·저항성). 당뇨신병증의 Type IV RTA, Addison병 평가에 유용.',
+  cat:'renal' },
+
+{ term:'ADH',        full:'Antidiuretic Hormone (Vasopressin / AVP)',
+  ko:'항이뇨호르몬. 뇌하수체 후엽에서 분비. 신장 집합관의 AQP2 수로를 삽입시켜 수분 재흡수 증가 → 요 농축. TTKG 해석의 전제 조건(Uosm > Posm)은 ADH 작용이 있어야 충족 가능. 요붕증(ADH 결핍 또는 저항)에서 Uosm < Posm로 TTKG 무효.',
+  cat:'renal' },
+
+{ term:'RTA',        full:'Renal Tubular Acidosis',
+  ko:'신세관산증. 신장 세뇨관의 산염기 조절 장애로 인한 비음이온간격 대사성 산증. Type I(원위형): 원위 H⁺ 분비 장애 → 저칼륨+요 pH>5.5. Type II(근위형): HCO₃⁻ 재흡수 장애. Type IV: 저알도스테론증/저항성 → 고칼륨혈증 동반(당뇨신병증에서 흔함).',
+  cat:'renal' },
+
+{ term:'CKD-MBD',    full:'CKD-Mineral and Bone Disorder',
+  ko:'만성 신장병 연관 광물 뼈 질환. 인 저류 → FGF-23 상승 → 비타민 D 활성화 저하 → Ca²⁺ 흡수 감소 → PTH 상승(이차성 부갑상선항진증) → 뼈·혈관 이상. KDIGO 기준: Ca·P·PTH·ALP 정기 모니터링. 인산결합제·비타민 D 유사체·시나칼세트로 관리.',
+  cat:'renal' },
+
+{ term:'MDRD',       full:'Modification of Diet in Renal Disease equation',
+  ko:'구 eGFR 추정 공식. 변수: 나이·성별·혈청 크레아티닌·인종. 과거 표준이었으나 eGFR 정상~경도 감소 구간에서 과소평가 문제. 현재는 CKD-EPI 2021 공식이 표준. 일부 기관에서 여전히 사용 중이므로 보고서 확인 시 어느 공식인지 주의 필요.',
+  cat:'renal' },
+
+{ term:'EPO',        full:'Erythropoietin',
+  ko:'에리트로포이에틴. 신장(주로 사구체 주위 세포)에서 저산소 자극으로 분비되는 조혈 호르몬. CKD 진행 시 EPO 생산 감소 → 신성 빈혈. ESA(조혈자극제, 에포에틴·다르베포에틴)가 EPO 유사체. Hb 목표 10–12 g/dL.',
+  cat:'renal' },
+
+/* ── DIABETES ── */
+{ term:'HbA1c',      full:'Glycated Hemoglobin (Hemoglobin A1c)',
+  ko:'당화혈색소. 적혈구 수명(약 120일)에 걸친 평균 혈당을 반영. 당뇨 진단: ≥6.5%, 당뇨전단계: 5.7–6.4%. 치료 목표: 대부분 <7%, 고령·저혈당 고위험 <8%. 빈혈·혈색소이상증·투석 시 부정확 → CGM 또는 fructosamine 대체.',
+  cat:'diabetes' },
+
+{ term:'eAG',        full:'Estimated Average Glucose',
+  ko:'추정 평균혈당. 공식: 28.7 × HbA1c(%) − 46.7 (mg/dL). HbA1c를 환자가 이해하기 쉬운 혈당 수치로 변환. HbA1c 7% ≈ eAG 154 mg/dL, 8% ≈ 183 mg/dL. 환자 교육 시 "3개월 평균 혈당"으로 설명에 유용.',
+  cat:'diabetes' },
+
+{ term:'CGM',        full:'Continuous Glucose Monitoring',
+  ko:'연속혈당측정기. 피하 센서로 5–15분 간격 실시간 혈당 측정. TIR·TAR·TBR·CV 등 지표 제공. 리브레(FreeStyle Libre)·덱스컴(Dexcom). 저혈당 알림·인슐린 펌프 연동 가능. HbA1c보다 혈당 변동성 정보 풍부.',
+  cat:'diabetes' },
+
+{ term:'AGP',        full:'Ambulatory Glucose Profile',
+  ko:'외래 혈당 프로파일. CGM 데이터를 14일 이상 수집하여 시간대별 혈당 분포를 표준화한 리포트. TIR·TBR·TAR·CV·GMI를 한 페이지에 시각화. FreeStyle Libre·Dexcom 앱에서 자동 생성. 혈당 패턴 분석 및 약물 조정의 핵심 도구.',
+  cat:'diabetes' },
+
+{ term:'GMI',        full:'Glucose Management Indicator',
+  ko:'혈당 관리 지표. CGM 평균혈당에서 HbA1c를 추정하는 공식: GMI(%) = 3.31 + 0.02392 × 평균혈당(mg/dL). 실측 HbA1c와 차이 날 수 있음(적혈구 수명 이상 시). CGM 14일 이상 데이터 필요. AGP 리포트에 자동 표시.',
+  cat:'diabetes' },
+
+{ term:'T3RU',       full:'T3 Resin Uptake (T3-Uptake)',
+  ko:'T3 수지 흡수율. TBG 포화도를 간접 평가하는 검사. FTI 계산 공식의 구성 요소. TBG 증가(임신·에스트로겐) 시 T3RU 감소, TBG 감소(안드로겐·네프로제) 시 T3RU 증가. Free T4 직접법 보급 이후 사용 감소.',
+  cat:'thyroid' },
+
+{ term:'DPP-4i',     full:'Dipeptidyl Peptidase-4 Inhibitor',
+  ko:'DPP-4 억제제(글립틴계). GLP-1 분해 억제로 식후 인슐린 분비 증가·글루카곤 억제. 시타글립틴·리나글립틴·빌다글립틴 등. 저혈당 위험 낮고 체중 중립적. 리나글립틴은 신기능 무관 투여 가능. 삭소글립틴은 심부전 입원 위험 주의.',
+  cat:'diabetes' },
+
+{ term:'ADA',        full:'American Diabetes Association',
+  ko:'미국 당뇨병학회. 매년 Standards of Care in Diabetes(당뇨 진료 기준) 발행. HbA1c 진단 기준·CGM 지표(TIR·TAR·TBR)·SGLT2i·GLP-1 RA 심혈관·신장 보호 권고 등 포함. 한국 당뇨병학회 가이드라인의 주요 참고 자료.',
+  cat:'diabetes' },
+
+{ term:'ADAG',       full:'A1c-Derived Average Glucose study',
+  ko:'HbA1c-eAG 변환 공식 근거 연구(Nathan 2008). T1DM·T2DM·정상인 507명, 12주 CGM 데이터 기반. 회귀식: eAG = 28.7 × A1c − 46.7. 이 공식이 현재 HbA1c-eAG 표준 변환식으로 사용됨.',
+  cat:'diabetes' },
+
+/* ── STATS / GENERAL ── */
+{ term:'AUC',        full:'Area Under the Curve (ROC-AUC)',
+  ko:'곡선하 면적. 진단 검사 정확도 지표. 0.5 = 무작위 수준, 0.7–0.8 = 양호, 0.8–0.9 = 우수, >0.9 = 탁월. ROC 곡선의 아래 면적으로 산출. FIB-4 NAFLD 섬유화 예측 AUC ≈ 0.80–0.90.',
+  cat:'stats' },
+
+{ term:'ROC',        full:'Receiver Operating Characteristic curve',
+  ko:'수신자 조작 특성 곡선. 모든 cutoff에서의 민감도(sensitivity) vs 1−특이도(specificity) 관계를 그래프화. 최적 cutoff는 Youden 지수(sensitivity + specificity − 1)를 최대화하는 점. AUC로 전체 진단 성능 요약.',
+  cat:'stats' },
+
+{ term:'NPV',        full:'Negative Predictive Value',
+  ko:'음성예측도. 검사 음성으로 나온 경우 실제로 질환이 없을 확률. NPV = TN / (TN + FN). 유병률이 낮을수록 NPV 높음. FIB-4 <1.30의 F3–F4 배제 NPV ≈ 90% 이상 → "저위험" 판정에 신뢰도 높음.',
+  cat:'stats' },
+
+{ term:'PPV',        full:'Positive Predictive Value',
+  ko:'양성예측도. 검사 양성으로 나온 경우 실제로 질환이 있을 확률. PPV = TP / (TP + FP). 유병률이 높을수록 PPV 높음. FIB-4 >2.67의 F3–F4 PPV ≈ 40–65% → 단독 확진 불가, 이차 검사(FibroScan) 필요.',
+  cat:'stats' },
+
+{ term:'Sensitivity', full:'Sensitivity (민감도)',
+  ko:'민감도. 진짜 양성률. 공식: TP / (TP + FN). "질환 있는 사람 중 검사가 양성으로 판정하는 비율." 높을수록 위음성 ↓ → 스크리닝(놓치면 안 되는 상황)에 중요. FIB-4 <1.30 저위험 컷오프의 sensitivity ≈ 95%.',
+  cat:'stats' },
+
+{ term:'Specificity', full:'Specificity (특이도)',
+  ko:'특이도. 진짜 음성률. 공식: TN / (TN + FP). "질환 없는 사람 중 검사가 음성으로 판정하는 비율." 높을수록 위양성 ↓ → 확진(불필요한 치료 방지)에 중요. FIB-4 >2.67 고위험 컷오프의 specificity ≈ 85%.',
+  cat:'stats' },
+
+{ term:'CI',         full:'Confidence Interval',
+  ko:'신뢰 구간. 모수의 참값이 포함될 것으로 기대되는 범위. 95% CI가 표준 (100번 중 95번은 참값 포함). 구간이 좁을수록 추정 정확. HR·OR·AUC 등 효과 지표 해석 시 CI가 1을 포함하면 통계적 유의성 없음.',
+  cat:'stats' },
+
+{ term:'HR',         full:'Hazard Ratio',
+  ko:'위험비. 생존 분석에서 두 군 간 사건 발생 속도 비교. HR = 1: 차이 없음, <1: 치료군 위험 감소, >1: 위험 증가. Cox 비례위험모형 기반. 시간에 따라 위험이 일정하다는 가정(비례 위험 가정) 필요.',
+  cat:'stats' },
+
+{ term:'OR',         full:'Odds Ratio',
+  ko:'교차비. 단면 연구·환자-대조군 연구에서 사용. 노출군과 비노출군의 오즈(odds) 비율. OR = 1: 연관 없음, >1: 위험 증가, <1: 보호 효과. 희귀 질환에서 RR(상대위험도)에 근사. 이분형 로지스틱 회귀의 결과로 산출.',
+  cat:'stats' },
+
+{ term:'RCT',        full:'Randomized Controlled Trial',
+  ko:'무작위 대조 시험. 임상 근거 수준의 최상위 단계(메타분석 제외). 대상자를 무작위로 치료군·대조군 배정하여 교란변수 균형. EMPA-REG·DAPA-HF·FIDELIO·FIGARO 등 주요 임상 근거. 맹검 여부에 따라 단일·이중맹검 RCT 구분.',
+  cat:'stats' },
+
+]; // END GLOSSARY
+
+(function() {
+  const CAT_META = {
+    liver:   { color:'#f47b20', label:'LIVER'   },
+    insulin: { color:'#16a34a', label:'INSULIN'  },
+    lipid:   { color:'#2563eb', label:'LIPID'   },
+    cardio:  { color:'#e11d48', label:'CARDIO'  },
+    obesity: { color:'#8b5cf6', label:'OBESITY' },
+    thyroid: { color:'#0891b2', label:'THYROID' },
+    adrenal: { color:'#0e7490', label:'ADRENAL' },
+    renal:   { color:'#0d9488', label:'RENAL'   },
+    diabetes:{ color:'#ea580c', label:'DM'      },
+    stats:   { color:'#64748b', label:'STATS'   },
+  };
+
+  const inp    = document.getElementById('glossaryInput');
+  const panel  = document.getElementById('glossaryResults');
+  const clearB = document.getElementById('glossaryClear');
+  const countEl= document.getElementById('glossaryCount');
+
+  countEl.textContent = GLOSSARY.length + '개';
+
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function hi(text, q) {
+    if (!q) return text;
+    return text.replace(new RegExp('(' + esc(q) + ')','gi'),
+      '<span class="glossary-highlight">$1</span>');
+  }
+
+  // ── 검색 ──
+  function doSearch(q) {
+    if (!q.trim()) return [];
+    const lq = q.toLowerCase();
+    if (q.length === 1) return GLOSSARY.filter(g => g.term.toLowerCase().startsWith(lq)).slice(0,12);
+    return GLOSSARY.filter(g => g.term.toLowerCase().includes(lq)).slice(0,12);
+  }
+
+  let currentResults = [];   // 현재 표시 중인 결과 배열
+
+  function render(q) {
+    if (!q.trim()) { panel.classList.remove('show'); return; }
+    currentResults = doSearch(q);
+    panel.classList.add('show');
+    if (!currentResults.length) {
+      panel.innerHTML = '<div class="glossary-results-header">검색 결과</div>'
+        + '<div class="glossary-no-result">일치하는 약어가 없습니다.</div>';
+      return;
+    }
+    const rows = currentResults.map((g, idx) => {
+      const m = CAT_META[g.cat] || CAT_META.stats;
+      const bg   = m.color + '12';
+      const bord = m.color + '30';
+      return `<div class="glossary-item" data-idx="${idx}">
+        <span class="g-badge" style="color:${m.color};background:${bg};border-color:${bord}">${hi(g.term,q)}</span>
+        <div class="g-body">
+          <span class="g-full">${g.full}<span class="g-cat-tag" style="color:${m.color}">${m.label}</span></span>
+          <span class="g-open-hint">자세히 ›</span>
+        </div>
+      </div>`;
+    }).join('');
+    panel.innerHTML = `<div class="glossary-results-header">검색 결과 — ${currentResults.length}건 &nbsp;·&nbsp; 클릭하면 설명이 열립니다</div>
+      <div class="glossary-results-list">${rows}</div>`;
+
+    // 클릭 이벤트
+    panel.querySelectorAll('.glossary-item').forEach(el => {
+      el.addEventListener('click', e => {
+        e.stopPropagation();
+        const idx = parseInt(el.dataset.idx);
+        openModal(currentResults, idx);
+      });
+    });
+  }
+
+  inp.addEventListener('input', () => {
+    const q = inp.value.trim();
+    clearB.classList.toggle('show', q.length > 0);
+    render(q);
+  });
+  inp.addEventListener('focus', () => { if (inp.value.trim()) render(inp.value.trim()); });
+  clearB.addEventListener('click', () => {
+    inp.value = ''; clearB.classList.remove('show');
+    panel.classList.remove('show'); inp.focus();
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.glossary-wrap') && !e.target.closest('.gmodal-overlay'))
+      panel.classList.remove('show');
+  });
+  inp.addEventListener('keydown', e => { if (e.key==='Escape') { panel.classList.remove('show'); closeModal(); } });
+
+  // ═══════════════════════════════
+  //  MODAL
+  // ═══════════════════════════════
+  const overlay  = document.getElementById('gmodalOverlay');
+  const gmodal   = document.getElementById('gmodal');
+  const mBadge   = document.getElementById('gmodalBadge');
+  const mFull    = document.getElementById('gmodalFull');
+  const mCat     = document.getElementById('gmodalCat');
+  const mKo      = document.getElementById('gmodalKo');
+  const mHint    = document.getElementById('gmodalHint');
+  const mClose   = document.getElementById('gmodalClose');
+  const mPrev    = document.getElementById('gmodalPrev');
+  const mNext    = document.getElementById('gmodalNext');
+
+  let modalList  = [];   // 현재 모달에서 탐색 중인 결과 배열
+  let modalIdx   = 0;
+
+  function openModal(list, idx) {
+    modalList = list;
+    modalIdx  = idx;
+    fillModal();
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    panel.classList.remove('show');
+  }
+
+  function fillModal() {
+    const g = modalList[modalIdx];
+    if (!g) return;
+    const m = CAT_META[g.cat] || CAT_META.stats;
+    const bg   = m.color + '15';
+    const bord = m.color + '60';
+    mBadge.textContent = g.term;
+    mBadge.style.color = m.color;
+    mBadge.style.background = bg;
+    mBadge.style.borderColor = bord;
+    mFull.textContent  = g.full;
+    mCat.textContent   = m.label;
+    mCat.style.color   = m.color;
+    mCat.style.borderColor = m.color + '80';
+    mCat.style.background  = bg;
+    mKo.textContent    = g.ko;
+    mHint.textContent  = `${modalIdx + 1} / ${modalList.length}`;
+    mPrev.disabled = (modalIdx === 0);
+    mNext.disabled = (modalIdx === modalList.length - 1);
+
+    // 애니메이션 재생
+    gmodal.style.animation = 'none';
+    gmodal.offsetHeight;   // reflow
+    gmodal.style.animation = '';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  mClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  mPrev.addEventListener('click', () => { if (modalIdx > 0) { modalIdx--; fillModal(); } });
+  mNext.addEventListener('click', () => { if (modalIdx < modalList.length - 1) { modalIdx++; fillModal(); } });
+
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('show')) return;
+    if (e.key === 'Escape')       closeModal();
+    if (e.key === 'ArrowLeft'  && modalIdx > 0)                      { modalIdx--; fillModal(); }
+    if (e.key === 'ArrowRight' && modalIdx < modalList.length - 1)   { modalIdx++; fillModal(); }
+  });
+})();
+</script>
+</body>
+</html>

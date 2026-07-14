@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한국인의 골다공증 치료 (FRAX 기반)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Segoe UI',sans-serif;font-size:13px;background:#f4f3f0;color:#1a1a18;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:18px 14px}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:10px}
+.pt{font-size:18px;font-weight:700;color:#1a1a18}
+.ps{font-size:11px;color:#73726c;margin-top:3px;line-height:1.6}
+.mgrid{display:grid;grid-template-columns:340px 1fr;gap:14px;align-items:start}
+@media(max-width:800px){.mgrid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e2e0db;border-radius:11px;padding:11px 14px;margin-bottom:11px;overflow:hidden;position:relative}
+.card:last-child{margin-bottom:0}
+.card-bar{height:4px;margin:-11px -14px 10px -14px;border-radius:0}
+.sec{font-size:11px;font-weight:700;color:#555350;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid #e2e0db;padding-bottom:6px;margin-bottom:9px}
+.fl{display:block;font-size:11px;color:#5f5e5a;margin-bottom:2px}
+.field{margin-bottom:7px}
+input[type=number],select{width:100%;padding:5px 8px;border:1px solid #d0cec8;border-radius:6px;font-size:12px;background:#fff;color:#1a1a18;outline:none;font-family:inherit;-webkit-appearance:none}
+input[type=number]:focus,select:focus{border-color:#888;box-shadow:0 0 0 2px rgba(0,0,0,.06)}
+input[type=range]{width:100%;accent-color:#1a1a18;cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.rg{display:flex;gap:5px}
+.rg label{flex:1;cursor:pointer}
+.rg label span{display:block;text-align:center;padding:5px 4px;border:1px solid #d0cec8;border-radius:6px;font-size:12px;color:#5f5e5a;user-select:none;transition:all .12s}
+.rg input[type=radio]{display:none}
+.rg input:checked+span{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.ck{display:flex;align-items:flex-start;gap:6px;padding:3px 0;font-size:12px;cursor:pointer;color:#5f5e5a}
+.ck input[type=checkbox]{width:13px;height:13px;flex-shrink:0;margin-top:1px;accent-color:#1a1a18;cursor:pointer}
+.divider{height:1px;background:#e2e0db;margin:8px 0}
+/* Risk metric cells */
+.rcmp{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.rcell{padding:10px 7px;background:#f8f7f5;border-radius:8px;border:1.5px solid #e2e0db;text-align:center}
+.rcell.vhigh{background:#fde8e8;border-color:#e24b4a;box-shadow:0 2px 8px rgba(226,75,74,.12)}
+.rcell.high{background:#fff0e0;border-color:#ef9f27}
+.rcell.moderate{background:#fffcee;border-color:#c9a02a;box-shadow:0 2px 8px rgba(201,160,42,.12)}
+.rcell.low{background:#f0f9e8;border-color:#639922}
+.rcell.dim{background:#fbfaf8;border-color:#ece9e3}
+.rlabel{font-size:9px;font-weight:700;color:#888780;margin-bottom:3px;line-height:1.3;text-transform:uppercase;letter-spacing:.05em}
+.rnum{font-size:28px;font-weight:700;line-height:1.05}
+.rsub{font-size:10px;color:#888780;margin-top:3px;line-height:1.4}
+.bw{height:5px;background:#e2e0db;border-radius:3px;overflow:hidden;margin:6px 0 2px}
+.bar{height:100%;border-radius:3px;transition:width .5s,background .4s;width:0}
+/* Tables */
+.lt{width:100%;font-size:12px;border-collapse:collapse}
+.lt th{text-align:left;font-size:10px;font-weight:700;color:#888780;padding:5px 7px;border-bottom:1.5px solid #e2e0db;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.lt td{padding:6px 7px;border-bottom:1px solid #f1efe8;color:#1a1a18;vertical-align:middle}
+.lt tr:last-child td{border-bottom:none}
+.lt tr.ci td{opacity:.4}
+/* Rec boxes */
+.rb{padding:9px 12px;border-radius:8px;border-left:3px solid #d0cec8;background:#f8f7f5;margin-bottom:7px}
+.rb.hi{border-left-color:#e24b4a}
+.rb.mo{border-left-color:#ef9f27}
+.rb.lo{border-left-color:#639922}
+.rb.bl{border-left-color:#185fa5}
+.rsrc{font-size:10px;font-weight:700;color:#888780;margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em}
+.ri{font-size:13px;font-weight:700;color:#1a1a18}
+.rind{font-size:11px;color:#5f5e5a;margin-top:2px;line-height:1.5}
+.rdrugs{margin-top:6px;font-size:11px;color:#5f5e5a}
+.rdrugs li{list-style:none;padding:2px 0}
+.rdrugs li::before{content:"▸ ";color:#b4b2a9;font-size:10px}
+.nb{padding:7px 10px;border-radius:7px;font-size:11px;line-height:1.6;margin-bottom:5px}
+.nb:last-child{margin-bottom:0}
+.nb.info{background:#e6f1fb;color:#185fa5}
+.nb.warn{background:#faeeda;color:#854f0b}
+.nb.dng{background:#fcebeb;color:#a32d2d}
+.nb.suc{background:#eaf3de;color:#3b6d11}
+/* Badges */
+.kbadge{display:inline-flex;align-items:center;padding:3px 11px;border-radius:6px;font-size:12px;font-weight:700}
+.kb-vhigh{background:#fde8e8;color:#a32d2d;border:1px solid #f0a0a0}
+.kb-high{background:#fef0e0;color:#854f0b;border:1px solid #f5c870}
+.kb-moderate{background:#fdf9d6;color:#7a6a10;border:1px solid #d9c355}
+.kb-low{background:#eaf3de;color:#3b6d11;border:1px solid #9dc05e}
+.kb-gray{background:#f4f3f0;color:#888780;border:1px solid #d0cec8}
+/* NNT colors */
+.nnt-g{color:#3b6d11;font-weight:700}
+.nnt-b{color:#185fa5;font-weight:700}
+.nnt-m{color:#854f0b;font-weight:700}
+.nnt-r{color:#a32d2d;font-weight:700}
+.nnt-na{color:#b4b2a9;font-size:11px}
+/* LHH colors */
+.lhh-g{color:#3b6d11;font-weight:600}
+.lhh-b{color:#185fa5;font-weight:600}
+.lhh-m{color:#854f0b;font-weight:600}
+.lhh-r{color:#a32d2d;font-weight:600}
+/* Drug class dot */
+.cdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;flex-shrink:0}
+/* Print btn */
+.pbtn{display:flex;align-items:center;gap:5px;padding:6px 13px;background:#1a1a18;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.pbtn:hover{background:#333}
+/* Stepwise */
+.sw-row{display:flex;gap:10px;align-items:stretch}
+.sw-left{display:flex;flex-direction:column;align-items:center;width:26px;flex-shrink:0}
+.sw-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.sw-line{flex:1;width:2px;background:#e2e0db;margin:3px 0}
+.sw-box{flex:1;border:1px solid #e2e0db;border-radius:8px;padding:9px 11px;margin-bottom:10px;background:#fff}
+.sw-box.active{border-color:#1a1a18;background:#f8f7f5}
+.sw-box.muted{opacity:.4}
+.sw-step{font-size:10px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.sw-name{font-size:13px;font-weight:700;color:#1a1a18}
+.sw-sub{font-size:11px;color:#5f5e5a;margin-top:3px;line-height:1.6}
+/* Collapsible */
+.coll-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;padding:2px 0}
+.coll-body{overflow:hidden;transition:max-height .25s ease;max-height:0}
+.coll-body.open{max-height:2000px}
+.coll-arr{font-size:11px;color:#888780}
+/* ── ABBR INLINE SEARCH ── */
+.abbr-inline{display:inline-flex;flex-direction:column;position:relative;vertical-align:middle;margin-left:6px}
+.abbr-inline-wrap{display:inline-flex;align-items:center;position:relative}
+.abbr-ico{position:absolute;left:5px;top:50%;transform:translateY(-50%);color:#aaa8a2;pointer-events:none;flex-shrink:0}
+#abbrInput{padding:1px 28px 1px 18px;border:1px solid #d0cec8;border-radius:4px;font-size:10px;width:88px;background:#faf9f7;color:#1a1a18;outline:none;font-family:inherit;transition:border-color .15s}
+#abbrInput:focus{border-color:#888}
+.abbr-cnt{position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:9px;color:#aaa8a2;pointer-events:none;white-space:nowrap}
+.abbr-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;background:#fff;border:1px solid #d0cec8;border-radius:9px;width:400px;max-height:320px;overflow-y:auto;z-index:9999;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:3px 0}
+.abbr-dropdown.open{display:block}
+.abbr-item{display:grid;grid-template-columns:70px 1fr;gap:2px 8px;padding:6px 12px;border-bottom:1px solid #f1efe8}
+.abbr-item:last-child{border-bottom:none}
+.abbr-item:hover{background:#f8f7f5}
+.abbr-t{font-family:'Courier New',monospace;font-weight:700;color:#185fa5;font-size:12px;align-self:center}
+.abbr-en{font-size:11px;color:#1a1a18;line-height:1.4}
+.abbr-ko{font-size:10px;color:#888780;grid-column:2;line-height:1.3}
+.abbr-empty{padding:16px;text-align:center;color:#b4b2a9;font-size:11px}
+@media print{
+  body{background:#fff;font-size:12px}
+  .wrap{max-width:100%;padding:8px}
+  .no-print{display:none!important}
+  .mgrid{grid-template-columns:1fr!important}
+  .card{break-inside:avoid}
+  @page{margin:1.5cm}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ── HEADER ── -->
+<div class="ph">
+  <div>
+    <div class="pt">한국인의 골다공증 치료 (FRAX 기반)</div>
+    <div class="ps">
+      한국인 FRAX 자동 계산 (Sheffield FRAX Korea 방법론) · 10년 골절 확률 · 위험도 분류 · 우선 추천 약물 · NNT/NNH 분석<br>
+      근거: AACE/ACE 2020 · BHOF 2022 · NOGG 2022 · KSO 2022 | Kanis JA et al. <i>Osteoporos Int</i> 2008<br>
+      <span style="color:#a07a2a;font-style:italic">※ 본 도구는 공식 FRAX를 대체하지 않습니다. 정밀 계산: sheffield.ac.uk/FRAX (Korea) 또는 frax.kr</span><span class="abbr-inline no-print"><span class="abbr-inline-wrap"><svg class="abbr-ico" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="abbrInput" type="text" placeholder="약어" oninput="filterAbbr(this.value)" onfocus="abbrFocus()" autocomplete="off"><span id="abbrCount" class="abbr-cnt">(72)</span></span><div id="abbrDropdown" class="abbr-dropdown"><div id="abbrList"></div></div></span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── GRID ── -->
+<div class="mgrid">
+
+<!-- ══════════ LEFT: INPUTS ══════════ -->
+<div>
+
+<!-- Card 1: FRAX 결과 입력 -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#2d4a6e 0%,#3d6491 100%)"></div>
+  <div class="sec" style="display:flex;align-items:center;justify-content:space-between">
+    <span>FRAX 결과 입력 <span style="color:#b4b2a9;font-weight:400;text-transform:none;letter-spacing:0">(공식 계산기 사용)</span></span>
+    <button class="pbtn no-print" onclick="resetAll()" style="background:#5a5a58;font-size:10px;padding:3px 9px;margin-left:8px">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.27"/></svg>
+      초기화
+    </button>
+  </div>
+
+  <!-- 공식 FRAX 바로가기 버튼 -->
+  <a href="https://www.fraxplus.org/calculation-tool" target="_blank" rel="noopener"
+     style="display:flex;align-items:center;justify-content:space-between;gap:8px;
+            background:#1a1a18;color:#fff;text-decoration:none;
+            padding:10px 14px;border-radius:8px;margin-bottom:10px;
+            font-size:13px;font-weight:600;transition:background .15s"
+     onmouseover="this.style.background='#2d2d2a'" onmouseout="this.style.background='#1a1a18'">
+    <span>
+      <span style="font-size:15px;margin-right:6px">📊</span>
+      공식 FRAX 계산기 바로가기
+    </span>
+    <span style="font-size:11px;opacity:.7;white-space:nowrap">fraxplus.org ↗</span>
+  </a>
+
+  <div style="font-size:11px;color:#888780;background:#f8f7f5;border-radius:7px;padding:8px 10px;margin-bottom:10px;line-height:1.7;border:1px solid #e2e0db">
+    ① 위 버튼 클릭 → ② 국가: <b style="color:#1a1a18">Korea</b> 선택 → ③ 입력 후 결과 확인<br>
+    → ④ 아래에 <b style="color:#1a1a18">MOF %</b>와 <b style="color:#1a1a18">고관절 골절 %</b> 값 입력
+  </div>
+
+  <!-- MOF / Hip 입력 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="background:#fff;border:1.5px solid #d0cec8;border-radius:8px;padding:10px;text-align:center;transition:border-color .15s" id="mofBox" onfocusin="this.style.borderColor='#1a1a18'" onfocusout="this.style.borderColor='#d0cec8'">
+      <div style="font-size:10px;color:#888780;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">10년 MOF 확률</div>
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:2px">
+        <input type="number" id="mMOF" value="" placeholder="예: 12.0" min="0" max="100" step="0.1"
+               oninput="calc()"
+               style="width:70px;border:none;background:transparent;font-size:22px;font-weight:700;color:#1a1a18;text-align:center;outline:none;padding:0">
+        <span style="font-size:15px;color:#888780">%</span>
+      </div>
+    </div>
+    <div style="background:#fff;border:1.5px solid #d0cec8;border-radius:8px;padding:10px;text-align:center;transition:border-color .15s" onfocusin="this.style.borderColor='#1a1a18'" onfocusout="this.style.borderColor='#d0cec8'">
+      <div style="font-size:10px;color:#888780;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">10년 고관절 골절</div>
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:2px">
+        <input type="number" id="mHip" value="" placeholder="예: 3.0" min="0" max="100" step="0.1"
+               oninput="calc()"
+               style="width:70px;border:none;background:transparent;font-size:22px;font-weight:700;color:#1a1a18;text-align:center;outline:none;padding:0">
+        <span style="font-size:15px;color:#888780">%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2: 임상 정보 (치료 결정 + NNT 분석용) -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#3a5a78 0%,#4f7fa0 100%)"></div>
+  <div class="sec">임상 정보 <span style="color:#b4b2a9;font-weight:400;text-transform:none;letter-spacing:0">(치료 결정 · NNT 분석)</span></div>
+
+  <div class="field">
+    <span class="fl">Femur Neck T-score <span style="color:#b4b2a9">(선택 — 치료 기준 판정에 사용)</span></span>
+    <input type="number" id="tscore" placeholder="예: −2.5" min="-5" max="3" step="0.1" oninput="calc()" style="width:130px;text-align:center">
+  </div>
+
+  <div class="field">
+    <span class="fl">골절 이력</span>
+    <select id="fxType" onchange="calc()">
+      <option value="none">없음</option>
+      <option value="nonhip">비고관절 골다공증 골절 (척추/손목/상완골 등)</option>
+      <option value="hip">고관절 골절 병력</option>
+      <option value="multiple">다발성 척추골절 (2개 이상)</option>
+    </select>
+  </div>
+  <label class="ck"><input type="checkbox" id="recentFx" onchange="calc()"><span>최근 2년 이내 골절 (초고위험 기준)</span></label>
+
+  <div class="divider"></div>
+
+  <div class="field">
+    <span class="fl">eGFR (mL/min/1.73m²)</span>
+    <input type="number" id="egfr" value="" min="5" max="130" step="5" oninput="calc()" style="width:100px">
+  </div>
+  <div class="field">
+    <span class="fl">심혈관 위험도</span>
+    <select id="cvRisk" onchange="calc()">
+      <option value="low">낮음 — MI/뇌졸중 병력 없음</option>
+      <option value="moderate">중등도 — CV 위험인자 보유</option>
+      <option value="high">고위험 — 최근 12개월 MI/뇌졸중</option>
+    </select>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:10px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">금기·주의 동반 상황</div>
+  <label class="ck"><input type="checkbox" id="upperGI" onchange="calc()"><span>상부위장관 질환/증상</span></label>
+  <label class="ck"><input type="checkbox" id="vteHx" onchange="calc()"><span>VTE 병력 (DVT/PE)</span></label>
+  <label class="ck"><input type="checkbox" id="hypoCalcium" onchange="calc()"><span>저칼슘혈증</span></label>
+  <label class="ck"><input type="checkbox" id="immuno" onchange="calc()"><span>면역억제 상태</span></label>
+  <label class="ck"><input type="checkbox" id="boneMalig" onchange="calc()"><span>골 악성종양 병력</span></label>
+  <label class="ck"><input type="checkbox" id="hotFlash" onchange="calc()"><span>안면홍조 증상</span></label>
+
+  <div class="divider"></div>
+  <div class="field">
+    <span class="fl">이전 비스포스포네이트 치료 기간</span>
+    <select id="priorBP" onchange="calc()">
+      <option value="0">없음 / 1년 미만</option>
+      <option value="3">1–5년</option>
+      <option value="5">5년 이상 (AFF 위험 증가)</option>
+    </select>
+  </div>
+  <div class="field">
+    <span class="fl">이전 동화제 치료</span>
+    <select id="priorAnabolic" onchange="calc()">
+      <option value="none">없음</option>
+      <option value="teriparatide">테리파라타이드 (완료)</option>
+      <option value="abaloparatide">아바로파라타이드 (완료)</option>
+      <option value="romosozumab">로모소주맙 (완료)</option>
+    </select>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#4a3d7e 0%,#6a5aad 100%)"></div>
+  <div class="sec">NNT / NNH 분석 파라미터</div>
+  <div class="field">
+    <span class="fl">치료 기간</span>
+    <div class="rg">
+      <label><input type="radio" name="dur" value="3" onchange="calc()"><span>3년</span></label>
+      <label><input type="radio" name="dur" value="5" onchange="calc()"><span>5년</span></label>
+      <label><input type="radio" name="dur" value="10" onchange="calc()"><span>10년</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <span class="fl">치료 목표 endpoint</span>
+    <select id="endpoint" onchange="calc()">
+      <option value="mof">MOF — 주요 골다공증 골절</option>
+      <option value="hip">고관절 골절</option>
+      <option value="vertebral">척추 골절 (FRAX MOF×0.42 추정)</option>
+      <option value="nonVertebral">비척추 골절 (추정)</option>
+    </select>
+  </div>
+  <div class="field">
+    <span class="fl">실제 순응도 보정 &nbsp;<b id="adhDisp" style="color:#1a1a18">80%</b></span>
+    <input type="range" id="adherence" min="20" max="100" value="80" step="5" oninput="updAdh(this)">
+    <div style="font-size:10px;color:#b4b2a9;margin-top:2px">경구 BP ~50% · SC 주사제 ~90% · IV ~95%</div>
+  </div>
+</div>
+
+</div><!-- end left -->
+
+<!-- ══════════ RIGHT: RESULTS ══════════ -->
+<div>
+
+<!-- R1: FRAX 결과 -->
+<div class="card">
+  <div class="card-bar" id="fraxBarTop" style="background:linear-gradient(90deg,#2d4a6e 0%,#3d6491 100%)"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <div class="sec" style="margin-bottom:0;border-bottom:none;padding-bottom:0">FRAX 입력값 확인</div>
+    <span id="treatBadge" style="font-size:10px"></span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px" id="fraxCells">
+    <div class="rcell moderate" id="cellMOF">
+      <div class="rlabel">10년 MOF 확률</div>
+      <div class="rnum" id="numMOF" style="color:#c9a02a">—</div>
+      <div class="bw"><div class="bar" id="barMOF"></div></div>
+      <div class="rsub">주요 골다공증 골절</div>
+    </div>
+    <div class="rcell" id="cellHip">
+      <div class="rlabel">10년 고관절 골절</div>
+      <div class="rnum" id="numHip">—</div>
+      <div class="bw"><div class="bar" id="barHip"></div></div>
+      <div class="rsub">Hip Fracture Probability</div>
+    </div>
+  </div>
+  <div id="threshRow" style="margin-top:8px"></div>
+  <div style="font-size:10px;color:#b4b2a9;margin-top:7px;line-height:1.6">
+    ※ 한국인 FRAX 근사 계산 (Kanis 2008 방법론 + 한국인 기저 위험률). 정밀 계산: <b>sheffield.ac.uk/FRAX</b> 또는 <b>frax.kr</b>에서 확인
+  </div>
+</div>
+
+<!-- R1b: AACE 4단계 분류 -->
+<div class="card" id="aaceCard">
+  <div class="card-bar" style="background:linear-gradient(90deg,#b34800 0%,#e07020 50%,#c9a02a 100%)"></div>
+  <div class="sec">AACE/ACE 2020 — 골절 위험도 4단계 분류 및 치료 지침</div>
+  <div id="aaceCt"></div>
+</div>
+
+<!-- R2: 위험도 분류 -->
+<div class="card">
+  <div class="card-bar" id="riskBarTop" style="background:linear-gradient(90deg,#639922 0%,#8aba30 100%)"></div>
+  <div class="sec">위험도 분류 및 치료 기준 평가</div>
+  <div id="riskCt"></div>
+</div>
+
+<!-- R3: 우선 추천 약물 -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#185fa5 0%,#2e86c1 100%)"></div>
+  <div class="sec">우선 추천 약물 (단계적 접근)</div>
+  <div id="recCt"></div>
+</div>
+
+<!-- R4: NNT/NNH 비교 테이블 -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#0e4d8a 0%,#185fa5 60%,#2980b9 100%)"></div>
+  <div class="coll-hdr" onclick="toggleColl('nntColl','nntArr')">
+    <div>
+      <div class="sec" style="margin-bottom:0;border-bottom:none;padding-bottom:0">약제별 NNT / NNH / LHH 비교</div>
+      <div id="nntPending" style="font-size:12px;color:#b4b2a9;padding:6px 0">추천 약물이 정해지면 활성화됩니다</div>
+    </div>
+    <span id="nntArr" class="coll-arr">▼</span>
+  </div>
+  <div id="nntColl" class="coll-body" style="padding-top:9px">
+    <div style="overflow-x:auto">
+      <table class="lt" id="nntTable">
+        <thead><tr>
+          <th style="min-width:130px">약제</th>
+          <th style="text-align:center">NNT</th>
+          <th style="text-align:center">ARR(%)</th>
+          <th style="text-align:center">NNH<br><span style="font-weight:400;font-size:9px;text-transform:none">(최소 주요 AE)</span></th>
+          <th style="text-align:center">LHH</th>
+          <th style="text-align:center">eGFR<br><span style="font-weight:400;font-size:9px;text-transform:none">제한</span></th>
+          <th style="text-align:center">급여</th>
+          <th style="text-align:center">상태</th>
+        </tr></thead>
+        <tbody id="nntBody"></tbody>
+      </table>
+    </div>
+    <div id="nntNote" style="font-size:10px;color:#888780;margin-top:7px;line-height:1.6"></div>
+    <div style="font-size:10px;color:#888780;margin-top:4px;line-height:1.7">
+      <b>NNT 색상:</b> <span class="nnt-g">≤20 매우 좋음</span> &nbsp;
+      <span class="nnt-b">21–40 좋음</span> &nbsp;
+      <span class="nnt-m">41–80 보통</span> &nbsp;
+      <span class="nnt-r">&gt;80 낮음</span> &nbsp;|&nbsp;
+      <b>LHH &gt; 1</b> = 순이익 &nbsp;|&nbsp;
+      <s>취소선</s> = 금기
+    </div>
+  </div>
+</div>
+
+<!-- R5: 약제별 상세 NNH -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#6a2d8a 0%,#9b59b6 100%)"></div>
+  <div class="coll-hdr" onclick="toggleColl('nnhColl','nnhArr')">
+    <div>
+      <div class="sec" style="margin-bottom:0;border-bottom:none;padding-bottom:0">약제별 이상반응 NNH 상세</div>
+      <div id="nnhPending" style="font-size:12px;color:#b4b2a9;padding:6px 0">추천 약물이 정해지면 활성화됩니다</div>
+    </div>
+    <span id="nnhArr" class="coll-arr">▼</span>
+  </div>
+  <div id="nnhColl" class="coll-body" style="padding-top:9px">
+    <div id="nnhDetail"></div>
+  </div>
+</div>
+
+<!-- R6: 임상 주의사항 -->
+<div class="card" id="alertCard" style="display:none">
+  <div class="card-bar" style="background:linear-gradient(90deg,#c0392b 0%,#e74c3c 100%)"></div>
+  <div class="sec">임상 주의사항</div>
+  <div id="alertCt"></div>
+</div>
+
+<!-- R7: 순차 치료 전략 -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#1a7a4a 0%,#27ae60 100%)"></div>
+  <div class="coll-hdr" onclick="toggleColl('seqColl','seqArr')">
+    <div>
+      <div class="sec" style="margin-bottom:0;border-bottom:none;padding-bottom:0">순차 치료 전략</div>
+      <div id="seqPending" style="font-size:12px;color:#b4b2a9;padding:6px 0">추천 약물이 정해지면 활성화됩니다</div>
+    </div>
+    <span id="seqArr" class="coll-arr">▼</span>
+  </div>
+  <div id="seqColl" class="coll-body" style="padding-top:9px">
+    <div id="seqCt"></div>
+  </div>
+</div>
+
+<!-- R8: 방법론 -->
+<div class="card">
+  <div class="card-bar" style="background:linear-gradient(90deg,#5a5a58 0%,#888780 100%)"></div>
+  <div class="coll-hdr" onclick="toggleColl('methColl','methArr')">
+    <div class="sec" style="margin-bottom:0;border-bottom:none;padding-bottom:0">방법론 및 공식</div>
+    <span id="methArr" class="coll-arr">▼</span>
+  </div>
+  <div id="methColl" class="coll-body" style="padding-top:9px;font-size:11px;color:#5f5e5a;line-height:1.9">
+    <b>한국인 FRAX 기저 확률</b>: Sheffield FRAX Korea (country=20) 보정값 (40–90세, 성별별 연령 보간)<br>
+    <b>BMI 보정</b>: HR_hip = exp(−0.049×(BMI−25)); HR_mof = exp(−0.023×(BMI−25)) [Kanis 2012 meta]<br>
+    <b>임상 위험인자 HR</b> (Kanis 2008 meta-analysis): 이전골절 1.86/1.62, 부모髖 1.49/1.72, 흡연 1.37/1.68, GC 1.78/1.74, RA 1.45/1.50, 속발성 1.56/1.75, 알코올 1.48/1.70 (MOF/Hip)<br>
+    <b>BMD T-score 보정</b>: Z-score = 입력 T-score − 연령별 평균 T-score (KNHANES) → HR = 1.60^(−Z) [MOF]; 2.45^(−Z) [Hip] (Johnell 2005 JBMR) ← T-score 직접 사용 시 과대평가 오류 발생<br>
+    <b>확률 변환</b>: P_adj = 1−(1−P_base)^HR (log-complementary scale)<br>
+    <b>NNT 공식</b>: p(t) = 1−(1−p₁₀)^(t/10); ARR = p(t)×RRR×순응도; NNT = 1/ARR<br>
+    <b>NNH 공식</b>: 급성 사건 고정; 누적 사건 = ARI×(t/t_ref); NNH = 1/ARI_adjusted<br>
+    <b>LHH</b> = NNH÷NNT; &gt;1이면 순이익 (Chatellier 1996 BMJ)<br>
+    <b>참고문헌</b>: Kanis 2008 <i>Osteoporos Int</i>; Johnell 2005 <i>JBMR</i>; AACE/ACE 2020 <i>Endocr Pract</i>; BHOF 2022 <i>JBMR</i>; NOGG 2022 <i>Arch Osteoporos</i>
+  </div>
+</div>
+
+</div><!-- end right -->
+</div><!-- end grid -->
+</div><!-- end wrap -->
+
+<script>
+// ═══════════════════════════════════════
+// DRUG DATABASE
+// ═══════════════════════════════════════
+const CC={'BP-oral':'#185fa5','BP-iv':'#5499c7','RANKL':'#3b6d11','PTH':'#7b5ea7','PTHrP':'#9b3e9b','sclerostin':'#a32d2d','SERM':'#854f0b'};
+const DRUGS=[
+  {id:'alendronate',name:'알렌드로네이트',brand:'포사맥스',cls:'BP-oral',dosing:'70 mg 주 1회',trialYrs:3,
+    rrr:{mof:.35,hip:.51,vertebral:.47,nonVertebral:.20},
+    nnh:[{e:'상부위장관 증상',a:.025,d:3,ac:false,s:2,ref:'FIT'},{e:'AFF (5년↑)',a:.0003,d:5,ac:false,s:3,ref:'Black 2010 NEJM'},{e:'ONJ',a:.00003,d:3,ac:false,s:3,ref:'SR'},{e:'근골격계 통증',a:.01,d:3,ac:false,s:1,ref:'PM'}],
+    egfLim:35,ins:true,insLine:1,
+    ci:['egfr35','upperGI','hypoCalcium'],warn:['priorBP5','upperGI']},
+  {id:'risedronate',name:'리세드로네이트',brand:'악토넬',cls:'BP-oral',dosing:'35 mg 주 1회',trialYrs:3,
+    rrr:{mof:.32,hip:.30,vertebral:.49,nonVertebral:.20},
+    nnh:[{e:'상부위장관 증상',a:.015,d:3,ac:false,s:2,ref:'VERT'},{e:'AFF (5년↑)',a:.0003,d:5,ac:false,s:3,ref:'SR'},{e:'ONJ',a:.00003,d:3,ac:false,s:3,ref:'SR'}],
+    egfLim:30,ins:true,insLine:1,
+    ci:['egfr30','hypoCalcium'],warn:['priorBP5']},
+  {id:'ibandronate',name:'이반드로네이트',brand:'본비바',cls:'BP-oral',dosing:'150 mg 월 1회',trialYrs:3,
+    rrr:{mof:null,hip:null,vertebral:.52,nonVertebral:null},
+    nnh:[{e:'상부위장관 (경구)',a:.015,d:3,ac:false,s:2,ref:'BONE'},{e:'APR (IV 초회)',a:.08,d:.25,ac:true,s:1,ref:'IV RCT'},{e:'ONJ',a:.00003,d:3,ac:false,s:3,ref:'SR'}],
+    egfLim:30,ins:true,insLine:1,
+    ci:['egfr30','hypoCalcium'],warn:[]},
+  {id:'zoledronate',name:'졸레드론산',brand:'아클라스타',cls:'BP-iv',dosing:'5 mg IV 연 1회',trialYrs:3,
+    rrr:{mof:.35,hip:.41,vertebral:.70,nonVertebral:.25},
+    nnh:[{e:'APR (초회, 38%)',a:.32,d:.083,ac:true,s:2,ref:'HORIZON-PFT'},{e:'심방세동',a:.008,d:3,ac:false,s:2,ref:'HORIZON-PFT'},{e:'AFF (5년↑)',a:.0003,d:5,ac:false,s:3,ref:'SR'},{e:'ONJ',a:.00003,d:3,ac:false,s:3,ref:'SR'}],
+    egfLim:35,ins:true,insLine:2,
+    ci:['egfr35','hypoCalcium'],warn:['priorBP5']},
+  {id:'denosumab',name:'데노수맙',brand:'프롤리아',cls:'RANKL',dosing:'60 mg SC 6개월마다',trialYrs:3,
+    rrr:{mof:.35,hip:.40,vertebral:.68,nonVertebral:.20},
+    nnh:[{e:'심각한 세균 감염',a:.003,d:3,ac:false,s:3,ref:'FREEDOM'},{e:'저칼슘혈증',a:.001,d:3,ac:false,s:2,ref:'FREEDOM'},{e:'ONJ (장기)',a:.0001,d:5,ac:false,s:3,ref:'Long-FREEDOM'},{e:'중단후 반동골절★',a:.07,d:1,ac:true,s:3,ref:'Lamy 2018'}],
+    egfLim:null,ins:true,insLine:2,
+    ci:['hypoCalcium'],warn:['immuno','rebound']},
+  {id:'teriparatide',name:'테리파라타이드',brand:'포스테오',cls:'PTH',dosing:'20 µg SC 매일 (max 24개월)',trialYrs:2,
+    rrr:{mof:.50,hip:null,vertebral:.65,nonVertebral:.53},
+    nnh:[{e:'고칼슘혈증 (경증)',a:.11,d:2,ac:false,s:1,ref:'FPT (Neer 2001)'},{e:'오심',a:.09,d:2,ac:false,s:1,ref:'FPT'},{e:'기립성 저혈압',a:.09,d:2,ac:false,s:1,ref:'FPT'},{e:'고요산혈증',a:.03,d:2,ac:false,s:1,ref:'FPT'}],
+    egfLim:null,ins:true,insLine:3,
+    ci:['boneMalig'],warn:['maxDur']},
+  {id:'abaloparatide',name:'아바로파라타이드',brand:'티무로스',cls:'PTHrP',dosing:'80 µg SC 매일 (max 18개월)',trialYrs:1.5,
+    rrr:{mof:.70,hip:.43,vertebral:.86,nonVertebral:.43},
+    nnh:[{e:'주사부위 홍반',a:.58,d:1.5,ac:false,s:1,ref:'ACTIVE'},{e:'기립성 저혈압',a:.10,d:1.5,ac:false,s:1,ref:'ACTIVE'},{e:'오심',a:.08,d:1.5,ac:false,s:1,ref:'ACTIVE'},{e:'고칼슘혈증',a:.035,d:1.5,ac:false,s:1,ref:'ACTIVE'}],
+    egfLim:null,ins:false,insLine:3,
+    ci:['boneMalig'],warn:['maxDur']},
+  {id:'romosozumab',name:'로모소주맙',brand:'이베니티',cls:'sclerostin',dosing:'210 mg SC 월 1회 × 12회',trialYrs:1,
+    rrr:{mof:.27,hip:.38,vertebral:.73,nonVertebral:.36},
+    nnh:[{e:'MACE (MI/뇌졸중)',a:.006,d:1,ac:false,s:3,ref:'ARCH (Saag 2017 NEJM)'},{e:'주사부위 반응',a:.05,d:1,ac:false,s:1,ref:'FRAME/ARCH'}],
+    egfLim:null,ins:true,insLine:3,
+    ci:['cvHigh','hypoCalcium'],warn:['cvMod']},
+  {id:'raloxifene',name:'랄록시펜',brand:'에비스타',cls:'SERM',dosing:'60 mg 매일',trialYrs:3,
+    rrr:{mof:null,hip:null,vertebral:.36,nonVertebral:null},
+    nnh:[{e:'VTE (DVT/PE)',a:.008,d:3,ac:false,s:3,ref:'MORE (Ettinger 1999)'},{e:'안면홍조',a:.10,d:3,ac:false,s:1,ref:'MORE'},{e:'하지경련',a:.07,d:3,ac:false,s:1,ref:'MORE'},{e:'치명적 뇌졸중 (고위험)',a:.003,d:3,ac:false,s:3,ref:'RUTH 2006'}],
+    egfLim:null,ins:true,insLine:2,
+    ci:['vteHx'],warn:['hotFlash']},
+];
+
+// ═══════════════════════════════════════
+// GET INPUTS  (Option A: 공식 FRAX 결과 직접 입력)
+// ═══════════════════════════════════════
+function getInp(){
+  const durEl=document.querySelector('input[name=dur]:checked');
+  const tsRaw=document.getElementById('tscore').value.trim();
+  const mofRaw=document.getElementById('mMOF').value.trim();
+  const hipRaw=document.getElementById('mHip').value.trim();
+  const mof=parseFloat(mofRaw), hip=parseFloat(hipRaw);
+  const ready=!isNaN(mof)&&mof>0&&!isNaN(hip)&&hip>=0;
+  return{
+    ready,
+    mof:isNaN(mof)?0:mof,
+    hip:isNaN(hip)?0:hip,
+    tScore:tsRaw===''?null:parseFloat(tsRaw),
+    fxType:document.getElementById('fxType').value,
+    recentFx:document.getElementById('recentFx').checked,
+    egfr:parseFloat(document.getElementById('egfr').value)||60,
+    cvRisk:document.getElementById('cvRisk').value,
+    upperGI:document.getElementById('upperGI').checked,
+    vteHx:document.getElementById('vteHx').checked,
+    hypoCalcium:document.getElementById('hypoCalcium').checked,
+    immuno:document.getElementById('immuno').checked,
+    boneMalig:document.getElementById('boneMalig').checked,
+    hotFlash:document.getElementById('hotFlash').checked,
+    priorBP:document.getElementById('priorBP').value,
+    priorAnabolic:document.getElementById('priorAnabolic').value,
+    dur:parseInt(durEl?.value||3),
+    endpoint:document.getElementById('endpoint').value,
+    adherence:parseInt(document.getElementById('adherence').value)/100
+  };
+}
+
+// ═══════════════════════════════════════
+// MAIN CALC
+// ═══════════════════════════════════════
+const EMPTY_MSG=`<div style="font-size:12px;color:#b4b2a9;padding:6px 0">공식 FRAX 결과를 입력하면 자동으로 계산됩니다.</div>`;
+
+function showEmptyResults(){
+  ['numMOF','numHip'].forEach(id=>{const el=document.getElementById(id);el.textContent='—';el.style.color='#1a1a18';});
+  ['barMOF','barHip'].forEach(id=>document.getElementById(id).style.width='0');
+  ['cellMOF','cellHip'].forEach(id=>document.getElementById(id).className='rcell dim');
+  document.getElementById('threshRow').innerHTML='';
+  document.getElementById('treatBadge').innerHTML='';
+  document.getElementById('aaceCt').innerHTML=EMPTY_MSG;
+  document.getElementById('riskCt').innerHTML=EMPTY_MSG;
+  document.getElementById('recCt').innerHTML=EMPTY_MSG;
+  document.getElementById('nntBody').innerHTML=`<tr><td colspan="8" style="text-align:center;color:#b4b2a9;padding:18px;font-size:12px">공식 FRAX 값을 입력하면 자동으로 계산됩니다</td></tr>`;
+  document.getElementById('nntNote').textContent='';
+  document.getElementById('nnhDetail').innerHTML='';
+  document.getElementById('alertCard').style.display='none';
+}
+
+function calc(){
+  const inp=getInp();
+  if(!inp.ready){ showEmptyResults(); return; }
+  const mof=inp.mof, hip=inp.hip;
+  renderFrax(mof,hip);
+  renderThresh(mof,hip);
+  renderAACE(mof,hip,inp);
+  renderRisk(mof,hip,inp);
+  renderRec(mof,hip,inp);
+  renderNNT(mof,hip,inp);
+  renderNNHDetail(inp.dur);
+  renderAlerts(inp);
+  renderSeq();
+}
+
+// ═══════════════════════════════════════
+// AACE 4단계 분류 패널
+// ═══════════════════════════════════════
+
+function getAACETierKey(mof, hip, inp) {
+  const tsRaw = document.getElementById('tscore').value.trim();
+  const ts = tsRaw === '' ? null : parseFloat(tsRaw);
+  const isOPSevere = ts !== null && !isNaN(ts) && ts <= -3.0;
+  const isOP       = ts !== null && !isNaN(ts) && ts <= -2.5;
+  const {fxType, recentFx} = inp;
+  const hasMajorFx = fxType==='hip' || fxType==='multiple' || recentFx;
+  const hasAnyFx   = fxType !== 'none' || recentFx;
+
+  if (hasMajorFx || isOPSevere || mof >= 30 || hip >= 4.5) return 'vhigh';
+  if (hasAnyFx || isOP || mof >= 20 || hip >= 3)           return 'high';
+  if (mof >= 10 || hip >= 1)                                return 'moderate';
+  return 'low';
+}
+
+function renderAACE(mof, hip, inp) {
+  const activeKey = getAACETierKey(mof, hip, inp);
+
+  const rows = [
+    { key:'low',      label:'저위험',   mof:'< 10%',   hip:'< 1%',    tx:'비약물',              col:'#3b6d11', bg:'#eaf3de', bdr:'#9dc05e' },
+    { key:'moderate', label:'중등도',   mof:'10–20%',  hip:'1–3%',    tx:'T-score에 따라 결정', col:'#7a6a10', bg:'#fdf9d6', bdr:'#d9c355' },
+    { key:'high',     label:'고위험',   mof:'20–30%',  hip:'3–4.4%',  tx:'항흡수제',            col:'#854f0b', bg:'#fff0e0', bdr:'#f5c870' },
+    { key:'vhigh',    label:'초고위험', mof:'≥ 30%',   hip:'≥ 4.5%',  tx:'동화제 우선',         col:'#a32d2d', bg:'#fde8e8', bdr:'#f0a0a0' },
+  ];
+
+  let html = `<table class="lt" style="font-size:13px">
+    <thead><tr>
+      <th style="width:90px">단계</th>
+      <th style="text-align:center">MOF</th>
+      <th style="text-align:center">Hip</th>
+      <th>치료</th>
+      <th style="width:24px"></th>
+    </tr></thead><tbody>`;
+
+  rows.forEach(r => {
+    const on = r.key === activeKey;
+    html += `<tr style="background:${on ? r.bg : ''};font-weight:${on ? '600' : '400'}">
+      <td style="border-left:${on ? `3px solid ${r.bdr}` : '3px solid transparent'};padding-left:9px;color:${on ? r.col : 'inherit'}">${r.label}</td>
+      <td style="text-align:center;color:${on ? r.col : 'inherit'}">${r.mof}</td>
+      <td style="text-align:center;color:${on ? r.col : 'inherit'}">${r.hip}</td>
+      <td style="color:${on ? r.col : 'inherit'}">${r.tx}</td>
+      <td style="text-align:center">${on ? `<span style="font-size:11px;font-weight:700;color:${r.col}">◀</span>` : ''}</td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>
+  <div style="font-size:10px;color:#b4b2a9;margin-top:5px">
+    AACE/ACE 2020 (Camacho PM et al. <i>Endocr Pract</i> 2020) &nbsp;|&nbsp;
+    T-score / 골절 병력 기준은 FRAX 수치와 <b>독립적</b>으로 치료 기준 충족 가능
+  </div>`;
+
+  document.getElementById('aaceCt').innerHTML = html;
+}
+function fraxStyle(mof,hip){
+  if(mof>=30||hip>=6)return{cls:'vhigh',col:'#a32d2d'};
+  if(mof>=20||hip>=3)return{cls:'high',col:'#854f0b'};
+  if(mof>=10||hip>=1.5)return{cls:'moderate',col:'#c9a02a'};
+  return{cls:'low',col:'#3b6d11'};
+}
+
+function renderFrax(mof,hip){
+  const ms=fraxStyle(mof,hip);
+  const hs=hip>=6?{cls:'vhigh',col:'#a32d2d'}:hip>=3?{cls:'high',col:'#854f0b'}:hip>=1.5?{cls:'moderate',col:'#c9a02a'}:{cls:'low',col:'#3b6d11'};
+  document.getElementById('cellMOF').className='rcell '+ms.cls;
+  document.getElementById('numMOF').textContent=mof.toFixed(1)+'%';
+  document.getElementById('numMOF').style.color=ms.col;
+  document.getElementById('barMOF').style.width=Math.min(mof,40)*2.5+'%';
+  document.getElementById('barMOF').style.background=ms.col;
+  document.getElementById('cellHip').className='rcell '+hs.cls;
+  document.getElementById('numHip').textContent=hip.toFixed(1)+'%';
+  document.getElementById('numHip').style.color=hs.col;
+  document.getElementById('barHip').style.width=Math.min(hip,30)*3.3+'%';
+  document.getElementById('barHip').style.background=hs.col;
+  const riskBarColors={vhigh:'linear-gradient(90deg,#a32d2d 0%,#e24b4a 100%)',high:'linear-gradient(90deg,#854f0b 0%,#ef9f27 100%)',moderate:'linear-gradient(90deg,#7a6a10 0%,#c9a02a 100%)',low:'linear-gradient(90deg,#3b6d11 0%,#639922 100%)'};
+  const el=document.getElementById('fraxBarTop');
+  if(el)el.style.background=riskBarColors[ms.cls]||riskBarColors.low;
+}
+
+function renderThresh(mof,hip){
+  const nm=mof>=20,nh=hip>=3,tx=nm||nh;
+  const b=(ok,label)=>`<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;background:${ok?'#eaf3de':'#f4f3f0'};color:${ok?'#3b6d11':'#888780'};border:1px solid ${ok?'#9dc05e':'#d0cec8'};margin-right:4px;margin-bottom:3px">${ok?'✓':'—'} ${label}</span>`;
+  document.getElementById('threshRow').innerHTML=`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0">
+    ${b(nm,'NOF/BHOF: MOF ≥ 20% ('+mof.toFixed(1)+'%)')}
+    ${b(nh,'NOF/BHOF: Hip ≥ 3% ('+hip.toFixed(1)+'%)')}
+    <span style="display:inline-flex;padding:2px 9px;border-radius:5px;font-size:10px;font-weight:700;background:${tx?'#eaf3de':'#fef0e0'};color:${tx?'#3b6d11':'#854f0b'};border:1px solid ${tx?'#9dc05e':'#f5c870'};margin-bottom:3px">${tx?'✓ 약물치료 권고 기준 충족':'⚑ NOF 기준 미충족 — 임상 판단 필요'}</span>
+  </div>`;
+  document.getElementById('treatBadge').innerHTML=tx?`<span style="font-size:10px;font-weight:700;color:#3b6d11;background:#eaf3de;padding:2px 8px;border-radius:5px;border:1px solid #9dc05e">치료 권고</span>`:`<span style="font-size:10px;font-weight:700;color:#888780;background:#f4f3f0;padding:2px 8px;border-radius:5px;border:1px solid #d0cec8">관찰/비약물</span>`;
+}
+
+// ═══════════════════════════════════════
+// RISK CLASSIFICATION
+// ═══════════════════════════════════════
+function getRisk(mof,hip,inp){
+  if(mof>=30||hip>=6||inp.fxType==='hip'||inp.fxType==='multiple'||inp.recentFx)
+    return{key:'vhigh',label:'초고위험',sub:'Very High Risk',cls:'kb-vhigh',col:'#a32d2d',
+      crit:'MOF≥30% 또는 Hip≥6%, 또는 고관절·다발성 척추골절 병력, 또는 최근 2년 내 골절'};
+  if(mof>=20||hip>=3||inp.fxType==='nonhip')
+    return{key:'high',label:'고위험',sub:'High Risk',cls:'kb-high',col:'#854f0b',
+      crit:'MOF 20–30% 또는 Hip 3–6%, 또는 이전 비고관절 골다공증 골절'};
+  if(mof>=10||hip>=1.5)
+    return{key:'moderate',label:'중등도 위험',sub:'Moderate Risk',cls:'kb-moderate',col:'#7a6a10',
+      crit:'MOF 10–20% 또는 Hip 1.5–3%'};
+  return{key:'low',label:'저위험',sub:'Low Risk',cls:'kb-low',col:'#3b6d11',
+    crit:'MOF < 10% 및 Hip < 1.5% — 약물치료 기준 미달'};
+}
+
+// ═══════════════════════════════════════
+// TREATMENT DECISION ENGINE (KSO / NOF / BHOF 기준)
+// ═══════════════════════════════════════
+// 치료 기준 (KSO 2022 / NOF-BHOF 2022):
+//  ① T-score ≤ −2.5 (골다공증) → 치료
+//  ② 골다공증성 골절 병력 (고관절/척추/다발) → 치료
+//  ③ FRAX NOF 기준: MOF ≥ 20% OR Hip ≥ 3% → 치료
+//  ④ 초고위험 특징 (최근 2년 내 골절, 다발성 척추) → 치료
+//  ⑤ T-score −1.0 ~ −2.5 + FRAX 경계 (MOF 15~20% or Hip 2~3%) → 치료 고려
+//  ⑥ T-score −1.0 ~ −2.5 + 일반 골절 병력 → 치료 고려
+//  ⑦ T-score 미측정 + FRAX 경계 (MOF 15~20%) → 치료 고려
+//  나머지 → 모니터링 (정상 골밀도 + NOF 미충족 포함)
+
+function getTreatDecision(mof, hip, inp) {
+  const tsRaw = document.getElementById('tscore').value.trim();
+  const ts = (tsRaw === '') ? null : parseFloat(tsRaw);
+  const {fxType, recentFx} = inp;
+
+  const isOP  = (ts !== null && !isNaN(ts) && ts <= -2.5);   // 골다공증
+  const isOPN = (ts !== null && !isNaN(ts) && ts > -2.5 && ts <= -1.0); // 골감소증
+  const isNormal = (ts !== null && !isNaN(ts) && ts > -1.0); // 정상
+  const tsUnknown = (ts === null || isNaN(ts));
+
+  const hasMajorFx = fxType === 'hip' || fxType === 'multiple' || recentFx;
+  const hasAnyFx   = fxType !== 'none' || recentFx;
+  const nofMet     = mof >= 20 || hip >= 3;
+  const borderline = (mof >= 15 && mof < 20) || (hip >= 2 && hip < 3);
+
+  // ① 초고위험 특징
+  if (recentFx || fxType === 'hip' || fxType === 'multiple')
+    return {dec:'treat', criterion:'① 초고위험 골절 특징 (최근 2년 내 / 고관절 / 다발성 척추)'};
+  // ② T-score ≤ −2.5
+  if (isOP)
+    return {dec:'treat', criterion:'① T-score ≤ −2.5 (골다공증 진단)'};
+  // ③ NOF FRAX 기준
+  if (nofMet)
+    return {dec:'treat', criterion:`② FRAX NOF 기준 충족 — MOF ${mof.toFixed(1)}% ≥ 20% 또는 Hip ${hip.toFixed(1)}% ≥ 3%`};
+  // ④ 골감소증 + 골절 병력
+  if (isOPN && hasAnyFx)
+    return {dec:'treat', criterion:'③ T-score −1.0 ~ −2.5 + 골절 병력'};
+  // ⑤ 골감소증 + FRAX 경계
+  if (isOPN && borderline)
+    return {dec:'consider', criterion:`T-score −1.0 ~ −2.5 + FRAX 경계 (MOF ${mof.toFixed(1)}%, Hip ${hip.toFixed(1)}%) — 치료 고려 구간`};
+  // ⑥ T-score 미측정 + FRAX 경계
+  if (tsUnknown && borderline)
+    return {dec:'consider', criterion:`BMD 미측정 + FRAX 경계 (MOF ${mof.toFixed(1)}%, Hip ${hip.toFixed(1)}%) — DXA 검사 후 결정 권고`};
+  // ⑦ 정상 골밀도 + NOF 미충족 → 치료 기준 미충족
+  if (isNormal && !nofMet && !hasAnyFx)
+    return {dec:'monitor', criterion:`T-score 정상 (${ts.toFixed(1)}) + NOF 기준 미충족 (MOF ${mof.toFixed(1)}% < 20%, Hip ${hip.toFixed(1)}% < 3%)`};
+  // ⑧ 나머지 (저위험 또는 중등도 FRAX만)
+  return {dec:'monitor', criterion:`NOF/KSO 치료 기준 미충족 — MOF ${mof.toFixed(1)}% < 20%, Hip ${hip.toFixed(1)}% < 3%`};
+}
+
+function renderRisk(mof,hip,inp){
+  const r=getRisk(mof,hip,inp);
+  const td=getTreatDecision(mof,hip,inp);
+  const p3m=((1-Math.pow(1-mof/100,.3))*100).toFixed(1);
+  const p5m=((1-Math.pow(1-mof/100,.5))*100).toFixed(1);
+  const p3h=((1-Math.pow(1-hip/100,.3))*100).toFixed(1);
+  const p5h=((1-Math.pow(1-hip/100,.5))*100).toFixed(1);
+
+  // 치료 결정 배지
+  const tdBadge = td.dec==='treat'
+    ? `<span style="font-size:11px;font-weight:700;background:#fde8e8;color:#a32d2d;border:1px solid #f0a0a0;padding:2px 9px;border-radius:5px">치료 권고</span>`
+    : td.dec==='consider'
+    ? `<span style="font-size:11px;font-weight:700;background:#fef0e0;color:#854f0b;border:1px solid #f5c870;padding:2px 9px;border-radius:5px">치료 고려</span>`
+    : `<span style="font-size:11px;font-weight:700;background:#eaf3de;color:#3b6d11;border:1px solid #9dc05e;padding:2px 9px;border-radius:5px">모니터링</span>`;
+
+  let html=`<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap">
+    <span class="kbadge ${r.cls}">${r.label}</span>
+    <span style="font-size:11px;color:#888780">${r.sub}</span>
+    ${tdBadge}
+  </div>
+  <div style="font-size:11px;color:#5f5e5a;margin-bottom:9px">${r.crit}</div>
+  <table class="lt" style="font-size:11px;margin-bottom:9px">
+    <thead><tr><th>기간</th><th style="text-align:center">MOF 확률</th><th style="text-align:center">고관절 확률</th></tr></thead>
+    <tbody>
+      <tr><td><b>10년</b> (FRAX)</td><td style="text-align:center;font-weight:700;color:${r.col}">${mof.toFixed(1)}%</td><td style="text-align:center;font-weight:700">${hip.toFixed(1)}%</td></tr>
+      <tr><td>5년 환산</td><td style="text-align:center">${p5m}%</td><td style="text-align:center">${p5h}%</td></tr>
+      <tr><td>3년 환산</td><td style="text-align:center">${p3m}%</td><td style="text-align:center">${p3h}%</td></tr>
+    </tbody>
+  </table>`;
+
+  // 치료 기준 체크리스트 표시
+  const tsRaw=document.getElementById('tscore').value.trim();
+  const ts=(tsRaw==='')?null:parseFloat(tsRaw);
+  const nofMet=mof>=20||hip>=3;
+  const isOP=ts!==null&&!isNaN(ts)&&ts<=-2.5;
+  const hasFx=inp.fxType!=='none'||inp.recentFx;
+
+  html+=`<div style="background:#f8f7f5;border-radius:7px;padding:8px 10px;border:1px solid #e2e0db">
+    <div style="font-size:10px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">치료 기준 체크 (KSO / NOF / BHOF 2022)</div>
+    <div style="font-size:11px;line-height:1.9">
+      ${chk(isOP, 'T-score ≤ −2.5 (골다공증)', ts!==null?`현재 ${ts!==null&&!isNaN(ts)?ts.toFixed(1):'미입력'}`:'BMD 미측정')}
+      ${chk(hasFx, '골절 병력 (고관절/척추/기타)', inp.fxType==='none'&&!inp.recentFx?'골절 없음':inp.fxType)}
+      ${chk(nofMet, `FRAX NOF 기준 (MOF ≥ 20% 또는 Hip ≥ 3%)`, `MOF ${mof.toFixed(1)}% / Hip ${hip.toFixed(1)}%`)}
+    </div>
+    <div class="nb ${td.dec==='treat'?'dng':td.dec==='consider'?'warn':'suc'}" style="margin-top:6px;margin-bottom:0">
+      ${td.dec==='treat'?'▶ 약물치료 권고':td.dec==='consider'?'▶ 치료 고려 구간 — DXA 결과 및 임상 인자 종합 판단 필요':'▶ 현재 약물치료 기준 미충족'} — ${td.criterion}
+    </div>
+  </div>`;
+
+  document.getElementById('riskCt').innerHTML=html;
+  // Dynamic top bar for risk card
+  const riskBars={vhigh:'linear-gradient(90deg,#a32d2d 0%,#e24b4a 100%)',high:'linear-gradient(90deg,#854f0b 0%,#ef9f27 100%)',moderate:'linear-gradient(90deg,#7a6a10 0%,#c9a02a 100%)',low:'linear-gradient(90deg,#3b6d11 0%,#639922 100%)'};
+  const rbt=document.getElementById('riskBarTop');
+  if(rbt)rbt.style.background=riskBars[r.key]||riskBars.low;
+}
+
+function chk(met, label, detail){
+  const icon = met ? '✓' : '✗';
+  const col  = met ? '#3b6d11' : '#b4b2a9';
+  return `<div><span style="color:${col};font-weight:700;margin-right:5px">${icon}</span><b style="color:${met?'#1a1a18':'#888780'}">${label}</b> <span style="color:#b4b2a9;font-size:10px">${detail}</span></div>`;
+}
+
+// ═══════════════════════════════════════
+// RECOMMENDATION
+// ═══════════════════════════════════════
+function renderRec(mof,hip,inp){
+  const risk=getRisk(mof,hip,inp);
+  const td=getTreatDecision(mof,hip,inp);
+  const{egfr,cvRisk,upperGI,vteHx,hypoCalcium,immuno,boneMalig,hotFlash,priorBP,priorAnabolic,fxType,recentFx}=inp;
+  const t1=[],t2=[],notes=[];
+
+  // ── 치료 기준 미충족 → 모니터링 안내만 ──
+  if(td.dec==='monitor'){
+    const tsRaw=document.getElementById('tscore').value.trim();
+    const ts=(tsRaw==='')?null:parseFloat(tsRaw);
+    const hasBMD = ts!==null&&!isNaN(ts);
+    let html=`<div class="nb suc"><b>약물치료 기준 미충족</b><br>`;
+    html+=`현재 KSO / NOF / BHOF 기준에서 골다공증 약물치료는 <b>권고되지 않습니다</b>.<br>`;
+    html+=`<span style="font-size:10px">사유: ${td.criterion}</span></div>`;
+    html+=`<div style="height:8px"></div>`;
+    html+=`<div class="rb lo"><div class="rsrc">권고 사항</div>
+      <div class="ri">비약물적 치료 및 모니터링</div>
+      <ul class="rdrugs">
+        <li>칼슘 1,000–1,200 mg/일 + 비타민D 800–1,000 IU/일 보충</li>
+        <li>체중 부하 운동 (주 3–5회, 30분 이상)</li>
+        <li>낙상 예방 교육 (근력강화, 균형 훈련)</li>
+        <li>음주·흡연 중단, 단백질 충분 섭취</li>
+        ${!hasBMD?'<li><b>DXA 검사 권고</b> — T-score 확인 후 재평가</li>':''}
+        <li>2년마다 FRAX 재평가${hasBMD?'':' (DXA 포함)'}</li>
+      </ul>
+    </div>`;
+    // 골밀도 미측정 시 DXA 권유 강조
+    if(!hasBMD){
+      html+=`<div class="nb warn">⚑ <b>T-score 미입력</b> — DXA 시행 후 T-score ≤ −2.5이면 치료 기준 충족 가능. 중등도 위험 이상이면 반드시 DXA 권고</div>`;
+    }
+    document.getElementById('recCt').innerHTML=html;
+    return;
+  }
+
+  // ── 치료 고려 구간 ──
+  if(td.dec==='consider'){
+    let html=`<div class="nb warn"><b>치료 고려 구간</b> — ${td.criterion}<br>
+      <span style="font-size:10px">T-score 및 추가 임상인자(낙상 위험, 골절 가속 인자)를 종합하여 치료 여부를 결정하십시오</span></div>`;
+    html+=`<div style="height:6px"></div>`;
+
+    // 우선 약제 — 금기 반영하여 결정
+    if(egfr<30){
+      // eGFR<30: BP 전체 금기
+      html+=`<div class="rb mo"><div class="rsrc">치료 고려 시 우선 약제</div>
+        <div class="ri">데노수맙</div>
+        <div class="rind">eGFR &lt; 30 — 비스포스포네이트 전체 금기 → 데노수맙</div>
+        <ul class="rdrugs"><li>데노수맙 60 mg SC 6개월마다</li><li>⚑ 저칼슘혈증 모니터링 필수</li></ul>
+      </div>`;
+    } else if(upperGI){
+      // 상부위장관 질환: 경구 BP 금기
+      html+=`<div class="nb dng" style="margin-bottom:7px">⊘ 상부위장관 질환 — 경구 비스포스포네이트 금기. 아래 대안 약제를 고려하십시오</div>`;
+      html+=`<div class="rb mo"><div class="rsrc">치료 고려 시 우선 약제 (경구 BP 금기)</div>
+        <div class="ri">졸레드론산 또는 데노수맙</div>
+        <div class="rind">T-score 및 환자 선호에 따라 결정</div>
+        <ul class="rdrugs">
+          ${egfr>=35?'<li>졸레드론산 5 mg IV 연 1회</li>':''}
+          <li>데노수맙 60 mg SC 6개월마다 (중단 시 BP 전환 필수)</li>
+        </ul>
+      </div>`;
+    } else if(egfr>=30&&egfr<35){
+      // eGFR 30-35: 알렌드로네이트 금기, 리세드로네이트 또는 데노수맙
+      html+=`<div class="nb warn" style="margin-bottom:7px">⚑ eGFR 30–35 — 알렌드로네이트·졸레드론산 금기 → 리세드로네이트 또는 데노수맙</div>`;
+      html+=`<div class="rb mo"><div class="rsrc">치료 고려 시 우선 약제</div>
+        <div class="ri">리세드로네이트 또는 데노수맙</div>
+        <div class="rind">T-score 및 환자 선호에 따라 결정</div>
+        <ul class="rdrugs">
+          <li>리세드로네이트 35 mg 주 1회</li>
+          <li>데노수맙 60 mg SC 6개월마다 (중단 시 BP 전환 필수)</li>
+        </ul>
+      </div>`;
+    } else {
+      // 금기 없음: 경구 BP 1차
+      html+=`<div class="rb mo"><div class="rsrc">치료 고려 시 우선 약제</div>
+        <div class="ri">경구 비스포스포네이트</div>
+        <div class="rind">T-score 및 환자 선호에 따라 결정</div>
+        <ul class="rdrugs">
+          <li>알렌드로네이트 70 mg 주 1회</li>
+          <li>리세드로네이트 35 mg 주 1회</li>
+        </ul>
+      </div>`;
+    }
+
+    const tsRaw=document.getElementById('tscore').value.trim();
+    if(tsRaw==='') html+=`<div class="nb warn">⚑ T-score 미입력 — DXA 시행 후 T-score ≤ −2.5 확인 시 치료 권고로 전환됩니다</div>`;
+    document.getElementById('recCt').innerHTML=html;
+    return;
+  }
+
+  // ── 치료 권고 (treat) → 위험도별 약제 추천 ──
+  if(risk.key==='vhigh'){
+    if(cvRisk!=='high'&&priorAnabolic==='none')
+      t1.push({id:'romosozumab',reason:'초고위험 1순위 — 이중기전 (골형성+항흡수) 12개월 후 항흡수제 전환 (AACE 2020)',note:'ARCH: hip Fx 38%↓ vs ALN · 이후 졸레드론산 또는 데노수맙 전환'});
+    if(priorAnabolic==='none')
+      t1.push({id:'teriparatide',reason:'초고위험 동화제 — CV 고위험 또는 로모소주맙 불가 시 대안',note:'24개월 후 즉시 항흡수제 전환 필수'});
+    if(egfr>=35) t2.push({id:'zoledronate',reason:'강력 항흡수제 — 동화제 후 전환 또는 독립 사용 (연 1회 IV)',note:''});
+    t2.push({id:'denosumab',reason:'강력 항흡수제 — CKD·BP 불내성 시 선택',note:'⚠ 중단 시 반드시 BP 전환 필수'});
+  }
+  if(risk.key==='high'){
+    if(egfr>=35) t1.push({id:'zoledronate',reason:'고위험 1순위 — MOF·Hip·척추 광범위 예방; 경구 순응도 불량 시 선호',note:'연 1회 IV 투여'});
+    if(egfr>=35&&!upperGI) t1.push({id:'alendronate',reason:'고위험 1순위 — 가장 광범위한 RCT 근거 (FIT)',note:'주 1회 경구'});
+    if(egfr>=35&&!upperGI) t1.push({id:'risedronate',reason:'고위험 1순위 — GI 부작용 비교적 낮음',note:''});
+    t1.push({id:'denosumab',reason:'고위험 1순위 — CKD·BP 불내성 시',note:'⚠ 중단 시 BP 전환 필수'});
+    if(egfr>=30&&egfr<35) t1.push({id:'risedronate',reason:'eGFR 30–35 — BP 중 eGFR 기준 가장 낮음 (≥30)',note:''});
+    if(!vteHx&&hip<3) t2.push({id:'raloxifene',reason:'척추골절 위험 주도형 + 유방암 예방 공존 시 대안',note:'고관절 예방 미입증; VTE 위험 증가'});
+  }
+  // moderate with 'treat' decision: T-score ≤ -2.5 이거나 골절 병력
+  if(risk.key==='moderate'||risk.key==='low'){
+    if(egfr<30)
+      t1.push({id:'denosumab',reason:'eGFR<30 — BP 전체 금기 → 데노수맙 우선',note:'저칼슘혈증 모니터링 필수'});
+    else{
+      if(egfr>=35&&!upperGI) t1.push({id:'alendronate',reason:'1차 치료제 — 광범위 RCT 근거',note:''});
+      if(egfr>=35&&!upperGI) t1.push({id:'risedronate',reason:'1차 치료제 — GI 부작용↓',note:''});
+      if(egfr>=35&&upperGI)  t1.push({id:'zoledronate',reason:'경구 BP 금기(위장관 질환) — IV 대안',note:'연 1회 주사'});
+      else if(egfr>=35)      t1.push({id:'zoledronate',reason:'경구 불내성 또는 순응도 불량 시 대안',note:'연 1회 IV'});
+      if(upperGI)            t1.push({id:'denosumab',reason:'경구 BP 금기(위장관 질환) 시 대안',note:'⚠ 중단 시 BP 전환 필수'});
+      if(egfr>=30&&egfr<35)  t1.push({id:'risedronate',reason:'eGFR 30–35 — 리세드로네이트 또는 데노수맙',note:''});
+    }
+    if(!vteHx) t2.push({id:'raloxifene',reason:'척추 위험 주도형 + 유방암 예방 공존 시',note:'고관절 예방 미입증'});
+  }
+
+  // 특수 주의사항
+  if(cvRisk==='high') notes.push({cls:'dng',m:'최근 MI/뇌졸중 (12개월 이내): 로모소주맙 금기 (MACE 위험↑ — ARCH trial)'});
+  else if(cvRisk==='moderate') notes.push({cls:'warn',m:'CV 위험인자 보유: 로모소주맙 사용 시 MACE 위험-이익 신중 평가'});
+  if(vteHx) notes.push({cls:'dng',m:'VTE (DVT/PE) 병력: 랄록시펜 금기'});
+  if(egfr<30) notes.push({cls:'dng',m:'eGFR < 30: 비스포스포네이트 전체 금기 → 데노수맙 (저칼슘혈증 모니터링)'});
+  else if(egfr<35) notes.push({cls:'warn',m:'eGFR 30–35: 졸레드론산·알렌드로네이트 금기 → 리세드로네이트 또는 데노수맙'});
+  if(upperGI) notes.push({cls:'warn',m:'상부위장관 질환: 경구 BP 금기/주의 → IV 졸레드론산 또는 데노수맙 선호'});
+  if(priorAnabolic!=='none') notes.push({cls:'info',m:`이전 동화제(${priorAnabolic}) 완료 → 항흡수제 즉시 전환 (졸레드론산 또는 데노수맙 권장)`});
+  if(hypoCalcium) notes.push({cls:'warn',m:'저칼슘혈증: 항골다공증제 투여 전 반드시 교정'});
+  if(immuno) notes.push({cls:'warn',m:'면역억제 상태: 데노수맙 사용 시 심각한 감염 위험↑'});
+  if(priorBP==='5') notes.push({cls:'warn',m:'BP 5년↑: 저위험 전환 시 drug holiday 고려; AFF 위험 재평가'});
+  if(boneMalig) notes.push({cls:'dng',m:'골 악성종양 병력: 테리파라타이드·아바로파라타이드 금기'});
+  if(hotFlash) notes.push({cls:'info',m:'안면홍조 증상: 랄록시펜 사용 시 증상 악화 가능 — 환자 상담 필요'});
+
+  const dd=n=>{const d=DRUGS.find(x=>x.id===n.id);if(!d)return'';const col=CC[d.cls]||'#888780';
+    return`<div class="rb ${n.tier==='t1'?'hi':'mo'}">
+      <div class="rsrc">${n.tier==='t1'?'1순위':'2순위 / 대안'}</div>
+      <div class="ri"><span class="cdot" style="background:${col}"></span>${d.name} <span style="font-size:11px;font-weight:400;color:#888780">(${d.brand})</span></div>
+      <div class="rind">${n.reason}</div>
+      <ul class="rdrugs"><li>${d.dosing}</li>${n.note?`<li>${n.note}</li>`:''}</ul>
+    </div>`;};
+
+  let html=`<div style="font-size:10px;color:#888780;margin-bottom:8px">AACE/ACE 2020 · BHOF 2022 · NOGG 2022 · KSO 2022 기준</div>`;
+  t1.forEach(n=>{n.tier='t1';html+=dd(n);});
+  t2.forEach(n=>{n.tier='t2';html+=dd(n);});
+  notes.forEach(n=>{html+=`<div class="nb ${n.cls}">⚑ ${n.m}</div>`;});
+  document.getElementById('recCt').innerHTML=html;
+}
+
+// ═══════════════════════════════════════
+// NNT TABLE
+// ═══════════════════════════════════════
+function convP(p10,yr){return(1-Math.pow(1-p10/100,yr/10))*100;}
+function nnhCalc(ae,dur){const a=ae.ac?ae.a:ae.a*(dur/ae.d);return a>0?Math.round(1/a):null;}
+function isCI(drug,inp){
+  let ci=false;
+  drug.ci.forEach(c=>{
+    if(c==='egfr35'&&inp.egfr<35)ci=true;
+    else if(c==='egfr30'&&inp.egfr<30)ci=true;
+    else if(c==='upperGI'&&inp.upperGI)ci=true;
+    else if(c==='hypoCalcium'&&inp.hypoCalcium)ci=true;
+    else if(c==='vteHx'&&inp.vteHx)ci=true;
+    else if(c==='boneMalig'&&inp.boneMalig)ci=true;
+    else if(c==='cvHigh'&&inp.cvRisk==='high')ci=true;
+  });
+  return ci;
+}
+function nntCls(n){if(!n)return'nnt-na';if(n<=20)return'nnt-g';if(n<=40)return'nnt-b';if(n<=80)return'nnt-m';return'nnt-r';}
+function lhhCls(l){if(l>=10)return'lhh-g';if(l>=3)return'lhh-b';if(l>=1)return'lhh-m';return'lhh-r';}
+
+function renderNNT(mof,hip,inp){
+  const{dur,endpoint,adherence,egfr}=inp;
+  const baseP=endpoint==='mof'?mof:endpoint==='hip'?hip:endpoint==='vertebral'?mof*.42:Math.max(mof*.55-hip*.30,mof*.30);
+
+  const rows=DRUGS.map(drug=>{
+    const rrr=drug.rrr[endpoint];
+    const ci=isCI(drug,inp);
+    let nnt=null,arr=null;
+    if(rrr){const p=convP(baseP,dur);const a=p*rrr*adherence/100;if(a>0){nnt=Math.round(1/a);arr=(a*100).toFixed(2);}}
+    let mn=Infinity,me='';
+    drug.nnh.forEach(ae=>{if(ae.e.includes('★'))return;const n=nnhCalc(ae,dur);if(n&&n<mn){mn=n;me=ae.e;}});
+    const nnh=mn<Infinity?mn:null;
+    const lhh=(nnt&&nnh)?nnh/nnt:null;
+    return{drug,ci,nnt,arr,nnh,me,lhh};
+  }).sort((a,b)=>{
+    if(a.ci!==b.ci)return a.ci?1:-1;
+    return(a.nnt||9999)-(b.nnt||9999);
+  });
+
+  let html='';
+  rows.forEach(r=>{
+    const{drug,ci,nnt,arr,nnh,me,lhh}=r;
+    const col=CC[drug.cls]||'#888780';
+    const nntH=nnt?`<span class="${nntCls(nnt)}" style="font-size:17px">${nnt}</span>`:`<span class="nnt-na">미입증</span>`;
+    const arrH=arr?`<span style="font-size:11px;color:#888780">${arr}%</span>`:'—';
+    const nnhH=nnh?`<b style="font-size:13px">${nnh}</b><div style="font-size:9px;color:#b4b2a9;line-height:1.2;max-width:80px">${me.substring(0,18)}</div>`:'—';
+    const lhhH=lhh?`<span class="${lhhCls(lhh)}">${lhh.toFixed(1)}</span>`:'—';
+    const egfH=drug.egfLim?`<span style="font-size:10px;color:${egfr<drug.egfLim?'#a32d2d':'#888780'}">&lt;${drug.egfLim}</span>`:`<span style="color:#b4b2a9;font-size:10px">없음</span>`;
+    const insH=drug.ins?`<span style="font-size:10px;font-weight:600;color:#3b6d11">${drug.insLine}차 급여</span>`:`<span style="font-size:10px;color:#854f0b">확인</span>`;
+    const stH=ci?`<span style="font-size:10px;font-weight:700;color:#a32d2d">금기</span>`:`<span style="font-size:10px;color:#3b6d11">가능</span>`;
+    html+=`<tr class="${ci?'ci':''}">
+      <td><span class="cdot" style="background:${col}"></span><b style="font-size:12px">${drug.name}</b><div style="font-size:10px;color:#b4b2a9">${drug.brand}</div></td>
+      <td style="text-align:center">${nntH}</td>
+      <td style="text-align:center">${arrH}</td>
+      <td style="text-align:center">${nnhH}</td>
+      <td style="text-align:center">${lhhH}</td>
+      <td style="text-align:center">${egfH}</td>
+      <td style="text-align:center">${insH}</td>
+      <td style="text-align:center">${stH}</td>
+    </tr>`;
+  });
+  document.getElementById('nntBody').innerHTML=html;
+  const epN={mof:'MOF',hip:'고관절',vertebral:'척추(×0.42 추정)',nonVertebral:'비척추(추정)'};
+  document.getElementById('nntNote').textContent=`기간: ${dur}년 · 순응도: ${Math.round(adherence*100)}% · Endpoint: ${epN[endpoint]} · 기저 확률: ${baseP.toFixed(1)}% (MOF ${mof.toFixed(1)}% / Hip ${hip.toFixed(1)}%)`;
+  const np=document.getElementById('nntPending'); if(np) np.style.display='none';
+}
+
+// ═══════════════════════════════════════
+// NNH DETAIL
+// ═══════════════════════════════════════
+function renderNNHDetail(dur){
+  const sevCol={1:'#c9a02a',2:'#854f0b',3:'#a32d2d'};
+  const sevLbl={1:'경증',2:'중등',3:'중증'};
+
+  // 고정 열 너비를 가진 단일 통합 테이블로 렌더링
+  let html=`<table class="lt" style="font-size:11px;table-layout:fixed;width:100%">
+    <colgroup>
+      <col style="width:26px">     <!-- 약제 색상 dot 열 -->
+      <col style="width:120px">    <!-- 약제명 -->
+      <col>                        <!-- 이상반응 (나머지) -->
+      <col style="width:76px">     <!-- NNH -->
+      <col style="width:130px">    <!-- 근거 -->
+      <col style="width:44px">     <!-- 중증도 -->
+    </colgroup>
+    <thead>
+      <tr style="border-bottom:1.5px solid #e2e0db">
+        <th colspan="2" style="text-align:left;padding:5px 6px">약제</th>
+        <th style="text-align:left">이상반응</th>
+        <th style="text-align:center">NNH<br><span style="font-weight:400;font-size:9px;text-transform:none">(${dur}년)</span></th>
+        <th style="text-align:left">근거</th>
+        <th style="text-align:center">중증도</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  DRUGS.forEach((drug, di)=>{
+    const col=CC[drug.cls]||'#888780';
+    drug.nnh.forEach((ae, ai)=>{
+      const n=nnhCalc(ae,dur);
+      const sc=sevCol[ae.s]||'#888780';
+      const slab=sevLbl[ae.s]||'—';
+      const isFirst=ai===0;
+      const borderTop=di>0&&isFirst?'border-top:2px solid #f1efe8':'';
+
+      // 약제명은 첫 번째 행에만, rowspan으로 묶음
+      const drugCell=isFirst
+        ?`<td rowspan="${drug.nnh.length}" style="vertical-align:middle;padding:5px 4px 5px 6px;${borderTop}">
+            <span class="cdot" style="background:${col};width:9px;height:9px"></span>
+          </td>
+          <td rowspan="${drug.nnh.length}" style="vertical-align:middle;font-weight:700;font-size:11px;color:${col};padding:5px 4px;${borderTop}">
+            ${drug.name}<br><span style="font-weight:400;font-size:9px;color:#b4b2a9">${drug.brand}</span>
+          </td>`
+        :'';
+
+      html+=`<tr>
+        ${drugCell}
+        <td style="padding:4px 6px;${isFirst?borderTop:''}">${ae.e}${ae.ac?` <span style="font-size:9px;color:#b4b2a9">(급성)</span>`:''}</td>
+        <td style="text-align:center;font-weight:700;color:${sc};padding:4px 6px;${isFirst?borderTop:''}">${n||'—'}</td>
+        <td style="color:#888780;padding:4px 6px;${isFirst?borderTop:''}">${ae.ref}</td>
+        <td style="text-align:center;color:${sc};font-size:10px;font-weight:600;padding:4px 6px;${isFirst?borderTop:''}">${slab}</td>
+      </tr>`;
+    });
+  });
+
+  html+=`</tbody></table>`;
+  document.getElementById('nnhDetail').innerHTML=html;
+  const hp=document.getElementById('nnhPending'); if(hp) hp.style.display='none';
+}
+
+// ═══════════════════════════════════════
+// ALERTS
+// ═══════════════════════════════════════
+function renderAlerts(inp){
+  const{egfr,cvRisk,vteHx,hypoCalcium,immuno,boneMalig,priorAnabolic,priorBP}=inp;
+  const al=[];
+  if(egfr<30)al.push({cls:'dng',m:'eGFR < 30: 비스포스포네이트 전체 금기'});
+  else if(egfr<35)al.push({cls:'warn',m:'eGFR 30–35: 졸레드론산·알렌드로네이트 금기'});
+  if(cvRisk==='high')al.push({cls:'dng',m:'최근 MI/뇌졸중: 로모소주맙 금기'});
+  if(vteHx)al.push({cls:'dng',m:'VTE 병력: 랄록시펜 금기'});
+  if(hypoCalcium)al.push({cls:'warn',m:'저칼슘혈증: 항골다공증제 투여 전 반드시 교정'});
+  if(immuno)al.push({cls:'warn',m:'면역억제 상태: 데노수맙 감염 위험↑'});
+  if(boneMalig)al.push({cls:'dng',m:'골 악성종양 병력: 테리파라타이드·아바로파라타이드 금기'});
+  if(priorAnabolic!=='none')al.push({cls:'info',m:`이전 동화제(${priorAnabolic}) 완료 → 항흡수제 즉시 전환`});
+  if(priorBP==='5')al.push({cls:'warn',m:'BP 5년 이상 사용: drug holiday 고려, AFF 위험 평가'});
+  const card=document.getElementById('alertCard');
+  if(!al.length){card.style.display='none';return;}
+  card.style.display='';
+  document.getElementById('alertCt').innerHTML=al.map(a=>`<div class="nb ${a.cls}">⚑ ${a.m}</div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// SEQUENTIAL THERAPY
+// ═══════════════════════════════════════
+function renderSeq(){
+  const seqs=[
+    {title:'초고위험 — 최적 순서 (AACE 2020 + ARCH 근거)',
+     steps:[{dot:'1',bg:'#fde8e8',col:'#a32d2d',name:'로모소주맙 × 12개월',sub:'골형성+골흡수억제 이중기전 (SC 월 1회)'},
+            {dot:'2',bg:'#e6f1fb',col:'#185fa5',name:'졸레드론산 (IV 연 1회)',sub:'ARCH trial: 이 순서에서 hip Fx 38%↓ vs ALN; 효과 최대화'}]},
+    {title:'동화제 → 항흡수제 (표준)',
+     steps:[{dot:'1',bg:'#fef0f8',col:'#7b5ea7',name:'테리파라타이드 / 아바로파라타이드',sub:'24/18개월 사용; 이후 즉시 전환'},
+            {dot:'2',bg:'#e6f1fb',col:'#185fa5',name:'졸레드론산 또는 데노수맙',sub:'전환 없으면 BMD 급속 소실'}]},
+    {title:'데노수맙 중단 시 필수 전환 (⚠ 미전환 시 다발성 반동 골절)',
+     steps:[{dot:'D',bg:'#eaf3de',col:'#3b6d11',name:'데노수맙 투여 중',sub:'6개월마다 SC 60 mg'},
+            {dot:'!',bg:'#fcebeb',col:'#a32d2d',name:'중단 전 BP 전환 계획 필수',sub:'졸레드론산 IV 또는 알렌드로네이트 즉시 투여 — NNH(미전환) ~15–30'}]},
+    {title:'항흡수제 → 동화제 (효과 감소 주의)',
+     steps:[{dot:'1',bg:'#e6f1fb',col:'#185fa5',name:'비스포스포네이트 장기 사용',sub:'특히 알렌드로네이트'},
+            {dot:'2',bg:'#fef0f8',col:'#7b5ea7',name:'테리파라타이드 (효과↓)',sub:'BP 선행 시 PTH 반응 감소; 가능하면 이 순서 피할 것'}],
+     muted:true},
+  ];
+  let html='';
+  seqs.forEach(s=>{
+    html+=`<div style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;color:#5f5e5a;margin-bottom:7px">${s.title}</div>`;
+    s.steps.forEach((step,i)=>{
+      const isLast=i===s.steps.length-1;
+      html+=`<div class="sw-row">
+        <div class="sw-left">
+          <div class="sw-dot" style="background:${step.bg};color:${step.col};border:1.5px solid ${step.col}">${step.dot}</div>
+          ${!isLast?`<div class="sw-line"></div>`:''}
+        </div>
+        <div class="sw-box ${s.muted?'muted':'active'}" style="margin-bottom:${isLast?10:0}px">
+          <div class="sw-step">${i===0?'시작':'전환'}</div>
+          <div class="sw-name" style="color:${step.col}">${step.name}</div>
+          <div class="sw-sub">${step.sub}</div>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  html+=`<div class="nb info">① 동화제→항흡수제 순서가 반대 순서보다 효과 우수 (IOF, AACE) &nbsp;|&nbsp; ② 데노수맙 중단 시 BP 전환 없으면 다발성 척추골절 위험 (NNH ~15–30) &nbsp;|&nbsp; ③ 골절 후 30–90일 내 조기 치료 시작 권고</div>`;
+  document.getElementById('seqCt').innerHTML=html;
+  const sp=document.getElementById('seqPending'); if(sp) sp.style.display='none';
+}
+
+// ═══════════════════════════════════════
+// COLLAPSIBLE
+// ═══════════════════════════════════════
+function toggleColl(bodyId,arrId){
+  const b=document.getElementById(bodyId);
+  const a=document.getElementById(arrId);
+  const open=b.classList.toggle('open');
+  a.textContent=open?'▲':'▼';
+}
+
+// ═══════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════
+function resetAll(){
+  ['mMOF','mHip','tscore','egfr'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.querySelectorAll('input[name=dur]').forEach(r=>r.checked=false);
+  ['recentFx','upperGI','vteHx','hypoCalcium','immuno','boneMalig','hotFlash'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.checked=false;});
+  document.getElementById('fxType').value='none';
+  document.getElementById('cvRisk').value='low';
+  document.getElementById('priorBP').value='0';
+  document.getElementById('priorAnabolic').value='none';
+  document.getElementById('endpoint').value='mof';
+  document.getElementById('adherence').value=80;
+  document.getElementById('adhDisp').textContent='80%';
+  ['nntColl','nnhColl','seqColl','methColl'].forEach(id=>document.getElementById(id).classList.remove('open'));
+  ['nntArr','nnhArr','seqArr','methArr'].forEach(id=>document.getElementById(id).textContent='▼');
+  window.scrollTo({top:0,behavior:'smooth'});
+  calc();
+}
+
+// ═══════════════════════════════════════
+// ABBR SEARCH
+// ═══════════════════════════════════════
+const ABBR_DATA=[
+  // ── 골절 위험·진단 ──
+  {t:'FRAX',   en:'Fracture Risk Assessment Tool',                      ko:'골절 위험 평가 도구 (10년 골절 확률 계산)'},
+  {t:'MOF',    en:'Major Osteoporotic Fracture',                        ko:'주요 골다공증성 골절 (척추·고관절·전완부·상완골)'},
+  {t:'BMD',    en:'Bone Mineral Density',                               ko:'골밀도'},
+  {t:'DXA',    en:'Dual-energy X-ray Absorptiometry',                   ko:'이중에너지 X선 흡수법 — 골밀도 표준 측정법'},
+  {t:'FN',     en:'Femur Neck',                                         ko:'대퇴골경부'},
+  {t:'T-score',en:'SD from Young Adult Mean (NHANES III reference)',    ko:'젊은 성인 평균 대비 표준편차; ≤−2.5 = 골다공증'},
+  {t:'Z-score',en:'SD from Age-matched Mean',                          ko:'동일 연령 평균 대비 표준편차 (50세 미만 권장)'},
+  {t:'VFA',    en:'Vertebral Fracture Assessment',                      ko:'DXA 기반 척추 골절 평가'},
+  {t:'TBS',    en:'Trabecular Bone Score',                              ko:'해면골 미세구조 점수 — FRAX 보정 인자'},
+  {t:'HAL',    en:'Hip Axis Length',                                    ko:'고관절 축 길이 — 골절 위험 독립 예측인자'},
+  {t:'QCT',    en:'Quantitative Computed Tomography',                   ko:'정량적 CT — 체적 골밀도 측정'},
+  {t:'QUS',    en:'Quantitative Ultrasound',                            ko:'정량적 초음파 — 골다공증 진단에 사용 불가'},
+  // ── NNT / 통계 ──
+  {t:'NNT',    en:'Number Needed to Treat',                             ko:'1명 골절 예방을 위해 치료해야 할 환자 수; 낮을수록 좋음'},
+  {t:'NNH',    en:'Number Needed to Harm',                              ko:'1명 이상반응 발생 시 치료받은 환자 수; 높을수록 안전'},
+  {t:'LHH',    en:'Likelihood of being Helped vs Harmed',               ko:'이득/해 비율 = NNH ÷ NNT; >1 이면 순이익'},
+  {t:'ARR',    en:'Absolute Risk Reduction',                            ko:'절대 위험 감소율 (%)'},
+  {t:'RRR',    en:'Relative Risk Reduction',                            ko:'상대 위험 감소율 (%)'},
+  {t:'ARI',    en:'Absolute Risk Increase',                             ko:'절대 위험 증가율 (이상반응 계산용)'},
+  {t:'HR',     en:'Hazard Ratio',                                       ko:'위험비'},
+  {t:'CI',     en:'Confidence Interval',                                ko:'신뢰구간'},
+  {t:'RCT',    en:'Randomized Controlled Trial',                        ko:'무작위 대조 임상시험'},
+  {t:'SD',     en:'Standard Deviation',                                 ko:'표준편차'},
+  // ── 약제 ──
+  {t:'BP',     en:'Bisphosphonate',                                     ko:'비스포스포네이트 (항흡수제)'},
+  {t:'ALN',    en:'Alendronate (포사맥스)',                              ko:'알렌드로네이트 — 경구 BP, 주 1회 70 mg'},
+  {t:'RIS',    en:'Risedronate (악토넬)',                                ko:'리세드로네이트 — 경구 BP, 주 1회 35 mg'},
+  {t:'IBN',    en:'Ibandronate (본비바)',                                ko:'이반드로네이트 — 경구 BP, 월 1회 150 mg'},
+  {t:'ZOL',    en:'Zoledronate / Zoledronic acid (아클라스타)',          ko:'졸레드론산 — IV BP, 연 1회 5 mg'},
+  {t:'DENO',   en:'Denosumab (프롤리아)',                                ko:'데노수맙 — RANKL 억제제, SC 6개월마다 60 mg'},
+  {t:'TPTD',   en:'Teriparatide (포스테오)',                             ko:'테리파라타이드 — PTH 유사체, 동화제, SC 매일 20 µg (최대 24개월)'},
+  {t:'ABALO',  en:'Abaloparatide (티무로스)',                            ko:'아바로파라타이드 — PTHrP 유사체, 동화제, SC 매일 80 µg (최대 18개월)'},
+  {t:'ROMO',   en:'Romosozumab (이베니티)',                              ko:'로모소주맙 — 스클레로스틴 억제제, 동화+항흡수 이중기전, SC 월 1회 210 mg × 12개월'},
+  {t:'RALOX',  en:'Raloxifene (에비스타)',                               ko:'랄록시펜 — SERM, 경구 매일 60 mg; 척추 골절만 예방'},
+  {t:'SERM',   en:'Selective Estrogen Receptor Modulator',              ko:'선택적 에스트로겐 수용체 조절제'},
+  {t:'PTH',    en:'Parathyroid Hormone',                                ko:'부갑상선호르몬'},
+  {t:'PTHrP',  en:'Parathyroid Hormone-related Protein',               ko:'부갑상선호르몬 관련 단백질'},
+  {t:'RANKL',  en:'Receptor Activator of Nuclear factor Kappa-B Ligand',ko:'파골세포 분화·활성화 인자 — 데노수맙 표적'},
+  // ── 이상반응 ──
+  {t:'AFF',    en:'Atypical Femoral Fracture',                          ko:'비전형 대퇴골 골절 — BP 장기 사용 (5년↑) 위험'},
+  {t:'ONJ',    en:'Osteonecrosis of the Jaw',                          ko:'턱뼈 괴사 — BP·데노수맙 희귀 이상반응'},
+  {t:'APR',    en:'Acute Phase Reaction',                               ko:'급성기 반응 — IV BP 초회 투여 후 발열·근육통 (38%)'},
+  {t:'MACE',   en:'Major Adverse Cardiovascular Events',               ko:'주요 심혈관 사건 (MI·뇌졸중·심혈관 사망) — 로모소주맙 주의'},
+  {t:'VTE',    en:'Venous Thromboembolism',                             ko:'정맥 혈전색전증 — 랄록시펜 금기 사유'},
+  {t:'DVT',    en:'Deep Vein Thrombosis',                               ko:'심부정맥혈전증'},
+  {t:'PE',     en:'Pulmonary Embolism',                                 ko:'폐색전증'},
+  {t:'MI',     en:'Myocardial Infarction',                              ko:'심근경색'},
+  // ── 검사 ──
+  {t:'eGFR',   en:'estimated Glomerular Filtration Rate',               ko:'추정 사구체 여과율 (mL/min/1.73 m²); BP 제한 기준'},
+  {t:'CTX',    en:'C-terminal Telopeptide of type I Collagen',          ko:'골흡수 표지자 — 항흡수제 반응 모니터링'},
+  {t:'P1NP',   en:'Procollagen type I N-terminal Propeptide',          ko:'골형성 표지자 — 동화제 반응 모니터링'},
+  {t:'BTM',    en:'Bone Turnover Marker',                               ko:'골표지자 (CTX, P1NP 등)'},
+  {t:'BMI',    en:'Body Mass Index',                                    ko:'체질량지수 (kg/m²); <19 = FRAX 독립 위험인자'},
+  // ── 투여 경로 ──
+  {t:'SC',     en:'Subcutaneous',                                       ko:'피하주사'},
+  {t:'IV',     en:'Intravenous',                                        ko:'정맥주사'},
+  // ── 학회·가이드라인 ──
+  {t:'AACE',   en:'American Association of Clinical Endocrinology',    ko:'미국 임상내분비학회 — 4단계 위험분류 기준'},
+  {t:'ACE',    en:'American College of Endocrinology',                 ko:'미국 내분비학회'},
+  {t:'BHOF',   en:'Bone Health and Osteoporosis Foundation',           ko:'미국 골건강·골다공증 재단 (구 NOF)'},
+  {t:'NOGG',   en:'National Osteoporosis Guideline Group',             ko:'영국 국가 골다공증 가이드라인 그룹'},
+  {t:'KSO',    en:'Korean Society of Osteoporosis',                    ko:'대한골대사학회'},
+  {t:'IOF',    en:'International Osteoporosis Foundation',             ko:'국제 골다공증 재단'},
+  // ── 임상시험 ──
+  {t:'FIT',    en:'Fracture Intervention Trial',                       ko:'알렌드로네이트 주요 RCT'},
+  {t:'HORIZON',en:'Health Outcomes and Reduced Incidence with Zoledronate Once Yearly', ko:'졸레드론산 연 1회 임상시험 (HORIZON-PFT)'},
+  {t:'FREEDOM',en:'Fracture Reduction Evaluation of Denosumab in Osteoporosis Every 6 Months', ko:'데노수맙 주요 RCT'},
+  {t:'ARCH',   en:'Active-Controlled Fracture Study in Postmenopausal Women with Osteoporosis at High Risk', ko:'로모소주맙 vs 알렌드로네이트 RCT'},
+  {t:'FRAME',  en:'FRActure study in postMenopausal woMEn with ostEoporosis',ko:'로모소주맙 vs 위약 RCT'},
+  {t:'ACTIVE', en:'Abaloparatide Comparator Trial In Vertebral Endpoints', ko:'아바로파라타이드 주요 RCT'},
+  {t:'FPT',    en:'Fracture Prevention Trial (Neer 2001)',              ko:'테리파라타이드 주요 RCT'},
+  {t:'MORE',   en:'Multiple Outcomes of Raloxifene Evaluation',        ko:'랄록시펜 주요 RCT (Ettinger 1999)'},
+  {t:'FLEX',   en:'Fracture Intervention Trial Long-term Extension',   ko:'알렌드로네이트 장기 연장 — drug holiday 근거'},
+  // ── 기타 ──
+  {t:'GIO',    en:'Glucocorticoid-Induced Osteoporosis',               ko:'스테로이드 유발 골다공증; >7.5 mg/일·3개월↑ = FRAX 보정'},
+  {t:'HRT',    en:'Hormone Replacement Therapy',                       ko:'호르몬 대체요법'},
+  {t:'GC',     en:'Glucocorticoid',                                    ko:'글루코코르티코이드 (스테로이드)'},
+  {t:'RA',     en:'Rheumatoid Arthritis',                              ko:'류마티스관절염 — FRAX 독립 위험인자'},
+  {t:'CV',     en:'Cardiovascular',                                    ko:'심혈관'},
+  {t:'AE',     en:'Adverse Event',                                     ko:'이상반응'},
+];
+
+function renderAbbrList(items){
+  const el=document.getElementById('abbrList');
+  if(!items.length){el.innerHTML='<div class="abbr-empty">검색 결과 없음</div>';return;}
+  el.innerHTML=items.map(a=>`
+    <div class="abbr-item">
+      <span class="abbr-t">${a.t}</span>
+      <span class="abbr-en">${a.en}</span>
+      <span class="abbr-ko">${a.ko}</span>
+    </div>`).join('');
+}
+
+function filterAbbr(val){
+  const dd=document.getElementById('abbrDropdown');
+  const cnt=document.getElementById('abbrCount');
+  const v=val.toLowerCase().trim();
+  if(!v){
+    cnt.textContent='('+ABBR_DATA.length+')';
+    dd.classList.remove('open');
+    return;
+  }
+  // 입력값의 첫 글자로 시작하는 약어만 필터링
+  const res=ABBR_DATA.filter(a=>a.t.toLowerCase().startsWith(v));
+  cnt.textContent='('+res.length+')';
+  renderAbbrList(res);
+  dd.classList.add('open');
+}
+
+function abbrFocus(){
+  if(document.getElementById('abbrInput').value.trim())
+    document.getElementById('abbrDropdown').classList.add('open');
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.abbr-inline')){
+    document.getElementById('abbrDropdown').classList.remove('open');
+  }
+});
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.getElementById('abbrDropdown').classList.remove('open');
+    document.getElementById('abbrInput').blur();
+  }
+});
+
+
+window.addEventListener('DOMContentLoaded',calc);
+</script>
+</body>
+</html>

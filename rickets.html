@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구루병(Rickets) 진단·치료·관리 가이드</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 분류 4색 */
+    --nutri:  #c47d00;   /* 영양성 — 황금 */
+    --hered:  #1a7f6e;   /* 유전성(인산뇨) — 청록 */
+    --vitd:   #7c3aed;   /* 비타민D 의존성 — 보라 */
+    --other:  #9b1c2e;   /* 기타/후천성 — 진홍 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-rk {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-rk span:nth-child(1) { background: var(--hered); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-rk span:nth-child(2) { background: var(--vitd);  color:#fff; padding:3px 6px; }
+  .logo-rk span:nth-child(3) { background: var(--nutri); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--hered); border-bottom-color: var(--hered); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-nutri   { background: #fff3cd; border-left: 3px solid var(--nutri); color: #7d4e00; }
+  .alert-hered   { background: #e0f4f1; border-left: 3px solid var(--hered); color: #0f5549; }
+  .alert-vitd    { background: #ede9fe; border-left: 3px solid var(--vitd);  color: #5b21b6; }
+  .alert-other   { background: #fce8eb; border-left: 3px solid var(--other); color: var(--other); }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl.small-text { font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── 수치 변화 표시 ── */
+  .v-up   { color: var(--red); font-weight: 700; }
+  .v-down { color: var(--accent); font-weight: 700; }
+  .v-n    { color: var(--text2); }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── TYPE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-nutri { background: #fff3cd; color: #7d4e00; border: 1px solid var(--nutri); }
+  .t-hered { background: #e0f4f1; color: var(--hered); border: 1px solid var(--hered); }
+  .t-vitd  { background: #ede9fe; color: var(--vitd);  border: 1px solid var(--vitd); }
+  .t-other { background: #fce8eb; color: var(--other); border: 1px solid var(--other); }
+
+  /* ── PILL / DRUG TAG ── */
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-vitd    { background: #fff3cd; color: #7d4e00; }
+  .drug-calc    { background: #dafbe1; color: #116329; }
+  .drug-phos    { background: #ddf4ff; color: #0550ae; }
+  .drug-mab     { background: #fce8eb; color: var(--other); }
+  .drug-gh      { background: #ede9fe; color: #5b21b6; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── CLASSIFICATION TIMELINE ── */
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(14px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-nutri { background: #fff8e1; }
+  .st-hered-p { background: #e0f4f1; }
+  .st-hered-v { background: #f3e8ff; }
+  .st-other  { background: #fde8eb; }
+
+  /* ── GEAR ROW (병태생리 박스) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-nutri { background: #fff8e1; border: 1.5px solid var(--nutri); color: #7d4e00; }
+  .gear-hered { background: #e0f4f1; border: 1.5px solid var(--hered); color: #0f5549; }
+  .gear-vitd  { background: #f3e8ff; border: 1.5px solid var(--vitd);  color: #5b21b6; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── 진행 막대 (% 빈도 시각화) ── */
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 150px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  /* ── ALGORITHM FLOW (간단 트리) ── */
+  .flow-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; text-align: center; font-size: calc(11px * var(--fscale, 1)); font-weight: 600; margin: 4px auto; max-width: 320px; }
+  .flow-arrow { text-align: center; color: var(--text2); font-size: calc(14px * var(--fscale, 1)); margin: 2px 0; }
+  .flow-result { background: #ede9fe; border: 1.5px solid var(--vitd); color: #5b21b6; border-radius: 6px; padding: 8px 10px; text-align: center; font-size: calc(11px * var(--fscale, 1)); font-weight: 700; margin: 4px; }
+  .flow-row { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-rk">
+        <span>R</span><span>I</span><span>X</span>
+      </div>
+      <h1>구루병(Rickets) 진단·치료·관리 가이드</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://doi.org/10.3389/fendo.2024.1383681" class="source-link" target="_blank">SIEDP Position Statement · Front. Endocrinol. 2024;15:1383681 ↗</a>
+      <span style="color:var(--text2)"> · Baroncelli GI, Comberiati P, et al. · Apr 2024</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 Frontiers/SIEDP의 공식 승인을 받지 않았습니다 (This tool is not officially endorsed)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요·분류</div>
+    <div class="tab" onclick="showTab('clinical')">🦴 임상·영상</div>
+    <div class="tab" onclick="showTab('biochem')">🧪 생화학·진단</div>
+    <div class="tab" onclick="showTab('genetics')">🧬 유전학</div>
+    <div class="tab" onclick="showTab('tx-nutri')">🍼 영양성 치료</div>
+    <div class="tab" onclick="showTab('tx-hered')">💊 유전성 치료</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--hered)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요·분류 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--other)">4개</div><div class="stat-lbl">대분류<br>(영양성·유전성·후천성 인산뇨·기타)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--hered)">1:20,000<br>~60,000</div><div class="stat-lbl">XLH 유병률<br>(최다 유전성 구루병)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--vitd)">5종</div><div class="stat-lbl">비타민D 의존성 구루병<br>(VDDR1A/1B/2A/2B/3)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--nutri)">전세계<br>최다</div><div class="stat-lbl">영양성 구루병<br>(개발도상국 최다 형태)</div></div>
+  </div>
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 구루병(Rickets) 정의 및 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-hered">
+        <span>🦴</span>
+        <div><strong>구루병(Rickets)</strong> = 성장판 및 골기질의 광화(mineralization) 결핍 골격질환(osteomalacia)으로, 혈중 칼슘·인 농도 저하와 연관됨.<br>
+        후천성·유전성 질환을 모두 포함하는 <strong>이질적인 질환군</strong>. 영양성 구루병은 전세계 최다 형태이나, 분자유전학 발전으로 유전성 형태의 발견도 증가.<br>
+        진단의 핵심: <strong>병력 + 생화학검사 + 영상검사</strong>. 가족력이 없어도 유전성이 의심되면 유전자검사 필수.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-nutri">
+          <div class="gear-title">🟡 영양성 (Nutritional)</div>
+          비타민D·칼슘·인 결핍<br>
+          <small>전세계 최다 형태, 서구권 이주민 아동에서도 진단됨</small>
+        </div>
+        <div class="gear-box gear-hered">
+          <div class="gear-title">🟢 유전성 인산뇨성</div>
+          PHEX·FGF23·DMP1 등 변이<br>
+          <small>FGF23-의존성 vs FGF23-비의존성</small>
+        </div>
+        <div class="gear-box gear-vitd">
+          <div class="gear-title">🟣 비타민D 의존성</div>
+          CYP27B1·CYP2R1·VDR·CYP3A4 변이<br>
+          <small>비타민D 활성화/분해/수용체 작용 이상</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>임상 양상만으로는 구루병의 <strong>다양한 유형을 구별할 수 없음</strong>. 진단·치료·관리는 모두 병인(pathogenesis)에 기반해야 하며 서로 긴밀히 연결됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4대 분류 타임라인 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 병인 기반 4대 분류 한눈에 보기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-nutri" onclick="showTab('overview')">
+          <div class="st-num" style="color:var(--nutri)">영양성</div>
+          <div class="st-lbl" style="color:#7d4e00"><strong>비타민D·Ca·P 결핍</strong><br>전세계 최다<br>UV 노출/식이 부족</div>
+        </div>
+        <div class="stage-box st-hered-p" onclick="showTab('genetics')">
+          <div class="st-num" style="color:var(--hered)">유전성<br>인산뇨성</div>
+          <div class="st-lbl" style="color:#0f5549"><strong>FGF23-의존/비의존</strong><br>XLH가 최다<br>PHEX, FGF23, DMP1 등</div>
+        </div>
+        <div class="stage-box st-hered-v" onclick="showTab('genetics')">
+          <div class="st-num" style="color:var(--vitd)">비타민D<br>의존성</div>
+          <div class="st-lbl" style="color:#5b21b6"><strong>VDDR1A/1B/2A/2B/3</strong><br>심한 저칼슘혈증<br>2차성 부갑상선기능항진증</div>
+        </div>
+        <div class="stage-box st-other" onclick="showTab('overview')">
+          <div class="st-num" style="color:var(--other)">기타<br>(후천성/직접손상)</div>
+          <div class="st-lbl" style="color:var(--other)"><strong>TIO, 철분주사, Fanconi</strong><br>장기부전, HPP<br>etidronate/불소/알루미늄</div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:4px">
+        <span>⚠️</span><div>임상적 신호만으로 활동성 구루병과 회복기 구루병을 구별할 수 없으며, <strong>골 변형이 임상적으로 관찰될 때는 이미 질환이 진행된 상태</strong>. 임상신호만으로 진단하면 과대평가·불필요한 치료로 이어질 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비고전적 인산뇨성/기타 원인 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> 비후천성 인산뇨성 구루병 및 기타 원인 상세</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧪 후천성 FGF23-의존성</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li><strong>종양유발골연화증(TIO)</strong>: 양성·서성장 중간엽종양의 FGF23 과다생산. 소아에서는 드묾. 종양 절제 시 완치 가능</li>
+              <li><strong>철분주사 유발 가역적 저인산혈증</strong>: 철 카르복시말토스 등 정맥 철분제제 투여 시. FGF23 절단 장애로 일시적 FGF23 상승</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>💊 후천성 FGF23-비의존성</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>약물 유발 의인성 Fanconi 증후군: valproate, cisplatin, ifosfamide, gentamycin, 인결합제 과용</li>
+              <li>독소: 중금속·항생제·항레트로바이러스제·항암제</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🫁 장기부전 관련</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">간부전·신부전이 비타민D 대사장애의 주요 원인. 흡수장애 증후군(낭성섬유증, 염증성장질환, 셀리악병, 광범위 장절제술)도 비타민D 흡수에 영향. DXA로 골밀도 감소 평가 가능.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🦷 성장판 직접 손상</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">장기간 에티드로네이트(etidronate) 투여, 영아형 저인산효소증(HPP, 흉곽 저광화로 호흡부전 동반 가능), 알루미늄 함유 제산제 장기복용, 인도 일부 지역 불소 과다노출(특히 칼슘결핍 동반 시 2.5mg/day 이상에서 독성)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: 임상·영상 ══════════════════ -->
+<div id="tab-clinical" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 연령별 주요 임상 징후</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#fff8e1;border:1.5px solid var(--nutri);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#7d4e00;margin-bottom:8px">👶 영아기 초기 징후</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li><strong>두개골 연화(Craniotabes)</strong> — 가장 흔한 첫 징후. 두개골 압박 시 함몰되며 압박 제거 후 다시 튕겨나옴</li>
+            <li>천문(fontanelle) 폐쇄 지연</li>
+            <li>전두부 돌출(frontal bossing)</li>
+          </ul>
+        </div>
+        <div style="background:#e0f4f1;border:1.5px solid var(--hered);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--hered);margin-bottom:8px">🧒 큰 아동의 주요 징후</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>손목·무릎·발목의 <strong>종창</strong></li>
+            <li>다리 변형: <strong>내반슬(genu valgum)</strong> 또는 <strong>외반슬(genu varum)</strong>, 보행 불능</li>
+            <li>구루병 염주(rachitic rosary) — 늑연골 접합부 종창</li>
+            <li>흉곽 변형, 골 통증</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>신체검진만으로는 <strong>활동성 구루병 vs 회복기 구루병</strong>, 그리고 <strong>유형 간 구별이 불가능</strong>. 비골격계 징후도 동반 가능: 성장장애, 운동발달 지연, 경련(저칼슘혈증), 근긴장저하, 확장성 심근병증, 빈혈, 무기력, 과민성, 치아발생 지연·에나멜 이상, 호흡기 감염 취약성.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 골격/치아 징후 표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 부위별 골격·치아 징후 총정리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl small-text">
+        <tr><th>두개골</th><th>흉곽·골반</th><th>사지</th><th>전신·척추</th><th>치아·치주</th></tr>
+        <tr>
+          <td>전두부 돌출<br>두개골유합증<br>주상두증<br>후두부 "탄환형" 변형<br>전천문 폐쇄지연<br>두개골연화*<br>중안면 저형성†</td>
+          <td>늑연골 접합부 비대(구루병염주)*<br>해리슨 구(Harrison sulcus)*<br>병리적 늑골골절*<br>새가슴(pigeon chest)<br>흉벽 비대칭<br>늑골 함몰<br>골반 출구 협착</td>
+          <td>손목·무릎·발목 확장<br>내반슬/외반슬<br>혼합형 내반/외반<br>짧은 상완골†<br>짧은 대퇴골†<br>경골 회전‡<br>관절고 만곡</td>
+          <td>성장장애<br>"재단사형" 자세*<br>불균형 단신(단지형)†<br>척추 측만<br>척추 후만</td>
+          <td>다발성 치아우식*<br>변색 에나멜<br>에나멜 형성저하<br>치아발생 지연<br>치은 누공 동반 농양§</td>
+        </tr>
+      </table>
+      <small style="display:block;margin-top:6px;line-height:1.6">* 주로 영양성 비타민D결핍 구루병 또는 비타민D 의존성 구루병에서 관찰 † 주로 XLH에서 관찰 ‡ 내족지·외족지 보행 § XLH 특이적: 외상·우식 없이도 주로 절치·견치에서 발생</small>
+    </div>
+  </div>
+
+  <!-- 영상의학 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📷</span> 영상의학적 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li><strong>단순 X선</strong>이 1차 영상검사. 가장 초기 징후는 골감소증·장골 피질 박화</li>
+        <li>신생아·미숙아: <strong>흉부 X선</strong> 유용 (근위 상완골·전방 늑골단의 광화 부족, 구루병염주)</li>
+        <li>가장 빠른 변화 호발 부위: <strong>손목·무릎</strong> (급속 성장 부위). 그중 <strong>원위 척골</strong>이 어린 아동에서 가장 좋은 조기 변화 관찰 부위</li>
+        <li>전형적 소견: 모든 성장판의 확장·불규칙화, 간단 확장·벌어짐(splaying)·컵모양화(cupping)·해짐(fraying), 거친 골소주 패턴, 골단 골화중심 흐려짐</li>
+        <li>두개골 변형·다리 만곡은 비광화 골유사조직(osteoid)에 의한 골연화증의 전형적 징후</li>
+        <li>병적 골절(늑골 포함)은 드물며 주로 매우 미숙한 신생아에서, 교정후생후 6개월 이후로는 매우 드묾</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>영상 소견은 <strong>영양성·인산뇨성·비타민D의존성 구루병 모두에서 유사</strong> — 영상검사는 진단 확인에는 유용하나 <strong>병인 구별에는 도움이 안 됨</strong>. 비타민D 치료 후 3–4주 내 간단부 끝에 "임시석회화대(zone of provisional calcification)"가 나타나면 치료반응 확인 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RSS/RGI-C -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📏</span> 중증도 평가 도구 — RSS / RGI-C</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>도구</th><th>설명</th><th>활용</th></tr>
+        <tr><td><strong>RSS</strong><br>(Rickets Severity Score)</td><td>간단부 해짐(fraying)·오목화(concavity)·성장판 침범 비율을 손목·무릎·발목에서 평가하는 <strong>10점 척도</strong> (10=최고중증, 0=정상)</td><td>영양성 구루병·XLH의 치료반응 평가, 혈청 ALP 활성도와 상관관계</td></tr>
+        <tr><td><strong>RGI-C</strong><br>(Radiographic Global Impression of Change)</td><td>전후 X선 쌍을 나란히 비교하여 변화점수 부여</td><td>HPP에서 골격변화 검증, XLH에서도 RSS의 보완지표로 신뢰성 입증</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /clinical -->
+
+
+<!-- ══════════════════ TAB 3: 생화학·진단 ══════════════════ -->
+<div id="tab-biochem" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 핵심 생화학 지표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-hered">
+        <span>🔬</span>
+        <div>혈청 <strong>칼슘·인·알칼리포스파타제(ALP)·PTH·비타민D 대사물</strong>이 진단의 핵심. <strong>ALP 상승은 HPP를 제외한 모든 구루병에서 관찰</strong>됨. 인 농도와 ALP는 연령별 참고치로 해석 필요.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🔵 저칼슘혈증형 구루병</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">중증 영양성 비타민D결핍 구루병 + 비타민D 의존성 구루병의 주요 생화학 소견. 저칼슘혈증, 낮거나 정상인 혈청 인, <strong>PTH 상승</strong>이 특징.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🟠 저인산혈증형 구루병</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">정상 칼슘 + 저인산혈증이 인산뇨성 구루병의 특이 소견. 단, 중증 영양성 비타민D결핍 구루병에서도 2차성 부갑상선기능항진증의 결과로 저인산혈증이 동반될 수 있음(보통 저칼슘혈증과 동반).</div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>저인산혈증은 모든 구루병의 공통분모</strong> — 성장판 비대세포(hypertrophic cell)의 세포자살 장애를 유발하여, 비대세포가 축적되며 구루병성 골을 형성함.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TmP/GFR, FGF23 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> TmP/GFR 및 FGF23 측정의 진단적 가치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li><strong>TmP/GFR</strong> (신세관 인 재흡수 최대치/사구체여과율) — 신장의 인 재흡수능을 평가하는 핵심 지표</li>
+        <li>영양성 비타민D결핍/비타민D의존성 구루병에서 TmP/GFR 저하 → <strong>2차성 부갑상선기능항진증</strong> 반영</li>
+        <li>인산뇨성 구루병에서 TmP/GFR 저하 → <strong>FGF23 과다생산 또는 분해저하</strong>에 의함</li>
+        <li><strong>요칼슘</strong> 증가는 HHRH 진단에 중요한 기준</li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--hered);margin-bottom:6px">FGF23 측정 — FGF23-의존 vs 비의존 구별</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>FGF23-의존성 인산뇨성 구루병(유전성·후천성 TIO 포함)에서 <strong>FGF23 농도 상승</strong></li>
+        <li>FGF23 &gt; 40 pg/mL + 저인산혈증 동반 시 소아 XLH 조기진단의 핵심 지표</li>
+        <li>영양성 비타민D결핍 구루병과 인산뇨성 구루병의 25(OH)D 수치가 중첩될 때, <strong>FGF23이 가장 중요한 구별 지표</strong></li>
+        <li>칼슘결핍 구루병에서도 FGF23 상승 관찰됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 비타민D 대사물 해석 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☀️</span> 25(OH)D / 1,25(OH)₂D 해석</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>지표</th><th>소견</th></tr>
+        <tr><td>영양성 비타민D결핍 진단 임계치</td><td>25(OH)D &lt;30 nmol/L(&lt;12 ng/mL)에서 강력한 근거 — 단, &gt;30 nmol/L에서도 발생 가능. 최근 메타분석: 칼슘섭취 충분 시 ~28 nmol/L(11 ng/mL), 칼슘섭취 부족 시 ~40 nmol/L(16 ng/mL)을 위험 임계치로 제안</td></tr>
+        <tr><td>1,25(OH)₂D 측정의 한계</td><td>영양성 비타민D결핍에서는 병기에 따라 상승(초기, 저칼슘혈증 보상)~저하(후기, 기질 고갈)로 변동 → <strong>측정 유용성 낮음</strong></td></tr>
+        <tr><td>VDDR1B, VDDR3</td><td>25(OH)D <span class="v-down">저하</span></td></tr>
+        <tr><td>VDDR1A, VDDR2A/2B</td><td>25(OH)D 정상~<span class="v-up">상승</span></td></tr>
+        <tr><td>인산뇨성 구루병</td><td>1,25(OH)₂D는 저인산혈증을 고려하면 <strong>부적절하게 정상(inappropriately normal)</strong>인 경우가 대부분</td></tr>
+        <tr><td>VDDR2A/2B, 칼슘결핍 구루병, X연관 열성 인산뇨성구루병, HHRH, NPHLOP1</td><td>1,25(OH)₂D <span class="v-up">상승</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 진단 알고리즘 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 진단 알고리즘 (생화학 기반)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:10px">
+        <span>📌</span>
+        <div>전제조건: 임상징후 + ALP 상승 + 영상학적 구루병 병변으로 <strong>구루병이 확인된 환자</strong>. 1차 분기점은 <strong>저칼슘혈증 vs 저인산혈증</strong>.</div>
+      </div>
+
+      <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--vitd);margin-bottom:6px;text-align:center">🔵 저칼슘혈증형 경로</div>
+      <div class="flow-box">25(OH)D 측정</div>
+      <div class="flow-arrow">▾</div>
+      <div class="flow-row">
+        <div style="text-align:center">
+          <div class="flow-box" style="background:#ede9fe">25(OH)D 낮음(L)</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-box">1,25(OH)₂D 측정</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-row">
+            <div class="flow-result">1,25(OH)₂D 낮음<br>→ VDDR1B / VDDR3</div>
+            <div class="flow-result">1,25(OH)₂D 정상~높음<br>→ 영양성 비타민D결핍</div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div class="flow-box" style="background:#ede9fe">25(OH)D 정상~높음(N/H)</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-box">1,25(OH)₂D 측정</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-row">
+            <div class="flow-result">1,25(OH)₂D 낮음<br>→ VDDR1A</div>
+            <div class="flow-result">1,25(OH)₂D 정상~높음<br>→ 영양성 칼슘결핍 / VDDR2*</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-sep"></div>
+
+      <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--hered);margin-bottom:6px;text-align:center">🟢 저인산혈증형 경로</div>
+      <div class="flow-box">TmP/GFR 측정</div>
+      <div class="flow-arrow">▾</div>
+      <div class="flow-row">
+        <div style="text-align:center">
+          <div class="flow-box" style="background:#e0f4f1">TmP/GFR 낮음(L)</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-box">FGF23 측정</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-row">
+            <div class="flow-result">FGF23 높음(H)<br>→ XLH* / ADHR* / ARHR* / TIO</div>
+            <div class="flow-result">FGF23 정상~낮음(N/L)<br>→ HHRH* / Fanconi 증후군*</div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div class="flow-box" style="background:#e0f4f1">TmP/GFR 높음(H)</div>
+          <div class="flow-arrow">▾</div>
+          <div class="flow-result">영양성 인 결핍</div>
+        </div>
+      </div>
+      <small style="display:block;margin-top:8px;text-align:center">* 유전자검사로 의심 진단을 확진해야 함. L=낮음, N=정상, H=높음</small>
+    </div>
+  </div>
+
+  <!-- 형태별 생화학 비교표 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 주요 형태별 생화학 소견 비교 (요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl small-text">
+        <tr><th>질환</th><th>Ca</th><th>P</th><th>ALP</th><th>PTH</th><th>25(OH)D</th><th>1,25(OH)₂D</th><th>FGF23</th></tr>
+        <tr><td>영양성 비타민D결핍</td><td>N,↓↓</td><td>↑</td><td>↑</td><td class="v-up">↑</td><td class="v-down">↑,N,↓</td><td>N</td><td>↓</td></tr>
+        <tr><td>영양성 칼슘결핍</td><td>N,↓↓</td><td>↑</td><td>↑</td><td class="v-up">N,↓</td><td>↑</td><td>N,↑</td><td>↓</td></tr>
+        <tr><td>XLH/ADHR/ARHR1-2</td><td>N</td><td class="v-down">↓</td><td>↑</td><td>N,↑</td><td>N</td><td>N,↓</td><td class="v-up">N,↑</td></tr>
+        <tr><td>HHRH</td><td>N</td><td class="v-down">↓</td><td>↑</td><td>N,↓</td><td>N</td><td class="v-up">N,↑</td><td>N,↓</td></tr>
+        <tr><td>VDDR1A</td><td class="v-down">↓</td><td>↓↑</td><td>↑</td><td class="v-up">N</td><td>↓</td><td class="v-down">N,↓↓</td><td>↓</td></tr>
+        <tr><td>VDDR1B</td><td class="v-down">↓</td><td>↓↑</td><td>↑</td><td class="v-up">↓</td><td class="v-down">↓</td><td class="v-down">N</td><td>↓</td></tr>
+        <tr><td>VDDR2A/2B</td><td class="v-down">↓</td><td>↓↑</td><td>↑</td><td class="v-up">N</td><td class="v-up">↑</td><td class="v-down">N,↓↓</td><td>↓</td></tr>
+        <tr><td>HPP</td><td>N,↑↑</td><td class="v-up">↓</td><td class="v-down">N,↓</td><td>N</td><td>N,↓</td><td>N</td><td class="v-up">↑</td></tr>
+      </table>
+      <small style="display:block;margin-top:6px">전체 상세 비교표는 원문 Table 2 참조. ↑상승 ↓저하 N정상</small>
+    </div>
+  </div>
+
+</div><!-- /biochem -->
+
+
+<!-- ══════════════════ TAB 4: 유전학 ══════════════════ -->
+<div id="tab-genetics" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> XLH (X-linked Hypophosphatemic Rickets)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-hered">
+        <span>🧬</span>
+        <div><strong>가장 흔한 유전성 구루병</strong> (유병률 1:20,000–60,000). <strong>PHEX</strong> 유전자(phosphate-regulating endopeptidase homolog, X-linked) 변이로 인해 <strong>FGF23 발현이 과다 조절</strong>됨.<br>
+        FGF23 과다생산 → 신세관 인 재흡수 저하 + 1α-수산화효소 활성 저하 + 24-수산화효소 활성 촉진 → <strong>저인산혈증</strong> + <strong>(저인산혈증 상황에서) 부적절하게 낮거나 정상인 1,25(OH)₂D</strong>.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>PHEX 변이는 <strong>모든 엑손 및 비번역 영역에 광범위하게 분포</strong>하며 다수의 삽입·결실도 보고됨 — 유전자검사 해석 시 이러한 이질성을 고려해야 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FGF23-dependent 분류 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟢</span> FGF23-의존성 인산뇨성 구루병 — 원인 유전자 전체</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>질환</th><th>유전자</th><th>OMIM#</th><th>비고</th></tr>
+        <tr><td><span class="stage t-hered">XLH</span></td><td><strong>PHEX</strong></td><td>307800</td><td>최다 유전성 구루병</td></tr>
+        <tr><td><span class="stage t-hered">ADHR</span></td><td><strong>FGF23</strong></td><td>193100</td><td>상염색체 우성, 철분결핍과 표현형 연관</td></tr>
+        <tr><td><span class="stage t-hered">ARHR1</span></td><td><strong>DMP1</strong></td><td>241520</td><td>상염색체 열성</td></tr>
+        <tr><td><span class="stage t-hered">ARHR2</span></td><td><strong>ENPP1</strong></td><td>613312</td><td>전신성 동맥석회화 동반 가능, 정상칼슘혈증 원발성 부갑상선기능항진증 동반 가능</td></tr>
+        <tr><td>Raine 증후군(ARHR3)</td><td>FAM20C</td><td>259775</td><td>비치명적 형태에서 구루병 드물게 동반</td></tr>
+        <tr><td>다골성 섬유이형성증(PFD)</td><td>GNAS</td><td>174800</td><td>McCune-Albright 증후군과 연관, 환자 약 50%에서 저인산혈증</td></tr>
+        <tr><td>인산뇨성 구루병+부갑상선기능항진증</td><td>KLOTHO(13q13.1 전좌)</td><td>612089</td><td>-</td></tr>
+        <tr><td>골친화성 이형성증</td><td>FGFR1</td><td>166250</td><td>-</td></tr>
+        <tr><td>Opsismodysplasia</td><td>INPPL1</td><td>258480</td><td>-</td></tr>
+        <tr><td>Jansen형 골단연골이형성증</td><td>PTH1R</td><td>156400</td><td>-</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>ADHR·ARHR1·ARHR2은 <strong>합쳐서 전체 인산뇨성 구루병의 20% 미만</strong>을 차지하는 희귀 변종.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FGF23-independent 분류 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔵</span> FGF23-비의존성 인산뇨성 구루병</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>질환</th><th>유전자</th><th>OMIM#</th><th>비고</th></tr>
+        <tr><td><span class="stage t-hered">HHRH</span><br>(고칼슘뇨증 동반 인산뇨성 구루병)</td><td><strong>SLC34A3</strong> (NaPi2c)</td><td>241530</td><td>활성 비타민D 대사물 투여 금기(1,25(OH)₂D 상승 때문)</td></tr>
+        <tr><td>NPHLOP1<br>(신석증/골다공증, 인산뇨성 1)</td><td><strong>SLC34A1</strong> (NaPi2a)</td><td>612286</td><td>-</td></tr>
+        <tr><td>NHERF1<br>(신석증/골다공증, 인산뇨성 2)</td><td><strong>SLC9A3</strong></td><td>604990</td><td>-</td></tr>
+        <tr><td>X연관 열성 인산뇨성 구루병</td><td>CLCN5</td><td>300554</td><td>-</td></tr>
+        <tr><td>Fanconi 증후군 / 원위 신세관산증</td><td>(다양)</td><td>-</td><td>인산뇨성 구루병 동반 가능</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- VDDR -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟣</span> 비타민D 의존성 구루병(VDDR) 전체 분류</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>유형</th><th>유전자</th><th>OMIM#</th><th>기전</th></tr>
+        <tr><td><span class="stage t-vitd">VDDR1A</span></td><td><strong>CYP27B1</strong></td><td>264700</td><td>신장 1α-수산화효소 결손 → 1,25(OH)₂D 합성 장애</td></tr>
+        <tr><td><span class="stage t-vitd">VDDR1B</span></td><td><strong>CYP2R1</strong></td><td>600081</td><td>간 25-수산화효소 결손 → 25(OH)D 합성 장애</td></tr>
+        <tr><td><span class="stage t-vitd">VDDR2A</span></td><td><strong>VDR</strong></td><td>277440</td><td>VDR 유전자 변이로 신호전달 장애</td></tr>
+        <tr><td><span class="stage t-vitd">VDDR2B</span></td><td>VDR</td><td>600785</td><td>핵 리보핵단백질이 VDR-DNA 결합을 방해</td></tr>
+        <tr><td><span class="stage t-vitd">VDDR3</span></td><td><strong>CYP3A4</strong></td><td>619073</td><td>기능획득 변이로 1,25(OH)₂D 불활성화 증가</td></tr>
+      </table>
+      <div class="alert alert-vitd" style="margin-top:8px">
+        <span>💡</span>
+        <div>모든 VDDR 유형의 <strong>가장 두드러진 생화학적 특징은 심한 저칼슘혈증과 2차성 부갑상선기능항진증</strong>. VDDR2A 중 <strong>DNA결합 도메인 변이는 거의 완전한 1,25(OH)₂D 저항성 + 탈모증</strong>을 동반하며 치료 반응이 더 나쁨.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /genetics -->
+
+
+<!-- ══════════════════ TAB 5: 영양성 치료 ══════════════════ -->
+<div id="tab-tx-nutri" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☀️</span> 영양성 비타민D결핍 구루병 — 비타민D 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>연령</th><th>일일용량 (3개월간)</th><th>단회 bolus</th><th>유지용량</th></tr>
+        <tr><td>&lt;3개월</td><td>2,000 IU</td><td>–</td><td>400 IU</td></tr>
+        <tr><td>3–12개월</td><td>2,000 IU</td><td>50,000 IU</td><td>400 IU</td></tr>
+        <tr><td>&gt;12개월–12세</td><td>3,000–6,000 IU</td><td>150,000 IU</td><td>600 IU</td></tr>
+        <tr><td>&gt;12세</td><td>6,000 IU</td><td>300,000 IU</td><td>600 IU</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>고용량 단회요법(stoss therapy, 최대 600,000 IU)은 <strong>고칼슘혈증 위험</strong>으로 권장되지 않음. 일일치료는 <strong>3–4개월</strong> 지속하되 개별화 필요 — 영상학적 회복이 불완전하면 연장.<br>
+        비타민D3가 bolus 투여 시 <strong>비타민D2보다 더 효과적</strong>. 비타민D 대사물(활성형)은 비타민D 상태를 회복시키지 못하고 고칼슘혈증 유발 가능 → <strong>사용 비권고</strong>.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>치료 후 재발 방지를 위해 회복 후에도 <strong>12개월 이전 400 IU/day, 이후 600 IU/day</strong> 유지 권고. 순응도가 낮은 경우 20일마다 100,000 IU를 3–4회 투여하거나, 3개월 이상 연령에서 50,000 IU(12세 이상은 최대 300,000 IU) 단회 근육주사 고려.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 칼슘 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧂</span> 증상성/무증상 저칼슘혈증의 칼슘 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>상황</th><th>칼슘염</th><th>용량(mg/kg, 원소칼슘)</th><th>투여방법</th></tr>
+        <tr><td>증상성 급성 저칼슘혈증<br>(테타니·경련·확장성 심근병증)</td><td>글루콘산칼슘 10%</td><td>5–20 mg/kg (0.5–2.0 mL/kg)</td><td>정맥 서서히, 10–15분 (서맥 주의, 심전도 모니터링 권고)</td></tr>
+        <tr><td>무증상 저칼슘혈증/정상칼슘혈증</td><td>탄산칼슘, 시트르산칼슘</td><td>30–75 mg/kg/day<br>또는 5세↑: 500mg/day, 10세↑: 1000mg/day</td><td>경구, 1일 2–3회 분복</td></tr>
+      </table>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>비타민D와 무관하게 <strong>최소 500mg/day 칼슘 섭취</strong>(식이 또는 보충제)를 병행 투여. PTH 정상화에 따른 <strong>"hungry-bone" 증후군</strong> 예방을 위해 칼슘 보충이 중요 — 특히 stoss therapy 시행 시.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모니터링 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 치료 모니터링 — 회복 타임라인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>혈청 칼슘·인 정상화: 보통 <strong>3주 내</strong> (일부는 6–10일 내에도 가능)</li>
+        <li>PTH: 정상칼슘혈증 회복과 함께 정상범위로 하락</li>
+        <li>25(OH)D: 신속 상승, <strong>4–6주 내</strong> 정상치 도달 가능</li>
+        <li>1,25(OH)₂D: 신속 상승하며 <strong>10주까지 상승상태 유지</strong></li>
+        <li>ALP: 점진적 감소, 비타민D결핍 중증도에 따라 <strong>3–6개월</strong>까지 상승 지속 가능 — <strong>골격병변 회복과 상관관계가 있어 치료효과 모니터링의 신뢰할 수 있고 경제적인 지표</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 칼슘결핍/인결핍 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🥛</span> 영양성 칼슘결핍 구루병 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>무작위대조연구: 일일 500/1000/2000mg 원소칼슘 비교 → <strong>1000mg과 2000mg이 500mg보다 효과적</strong>, 둘 사이 차이는 없음</li>
+        <li>권장: <strong>1000mg/day 원소칼슘</strong> (2–3회 분복), 완치까지 지속 (일부는 24주 이상 필요)</li>
+        <li>비타민D 보충(50,000 IU/4주마다)을 병행하면 회복속도 향상</li>
+        <li>영상학적 성장판 회복: 보통 <strong>3–6개월</strong>, 임상적 회복은 생화학·영상 회복보다 더 오래 걸림</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 미숙아 인결핍 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶 </span> 미숙아 대사성 골질환(인 결핍) 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li><strong>PTH 측정이 핵심</strong>: 칼슘결핍 시 PTH 상승, 인결핍 시 PTH 정상~저하</li>
+        <li>인 보충: 혈청 인 &lt;4mg/dL(1mmol/L)에서 고려, &lt;5.5mg/dL(1.3mmol/L)이고 ALP 상승 동반 시도 고려</li>
+        <li>경장영양 권장 섭취: 칼슘 150–220mg/kg/day, 인 75–140mg/kg/day (칼슘:인 비율 1.5:1~1.7:1, mg 기준)</li>
+        <li>비경구영양: 칼슘 75–100mg/kg/day, 인 50–80mg/kg/day</li>
+        <li>경구 원소미네랄 추가 시작: 칼슘 20mg/kg/day, 인 10–20mg/kg/day → 최대 칼슘 70–80mg/kg/day, 인 40–50mg/kg/day까지 증량</li>
+        <li>PTH·ALP는 <strong>1–2주마다</strong> 측정하여 칼슘:인 비율 조정</li>
+        <li>비타민D: ESPGHAN(유럽) 800–1000 IU/day vs 미국 권고 1500g 미만 200 IU/day, 1500g 이상 400 IU/day — <strong>지역별 권고 상이</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tx-nutri -->
+
+
+<!-- ══════════════════ TAB 6: 유전성 치료 ══════════════════ -->
+<div id="tab-tx-hered" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟣</span> 비타민D 의존성 구루병(VDDR) 유지요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl small-text">
+        <tr><th>약제</th><th>VDDR1A</th><th>VDDR1B</th><th>VDDR2</th><th>VDDR3</th></tr>
+        <tr><td>비타민D</td><td>비권장</td><td>이형접합: 5,000–10,000 IU/day<br>동형접합: 600,000/3개월</td><td>비권장</td><td>50,000/day</td></tr>
+        <tr><td>칼시페디올</td><td>비권장</td><td>15–50 µg/day</td><td>20–200 µg/day*</td><td>?</td></tr>
+        <tr><td>알파칼시돌</td><td>10–100 ng/kg/day (0.5–3 µg/day)</td><td>0.5–3 µg/day</td><td>10–400 ng/kg/day†<br>(5–60 µg/day†)</td><td>?</td></tr>
+        <tr><td>칼시트리올</td><td>10–100 ng/kg/day (0.3–2 µg/day)</td><td>0.3–2 µg/day</td><td>10–400 ng/kg/day†<br>(5–60 µg/day†)</td><td>?</td></tr>
+        <tr><td>칼슘염(경구)</td><td>0.5–3 g/day</td><td>0.5–2 g/day</td><td>3–5 g/day<br>(400–1400 mg/m²/day‡)</td><td>?</td></tr>
+      </table>
+      <small style="display:block;margin-top:6px">* 탈모 없는 환자 일부만 반응 † 최대용량에도 무반응 환자 존재 ‡ 수년간 정맥투여 필요한 경우도 있음</small>
+      <div class="alert alert-vitd" style="margin-top:8px">
+        <span>💊</span>
+        <div><strong>VDDR1A</strong>: 1,25(OH)₂D를 생리적 용량으로 1일 2회 투여(반감기 짧음), 알파칼시돌은 1일 1회 가능. 치료 첫 수개월은 유지용량보다 2–5배 높은 용량 필요할 수 있음. 반응은 보통 신속(7–9주 내 회복). 신장 초음파를 1–2년마다(고칼슘뇨증 시 더 자주) 시행하여 신석회화증 모니터링.<br><br>
+        <strong>VDDR1B</strong>: 비타민D는 간 전환 장애로 효과가 적거나 없음 → <strong>칼시페디올</strong>이 최선의 치료. 동형접합 CYP2R1 변이는 비타민D bolus에 거의 반응하지 않음.<br><br>
+        <strong>VDDR2A/2B</strong>: VDR 변이 위치에 따라 반응 다름 — DNA결합 도메인 변이(탈모 동반)는 거의 완전 저항성으로 절반은 최고용량에도 무반응, 나머지 절반은 비탈모 환자보다 10배 높은 용량 필요. 사춘기 이후 장내 칼슘흡수가 증가하여 일부는 보충 없이도 정상칼슘혈증 유지 가능.<br><br>
+        <strong>VDDR3</strong>: 자료 제한적, 영양성 비타민D결핍보다 훨씬 고용량의 평생 비타민D 치료 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인산뇨성 전통치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> FGF23-의존성 인산뇨성 구루병 — 전통치료(Conventional)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th></th><th>구루병 징후 전(신생아 등)</th><th>임상적/영상학적 구루병 확인 시</th></tr>
+        <tr><td><strong>시작용량</strong></td><td>알파칼시돌 25–40 ng/kg/day (0.8–1µg/day), 1일1회<br>무기인산염 20–40 mg/kg/day, 1일4–6회</td><td>알파칼시돌 40–80 ng/kg/day (1–1.5µg/day)<br>칼시트리올 20–40 ng/kg/day, 1일2–3회<br>무기인산염 40–60 mg/kg/day, 1일4–6회</td></tr>
+        <tr><td colspan="2"><strong>유지용량</strong></td><td>알파칼시돌 25–40 ng/kg/day (1–2µg/day) 1일1회 / 칼시트리올 20–30 ng/kg/day 1일2–3회 / 무기인산염 20–60 mg/kg/day 1일4–6회</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>두 약제는 <strong>반드시 병용투여</strong>하며 균형용량으로 신중히 모니터링. 조기치료(영아기부터)는 예후를 개선하나 골격 이상을 완전히 정상화하지는 못함. <strong>흔한 부작용</strong>: 위장관 증상(설사·혈변·복통, 인 용량감소로 개선 가능), 고칼슘혈증, 2차/3차 부갑상선기능항진증, 고칼슘뇨증, 신석회화증, 신석증.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>ADHR — 철분상태 우선 평가</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">철분결핍이 표현형 중증도에 영향. 철분 보충(원소철 3–6mg/kg, 최대 200mg/day, 3개월)으로 FGF23 정상화 및 인 개선 가능 → <strong>전통치료 감량/중단은 철분상태 최적화 후에만 시도</strong>. 페리틴 측정으로 보충 필요성 평가.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>ARHR2 — 동맥석회화 평가 필수</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">ENPP1 결핍은 동맥·심장·관절 석회화 또는 전신성 동맥석회화와 동반 가능 → 경동맥 내중막두께·심초음파 강력 권고. 최근 연구는 전통치료가 석회화를 증가시키지 않음을 시사. 양측 ENPP1 변이 시 정상칼슘혈증 원발성 부갑상선기능항진증 발생 가능(부분 부갑상선절제술 필요할 수 있음).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 부로수맙 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 부로수맙(Burosumab) — XLH 표적치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-hered">
+        <span>🧬</span>
+        <div><strong>부로수맙</strong> = FGF23을 표적하는 재조합 인간 IgG1 단클론항체. FDA·EMA·일본 PMDA 승인. 유럽에서는 <strong>1세 이상 소아·청소년</strong>(성장판 개방, 영상학적 구루병 소견 있는 경우)에 적응.</div>
+      </div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9;margin-top:6px">
+        <li>전통치료보다 우수한 영상학적 회복, 골/관절통 개선, 신체기능 개선 입증</li>
+        <li><strong>RSS ≥2</strong>인 환자에서 전통치료군보다 구루병 중증도·종적 성장·생화학 지표 모두 개선</li>
+        <li>다른 적응증(보고): ARHR1, 섬유이형성증, 피부골격 저인산혈증 증후군 등에서도 효과 보고</li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--hered);margin-bottom:6px">투여 프로토콜 핵심</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>전통치료는 부로수맙 시작 <strong>7–10일 전 중단</strong></li>
+        <li><strong>시작용량</strong>: 0.8 mg/kg 피하주사, 2주마다(Q2W)</li>
+        <li><strong>적정용량 조절</strong>: 0.4 mg/kg씩 증량, 공복 혈청 인을 연령별 정상범위 하한으로 유지, 최대 2.0mg/kg(최대 90mg)</li>
+        <li>적정기간 중 공복 인 측정: 마지막 주사 후 7–11일 시점이 이상적</li>
+        <li>안정용량 도달(보통 3–4개월) 후에는 <strong>주사 직전</strong> 측정으로 저용량 여부 확인</li>
+        <li>공복 혈청 인이 연령별 정상범위 <strong>상한 초과</strong> 시 치료 중단(다음 용량 보류 후 2주 후 재평가, 정상범위 미만 확인되면 이전 용량의 절반으로 4주마다 재시작)</li>
+        <li>혈청 인이 정상범위 하한 미만이어도 <strong>ALP의 지속적 감소 + 임상적 개선</strong>이 동반되면 수용 가능한 반응으로 판단</li>
+        <li>25(OH)D &gt;50 nmol/L(20 ng/mL) 유지 — 2차성 부갑상선기능항진증 예방 및 부로수맙 매개 1,25(OH)₂D 합성 촉진</li>
+        <li>1,25(OH)₂D 측정은 <strong>논쟁 중</strong> — 일부 권고에선 모니터링하나, 일부는 비용 대비 이득 불명확으로 비권고</li>
+        <li>치료 시작 후 <strong>성장판 폐쇄까지 청소년기 내내 지속</strong>, 이후 성인용량(4주마다, Q4W)으로 전환 — 전환시점은 연령보다 <strong>성장판 폐쇄 여부</strong>가 더 적절한 기준</li>
+        <li>가장 흔한 부작용: 일시적 주사부위 반응, 두통, 사지통증 (전반적으로 내약성 우수)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 추적관찰 비교 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> XLH 추적관찰 — 전통치료 vs 부로수맙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl small-text">
+        <tr><th>항목</th><th>전통치료</th><th>부로수맙</th></tr>
+        <tr><td>임상·신체측정 평가</td><td>5세↓: 1–3개월 / 5세↑: 3–6개월</td><td>동일</td></tr>
+        <tr><td>치과 평가</td><td>6–12개월 또는 증상시</td><td>동일</td></tr>
+        <tr><td>정형외과 평가</td><td>12개월 또는 증상시</td><td>동일</td></tr>
+        <tr><td>혈액 생화학(Ca,P,Cr,ALP,PTH)</td><td>3–6개월</td><td>첫 3개월은 4주마다, 이후 최소 3개월마다</td></tr>
+        <tr><td>25(OH)D / 1,25(OH)₂D</td><td>해당없음</td><td>3–4개월마다(특히 겨울철)</td></tr>
+        <tr><td>요칼슘·요인·요크레아티닌</td><td>3–6개월</td><td>첫 3개월 4주마다, 이후 3개월마다</td></tr>
+        <tr><td>X선(손목·무릎·하지)</td><td>1–2년 또는 증상시</td><td>동일</td></tr>
+        <tr><td>신장초음파</td><td>매년(신석회화증 시 6개월)</td><td>1–2년(전통치료 과거력+신석회화증 시 매년)</td></tr>
+        <tr><td>삶의 질 평가</td><td>매년</td><td>3–6개월마다(최대 1–2년)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 기타 형태 치료 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 기타 인산뇨성 구루병 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>HHRH 치료</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li><strong>경구 무기인산염 단독요법</strong> — 활성 비타민D 대사물은 <strong>금기</strong>(1,25(OH)₂D 이미 상승 상태)</li>
+              <li>인 보충으로 1,25(OH)₂D 감소, 장내 칼슘흡수·고칼슘뇨증 감소, 골광화 개선 목표</li>
+              <li>구연산칼륨, 염분제한, 수분보충이 고칼슘뇨증 감소에 유용</li>
+              <li>플루코나졸(100mg/day)로 1α-수산화효소 억제하여 1,25(OH)₂D·고칼슘뇨증을 거의 정상화 (제한적 증례)</li>
+              <li>성장호르몬(GH) + 인보충 병용 시 신장 인 누출 개선 및 성장 가속 (제한적 증례, 장기 효능·안전성 추가연구 필요)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>TIO(종양유발골연화증) 치료</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li><strong>종양 절제 시 완치 가능</strong> — FGF23 농도 추적으로 절제 효과·재발 모니터링</li>
+              <li>절제 불가능/종양 미발견/수술 대기 중: XLH와 유사한 전통치료(인+활성 비타민D) 시행</li>
+              <li>부로수맙 사례 일부 보고 (소아 피부골격 저인산혈증 증후군 등)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>성장호르몬(GH) 치료 — XLH</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">전통치료와 병용 시 <strong>단기 종적 성장 개선</strong> 보고되나 최종 성인 키에 대한 효과는 <strong>결론적이지 않음</strong>. 부로수맙 전환 후에도 신장예후가 불충분한 경우 GH 지속이 유리할 가능성 있으나, <strong>전통치료/부로수맙과 GH 병용은 일상적으로 권장되지 않음</strong> — 추가 장기연구 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>Fanconi 증후군 / 기타 세뇨관병증</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">인보충 + 활성 비타민D 대사물을 기저질환(Fanconi 증후군, Dent병, 기타 전신질환)에 대한 권장치료와 함께 병용.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /tx-hered -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"ADHR",  def:"Autosomal Dominant Hypophosphatemic Rickets — 상염색체 우성 저인산혈증성 구루병" },
+  { term:"ALP",   def:"Alkaline Phosphatase — 알칼리포스파타제 (HPP 제외 모든 구루병에서 상승)" },
+  { term:"ARHR1/2",def:"Autosomal Recessive Hypophosphatemic Rickets type 1/2 — 상염색체 열성 저인산혈증성 구루병 1/2형" },
+  { term:"FGF23", def:"Fibroblast Growth Factor 23 — 섬유아세포성장인자 23, 인 대사 핵심 호르몬" },
+  { term:"GFR",   def:"Glomerular Filtration Rate — 사구체여과율" },
+  { term:"HHRH",  def:"Hypophosphatemic Rickets with Hypercalciuria — 고칼슘뇨증을 동반한 저인산혈증성 구루병" },
+  { term:"HPP",   def:"Hypophosphatasia — 저인산효소증 (ALP가 상승하지 않는 예외적 구루병 유사질환)" },
+  { term:"NHERF1",def:"Na+/H+ Exchanger Regulatory Factor 1 — 신석증/골다공증·인산뇨성 2형 원인" },
+  { term:"NPHLOP1",def:"Nephrolithiasis/Osteoporosis, Hypophosphatemic 1 — 신석증/골다공증·인산뇨성 1형" },
+  { term:"PHEX",  def:"Phosphate-regulating Endopeptidase homolog, X-linked — XLH 원인 유전자" },
+  { term:"PTH",   def:"Parathyroid Hormone — 부갑상선호르몬" },
+  { term:"RGI-C", def:"Radiographic Global Impression of Change — 방사선학적 전반적 변화 인상 척도" },
+  { term:"RSS",   def:"Rickets Severity Score — 구루병 중증도 점수 (10점 척도)" },
+  { term:"TIO",   def:"Tumor-Induced Osteomalacia — 종양유발 골연화증" },
+  { term:"TmP/GFR",def:"Tubular maximum reabsorption of Phosphate / Glomerular Filtration Rate — 신세관 인 재흡수능 지표" },
+  { term:"VDDR",  def:"Vitamin D-Dependent Rickets — 비타민D 의존성 구루병 (1A/1B/2A/2B/3형)" },
+  { term:"VDR",   def:"Vitamin D Receptor — 비타민D 수용체" },
+  { term:"XLH",   def:"X-Linked Hypophosphatemic rickets — X연관 저인산혈증성 구루병 (최다 유전성 구루병)" },
+  { term:"25(OH)D",def:"25-hydroxyvitamin D — 25-수산화비타민D (비타민D 저장형, 간에서 합성)" },
+  { term:"1,25(OH)2D",def:"1,25-dihydroxyvitamin D — 1,25-디하이드록시비타민D (활성형, 신장에서 합성)" },
+];
+
+// 약어 초기 렌더
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+// 탭 전환
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+// 카드 토글
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// 아코디언 토글
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// 약어 검색
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
