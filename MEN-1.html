@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다발성 내분비 신생물 1형(MEN1) 임상진료지침 — Endocrine Society 2012</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --brand: #b45309;   /* MEN1 amber */
+    --brand2: #92400e;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--brand); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); text-align: center; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--brand); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-1q  { background: #fef3c7; color: #78350f; border: 1px solid #b45309; }   /* 1 = strong recommend */
+  .grade-2q  { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }   /* 2 = suggest */
+  .grade-qqqq { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }  /* high */
+  .grade-qqqe { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }  /* moderate */
+  .grade-qqee { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }  /* low */
+  .grade-qeee { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }  /* very low */
+
+  /* ── TOOLTIP ── */
+  .grade::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .grade::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--brand); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-amber   { background: #fef3c7; border-left: 3px solid var(--brand);   color: #78350f; }
+
+  /* ── TABLE ── */
+  .t { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .t th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .t td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .t tr:last-child td { border-bottom: none; }
+  .t tr:hover td { background: rgba(0,0,0,0.02); }
+  .t .hl td { background: #fef9ee; }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-main { background: #fef3c7; color: var(--brand2); }
+  .pill-assoc { background: #f5f0ff; color: #5b21b6; }
+  .pill-rare { background: #f6f8fa; color: #57606a; }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--brand); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .age-badge { display: inline-block; background: #fef3c7; color: var(--brand2); border: 1px solid var(--brand); border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">Endocrine Society 2012</span>
+      <h1>다발성 내분비 신생물 1형(MEN1) 임상진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1210/jc.2012-1230" class="source-link" target="_blank">J Clin Endocrinol Metab 2012;97:2990–3011 ↗</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))"> · Thakker RV, Newey PJ, Walls GV, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by The Endocrine Society</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요</div>
+    <div class="tab" onclick="showTab('parathyroid',this)">🦴 부갑상선</div>
+    <div class="tab" onclick="showTab('pancreas',this)">🫀 췌장 NET</div>
+    <div class="tab" onclick="showTab('pituitary',this)">🧠 뇌하수체</div>
+    <div class="tab" onclick="showTab('other',this)">🔬 기타 종양</div>
+    <div class="tab" onclick="showTab('genetics',this)">🧬 유전 검사</div>
+    <div class="tab" onclick="showTab('screening',this)">📋 스크리닝</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">~95%</div><div class="stat-lbl">부갑상선종양 침투율 (전 생애)</div></div>
+    <div class="stat-box"><div class="stat-val">40–70%</div><div class="stat-lbl">췌장 NET 침투율</div></div>
+    <div class="stat-box"><div class="stat-val">30–40%</div><div class="stat-lbl">뇌하수체 종양 침투율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">50세</div><div class="stat-lbl">미치료 시 50% 사망 연령 (중앙값)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> MEN1 핵심 특성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-amber">
+        <span>📌</span>
+        <div><strong>MEN1(다발성 내분비 신생물 1형)</strong>은 <em>MEN1</em> 유전자(11q13, 10개 엑손) 돌연변이로 인한 상염색체 우성 종양 억제유전자 질환. 610개 아미노산 단백질 <strong>menin</strong>을 인코딩. 1차 친족의 MEN1 위험도 50%.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">진단 기준 (3가지 중 1개 충족)</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>① <strong>임상적</strong>: MEN1 관련 내분비 종양 ≥2개 (부갑상선, 췌장, 뇌하수체)</li>
+            <li>② <strong>가족성</strong>: MEN1 임상 진단 환자의 1차 친족 중 관련 종양 1개</li>
+            <li>③ <strong>유전적</strong>: 증상 없이도 생식세포 MEN1 돌연변이 보유자 확인</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">MEN1 vs 비-MEN1 차이점</div>
+          <table class="t">
+            <tr><th>특성</th><th>MEN1</th><th>비-MEN1</th></tr>
+            <tr><td>부갑상선 재발</td><td>20–60% (10년)</td><td>4%</td></tr>
+            <tr><td>위스트리노마 수술적 치유 (5년)</td><td>~5%</td><td>~40%</td></tr>
+            <tr><td>뇌하수체 대선종</td><td>85%</td><td>42–64%</td></tr>
+            <tr><td>인슐린종 전이</td><td>최대 50%</td><td>&lt;10%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 종양 발생 스펙트럼 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> MEN1 관련 종양 스펙트럼 및 침투율</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">주요 3대 종양 <span class="pill pill-main">Main</span></div>
+          <table class="t">
+            <tr><th>종양</th><th>침투율</th><th>첫 증상 시작 연령</th></tr>
+            <tr class="hl"><td>부갑상선 종양 → 원발성 부갑상선기능항진증</td><td><strong>~90%</strong></td><td>20–25세</td></tr>
+            <tr><td>췌장/십이지장 NET (gastrinoma, insulinoma 등)</td><td>30–70%</td><td>다양 (소아기 포함)</td></tr>
+            <tr><td>전방 뇌하수체 종양 (prolactinoma 등)</td><td>30–40%</td><td>5세~ (최고령 80대)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">동반 종양 <span class="pill pill-assoc">Associated</span></div>
+          <table class="t">
+            <tr><th>종양</th><th>침투율</th></tr>
+            <tr><td>부신 피질 종양</td><td>~40%</td></tr>
+            <tr><td>안면 혈관섬유종</td><td>~85%</td></tr>
+            <tr><td>콜라겐종</td><td>~70%</td></tr>
+            <tr><td>지방종</td><td>~30%</td></tr>
+            <tr><td>위장관 NET (gastric ECLoma)</td><td>~10%</td></tr>
+            <tr><td>흉선 NET</td><td>~2%</td></tr>
+            <tr><td>기관지폐 NET</td><td>~2%</td></tr>
+            <tr><td>뇌수막종</td><td>&lt;10%</td></tr>
+            <tr><td>갈색세포종</td><td>&lt;1%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>MEN1 환자의 약 70%가 MEN1 직접 관련 원인으로 사망. 특히 <strong>악성 췌장 NET</strong>과 <strong>흉선 카르시노이드</strong>는 사망 위험비 3–4배 증가. 과거 주사인(ZES 연관 합병증)에서 이들 악성 종양으로 원인이 전환됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 일반 권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 일반 권고 — 다학제 팀(MDT)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안 (Suggest)">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거 수준">QQEE</span></div>
+          <div class="rec-text">MEN1 환자와 가족은 <strong>내분비 종양 관리 경험</strong>이 있는 전문 MDT가 관리해야 함.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">MDT 구성: 내분비내과의·소화기내과의·종양내과의, 내분비외과의, 신경내분비 병리의, 핵의학 포함 영상의학과의, 임상유전학과의. <strong>모든 위장췌장 NET·흉선·기관지 카르시노이드는 신경내분비 MDT에서 논의</strong>.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 침투율 연령 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> MEN1 유전자 침투율의 연령별 변화</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>ℹ️</span>
+        <div>5세 미만에서는 돌연변이가 비침투성인 것으로 보임. 이후 침투율이 급격히 증가하여 20세까지 50% 이상, 40세까지 95% 이상에서 임상·생화학 발현 발생.</div>
+      </div>
+      <table class="t" style="margin-top:8px">
+        <tr><th>연령</th><th>임상적 침투율</th><th>생화학적 침투율</th><th>주요 임상 의의</th></tr>
+        <tr><td>&lt;5세</td><td>거의 0%</td><td>거의 0%</td><td>돌연변이 비침투성 시기</td></tr>
+        <tr><td>20세</td><td>&gt;50%</td><td>—</td><td>스크리닝 적극 시작</td></tr>
+        <tr><td>40세</td><td>80%</td><td>&gt;98%</td><td>사실상 대부분 발현</td></tr>
+        <tr><td>50세 (미치료)</td><td>—</td><td>—</td><td>50% 사망 (주로 악성 NET)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══ PARATHYROID ═══ -->
+<div id="tab-parathyroid" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 부갑상선 종양 — 임상 특성 및 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-amber">
+        <span>📌</span>
+        <div>원발성 부갑상선기능항진증은 MEN1의 <strong>가장 흔한 발현</strong> (~90%). 발병 연령 20–25세로, 비-MEN1(55세)보다 훨씬 빠름. 남녀비 1:1 (비-MEN1은 1:3).</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">임상 증상</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 무증상 고칼슘혈증 (가장 흔함)</li>
+            <li>• 신장 결석</li>
+            <li>• 골섬유낭종 (osteitis fibrosa cystica)</li>
+            <li>• 다뇨·다음·변비·권태감</li>
+            <li>• 간헐적 소화성 궤양 (MEN1 ZES 연관)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">MEN1 vs 비-MEN1 부갑상선기능항진증</div>
+          <table class="t">
+            <tr><th>특성</th><th>MEN1</th><th>비-MEN1</th></tr>
+            <tr><td>발병 연령</td><td>20–25세</td><td>~55세</td></tr>
+            <tr><td>남녀비</td><td>1:1</td><td>1:3</td></tr>
+            <tr><td>골밀도 감소</td><td>더 심함</td><td>덜 심함</td></tr>
+            <tr><td>부갑상선암</td><td>매우 드묾 (보고 3례)</td><td>드묾</td></tr>
+            <tr><td>술후 재발(10년)</td><td>20–60%</td><td>4–16%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>수술 전 국소화 영상(경부 초음파, Tc99m-sestamibi 부갑상선 신티그라피)은 MEN1에서 효용 제한적. 4개 부갑상선 모두 침범될 수 있으므로 영상과 무관하게 경부 탐색이 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 부갑상선 수술 권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 부갑상선 수술 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고 (Recommend)">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">경험 있는 내분비외과의가 시행하는 수술이 치료 선택. 타이밍은 아직 미정의. <strong>개방 양측 경부 탐색 + 부분 부갑상선 절제술(최소 3.5개 절제)</strong> 또는 완전 부갑상선 절제술을 권고.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">수술 시 동시 경경부 흉선 절제술 제안 (흉선 카르시노이드 예방 및 부갑상선 과형성 조직 제거 목적).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">완전 부갑상선 절제술 + 자가이식 고려 가능 (전완부에 이식 → 재발 시 국소마취 하 이식 조직 제거로 재수술 회피).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">최소침습 부갑상선 절제술은 대개 <strong>비권고</strong> — 다수의 선종 또는 과형성이 흔하기 때문.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>술기별 비교</strong>: 부분 절제술(3.5개) 시 40–60% 10–12년 내 재발, 저칼슘혈증 10–30%. 완전 절제 + 자가이식 시 재발 &gt;50% (이식 조직 과형성). 최적 수술 방법은 여전히 논란. Cinacalcet은 수술 실패 또는 금기 시 대안.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 스크리닝 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 부갑상선 스크리닝 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text">원발성 부갑상선기능항진증 스크리닝: <strong>혈청 칼슘 + PTH 연 1회</strong> 측정. 시작 연령: <span class="age-badge">8세</span>.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /parathyroid -->
+
+<!-- ═══ PANCREAS ═══ -->
+<div id="tab-pancreas" class="panel">
+
+  <!-- 개요 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 췌장 NET 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>⚠️</span>
+        <div>악성 췌장 NET는 현재 MEN1 환자의 <strong>가장 흔한 사망 원인</strong>. 비기능성 췌장 NET도 예후가 insulinoma·gastrinoma보다 나쁨. 조기 방사선학적 진단이 필수.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <table class="t">
+            <tr><th>종양 유형</th><th>MEN1 침투율</th><th>특이 사항</th></tr>
+            <tr><td><strong>Gastrinoma</strong></td><td>40%</td><td>ZES, 다발성 십이지장 점막하 병변</td></tr>
+            <tr><td><strong>Insulinoma</strong></td><td>10%</td><td>MEN1에서 비-MEN1보다 전이 많음(50% vs &lt;10%)</td></tr>
+            <tr><td>비기능성 NET</td><td>20–55%</td><td>가장 흔함, 가장 나쁜 예후</td></tr>
+            <tr><td>Glucagonoma</td><td>&lt;3%</td><td>진단 시 50–80% 전이</td></tr>
+            <tr><td>VIPoma</td><td>드묾</td><td>WDHA 증후군</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">비기능성 NET 크기와 전이율</div>
+          <table class="t">
+            <tr><th>종양 크기</th><th>동시 전이율</th></tr>
+            <tr><td>&lt;1 cm</td><td>4%</td></tr>
+            <tr><td>2.1–3.0 cm</td><td>18%</td></tr>
+            <tr><td>&gt;3 cm</td><td>43%</td></tr>
+            <tr><td>&gt;4 cm (일반)</td><td>25–40% (간전이)</td></tr>
+          </table>
+          <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:4px">* 림프절 전이는 생존율에 독립적으로 영향 없음 (gastrinoma 연구 기반)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 스크리닝 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 췌장 NET 스크리닝 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">생화학적 스크리닝 (최소): <strong>연 1회 공복 위장관 호르몬 패널</strong> — 가스트린, 글루카곤, VIP, 췌장 폴리펩타이드, chromogranin A, 인슐린 + 공복 혈당.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">영상 스크리닝 (최소 권고안): <strong>MRI, CT 또는 내시경 초음파로 연 1회 췌장·십이지장 시각화</strong>. 최적 방법 및 간격은 미확립 — 기관 자원, 임상 판단, 환자 선호에 따라.</div>
+        </li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>내시경 초음파(EUS)가 소형 췌장 종양 검출에 가장 민감. 소마토스타틴 수용체 신티그라피는 전이 병변 검출에 가장 신뢰도 높음.</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>📅</span>
+            <div>스크리닝 시작 연령: <span class="age-badge">Gastrinoma: 20세</span> <span class="age-badge">Insulinoma: 5세</span> <span class="age-badge">기타 NET: 10세</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 원칙 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 췌장 NET 치료 원칙 및 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text">주요 목표: <strong>가능한 한 오래 무증상·무질병 유지, 삶의 질 보전</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text">증상성 기능성 NET(insulinoma 포함): 가능하면 <strong>수술로 치유</strong> 추구.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">치료 계획 전 <strong>전체 병기 평가</strong> 필수.</div>
+        </li>
+      </ul>
+
+      <!-- Gastrinoma 세부 -->
+      <div class="sec-sep"></div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>Gastrinoma (ZES) 치료</span>
+          <span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ">QQQQ</span></div>
+              <div class="rec-text"><strong>약물치료</strong>: 양성자 펌프 억제제(PPI — omeprazole, lansoprazole)가 1차 선택. 필요 시 H₂ 차단제 추가. 목표: 기저 위산 분비 &lt;10 mmol/L.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text">대부분의 MEN1 환자: <strong>다발성 소형 십이지장 점막하 gastrinoma</strong> → 의학적 관리 우선 권고.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text">췌장에 발생한 비전이성 gastrinoma: 수술적 절제 고려 — 크기 &gt;2 cm의 췌장 gastrinoma는 수술 후 생존율 개선 보고. 경험 있는 전문 센터에서 국소 절제 + 림프절 청소술, 십이지장 절제술도 고려 가능.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">Whipple 췌십이지장 절제술은 치유율이 높지만 수술 사망률·장기 합병증(당뇨, 지방변증, 덤핑 증후군) 증가. 대부분의 환자에게 권고하지 않음 — 수술 안 해도 15년 생존율 우수(100% 비전이, 52% 전이).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text"><strong>고혈당증이 없는 MEN1-ZES 환자에서 원발성 부갑상선기능항진증 치료</strong>가 ZES 환자의 20%에서 임상·생화학 지표 개선. 부갑상선 수술을 먼저 고려.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Insulinoma 세부 -->
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>Insulinoma 치료</span>
+          <span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 의학적 치료(다빈도 식사, diazoxide, octreotide)는 항상 성공적이지 않음 → <strong>수술이 최적</strong></li>
+            <li>• 수술 범위: 단일 종양 적출(enucleation) ~ 원위 췌장 절제술 ~ 부분 췌장 절제술 ~ 모든 육안 종양 절제</li>
+            <li>• 수술 중 인슐린/혈당비 모니터링으로 성공적 절제 확인</li>
+            <li>• 전이성: streptozotocin + 5-FU + doxorubicin 또는 간동맥 색전술</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NF-NET 세부 -->
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>비기능성 췌장 NET 수술 기준</span>
+          <span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text"><strong>&gt;1 cm</strong> 크기의 비기능성 췌장 NET → 수술적 절제 고려 권고 (일부 센터는 &gt;2 cm 기준 적용).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text"><strong>&lt;1 cm</strong> 비기능성 NET → 3–6개월 내 크기 2배 이상 성장하며 1 cm 초과 시 수술 고려. 수술 전 환자의 충분한 정보 제공 및 동의 필수.</div>
+            </li>
+          </ul>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div>수술 후에도 잔여 췌장 조직에 종양 재발 가능. 잠재적 전이 병변은 초기 발현 시에도 영상에서 놓칠 수 있음. 췌십이지장 수술 시 당뇨·지방변증 합병증 위험 고려.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 진행성 치료 -->
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>절제 불가/전이성 췌장 NET 치료</span>
+          <span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">절제 불가 종양 치료: 소마토스타틴 유사체, 생물요법, 표적 방사핵종 치료, 국소 치료, 화학요법.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">수술 불가 또는 전이성 췌장 NET: 화학요법(streptozotocin + 5-FU 등).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">진행성 고분화 췌장 NET: <strong>Sunitinib</strong>(TKR 억제제) — PFS 11.4개월 vs 5.5개월(위약), 또는 <strong>Everolimus</strong>(mTOR 억제제) — PFS 11.0개월 vs 4.6개월(위약) 고려. (비-MEN1 연구 결과의 MEN1 외삽)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /pancreas -->
+
+<!-- ═══ PITUITARY ═══ -->
+<div id="tab-pituitary" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 뇌하수체 종양 — 임상 특성 및 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-amber">
+        <span>📌</span>
+        <div>MEN1 뇌하수체 선종은 비-MEN1보다 크고 공격적이며 치료 반응이 나쁨. 대선종 비율 MEN1 85% vs 비-MEN1 42–64%. MEN1 뇌하수체 종양의 30%가 주변 조직 침범(Hardy III–IV등급).</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">뇌하수체 종양 유형별 빈도 (MEN1)</div>
+          <table class="t">
+            <tr><th>종양 유형</th><th>MEN1 빈도</th><th>주요 증상</th></tr>
+            <tr class="hl"><td><strong>Prolactinoma</strong></td><td>~60%</td><td>월경 이상·불임·유즙 분비(여)/발기부전(남)</td></tr>
+            <tr><td>Somatotrophinoma (GH 분비)</td><td>&lt;25%</td><td>말단비대증 (40세 이상 호발)</td></tr>
+            <tr><td>Corticotrophinoma (ACTH 분비)</td><td>5%</td><td>쿠싱병</td></tr>
+            <tr><td>비기능성 선종</td><td>~5–25%</td><td>종양 압박 증상, 시야 장애</td></tr>
+          </table>
+          <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:4px">* 복합호르몬 분비(plurihormonal) 종양이 비-MEN1보다 높음. prolacto-somatotrophinoma 흔함.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">MEN1 vs 비-MEN1 뇌하수체 선종</div>
+          <table class="t">
+            <tr><th>특성</th><th>MEN1</th><th>비-MEN1</th></tr>
+            <tr><td>대선종 비율</td><td>85%</td><td>42–64%</td></tr>
+            <tr><td>주변 조직 침범</td><td>~30%</td><td>~10%</td></tr>
+            <tr><td>호르몬 정상화 성공</td><td>42%</td><td>90%</td></tr>
+            <tr><td>Prolactinoma 치료 성공</td><td>44%</td><td>높음</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>MEN1 뇌하수체 종양의 15%에서 prolactinoma가 첫 MEN1 발현. 5세 소아에서 발생 보고 있으므로 조기 스크리닝 필수.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 스크리닝 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 뇌하수체 종양 스크리닝 및 치료 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">생화학 스크리닝: <strong>프롤락틴 + IGF-1 연 1회</strong>. 시작 연령: <span class="age-badge">5세</span>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">영상 스크리닝: <strong>뇌하수체 MRI 3–5년마다</strong>. 이상 소견 시 시상하부-뇌하수체 기능 검사 추가.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text"><strong>치료</strong>: 비-MEN1 뇌하수체 종양 치료와 동일 원칙 적용.
+            <ul style="list-style:disc;padding-left:14px;margin-top:4px;line-height:1.9">
+              <li>Prolactinoma → 도파민 작용제(bromocriptine 또는 cabergoline)</li>
+              <li>Somatotrophinoma → octreotide 또는 lanreotide</li>
+              <li>수술: 선택적 경접형동 하수체 절제술</li>
+              <li>방사선치료: 절제 불가 잔류 종양에 보조적 사용</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>⚠️</span>
+        <div>MEN1 뇌하수체 종양은 의학·수술·방사선치료 후에도 호르몬 과잉 분비 지속 비율이 높아 (MEN1 45% vs 비-MEN1 10–40%) 비-MEN1 대비 수술 빈도가 더 높을 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pituitary -->
+
+<!-- ═══ OTHER ═══ -->
+<div id="tab-other" class="panel">
+
+  <!-- 카르시노이드 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫁</span> 흉선·기관지폐·위장관 카르시노이드 종양</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>⚠️</span>
+        <div><strong>흉선 카르시노이드</strong>는 MEN1에서 특히 공격적. 사망 위험비 4.29. 진단 후 중앙 생존기간 9.5년, 70%가 종양 직접 원인으로 사망. 유럽 MEN1 환자에서 남성 압도적(남:녀 = 20:1). 흡연자 위험 증가. 예방적 흉선 절제 후에도 발생 가능 → 수술 후에도 영상 추적 필수.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">카르시노이드 종양 특성 비교</div>
+          <table class="t">
+            <tr><th>종양 부위</th><th>성별</th><th>예후</th></tr>
+            <tr><td>흉선</td><td>남성 압도 (20:1, 유럽)</td><td>매우 나쁨 (사망 위험비 4.29)</td></tr>
+            <tr><td>기관지폐</td><td>여성 압도 (1:4)</td><td>사망 위험 증가 없음</td></tr>
+            <tr><td>위장관 (ECLoma)</td><td>다양</td><td>70% 이상 MEN1-ZES에서 발생, 대개 &lt;1.5 cm</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">카르시노이드 스크리닝 및 치료 권고</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ">QQQQ</span></div>
+              <div class="rec-text">요중 5-HIAA 및 chromogranin A는 흉선·기관지 카르시노이드 검출에 <strong>도움 안 됨</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qeee" data-tip="QEEE = 매우 낮은 근거">QEEE</span></div>
+              <div class="rec-text">흉선·기관지폐 카르시노이드 탐지: <strong>CT 또는 MRI 1–2년마다</strong>. 시작 연령: <span class="age-badge">15세</span>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text">고혈당증 동반 MEN1-ZES 환자에서 위내시경 3년마다 (위궤양 및 II형 위장관 카르시노이드 탐지).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ">QQQQ</span></div>
+              <div class="rec-text">절제 가능한 흉선·기관지 카르시노이드: <strong>수술적 절제가 치료 선택</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qeee" data-tip="QEEE">QEEE</span></div>
+              <div class="rec-text">진행성·절제 불가 카르시노이드: 방사선치료 + 화학요법(cisplatin, etoposide).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text">소형 위 ECLoma (≤10 mm): 내시경 감시 가능. 대형 → 내시경 절제 또는 부분/전 위 절제. 소마토스타틴 유사체로 ECLoma 퇴행 보고.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 부신 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫘</span> 부신 피질 종양</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>MEN1 부신 종양 발생률: 영상 스크리닝 방법에 따라 20–73%. 대부분 비기능성. &lt;10%에서만 호르몬 과잉 분비. 부신 피질암 빈도: 전체 MEN1의 ~1%, 부신 종양 ≥1 cm에서 ~13%.</div>
+          </div>
+        </div>
+        <div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE">QQEE</span></div>
+              <div class="rec-text">최소 스크리닝: <strong>복부 CT 또는 MRI 3년마다</strong>. 시작 연령: <span class="age-badge">10세</span>. (췌장 영상과 함께 시행 가능)</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">부신 병변 방사선학적 악성 징후 평가. 부신 영상 판독은 <strong>부신 영상 전문 영상의학과의</strong>가 시행.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">생화학 검사: 임상 증상 또는 종양 &gt;1 cm 시에만 시행 — 원발성 고알도스테론증 및 ACTH 비의존성 쿠싱 증후군 평가 우선.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE">QQQE</span></div>
+              <div class="rec-text">수술 적응증: ① 기능성 종양 (원발성 고알도스테론증, 쿠싱) ② 비전형적 영상 소견 + 크기 1–4 cm ③ 크기 &gt;4 cm ④ 6개월 내 유의미한 성장.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 피부 병변 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖐️</span> 피부 병변 — 진단 단서</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-success">
+        <span>💡</span>
+        <div>MEN1의 피부 병변은 임상 진단이 이루어지기 전 전증상 진단의 단서가 될 수 있음. 일반 치료 불필요.</div>
+      </div>
+      <table class="t" style="margin-top:8px">
+        <tr><th>병변</th><th>빈도</th><th>특징</th></tr>
+        <tr><td>안면 혈관섬유종 (angiofibromas)</td><td>22–88%</td><td>다발성. 일반 인구보다 높은 빈도 → MEN1 전증상 진단 단서 가능</td></tr>
+        <tr><td>콜라겐종 (collagenomas)</td><td>0–72%</td><td>피부 섬유성 병변; MEN1의 높은 빈도가 특징적</td></tr>
+        <tr><td>피하 지방종 (lipomas)</td><td>&gt;33%</td><td>다발성, 내장·흉막·후복막도 발생 가능. 외과적 제거 후 재발 없음</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /other -->
+
+<!-- ═══ GENETICS ═══ -->
+<div id="tab-genetics" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> MEN1 유전자 및 돌연변이</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-amber">
+        <span>📌</span>
+        <div>MEN1 유전자(11q13, 10개 엑손)는 전사조절·게놈 안정성·세포분열·증식을 조절하는 <strong>menin</strong>(610개 아미노산) 인코딩. 종양 억제 유전자로서 LOH를 통한 '2-hit' 기전.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">MEN1 돌연변이 특성</div>
+          <table class="t">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>보고된 돌연변이 총 수</td><td>1,336개 (생식세포 1,133 + 체세포 203)</td></tr>
+            <tr><td>서로 다른 생식세포 돌연변이</td><td>459종</td></tr>
+            <tr><td>인코딩 영역 전체 분포</td><td>전체 1,830 bp 코딩 영역과 접합 부위에 산재</td></tr>
+            <tr><td>불활성화 돌연변이 비율</td><td>75% (종양 억제 유전자에 합당)</td></tr>
+            <tr><td>드노보 돌연변이</td><td>전체의 &gt;10%</td></tr>
+            <tr><td>유전형-표현형 상관</td><td><strong>없음</strong> (MEN2와 다른 점)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">흔한 돌연변이 부위 (전체의 &gt;20%)</div>
+          <table class="t">
+            <tr><th>코돈/위치</th><th>특성</th></tr>
+            <tr><td>83/84 (4 bp del)</td><td>4%</td></tr>
+            <tr><td>119 (3 bp del)</td><td>3%</td></tr>
+            <tr><td>209–211 (4 bp del)</td><td>8%</td></tr>
+            <tr><td>418 (3 bp del)</td><td>4%</td></tr>
+            <tr><td>514–516 (del/ins)</td><td>7%</td></tr>
+            <tr><td>Intron 4 접합 부위</td><td>10%</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>5–25% 환자에서 코딩 영역 돌연변이 미검출 → 전체·부분 유전자 결실, 프로모터·비번역 영역 돌연변이 가능. MLPA(다중 라이게이션 의존성 프로브 증폭)로 엑손 결실 추가 검사 권고.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유전자 검사 권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> MEN1 유전자 검사 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">MEN1 생식세포 돌연변이 검사를 <strong>증례 환자 및 1차 친족 모두에게</strong> 제공 — 무증상자·증상자 모두 포함.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">무증상 친족에 대한 MEN1 검사는 <strong>가능한 한 이른 시기</strong>에 제공 — MEN1 발현이 5세부터 가능하므로.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2q" data-tip="2 = 제안">2</span><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></div>
+          <div class="rec-text">비정형 MEN1 표현형 (예: 다선 부갑상선기능항진증)에서도 MEN1 검사 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text">검사 전 모든 대상자에게 <strong>유전 상담</strong> 제공 필수.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></div>
+          <div class="rec-text">검사는 <strong>MEN1 유전자 돌연변이 분석이 인증된 임상 유전자 검사실</strong>에서 시행. 코딩 영역 돌연변이 미검출 시 → MLPA(부분·전 유전자 결실 탐지), 반수체형 분석, 다른 유전자 분석 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">알려진 MEN1 돌연변이 보유 가족의 친족은 <strong>생화학·방사선 스크리닝 전에 먼저 유전자 검사</strong>를 받아야 함 — 불필요한 다중 검사 부담 및 비용 절감.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1q" data-tip="1 = 권고">1</span><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></div>
+          <div class="rec-text">MEN1 생식세포 돌연변이 보유 확인자: <strong>연 1회</strong> 주기적 MEN1 연관 종양 스크리닝.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 검사 적응증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> MEN1 유전자 검사 적응증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">증례 환자에서 검사 적응증</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>① MEN1 임상 기준 충족 (≥2개 MEN1 관련 종양)</li>
+            <li>② 30세 이전 발생 부갑상선 선종</li>
+            <li>③ 다선 부갑상선 질환, gastrinoma, 다발성 췌장 NET (연령 무관)</li>
+            <li>④ 고전적 3가지가 아닌 2개 이상 MEN1 관련 종양 (예: 부갑상선 + 부신)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">가족에서 검사 적응증</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 알려진 MEN1 돌연변이 보유자의 <strong>무증상 1차 친족</strong></li>
+            <li>• MEN1 돌연변이 보유자의 가족성 MEN1(증상이 있는) 1차 친족</li>
+          </ul>
+          <div class="alert alert-success" style="margin-top:8px">
+            <span>💡</span>
+            <div>MEN1 돌연변이 <strong>없는</strong> 가족 → 추가 임상 검사 불필요, MEN1 관련 종양 발생 위험이 일반 인구 수준으로 감소. 가족의 불안·비용 큰 폭 절감.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 표현복 -->
+      <div class="sec-sep"></div>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div><strong>표현복(Phenocopy)</strong>: MEN1 관련 종양이 있으나 MEN1 돌연변이 없는 경우 5–10% 존재. 다른 유전자 돌연변이로 인한 MEN1 유사 표현형 가능성:
+          <ul style="list-style:disc;padding-left:16px;margin-top:4px;line-height:1.9">
+            <li><strong>CDC73</strong> 돌연변이 → HPT-JT 증후군 (부갑상선 + 턱 종양)</li>
+            <li><strong>CASR</strong> 돌연변이 → 가족성 양성 저칼슘뇨성 고칼슘혈증(FBHH)</li>
+            <li><strong>AIP</strong> 돌연변이 → 가족성 고립성 뇌하수체 선종(FIPA)</li>
+            <li><strong>CDKN1B</strong>(p27kip1) 돌연변이 → MEN4</li>
+            <li><em>CDKN</em> p15/p18/p21 → MEN1 드문 원인 (~1–2%)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /genetics -->
+
+<!-- ═══ SCREENING ═══ -->
+<div id="tab-screening" class="panel">
+
+  <!-- 스크리닝 표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> MEN1 고위험군 생화학·영상 스크리닝 프로토콜 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-amber">
+        <span>📌</span>
+        <div>스크리닝 대상: MEN1 돌연변이 보유 확인자(증례 환자 및 돌연변이 보유 친족). 생화학적 이상이 임상 증상보다 선행하므로 연 1회 생화학 검사가 핵심.</div>
+      </div>
+      <div style="overflow-x:auto;margin-top:8px">
+      <table class="t">
+        <tr>
+          <th>종양</th>
+          <th>시작 연령</th>
+          <th>생화학 검사 (혈청/혈장, 연 1회)</th>
+          <th>영상 검사 (간격)</th>
+        </tr>
+        <tr class="hl">
+          <td><strong>부갑상선</strong></td>
+          <td><span class="age-badge">8세</span></td>
+          <td>칼슘, PTH</td>
+          <td>없음</td>
+        </tr>
+        <tr>
+          <td>췌장 NET — Gastrinoma</td>
+          <td><span class="age-badge">20세</span></td>
+          <td>가스트린 (± 위 pH)</td>
+          <td>없음</td>
+        </tr>
+        <tr>
+          <td>췌장 NET — Insulinoma</td>
+          <td><span class="age-badge">5세</span></td>
+          <td>공복 혈당, 인슐린</td>
+          <td>없음</td>
+        </tr>
+        <tr class="hl">
+          <td>기타 췌장 NET</td>
+          <td><span class="age-badge">10세</span></td>
+          <td>Chromogranin A; 췌장 폴리펩타이드, 글루카곤, VIP</td>
+          <td>MRI, CT 또는 EUS (연 1회)</td>
+        </tr>
+        <tr>
+          <td>전방 뇌하수체</td>
+          <td><span class="age-badge">5세</span></td>
+          <td>프롤락틴, IGF-1</td>
+          <td>MRI (3–5년마다)</td>
+        </tr>
+        <tr class="hl">
+          <td>부신</td>
+          <td><span class="age-badge">10세</span></td>
+          <td>증상 또는 종양 &gt;1 cm 시에만 시행</td>
+          <td>MRI 또는 CT (연 1회, 췌장 영상과 함께)</td>
+        </tr>
+        <tr>
+          <td>흉선·기관지 카르시노이드</td>
+          <td><span class="age-badge">15세</span></td>
+          <td>없음</td>
+          <td>CT 또는 MRI (1–2년마다)</td>
+        </tr>
+      </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">EUS: 내시경 초음파 | 영상 간격은 기관 자원·임상 판단·환자 선호에 따라 조정 가능</div>
+    </div>
+  </div>
+
+  <!-- 권고 등급 표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> GRADE 권고 등급 기준 (이 가이드라인 사용)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">권고 강도</div>
+          <table class="t">
+            <tr><th>등급</th><th>표현</th><th>의미</th></tr>
+            <tr><td><span class="grade grade-1q" data-tip="강한 권고">1</span></td><td>"권고한다 (Recommend)"</td><td>대부분의 환자에서 이익이 위험 초과</td></tr>
+            <tr><td><span class="grade grade-2q" data-tip="약한 권고">2</span></td><td>"제안한다 (Suggest)"</td><td>환자 상황·선호에 따라 신중한 고려 필요</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">근거 수준</div>
+          <table class="t">
+            <tr><th>등급</th><th>의미</th></tr>
+            <tr><td><span class="grade grade-qqqq" data-tip="QQQQ = 높은 근거">QQQQ</span></td><td>높은 근거 수준</td></tr>
+            <tr><td><span class="grade grade-qqqe" data-tip="QQQE = 중등 근거">QQQE</span></td><td>중등 근거 수준</td></tr>
+            <tr><td><span class="grade grade-qqee" data-tip="QQEE = 낮은 근거">QQEE</span></td><td>낮은 근거 수준</td></tr>
+            <tr><td><span class="grade grade-qeee" data-tip="QEEE = 매우 낮은 근거">QEEE</span></td><td>매우 낮은 근거 수준</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>MEN1은 희귀 질환으로 특정 치료를 평가하는 무작위 대조 임상시험이 부족. 대부분의 권고는 전문가 의견에 기반하며 근거 수준이 낮거나 중등 수준. 가이드라인은 경직된 프로토콜이 아닌 진료 <strong>틀</strong>로 사용해야 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 권고 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📝</span> 전체 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🏥 일반 및 MDT 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">MEN1 환자·가족 → 내분비 종양 경험 있는 MDT 관리.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">MDT: 내분비내과·소화기내과·종양내과의, 내분비외과의, NET 병리의, 핵의학 포함 영상의학과의, 임상유전학과의. 모든 위장췌장 NET·흉선·기관지 카르시노이드는 신경내분비 MDT에서 논의.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🧬 유전자 검사 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">증례 환자 및 1차 친족 모두에게 MEN1 생식세포 돌연변이 검사 제공 (무증상·유증상 모두).</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">무증상 친족의 검사는 최대한 이른 시기에 — MEN1이 5세부터 발현 가능.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">검사 전 모든 대상자에게 유전 상담 필수.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">인증된 임상 유전자 검사실에서 시행. 코딩 영역 돌연변이 미검출 시 MLPA·반수체형 분석·다른 유전자 분석 고려.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">알려진 돌연변이 가족의 친족은 생화학·영상 스크리닝 전에 먼저 유전자 검사.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">MEN1 돌연변이 보유 확인자: 연 1회 주기적 종양 스크리닝.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🦴 부갑상선 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">스크리닝: 혈청 칼슘 + PTH 연 1회 (8세부터).</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">경험 있는 내분비외과의가 개방 양측 경부 탐색 시행. 부분 부갑상선 절제술(≥3.5개) 또는 완전 절제술 권고.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">수술 시 경경부 흉선 절제술 동시 시행 제안.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">완전 부갑상선 절제술 + 자가이식 고려 가능.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">최소침습 부갑상선 절제술은 대개 비권고.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🫀 췌장 NET 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">생화학: 공복 위장관 호르몬 패널 연 1회. 영상: MRI/CT/EUS 연 1회 (10세부터).</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">주요 목표: 가능한 한 오래 무증상·무질병 유지, 삶의 질 보전.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">Gastrinoma: 다발성 십이지장 gastrinoma → PPI 의학적 관리 우선. 췌장 gastrinoma (&gt;2 cm) → 수술 고려.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">비기능성 NET (&gt;1 cm 또는 6–12개월 내 유의미한 성장) → 수술 고려.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">진행성 고분화 췌장 NET: Sunitinib 또는 Everolimus 고려.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🧠 뇌하수체 종양 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">스크리닝: 프롤락틴 + IGF-1 연 1회 (5세부터). 뇌하수체 MRI 3–5년마다.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">치료: 비-MEN1 뇌하수체 종양과 동일 원칙. Prolactinoma → 도파민 작용제. Somatotrophinoma → 소마토스타틴 유사체. 수술: 경접형동 하수체 절제술. 방사선치료: 잔류 절제 불가 조직.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🫁 흉선·기관지·위 카르시노이드 및 부신 권고</span><span class="osa-arrow">▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">요중 5-HIAA·chromogranin A는 흉선·기관지 카르시노이드 검출에 유용하지 않음.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qeee">QEEE</span></div><div class="rec-text">흉선·기관지폐 카르시노이드: CT 또는 MRI 1–2년마다 (15세부터).</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqq">QQQQ</span></div><div class="rec-text">절제 가능한 흉선·기관지 카르시노이드: 수술이 1차 치료.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-2q">2</span><span class="grade grade-qqee">QQEE</span></div><div class="rec-text">부신: 최소 CT/MRI 3년마다 (10세부터). 종양 &gt;1 cm 또는 증상 시 생화학 평가.</div></li>
+            <li class="rec-item"><div class="rec-badges"><span class="grade grade-1q">1</span><span class="grade grade-qqqe">QQQE</span></div><div class="rec-text">부신 수술 적응: ① 기능성 종양 ② 비전형 영상 + 1–4 cm ③ &gt;4 cm ④ 6개월 내 유의한 성장.</div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /screening -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TABS ───
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.querySelector('.osa-arrow').textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['MEN1','Multiple Endocrine Neoplasia Type 1 (다발성 내분비 신생물 1형) — MEN1 유전자(11q13) 돌연변이로 인한 상염색체 우성 종양 억제유전자 질환. Menin 단백 인코딩.'],
+  ['MEN2','Multiple Endocrine Neoplasia Type 2 — RET 유전자 돌연변이; MTC·갈색세포종·부갑상선기능항진증'],
+  ['MEN4','Multiple Endocrine Neoplasia Type 4 — CDKN1B(p27kip1) 돌연변이; 부갑상선 + 뇌하수체 선종 연관'],
+  ['Menin','MEN1 유전자가 인코딩하는 610개 아미노산 핵 단백질 — 전사조절·게놈 안정성·세포분열 조절. 종양 억제 기능.'],
+  ['MDT','Multidisciplinary Team (다학제 팀) — MEN1 진료의 핵심 구조; 내분비내과·외과·종양내과·영상의학·병리·유전학 전문가 포함'],
+  ['NET','Neuroendocrine Tumor (신경내분비 종양) — MEN1에서 부갑상선·췌도·뇌하수체·카르시노이드 등 다발성으로 발생'],
+  ['ZES','Zollinger-Ellison Syndrome (졸링거-엘리슨 증후군) — gastrinoma에 의한 위산 과다 분비 + 재발성 소화성 궤양'],
+  ['LOH','Loss of Heterozygosity (이형접합성 소실) — MEN1 종양의 90% 이상에서 발생. 종양 억제유전자의 2-hit 기전'],
+  ['MLPA','Multiplex Ligation-Dependent Probe Amplification — 엑손 결실 탐지에 사용; 코딩 영역 돌연변이 미검출 시 추가 검사'],
+  ['FIHP','Familial Isolated Hyperparathyroidism (가족성 고립성 부갑상선기능항진증) — MEN1 변형; 부갑상선 종양만 발생'],
+  ['FIPA','Familial Isolated Pituitary Adenoma (가족성 고립성 뇌하수체 선종) — AIP 유전자 돌연변이; MEN1 표현복 가능'],
+  ['HPT-JT','Hyperparathyroidism-Jaw Tumor syndrome — CDC73(parafibromin) 돌연변이; 부갑상선 + 턱 종양; MEN1 표현복'],
+  ['FBHH','Familial Benign Hypocalciuric Hypercalcemia (가족성 양성 저칼슘뇨성 고칼슘혈증) — CASR 돌연변이; MEN1 표현복'],
+  ['AIP','Aryl Hydrocarbon Receptor-Interacting Protein — 11q13 위치 종양 억제 유전자; FIPA 원인; AIP 돌연변이 FIPA의 20%'],
+  ['ECL','Enterochromaffin-Like cells (장크롬친화성 유사 세포) — 위 점막 세포; II형 위장관 카르시노이드(ECLoma)의 기원'],
+  ['PPI','Proton Pump Inhibitor (양성자 펌프 억제제) — omeprazole, lansoprazole 등; ZES-gastrinoma 약물치료 1차 선택'],
+  ['SASI','Selective Arterial Secretagogue Injection test — 선택 동맥 분비자극 주사 검사; gastrinoma 국소화에 사용'],
+  ['mTOR','Mammalian Target of Rapamycin — 세포 성장·증식·혈관신생 자극 세린-트레오닌 키나아제; Everolimus 표적'],
+  ['TKR','Tyrosine Kinase Receptor — 췌장 NET에서 발현; Sunitinib 표적'],
+  ['EUS','Endoscopic Ultrasound (내시경 초음파) — 소형 췌장 종양 검출에 가장 민감한 방법'],
+  ['5-HIAA','5-Hydroxyindoleacetic Acid (5-하이드록시인돌아세트산) — 카르시노이드 요중 대사산물; 흉선·기관지 카르시노이드에는 유용하지 않음'],
+  ['CgA','Chromogranin A (크로모그라닌 A) — 신경내분비 종양 표지자; 췌장 NET 생화학 스크리닝에 포함'],
+  ['VIP','Vasoactive Intestinal Polypeptide (혈관작용 장 폴리펩타이드) — VIPoma에서 과잉 분비; WDHA 증후군 원인'],
+  ['WDHA','Watery Diarrhea, Hypokalemia, Achlorhydria — VIPoma(Verner-Morrison) 증후군의 임상 삼징후'],
+  ['GH','Growth Hormone (성장호르몬) — somatotrophinoma에서 과잉 분비 → 말단비대증'],
+  ['IGF-1','Insulin-like Growth Factor-1 — somatotrophinoma 및 말단비대증 스크리닝·모니터링 표지자; MEN1 뇌하수체 스크리닝에 포함'],
+  ['PTH','Parathyroid Hormone (부갑상선 호르몬) — 원발성 부갑상선기능항진증 진단의 핵심 표지자; 연 1회 스크리닝'],
+  ['ACTH','Adrenocorticotropic Hormone (부신피질자극호르몬) — corticotrophinoma에서 과잉 분비 → 쿠싱병'],
+  ['Everolimus','mTOR 억제제; 진행성 고분화 췌장 NET에서 PFS 11.0개월 vs 4.6개월(위약). 비-MEN1 결과를 MEN1에 외삽 적용 권고.'],
+  ['Sunitinib','TKR 억제제; 진행성 고분화 췌장 NET에서 PFS 11.4개월 vs 5.5개월(위약). Everolimus와 함께 진행성 췌장 NET 치료 옵션.'],
+  ['Cinacalcet','칼슘 감지 수용체 작용제; 수술 실패 또는 금기인 MEN1 부갑상선기능항진증 환자에서 대안 치료'],
+  ['CDKN1B','Cyclin-Dependent Kinase Inhibitor 1B — p27kip1 인코딩; MEN4 원인 유전자; 임상적 MEN1이나 MEN1 돌연변이 없는 환자의 ~1.5%'],
+  ['CDC73','Cell Division Cycle 73 — parafibromin 인코딩; HPT-JT 증후군 원인; MEN1 표현복 원인 유전자'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTA 2024 갑상선결절 진료권고안</title>
+<style>
+  :root {
+    --bg:#f6f8fa;--surface:#fff;--surface2:#f0f2f5;--border:#d0d7de;
+    --accent:#0a7c8a;--accent2:#065a64;
+    --green:#1a7f37;--yellow:#9a6700;--red:#cf222e;--blue:#0550ae;--orange:#bc4c00;
+    --text:#1f2328;--text2:#57606a;--fscale:1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size: calc(13px * var(--fscale, 1));line-height:1.5;min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;position:sticky;top:0;z-index:100}
+  .header-inner{width:100%;max-width:960px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .logo-badge{background:var(--accent);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+  header h1{font-size:18px;font-weight:700;color:var(--text);text-align:center}
+  .meta{color:var(--text2);font-size: calc(11px * var(--fscale, 1))}
+  .source-link{color:var(--accent);font-size: calc(11px * var(--fscale, 1));text-decoration:none}
+  .source-link:hover{text-decoration:underline}
+  .tab-bar{display:flex;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;position:sticky;top:66px;z-index:99}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .font-zoom-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;margin:4px 4px 4px 6px;padding:5px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--accent2);font-size:calc(11px * var(--fscale, 1));font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s}
+  .font-zoom-btn:hover{background:var(--border)}
+  .font-zoom-btn .fz-icon{font-size:calc(12px * var(--fscale, 1))}
+  .tab-bar-inner{width:100%;max-width:960px;display:flex;align-items:center;gap:1px}
+  .tab{padding:8px 11px;font-size: calc(11.5px * var(--fscale, 1));color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;user-select:none}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+  .tab-abbr-wrap{display:flex;align-items:center;padding:4px 8px;margin-left:auto;flex-shrink:0;position:relative}
+  .main{padding:12px 16px;max-width:960px;margin:0 auto}
+  .panel{display:none}
+  .panel.active{display:block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}.tab{padding:7px 8px;font-size: calc(11px * var(--fscale, 1))}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px}
+  .card-header{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+  .card-header .toggle{font-size: calc(14px * var(--fscale, 1));transition:transform .2s}
+  .card-header.open .toggle{transform:rotate(180deg)}
+  .card-body{padding:10px 12px}
+  .card-body.collapsed{display:none}
+  .stat-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;flex:1;text-align:center;min-width:80px}
+  .stat-val{font-size: calc(18px * var(--fscale, 1));font-weight:700;color:var(--accent)}
+  .stat-lbl{font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:2px}
+  .rl{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size: calc(11px * var(--fscale, 1));font-weight:800;flex-shrink:0}
+  .rl1{background:#cf222e;color:#fff}
+  .rl2{background:#0550ae;color:#fff}
+  .rl3{background:#9a6700;color:#fff}
+  .rl4{background:#57606a;color:#fff}
+  .rl-label{display:inline-block;padding:1px 7px;border-radius:3px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap}
+  .rl1-l{background:#ffebe9;color:#82071e;border:1px solid #cf222e}
+  .rl2-l{background:#ddf4ff;color:#0550ae;border:1px solid #0550ae}
+  .rl3-l{background:#fff8c5;color:#7d4e00;border:1px solid #9a6700}
+  .rl4-l{background:#f6f8fa;color:#57606a;border:1px solid #d0d7de}
+  .rec-list{list-style:none}
+  .rec-item{padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start}
+  .rec-item:last-child{border-bottom:none}
+  .rec-meta{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;min-width:28px;padding-top:1px}
+  .rec-code{font-size: calc(9.5px * var(--fscale, 1));color:var(--text2);font-weight:600;text-align:center}
+  .rec-text{font-size: calc(12px * var(--fscale, 1));color:var(--text);line-height:1.6}
+  .rec-note{font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px;padding:4px 8px;background:var(--surface2);border-left:2px solid var(--border);border-radius:0 4px 4px 0;line-height:1.55}
+  .alert{padding:8px 12px;border-radius:6px;font-size: calc(12px * var(--fscale, 1));margin:8px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.55}
+  .alert-info{background:#ddf4ff;border-left:3px solid #0550ae;color:#0550ae}
+  .alert-warn{background:#fff8c5;border-left:3px solid var(--yellow);color:#7d4e00}
+  .alert-success{background:#dafbe1;border-left:3px solid var(--green);color:#116329}
+  .alert-teal{background:#eaf7fb;border-left:3px solid var(--accent);color:var(--accent2)}
+  .alert-danger{background:#ffebe9;border-left:3px solid var(--red);color:#82071e}
+  .kta-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1))}
+  .kta-table th{background:var(--surface2);color:var(--text2);padding:6px 8px;font-size: calc(10.5px * var(--fscale, 1));font-weight:600;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+  .kta-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+  .kta-table tr:last-child td{border-bottom:none}
+  .kta-table tr:hover td{background:rgba(0,0,0,.015)}
+  .kta-table .hl-row td{background:#eaf7fb}
+  .kta-table .warn-row td{background:#fff8c5}
+  .kta-table .danger-row td{background:#ffebe9}
+  .acc{border:1px solid var(--border);border-radius:6px;margin-bottom:5px;overflow:hidden}
+  .acc-hdr{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+  .acc-hdr:hover{background:#e1e4e8}
+  .acc-body{display:none;padding:10px 12px;font-size: calc(12px * var(--fscale, 1));line-height:1.65}
+  .section-title{font-size: calc(13px * var(--fscale, 1));font-weight:700;color:var(--text);margin:14px 0 7px;padding-bottom:5px;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:6px}
+  .sec-badge{background:var(--accent);color:#fff;font-size: calc(9.5px * var(--fscale, 1));font-weight:700;padding:2px 6px;border-radius:3px}
+  .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size: calc(10px * var(--fscale, 1));font-weight:600}
+  .pill-teal{background:#eaf7fb;color:var(--accent2)}
+  .pill-red{background:#ffebe9;color:#82071e}
+  .pill-blue{background:#ddf4ff;color:#0550ae}
+  .pill-yellow{background:#fff8c5;color:#7d4e00}
+  .pill-green{background:#dafbe1;color:#116329}
+  .sub-section{margin:10px 0 4px;font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:6px}
+  .sub-section::before{content:'';display:inline-block;width:3px;height:14px;background:var(--accent);border-radius:2px}
+  #abbr-input{border:1px solid var(--border);border-radius:5px;padding:4px 28px 4px 8px;font-size: calc(11px * var(--fscale, 1));width:120px;outline:none}
+  #abbr-input:focus{border-color:var(--accent)}
+  .abbr-item{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;display:flex;flex-direction:column;gap:1px;margin-bottom:3px}
+  .abbr-term{font-weight:700;color:var(--accent);font-size: calc(11px * var(--fscale, 1));font-family:monospace}
+  .abbr-def{font-size: calc(11px * var(--fscale, 1));color:var(--text2)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">KTA · 대한갑상선학회 2024</span>
+      <h1>갑상선결절 진료권고안 2024</h1>
+    </div>
+    <div class="meta">Int J Thyroidol 2024;17(1):208-244 &nbsp;|&nbsp; KTA Management Guidelines for Thyroid Nodules 2024</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <a class="source-link" href="https://doi.org/10.11106/ijt.2024.17.1.208" target="_blank">🔗 원문 DOI</a>
+      <a class="source-link" href="https://www.thyroid.kr" target="_blank">🔗 대한갑상선학회</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">⚠️ 임상 보조 참고용. 최신 원문 확인 필요.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 대한갑상선학회 공식 승인 자료가 아닙니다.</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('screening')">🔍 1. 고위험군 선별</div>
+    <div class="tab" onclick="showTab('workup')">🩺 2. 초기 검사</div>
+    <div class="tab" onclick="showTab('biopsy')">🔬 3. 병리진단검사</div>
+    <div class="tab" onclick="showTab('followup')">📅 4. 장기 추적</div>
+    <div class="tab" onclick="showTab('treatment')">⚡ 5. 양성결절 치료</div>
+    <div class="tab" onclick="showTab('pregnancy')">🤰 6. 임신부</div>
+    <div class="tab-abbr-wrap">
+      <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+        onfocus="document.getElementById('abbr-dd').style.display='block';filterAbbr(this.value)" autocomplete="off">
+      <span id="abbr-cnt" style="position:absolute;right:9px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      <div id="abbr-dd" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:400px;max-height:320px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══ TAB: 개요 ══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">6</div><div class="stat-lbl">섹션</div></div>
+    <div class="stat-box"><div class="stat-val">37p</div><div class="stat-lbl">원문</div></div>
+    <div class="stat-box"><div class="stat-val">4단계</div><div class="stat-lbl">권고수준</div></div>
+    <div class="stat-box"><div class="stat-val">2024</div><div class="stat-lbl">KTA 최신판</div></div>
+  </div>
+  <div class="alert alert-teal">ℹ️ 2023 갑상선결절 진료권고안을 2024 갑상선분화암 진료권고안 개정에 맞춰 일부 수정한 최신판. 저위험군 적극적 관찰의 종양 크기 기준 및 수술 크기 기준이 주요 변경 내용.</div>
+
+  <div class="section-title"><span class="sec-badge">권고수준</span> 권고수준 체계</div>
+  <table class="kta-table">
+    <thead><tr><th>수준</th><th>명칭</th><th>정의</th></tr></thead>
+    <tbody>
+      <tr><td><span class="rl rl1">1</span></td><td><strong>강력히 권고</strong></td><td>중요한 건강 이득/손실이 있다는 충분하고 객관적인 근거가 있는 경우</td></tr>
+      <tr><td><span class="rl rl2">2</span></td><td><strong>일반적으로 권고</strong></td><td>근거가 있으나 확실하지 않거나 간접적이어서 일률적 권고가 어려운 경우</td></tr>
+      <tr><td><span class="rl rl3">3</span></td><td><strong>전문가 합의</strong></td><td>임상 근거는 부족하나 환자 상황과 전문가 합의에 따른 권고</td></tr>
+      <tr><td><span class="rl rl4">4</span></td><td><strong>권고 보류</strong></td><td>근거가 없거나 이견이 많아 찬성도 반대도 하지 않음</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title" style="margin-top:14px"><span class="sec-badge">주요변경</span> 2024 개정 핵심 변경사항 5가지 <span style="font-size: calc(10px * var(--fscale, 1));font-weight:400;color:var(--text2);margin-left:4px">▸ 항목 클릭 시 상세 내용</span></div>
+
+  <style>
+    .chg-item{border:1px solid var(--border);border-radius:7px;margin-bottom:6px;overflow:hidden}
+    .chg-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;background:var(--surface);transition:background .15s}
+    .chg-hdr:hover{background:var(--surface2)}
+    .chg-hdr.open{background:#f0f8fa}
+    .chg-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size: calc(12px * var(--fscale, 1));font-weight:800;flex-shrink:0}
+    .chg-title{font-size: calc(12.5px * var(--fscale, 1));font-weight:600;color:var(--text);flex:1}
+    .chg-icon{font-size: calc(13px * var(--fscale, 1));color:var(--text2);flex-shrink:0;transition:transform .2s}
+    .chg-hdr.open .chg-icon{transform:rotate(180deg)}
+    .chg-body{display:none;padding:0 14px 13px 14px;font-size: calc(12px * var(--fscale, 1));line-height:1.7;color:var(--text);border-top:1px solid var(--border);background:#fafbfc}
+    .chg-body p{margin-top:8px}
+    .chg-body ul{padding-left:16px;margin-top:6px}
+    .chg-body ul li{margin-bottom:4px}
+    .chg-body .cn{margin-top:9px;padding:7px 10px;background:#eaf7fb;border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:var(--accent2)}
+    .chg-body .cw{margin-top:9px;padding:7px 10px;background:#fff8c5;border-left:3px solid var(--yellow);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:#7d4e00}
+    .chg-body .ci{margin-top:9px;padding:7px 10px;background:#ddf4ff;border-left:3px solid #0550ae;border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:#0550ae}
+    .chg-body table{width:100%;border-collapse:collapse;margin-top:9px;font-size: calc(11.5px * var(--fscale, 1))}
+    .chg-body table th{background:var(--surface2);padding:6px 8px;font-size: calc(10.5px * var(--fscale, 1));text-align:left;border-bottom:1px solid var(--border);color:var(--text2);white-space:nowrap}
+    .chg-body table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+    .chg-body table tr:last-child td{border-bottom:none}
+    .chg-body table tr.hl td{background:#eaf7fb}
+    .chg-body table tr.warn td{background:#fff8c5}
+    .chg-body table tr.dng td{background:#ffebe9}
+  </style>
+
+  <!-- ① 고위험군 정의 -->
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#0550ae;color:#fff">①</span>
+      <span class="chg-title">갑상선암 선별검사가 권고되는 <strong>고위험군 정의</strong> 명확화</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>기존 권고안에서 모호하게 기술되었던 갑상선암 선별검사 적응 고위험군을 구체적으로 정의하였다. 일반 인구에서는 선별검사를 권고하지 않으나, 다음 고위험군에서는 초음파 선별을 고려한다.</p>
+      <table>
+        <thead><tr><th>고위험군</th><th>근거</th><th>권고수준</th></tr></thead>
+        <tbody>
+          <tr><td>직계 가족 중 갑상선분화암 <strong>≥3명</strong></td><td>가족성 발생률 9–11.3%. 3명 이상 시 22.7%에서 갑상선암 발견</td><td><span class="rl rl4" style="width:18px;height:18px;font-size: calc(10px * var(--fscale, 1))">4</span> (일률적 초음파 권고 안 함)</td></tr>
+          <tr class="hl"><td>유전성 종양증후군 가족 구성원</td><td>PTEN/FAP/DICER1/Carney complex/Werner/MEN2 등</td><td><span class="rl rl2" style="width:18px;height:18px;font-size: calc(10px * var(--fscale, 1))">2</span> (유전상담 후 유전자변이 유무에 따라)</td></tr>
+          <tr><td>소아 시기 경부 방사선 조사력</td><td>10–30 Gy 구간: RR 15.2 최대. 방사선 조사 5년 후 선별 권고</td><td>권고 (가이드라인 기반)</td></tr>
+          <tr><td>그레이브스병·하시모토갑상선염</td><td>암 위험도 각각 4–5배, 1.5–1.8배 증가. 단 예후는 불량하지 않음</td><td><span class="rl rl4" style="width:18px;height:18px;font-size: calc(10px * var(--fscale, 1))">4</span> (일률적 권고 안 함. 결절·비대칭 종대 시 고려)</td></tr>
+        </tbody>
+      </table>
+      <div class="cn">📌 관련 권고문: 1.A–D</div>
+    </div>
+  </div>
+
+  <!-- ② K-TIRADS 적용 -->
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#0a7c8a;color:#fff">②</span>
+      <span class="chg-title">개정된 <strong>2021 K-TIRADS</strong> 기반 암 위험도 분류 및 FNA/CNB 기준 적용</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>2021년 대한갑상선영상의학회가 개정한 K-TIRADS를 권고안에 공식 반영하였다. 결절의 초음파 소견 유형(에코, 고형/낭성 비율, 악성의심 소견 유무)에 따라 4개 위험 범주로 분류하고, 각 범주별 FNA/CNB 기준 크기를 명시하였다.</p>
+      <table>
+        <thead><tr><th>K-TIRADS</th><th>초음파 특성</th><th>암 위험도</th><th>FNA/CNB 기준</th></tr></thead>
+        <tbody>
+          <tr class="dng"><td><strong>5 높은의심</strong></td><td>악성의심 소견 있는 저에코 고형결절<br><small>(미세석회화·비평행 방향·침상/소엽성 경계)</small></td><td>&gt;60%</td><td><strong>&gt;1 cm</strong><br>0.5–1 cm: 고려 가능</td></tr>
+          <tr class="warn"><td><strong>4 중간의심</strong></td><td>①악성의심 소견 없는 저에코 고형 ②부분낭성·등/고에코 + 악성의심 소견 ③완전 석회화</td><td>10–40%</td><td><strong>&gt;1–1.5 cm</strong><br>임상소견·환자 특성 고려</td></tr>
+          <tr><td><strong>3 낮은의심</strong></td><td>악성의심 소견 없는 부분낭성·등/고에코 결절</td><td>3–10%</td><td><strong>&gt;2 cm</strong></td></tr>
+          <tr class="hl"><td><strong>2 양성</strong></td><td>해면모양·혜성꼬리 인공음영 있는 부분낭성·순수 낭종</td><td>&lt;3%</td><td>해당 없음</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li>K-TIRADS 4에서 FNA 기준 크기는 <strong>1 cm 초과~1.5 cm 이하 범위 내</strong>에서 초음파 소견·결절 위치·임상적 위험인자·환자 특성을 고려하여 결정</li>
+        <li>불량한 예후인자(경부 LN전이 의심·육안적 ETE·원격전이·수질암 의심) → <strong>결절 크기 무관하게 즉각 FNA</strong></li>
+        <li>PET/CT 우연종 국소섭취: K-TIRADS 3→10.2%, K-TIRADS 4→52.1%, K-TIRADS 5→93.5% 악성</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: 2.2.A, Table 2.2.A</div>
+    </div>
+  </div>
+
+  <!-- ③ CNB·분자표지자 -->
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#1a7f37;color:#fff">③</span>
+      <span class="chg-title"><strong>CNB·분자표지자검사</strong>의 임상 역할 추가 및 구체화</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>중심바늘생검(CNB)과 분자표지자검사의 역할을 기존 권고안보다 구체적으로 추가하였다.</p>
+      <p><strong>CNB 추가된 역할:</strong></p>
+      <ul>
+        <li>FNA의 <strong>보완적 병리진단검사법</strong>으로 숙련된 외과의에 의해 선택적 시행</li>
+        <li>FNA 비진단적 반복률 28–40% → CNB 대체 시 <strong>1.1–3.8%</strong>로 감소</li>
+        <li>여포종양의 진단 민감도: FNA 74% vs CNB <strong>80–91%</strong> → 고주파절제 치료 결정 시 CNB 포함 권고</li>
+        <li>반복 비정형(AUS) 결절에서 CNB로 반복 비정형 진단 비율 감소</li>
+      </ul>
+      <p style="margin-top:8px"><strong>분자표지자검사 추가된 역할:</strong></p>
+      <table>
+        <thead><tr><th>표지자</th><th>역할</th><th>특성</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BRAF V600E</strong></td><td>유두암 확진 보조, AUS에서 암 위험도 상승</td><td>아시아에서 단독 검사로도 AUS의 암 위험 33–56% → 71–88%로 상승</td></tr>
+          <tr><td><strong>TERT 프로모터</strong></td><td>예후 불량 표지자</td><td>BRAF/RAS 동반 시 원격전이 11.7배↑, 사망률 15배↑</td></tr>
+          <tr><td><strong>RAS 돌연변이</strong></td><td>여포종양·NIFTP 감별</td><td>악성 양성예측도 약 66%. 양성 종양에서도 검출 가능</td></tr>
+          <tr><td><strong>차세대염기서열 패널</strong></td><td>AUS·여포종양 암 위험도 계층화</td><td>민감도 74–94%, 특이도 68–85%, NPV 92–97%</td></tr>
+        </tbody>
+      </table>
+      <div class="cn">📌 관련 권고문: 3.1.C–D, 3.4.A, 3.5.B, 3.6.B, 3.8.A</div>
+    </div>
+  </div>
+
+  <!-- ④ 적극적 관찰 -->
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#9a6700;color:#fff">④</span>
+      <span class="chg-title">저위험군 미세갑상선유두암에서 <strong>적극적 관찰(Active Surveillance)</strong> 적용 및 종양 크기 기준 업데이트</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>2024 갑상선분화암 진료권고안(파트 I.2.3)과 연동하여 적극적 관찰의 근거를 보완하고, 종양 크기 기준을 업데이트하였다. 핵심은 <strong>즉각 수술과 적극적 관찰의 장기 결과가 동등</strong>하다는 대규모 데이터 축적이다.</p>
+      <table>
+        <thead><tr><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>대상</strong></td><td>≤1 cm 저위험군 미세갑상선유두암(PTMC) 성인 환자 (권고수준 2)</td></tr>
+          <tr><td><strong>수술 우선</strong></td><td>임상적 LN·원격전이 의심 / 육안적 ETE·기관·RLN 침범 의심 / 공격적 조직아형(긴세포·원주세포·hobnail)</td></tr>
+          <tr class="hl"><td><strong>관찰 가능</strong></td><td>전이·ETE 없음 + 공격적 아형 아님 / 수술 위험 높은 동반질환 / 여생 짧은 경우 / 해결해야 할 내과·외과 질환</td></tr>
+          <tr><td><strong>진행 판정 기준</strong></td><td>종양 최대 길이 <strong>3 mm 이상 증가</strong> 또는 새로운 경부 LN전이 발생</td></tr>
+          <tr><td><strong>추적 간격</strong></td><td>초기 6개월 후 이상 없으면 1년 간격 경부 초음파</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px"><strong>주요 근거(2024 업데이트):</strong></p>
+      <ul>
+        <li>일본 Kuma Hospital 3,222명 30년 추적: 10년 크기 증가 4.7%, LN전이 1.0%</li>
+        <li>즉시 수술군 vs 진행 후 수술군: 치료 범주·합병증 차이 없음(일본 699명 연구)</li>
+        <li>국내 MAeSTro 전향 연구: 림프절전이·방사성요오드 치료 비율은 진행 후 수술군에서 증가, 단 생존율 차이 없음</li>
+        <li>경제성: 초기 비용은 즉시 수술군 높으나 약 16년 후부터는 적극적 관찰군에서 높아짐</li>
+        <li>삶의 질: 적극적 관찰 선택 환자에서 전 추적 기간 동안 양호</li>
+      </ul>
+      <div class="cw">⚠️ 9 mm 이상 PTMC는 진행 가능성 높음(HR 1.79). 1–2 cm 저위험군 유두암에서의 적극적 관찰은 추가 연구 필요.</div>
+      <div class="cn">📌 관련 권고문: 3.7.B (권고수준 2) / KTA 갑상선분화암 권고안 2024 I.2.3.A 연동</div>
+    </div>
+  </div>
+
+  <!-- ⑤ 비수술적절제 치료 -->
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#bc4c00;color:#fff">⑤</span>
+      <span class="chg-title">갑상선 양성 결절 <strong>비수술적절제 치료 적응증</strong> 구체화</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>비수술적절제 치료(고주파절제술·레이저절제술·에탄올절제술)의 적응증과 금기, 각 치료법의 대상 결절 특성을 이전 권고안보다 구체화하였다.</p>
+      <p><strong>비수술적절제 치료 대상 기준:</strong></p>
+      <ul>
+        <li>FNA 또는 CNB에서 <strong>2회 이상 양성</strong>으로 진단된 결절</li>
+        <li>K-TIRADS 2 결절·자율기능성 결절: <strong>1회 양성</strong>으로도 대상 가능</li>
+        <li>순수 낭종: FNA 비진단적 결과에서도 에탄올절제술 시행 가능</li>
+      </ul>
+      <table style="margin-top:8px">
+        <thead><tr><th>치료법</th><th>대상 결절</th><th>주요 근거</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>고주파/레이저절제술</strong></td><td>압박·미용 문제 있는 <strong>고형·고형우세 양성 결절</strong></td><td>수술 대비 증상완화 효과 동등, 갑상선기능저하 없음, 미용 우수. 체계적 문헌고찰 다수</td></tr>
+          <tr><td><strong>에탄올절제술</strong></td><td>재발하는 <strong>양성 낭성결절</strong></td><td>1차 치료로 권고. 고형결절에는 효과 낮고 누출 위험</td></tr>
+          <tr><td><strong>방사성요오드</strong></td><td>현성 <strong>자율기능성 갑상선결절</strong></td><td>2–3년 내 60–70% 기능 정상화. 장기적 갑상선기능저하 4–75%</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px"><strong>비수술적절제 치료 제외 기준(신규 명시):</strong></p>
+      <ul>
+        <li>K-TIRADS 5 결절 또는 초음파·임상 소견에서 암·여포종양 의심</li>
+        <li>병리진단검사에서 Bethesda IV·V·VI(반복 양성이더라도 제외)</li>
+        <li>흉골뒤갑상선종(종격동 위치로 초음파 평가 어려움)</li>
+        <li>결절 크기 ≥6–7 cm(비용 대비 효율 저하)</li>
+        <li>갑상선 양엽 결절의 경우 크기 <strong>최소 2 cm 초과</strong> + 증상·미용 문제 있는 경우에만 대상</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: 5.D–I (권고수준 1–3) / 2017·2020·2022 한국·국제 고주파절제술 가이드라인 반영</div>
+    </div>
+  </div>
+
+  <div class="section-title"><span class="sec-badge">구성</span> 권고안 구성</div>
+  <table class="kta-table">
+    <thead><tr><th>섹션</th><th>주요 내용</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill pill-teal">1</span></td><td>갑상선암 <strong>고위험군</strong>과 선별검사의 역할 (가족성·유전성·방사선 노출)</td></tr>
+      <tr><td><span class="pill pill-blue">2</span></td><td><strong>초기 검사</strong> — 혈액검사(TSH, Tg, 칼시토닌), 갑상선 초음파(K-TIRADS), PET/CT</td></tr>
+      <tr><td><span class="pill pill-yellow">3</span></td><td><strong>병리진단검사</strong> — FNA·CNB 방법, Bethesda 범주별 처치, 분자표지자</td></tr>
+      <tr><td><span class="pill pill-green">4</span></td><td><strong>장기 추적관찰</strong> — 양성 결절, FNA 미시행 결절의 K-TIRADS별 추적 간격</td></tr>
+      <tr><td><span class="pill pill-red">5</span></td><td>갑상선 <strong>양성 결절 치료</strong> — 고주파절제술, 에탄올절제술, 방사성요오드, 수술</td></tr>
+      <tr><td><span class="pill pill-teal">6</span></td><td><strong>임신부</strong>의 갑상선결절 처치 및 수술 시기</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ TAB: 1. 고위험군 선별 ══ -->
+<div id="tab-screening" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 1</span> 갑상선암 고위험군과 선별검사</div>
+  <div class="alert alert-info">ℹ️ 갑상선암 선별검사 기준: 갑상선암의 고위험군(가족력·방사선 노출·유전성 종양증후군)에서 초음파 선별 고려. 그러나 대부분 고위험군에서 조기 진단이 재발·사망 감소에 미치는 근거 아직 불충분.</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>👨‍👩‍👧 1.A–D. 가족력·동반질환별 선별검사 권고</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl4">4</span><span class="rec-code">1.A</span></div>
+          <div class="rec-text"><strong>직계 가족 중 갑상선분화암 ≥3명</strong> — 선별검사로 조기 진단은 가능하나 이환율·사망률 감소 증거 없음 → <strong>일률적 초음파 권고 안 함</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">1.B</span></div>
+          <div class="rec-text"><strong>가족성 갑상선암·유전성 종양증후군</strong> 환자의 가족 → <strong>유전상담</strong> 후 유전자변이 유무에 따라 선별검사 및 치료</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl4">4</span><span class="rec-code">1.C</span></div>
+          <div class="rec-text"><strong>그레이브스병, 하시모토갑상선염, 부갑상선기능항진증</strong> 환자 → 갑상선암 선별 목적 초음파 <strong>일률적으로 권고 안 함</strong>
+            <div class="rec-note">💡 그레이브스병에서 갑상선결절 동반 시 암 위험 4–5배↑, 예후는 불량하지 않음. 하시모토갑상선염: 암 위험 1.5–1.8배↑이나 예후 오히려 양호.</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">1.D</span></div>
+          <div class="rec-text">1.A–C 해당 환자 — <strong>신체검진 후 갑상선결절·비대칭 갑상선종대·림프절 종대 의심 시</strong> 초음파 고려</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>☢️ 소아 방사선 치료 과거력</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: calc(12px * var(--fscale, 1));color:var(--text);margin-bottom:8px">경부 방사선 조사력은 갑상선암 발생의 위험 인자. 방사선량(Gy)에 따른 갑상선암 상대위험도: 10–30 Gy 구간에서 최대(RR 15.2), &gt;40 Gy에서 감소(RR 5.1).</p>
+      <div class="alert alert-warn">⚠️ 2018 Childhood Cancer Guideline Harmonization Group 권고: 갑상선부위 방사선치료 또는 ¹³¹I-MIBG 치료병력 소아암 생존자 → <strong>5년 후 갑상선암 선별검사 권고</strong>. 1–2년 간격 촉진 또는 3–5년 간격 초음파.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧬 유전성 종양증후군과 갑상선암</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>증후군</th><th>유전자</th><th>갑상선암 연관</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PTEN 과오종 증후군 (Cowden)</strong></td><td>PTEN (10q23)</td><td>여포암 또는 유두암, 다수 여포성 결절 배경</td></tr>
+          <tr><td><strong>FAP / APC 연관 용종증</strong></td><td>APC (5q21–22)</td><td>체모양-오디모양갑상선암(CMTC); 97%에서 FAP 연관</td></tr>
+          <tr><td><strong>Carney complex</strong></td><td>PRKAR1A (17q24.2)</td><td>갑상선결절·암 발생 가능</td></tr>
+          <tr><td><strong>Werner 증후군</strong></td><td>WRN (8p12)</td><td>역형성암·여포암 위험 증가</td></tr>
+          <tr><td><strong>DICER1 증후군</strong></td><td>DICER1 (14q32.13)</td><td>다결절성 갑상선종, 갑상선암 위험</td></tr>
+          <tr><td><strong>MEN2</strong></td><td>RET (10q11.2)</td><td>갑상선수질암(유전자변이 위험도에 따라 예방적 갑상선절제)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 2. 초기 검사 ══ -->
+<div id="tab-workup" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 2</span> 임상적·우연히 발견된 갑상선결절 초기 검사</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧪 2.1. 혈액검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">2.1.A</span></div>
+          <div class="rec-text"><strong>갑상선기능검사(TSH 포함)</strong> — 초기 검사에 포함. TSH 정상보다 낮으면 <strong>갑상선스캔</strong> 시행 (자율기능성 결절 감별)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">2.1.B</span></div>
+          <div class="rec-text">모든 갑상선결절에 대해 <strong>일률적인 혈청 Tg 측정 권고 안 함</strong> (민감도·특이도 낮음)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">2.1.C</span></div>
+          <div class="rec-text">갑상선결절 <strong>수술 또는 비수술적절제 치료 전</strong> 혈청 <strong>칼시토닌</strong> 측정 고려
+            <div class="rec-note">💡 칼시토닌 &gt;100 pg/mL: 거의 모든 환자에서 수질암. 10–20 pg/mL: 수질암 5%. 남성 &gt;15 pg/mL, 여성 &gt;7.9 pg/mL 시 민감도 95–96%.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔊 2.2. 갑상선 초음파 — K-TIRADS 2021</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">2.2.A</span></div>
+          <div class="rec-text">갑상선결절 존재·의심 모든 환자 — <strong>경부 림프절 평가 포함 갑상선 초음파</strong> 권고</div>
+        </li>
+      </ul>
+      <div class="sub-section">2021 K-TIRADS 갑상선결절 암 위험도 분류 및 FNA 기준 (Table 2.2.A)</div>
+      <table class="kta-table">
+        <thead><tr><th>범주</th><th>초음파 유형</th><th>암 위험도</th><th>FNA/CNB 기준</th></tr></thead>
+        <tbody>
+          <tr class="danger-row"><td><strong>K-TIRADS 5</strong><br>높은의심</td><td>암 의심 초음파 소견 있는 <strong>저에코 고형결절</strong></td><td>&gt;60%</td><td><strong>&gt;1 cm</strong><br><span style="font-size: calc(10px * var(--fscale, 1));color:#57606a">0.5–1 cm: 병리진단 고려 가능</span></td></tr>
+          <tr class="warn-row"><td><strong>K-TIRADS 4</strong><br>중간의심</td><td>①암 의심 소견 없는 저에코 고형 ②암 의심 소견 있는 부분낭성·등/고에코 ③완전 석회화</td><td>10–40%</td><td><strong>&gt;1–1.5 cm</strong><br><span style="font-size: calc(10px * var(--fscale, 1));color:#57606a">임상소견·크기·환자 특성 고려</span></td></tr>
+          <tr><td><strong>K-TIRADS 3</strong><br>낮은의심</td><td>암 의심 소견 없는 부분낭성·등/고에코 결절</td><td>3–10%</td><td><strong>&gt;2 cm</strong></td></tr>
+          <tr class="hl-row"><td><strong>K-TIRADS 2</strong><br>양성</td><td>해면모양 결절 / 혜성꼬리 인공음영 있는 부분낭성 / 순수 낭종</td><td>&lt;3%</td><td>해당 없음<br><span style="font-size: calc(10px * var(--fscale, 1));color:#57606a">치료 계획 시 생검 가능</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">⚠️ 경부 LN전이 의심·명백한 ETE·원격전이 확인·수질암 의심 등 불량 예후인자 → <strong>결절 크기 무관하게 병리진단검사 시행</strong></div>
+      <div class="sub-section">주요 악성 의심 초음파 소견</div>
+      <p style="font-size: calc(12px * var(--fscale, 1));line-height:1.7;color:var(--text)">
+        <span class="pill pill-red">미세석회화·점상 고에코</span>&nbsp;
+        <span class="pill pill-red">비평행 방향(앞뒤로 긴 모양)</span>&nbsp;
+        <span class="pill pill-red">침상/소엽성 불규칙 경계</span>&nbsp;
+        <span class="pill pill-yellow">저에코</span>&nbsp;
+        <span class="pill pill-yellow">고형 성분</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔵 2.3. ¹⁸F-FDG PET/CT</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">2.3.A</span></div>
+          <div class="rec-text">PET/CT에서 우연히 발견된 <strong>갑상선내 국소 섭취(focal uptake)</strong> → 갑상선암 가능성 높으므로 초음파 소견 고려하여 <strong>병리진단검사 시행</strong>
+            <div class="rec-note">💡 국소 섭취 결절의 암 위험도: K-TIRADS 3 10.2%, K-TIRADS 4 52.1%, K-TIRADS 5 93.5%. 미만 섭취(diffuse uptake)+만성 림프구성 갑상선염 합당 시 추가검사 불필요.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 3. 병리진단검사 ══ -->
+<div id="tab-biopsy" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 3</span> 병리진단검사(FNA·CNB)와 분자표지자검사</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔬 3.1. FNA·CNB 방법 및 Bethesda 범주</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.1.A</span></div><div class="rec-text"><strong>FNA</strong> — 갑상선결절 병리 진단에 가장 좋은 검사</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.1.B</span></div><div class="rec-text">FNA 결과 — <strong>2023년 Bethesda system(3판)</strong> 진단 범주에 따라 보고</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">3.1.C</span></div><div class="rec-text">CNB 결과 — <strong>대한갑상선학회 병리진단 권고안</strong>(6개 범주) 에 따라 보고. FNA의 보완적 수단, 숙련된 외과의 선택적 시행</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.1.D</span></div><div class="rec-text">암 위험도 평가 보조 — 임상위험인자·초음파·환자 선호도 고려하여 <strong>분자표지자검사</strong> 시행 가능</div></li>
+      </ul>
+      <div class="sub-section">2023 Bethesda system 범주별 암 위험도 (Table 3.1.A)</div>
+      <table class="kta-table">
+        <thead><tr><th>범주</th><th>진단명</th><th>성인 암 위험도</th><th>소아 암 위험도</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>비진단적 (nondiagnostic)</td><td>13% (5–20)</td><td>14% (0–33)</td></tr>
+          <tr class="hl-row"><td>II</td><td>양성 (benign)</td><td>4% (2–7)</td><td>6% (0–27)</td></tr>
+          <tr class="warn-row"><td>III</td><td>비정형 (AUS)</td><td>22% (13–30)</td><td>28% (11–54)</td></tr>
+          <tr class="warn-row"><td>IV</td><td>여포종양 (follicular neoplasm)</td><td>30% (23–34)</td><td>50% (28–100)</td></tr>
+          <tr class="danger-row"><td>V</td><td>악성의심 (suspicious for malignancy)</td><td>74% (67–83)</td><td>81% (40–100)</td></tr>
+          <tr class="danger-row"><td>VI</td><td>악성 (malignant)</td><td>97% (97–100)</td><td>98% (86–100)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📋 3.2–3.7. 범주별 처치 권고</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">I. 비진단적 (Bethesda I) <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.2.A</span></div><div class="rec-text">초기 FNA 비진단적 → <strong>초음파유도하 FNA 재시행</strong></div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.2.B</span></div><div class="rec-text">반복적 비진단적 낭성 결절(높은의심 소견 없음) → <strong>주의 깊은 추적관찰</strong> 또는 수술 필요 가능</div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.2.C</span></div><div class="rec-text">반복 비진단적 + 악성 강의심·20% 이상 크기 증가·임상적 암 위험 → <strong>수술적 절제 고려</strong></div></li>
+          </ul>
+          <div class="rec-note">💡 FNA 비진단 반복률 28–40%. CNB로 대체 시 1.1–3.8%로 감소. 낭성 부분 &gt;50% 시 재검에서도 비진단 가능성 높음.</div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">II. 양성 (Bethesda II) <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.3.A</span></div><div class="rec-text">양성 결절 → <strong>즉각적인 추가 검사나 치료 불필요</strong></div></li>
+          </ul>
+          <div class="rec-note">💡 FNA 양성의 암 위험도(위음성률) 0–3%. 높은의심 초음파 소견 결절에서 위음성률 상대적으로 높음(3.1–18.2%) → 추적검사에서 크기 감소 없으면 반복 병리진단 권고.</div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">III. 비정형 AUS (Bethesda III) <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.4.A</span></div><div class="rec-text">임상위험인자·초음파·환자 선호도 고려 → 초음파 추적 또는 <strong>반복 FNA, CNB, 분자표지자검사</strong></div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">3.4.B</span></div><div class="rec-text">반복 병리진단검사에서도 결론 불가·분자표지자 미시행 → 임상위험인자·크기·초음파·환자 선호도에 따라 <strong>추적 또는 수술</strong></div></li>
+          </ul>
+          <div class="rec-note">💡 BRAF V600E 단독 검사: 아시아에서 AUS의 암 위험도 33.4–56.5% → 71.1–87.9%로 상승. 차세대염기서열 유전자패널: 민감도 74–94%, 특이도 68–85%.</div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">IV. 여포종양 (Bethesda IV) <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">3.5.A</span></div><div class="rec-text"><strong>수술 우선 고려</strong>. 크기 ≥2 cm일수록 암 위험도 증가 (암 위험도: ≥2 cm 1.63배, ≥3 cm 2.39배, ≥4 cm 2.29배)</div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.5.B</span></div><div class="rec-text">임상·초음파 소견 고려 → 추적관찰 또는 분자표지자검사 진행 가능</div></li>
+          </ul>
+          <div class="rec-note">💡 여포종양의 악성 상당수가 FTC 또는 NIFTP → 수술적 절제로만 정확한 진단 가능. 여포종양의 62–70%에서 불필요한 수술 발생.</div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">V. 악성의심 (Bethesda V) <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">3.6.A</span></div><div class="rec-text">악성으로 진단된 경우와 유사하게 임상위험인자·초음파·환자 선호도 고려하여 <strong>수술적 절제</strong></div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.6.B</span></div><div class="rec-text">유전자변이검사 결과에 따라 수술 의사결정이 바뀔 수 있는 경우 → <strong>분자표지자검사 고려</strong></div></li>
+          </ul>
+          <div class="rec-note">💡 BRAF V600E + TERT 프로모터 동반 시: BRAF 단독에 비해 TMN 병기 4.2배↑, 원격전이 11.7배↑, 재발률 4.3배↑, 사망률 15배↑ → 적극적 수술 치료 고려.</div>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">VI. 악성 (Bethesda VI) + 저위험군 적극적 관찰 <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">▾</span></div>
+        <div class="acc-body">
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.7.A</span></div><div class="rec-text">악성 결절 → 일반적으로 <strong>수술 권고</strong></div></li>
+            <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">3.7.B</span></div><div class="rec-text"><strong>저위험군 미세갑상선유두암</strong>(≤1 cm) 성인 환자 → <strong>적극적 관찰(active surveillance) 고려 가능</strong></div></li>
+          </ul>
+          <div class="sub-section">적극적 관찰 수술 우선 적응증</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>임상적 림프절전이 또는 원격전이 의심</li>
+            <li>종양의 육안적 ETE·기관·되돌이후두신경 침범 의심</li>
+            <li>갑상선유두암의 공격적 조직아형(긴세포·원주세포·hobnail)</li>
+          </ul>
+          <div class="sub-section">적극적 관찰 가능 조건</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>매우 낮은 위험도 종양(전이·육안적 ETE 없음, 공격적 아형 아님)</li>
+            <li>동반 질환으로 수술 위험도 높은 경우</li>
+            <li>남은 여생이 짧을 것으로 예상되는 경우</li>
+          </ul>
+          <div class="alert alert-info" style="margin-top:8px">ℹ️ 질병 진행 정의: 종양 최대 길이 <strong>3 mm 이상 증가</strong> 또는 새로운 경부 LN전이 발생. 일본 Kuma Hospital 30년 추적: 10년 크기증가 4.7%, LN전이 1.0%.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧬 3.8. 미결정 결절에서 분자표지자검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.8.A</span></div><div class="rec-text">분자표지자검사 — 임상위험인자·세포검사·초음파 기반 암 위험도와 실행 가능성·환자 선호도 고려하여 시행</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.8.B</span></div><div class="rec-text">미결정 갑상선결절 평가 위해 <strong>일률적 ¹⁸F-FDG PET/CT 권고 안 함</strong></div></li>
+      </ul>
+      <div class="sub-section">주요 분자표지자 특성</div>
+      <table class="kta-table">
+        <thead><tr><th>표지자</th><th>특성</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BRAF V600E</strong></td><td>유두암 특이도 높음. 아시아에서 단독 검사로도 유용. 빈도: 유두암 ~60%</td></tr>
+          <tr><td><strong>RAS 돌연변이</strong></td><td>NIFTP·양성 종양에서도 검출. 악성 양성예측도 약 66%</td></tr>
+          <tr><td><strong>TERT 프로모터</strong></td><td>예후 예측 표지자. BRAF/RAS 동반 시 더 나쁜 경과. 특이도 높으나 민감도 낮음</td></tr>
+          <tr><td><strong>차세대염기서열 패널</strong></td><td>다수 유전자변이 동시 분석. 민감도 74–94%, 특이도 68–85%, NPV 92–97%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🫘 3.9. 다결절성 갑상선종</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.9.A</span></div><div class="rec-text">크기 &gt;1 cm 결절 ≥2개 — 단일 결절 환자와 동일하게 평가. 결절마다 독립적 악성 위험 → 초음파 소견 기반 <strong>1개 이상에서 FNA 고려</strong></div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">3.9.B</span></div><div class="rec-text">다수의 &gt;1 cm 결절 — <strong>악성 가능성이 가장 높은 결절</strong>에서 우선 FNA</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.9.C</span></div><div class="rec-text">악성 의심 소견 없고 정상조직 없이 유사한 융합성 결절 다수 — 악성 가능성 낮음 → 가장 큰 결절(&gt;2 cm)에서 FNA 또는 FNA 없이 관찰</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">3.9.D</span></div><div class="rec-text">혈청 TSH 낮은 경우 → <strong>갑상선스캔</strong> 시행 (자율기능성 결절 여부 확인)</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 4. 장기 추적 ══ -->
+<div id="tab-followup" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 4</span> 갑상선결절의 장기 추적관찰</div>
+  <div class="alert alert-info">ℹ️ 결절 크기 증가 정의: 적어도 두 방향에서 2 mm 이상이면서 <strong>직경 20% 이상 증가</strong> 또는 <strong>용적 50% 이상 증가</strong>.</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>✅ 4.1. 병리진단검사 결과 양성 결절 추적</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>초음파 범주</th><th>추적 방법</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="danger-row"><td><strong>K-TIRADS 5</strong><br>높은의심</td><td>6–12개월 이내 초음파. 크기 감소 없으면 <strong>FNA 반복</strong><br><span style="font-size: calc(10px * var(--fscale, 1));color:#57606a">단, ≤1 cm는 반복 FNA 없이 초음파 추적 고려 가능</span></td><td><span class="rl rl1">1</span></td></tr>
+          <tr class="warn-row"><td><strong>K-TIRADS 3–4</strong><br>낮은/중간의심</td><td>12–24개월 시점 초음파. 크기 증가 또는 새 의심소견 → FNA 또는 지속 관찰</td><td><span class="rl rl3">3</span></td></tr>
+          <tr class="hl-row"><td><strong>K-TIRADS 2</strong><br>양성</td><td>지속적 크기 증가로 치료 목적 FNA 후 양성 → <strong>악성 위험 추적 불필요</strong></td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td>반복 FNA 양성</td><td>악성의심 소견 변화 없으면 <strong>추적 FNA 불필요</strong></td><td><span class="rl rl1">1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🕐 4.2. FNA 미시행 결절 추적 (K-TIRADS별 간격)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>K-TIRADS</th><th>초음파 추적 간격</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="danger-row"><td><strong>5 (높은의심)</strong></td><td>초기 1–2년: <strong>6–12개월</strong> 간격. 크기 증가 없으면 이후 <strong>1년</strong> 간격</td><td><span class="rl rl2">2</span></td></tr>
+          <tr class="warn-row"><td><strong>3–4 (낮은/중간의심)</strong></td><td><strong>1–2년 이상</strong> 간격. 단, ≤1 cm 낮은의심은 <strong>2–5년 후</strong> 고려</td><td><span class="rl rl3">3</span></td></tr>
+          <tr class="hl-row"><td><strong>2 (양성)</strong></td><td>악성 위험 추적 불필요. 결절 크기·임상 소견에 따라 <strong>2–5년 후</strong> 고려</td><td><span class="rl rl3">3</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-teal" style="margin-top:8px">📌 5년 추적 다기관 연구(1567개): 89% 크기 변화 없거나 감소. 암 진단 0.3%(5개). 높은의심·중간의심에서 첫 FNA 양성이었으나 두 번째 FNA에서 악성 확인.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 5. 양성결절 치료 ══ -->
+<div id="tab-treatment" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 5</span> 갑상선 양성 결절의 치료</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🚫 갑상선호르몬 억제치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">5.A</span></div><div class="rec-text"><strong>일률적인 갑상선호르몬 억제 치료 권고 안 함</strong> — 억제요법의 잠재적 위해(부정맥·골다공증)가 이득 상회</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">5.B</span></div><div class="rec-text">크기 증가하나 반복 세포검사 양성 → 크기 약간 증가하는 대부분의 무증상 결절은 <strong>치료 없이 추적관찰</strong></div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl4">4</span><span class="rec-code">5.C</span></div><div class="rec-text">크기 증가하는 양성 결절에서 갑상선호르몬 억제치료 효과에 대한 자료 없음</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>⚡ 비수술적절제 치료 적응증 및 방법</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">📋 비수술적절제 치료 대상: <strong>FNA 또는 CNB에서 2회 이상 양성</strong>인 결절 중 ①압박증상 ②미용적 문제 ③자율기능성 갑상선결절</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">5.D</span></div><div class="rec-text">압박증상·미용 문제·자율기능성 결절 → <strong>수술·방사성요오드·비수술적절제</strong>(에탄올절제술·고주파절제술·레이저절제술) 고려</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">5.E</span></div><div class="rec-text">크기 증가하는 &gt;4 cm 결절 — 압박증상 심하거나 악성 임상 우려 시 <strong>수술 고려</strong></div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">5.F</span></div><div class="rec-text">압박증상·미용 문제 있는 정상 기능의 양성 고형 갑상선결절 → <strong>비수술적절제 치료 또는 수술</strong> 고려</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">5.G</span></div><div class="rec-text">양성 <strong>고형결절</strong> 비수술적절제 치료 → <strong>고주파절제술 또는 레이저절제술</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">5.H</span></div><div class="rec-text">재발하는 양성 <strong>낭성결절</strong> 압박/미용 문제 → <strong>에탄올절제술</strong> 일차적 치료법</div></li>
+        <li class="rec-item"><div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">5.I</span></div><div class="rec-text">현성의 <strong>자율기능성 갑상선결절</strong> → <strong>방사성요오드 치료 또는 수술</strong> 일차적으로 고려</div></li>
+      </ul>
+      <div class="sub-section">치료법 비교</div>
+      <table class="kta-table">
+        <thead><tr><th>치료법</th><th>주요 적응</th><th>장점</th><th>단점</th></tr></thead>
+        <tbody>
+          <tr><td><strong>고주파/레이저절제술</strong></td><td>압박·미용 문제 있는 고형·고형우세 양성 결절</td><td>갑상선기능저하 없음, 반복 가능, 삶의 질 우수</td><td>크기 감소 시간 오래 걸림, 큰 결절 시 2회 이상 필요</td></tr>
+          <tr><td><strong>에탄올절제술</strong></td><td>재발 양성 낭성결절</td><td>효과적, 간편, 일차적</td><td>고형결절에는 효과 낮음, 누출 시 통증·신경 손상</td></tr>
+          <tr><td><strong>방사성요오드</strong></td><td>현성 자율기능성 갑상선결절</td><td>비침습적</td><td>장기적 갑상선기능저하 4–75%, 임신·수유 금기</td></tr>
+          <tr><td><strong>수술</strong></td><td>&gt;4 cm·악성 우려·비수술 치료 거부</td><td>악성 여부 확인 가능</td><td>전신마취·입원·합병증(부갑상선기능저하, 신경 마비)</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">⚠️ <strong>비수술적절제 치료 제외 대상</strong>: K-TIRADS 5 결절 / 초음파·임상 소견에서 암 또는 여포종양 의심 / 병리진단검사에서 Bethesda IV·V·VI / 흉골뒤갑상선종 / 크기 ≥6–7 cm (비용 대비 효율 저하)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: 6. 임신부 ══ -->
+<div id="tab-pregnancy" class="panel">
+  <div class="section-title"><span class="sec-badge">섹션 6</span> 임신부의 갑상선결절</div>
+  <div class="alert alert-warn">⚠️ 15–34세 여성에서 가장 많이 발생한 암이 갑상선암(국가암통계 2021, 10만 명당 80명). 임신 중 갑상선결절은 비임신부와 동일하게 초음파 기반 암 위험도 평가. 갑상선스캔만 금기.</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🤰 6.A–B. 임신부 갑상선결절 처치 권고</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">6.A</span></div>
+          <div class="rec-text">임신부에서 갑상선결절 발견 → <strong>비임신부와 마찬가지로 초음파 소견 기반 FNA 고려</strong>. 임신 초기 이후에도 TSH 지속 낮으면 갑상선스캔이 가능해지는 <strong>출산 이후</strong>로 병리진단 미룰 수 있음</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">6.B</span></div>
+          <div class="rec-text"><strong>임신 초기 진단 갑상선암</strong> — 초음파 추적관찰 필요
+            <ul style="padding-left:14px;margin-top:6px;line-height:1.9;font-size: calc(12px * var(--fscale, 1))">
+              <li>임신 <strong>24주까지 진행(크기증가 20% 이상 또는 용적 50% 이상 or 경부 LN전이)</strong> → 수술 고려</li>
+              <li>임신 중기까지 크기 변화 없거나 임신 후기 처음 진단 → <strong>분만 후 수술</strong> 가능</li>
+              <li><strong>진행된 갑상선암</strong> → 임신 중기에 수술 시행이 바람직</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">ℹ️ 임신 중 수술 vs 분만 후 수술: 재발률·생존율 차이 없음. 갑상선암 진단 후 1년 이내 치료 지연도 예후에 악영향 없음. 임신 24주 전 수술 시 임신 중기(14–26주)가 유산 위험 최소.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const abbrs = [
+  {t:'FNA',d:'세침흡인검사 (Fine Needle Aspiration)'},
+  {t:'CNB',d:'중심바늘생검 (Core Needle Biopsy)'},
+  {t:'K-TIRADS',d:'한국 갑상선 영상 보고 체계 (Korean Thyroid Imaging Reporting and Data System, 2021)'},
+  {t:'AUS',d:'비정형 (Atypia of Undetermined Significance) — Bethesda 범주 III'},
+  {t:'NIFTP',d:'유두암유사핵모양비침습여포종양 (Non-Invasive Follicular Thyroid Neoplasm with Papillary-like nuclear features)'},
+  {t:'TSH',d:'갑상선자극호르몬 (Thyroid Stimulating Hormone)'},
+  {t:'Tg',d:'갑상선글로불린 (Thyroglobulin)'},
+  {t:'TgAb',d:'갑상선글로불린항체 (Anti-Thyroglobulin Antibody)'},
+  {t:'BRAF',d:'BRAF V600E 돌연변이 — 갑상선유두암의 약 60%, 공격성 예측 인자'},
+  {t:'TERT',d:'텔로머라제역전사효소 프로모터 돌연변이 — 예후 불량 표지자'},
+  {t:'RAS',d:'RAS 돌연변이 (NRAS/HRAS/KRAS) — 여포암·NIFTP 연관, 악성 PPV 약 66%'},
+  {t:'FTC',d:'갑상선여포암 (Follicular Thyroid Carcinoma)'},
+  {t:'PTC',d:'갑상선유두암 (Papillary Thyroid Carcinoma)'},
+  {t:'PTMC',d:'갑상선유두미세암 (Papillary Thyroid Microcarcinoma, ≤1 cm)'},
+  {t:'ETE',d:'갑상선외부침범 (Extrathyroidal Extension)'},
+  {t:'KTA',d:'대한갑상선학회 (Korean Thyroid Association)'},
+  {t:'PET/CT',d:'양전자방출단층촬영 (Positron Emission Tomography/CT)'},
+  {t:'FAP',d:'가족성 선종성 용종증 (Familial Adenomatous Polyposis) — CMTC 연관'},
+  {t:'CMTC',d:'갑상선체모양-오디모양암 (Cribriform Morular Thyroid Carcinoma) — 97% FAP 연관'},
+  {t:'PTEN',d:'PTEN 과오종 종양 증후군 (PTEN Hamartoma Tumor Syndrome/Cowden syndrome)'},
+  {t:'MEN2',d:'다발성내분비종양증후군 2형 (Multiple Endocrine Neoplasia Type 2) — RET 유전자, 수질암'},
+  {t:'RFA',d:'고주파절제술 (Radiofrequency Ablation)'},
+  {t:'NPV',d:'음성예측도 (Negative Predictive Value)'},
+  {t:'PPV',d:'양성예측도 (Positive Predictive Value)'},
+];
+
+function toggleChg(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.getElementById('abbr-dd').style.display = 'none';
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const icon = hdr.querySelector('span:last-child');
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  if(icon) icon.textContent = isOpen ? '▾' : '▴';
+}
+
+function filterAbbr(val) {
+  const dd = document.getElementById('abbr-dd');
+  const grid = document.getElementById('abbr-grid');
+  const cnt = document.getElementById('abbr-cnt');
+  const q = val.trim().toLowerCase();
+  const filtered = q === '' ? abbrs : abbrs.filter(a => a.t.toLowerCase().includes(q) || a.d.toLowerCase().includes(q));
+  grid.innerHTML = filtered.map(a =>
+    `<div class="abbr-item"><span class="abbr-term">${a.t}</span><span class="abbr-def">${a.d}</span></div>`
+  ).join('');
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  dd.style.top = (rect.bottom + 4) + 'px';
+  dd.style.right = '8px';
+  dd.style.left = 'auto';
+  cnt.textContent = filtered.length || '';
+  dd.style.display = 'block';
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const dd = document.getElementById('abbr-dd');
+  if(inp && !inp.contains(e.target) && dd && !dd.contains(e.target)) dd.style.display = 'none';
+});
+
+document.querySelectorAll('.card-header').forEach(hdr => {
+  if(!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+});
+</script>
+</body>
+</html>

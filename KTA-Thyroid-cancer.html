@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTA 2024 갑상선분화암 진료권고안</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0a7c8a;
+    --accent2: #065a64;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --blue: #0550ae;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--accent); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 18px; font-weight: 700; color: var(--text); text-align: center; }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center; background: var(--surface);
+    border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none;
+    position: sticky; top: 65px; z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; gap: 1px; }
+  .tab { padding: 8px 11px; font-size: calc(11.5px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 8px; margin-left: auto; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2 { grid-template-columns: 1fr; } .tab { padding: 7px 8px; font-size: calc(11px * var(--fscale, 1)); } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* 권고수준 배지 */
+  .rl { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: calc(11px * var(--fscale, 1)); font-weight: 800; flex-shrink: 0; }
+  .rl1 { background: #cf222e; color: #fff; }
+  .rl2 { background: #0550ae; color: #fff; }
+  .rl3 { background: #9a6700; color: #fff; }
+  .rl4 { background: #57606a; color: #fff; }
+  .rl-label { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .rl1-l { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .rl2-l { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .rl3-l { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .rl4-l { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+
+  /* 권고문 리스트 */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 9px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-meta { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; min-width: 28px; padding-top: 1px; }
+  .rec-code { font-size: calc(9.5px * var(--fscale, 1)); color: var(--text2); font-weight: 600; text-align: center; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.6; }
+  .rec-text strong { color: var(--accent2); }
+  .rec-note { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); margin-top: 4px; padding: 4px 8px; background: var(--surface2); border-left: 2px solid var(--border); border-radius: 0 4px 4px 0; line-height: 1.55; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid #0550ae; color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-teal { background: #eaf7fb; border-left: 3px solid var(--accent); color: var(--accent2); }
+
+  .kta-table { width: 100%; border-collapse: collapse; font-size: calc(11.5px * var(--fscale, 1)); }
+  .kta-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10.5px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .kta-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .kta-table tr:last-child td { border-bottom: none; }
+  .kta-table tr:hover td { background: rgba(0,0,0,.02); }
+  .kta-table .section-row td { background: var(--surface2); color: var(--accent); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .kta-table .hl-row td { background: #eaf7fb; }
+  .kta-table .warn-row td { background: #fff8c5; }
+  .kta-table .danger-row td { background: #ffebe9; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e1e4e8; }
+  .acc-hdr .acc-icon { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+
+  .section-title { font-size: calc(13px * var(--fscale, 1)); font-weight: 700; color: var(--text); margin: 14px 0 7px; padding-bottom: 5px; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 6px; }
+  .sec-badge { background: var(--accent); color: #fff; font-size: calc(9.5px * var(--fscale, 1)); font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; }
+  .pill-teal { background: #eaf7fb; color: var(--accent2); }
+  .pill-red { background: #ffebe9; color: #82071e; }
+  .pill-blue { background: #ddf4ff; color: #0550ae; }
+  .pill-yellow { background: #fff8c5; color: #7d4e00; }
+  .pill-green { background: #dafbe1; color: #116329; }
+
+  /* abbr */
+  #abbr-input { border: 1px solid var(--border); border-radius: 5px; padding: 4px 28px 4px 8px; font-size: calc(11px * var(--fscale, 1)); width: 120px; outline: none; }
+  #abbr-input:focus { border-color: var(--accent); }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 5px 10px; display: flex; flex-direction: column; gap: 1px; margin-bottom: 3px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(11px * var(--fscale, 1)); font-family: monospace; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+
+  .sub-section { margin: 10px 0 4px; font-size: calc(12px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); display: flex; align-items: center; gap: 6px; }
+  .sub-section::before { content: ''; display: inline-block; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">KTA · 대한갑상선학회 2024</span>
+      <h1>갑상선분화암 진료권고안 2024</h1>
+    </div>
+    <div class="meta">Int J Thyroidol 2024;17(1):1-20 &nbsp;|&nbsp; KTA Guideline for Differentiated Thyroid Cancers 2024</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <a class="source-link" href="https://doi.org/10.11106/ijt.2024.17.1.1" target="_blank">🔗 원문 DOI</a>
+      <a class="source-link" href="https://www.thyroid.kr" target="_blank">🔗 대한갑상선학회</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">⚠️ 임상 보조 참고용. 최신 원문 확인 필요.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 대한갑상선학회 공식 승인 자료가 아닙니다.</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('part1a')">🔪 I. 수술</div>
+    <div class="tab" onclick="showTab('part1b')">⚗️ I. 방사성요오드</div>
+    <div class="tab" onclick="showTab('part1c')">🔬 I. 병기·위험군</div>
+    <div class="tab" onclick="showTab('part2')">📊 II. 추적</div>
+    <div class="tab" onclick="showTab('part3')">💊 III. 진행성</div>
+    <div class="tab" onclick="showTab('part4')">🤰 IV. 임신</div>
+    <div class="tab" onclick="showTab('part5')">👶 V. 소아</div>
+    <div class="tab-abbr-wrap">
+      <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+        onfocus="document.getElementById('abbr-dd').style.display='block';filterAbbr(this.value)" autocomplete="off">
+      <span id="abbr-cnt" style="position:absolute;right:9px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      <div id="abbr-dd" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:420px;max-height:340px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════ TAB: 개요 ══════════════ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">파트</div></div>
+    <div class="stat-box"><div class="stat-val">207p</div><div class="stat-lbl">전문</div></div>
+    <div class="stat-box"><div class="stat-val">2024</div><div class="stat-lbl">KTA 최신판</div></div>
+    <div class="stat-box"><div class="stat-val">4단계</div><div class="stat-lbl">권고수준</div></div>
+  </div>
+
+  <div class="alert alert-teal">ℹ️ 본 권고안은 <strong>성인 및 소아 갑상선분화암</strong>(DTC) 환자의 진단·치료·추적을 다루며 2024년 대한갑상선학회 공식 학술지에 발표됨. 갑상선결절 권고안(2024)과 별도 발간.</div>
+
+  <div class="section-title"><span class="sec-badge">권고수준</span> 권고수준 분류 체계 (Table 1)</div>
+  <table class="kta-table">
+    <thead><tr><th>수준</th><th>명칭</th><th>정의</th></tr></thead>
+    <tbody>
+      <tr><td><span class="rl rl1">1</span></td><td><strong>강력히 권고</strong></td><td>권고 행위를 했을 때 중요한 건강 이득/손실이 있다는 <strong>충분하고 객관적인 근거</strong>가 있는 경우</td></tr>
+      <tr><td><span class="rl rl2">2</span></td><td><strong>일반적으로 권고</strong></td><td>근거가 있으나 <strong>확실하지 않거나 간접적</strong>이어서 일률적 권고가 어려운 경우</td></tr>
+      <tr><td><span class="rl rl3">3</span></td><td><strong>전문가 합의</strong></td><td>임상 근거는 부족하나 <strong>환자 상황과 전문가 합의</strong>에 따른 권고</td></tr>
+      <tr><td><span class="rl rl4">4</span></td><td><strong>권고 보류</strong></td><td>근거가 없거나 이견이 많아 <strong>찬반을 표명하지 않음</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title" style="margin-top:14px"><span class="sec-badge">주요변경</span> 2024 개정 핵심 변경사항 10가지 <span style="font-size: calc(10px * var(--fscale, 1));font-weight:400;color:var(--text2);margin-left:4px">▸ 항목 클릭 시 상세 내용</span></div>
+
+  <style>
+    .chg-item{border:1px solid var(--border);border-radius:7px;margin-bottom:6px;overflow:hidden}
+    .chg-hdr{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;user-select:none;background:var(--surface);transition:background .15s}
+    .chg-hdr:hover{background:var(--surface2)}
+    .chg-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size: calc(12px * var(--fscale, 1));font-weight:800;flex-shrink:0}
+    .chg-title{font-size: calc(12.5px * var(--fscale, 1));font-weight:600;color:var(--text);flex:1}
+    .chg-icon{font-size: calc(13px * var(--fscale, 1));color:var(--text2);flex-shrink:0;transition:transform .2s}
+    .chg-hdr.open .chg-icon{transform:rotate(180deg)}
+    .chg-body{display:none;padding:0 14px 12px 50px;font-size: calc(12px * var(--fscale, 1));line-height:1.7;color:var(--text);border-top:1px solid var(--border);background:#fafbfc}
+    .chg-body p{margin-top:8px}
+    .chg-body ul{padding-left:16px;margin-top:6px}
+    .chg-body ul li{margin-bottom:4px}
+    .chg-body .cn{margin-top:8px;padding:7px 10px;background:#eaf7fb;border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:var(--accent2)}
+    .chg-body .cw{margin-top:8px;padding:7px 10px;background:#fff8c5;border-left:3px solid var(--yellow);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:#7d4e00}
+    .chg-body table{width:100%;border-collapse:collapse;margin-top:8px;font-size: calc(11px * var(--fscale, 1))}
+    .chg-body table th{background:var(--surface2);padding:5px 8px;font-size: calc(10.5px * var(--fscale, 1));text-align:left;border-bottom:1px solid var(--border);color:var(--text2)}
+    .chg-body table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+    .chg-body table tr:last-child td{border-bottom:none}
+  </style>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#cf222e;color:#fff">①</span>
+      <span class="chg-title">병리진단검사 및 임상 소견에 따른 <strong>수술범위 개별화</strong></span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>기존 권고안에서는 암 크기 위주로 수술범위를 결정했으나, 2024 개정안은 <strong>FNA/CNB 결과와 임상 소견을 통합하여 수술범위를 개별화</strong>하도록 하였다.</p>
+      <table>
+        <thead><tr><th>cT 병기</th><th>cN</th><th>권고 수술</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr style="background:#dafbe1"><td>cT1a (≤1 cm)</td><td>cN0, ETE 없음</td><td><strong>갑상선엽절제술</strong></td><td>1</td></tr>
+          <tr style="background:#dafbe1"><td>cT1b (1–2 cm)</td><td>cN0, ETE 없음</td><td><strong>엽절제술 우선</strong> (전절제 가능)</td><td>1</td></tr>
+          <tr><td>cT2 (2–4 cm)</td><td>cN0, ETE 없음</td><td>엽절제 또는 전절제 선택</td><td>2</td></tr>
+          <tr><td>cT3a (&gt;4 cm)</td><td>cN0, ETE 없음</td><td>일반적으로 <strong>전절제술</strong></td><td>2</td></tr>
+          <tr><td>cT3b</td><td>cN0, 띠근육 국한 ETE</td><td>전절제술 선택적</td><td>2</td></tr>
+          <tr style="background:#ffebe9"><td>cT4 / cN1 / M1</td><td>주요기관 침범·전이</td><td><strong>전절제 + 완전 육안절제</strong></td><td>2</td></tr>
+        </tbody>
+      </table>
+      <p><strong>핵심</strong>: 1–2 cm(cT1b) 종양에서 <strong>엽절제술이 우선</strong>으로 변경된 점이 가장 큰 개정 내용. 전절제술의 합병증(부갑상선기능저하증·반회후두신경손상) 위험을 줄이면서도 종양학적 결과는 동등함을 보인 근거들을 반영.</p>
+      <div class="cn">📌 관련 권고문: I.2.2.A–F / 갑상선완료절제술: I.2.5</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#0550ae;color:#fff">②</span>
+      <span class="chg-title">저위험군 미세갑상선유두암에서 <strong>적극적 관찰(Active Surveillance)</strong> 적용</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>일본·미국 등에서 축적된 대규모 전향 연구 결과를 반영하여, <strong>1 cm 이하의 저위험군 갑상선유두미세암(PTMC)</strong>에서 즉각 수술 대신 <strong>초음파 추적관찰(적극적 관찰)</strong>을 선택 가능하도록 하였다.</p>
+      <ul>
+        <li><strong>적합 조건</strong>: 갑상선 내 국한, ETE 없음, 임상적 LN전이 없음, 원격전이 없음, 공격적 아형 아님</li>
+        <li>일본 Kuma Hospital 연구(1,200명 이상, 10년 추적): 크기 진행 8%, LN전이 발생 3.8%, 원격전이 0% — 즉각 수술과 임상 결과 차이 없음</li>
+        <li>환자와 충분한 상담 후 <strong>공유 의사결정(shared decision-making)</strong>으로 결정</li>
+        <li>추적 주기: 초기 6개월 후 이상 없으면 1년 간격 경부 초음파</li>
+      </ul>
+      <div class="cw">⚠️ 관찰 중 크기 3 mm 이상 증가, 새로운 LN전이 발생, 환자 불안·선호도 변화 시 수술로 전환 고려</div>
+      <div class="cn">📌 관련 권고문: I.2.3.A (권고수준 2)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#0a7c8a;color:#fff">③</span>
+      <span class="chg-title"><strong>최소침습수술</strong>(내시경·로봇 갑상선수술) 적응증 명확화</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>경부 흉터를 원하지 않는 환자들의 요구와 기술적 발전을 반영하여 내시경/로봇 수술의 적응증을 구체화하였다.</p>
+      <ul>
+        <li><strong>적응증</strong>: 저위험군 갑상선분화암, 환자 선호도 있는 경우</li>
+        <li><strong>주요 접근법</strong>: 경액와(axillary), 경구(transoral TOETVA), 유방·전흉부 접근 등</li>
+        <li>국내 대형센터 연구들: 개복수술 대비 종양학적 결과 동등, 미용적 만족도 높음</li>
+        <li><strong>비적응증</strong>: 고위험군, 광범위 침범(T3b 이상), 재수술, 방사선 치료력, 갑상선전절제술 후 완료절제술</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: I.2.6.A (권고수준 2)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#6f42c1;color:#fff">④</span>
+      <span class="chg-title"><strong>2022 WHO 병리 진단 기준</strong> 도입 및 국문 용어 정의</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>2022년 개정된 WHO 갑상선종양 분류체계를 국내 권고안에 공식 반영하였다.</p>
+      <table>
+        <thead><tr><th>항목</th><th>기존(2017 WHO)</th><th>개정(2022 WHO)</th></tr></thead>
+        <tbody>
+          <tr><td>고등급 갑상선유두암</td><td>별도 분류 없음</td><td><strong>고등급갑상선분화암(HGDTC)</strong> 신설</td></tr>
+          <tr><td>NIFTP</td><td>비침습성 여포아형 갑상선유두암</td><td>유지, 침습 기준 세분화</td></tr>
+          <tr><td>혈관침습 개수</td><td>구분 없음</td><td><strong>4개 이상</strong> → 광범위침습형, 고위험군 분류</td></tr>
+          <tr><td>저분화암 기준</td><td>Turin 기준</td><td>유지, 고등급DTC와 별도 분류</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li>나쁜 예후 조직학적 아형 — <strong>긴세포(tall cell), 원주세포(columnar), hobnail 아형</strong> 병리보고서 명기 의무화</li>
+        <li>피막형성 여포아형: 최소침습형·피막형성혈관침습형·광범위침습형 구분 명기</li>
+        <li>가족성 증후군 연관 아형(FAP 연관 체모양-오디모양암, PTEN 연관) 병리보고서 명기</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: I.4.1.A, I.4.3.A–D (권고수준 1)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#bc4c00;color:#fff">⑤</span>
+      <span class="chg-title"><strong>초기위험군 분류 개정</strong> 및 개별 위험인자별 재발률 제시</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>저·중간·고위험군 3단계 틀을 유지하면서, <strong>개별 위험인자별 재발률 데이터</strong>를 추가하여 위험도 평가를 정밀화하였다.</p>
+      <table>
+        <thead><tr><th>위험인자</th><th>재발위험도 영향</th></tr></thead>
+        <tbody>
+          <tr><td>공격적 아형(긴세포·hobnail·원주세포 등)</td><td>중간위험군 이상으로 상향</td></tr>
+          <tr><td>미세 ETE(갑상선주위연조직)</td><td>중간위험군</td></tr>
+          <tr><td>육안적 ETE(띠근육, cT3b)</td><td>중간~고위험군</td></tr>
+          <tr><td>여포암 혈관침습 1–3개</td><td>중간위험군</td></tr>
+          <tr><td>여포암 혈관침습 ≥4개</td><td><strong>고위험군</strong></td></tr>
+          <tr><td>전이LN 크기 ≤3 cm</td><td>중간위험군</td></tr>
+          <tr><td>전이LN 크기 &gt;3 cm</td><td><strong>고위험군</strong></td></tr>
+          <tr><td>LN 림프절외부침범(ENE)</td><td>고위험군</td></tr>
+          <tr><td>전이LN 개수 다수, 전이LN 비율 높음</td><td>재발위험도 증가</td></tr>
+        </tbody>
+      </table>
+      <p>단독 인자보다 <strong>동반된 임상·병리 위험인자들을 종합적으로 고려</strong>하여 재발위험도를 평가하도록 강조하였다.</p>
+      <div class="cn">📌 관련 권고문: I.5.1.A–B, I.5.2.A (권고수준 3)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#1a7f37;color:#fff">⑥</span>
+      <span class="chg-title"><strong>분자표지자검사</strong>의 역할 추가 (수술 전·후 양 단계)</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>수술 전·후 양 단계에서 분자표지자검사의 역할을 신규 추가하였다.</p>
+      <ul>
+        <li><strong>수술 전(진단 보조)</strong>: Bethesda 3·4·5에서 수술 여부 결정 보조 → BRAF, RAS, RET, NTRK 융합 등 패널 검사 고려 (권고수준 2)</li>
+        <li><strong>수술 후(예후 예측)</strong>: BRAF<sup>V600E</sup>, RAS, TERT 프로모터 돌연변이 검사로 재발위험도 예측 (권고수준 2)</li>
+      </ul>
+      <table>
+        <thead><tr><th>표지자</th><th>빈도 / 의미</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BRAF V600E</strong></td><td>유두암의 약 60% 양성 — 공격성·재발위험 증가, MAPK 경로 활성화</td></tr>
+          <tr><td><strong>TERT 프로모터</strong></td><td>단독 또는 BRAF/RAS 동반 시 재발·사망위험 크게 증가, 특히 고령층</td></tr>
+          <tr><td><strong>RAS 돌연변이</strong></td><td>여포암·NIFTP 연관, 중간 공격성, BRAF 음성 유두암에서도 발생</td></tr>
+          <tr><td><strong>RET/PTC 융합</strong></td><td>유두암 20–30%, 방사선 노출 연관, 셀퍼카티닙 등 표적치료 가능</td></tr>
+          <tr><td><strong>NTRK 융합</strong></td><td>드물지만(약 2%) 라로트렉티닙·엔트렉티닙 표적치료 대상</td></tr>
+        </tbody>
+      </table>
+      <div class="cn">📌 관련 권고문: I.2.1.E (수술 전), I.5.4.A (수술 후), III.4.3.D (진행성, 권고수준 1)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#0550ae;color:#fff">⑦</span>
+      <span class="chg-title"><strong>지속적위험분류(ORS)</strong> 개정 및 TSH 목표농도 연동 세분화</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>초기 치료 후 질병 상태를 <strong>4가지 반응</strong>으로 재분류(ORS)하고, 수술 범위(엽절제/전절제)·RAI 시행 여부·초기위험군에 따른 TSH 목표농도를 세분화하여 제시하였다.</p>
+      <table>
+        <thead><tr><th>ORS 반응</th><th>정의</th><th>TSH 목표</th></tr></thead>
+        <tbody>
+          <tr style="background:#dafbe1"><td><strong>완전반응 (ER)</strong></td><td>임상·생화학·구조적 증거 없음 (관해)</td><td>0.5–2.0 mIU/L — TSH 억제 불필요</td></tr>
+          <tr><td><strong>생화학적 불완전반응 (BIR)</strong></td><td>구조적 병변 없이 Tg 수치 이상</td><td>초기위험군·Tg 추세 따라 개별화 (0.1–2.0)</td></tr>
+          <tr style="background:#ffebe9"><td><strong>구조적 불완전반응 (SIR)</strong></td><td>잔존 또는 새 국소·원격전이</td><td><strong>&lt; 0.1 mIU/L</strong> 유지</td></tr>
+          <tr style="background:#fff8c5"><td><strong>불명확반응 (IDR)</strong></td><td>양성/악성 구분 애매한 소견</td><td>초기위험군 따라 개별화</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li>수술 범위(엽절제/전절제)와 RAI 시행 여부에 따라 ORS 기준이 달라지므로, <strong>수술 범위별 ORS 기준표(Table II.1.A)</strong> 신규 제시</li>
+        <li>고위험군 전절제+RAI 후 BIR/IDR: 초기 5년간 TSH 0.1–0.5, 이후 완화</li>
+        <li>완전반응 달성 시 TSH 억제 중단 가능 — 장기 합병증(골다공증, 심방세동) 위험 감소</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: II.1.A–B, II.2.2–2.3 (권고수준 1–3)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#9a6700;color:#fff">⑧</span>
+      <span class="chg-title">수술 전후 <strong>부갑상선기능저하증</strong> 평가 및 치료 신규 추가</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>갑상선전절제술 후 부갑상선기능저하증은 가장 흔하고 중요한 합병증(일시적 20–30%, 영구적 1–3%). 2024 개정안에서 <strong>단계별 평가 및 치료 프로토콜</strong>을 신규 추가하였다.</p>
+      <table>
+        <thead><tr><th>단계</th><th>내용</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr><td><strong>수술 전</strong></td><td>혈청 Ca, PTH, 25(OH)D 검사 고려; 저칼슘·비타민D 결핍 시 수술 전 교정</td><td>2–3</td></tr>
+          <tr><td><strong>수술 후 24시간 내</strong></td><td>혈청 Ca·PTH 검사 — 급성 부갑상선기능저하증 확인</td><td>2</td></tr>
+          <tr><td><strong>급성기 치료</strong></td><td>PTH·Ca·저칼슘혈증 증상 따라 <strong>경구 Ca + 활성형비타민D(칼시트리올)</strong> 보충 결정</td><td>2</td></tr>
+          <tr><td><strong>영구적 치료</strong></td><td>비타민D, 경구 Ca — <strong>주기적 생화학검사</strong>로 치료 적절성 평가</td><td>1–2</td></tr>
+          <tr><td><strong>장기 합병증 평가</strong></td><td>신석증, 연조직 석회화, 백내장, 인지기능 저하 등 모니터링</td><td>3</td></tr>
+        </tbody>
+      </table>
+      <div class="cw">⚠️ 영구적 부갑상선기능저하증 환자의 임신 시 Ca/비타민D 요구량 증가 → 주기적 이온화 Ca 모니터링 필요 (Part IV 연계)</div>
+      <div class="cn">📌 관련 권고문: I.3.2.A–H (권고수준 1–3), IV.4.A (임신 시)</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#cf222e;color:#fff">⑨</span>
+      <span class="chg-title"><strong>전신항암요법 업데이트</strong> — 신규 표적치료제 확대</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>방사성요오드 불응성(RAIR) 진행성 갑상선분화암에 대한 <strong>신규 표적치료제들을 추가</strong>하고 치료 원칙을 구체화하였다. 전신항암치료 전 반드시 <strong>유전자검사</strong> 시행을 권고수준 1로 추가하였다.</p>
+      <table>
+        <thead><tr><th>약제</th><th>기전·표적</th><th>주요 근거</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr><td><strong>렌바티닙</strong></td><td>멀티키나제(VEGFR1–3, FGFR1–4, RET, KIT)</td><td>SELECT trial: PFS 18.3 vs 3.6개월</td><td>2</td></tr>
+          <tr><td><strong>소라페닙</strong></td><td>멀티키나제(VEGFR, BRAF, RET, PDGFR)</td><td>DECISION trial: PFS 10.8 vs 5.8개월</td><td>2</td></tr>
+          <tr><td><strong>카보잔티닙</strong></td><td>멀티키나제(VEGFR, MET, RET, AXL)</td><td>COSMIC-311: 렌바/소라페닙 이후 2차</td><td>2</td></tr>
+          <tr><td><strong>셀퍼카티닙</strong></td><td>선택적 RET 억제제</td><td>LIBRETTO-001: RET 융합 양성 ORR 79%</td><td>2</td></tr>
+          <tr><td><strong>프랄세티닙</strong></td><td>선택적 RET 억제제</td><td>ARROW trial: RET 융합 양성, 성인+청소년</td><td>2</td></tr>
+          <tr><td><strong>라로트렉티닙</strong></td><td>범-TRK(NTRK1/2/3) 억제제</td><td>ORR 75%, 성인+2세 이상 소아</td><td>2</td></tr>
+          <tr><td><strong>엔트렉티닙</strong></td><td>NTRK+ROS1+ALK 억제제</td><td>NTRK 융합 양성, 성인+12세 이상</td><td>2</td></tr>
+          <tr><td><strong>다브라페닙+트라메티닙</strong></td><td>BRAF V600E + MEK 이중억제</td><td>BRAF V600E 양성 DTC 2차 이상</td><td>2</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li>전신항암치료 전 반드시 <strong>유전자검사(BRAF·RAS·TERT + NTRK·RET 융합 포함)</strong> 시행 고려 (권고수준 1)</li>
+        <li>다학제팀 기반 치료 결정, RECIST 기준 반응 평가, 부작용 모니터링 권고</li>
+        <li>1차 약제 진행 확인 시 → 2차 치료제 또는 임상연구 참여 고려 (권고수준 3)</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: III.4.3.D–F, III.4.4.A–G, III.4.5.A–D</div>
+    </div>
+  </div>
+
+  <div class="chg-item">
+    <div class="chg-hdr" onclick="toggleChg(this)">
+      <span class="chg-num" style="background:#1a7f37;color:#fff">⑩</span>
+      <span class="chg-title"><strong>소아 갑상선분화암</strong> 치료 권고(Part V) 신규 추가</span>
+      <span class="chg-icon">▾</span>
+    </div>
+    <div class="chg-body">
+      <p>소아·청소년 DTC는 성인과 임상적 특성이 달라 <strong>Part V(소아 갑상선분화암)</strong>를 독립 파트로 신규 추가하였다.</p>
+      <ul>
+        <li><strong>성인과의 차이</strong>: 진단 시 종양 크고 주변조직 침범·LN전이·폐전이 빈도 높음. 그러나 사망률 낮고 <strong>장기 생존 예후 양호</strong>. 유두암 80–90%, 여포암 &lt;10%</li>
+        <li><strong>수술 원칙</strong>: 갑상선전절제술 우선 (저위험 미세암은 엽절제 고려 가능). <strong>숙련된 갑상선전문외과의</strong> 권고</li>
+        <li>수술 전·중 LN전이 확인 시 치료적 LN절제술 시행</li>
+      </ul>
+      <table>
+        <thead><tr><th>소아위험수준</th><th>기준</th></tr></thead>
+        <tbody>
+          <tr style="background:#dafbe1"><td><strong>저위험</strong></td><td>ETE 없음, LN N0/Nx 또는 미세전이(≤0.2 cm) N1a</td></tr>
+          <tr><td><strong>중간위험</strong></td><td>광범위 N1a 또는 미세전이 있는 N1b</td></tr>
+          <tr style="background:#ffebe9"><td><strong>고위험</strong></td><td>진행 원발암(T4) 또는 광범위 N1b; 원격전이 가능</td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li><strong>성장기 특성</strong>: LT4 용량·Ca/비타민D 요구량 변화 → <strong>3–6개월 간격</strong> 추적</li>
+        <li>RAI 치료: 다학제적 이득·위해 평가 기반; 폐 미세전이+RAI 섭취 시 RAI 시행 (권고수준 1)</li>
+        <li>RAIR 소아 진행암 → 유전자변이 기반 전신항암치료 고려 (권고수준 2)</li>
+        <li>유전종양증후군(PTEN 과오종, RET 생식세포변이 등) 의심 시 유전자검사 권고 (권고수준 1)</li>
+      </ul>
+      <div class="cn">📌 관련 권고문: Part V 전체 (V.1–V.7)</div>
+    </div>
+  </div>
+
+  <div class="section-title"><span class="sec-badge">구성</span> 권고안 구성</div>
+  <table class="kta-table">
+    <thead><tr><th>파트</th><th>내용</th><th>주요 섹션</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill pill-teal">Part I</span></td><td>갑상선분화암의 <strong>초기치료</strong></td><td>수술 전 병기, 수술 범위, 림프절절제, 병리/병기, 방사성요오드</td></tr>
+      <tr><td><span class="pill pill-blue">Part II</span></td><td>갑상선분화암의 <strong>추적</strong></td><td>ORS, TSH 목표농도, 추적검사(Tg, US, RAI scan)</td></tr>
+      <tr><td><span class="pill pill-red">Part III</span></td><td><strong>진행성</strong> 갑상선분화암 치료</td><td>경부재발, 원격전이, RAI불응성, 전신항암치료</td></tr>
+      <tr><td><span class="pill pill-yellow">Part IV</span></td><td><strong>임신 중</strong> 갑상선암 치료</td><td>수술 시기, TSH 목표, 추적, 칼슘/VitD 관리</td></tr>
+      <tr><td><span class="pill pill-green">Part V</span></td><td><strong>소아</strong> 갑상선분화암</td><td>수술 원칙, 소아위험수준 분류, RAI치료, 재발 치료</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════ TAB: Part I — 수술 ══════════════ -->
+<div id="tab-part1a" class="panel">
+  <div class="section-title"><span class="sec-badge">Part I</span> 갑상선분화암의 초기치료 — 수술</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🖼️ I.1. 수술 전 영상 및 혈액검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.1.1.A</span></div>
+          <div class="rec-text">갑상선절제술 예정 환자 — <strong>수술 전 경부 초음파</strong> 시행(종양 크기, 다발성, 갑상선외부침범, 경부 림프절 평가)
+            <div class="rec-note">💡 경부 LN전이 의심 시 초음파 유도 FNA + Tg 측정. 전이 확인 시 수술 전 표지(marking) 고려</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.1.1.B</span></div>
+          <div class="rec-text">국소 종양 침범 및 경부 LN 평가 위해 <strong>조영증강 경부 CT</strong> 추가 시행 가능</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.1.2.A</span></div>
+          <div class="rec-text">수술 전 <strong>일률적인 Tg·TgAb 측정은 권고되지 않음</strong>
+            <div class="rec-note">💡 원격전이 감별이 필요한 병소가 있는 경우에는 도움이 될 수 있음</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.1.3.A</span></div>
+          <div class="rec-text">수술 전 <strong>¹⁸F-FDG PET/CT</strong>는 일반적으로 권고되지 않으나, 측경부 LN전이·원격전이 의심, 또는 공격적 조직형(고위험 아형, 저분화암, 고등급갑상선분화암) 시 초기 병기 결정 위해 시행 가능</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">✂️ I.2. 갑상선분화암의 수술 범위</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">FNA 결과에 따른 수술</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.2.1.A</span></div>
+          <div class="rec-text"><strong>Bethesda 1 (비진단적)</strong> 반복 후도 비진단적이고 초음파상 악성 강의심·20% 이상 크기 증가·임상적 악성 위험 시 → 수술 고려</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.1.B</span></div>
+          <div class="rec-text"><strong>Bethesda 3 (비정형)</strong> 반복 후도 결론 불가, 분자표지자 미시행/결론 불가 시 → 임상위험인자·크기·초음파·환자 선호도에 따라 추적 또는 수술</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.1.C</span></div>
+          <div class="rec-text"><strong>Bethesda 4 (여포종양)</strong> → <strong>수술 우선 고려</strong>. 크기 ≥2 cm일수록 암 위험도 증가 고려</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.1.D</span></div>
+          <div class="rec-text"><strong>Bethesda 5 (악성의심)</strong> → 악성으로 진단된 경우와 유사하게 임상위험인자·초음파·환자 선호도 고려하여 수술</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.1.E</span></div>
+          <div class="rec-text">Bethesda 3·4·5 — 임상위험인자·초음파·환자 선호도 고려하여 <strong>분자표지자검사</strong> 고려 가능</div>
+        </li>
+      </ul>
+
+      <div class="sub-section">악성 진단 시 수술 범위 (I.2.2)</div>
+      <table class="kta-table">
+        <thead><tr><th>cT 병기</th><th>cN 상태</th><th>권고 수술</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="hl-row"><td>cT1a (≤1 cm, ETE 없음)</td><td>cN0</td><td><strong>갑상선엽절제술</strong></td><td><span class="rl rl1">1</span></td></tr>
+          <tr class="hl-row"><td>cT1b (1–2 cm, ETE 없음)</td><td>cN0</td><td><strong>갑상선엽절제술 우선</strong> (전절제 가능)</td><td><span class="rl rl1">1</span></td></tr>
+          <tr><td>cT2 (2–4 cm, ETE 없음)</td><td>cN0</td><td>엽절제술 또는 전절제술 선택</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td>cT3a (>4 cm, ETE 없음)</td><td>cN0</td><td>일반적으로 <strong>갑상선전절제술</strong></td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td>cT3b (띠근육 국한 ETE)</td><td>cN0</td><td>갑상선전절제술 선택적</td><td><span class="rl rl2">2</span></td></tr>
+          <tr class="danger-row"><td>cT4 (주요기관 ETE)</td><td>cN1 또는 M1</td><td><strong>갑상선전절제 + 원발암 완전 육안절제</strong></td><td><span class="rl rl2">2</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-section" style="margin-top:10px">저위험군 미세갑상선유두암 — 적극적 관찰</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.3.A</span></div>
+          <div class="rec-text"><strong>저위험군 미세갑상선유두암(≤1 cm, 저위험)</strong> 성인 환자에서 <strong>적극적 관찰(active surveillance)</strong>을 고려할 수 있음</div>
+        </li>
+      </ul>
+
+      <div class="sub-section" style="margin-top:10px">내시경/로봇수술</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.6.A</span></div>
+          <div class="rec-text"><strong>내시경 및 로봇 갑상선수술</strong> — 환자 선호도에 따라 적응증에 해당하는 <strong>저위험군 갑상선분화암</strong>에서 시행 가능</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🔗 I.2.4. 림프절절제술 권고</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.2.4.A</span></div>
+          <div class="rec-text">임상적 <strong>중앙경부(Level VI) LN전이 확인</strong> → 치료적 중앙경부 림프절절제술 시행</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.4.B</span></div>
+          <div class="rec-text">cN0 갑상선유두암 — <strong>일률적 예방적 중앙경부 LN절제 권고 안 됨</strong>. 재발감소 효과와 합병증 위해 고려하여 선택적 시행 가능
+            <div class="rec-note">💡 수술 후 예후·치료전략 결정에 필요한 경우도 예방적 중앙경부 LN절제 시행 가능</div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.2.4.C</span></div>
+          <div class="rec-text">진행 원발암(T3·T4) 및 확인된 <strong>측경부 LN전이(N1b)</strong> 있는 경우 → <strong>예방적 중앙경부 LN절제 권고</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.2.4.D</span></div>
+          <div class="rec-text"><strong>갑상선여포암</strong> — 대부분 예방적 중앙경부 LN절제 불필요</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.2.4.E</span></div>
+          <div class="rec-text">명백한 <strong>측경부 LN전이 확인</strong> → 치료적 측경부 림프절절제술 시행</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🏥 I.3. 수술 전후 합병증 평가</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">음성 평가</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.3.1.A·E</span></div>
+          <div class="rec-text">갑상선 수술 받는 모든 환자 — <strong>수술 전후 음성 이상 유무 확인</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.3.1.C</span></div>
+          <div class="rec-text">음성 이상 있는 경우, 후두 육안검사 이상 시, 후방 침범 의심·종괴 큰 경우·이전 경부수술·광범위 LN전이 의심 시 → <strong>반드시 성대 상태 평가</strong></div>
+        </li>
+      </ul>
+      <div class="sub-section" style="margin-top:8px">부갑상선기능 평가</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.3.2.A</span></div>
+          <div class="rec-text">갑상선전절제술 또는 완료절제술 받는 모든 환자 — 수술 전 <strong>혈청 Ca, PTH, 25(OH)D</strong> 검사 고려</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.3.2.D</span></div>
+          <div class="rec-text">수술 <strong>24시간 내 혈청 Ca·PTH 검사</strong> 고려 — 급성 부갑상선기능저하증 확인</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.3.2.E</span></div>
+          <div class="rec-text">수술 후 부갑상선기능저하증 — PTH·Ca 수치·저칼슘혈증 증상에 따라 <strong>Ca+활성형비타민D 보충요법</strong> 결정</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.3.2.F</span></div>
+          <div class="rec-text"><strong>영구적 부갑상선기능저하증</strong> — 기능저하 정도에 따라 비타민D·경구 Ca 등 약물치료 필요</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part I — 방사성요오드 ══════════════ -->
+<div id="tab-part1b" class="panel">
+  <div class="section-title"><span class="sec-badge">Part I</span> I.6. 수술 후 방사성요오드(RAI) 치료</div>
+  <div class="alert alert-info">ℹ️ RAI 치료는 수술 후 잔존 병소 여부, 병기, 재발위험도를 종합 고려하여 결정(권고수준 1)</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🎯 I.6.2. RAI 치료 대상</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>초기위험군</th><th>권고</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="hl-row"><td><strong>저위험군</strong></td><td>일률적 RAI 잔여갑상선제거술 <strong>권고 안 됨</strong></td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>중간위험군</strong></td><td>위험인자 종합 고려하여 RAI 치료(잔여제거 또는 보조치료) <strong>고려</strong></td><td><span class="rl rl2">2</span></td></tr>
+          <tr class="danger-row"><td><strong>고위험군</strong></td><td>RAI 치료(보조치료 또는 알려진 병소 치료) <strong>시행</strong></td><td><span class="rl rl1">1</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">⚠️ 저위험군이라도 개별적 재발 위험인자 및 질병 추적에의 영향을 고려하여 치료 여부 결정</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">💊 I.6.3. RAI 투여 용량</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>치료 목적</th><th>용량</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr><td><strong>잔여갑상선제거술</strong> (remnant ablation)</td><td><strong>30–50 mCi</strong> (1.11–1.75 GBq)</td><td><span class="rl rl1">1</span></td></tr>
+          <tr><td><strong>보조치료</strong> (adjuvant therapy)</td><td><strong>30–100 mCi</strong> (1.11–3.7 GBq) — 재발인자 종합 평가</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>알려진 병소 치료</strong></td><td><strong>100 mCi 이상</strong> (≥3.7 GBq)</td><td><span class="rl rl2">2</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">⚗️ I.6.4. RAI 투여 전 준비</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.4.A</span></div>
+          <div class="rec-text">RAI 치료·진단스캔 전 <strong>혈중 TSH 자극</strong> 필요. 투여 전 TSH 측정</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.4.C</span></div>
+          <div class="rec-text">TSH 자극: <strong>LT4 중단</strong> 또는 <strong>rhTSH 주사</strong> 사용</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.4.D</span></div>
+          <div class="rec-text">잔여갑상선제거 또는 보조치료 목적 RAI 시 — LT4 중단보다 <strong>rhTSH 우선 권고</strong> (동반질환·삶의 질 고려)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.4.F</span></div>
+          <div class="rec-text">LT4 중단 방법: RAI 전 <strong>LT4 3–4주 중단</strong> 또는 LT3 변경 후 <strong>최소 2주 중단</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.6.4.G</span></div>
+          <div class="rec-text">LT4 중단 시 RAI/스캔 전 <strong>TSH ≥ 30 mIU/L</strong> 유지 목표</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.6.4.H</span></div>
+          <div class="rec-text">RAI·진단검사 전 <strong>1–2주 저요오드 식이</strong> 시행</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🖼️ I.6.5. RAI 후 전신스캔</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.5.A</span></div>
+          <div class="rec-text">RAI 치료 투여 후 → <strong>치료 후 전신스캔</strong> 시행 (병기 정보·RAI 섭취능력 파악)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.6.5.B</span></div>
+          <div class="rec-text">평면 영상에서 비정상 섭취 의심 시 → <strong>SPECT/CT 추가 시행</strong></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">☢️ I.7. 외부방사선조사·항암화학요법</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.7.1.A</span></div>
+          <div class="rec-text">완전 절제된 갑상선분화암 — <strong>외부방사선조사의 역할 없음</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.7.1.B</span></div>
+          <div class="rec-text">불완전 절제 또는 반복 재발 — 보조적 외부방사선조사 <strong>선택적 시행</strong> 가능</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.7.2.A</span></div>
+          <div class="rec-text"><strong>보조적 항암제의 일률적 사용은 역할 없음</strong></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part I — 병기·위험군 ══════════════ -->
+<div id="tab-part1c" class="panel">
+  <div class="section-title"><span class="sec-badge">Part I</span> I.4–5. 병리·병기·초기위험군 분류</div>
+
+  <style>
+    .p4-item{border:1px solid var(--border);border-radius:7px;margin-bottom:7px;overflow:hidden}
+    .p4-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;background:var(--surface);transition:background .15s}
+    .p4-hdr:hover{background:var(--surface2)}
+    .p4-hdr.open{background:#f0f8fa}
+    .p4-badge{padding:2px 8px;border-radius:3px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap;flex-shrink:0;background:#eaf7fb;color:var(--accent2);border:1px solid var(--border)}
+    .p4-htitle{font-size: calc(12.5px * var(--fscale, 1));font-weight:600;color:var(--text);flex:1}
+    .p4-rl{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size: calc(11px * var(--fscale, 1));font-weight:800;flex-shrink:0}
+    .p4-icon{font-size: calc(13px * var(--fscale, 1));color:var(--text2);flex-shrink:0;transition:transform .2s}
+    .p4-hdr.open .p4-icon{transform:rotate(180deg)}
+    .p4-body{display:none;padding:0 14px 13px 14px;font-size: calc(12px * var(--fscale, 1));line-height:1.7;color:var(--text);border-top:1px solid var(--border);background:#fafbfc}
+    .p4-body p{margin-top:8px}
+    .p4-body ul{padding-left:16px;margin-top:6px}
+    .p4-body ul li{margin-bottom:4px}
+    .p4-body .pn{margin-top:9px;padding:7px 10px;background:#eaf7fb;border-left:3px solid var(--accent);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:var(--accent2)}
+    .p4-body .pw{margin-top:9px;padding:7px 10px;background:#fff8c5;border-left:3px solid var(--yellow);border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:#7d4e00}
+    .p4-body .pi{margin-top:9px;padding:7px 10px;background:#ddf4ff;border-left:3px solid #0550ae;border-radius:0 4px 4px 0;font-size: calc(11.5px * var(--fscale, 1));color:#0550ae}
+    .p4-body table{width:100%;border-collapse:collapse;margin-top:9px;font-size: calc(11.5px * var(--fscale, 1))}
+    .p4-body table th{background:var(--surface2);padding:6px 8px;font-size: calc(10.5px * var(--fscale, 1));text-align:left;border-bottom:1px solid var(--border);color:var(--text2);white-space:nowrap}
+    .p4-body table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+    .p4-body table tr:last-child td{border-bottom:none}
+    .p4-body table tr.hl td{background:#eaf7fb}
+    .p4-body table tr.warn td{background:#fff8c5}
+    .p4-body table tr.danger td{background:#ffebe9}
+    .p4-subsec{font-size: calc(12px * var(--fscale, 1));font-weight:700;color:var(--accent2);margin:10px 0 5px;display:flex;align-items:center;gap:5px}
+    .p4-subsec::before{content:'';display:inline-block;width:3px;height:13px;background:var(--accent);border-radius:2px}
+  </style>
+
+  <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-bottom:8px">▸ 각 권고문 클릭 시 상세 설명 표시</div>
+
+  <!-- I.4.1.A -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.1.A</span>
+      <span class="p4-htitle">갑상선분화암의 병리학적 진단은 <strong>2022 WHO 종양분류체계</strong>를 따른다</span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>2022년 WHO 갑상선종양 분류체계는 <strong>분자 프로파일 및 종양세포 기원</strong>에 따라 7개 범주로 분류한다. 본 권고안의 적용 대상은 <strong>여포세포 유래 암종</strong>과 <strong>갑상선체모양-오디모양암(CMTC)</strong>이다.</p>
+      <div class="p4-subsec">2022 WHO 갑상선종양 분류표 (Table I.4.1.A)</div>
+      <table>
+        <thead><tr><th>범주</th><th>주요 유형</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>1. 여포세포 유래 종양</strong></td><td>
+            <b>양성:</b> FND, FA, 유두모양FA, 호산성선종(OA)<br>
+            <b>저위험:</b> NIFTP, FT-UMP, WDT-UMP, HTT<br>
+            <b>악성 분화암:</b> FTC, IEFVPTC, PTC, 호산성암(OCA)<br>
+            <b>고등급갑상선분화암(DHGTC)</b> — 2022 신설<br>
+            <b>저분화암(PDTC)</b>, <b>역형성암(ATC)</b>
+          </td></tr>
+          <tr><td><strong>2. C세포 유래</strong></td><td>갑상선수질암(MTC)</td></tr>
+          <tr><td><strong>3. 수질여포혼합암</strong></td><td>MMFCC</td></tr>
+          <tr><td><strong>4. 침샘형 갑상선암</strong></td><td>점액표피모양암(MEC), 분비암종(SC)</td></tr>
+          <tr><td><strong>5. 조직발생 미상</strong></td><td>SMECE, 체모양-오디모양암(CMTC)</td></tr>
+          <tr><td><strong>6. 갑상선내 흉선종양</strong></td><td>흉선종, SETTLE, ITC</td></tr>
+          <tr><td><strong>7. 갑상선배아종양</strong></td><td>갑상선모세포종</td></tr>
+        </tbody>
+      </table>
+      <div class="p4-subsec" style="margin-top:12px">고등급갑상선분화암(DHGTC) — 2022년 신설 개념</div>
+      <p>유두암·여포암에서 다음 소견 중 하나 이상 시 일반 분화암보다 <strong>예후 불량</strong>으로 분류:</p>
+      <ul>
+        <li>유사분열(mitosis) ≥ <strong>5개/2 mm²</strong></li>
+        <li>종양세포 괴사(tumor necrosis) 존재</li>
+        <li>단, Turin 기준을 충족하는 저분화암(PDTC)은 DHGTC와 별도 분류</li>
+      </ul>
+      <div class="p4-subsec" style="margin-top:12px">피막형성여포아형 갑상선암의 침습 정도 분류</div>
+      <table>
+        <thead><tr><th>아형</th><th>정의</th><th>재발률</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>최소침습형</strong></td><td>피막만 침범, 혈관침습 없음</td><td>0–5% (저위험군)</td></tr>
+          <tr><td><strong>피막형성혈관침습형</strong></td><td>혈관침습 있음 (1–3개: 중간 / ≥4개: 고위험)</td><td>1.9–44%</td></tr>
+          <tr class="danger"><td><strong>광범위침습형</strong></td><td>광범위 갑상선·주변조직 침범</td><td>12.7–54% (고위험군)</td></tr>
+        </tbody>
+      </table>
+      <div class="pn">📌 본 분류는 FTC·IEFVPTC·OCA(호산성암)에 공통 적용</div>
+    </div>
+  </div>
+
+  <!-- I.4.2.A -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.2.A</span>
+      <span class="p4-htitle">모든 갑상선분화암 환자에서 수술 후 <strong>임상적·병리적 병기 결정</strong> 시행</span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>수술 후 병기 결정은 다음 4가지 목적으로 모든 DTC 환자에서 필수적으로 시행한다.</p>
+      <table>
+        <thead><tr><th>목적</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>① <strong>예후 예측</strong></td><td>원격전이 여부·연령·종양 국소 진행 정도를 기반으로 사망위험 예측. 저위험군(70–85%) 구별</td></tr>
+          <tr><td>② <strong>추가 치료 결정</strong></td><td>방사성요오드 치료, TSH 억제치료 여부 및 강도 결정</td></tr>
+          <tr><td>③ <strong>추적 계획 수립</strong></td><td>추적 빈도·강도·방법(Tg, 초음파, RAI 스캔) 결정</td></tr>
+          <tr><td>④ <strong>의료진 간 소통</strong></td><td>표준화된 용어로 다학제팀 의사소통 원활화</td></tr>
+        </tbody>
+      </table>
+      <div class="pi">ℹ️ AJCC/UICC 병기는 <b>사망위험 예측</b> 도구. <b>재발위험 예측</b>에는 별도의 초기위험군 분류(I.5.1) 사용 필요</div>
+    </div>
+  </div>
+
+  <!-- I.4.2.B TNM/Stage -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.2.B</span>
+      <span class="p4-htitle">병기 결정: <strong>AJCC/UICC 8판 TNM 병기</strong> 사용 권장</span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <div class="p4-subsec">TNM 정의 (Table I.4.2.A) — AJCC 8판</div>
+      <table>
+        <thead><tr><th colspan="2">T — 원발종양</th></tr></thead>
+        <tbody>
+          <tr><td style="width:70px"><strong>T1a</strong></td><td>≤ 1 cm, ETE 없음</td></tr>
+          <tr><td><strong>T1b</strong></td><td>1 cm 초과 ≤ 2 cm, ETE 없음</td></tr>
+          <tr><td><strong>T2</strong></td><td>2 cm 초과 ≤ 4 cm, ETE 없음</td></tr>
+          <tr><td><strong>T3a</strong></td><td>&gt; 4 cm, ETE 없음</td></tr>
+          <tr class="warn"><td><strong>T3b</strong></td><td>크기 무관, <strong>띠근육 국한</strong> 육안적 ETE</td></tr>
+          <tr class="danger"><td><strong>T4a</strong></td><td>피하연부조직·후두·기도·식도·되돌이후두신경 침범</td></tr>
+          <tr class="danger"><td><strong>T4b</strong></td><td>Prevertebral fascia 침범 또는 경동맥/종격동 혈관 포위</td></tr>
+        </tbody>
+      </table>
+      <table style="margin-top:8px">
+        <thead><tr><th colspan="2">N — 국소 림프절</th></tr></thead>
+        <tbody>
+          <tr><td style="width:70px"><strong>N0a</strong></td><td>1개 이상 LN에서 세포학적·조직학적으로 LN전이 없음 (병리 확인)</td></tr>
+          <tr><td><strong>N0b</strong></td><td>영상·임상적으로 LN전이 없음 (병리 미확인)</td></tr>
+          <tr class="warn"><td><strong>N1a</strong></td><td>Level VI·VII (중앙경부: 기도전·기도주위·전후두·상종격동)</td></tr>
+          <tr class="danger"><td><strong>N1b</strong></td><td>일측성·양측성·반대편 측경부 (Level I–V) 또는 후인두 LN전이</td></tr>
+        </tbody>
+      </table>
+      <div class="p4-subsec" style="margin-top:12px">병기 분류 (Table I.4.2.B) — AJCC 8판</div>
+      <table>
+        <thead><tr><th colspan="4" style="background:#dafbe1;color:#116329">55세 미만</th></tr>
+        <tr><th>병기</th><th>T</th><th>N</th><th>M</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>Stage I</strong></td><td>Any T</td><td>Any N</td><td>M0</td></tr>
+          <tr class="warn"><td><strong>Stage II</strong></td><td>Any T</td><td>Any N</td><td>M1</td></tr>
+        </tbody>
+      </table>
+      <table style="margin-top:6px">
+        <thead><tr><th colspan="4" style="background:#fff8c5;color:#7d4e00">55세 이상</th></tr>
+        <tr><th>병기</th><th>T</th><th>N</th><th>M</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>Stage I</strong></td><td>T1–2</td><td>N0</td><td>M0</td></tr>
+          <tr class="hl"><td><strong>Stage II</strong></td><td>T1–2 또는 T3a/b</td><td>N1 또는 Any N</td><td>M0</td></tr>
+          <tr class="warn"><td><strong>Stage III</strong></td><td>T4a</td><td>Any N</td><td>M0</td></tr>
+          <tr class="warn"><td><strong>Stage IVA</strong></td><td>T4b</td><td>Any N</td><td>M0</td></tr>
+          <tr class="danger"><td><strong>Stage IVB</strong></td><td>Any T</td><td>Any N</td><td>M1</td></tr>
+        </tbody>
+      </table>
+      <div class="pw">⚠️ <b>핵심</b>: 55세 미만은 원격전이(M1)가 있어도 최고 Stage II. AJCC 8판에서 연령 기준이 기존 45세 → <b>55세</b>로 상향됨. Stage III 이상은 55세 이상에서만 존재.</div>
+      <div class="pi">ℹ️ AJCC 병기는 사망 위험 예측 도구. 70–85%의 DTC 환자가 Stage I에 해당. 재발 위험·추적 강도 결정에는 초기위험군 분류(I.5)를 추가로 사용해야 함.</div>
+    </div>
+  </div>
+
+  <!-- I.4.3.A -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.3.A</span>
+      <span class="p4-htitle">병리 보고서: AJCC 병기·재발 예측을 위한 <strong>조직학적 특징 전항목 기술</strong></span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>갑상선절제 검체 병리 보고서에는 AJCC/UICC 병기와 재발위험도 평가에 필요한 다음 항목들을 <strong>필수적으로 포함</strong>해야 한다.</p>
+      <table>
+        <thead><tr><th>기재 항목</th><th>내용 / 임상적 의미</th></tr></thead>
+        <tbody>
+          <tr><td><strong>조직학적 아형</strong></td><td>유두암: 일반형·긴세포·원주세포·hobnail·미만성경화 등<br>여포암: 최소침습·혈관침습·광범위침습 구분</td></tr>
+          <tr class="warn"><td><strong>종양세포 괴사</strong></td><td>존재 시 DHGTC 가능성 → 예후 불량 지표</td></tr>
+          <tr class="warn"><td><strong>유사분열 세포수</strong></td><td>2 mm² 당 개수. ≥5개 시 DHGTC 기준 중 하나 충족</td></tr>
+          <tr class="warn"><td><strong>혈관 침습 여부 + 개수</strong></td><td>여부뿐 아니라 <b>침습된 혈관의 개수</b> 반드시 기재: 1–3개(중간위험군) vs ≥4개(고위험군)</td></tr>
+          <tr><td><strong>림프관 침습</strong></td><td>존재 여부</td></tr>
+          <tr><td><strong>갑상선외부침범(ETE)</strong></td><td>미세 ETE(현미경적) vs 육안적 ETE 구분 명기<br>육안적: 띠근육(T3b) vs 주요기관(T4a/b)</td></tr>
+          <tr><td><strong>절제연 상태</strong></td><td>R0(완전절제) / R1(현미경 양성, 재발률 3.85–10.9%) / R2(육안 잔존)</td></tr>
+          <tr class="danger"><td><strong>림프절 정보</strong></td><td>검사한 총 LN 개수, 전이 LN 개수<br>가장 큰 전이병소 크기 (≤3 cm: 중간위험, &gt;3 cm: 고위험)<br><b>림프절 피막외 침범(ENE)</b> 여부</td></tr>
+          <tr><td><strong>Ki-67 표지지수</strong></td><td>필수항목 아니나 고등급·저분화암 의심 시 유용<br>≥5%: 악성도 증가 / ≥10%: PDTC / ≥30%: ATC</td></tr>
+        </tbody>
+      </table>
+      <div class="pn">📌 미국병리학회(CAP), 암보고 국제협력기구(ICCR)의 표준 갑상선암 병리보고서 양식 참고 권장</div>
+    </div>
+  </div>
+
+  <!-- I.4.3.B -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.3.B</span>
+      <span class="p4-htitle">갑상선유두암 <strong>나쁜 예후 조직학적 아형</strong>(긴세포·원주세포·hobnail) 병리보고서 명기</span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>갑상선유두암에서 다음 <strong>3가지 나쁜 예후 아형</strong>을 반드시 구분하여 병리 보고서에 명기한다. 이들은 <strong>중간위험군 이상</strong> 분류의 근거가 된다.</p>
+      <table>
+        <thead><tr><th>아형</th><th>병리 특징</th><th>임상 특성</th><th>위험군</th></tr></thead>
+        <tbody>
+          <tr class="danger"><td><strong>긴세포형</strong><br>(Tall cell)</td><td>세포 높이 ≥ 너비의 2배, 풍부한 호산성 세포질, 핵 기저부 위치</td><td>PTC의 약 10–15%, 빈번한 BRAF V600E. 재발률 및 사망률 높음</td><td>중간~고위험군</td></tr>
+          <tr class="danger"><td><strong>원주세포형</strong><br>(Columnar cell)</td><td>세포 높이 &gt; 너비, 핵 겹침(pseudostratification), 매우 드묾(PTC &lt;1%)</td><td>재발률 12–25%, 매우 공격적 경과. 원격전이 빈번</td><td>중간~고위험군</td></tr>
+          <tr class="warn"><td><strong>hobnail 아형</strong></td><td>세포의 정단(apical)부 핵 소실·돌출, 유두 구조 소실</td><td>BRAF V600E + TERT 프로모터 동반 빈번. 역형성전환 위험 증가</td><td>중간~고위험군</td></tr>
+        </tbody>
+      </table>
+      <div class="p4-subsec" style="margin-top:10px">기타 유두암 아형 (예후 참고)</div>
+      <table>
+        <thead><tr><th>아형</th><th>특징</th><th>예후</th></tr></thead>
+        <tbody>
+          <tr><td>미만성 경화형 (Diffuse sclerosing)</td><td>젊은 여성, 양쪽 엽 미만성 침범, 사포소체, 림프구 침윤</td><td>재발 높으나 사망률 낮음</td></tr>
+          <tr><td>고형형 (Solid/trabecular)</td><td>소아·방사선 노출 연관, NTRK 융합 빈번</td><td>중간</td></tr>
+          <tr><td>Warthin-like</td><td>호산성 세포질, 풍부한 림프구 배경</td><td>예후 양호</td></tr>
+          <tr class="hl"><td>피막형성 여포아형 (IEFVPTC)</td><td>완전 피막 형성 + 유두암 핵 소견. 혈관침습 수에 따라 중간/고위험 분류</td><td>NIFTP(비침습)보다 예후 불량</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- I.4.3.C -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#cf222e;color:#fff">1</span>
+      <span class="p4-badge">I.4.3.C</span>
+      <span class="p4-htitle">피막형성 여포아형 갑상선암: <strong>침습 아형 3가지 구분 명기</strong></span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>피막형성여포아형 갑상선암(FTC·IEFVPTC·OCA)은 <strong>피막 및 혈관 침습 정도</strong>에 따라 위험도를 분류하며 병리 보고서에 반드시 명기한다.</p>
+      <table>
+        <thead><tr><th>아형</th><th>정의</th><th>재발률</th><th>위험군</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>최소침습형</strong><br>(Minimally invasive)</td><td>피막만 침범, 혈관침습 없음</td><td>0–5%<br>(4 cm 이하 시)</td><td>저위험군</td></tr>
+          <tr><td><strong>피막형성혈관침습형</strong><br>혈관침습 1–3개</td><td>피막 형성 + 혈관침습 1–3개</td><td>1.9–15.2%</td><td>중간위험군</td></tr>
+          <tr class="danger"><td><strong>피막형성혈관침습형</strong><br>혈관침습 ≥4개</td><td>피막 형성 + 혈관침습 ≥4개</td><td>17.9–44.4%</td><td><strong>고위험군</strong></td></tr>
+          <tr class="danger"><td><strong>광범위침습형</strong><br>(Widely invasive)</td><td>광범위 갑상선·주변조직 침범</td><td>12.7–54%</td><td><strong>고위험군</strong></td></tr>
+        </tbody>
+      </table>
+      <ul style="margin-top:8px">
+        <li>갑상선여포암의 예후는 단순 크기보다 <strong>피막·혈관침습 정도</strong>가 결정적 요인</li>
+        <li>최소침습 FTC: 4 cm 초과인 경우 저위험군에서 제외</li>
+        <li>이 분류는 FTC 외 다른 피막형성갑상선분화암에도 동일 기준 적용 제안 (추후 연구 필요)</li>
+      </ul>
+      <div class="pn">📌 혈관침습 개수(1–3개 vs ≥4개)를 반드시 구분하여 기록해야 초기위험군 분류(I.5)에 정확히 반영 가능</div>
+    </div>
+  </div>
+
+  <!-- I.4.3.D -->
+  <div class="p4-item">
+    <div class="p4-hdr" onclick="toggleP4(this)">
+      <span class="p4-rl" style="background:#9a6700;color:#fff">3</span>
+      <span class="p4-badge">I.4.3.D</span>
+      <span class="p4-htitle">가족성 증후군 연관 조직학적 아형 병리 보고서 명기</span>
+      <span class="p4-icon">▾</span>
+    </div>
+    <div class="p4-body">
+      <p>유전성 갑상선암 그룹(증후군성 가족성 갑상선비수질암, SFNMTC)과 연관된 아형은 병리 보고서에 명기하여 <strong>유전상담 및 가족 선별검사</strong>로 연결한다.</p>
+      <table>
+        <thead><tr><th>증후군</th><th>관련 유전자</th><th>갑상선 병리 특징</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>FAP</strong><br>(가족성 선종성 용종증)</td><td>APC 유전자</td><td><b>갑상선체모양-오디모양암(CMTC)</b>: 97%에서 FAP와 연관. 젊은 여성(89%가 40세 미만). β-카테닌 핵·세포질 양성 특징</td></tr>
+          <tr><td><strong>PHTS</strong><br>(PTEN 과오종 증후군)</td><td>PTEN, PIK3CA, AKT1, SDHx, KLLN</td><td>다수의 여포성 결절 배경에서 여포암·유두암 발생. 갑상선 종양 세포에서 PTEN 면역염색 소실</td></tr>
+          <tr><td><strong>DICER1 증후군</strong></td><td>DICER1</td><td>다결절성 갑상선종, 갑상선암 발생 위험 증가</td></tr>
+          <tr><td><strong>카니 복합체 (CNC)</strong></td><td>PRKAR1A</td><td>다수의 갑상선결절, 갑상선암 발생 가능</td></tr>
+          <tr><td><strong>베르너 증후군</strong></td><td>WRN</td><td>역형성암·여포암 위험 증가, 조기 노화 동반</td></tr>
+        </tbody>
+      </table>
+      <div class="pi">ℹ️ CMTC의 53%가 FAP 연관 → FAP 환자에서 대장경까지 다학제 연계 필요</div>
+      <div class="pw">⚠️ 가족성 증후군 의심 시 → <b>유전자검사 권고</b> (Part V, V.2.1.A, 권고수준 1). 소아 갑상선암에서 특히 중요</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">⚠️ I.5.1. 초기위험군 분류 (저·중간·고위험군)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>위험군</th><th>주요 해당 조건</th></tr></thead>
+        <tbody>
+          <tr class="hl-row">
+            <td><span class="pill pill-green">저위험군</span></td>
+            <td>갑상선내 국한·ETE 없음, LN전이 없거나 미세전이(≤0.2cm) 5개 미만, 혈관침습 없음, 완전 절제, RAI 섭취 있는 잔여갑상선 조직만 있는 경우 등</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-yellow">중간위험군</span></td>
+            <td>공격적 아형(긴세포·원주세포·hobnail 등), 미세 ETE, 혈관침습 있는 갑상선유두암, N1a 미세전이 5개 이상, 최소침습 여포암(혈관침습 3개 미만), N1b 미세전이, 전이LN 크기 ≤3cm</td>
+          </tr>
+          <tr class="danger-row">
+            <td><span class="pill pill-red">고위험군</span></td>
+            <td>육안적 ETE(cT3b·T4), 절제 불완전, 원격전이, Tg 과다(RAI 섭취 없음), 광범위침습형 여포암, 혈관침습 4개 이상, 전이LN >3cm</td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.5.1.A</span></div>
+          <div class="rec-text">수술 후 잔존병소·재발 위험에 따라 <strong>초기위험군 분류</strong>(저·중간·고위험군) 시행</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">I.5.1.B</span></div>
+          <div class="rec-text">초기위험군 분류에 따라 <strong>TSH 목표농도</strong>와 추가 치료전략 결정</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">I.5.3.A</span></div>
+          <div class="rec-text">수술 후 질병·잔여갑상선 평가 및 재발 예측 위해 <strong>혈청 Tg(TSH-비자극 또는 자극)</strong> 측정 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">I.5.4.A</span></div>
+          <div class="rec-text">수술 후 예후 예측 위해 <strong>BRAF<sup>V600E</sup>·RAS·TERT 프로모터 돌연변이</strong> 검사 고려 가능</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part II — 추적 ══════════════ -->
+<div id="tab-part2" class="panel">
+  <div class="section-title"><span class="sec-badge">Part II</span> 갑상선분화암의 추적</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🔄 II.1. 지속적위험분류(ORS) — 치료반응 재평가</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">📌 초기 치료 완료 후 임상적·생화학적·영상학적 소견을 종합하여 지속적으로 질병 상태를 재평가 → ORS에 따라 TSH 목표농도·추적방법·추가치료 결정</div>
+      <table class="kta-table" style="margin-top:8px">
+        <thead><tr><th>반응</th><th>정의</th></tr></thead>
+        <tbody>
+          <tr class="hl-row"><td><span class="pill pill-green">완전반응 (ER)</span></td><td>임상적·생화학적·구조적 질환 증거 없음 (관해, 병소의 증거 없음)</td></tr>
+          <tr><td><span class="pill pill-yellow">생화학적 불완전반응 (BIR)</span></td><td>구조적 병변 증거 없이 Tg 수치 이상</td></tr>
+          <tr class="danger-row"><td><span class="pill pill-red">구조적 불완전반응 (SIR)</span></td><td>잔존 또는 새로 발견된 국소·원격전이</td></tr>
+          <tr><td><span class="pill pill-teal">불명확반응 (IDR)</span></td><td>생화학적·구조적 소견이 양성/악성 구분 애매</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🎯 II.2. ORS에 따른 TSH 목표농도</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">수술 후 초기위험군별 TSH 목표</div>
+      <table class="kta-table">
+        <thead><tr><th>초기위험군</th><th>초기 TSH 목표</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="hl-row"><td><span class="pill pill-green">저위험군</span></td><td>TSH 억제(&lt;0.1) 권고 안 됨; <strong>0.5–2.0 mIU/L</strong> 고려</td><td><span class="rl rl1">1</span> / <span class="rl rl3">3</span></td></tr>
+          <tr><td><span class="pill pill-yellow">중간위험군</span></td><td>TSH 억제(&lt;0.1) 권고 안 됨; 위험인자 따라 <strong>0.1–2.0 mIU/L</strong></td><td><span class="rl rl2">2</span> / <span class="rl rl3">3</span></td></tr>
+          <tr class="danger-row"><td><span class="pill pill-red">고위험군</span></td><td><strong>TSH &lt; 0.1 mIU/L</strong> 유지</td><td><span class="rl rl1">1</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="sub-section" style="margin-top:10px">추적 중 ORS에 따른 TSH 목표</div>
+      <table class="kta-table">
+        <thead><tr><th>ORS 반응</th><th>추적 TSH 목표</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="hl-row"><td><span class="pill pill-green">완전반응 (ER)</span></td><td>TSH 억제 불필요; <strong>0.5–2.0 mIU/L</strong></td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><span class="pill pill-yellow">생화학적/불명확 반응</span> (저위험·엽절제·전절제·RAI미시행)</td><td><strong>0.5–2.0 mIU/L</strong></td><td><span class="rl rl3">3</span> / <span class="rl rl2">2</span></td></tr>
+          <tr><td><span class="pill pill-yellow">생화학적/불명확 반응</span> (중간위험군)</td><td>초기 <strong>0.1–0.5 mIU/L</strong> → 이후 완화</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><span class="pill pill-yellow">생화학적/불명확 반응</span> (고위험군, 전절제+RAI)</td><td>초기 5년 <strong>0.1–0.5 mIU/L</strong> → 이후 완화</td><td><span class="rl rl2">2</span></td></tr>
+          <tr class="danger-row"><td><span class="pill pill-red">구조적 불완전반응 (SIR)</span></td><td><strong>TSH &lt; 0.1 mIU/L</strong> (금기 없는 한)</td><td><span class="rl rl1">1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🧪 II.3. 추적검사 방법</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">II.3.1.A</span></div>
+          <div class="rec-text">LT4 복용 모든 환자 — <strong>12개월 이하 간격</strong>으로 혈청 TSH·갑상선호르몬 측정</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">II.3.2.A</span></div>
+          <div class="rec-text">혈청 <strong>Tg — 동일 검사법으로 추적</strong>; 동시에 측정한 TgAb 고려하여 평가</div>
+        </li>
+      </ul>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">📡 RAI 진단스캔 적응증 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul style="padding-left:16px;line-height:1.8">
+            <li>전절제+RAI 후 불완전/불명확 반응: Tg↑ 또는 TgAb↑ 지속 시 고려</li>
+            <li>경부 초음파상 비정상 LN 발견 시 — FNA+Tg 세척액 먼저 시행</li>
+            <li>원격전이 의심 시 — RAI 전신스캔 또는 SPECT/CT</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">🖥️ 경부 초음파 추적 적응증 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul style="padding-left:16px;line-height:1.8">
+            <li>완전반응(ER) — 저위험군: 1–2년 후 초음파, 이후 5년 이상 간격 연장 가능</li>
+            <li>생화학적·불명확반응 — Tg 추세 보며 필요 시 시행</li>
+            <li>구조적 불완전반응(SIR) — 3–6개월 간격으로 주기적 시행</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part III — 진행성 ══════════════ -->
+<div id="tab-part3" class="panel">
+  <div class="section-title"><span class="sec-badge">Part III</span> 진행성 갑상선분화암의 치료</div>
+  <div class="alert alert-danger">⚠️ 진행성 갑상선분화암의 진단·치료 시 내분비학·종양학·외과학·영상의학·핵의학·병리학 <strong>다학제적 접근</strong> 필요 (권고수준 2)</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🔁 III.4. 방사성요오드 불응성(RAIR) — 정의 및 치료 원칙</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sub-section">RAIR 정의 (III.4.1.B)</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.8;margin-bottom:8px">
+        <li>전이 병소에 RAI 섭취가 없는 경우</li>
+        <li>일부 병소에서만 RAI 섭취가 있고 다른 부위는 섭취 없는 경우</li>
+        <li>RAI 섭취가 있음에도 불구하고 질병이 <strong>진행</strong>하는 경우</li>
+      </ul>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">III.4.2.A</span></div>
+          <div class="rec-text">RAIR 확인 시 — <strong>추가 RAI 치료 일반적으로 권고 안 됨</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">III.4.3.D</span></div>
+          <div class="rec-text">전신항암요법 고려 시 — <strong>유전자검사(BRAF 돌연변이, NTRK·RET 융합유전자 포함)</strong> 시행 고려</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">III.4.3.E</span></div>
+          <div class="rec-text">증상 있거나 진행 확인된 RAIR 갑상선암으로 국소치료 불가능한 경우 — <strong>전신항암치료 고려</strong></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">💉 III.4.4. 전신항암치료 약제 선택</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>약제</th><th>적응</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr><td><strong>렌바티닙·소라페닙</strong></td><td>진행성 RAIR DTC 성인 — <strong>1차 이상</strong> 전신항암치료제</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>카보잔티닙</strong></td><td>소라페닙/렌바티닙 치료 후 진행된 RAIR DTC</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>셀퍼카티닙·프랄세티닙</strong></td><td>RET 융합 유전자 양성 진행성 RAIR DTC (성인+12세 이상 청소년)</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>라로트렉티닙</strong></td><td>수술 불가, 다른 효과적 치료 없는 <strong>전이성 NTRK 융합 유전자 양성</strong> 갑상선암 (성인+2세 이상 소아)</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>엔트렉티닙</strong></td><td>표준치료 후 진행된 전이성/절제불가 <strong>NTRK 융합 양성</strong> (성인+12세 이상)</td><td><span class="rl rl2">2</span></td></tr>
+          <tr><td><strong>다브라페닙+트라메티닙</strong></td><td><strong>BRAF 돌연변이</strong> 동반 진행성 RAIR DTC — 2차 이상 치료</td><td><span class="rl rl2">2</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🦴 III.5. 전이 부위별 치료 원칙</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">🫁 폐전이 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul style="padding-left:16px;line-height:1.9;font-size: calc(12px * var(--fscale, 1))">
+            <li>폐 <strong>미세전이(micrometastasis)</strong> — RAI 치료 우선 고려 <span class="rl rl1">1</span></li>
+            <li>RAI 섭취·임상 반응 있는 폐 미세전이 — 6–12개월 간격 반복 RAI <span class="rl rl1">1</span></li>
+            <li>RAI 섭취 있는 대결절 폐전이 — RAI 치료 고려 가능 <span class="rl rl3">3</span></li>
+            <li>천천히 자라는 폐전이 — TSH 억제하며 추적 가능 <span class="rl rl3">3</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">🦴 뼈전이 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul style="padding-left:16px;line-height:1.9;font-size: calc(12px * var(--fscale, 1))">
+            <li>RAI 섭취하는 뼈전이 — RAI 치료 시행 <span class="rl rl1">1</span></li>
+            <li>완전 절제 가능한 단일 뼈전이 — 완전 절제 수술 우선 고려 <span class="rl rl2">2</span></li>
+            <li>불안정한 뼈전이 — 외부방사선조사, 뼈 시멘트, 수술적 고정 고려</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">🧠 뇌전이 <span class="acc-icon">▾</span></div>
+        <div class="acc-body">
+          <ul style="padding-left:16px;line-height:1.9;font-size: calc(12px * var(--fscale, 1))">
+            <li>수술 가능한 단일 뇌전이 — 수술적 절제 우선 고려</li>
+            <li>수술 불가 또는 다발성 뇌전이 — 방사선 수술 또는 외부방사선조사 고려</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part IV — 임신 ══════════════ -->
+<div id="tab-part4" class="panel">
+  <div class="section-title"><span class="sec-badge">Part IV</span> 임신 중 갑상선암의 치료</div>
+  <div class="alert alert-warn">⚠️ 15–34세 여성에서 가장 많이 발생한 암이 갑상선암 (2021년 국가암통계, 10만 명당 80명). 임신 중 갑상선암은 적절한 치료와 관리가 필요.</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🤰 IV.1. 임신 중 새로 진단된 갑상선암</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">IV.1.A</span></div>
+          <div class="rec-text"><strong>임신 초기 새로 진단된 갑상선유두암</strong> — <strong>초음파로 추적관찰</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">IV.1.B</span></div>
+          <div class="rec-text"><strong>임신 24–26주 전</strong>에 갑상선암이 <strong>진행하면 수술 고려</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">IV.1.C</span></div>
+          <div class="rec-text">임신 24–26주까지 <strong>진행하지 않거나</strong>, 임신 <strong>20주 이후</strong> 진단된 갑상선유두암 → <strong>출산 이후 수술</strong> 고려</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">ℹ️ 임신 중 갑상선수술 최적 시기는 임신 2분기(14–26주). 태아 기형·유산 위험 최소화.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🎯 IV.2–3. 임신 중 TSH 조절 및 추적</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">IV.2.A</span></div>
+          <div class="rec-text">임신 중 TSH — <strong>임신 직전 조절 목표</strong>에 맞추어 조절</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">IV.2.B</span></div>
+          <div class="rec-text">임신 중 TSH 검사 — <strong>16–20주까지 4–8주마다</strong>, 이후 최소 <strong>26–32주 사이 1회 이상</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">IV.3.A</span></div>
+          <div class="rec-text">임신 직전 ORS <strong>완전반응(ER)</strong> → 임신 중 갑상선초음파·Tg 추적검사 <strong>필요 없음</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">IV.3.B</span></div>
+          <div class="rec-text">임신 직전 ORS <strong>생화학적·구조적·불명확반응</strong> → 임신 중 갑상선초음파·Tg 추적검사 <strong>고려</strong></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">💊 IV.4. 칼슘/비타민D 모니터링</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">IV.4.A</span></div>
+          <div class="rec-text">수술 후 <strong>부갑상선기능저하증</strong> 있는 임신부 — 임신 중 <strong>알부민 조정 Ca 또는 이온화 Ca 주기적 측정</strong>, 경구 Ca·비타민D 조정</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: Part V — 소아 ══════════════ -->
+<div id="tab-part5" class="panel">
+  <div class="section-title"><span class="sec-badge">Part V</span> 소아 갑상선분화암</div>
+  <div class="alert alert-info">ℹ️ 소아 DTC는 성인보다 종양이 크고 주변조직 침범·림프절전이·폐전이 빈도 높음. 재발률 높으나 사망률 낮고 <strong>장기 생존 예후 양호</strong>. 유두암 80–90%, 여포암 &lt;10%.</div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">✂️ V.3. 소아 갑상선암 수술 원칙</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.3.1.A</span></div>
+          <div class="rec-text">소아 갑상선분화암 — <strong>갑상선전절제술 우선</strong> 고려</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">V.3.1.B</span></div>
+          <div class="rec-text">저위험군 소아 미세갑상선유두암 — <strong>갑상선엽절제술</strong> 고려 가능</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.3.1.C</span></div>
+          <div class="rec-text">수술 전·중 중앙경부 또는 측경부 LN전이 확인 소아 → <strong>치료적 중앙경부 LN절제술</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.3.1.E</span></div>
+          <div class="rec-text">수술 전 측경부 LN전이 명백한 소아 → <strong>치료적 측경부 LN절제술</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl3">3</span><span class="rec-code">V.3.1.F</span></div>
+          <div class="rec-text">소아 갑상선분화암 수술 — <strong>숙련된 외과의</strong>에 의한 시행 고려</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">⚠️ V.4.1. 소아위험수준 3단계 분류</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="kta-table">
+        <thead><tr><th>위험수준</th><th>기준</th><th>수준</th></tr></thead>
+        <tbody>
+          <tr class="hl-row">
+            <td><span class="pill pill-green">저위험군</span></td>
+            <td>ETE 없음, LN전이 없거나 N0/Nx 또는 예방적 중앙경부 LN절제 후 발견된 미세전이(≤0.2 cm)가 있는 N1a</td>
+            <td><span class="rl rl2">2</span></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-yellow">중간위험군</span></td>
+            <td>광범위한 N1a 또는 미세전이가 있는 N1b</td>
+            <td><span class="rl rl2">2</span></td>
+          </tr>
+          <tr class="danger-row">
+            <td><span class="pill pill-red">고위험군</span></td>
+            <td>진행된 원발암(T4) 또는 광범위한 N1b; 원격전이 동반 가능</td>
+            <td><span class="rl rl2">2</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.4.2.C</span></div>
+          <div class="rec-text">LT4 용량 변화 가능한 성장기 소아 → <strong>3–6개월 간격</strong> 추적검사</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.4.2.D</span></div>
+          <div class="rec-text">부갑상선기능저하증 동반 성장기 소아 (Ca·VitD 요구량 증가) → <strong>3–6개월 간격</strong> 추적</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">☢️ V.5. 소아 방사성요오드 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.5.A</span></div>
+          <div class="rec-text">소아 RAI 치료 — <strong>이득과 위험에 대한 다학제적 평가</strong> 기반 결정</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.5.B</span></div>
+          <div class="rec-text">RAI 섭취 있는 소아 DTC의 <strong>폐 미세전이</strong> → RAI 치료 시행</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.5.C</span></div>
+          <div class="rec-text">수술적 절제 불가능한 지속 병소로 RAI 섭취 있는 경우 → RAI 치료 고려</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span class="ch-title">🔄 V.6–7. 소아 재발·지속병소 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.6.A</span></div>
+          <div class="rec-text">추적 중 Tg 또는 TgAb 상승 시 → <strong>경부 초음파 우선 시행</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.6.B</span></div>
+          <div class="rec-text">수술 가능한 경부 재발 — <strong>수술 우선</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl1">1</span><span class="rec-code">V.6.E</span></div>
+          <div class="rec-text">추적 중 새로 발견된 폐전이, RAI 섭취 있으면 → <strong>RAI 치료</strong> 시행</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-meta"><span class="rl rl2">2</span><span class="rec-code">V.7.C</span></div>
+          <div class="rec-text">수술 불가 RAIR 소아 갑상선유두암 진행 시 → <strong>유전자 변이 기반 전신항암치료</strong> 고려</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const abbrs = [
+  {t:'DTC', d:'갑상선분화암 (Differentiated Thyroid Cancer)'},
+  {t:'PTC', d:'갑상선유두암 (Papillary Thyroid Carcinoma)'},
+  {t:'FTC', d:'갑상선여포암 (Follicular Thyroid Carcinoma)'},
+  {t:'PTMC', d:'갑상선유두미세암 (Papillary Thyroid Microcarcinoma, ≤1 cm)'},
+  {t:'ETE', d:'갑상선외부침범 (Extrathyroidal Extension)'},
+  {t:'RAI', d:'방사성요오드 (Radioactive Iodine, ¹³¹I)'},
+  {t:'RAIR', d:'방사성요오드 불응성 (Radioactive Iodine Refractory)'},
+  {t:'TSH', d:'갑상선자극호르몬 (Thyroid Stimulating Hormone)'},
+  {t:'Tg', d:'갑상선글로불린 (Thyroglobulin)'},
+  {t:'TgAb', d:'갑상선글로불린항체 (Anti-Thyroglobulin Antibody)'},
+  {t:'LT4', d:'레보티록신 (Levothyroxine)'},
+  {t:'rhTSH', d:'재조합인간 TSH (Recombinant Human TSH, Thyrogen®)'},
+  {t:'FNA', d:'세침흡인검사 (Fine Needle Aspiration)'},
+  {t:'CNB', d:'중심바늘생검 (Core Needle Biopsy)'},
+  {t:'ORS', d:'지속적위험분류 (Ongoing Risk Stratification)'},
+  {t:'ER', d:'완전반응 (Excellent Response) — ORS'},
+  {t:'BIR', d:'생화학적 불완전반응 (Biochemical Incomplete Response) — ORS'},
+  {t:'SIR', d:'구조적 불완전반응 (Structural Incomplete Response) — ORS'},
+  {t:'IDR', d:'불명확반응 (Indeterminate Response) — ORS'},
+  {t:'AJCC', d:'미국암합동위원회 (American Joint Committee on Cancer)'},
+  {t:'K-TIRADS', d:'한국 갑상선 영상 보고 체계 (Korean Thyroid Imaging Reporting and Data System)'},
+  {t:'SPECT/CT', d:'단일광자방출 컴퓨터단층촬영 (Single-Photon Emission CT)'},
+  {t:'PET/CT', d:'양전자방출단층촬영 (Positron Emission Tomography/CT)'},
+  {t:'BRAF', d:'BRAF V600E 돌연변이 — DTC 공격성 예측 인자'},
+  {t:'TERT', d:'텔로머라제역전사효소 (Telomerase Reverse Transcriptase) 프로모터 돌연변이'},
+  {t:'NTRK', d:'신경영양수용체 티로신키나제 융합유전자 (Neurotrophic Receptor Tyrosine Kinase fusion)'},
+  {t:'RET', d:'RET 융합유전자 — 셀퍼카티닙/프랄세티닙 표적'},
+  {t:'PTH', d:'부갑상선호르몬 (Parathyroid Hormone)'},
+  {t:'25(OH)D', d:'25-하이드록시비타민D (25-Hydroxyvitamin D)'},
+  {t:'RECIST', d:'고형종양 치료반응 평가기준 (Response Evaluation Criteria in Solid Tumors)'},
+  {t:'KTA', d:'대한갑상선학회 (Korean Thyroid Association)'},
+  {t:'LN', d:'림프절 (Lymph Node)'},
+  {t:'WHO', d:'세계보건기구 (World Health Organization)'},
+];
+
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.getElementById('abbr-dd').style.display = 'none';
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const icon = hdr.querySelector('.acc-icon');
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '▾' : '▴';
+}
+
+function toggleP4(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleChg(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(val) {
+  const dd = document.getElementById('abbr-dd');
+  const grid = document.getElementById('abbr-grid');
+  const cnt = document.getElementById('abbr-cnt');
+  const q = val.trim().toLowerCase();
+  const filtered = q === '' ? abbrs : abbrs.filter(a => a.t.toLowerCase().includes(q) || a.d.toLowerCase().includes(q));
+  grid.innerHTML = filtered.map(a =>
+    `<div class="abbr-item"><span class="abbr-term">${a.t}</span><span class="abbr-def">${a.d}</span></div>`
+  ).join('');
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  dd.style.top = (rect.bottom + 4) + 'px';
+  dd.style.right = '8px';
+  dd.style.left = 'auto';
+  cnt.textContent = filtered.length || '';
+  dd.style.display = 'block';
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const dd = document.getElementById('abbr-dd');
+  if (inp && !inp.contains(e.target) && dd && !dd.contains(e.target)) dd.style.display = 'none';
+});
+
+// 초기 카드 상태
+document.querySelectorAll('.card-header').forEach(hdr => {
+  if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+});
+</script>
+</body>
+</html>

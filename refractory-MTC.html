@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>불응성 갑상선수질암(MTC) 합의 권고 — ENDOCAN-TUTHYREF 2025</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --teal: #0f766e;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: #7c3aed;
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); text-align: center; }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 14px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: #7c3aed; border-bottom-color: #7c3aed; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #7c3aed; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  /* ── GRADE ── */
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .badge-ret  { background: #f0fdf4; color: #166534; border: 1px solid #22c55e; }
+  .badge-ras  { background: #eff6ff; color: #1e40af; border: 1px solid #3b82f6; }
+  .badge-wt   { background: #fefce8; color: #854d0e; border: 1px solid #eab308; }
+  .badge-1st  { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+  .badge-2nd  { background: #fff0f0; color: #82071e; border: 1px solid #cf222e; }
+  .badge-3rd  { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .badge-hi   { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .badge-lo   { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .badge-new  { background: #e0f2fe; color: #075985; border: 1px solid #0ea5e9; }
+
+  /* ── TOOLTIP ── */
+  .badge::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .badge::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .badge:hover::after, .badge:hover::before { display: block; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-purple  { background: #f5f0ff; border-left: 3px solid #7c3aed;        color: #5b21b6; }
+  .alert-teal    { background: #f0fdfa; border-left: 3px solid var(--teal);    color: #134e4a; }
+
+  /* ── TABLE ── */
+  .mtc-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .mtc-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .mtc-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .mtc-table tr:last-child td { border-bottom: none; }
+  .mtc-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .mtc-table .hl td { background: #f5f0ff; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: #7c3aed; }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── FLOW ── */
+  .flow-step { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; border-radius: 6px; margin-bottom: 4px; }
+  .flow-num  { font-weight: 700; min-width: 26px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: #7c3aed; font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  /* drug boxes */
+  .drug-box { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; background: var(--surface); }
+  .drug-name { font-size: calc(14px * var(--fscale, 1)); font-weight: 700; color: #7c3aed; margin-bottom: 6px; }
+  .drug-sub  { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">ENDOCAN-TUTHYREF 2025</span>
+      <h1>불응성 갑상선수질암(MTC) 합의 권고</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1016/j.ando.2025.101733" class="source-link" target="_blank">Annales d'Endocrinologie 2025;86:101733 ↗</a>
+      <span class="meta"> · Lasolle H, Do Cao C, Lamartina L, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">French INCa ENDOCAN-TUTHYREF rare-cancer network consensus | This tool is not officially endorsed</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요·예후</div>
+    <div class="tab" onclick="showTab('molecular',this)">🧬 분자 이상</div>
+    <div class="tab" onclick="showTab('timing',this)">⏱️ 치료 시작</div>
+    <div class="tab" onclick="showTab('therapy',this)">💊 전신치료</div>
+    <div class="tab" onclick="showTab('algorithm',this)">🗺️ 치료 알고리즘</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════ OVERVIEW ═══════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">2–5%</div><div class="stat-lbl">전체 갑상선암 중 MTC 비율 (여성 2–3%, 남성 4–5%)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">9.5년</div><div class="stat-lbl">전이성 MTC 중앙 전체 생존기간 (ENDOCAN-TUTHYREF, n=355)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">~20%</div><div class="stat-lbl">전이성 MTC 10년 생존율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">95%</div><div class="stat-lbl">국소 MTC 10년 생존율</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📌</span> 불응성 MTC 정의 및 배경</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple">
+        <span>🔑</span>
+        <div><strong>불응성(refractory) MTC</strong> = 모든 <strong>전이성</strong> MTC + <strong>절제 불가능한 국소 진행성</strong> MTC. 분화 갑상선암의 불응성 정의와 유사하게 적용.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td style="font-weight:600">산발성 비율</td><td>75–80% (나머지 20–25% 유전성)</td></tr>
+            <tr><td style="font-weight:600">전이성 MTC 발생률</td><td>진단 시 10–30%</td></tr>
+            <tr><td style="font-weight:600">진단 시 림프절 전이</td><td>45%</td></tr>
+            <tr><td style="font-weight:600">프랑스 연간 신규</td><td>50–60명 (불응성 기준)</td></tr>
+            <tr><td style="font-weight:600">5년 생존율 (전이성)</td><td>69% (ENDOCAN 코호트)</td></tr>
+            <tr><td style="font-weight:600">15년 생존율 (전이성)</td><td>40% (ENDOCAN 코호트)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>전이성 MTC의 임상 경과는 환자마다 <strong>매우 다양</strong>: 매우 서서히 성장하는 환자부터 급격히 진행하는 환자까지. 개별 예후 예측이 어렵다.</div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:0">
+            <span>📈</span>
+            <div>최근 시리즈에서 전이성 MTC 예후가 이전보다 다소 개선된 결과 보고 — 치료 발전(표적치료)에 기인한 것으로 추정.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 예후 인자 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 예후 인자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">① 생물학적 예후 인자 — Calcitonin 배가 시간</div>
+          <table class="mtc-table">
+            <tr><th>Calcitonin 배가 시간</th><th>예후</th></tr>
+            <tr style="background:#ffebe9"><td><strong>&lt;6개월</strong></td><td><span class="badge badge-hi" data-tip="나쁜 예후">불량</span> — 생존율 현저히 저하</td></tr>
+            <tr><td>6–24개월</td><td>중간 예후</td></tr>
+            <tr style="background:#dafbe1"><td><strong>&gt;24개월</strong></td><td><span class="badge badge-lo" data-tip="좋은 예후">양호</span> — 생존율 양호</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:8px">
+            <span>ℹ️</span>
+            <div>Calcitonin 배가 시간 = 신뢰할 수 있는 예후 표지자. CEA 배가 시간도 함께 활용.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">② 조직학적 예후 인자 — IMTCGS (2022)</div>
+          <div class="alert alert-purple" style="margin-bottom:6px">
+            <span>🔬</span>
+            <div><strong>국제 MTC 등급 시스템(IMTCGS)</strong>: 2022년 도입. 증식 활성도 + 종양 괴사를 기반으로 2단계 분류. 2022 WHO 갑상선 종양 분류에 수록.</div>
+          </div>
+          <table class="mtc-table">
+            <tr><th>등급</th><th>기준</th><th>예후</th></tr>
+            <tr style="background:#dafbe1">
+              <td><span class="badge badge-lo">저등급</span></td>
+              <td>아래 3가지 모두 해당 없음</td>
+              <td>전체·질병 특이·원격전이·국소재발 생존↑</td>
+            </tr>
+            <tr style="background:#ffebe9">
+              <td><span class="badge badge-hi">고등급</span></td>
+              <td>아래 중 <strong>≥1개</strong> 해당:<br>
+                • 유사분열 지수 ≥5/2 mm²<br>
+                • Ki67 증식 지수 ≥5%<br>
+                • 종양 괴사</td>
+              <td>전체·질병 특이 생존↓ (독립적 인자)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════ MOLECULAR ═══════ -->
+<div id="tab-molecular" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> MTC 분자 이상 — 어떤 검사를 해야 하는가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>RET 원발암유전자(10q11.2, 21개 엑손)는 막횡단 티로신 키나아제 수용체를 코딩. 활성화 시 MAPK·PI3K 경로 과발현 → 세포 생존·증식·이동·혈관신생 능력 부여.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">생식세포 RET 돌연변이 (유전성 MTC)</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>비율</td><td>전체 MTC의 약 25%</td></tr>
+            <tr><td>주요 위치</td><td>Exon 8, 10, 11, 13, 14, 15, 16 (시스테인·티로신 도메인)</td></tr>
+            <tr><td>개념</td><td>제2형 다발성 내분비 신생물(MEN2) 연관</td></tr>
+            <tr><td>임상 의의</td><td>MTC 진단 즉시 체계적 검사 필수</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">체세포 RET 돌연변이 (산발성 MTC)</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>산발성 MTC 전체</td><td>~50–60%에서 체세포 RET 돌연변이</td></tr>
+            <tr><td>전이성·불응성 MTC</td><td><strong>최대 80%</strong>에서 검출</td></tr>
+            <tr><td>M918T (exon 16)</td><td>가장 흔함 (~70–80% 산발성 전이성). 공격성 증가와 연관</td></tr>
+            <tr><td>미세암</td><td>M918T 비율 낮음 (소수)</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAS 및 기타 돌연변이 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> RAS 및 기타 분자 이상</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="mtc-table">
+            <tr><th>유전자</th><th>빈도</th><th>특징</th></tr>
+            <tr>
+              <td><strong>HRAS / KRAS</strong></td>
+              <td>산발성 MTC ~20%<br>RET 야생형 MTC ~60%</td>
+              <td>RET 돌연변이와 거의 상호 배타적. 치료 표적 가능성 연구 중 (현재 MTC 허가 적응증 없음)</td>
+            </tr>
+            <tr>
+              <td>MET, FGFR, PDGFR</td>
+              <td>낮은 빈도</td>
+              <td>재발성 돌연변이로 보고됨</td>
+            </tr>
+            <tr>
+              <td>ALK fusion</td>
+              <td>극히 드묾</td>
+              <td>산발성 MTC에서 드물게 보고</td>
+            </tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>181명 산발성 MTC NGS 분석: <strong>&gt;80%</strong>에서 분자 이상 확인 — 주로 RET 또는 RAS 점 돌연변이.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">RET 억제제 치료 중 내성 기전</div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div>선택적 RET 억제제 치료 중 <strong>이차 진행</strong> 발생 가능. 내성 기전:</div>
+          </div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2;margin-top:4px">
+            <li>• <strong>On-target 내성</strong>: RET 유전자 내 내성 돌연변이 획득 (L730I, G810S 등)</li>
+            <li>• <strong>Off-target 내성</strong> (더 흔함): 우회 기전 — MET, NTRK, RAS 증폭 등</li>
+          </ul>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>🔬</span>
+            <div>진행 병변 생검으로 내성 돌연변이 확인 가능. 접근 불가 병변 시 액체 생검(순환종양 DNA) 고려. 일부 환자에서 항-RET 치료 후 탈분화 조직학 보고.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 분자 검사 권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 분자 유전자 검사 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>체세포 분자 이상 검사의 <strong>주요 목적</strong>: ① 선택적 억제제에 대한 반응 예측 (치료 유도) ② 치료 실패 또는 내성 원인 파악.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">검사 적응증</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="badge badge-new" data-tip="권고">권고</span></div>
+              <div class="rec-text">수술 불가 국소 진행성 암</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="badge badge-new" data-tip="권고">권고</span></div>
+              <div class="rec-text">전신치료가 고려되는 진행성 전이암</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="badge badge-new" data-tip="권고">권고</span></div>
+              <div class="rec-text">RET 표적 전신치료 실패 시</div>
+            </li>
+          </ul>
+          <div class="alert alert-success" style="margin-top:6px">
+            <span>✅</span>
+            <div>불응성 MTC 진단 즉시 분자 유전자 검사 시행 권고 — 전신치료 적응증이 즉각적이지 않더라도. 조직은 시간이 지남에 따라 핵산 추출 품질 저하.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">검사 방법</div>
+          <table class="mtc-table">
+            <tr><th>방법</th><th>내용</th></tr>
+            <tr><td><strong>NGS (권장)</strong></td><td>광범위 유전자 분석 권고. 주로 점 돌연변이 스크리닝 → DNA 염기서열 분석 우선. 동결 또는 FFPE 조직 모두 사용 가능</td></tr>
+            <tr><td>실시간 PCR</td><td>NGS 접근 불가 시 더 표적화된 대안 방법</td></tr>
+            <tr><td>IHC</td><td>돌연변이 검출에 <strong>검증된 방법 없음</strong> — 사용 불가</td></tr>
+            <tr><td>액체 생검 (ctDNA)</td><td>접근 불가 병변 시 고려. MTC 데이터 제한적이나 고무적</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>🇫🇷</span>
+            <div><strong>프랑스 특이사항</strong>: RET/RAS 돌연변이 없거나 항-RET 치료 후 진행 시 → <em>France Médecine Génomique</em> 계획 하에 광범위 염기서열 분석 가능 (ENDOCAN-TUTHYREF 종양 위원회 승인 필요). 2023년 10월부터 최신 FFPE 블록도 분석 가능.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /molecular -->
+
+<!-- ═══════ TIMING ═══════ -->
+<div id="tab-timing" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⏱️</span> 전신치료 시작 시기 — 언제, 어떻게 준비할 것인가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple">
+        <span>📌</span>
+        <div>전신치료 시작의 핵심 과제: <strong>적절한 시기 결정</strong> — 예상 편익 대비 허용 가능한 부작용으로 질병 조절 달성. 치료 결정은 <strong>항상 개별화</strong>되어야 하며 내분비 종양학 전문가를 포함한 다학제 종양 위원회에서 결정.</div>
+      </div>
+
+      <div style="margin-top:10px;font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">전신치료 시작 결정 기준 (Fig. 1 기반)</div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+        <div class="flow-step" style="background:#ffebe9;border-left:3px solid var(--red)">
+          <span class="flow-num" style="color:var(--red)">즉시</span>
+          <div><strong>증상 있음 + 종양 부하 高</strong> → 전신치료</div>
+        </div>
+        <div class="flow-step" style="background:#fff8c5;border-left:3px solid var(--yellow)">
+          <span class="flow-num" style="color:var(--yellow)">고려</span>
+          <div><strong>증상 없음 + 12개월 내 유의미한 성장 + 종양 부하 高</strong> → 전신치료</div>
+        </div>
+        <div class="flow-step" style="background:#ddf4ff;border-left:3px solid var(--accent2)">
+          <span class="flow-num" style="color:var(--accent2)">국소</span>
+          <div><strong>증상 없음 + 12개월 내 유의미한 성장 + 종양 부하 低</strong> → 국소 치료</div>
+        </div>
+        <div class="flow-step" style="background:#dafbe1;border-left:3px solid var(--green)">
+          <span class="flow-num" style="color:var(--green)">관찰</span>
+          <div><strong>증상 없음 + 성장 없음 + 종양 부하 低</strong> → 적극적 모니터링</div>
+        </div>
+        <div class="flow-step" style="background:#ddf4ff;border-left:3px solid var(--accent2)">
+          <span class="flow-num" style="color:var(--accent2)">국소</span>
+          <div><strong>증상 있음 + 종양 부하 低</strong> → 국소 치료</div>
+        </div>
+      </div>
+
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">전신치료 전 준비 사항</div>
+          <div class="alert alert-teal">
+            <span>📌</span>
+            <div>표적치료 부작용을 사전에 예방하고 중증도를 줄이기 위해 <strong>환자 준비</strong>가 필수.</div>
+          </div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2;margin-top:6px">
+            <li>• <strong>심혈관계</strong>: 고혈압, 심부전, QTc 연장 예방·모니터링</li>
+            <li>• <strong>신장</strong>: 단백뇨 평가</li>
+            <li>• <strong>소화기</strong>: 오심/구토, 설사 예방</li>
+            <li>• <strong>영양</strong>: 체중 감소, 근감소증 평가</li>
+            <li>• <strong>피부</strong>: 수족 각화증, 피부 발진, 구내염 대비</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">다학제 팀 구성</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 종양내과의 / 내분비내과의</li>
+            <li>• 심장내과의 (QTc 모니터링)</li>
+            <li>• 신장내과의 (단백뇨)</li>
+            <li>• 임상약사</li>
+            <li>• 영양사</li>
+            <li>• 코디네이터 간호사 / 전문간호사</li>
+          </ul>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>치료 시작 <strong>전</strong>부터 다학제 팀 구성 필요. 삶의 질·심리·사회적 상황 평가. 주요 독성 예방·관리를 위한 환자 교육 강력 권장.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 국소 치료 역할 -->
+      <div class="sec-sep"></div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">국소 치료의 역할</div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div><strong>과소전이(oligometastatic) 질환</strong> 또는 과소전이적 진행 시 국소 치료 우선 고려.</div>
+          </div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9;margin-top:4px">
+            <li>• <strong>수술</strong>: 단발 전이 절제 가능 시</li>
+            <li>• <strong>방사선치료</strong>: 국소 제어 목적</li>
+            <li>• <strong>중재 방사선학</strong>: 열절제술(thermoablation) 등</li>
+          </ul>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚠️</span>
+            <div>전신치료 시작 <strong>전</strong> 국소 제어가 필요한 상황:</div>
+          </div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9;margin-top:4px">
+            <li>• 증상을 일으키는 전이</li>
+            <li>• 합병증 위험이 있는 전이 (골 전이, 조절되지 않는 뇌 전이)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /timing -->
+
+<!-- ═══════ THERAPY ═══════ -->
+<div id="tab-therapy" class="panel">
+
+  <!-- Phase 3 시험 요약표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> MTC Phase 3 임상시험 요약 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="mtc-table">
+        <tr>
+          <th>약제</th>
+          <th>분자 표적</th>
+          <th>시험 디자인</th>
+          <th>무진행 생존기간 (PFS)</th>
+          <th>반응률 (ORR)</th>
+          <th>특기 사항</th>
+        </tr>
+        <tr style="background:#f5f0ff">
+          <td>
+            <strong>Vandetanib</strong><br>
+            <small>300 mg/일</small><br>
+            <small>ZETA trial</small>
+          </td>
+          <td>VEGFR, EGFR, c-Kit, RET</td>
+          <td>vs. 위약 (진행 증거 불필요)</td>
+          <td><strong>30.5개월</strong> vs. 19.5개월</td>
+          <td>45% vs. 13%</td>
+          <td>전체 생존기간 차이 없음. 2017 사후 분석: 진행 환자에서 PFS 21.4 vs. 8.4개월</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Cabozantinib</strong><br>
+            <small>140 mg/일</small><br>
+            <small>EXAM trial</small>
+          </td>
+          <td>VEGFR, MET, RET, AXL</td>
+          <td>vs. 위약 (14개월 내 진행 기준)</td>
+          <td><strong>11.2개월</strong> vs. 4개월</td>
+          <td>28% vs. 0%</td>
+          <td>반응 지속기간 14개월. 전체 생존기간 차이 없음. 용량 감소 80%, 불내성 중단 20%</td>
+        </tr>
+        <tr class="hl">
+          <td>
+            <strong>Selpercatinib</strong> <span class="badge badge-new">신규</span><br>
+            <small>160 mg × 2회/일</small><br>
+            <small>LIBRETTO-531</small>
+          </td>
+          <td>RET (선택적)</td>
+          <td>vs. MKI (Vandetanib 또는 Cabozantinib) (14개월 내 진행 기준, RET 변이 양성, 치료 미경험)</td>
+          <td><strong>미도달</strong> vs. 16.8개월</td>
+          <td>69% vs. 39%</td>
+          <td>종양 축소 69% vs. 40%. 진행 위험 72% 감소. 용량 감소 39% vs. 77%, 중단 4.8% vs. 27%. <strong>EMA 승인 + 프랑스 1차 급여</strong> (RET 변이 양성)</td>
+        </tr>
+      </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">MKI: 다중키나아제 억제제 | ORR: 객관적 반응률 | PFS: 무진행 생존기간</div>
+    </div>
+  </div>
+
+  <!-- MKI 상세 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 1세대 다중키나아제 억제제(MKI)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div class="drug-box">
+          <div class="drug-name">Vandetanib</div>
+          <div class="drug-sub">ZETA 연구 (2012) | 300 mg/일 경구</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>표적</td><td>RET, VEGFR, EGFR</td></tr>
+            <tr><td>대상</td><td>절제 불가(5%) 또는 전이성(95%) MTC 331명</td></tr>
+            <tr><td>PFS</td><td>30.5개월 (위약 19.3개월)</td></tr>
+            <tr><td>ORR</td><td>45%</td></tr>
+            <tr><td>전체 생존기간</td><td>두 군 간 차이 없음</td></tr>
+            <tr><td>Grade 3–4 이상반응</td><td>환자의 50%: 설사, 고혈압, QT 연장</td></tr>
+            <tr><td>용량 감소</td><td>1/3 환자, 불내성 중단 12%</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div><strong>EMA 제한사항</strong>: RET 변이 양성 환자에만 유럽 승인 제한 (ZETA 연구에서 RET 음성 환자 효과 미입증). 프랑스: 진행성·전이성 MTC 1차 급여 (RET 음성 포함 — 국가 정책 차이).</div>
+          </div>
+        </div>
+        <div class="drug-box">
+          <div class="drug-name">Cabozantinib</div>
+          <div class="drug-sub">EXAM 연구 (2013) | 140 mg/일 경구</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>표적</td><td>RET, VEGFR, MET, AXL</td></tr>
+            <tr><td>대상</td><td>RECIST 기준 14개월 내 진행 MTC 330명</td></tr>
+            <tr><td>PFS</td><td>11.2개월 (위약 4개월)</td></tr>
+            <tr><td>ORR</td><td>27%, 반응 지속기간 14개월</td></tr>
+            <tr><td>전체 생존기간</td><td>차이 없음</td></tr>
+            <tr><td>Grade 3–4 이상반응</td><td>75%: 설사, 수족증후군, 고혈압, 변비, 구토, 점막염</td></tr>
+            <tr><td>용량 감소</td><td>80%, 불내성 중단 20%</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>RET 또는 RAS 변이 MTC 모두에서 유효. c-MET 표적으로 Selpercatinib 내성 기전의 일부(MET 우회) 극복 가능.</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>📊</span>
+        <div>메타분석(Phase I–III + 실제 임상 후향적 연구): <strong>Vandetanib 39%</strong>, <strong>Cabozantinib 66%</strong>에서 불내성으로 인한 치료 중단. 두 약제의 환자 포함 기준이 상이하여 직접 효능 비교 불가.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selpercatinib -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 선택적 RET 억제제 — Selpercatinib <span style="font-size: calc(11px * var(--fscale, 1));color:#7c3aed">(표준치료 전환)</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple">
+        <span>🔑</span>
+        <div>Selpercatinib은 V804 내성 돌연변이를 포함한 다양한 RET 돌연변이에 활성을 가진 고선택적 RET 억제제. <strong>LIBRETTO-531 시험</strong>에서 MKI 대비 우월성 입증 → EMA 승인 + 프랑스 급여.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="drug-box">
+          <div class="drug-name">Selpercatinib (LOXO-292)</div>
+          <div class="drug-sub">LIBRETTO-531 Phase III (2023) | 160 mg × 2회/일</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>대상</td><td>전이성·국소진행성 RET 변이 MTC 291명 (14개월 내 진행, 치료 미경험)</td></tr>
+            <tr><td>비교군</td><td>Cabozantinib 또는 Vandetanib (연구자 선택, 2:1 무작위)</td></tr>
+            <tr><td>PFS</td><td><strong>미도달</strong> vs. 16.8개월</td></tr>
+            <tr><td>진행 위험 감소</td><td><strong>72%</strong> 감소</td></tr>
+            <tr><td>ORR</td><td><strong>69%</strong> vs. 40%</td></tr>
+            <tr><td>종양 축소</td><td>69% vs. 40%</td></tr>
+            <tr><td>용량 감소</td><td>39% vs. 77%</td></tr>
+            <tr><td>치료 중단</td><td><strong>4.8% vs. 27%</strong></td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">LIBRETTO-001 Phase I–II 결과 (2020)</div>
+          <table class="mtc-table">
+            <tr><th>환자군</th><th>반응률</th></tr>
+            <tr><td>1차 치료 환자</td><td><strong>73%</strong></td></tr>
+            <tr><td>1년 반응 유지율</td><td><strong>93%</strong></td></tr>
+            <tr><td>Cabozantinib/Vandetanib 이전 치료 환자</td><td><strong>69%</strong></td></tr>
+          </table>
+          <div class="alert alert-success" style="margin-top:8px">
+            <span>✅</span>
+            <div>이상반응(고혈압, 간효소 상승, 설사, 저나트륨혈증): 용량 감소 30%, 치료 중단 <strong>단 2%</strong>. MKI 대비 현저히 우수한 내약성.</div>
+          </div>
+          <div class="alert alert-teal" style="margin-top:0">
+            <span>🇪🇺</span>
+            <div><strong>EMA 승인</strong>: RET 변이 양성 진행성 MTC의 1차 치료. <strong>프랑스 급여</strong>: RET 변이 양성 환자 1차 치료.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기타 치료 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 기타 치료 옵션 (2차·3차 이상)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="osa-acc">
+            <div class="osa-hdr" onclick="toggleOsa(this)">
+              <span>알킬화제 — Dacarbazine 기반 화학요법</span>
+              <span class="osa-arrow">▾ 펼치기</span>
+            </div>
+            <div class="osa-body">
+              <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+                <li>• 5-FU + Dacarbazine 병용 (소규모 후향 연구)</li>
+                <li>• 급격히 진행하고 통상 치료 내성인 일부 MTC에서 효과 시사</li>
+                <li>• <strong>적응증</strong>: 유효한 치료 대안 없는 2–3차 이상 진행 시</li>
+                <li>• 알킬화제 유도 고종양 돌연변이 부담(TMB-H) + 면역관문억제제 반응 증례 보고</li>
+              </ul>
+            </div>
+          </div>
+          <div class="osa-acc" style="margin-top:4px">
+            <div class="osa-hdr" onclick="toggleOsa(this)">
+              <span>Lenvatinib — 비선택적 VEGFR 억제제</span>
+              <span class="osa-arrow">▾ 펼치기</span>
+            </div>
+            <div class="osa-body">
+              <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+                <li>• 단일군 Phase 2 시험에서 효과 시사</li>
+                <li>• 유효 치료 대안 없을 때 2–3차로 고려 가능</li>
+                <li>• MTC에서 허가 적응증 없음</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="osa-acc">
+            <div class="osa-hdr" onclick="toggleOsa(this)">
+              <span>면역관문억제제 — Pembrolizumab 등</span>
+              <span class="osa-arrow">▾ 펼치기</span>
+            </div>
+            <div class="osa-body">
+              <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+                <li>• 통상 치료 실패 환자에서 잠재적 옵션 — 예비 연구</li>
+                <li>• 특히 <strong>RET 비변이</strong> 환자 대상</li>
+                <li>• <strong>적응증 조건</strong>: 높은 종양 돌연변이 부담 (TMB-H &gt;10 mut/Mb) — KEYNOTE-158 기반</li>
+                <li>• 임상시험 참여 권장</li>
+              </ul>
+            </div>
+          </div>
+          <div class="alert alert-danger" style="margin-top:6px">
+            <span>🚫</span>
+            <div>기존 세포독성 화학요법(dacarbazine 등)은 효과 제한적 — <strong>새로운 표적치료 옵션이 있는 경우 1차 치료로 사용하지 않음</strong>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /therapy -->
+
+<!-- ═══════ ALGORITHM ═══════ -->
+<div id="tab-algorithm" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 불응성 MTC 치료 의사결정 알고리즘 (Fig. 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>전신치료뿐 아니라 <strong>국소 치료</strong>(수술·방사선·중재 방사선)도 치료 전략에서 중요한 역할. 종양 범위·진행 양상·분자 특성을 고려한 개별화 다모달 관리 알고리즘.</div>
+      </div>
+
+      <!-- RET 변이 양성 -->
+      <div style="margin-top:10px">
+        <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#7c3aed;padding:8px 12px;background:#f5f0ff;border-radius:6px;border-left:3px solid #7c3aed;margin-bottom:6px">
+          🧬 RET 변이 양성 (생식세포 또는 체세포)
+        </div>
+
+        <div style="margin-left:16px">
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:4px">1차 치료</div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+            <div class="flow-step" style="background:#f5f0ff;border-left:3px solid #7c3aed">
+              <span class="flow-num" style="color:#7c3aed">①</span>
+              <div><span class="badge badge-1st">1차</span> <strong>Selpercatinib</strong> <span style="color:var(--green)">(권고)</span> — LIBRETTO-531에서 MKI 대비 PFS·ORR·내약성 모두 우월. EMA 승인·프랑스 급여.</div>
+            </div>
+            <div class="flow-step" style="background:#f5f0ff;border-left:3px solid #7c3aed">
+              <span class="flow-num" style="color:#7c3aed">①</span>
+              <div><span class="badge badge-1st">1차</span> <strong>Vandetanib</strong> <span style="color:var(--text2)">(대안)</span> — Selpercatinib 급여 전 또는 접근 불가 시.</div>
+            </div>
+            <div class="flow-step" style="background:#f5f0ff;border-left:3px solid #7c3aed">
+              <span class="flow-num" style="color:#7c3aed">①</span>
+              <div><span class="badge badge-1st">1차</span> <strong>임상시험 참여</strong> — 가능한 경우 우선 고려.</div>
+            </div>
+          </div>
+
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:4px">2차 치료 (1차에서 미사용 옵션)</div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+            <div class="flow-step" style="background:#fff0f0;border-left:3px solid var(--red)">
+              <span class="flow-num" style="color:var(--red)">②</span>
+              <div><span class="badge badge-2nd">2차</span> <strong>Vandetanib</strong> 또는 <strong>Cabozantinib</strong> — 1차에서 Selpercatinib 사용 후 진행 시.</div>
+            </div>
+            <div class="flow-step" style="background:#fff0f0;border-left:3px solid var(--red)">
+              <span class="flow-num" style="color:var(--red)">②</span>
+              <div><span class="badge badge-2nd">2차</span> <strong>Selpercatinib</strong> — 1차 MKI 이후 (LIBRETTO-001 Phase I/II 근거).</div>
+            </div>
+            <div class="flow-step" style="background:#fff0f0;border-left:3px solid var(--red)">
+              <span class="flow-num" style="color:var(--red)">②</span>
+              <div><span class="badge badge-2nd">2차</span> <strong>임상시험 참여</strong> — 가능한 경우 우선.</div>
+            </div>
+          </div>
+
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:4px">≥3차 치료 (Selpercatinib 후 진행 포함)</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div class="flow-step" style="background:#f6f8fa;border-left:3px solid var(--text2)">
+              <span class="flow-num" style="color:var(--text2)">③</span>
+              <div><span class="badge badge-3rd">3차+</span> <strong>TUTHYREF 다학제 종양 위원회</strong> 의뢰 — 내성 변이 광범위 패널 검사 + 액체 생검. 화학요법(5-FU/Dacarbazine), 기타 MKI(e.g. Lenvatinib), 임상시험, 바이오마커 기반 면역치료 고려.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-sep"></div>
+
+      <!-- RET 변이 음성 -->
+      <div>
+        <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--yellow);padding:8px 12px;background:#fffbeb;border-radius:6px;border-left:3px solid var(--yellow);margin-bottom:6px">
+          🧬 RET 변이 음성 (No RET mutation*)
+        </div>
+        <div style="margin-left:16px;font-size: calc(12px * var(--fscale, 1));color:var(--text2);margin-bottom:8px">* 체세포 및 생식세포 RET 검사 모두 음성</div>
+
+        <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+          <div class="flow-step" style="background:#fffbeb;border-left:3px solid var(--yellow)">
+            <span class="flow-num" style="color:var(--yellow)">①</span>
+            <div><span class="badge badge-1st">1차</span> <strong>Cabozantinib</strong> 또는 <strong>Vandetanib</strong> — 위약 대비 PFS 우월 (RCT 근거). 단, 이들 시험에서 RET 변이 양성 환자 수 소수.</div>
+          </div>
+          <div class="flow-step" style="background:#fffbeb;border-left:3px solid var(--yellow)">
+            <span class="flow-num" style="color:var(--yellow)">①</span>
+            <div><span class="badge badge-1st">1차</span> <strong>임상시험 참여</strong> — 가능한 경우 우선.</div>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:4px">2차 이상 (1차에서 미사용 MKI)</div>
+        <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+          <div class="flow-step" style="background:#fff0f0;border-left:3px solid var(--red)">
+            <span class="flow-num" style="color:var(--red)">②</span>
+            <div><span class="badge badge-2nd">2차</span> <strong>Vandetanib</strong> 또는 <strong>Cabozantinib</strong> (1차에서 미사용 약제) + <strong>임상시험</strong></div>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:4px">≥3차</div>
+        <div class="flow-step" style="background:#f6f8fa;border-left:3px solid var(--text2)">
+          <span class="flow-num" style="color:var(--text2)">③</span>
+          <div><span class="badge badge-3rd">3차+</span> <strong>TUTHYREF 다학제 종양 위원회</strong> — 화학요법(5-FU/Dacarbazine), 기타 MKI(Lenvatinib), 임상시험, 바이오마커 기반 면역치료(TMB-H 시 Pembrolizumab). <em>France Génomique 2025</em>를 통한 광범위 유전자 분석으로 새로운 표적 발굴.</div>
+        </div>
+      </div>
+
+      <div class="sec-sep"></div>
+
+      <div class="alert alert-purple">
+        <span>📌</span>
+        <div><strong>모든 단계에서 공통</strong>: 국소 치료(수술·방사선·중재 방사선)는 전신치료와 병행하여 치료 전략의 중요한 부분. 다학제 전문가 센터 케어 및 지역 희귀암 위원회를 통한 치료 결정 공유가 핵심.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결론 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✅</span> 결론 및 핵심 메시지</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-success">
+            <span>🎯</span>
+            <div>불응성 MTC 치료는 <strong>유전학 발전</strong>과 <strong>표적 전신치료 등장</strong>으로 최근 수년간 크게 진보.</div>
+          </div>
+          <div class="alert alert-purple" style="margin-top:0">
+            <span>🔑</span>
+            <div><strong>Selpercatinib</strong>: RET 변이 양성 MTC의 새로운 1차 표준치료. MKI 대비 PFS·ORR·내약성 모두 우월.</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:0">
+            <span>🧬</span>
+            <div>RET 억제제 내성 및 RET 변이 음성 MTC에서 치료 자원 여전히 제한적 → <em>France Génomique 2025</em> 계획을 통한 새로운 표적 발굴 기대.</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-warn">
+            <span>⚙️</span>
+            <div><strong>다학제 치료 필수</strong>: 환자의 임상 상황·종양 분자 특성·질병 진행을 개별 고려한 맞춤 치료.</div>
+          </div>
+          <div class="alert alert-teal" style="margin-top:0">
+            <span>🏥</span>
+            <div><strong>ENDOCAN-TUTHYREF 네트워크</strong>(프랑스 INCa): 전문 센터 케어 접근성 향상 + 지역·전국 희귀암 위원회를 통한 치료 결정 공유. 가이드라인: tuthyref.com</div>
+          </div>
+          <div class="alert alert-danger" style="margin-top:0">
+            <span>⚠️</span>
+            <div>표적치료는 다양한 이상반응의 <strong>선제적 모니터링·관리</strong>를 통해 삶의 질 보전과 치료 순응도 유지 필수.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /algorithm -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TABS ───
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.querySelector('.osa-arrow').textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['MTC','Medullary Thyroid Carcinoma (갑상선수질암) — 방여포 C세포 유래 신경내분비종양; RET 원발암유전자 돌연변이가 핵심 병인'],
+  ['RET','REarranged during Transfection — 10q11.2 위치 막횡단 티로신 키나아제 수용체 원발암유전자; MAPK·PI3K 경로 활성화'],
+  ['MEN2','Multiple Endocrine Neoplasia Type 2 — RET 생식세포 돌연변이 연관 유전 증후군; MTC를 공통 구성 요소로 포함'],
+  ['PFS','Progression-Free Survival (무진행 생존기간) — 치료 시작부터 진행 또는 사망까지의 기간; MTC 임상시험 일차 평가변수'],
+  ['ORR','Objective Response Rate (객관적 반응률) — RECIST 기준 완전반응 + 부분반응 합계'],
+  ['RECIST','Response Evaluation Criteria in Solid Tumors — 고형종양 치료 반응 평가 기준; 영상학적 진행 판정에 사용'],
+  ['MKI','Multikinase Inhibitor (다중키나아제 억제제) — Vandetanib, Cabozantinib 등; RET + VEGFR 등 다중 표적'],
+  ['Vandetanib','RET·VEGFR·EGFR 다중 TKI; 300 mg/일; ZETA 연구(2012); 프랑스 1차 급여 (RET 음성 포함); EMA는 RET 양성 제한'],
+  ['Cabozantinib','RET·VEGFR·MET·AXL 다중 TKI; 140 mg/일; EXAM 연구(2013); 2·3차 치료 옵션'],
+  ['Selpercatinib','선택적 RET 억제제; 160 mg×2회/일; LIBRETTO-531: MKI 대비 PFS·ORR·내약성 우월; EMA 승인·프랑스 1차 급여 (RET 변이 양성)'],
+  ['IMTCGS','International Medullary Thyroid Carcinoma Grading System — 2022년 도입 2단계 조직학적 등급; 유사분열 지수·Ki67·괴사 기반; 2022 WHO 분류 수록'],
+  ['TMB','Tumor Mutational Burden (종양 돌연변이 부담) — TMB-H(>10 mut/Mb)는 면역관문억제제 반응 예측 바이오마커'],
+  ['NGS','Next-Generation Sequencing (차세대 염기서열분석) — 불응성 MTC 분자 분석 권고 방법; 점 돌연변이 스크리닝 우선'],
+  ['ctDNA','Circulating Tumor DNA (순환종양 DNA) — 액체 생검의 핵심. RET 억제제 진행 후 내성 돌연변이 탐지에 활용. MTC 데이터 제한적이나 고무적'],
+  ['FFPE','Formalin-Fixed Paraffin-Embedded — 포르말린 고정 파라핀 포매 조직; NGS 및 분자 분석에 사용 가능'],
+  ['MAPK','Mitogen-Activated Protein Kinase — RET 활성화 시 과발현되는 주요 신호 경로; 세포 증식·생존 촉진'],
+  ['PI3K','Phosphoinositide 3-Kinase — RET 활성화 경로 중 하나; 세포 생존·이동·혈관신생 관여'],
+  ['VEGFR','Vascular Endothelial Growth Factor Receptor — MKI의 주요 표적; 항혈관신생 효과'],
+  ['EGFR','Epidermal Growth Factor Receptor — Vandetanib의 표적 중 하나'],
+  ['MET','Mesenchymal-Epithelial Transition receptor — Cabozantinib 표적; RET 억제제 내성 우회 기전에 관여'],
+  ['NTRK','Neurotrophic Tyrosine Receptor Kinase — RET 억제제 내성 우회 기전에 관여하는 융합 유전자'],
+  ['HRAS','Harvey Rat Sarcoma viral proto-oncogene — RAS 계열; RET 음성 MTC의 ~20%, RET 야생형 MTC의 ~60%에서 돌연변이'],
+  ['KRAS','Kirsten Rat Sarcoma viral proto-oncogene — RAS 계열; HRAS와 함께 MTC에서 주요 RAS 돌연변이'],
+  ['INCa','Institut National du Cancer (프랑스 국립암연구소) — ENDOCAN-TUTHYREF 희귀암 네트워크 주관 기관'],
+  ['ENDOCAN-TUTHYREF','프랑스 INCa 불응성 갑상선암 희귀암 네트워크 — 불응성 MTC 합의 권고 발행 기관; 지역·전국 종양 위원회 운영'],
+  ['Dacarbazine','알킬화제; 5-FU와 병용; 신속 진행·기존 치료 내성 MTC에서 소규모 후향 연구에서 효과 시사. 2–3차 이상'],
+  ['Lenvatinib','다중 VEGFR·FGFR·PDGFR·RET·KIT TKI; MTC에서 허가 외 2–3차 옵션; 단일군 Phase 2 근거'],
+  ['Pembrolizumab','PD-1 면역관문억제제; TMB-H(>10 mut/Mb) MTC에서 잠재적 옵션; KEYNOTE-158 기반; 임상시험 참여 권장'],
+  ['V804','RET exon 14의 내성 돌연변이 위치; Selpercatinib은 이 내성 돌연변이에도 활성 유지'],
+  ['5-FU','5-Fluorouracil — Dacarbazine과 병용하는 화학요법 약제; 불응성 MTC의 2–3차 이상 옵션'],
+  ['QTc','Corrected QT interval — 심전도 QT 간격 보정값; Vandetanib 투여 중 QTc 연장 주요 이상반응으로 정기 모니터링 필수'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

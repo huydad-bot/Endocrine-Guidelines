@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>원발성 부갑상선기능항진증(PHPT) 가이드라인 — 5차 국제 워크숍 2022</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --text: #1f2328;
+    --text2: #57606a;
+    --brand: #0f766e;   /* teal — parathyroid */
+    --brand2: #134e4a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--brand); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); text-align: center; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* TABS */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* MAIN */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* CARD */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* STAT */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--brand); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  /* GRADE */
+  .g { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .g-strong { background: #d1fae5; color: #065f46; border: 1px solid #059669; }
+  .g-weak   { background: #fef3c7; color: #78350f; border: 1px solid #d97706; }
+  .g-hi     { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .g-mod    { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .g-lo     { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .g-vlo    { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .g-ungr   { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+
+  /* TOOLTIP */
+  .g::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .g::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .g:hover::after, .g:hover::before { display: block; }
+
+  /* REC LIST */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; }
+  .rec-num { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--brand); }
+
+  /* ALERT */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-teal    { background: #f0fdfa; border-left: 3px solid var(--brand);   color: var(--brand2); }
+
+  /* TABLE */
+  .t { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .t th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .t td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .t tr:last-child td { border-bottom: none; }
+  .t tr:hover td { background: rgba(0,0,0,0.02); }
+  .t .hl td { background: #f0fdfa; }
+
+  /* ACCORDION */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ABBR */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--brand); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .val-badge { display: inline-block; background: #f0fdfa; color: var(--brand2); border: 1px solid var(--brand); border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">5th International Workshop 2022</span>
+      <h1>원발성 부갑상선기능항진증(PHPT) 평가 및 관리 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1002/jbmr.4677" class="source-link" target="_blank">J Bone Miner Res 2022;37:2293–2314 ↗</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))"> · Bilezikian JP, Khan AA, Silverberg SJ, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ASBMR</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요·진단</div>
+    <div class="tab" onclick="showTab('eval',this)">🔬 평가</div>
+    <div class="tab" onclick="showTab('surgery',this)">🔪 수술</div>
+    <div class="tab" onclick="showTab('medical',this)">💊 약물치료</div>
+    <div class="tab" onclick="showTab('monitor',this)">📊 추적관찰</div>
+    <div class="tab" onclick="showTab('pregnancy',this)">🤰 임신</div>
+    <div class="tab" onclick="showTab('recs',this)">📋 권고 전체</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">233/100,000</div><div class="stat-lbl">미국 여성 PHPT 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">85%</div><div class="stat-lbl">산발성 단일 선종 (가장 흔한 원인)</div></div>
+    <div class="stat-box"><div class="stat-val">&lt;1%</div><div class="stat-lbl">부갑상선암 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">&gt;10%</div><div class="stat-lbl">유전적 PHPT 원인 (10개 유전자)</div></div>
+  </div>
+
+  <!-- 진단 기준 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> PHPT 진단 기준 — 권고 1</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">1.1 고칼슘혈증성 PHPT</div>
+          <div class="alert alert-teal">
+            <span>📌</span>
+            <div><strong>2주 이상 간격으로 2회</strong>에 걸쳐 알부민 보정 혈청 칼슘 상승 + 상승 또는 부적절하게 정상인 온전 PTH (2세대 또는 3세대 어세이)</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:0">
+            <span>ℹ️</span>
+            <div><strong>알부민 보정</strong>: 혈청 알부민이 4 g/dL 미만 시 1 g/dL 감소당 0.8 보정. 이온화 칼슘 측정기 이용 시 알부민 보정 불필요.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">1.3 정상칼슘혈증성 PHPT (NPHPT)</div>
+          <div class="alert alert-warn">
+            <span>📌</span>
+            <div><strong>3–6개월 간격으로 2회 이상</strong>에 걸쳐 알부민 보정 총 칼슘 + 이온화 칼슘 정상 + PTH 상승. 이차성 부갑상선기능항진증의 모든 원인 배제 후 진단.</div>
+          </div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">이차성 부갑상선기능항진증 원인: CKD 3–5기, 비타민 D 결핍, 칼슘 흡수 장애, 비스포스포네이트·데노수맙 사용</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임상 표현형 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> PHPT 임상 표현형 — 권고 2</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="t">
+        <tr><th>표현형</th><th>정의</th><th>특징</th></tr>
+        <tr class="hl">
+          <td><strong>증상성 PHPT</strong><br><small>(Symptomatic)</small></td>
+          <td>명확한 골격·신장 합병증 동반</td>
+          <td>뼈 통증·낭종성 섬유골염, 골절, CKD, 신장결석/신석회화증</td>
+        </tr>
+        <tr>
+          <td><strong>무증상 PHPT</strong><br><small>(Asymptomatic)</small></td>
+          <td>생화학 스크리닝으로 발견; 명확한 증상 없음</td>
+          <td>2가지 하위형: ① 표적 장기 침범 있음 ② 표적 장기 침범 없음</td>
+        </tr>
+        <tr>
+          <td><strong>정상칼슘혈증성 PHPT</strong><br><small>(NPHPT)</small></td>
+          <td>이온화 및 총 칼슘 정상 + PTH 지속 상승</td>
+          <td>골격·신장 합병증 동반 가능. 고칼슘혈증으로 진행 가능</td>
+        </tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>DXA로 저골밀도 또는 초음파로 신장결석이 발견된 경우에도 이미 "무증상"으로 분류된 환자는 재분류하지 않음 — "표적 장기 침범 동반 무증상 PHPT"로 기술.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 감별 진단 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 고칼슘혈증·고PTH 감별 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">고칼슘혈증 + PTH 상승 (PHPT 진단 확정 전 배제)</div>
+          <table class="t">
+            <tr><th>감별 진단</th><th>구별 단서</th></tr>
+            <tr><td><strong>FHH (가족성 저칼슘뇨성 고칼슘혈증)</strong></td><td>소변 Ca/Cr 청소율 비 &lt;0.01 (70–80% 민감도). 30세 미만, 가족력. 유전자 검사 권고.</td></tr>
+            <tr><td>티아지드계 이뇨제·리튬</td><td>복약력. 약물 중단 후 수개월 재검사.</td></tr>
+            <tr><td>이소성 PTH 분비</td><td>매우 드묾</td></tr>
+            <tr><td>삼차성 부갑상선기능항진증</td><td>장기 이차성 HPT(신부전·흡수 장애) 경과 후 발생</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">고칼슘혈증 + PTH 억제 (PHPT 배제)</div>
+          <table class="t">
+            <tr><th>원인</th><th>기전</th></tr>
+            <tr><td>악성종양 (PTHrP)</td><td>PTH 교차 반응 없음. PTHrP 측정.</td></tr>
+            <tr><td>용해성 골 전이</td><td>영상 확인</td></tr>
+            <tr><td>육아종성 질환 (사르코이드증, 결핵)</td><td>1,25(OH)₂D 과잉 생산</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>비오틴 보충제는 일부 PTH 어세이에서 위음성 유발 가능 → PTH 측정 최소 48시간 전 복용 중단 권고.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유전학 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> PHPT 유전학 — 권고 3.5</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>PHPT 환자의 &gt;10%에서 10개 유전자 중 하나에서 돌연변이 발견. 유전자 검사 확인 시 치료 결정 변화 가능.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">유전자 검사 권고 대상</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 30세 미만 환자</li>
+            <li>• 병력 또는 영상으로 다선 질환</li>
+            <li>• 고칼슘혈증 가족력</li>
+            <li>• MEN1, MEN2A, MEN4, HPT-JT 증후군 의심</li>
+            <li>• 비정형 부갑상선 선종 또는 부갑상선암</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">유전자 검사 결과에 따른 치료 변화</div>
+          <table class="t">
+            <tr><th>진단</th><th>임상적 영향</th></tr>
+            <tr><td><strong>HPT-JT 증후군</strong></td><td>부갑상선암 위험↑ → 조기 양측 경부 탐색</td></tr>
+            <tr><td><strong>MEN1, MEN2</strong></td><td>다선 질환 → 양측 경부 탐색. 선택적 부갑상선 절제술 금기</td></tr>
+            <tr><td><strong>FHH</strong></td><td>대부분 수술 금기</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══ EVAL ═══ -->
+<div id="tab-eval" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> PHPT 평가 — 권고 3 (생화학·골격·신장)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">3.1 생화학 검사</div>
+          <table class="t">
+            <tr><th>검사</th><th>의의</th></tr>
+            <tr class="hl"><td>알부민 보정 혈청 칼슘<br><small>(NPHPT 의심 시 이온화 칼슘)</small></td><td>진단 및 중증도 평가</td></tr>
+            <tr><td>혈청 인(Phosphorus)</td><td>저인산혈증(PTH 과잉에 의한 인산뇨)</td></tr>
+            <tr class="hl"><td>온전 PTH</td><td>진단의 핵심</td></tr>
+            <tr><td>25OHD</td><td>비타민 D 결핍 시 PTH 추가 자극 배제</td></tr>
+            <tr class="hl"><td>크레아티닌</td><td>신기능 평가</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>골표지자(bone turnover markers)는 표준 평가에 불필요. PTX 후 BMD 변화 예측에 대한 가치도 불확실.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">3.2 골격 평가</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"></div>
+              <div class="rec-text"><strong>3부위 DXA</strong>: 요추, 고관절, 원위 1/3 요골 — PHPT에서 피질골 감소(요골 우선)가 전형적이나 모든 패턴 가능</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"></div>
+              <div class="rec-text"><strong>척추 골절 영상</strong>: VFA 또는 척추 X-ray. 무증상 골절 22%까지 발견 가능</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"></div>
+              <div class="rec-text"><strong>TBS</strong>: 이용 가능 시 보조 검사로 활용 가능. 방사선 추가 노출 없음. 단 단독으로는 충분치 않음</div>
+            </li>
+          </ul>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px;margin-top:10px">3.3 신장 평가</div>
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-text">eGFR 또는 <strong>크레아티닌 청소율</strong>(선호). 24시간 소변 칼슘. 신장결석/신석회화증 영상(CT·초음파·복부 X-ray)</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-text">고칼슘뇨 동반 시 또는 신장결석 확인 시: <strong>결석 위험 프로파일</strong> 시행 (초산뇨·마그네슘뇨·옥살산뇨·구연산뇨·시스틴뇨)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>3.4 비고전적 발현(신경인지·삶의 질·심혈관)</strong>: 이들 평가에 대한 일상적 시행을 지지하는 데이터 없음. 수술 후 개선도 일관되지 않음. 표준 평가에 포함하지 않음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 신장 기능 상세 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫘</span> 신장 침범 상세 — eGFR 역치와 고칼슘뇨</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">eGFR 역치</div>
+          <div class="alert alert-teal">
+            <span>📌</span>
+            <div>크레아티닌 청소율 <span class="val-badge">&lt;60 mL/min</span>이 해로운 신기능 영향의 역치로 널리 적용. PTX 후 &lt;60 mL/min 환자에서 신기능 안정화, 미수술 시 지속 감소 보고.</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:0">
+            <span>ℹ️</span>
+            <div>eGFR은 스크리닝에만 유용. 실제 크레아티닌 청소율 반복 측정이 더 정확. KDIGO 기준: 1–2년에 걸쳐 연간 3 mL/min 감소 = 유의미한 감소.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">고칼슘뇨 수술 기준 (2022 개정)</div>
+          <table class="t">
+            <tr><th>성별</th><th>수술 기준 역치</th></tr>
+            <tr class="hl"><td><strong>여성</strong></td><td><span class="val-badge">&gt;250 mg/일</span></td></tr>
+            <tr class="hl"><td><strong>남성</strong></td><td><span class="val-badge">&gt;300 mg/일</span></td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>이전 가이드라인 역치(>400 mg/일)에서 <strong>2022년 개정</strong>. 성별 구분 적용. 무증상 PHPT 환자의 22%까지 잠재 신장결석 보고 → 모든 PHPT 환자에서 신장 영상 권고.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /eval -->
+
+<!-- ═══ SURGERY ═══ -->
+<div id="tab-surgery" class="panel">
+
+  <!-- 수술 적응증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 부갑상선 절제술(PTX) 권고 — 권고 4·5</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div><strong>권고 4 (GRADEd · 강한 권고 / 높은 근거 수준)</strong>: 무증상 PHPT 환자에서 질병 치유를 위한 수술을 권고.</div>
+      </div>
+      <div class="alert alert-teal" style="margin-top:0">
+        <span>📌</span>
+        <div>PTX는 모든 증상성 PHPT 환자에서 시행. 무증상 PHPT에서는 아래 기준 중 하나 이상 충족 시 수술 권고. 기준 미충족 시에도 환자·의사 합의 하에 수술 선택 가능.</div>
+      </div>
+      <div style="margin-top:8px;font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">5.1 무증상 PHPT 수술 기준 (하나만 충족하면 충분)</div>
+      <table class="t">
+        <tr><th>기준</th><th>역치</th><th>비고</th></tr>
+        <tr class="hl">
+          <td><strong>5.1.1 혈청 칼슘</strong></td>
+          <td><span class="val-badge">&gt;정상 상한치 + 1 mg/dL (0.25 mmol/L)</span></td>
+          <td>1990년부터 유지된 기준</td>
+        </tr>
+        <tr>
+          <td><strong>5.1.2 골격 침범</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="padding-left:20px">① VFA 또는 척추 X-ray 골절</td>
+          <td>골절 확인</td>
+          <td>무증상 골절 포함</td>
+        </tr>
+        <tr>
+          <td style="padding-left:20px">② DXA T-점수</td>
+          <td><span class="val-badge">≤-2.5 (어느 부위든)</span></td>
+          <td>요추·고관절·원위 1/3 요골 포함</td>
+        </tr>
+        <tr>
+          <td><strong>5.1.3 신장 침범</strong></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="padding-left:20px">① 크레아티닌 청소율 또는 eGFR</td>
+          <td><span class="val-badge">&lt;60 mL/min</span></td>
+          <td>단일 신장 보유 시 60 mL/min 이상에서도 특수 적응증 고려</td>
+        </tr>
+        <tr>
+          <td style="padding-left:20px">② 신석회화증 또는 신장결석</td>
+          <td>영상으로 확인</td>
+          <td>X-ray, 초음파, CT</td>
+        </tr>
+        <tr>
+          <td style="padding-left:20px">③ 고칼슘뇨</td>
+          <td><span class="val-badge">여성 &gt;250 mg/일 / 남성 &gt;300 mg/일</span></td>
+          <td>2022 개정 기준</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>5.1.4 연령</strong></td>
+          <td><span class="val-badge">&lt;50세</span></td>
+          <td>다른 기준 불필요; 연령 단독으로 충분한 적응증</td>
+        </tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>수술 비권고 상황</strong>: 신경인지 기능·삶의 질·심혈관 지표 개선을 위한 수술은 근거 불충분으로 권고하지 않음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이전 가이드라인 비교 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📅</span> 수술 기준 변천사 비교 (1990→2022)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="t">
+        <tr><th>기준</th><th>1990</th><th>2002</th><th>2008</th><th>2013</th><th><strong>2022 (현행)</strong></th></tr>
+        <tr>
+          <td>혈청 칼슘 (정상 상한치 초과)</td>
+          <td>1–1.6 mg/dL</td>
+          <td>1.0 mg/dL</td>
+          <td>1.0 mg/dL</td>
+          <td>1.0 mg/dL</td>
+          <td class="hl"><strong>1.0 mg/dL</strong></td>
+        </tr>
+        <tr>
+          <td>DXA T-점수</td>
+          <td>Z-점수 &lt;-2.0</td>
+          <td>T &lt;-2.5 (어느 부위)</td>
+          <td>T &lt;-2.5 (어느 부위)</td>
+          <td>T &lt;-2.5 + 척추 골절</td>
+          <td class="hl"><strong>T &lt;-2.5 (어느 부위) + 척추 골절</strong></td>
+        </tr>
+        <tr>
+          <td>신장 — eGFR</td>
+          <td>기대치 대비 &gt;30% 감소</td>
+          <td>기대치 대비 &gt;30% 감소</td>
+          <td>&lt;60 mL/min</td>
+          <td>&lt;60 mL/min</td>
+          <td class="hl"><strong>&lt;60 mL/min</strong></td>
+        </tr>
+        <tr>
+          <td>신장 — 24시간 소변 칼슘</td>
+          <td>&gt;400 mg/일</td>
+          <td>&gt;400 mg/일</td>
+          <td>권고 안 함</td>
+          <td>&gt;400 mg/일 + 결석 위험</td>
+          <td class="hl"><strong>여성 &gt;250 / 남성 &gt;300 mg/일</strong></td>
+        </tr>
+        <tr>
+          <td>신장결석/신석회화증</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>영상 확인</td>
+          <td class="hl"><strong>영상 확인</strong></td>
+        </tr>
+        <tr>
+          <td>연령</td>
+          <td>&lt;50세</td>
+          <td>&lt;50세</td>
+          <td>&lt;50세</td>
+          <td>&lt;50세</td>
+          <td class="hl"><strong>&lt;50세</strong></td>
+        </tr>
+      </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">2022년의 가장 큰 변화: 소변 칼슘 역치가 성별 구분되어 하향 조정 (400 → 여성 250/남성 300 mg/일)</div>
+    </div>
+  </div>
+
+  <!-- 수술 방법 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 수술 전 영상 및 수술 기법 — 권고 6</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text"><strong>수술 전 영상은 진단 목적으로 사용하지 않음</strong>. 수술을 결정한 환자에서 이상 부갑상선 위치 확인 목적으로만 시행.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">수술 전 영상 방법: ① 고해상도 경부 초음파 ② Tc-99m-세스타미비 감산 신티그라피 ③ 조영증강 4차원(4D) CT.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">성공적 수술 전 영상 시: <strong>선택적 부갑상선 절제술 ± 수술 중 PTH 모니터링(IOPTH)</strong>으로 95–97% 치유율 달성 가능. 짧은 수술 시간, 흉터 감소, 인접 구조물 손상 위험 감소.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">경험 있는 부갑상선 외과의 정의: 연간 부갑상선 절제술 50례 이상 시행 외과의.</div>
+        </li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div><strong>수술 성적</strong>: 경험 있는 외과의 기준 — 영구 반회후두신경 손상 1%, 지속/재발 2–5%, 경부 혈종 0.5%. 저칼슘혈증(다선 절제 시) 10% 미만.</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-teal">
+            <span>📈</span>
+            <div>PTX 후 BMD 증가 — 중증, 젊은 연령, 양호한 신기능에서 효과 큼. 신장결석 발생률: 수술 후 10년에 대조군 수준으로 감소.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /surgery -->
+
+<!-- ═══ MEDICAL ═══ -->
+<div id="tab-medical" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 비수술적 약물 치료 — 권고 7·11 (GRADEd)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>ℹ️</span>
+        <div>수술 기준을 충족하지 않거나 수술을 원하지 않는 환자에서 약물 옵션 적용. PTX 후 BMD 증가와 골절 위험 감소의 연관성이 PHPT에서 폐경 후 골다공증과 동일한지 불확실하므로 BMD 개선 → 골절 감소로 직접 추론은 제한적.</div>
+      </div>
+
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <!-- Cinacalcet -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>Cinacalcet — 혈청 칼슘 감소 목적</span>
+            <span class="osa-arrow">▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <div class="rec-badges" style="margin-bottom:8px">
+              <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+              <span class="g g-lo" data-tip="낮은 근거 수준">낮은 근거</span>
+            </div>
+            <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+              <li>• 혈청 칼슘 감소에 효과적 (1–5년 연구)</li>
+              <li>• PTH도 감소하나 칼슘보다 감소폭 작음</li>
+              <li>• <strong>BMD 개선 없음</strong></li>
+              <li>• <strong>적응증</strong>: 혈청 칼슘 &gt;정상 상한치 + 1 mg/dL (0.25 mmol/L) 이상인 비수술 환자</li>
+              <li>• NPHPT에서 신장결석 수·크기 감소 보고 (소규모 연구)</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Bisphosphonate -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>비스포스포네이트 (Alendronate) — BMD 증가 목적</span>
+            <span class="osa-arrow">▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <div class="rec-badges" style="margin-bottom:8px">
+              <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+              <span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span>
+            </div>
+            <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+              <li>• Alendronate: BMD 개선 + 골전환 감소</li>
+              <li>• 혈청 칼슘 일관 감소 <strong>없음</strong></li>
+              <li>• 남성·노인에서도 유사한 효과</li>
+              <li>• NPHPT에서도 BMD 개선 보고</li>
+              <li>• <strong>적응증</strong>: 저골밀도(T ≤-2.5)이나 수술 못하는 환자</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <!-- Denosumab -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>Denosumab — BMD 증가 목적</span>
+            <span class="osa-arrow">▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <div class="rec-badges" style="margin-bottom:8px">
+              <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+              <span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span>
+            </div>
+            <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+              <li>• 1–2년 후향 연구: BMD 개선</li>
+              <li>• 혈청 칼슘 변화 없음, PTH 28% 상승 (RANKL 차단으로 예상 범위)</li>
+              <li>• 수술 대비: BMD는 수술이 우세, TBS는 denosumab 우세</li>
+              <li>• <strong>적응증</strong>: 저골밀도 비수술 환자</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Cinacalcet + Denosumab -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>Cinacalcet + Denosumab 병용</span>
+            <span class="osa-arrow">▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+              <li>• 50주 RCT: 혈청 칼슘 정상화 64% + 요추·대퇴골경 BMD 증가</li>
+              <li>• 칼슘 감소(cinacalcet)·BMD 증가(denosumab) 상호 보완</li>
+              <li>• 권고 11.5: 고칼슘혈증 + 저골밀도 비수술 환자에서 고려</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vitamin D -->
+      <div class="sec-sep"></div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">비타민 D 보충 — GRADEd 권고</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak" data-tip="약한 권고">약한 권고</span><span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span></div>
+          <div class="rec-text">25OHD <span class="val-badge">&lt;30 ng/mL</span> (불충분) 또는 <span class="val-badge">&lt;12 ng/mL</span> (결핍) 시 보충 권고. 목표: <span class="val-badge">25OHD &gt;30 ng/mL</span>, 단 검사실 참고 범위 상한치 초과 금지 (예: &lt;50 ng/mL). 메타분석: 다양한 용량 범위에서 고칼슘혈증 악화 없이 PTH 평균 33% 감소.</div>
+        </li>
+      </ul>
+
+      <!-- 칼슘 섭취 -->
+      <div class="sec-sep"></div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">영양 — 칼슘 섭취</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">칼슘 섭취 제한은 PTH 추가 자극 가능성으로 <strong>권장하지 않음</strong>. Institute of Medicine 기준 적용: <span class="val-badge">800 mg/일</span> (여성 &lt;50세·남성 &lt;70세) / <span class="val-badge">1000 mg/일</span> (여성 &gt;50세·남성 &gt;70세).</div>
+        </li>
+      </ul>
+
+      <!-- 에스트로겐 / 랄록시펜 -->
+      <div class="sec-sep"></div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">에스트로겐 / SERMs</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak" data-tip="약한 권고">약한 권고 (낮은 근거)</span></div>
+          <div class="rec-text">결합 에스트로겐: 요추 BMD 7.3% 증가. 혈청 칼슘 감소 효과 불일치.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-lo" data-tip="데이터 불충분">불충분</span></div>
+          <div class="rec-text">Raloxifene: 데이터 불충분으로 권고 불가.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /medical -->
+
+<!-- ═══ MONITOR ═══ -->
+<div id="tab-monitor" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> PTX 미시행 환자의 모니터링 — 권고 9</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="t">
+        <tr><th>항목</th><th>모니터링 방법</th><th>주기</th></tr>
+        <tr class="hl"><td>혈청 칼슘</td><td>알부민 보정 혈청 칼슘</td><td><strong>연 1회</strong></td></tr>
+        <tr><td>25OHD</td><td>혈청 25-히드록시비타민 D</td><td><strong>연 1회</strong></td></tr>
+        <tr><td>PTH</td><td>온전 PTH (임상적으로 적절 시)</td><td>연 1회 (임상 필요 시)</td></tr>
+        <tr class="hl"><td>골밀도 (DXA)</td><td>3부위 DXA (요추·고관절·원위 요골)</td><td><strong>1–2년마다</strong>. BMD 정상이면 더 긴 간격 가능</td></tr>
+        <tr><td>척추 평가</td><td>척추 X-ray, VFA, TBS</td><td>임상적으로 적절 시</td></tr>
+        <tr class="hl"><td>신기능</td><td>크레아티닌 청소율 (eGFR 대비 선호)</td><td><strong>연 1회</strong></td></tr>
+        <tr><td>신장 영상</td><td>X-ray, CT, 초음파</td><td>임상적으로 적절 시</td></tr>
+        <tr><td>24시간 소변 칼슘</td><td>24시간 소변 칼슘</td><td>임상적으로 적절 시</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>DXA 추적 시 동일 기관 사용 권장 (ISCD 기준). 유의미한 변화 정의: 측정 정밀도의 최소 유의 변화(LSC) 초과. 예: 요추 정밀도 1%일 때, 95% 신뢰수준 유의 변화 = 2.77% 초과.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 추적 중 수술 적응증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 추적관찰 중 수술 권고 전환 기준 — 권고 10</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">10.1</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">혈청 칼슘이 지속적으로 <span class="val-badge">&gt;정상 상한치 + 1 mg/dL</span>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">10.2</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">저에너지 골절 발생.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">10.3</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">신장결석 발생.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">10.4</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">BMD의 유의미한 감소 (LSC 초과) → T-점수 ≤-2.5에 도달.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">10.5</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">크레아티닌 청소율의 유의미한 감소 (1–2년에 걸쳐 평균 &gt;3 mL/min/년) → &lt;60 mL/min.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /monitor -->
+
+<!-- ═══ PREGNANCY ═══ -->
+<div id="tab-pregnancy" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 중 PHPT 관리 — 권고 12</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>임신 중 PHPT는 드문 상황. 실제 발생률 미상. 비특이적 증상(피로·변비·구역)이 임신 증상과 겹쳐 진단 지연 가능. 대부분 경증(알부민 보정 칼슘이 정상 상한치 + 1 mg/dL 이내).</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">임신 중 칼슘·PTH 생리적 변화</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+            <li>• 총 칼슘: 세포외액량 증가·알부민 감소로 저하 (이온화 칼슘은 불변)</li>
+            <li>• PTH: 1삼분기에 정상 하한으로 감소 → 임신 말기까지 정상 중간값으로 회복</li>
+          </ul>
+        </div>
+        <div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div>태아 합병증 위험: 자궁 내 태아 부갑상선 억제 → 출생 후 신생아 저칼슘혈증. 산모 칼슘 &gt;11 mg/dL일수록 태아 손실 위험 증가 보고.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-sep"></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">12.1</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">경증: <strong>수분 보충 및 칼슘 모니터링</strong>으로 관리.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.2</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text"><strong>비스포스포네이트 및 데노수맙 사용 금지</strong> (태반 통과 위험).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.3</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text"><strong>Cinacalcet</strong>: 임신 중 사용 데이터 매우 제한적.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.4</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">혈청 칼슘 <span class="val-badge">&gt;11 mg/dL</span>이고 수술 금기 없는 경우: <strong>임신 2삼분기</strong>(임신 전반기)에 부갑상선 절제술 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.5</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">수술 전 영상: <strong>초음파로만 제한</strong> (방사선·조영제 태반 통과 위험).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.6</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">수술 연기 시: <strong>신생아 저칼슘혈증</strong> 밀접 모니터링 필요 (출생 전후 혈청 칼슘 반복 측정).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">12.7</span>
+          <div class="rec-badges"><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널</span></div>
+          <div class="rec-text">수술 연기 시: <strong>분만 후 PTX 시행</strong>. 다음 임신 전 PTX 시행이 더욱 강력히 권고됨.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /pregnancy -->
+
+<!-- ═══ RECS ═══ -->
+<div id="tab-recs" class="panel">
+
+  <!-- GRADE 설명 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> GRADE 방법론 설명</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">권고 강도</div>
+          <table class="t">
+            <tr><th>등급</th><th>표현</th><th>의미</th></tr>
+            <tr><td><span class="g g-strong" data-tip="강한 권고">강한 권고</span></td><td>"Recommend"</td><td>바람직한 효과가 그렇지 않은 효과보다 훨씬 큼</td></tr>
+            <tr><td><span class="g g-weak" data-tip="약한 권고">약한 권고</span></td><td>"Suggest"</td><td>낮은 근거 수준 또는 바람직한/그렇지 않은 효과 간 균형 근사</td></tr>
+            <tr><td><span class="g g-ungr" data-tip="비GRADE 패널 권고">패널 권고</span></td><td>"Panel recommends/proposes"</td><td>비GRADE 서술적 검토에 기반한 권고</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">근거 수준</div>
+          <table class="t">
+            <tr><th>등급</th><th>의미</th></tr>
+            <tr><td><span class="g g-hi" data-tip="높은 근거 수준">높음</span></td><td>진효과가 효과 추정치에 근접한다는 매우 높은 신뢰도</td></tr>
+            <tr><td><span class="g g-mod" data-tip="중등 근거 수준">중등</span></td><td>진효과가 효과 추정치에 가깝지만 상당한 차이 가능</td></tr>
+            <tr><td><span class="g g-lo" data-tip="낮은 근거 수준">낮음</span></td><td>진효과가 효과 추정치와 상당히 다를 수 있음</td></tr>
+            <tr><td><span class="g g-vlo" data-tip="매우 낮은 근거 수준">매우 낮음</span></td><td>진효과가 효과 추정치와 매우 다를 가능성 높음</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>이 가이드라인에서 GRADE는 수술 및 약물 관리에 관한 체계적 문헌고찰에만 적용. 기타 권고는 패널의 서술적 검토에 기반하며 "패널 권고(비등급)" 표시.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 권고 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📝</span> 전체 권고 요약 (1–12)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>1–3. 진단 및 평가</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">1.1</span><div class="rec-text">고칼슘혈증성 PHPT: 2주 이상 간격 2회 측정에서 알부민 보정 칼슘 상승 + 상승 또는 부적절 정상 PTH.</div></li>
+            <li class="rec-item"><span class="rec-num">1.2</span><div class="rec-text">감별: FHH(소변 Ca/Cr 청소율 &lt;0.01, 30세 미만, 가족력), 티아지드·리튬, 이소성 PTH(매우 드묾).</div></li>
+            <li class="rec-item"><span class="rec-num">1.3</span><div class="rec-text">정상칼슘혈증성 PHPT(NPHPT): 3–6개월 간격 2회 이상 총·이온화 칼슘 정상 + PTH 상승. 모든 이차성 원인 배제 후 진단.</div></li>
+            <li class="rec-item"><span class="rec-num">3.1</span><div class="rec-text">생화학: 알부민 보정 칼슘(NPHPT 시 이온화 칼슘), 인, 온전 PTH, 25OHD, 크레아티닌.</div></li>
+            <li class="rec-item"><span class="rec-num">3.2</span><div class="rec-text">골격: 3부위 DXA + 척추 골절 영상(VFA 또는 X-ray). TBS는 보조 검사로 활용 가능.</div></li>
+            <li class="rec-item"><span class="rec-num">3.3</span><div class="rec-text">신장: eGFR 또는 크레아티닌 청소율 + 24시간 소변 칼슘. 신장결석/신석회화증 영상. 고칼슘뇨 또는 신장결석 시 결석 위험 프로파일.</div></li>
+            <li class="rec-item"><span class="rec-num">3.4</span><div class="rec-text">신경인지·심혈관 평가: 일상적 시행 데이터 없음 → 비권고.</div></li>
+            <li class="rec-item"><span class="rec-num">3.5</span><div class="rec-text">유전자 검사: 30세 미만, 다선 질환, 고칼슘혈증 가족력, MEN1/2A/4/HPT-JT 의심, 비정형 선종·부갑상선암 시 고려.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>4–6. 수술</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">4</span><div class="rec-badges"><span class="g g-strong">강한 권고</span><span class="g g-hi">높은 근거</span></div><div class="rec-text">무증상 PHPT에서 질병 치유를 위한 수술 권고.</div></li>
+            <li class="rec-item"><span class="rec-num">5.1.1</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">혈청 칼슘 &gt;정상 상한치 + 1 mg/dL (0.25 mmol/L).</div></li>
+            <li class="rec-item"><span class="rec-num">5.1.2</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">골격: VFA/X-ray 골절 또는 DXA T ≤-2.5 (어느 부위).</div></li>
+            <li class="rec-item"><span class="rec-num">5.1.3</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">신장: eGFR/크레아티닌 청소율 &lt;60 mL/min, 신장결석/신석회화증, 고칼슘뇨(여성 &gt;250·남성 &gt;300 mg/일).</div></li>
+            <li class="rec-item"><span class="rec-num">5.1.4</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">연령 &lt;50세 (단독 기준으로 충분).</div></li>
+            <li class="rec-item"><span class="rec-num">5.2</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">경험 있는 부갑상선 외과의가 수술 시행.</div></li>
+            <li class="rec-item"><span class="rec-num">5.3</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">신경인지·삶의 질·심혈관 개선을 위한 수술 비권고 (근거 불충분).</div></li>
+            <li class="rec-item"><span class="rec-num">6.1–6.5</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 전 영상은 진단 목적 비권고. 수술 결정 후 병소 위치 확인용으로만 사용. 방법: 고해상도 초음파·세스타미비 신티그라피·4D CT. 선택적 PTX ± IOPTH로 높은 치유율 달성.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>7–8. 비수술적 의학 관리</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">7.1</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">Cinacalcet: 혈청 칼슘 정상화 목적.</div></li>
+            <li class="rec-item"><span class="rec-num">7.2</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">칼슘 섭취: IoM 기준 준수(800–1000 mg/일). 제한 비권고.</div></li>
+            <li class="rec-item"><span class="rec-num">7.3</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">25OHD 목표: &gt;30 ng/mL. 검사실 참고범위 상한 미초과.</div></li>
+            <li class="rec-item"><span class="rec-num">7.4</span><div class="rec-badges"><span class="g g-weak">약한 권고</span><span class="g g-vlo">매우 낮은 근거</span></div><div class="rec-text">Alendronate 또는 Denosumab: 금기 없을 시 BMD 증가 목적.</div></li>
+            <li class="rec-item"><span class="rec-num">7.5</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">에스트로겐: BMD 증가. 혈청 칼슘 감소 효과 불일치.</div></li>
+            <li class="rec-item"><span class="rec-num">7.6</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">Raloxifene: 데이터 불충분으로 권고 불가.</div></li>
+            <li class="rec-item"><span class="rec-num">8.1</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">NPHPT: 현시점에서 수술 가이드라인 권고 불가 (데이터 제한). 고칼슘혈증성 PHPT 기준이 참고 지침으로 활용 가능.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>9–11. 모니터링 및 비수술 환자 관리</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">9.1</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">혈청 칼슘·25OHD 연 1회. PTH (임상 적절 시).</div></li>
+            <li class="rec-item"><span class="rec-num">9.2</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">3부위 DXA 1–2년마다. BMD 정상이면 간격 연장 가능. 척추 영상(X-ray·VFA·TBS) 임상 적절 시.</div></li>
+            <li class="rec-item"><span class="rec-num">9.3</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">신기능: 크레아티닌 청소율 연 1회. 신장 영상·24시간 소변 칼슘 임상 적절 시.</div></li>
+            <li class="rec-item"><span class="rec-num">10.1–10.5</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 전환 기준: ① 칼슘 지속 &gt;정상 + 1 mg/dL ② 저에너지 골절 ③ 신장결석 ④ BMD 유의미 감소 → T ≤-2.5 ⑤ 크레아티닌 청소율 유의미 감소 → &lt;60 mL/min.</div></li>
+            <li class="rec-item"><span class="rec-num">11.1–11.5</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 기준 충족이나 수술 안 하는 환자: 칼슘 IoM 기준. 25OHD &gt;30 ng/mL 유지. 고칼슘혈증 시 cinacalcet. 저골밀도 시 비스포스포네이트/denosumab. 두 가지 모두 필요 시 병용 고려.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="osa-acc" style="margin-top:4px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>12. 임신</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">12.1</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">경증: 수분 보충 + 칼슘 모니터링.</div></li>
+            <li class="rec-item"><span class="rec-num">12.2</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">비스포스포네이트·데노수맙 사용 금지.</div></li>
+            <li class="rec-item"><span class="rec-num">12.3</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">Cinacalcet: 데이터 매우 제한적.</div></li>
+            <li class="rec-item"><span class="rec-num">12.4</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">칼슘 &gt;11 mg/dL + 수술 금기 없음 → 2삼분기에 PTX 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">12.5</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 전 영상: 초음파로만 제한.</div></li>
+            <li class="rec-item"><span class="rec-num">12.6</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 연기 시 신생아 저칼슘혈증 밀접 모니터링.</div></li>
+            <li class="rec-item"><span class="rec-num">12.7</span><div class="rec-badges"><span class="g g-ungr">패널</span></div><div class="rec-text">수술 연기 시 분만 후 PTX 시행. 다음 임신 전 PTX가 더욱 강력히 권고.</div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /recs -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.querySelector('.osa-arrow').textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+const abbrs = [
+  ['PHPT','Primary Hyperparathyroidism (원발성 부갑상선기능항진증) — PTH 자율적 과잉 분비에 의한 고칼슘혈증. 가장 흔한 원인은 단일 선종(85%).'],
+  ['NPHPT','Normocalcemic Primary Hyperparathyroidism (정상칼슘혈증성 PHPT) — 총·이온화 칼슘 정상 + PTH 지속 상승. 모든 이차성 원인 배제 후 진단.'],
+  ['PTH','Parathyroid Hormone (부갑상선 호르몬) — 신장 칼슘 재흡수 자극·인산뇨 촉진·1,25(OH)₂D 생산 자극·골 흡수 증가로 혈청 칼슘 유지.'],
+  ['PTX','Parathyroidectomy (부갑상선 절제술) — PHPT의 유일한 근치적 치료. 경험 있는 외과의(연간 ≥50례)가 시행 시 치유율 95–97%.'],
+  ['IOPTH','Intraoperative PTH monitoring (수술 중 PTH 모니터링) — 선택적 부갑상선 절제술 시 보조 수단. 절제 성공 여부 실시간 확인.'],
+  ['DXA','Dual-Energy X-ray Absorptiometry (이중에너지 X선 흡수계측법) — 골밀도 측정의 표준. PHPT 평가에서 3부위(요추·고관절·원위 요골) 측정.'],
+  ['BMD','Bone Mineral Density (골밀도) — DXA로 측정. T-점수 ≤-2.5 = 골다공증 범위. PHPT에서 피질골(원위 요골) 우선 감소.'],
+  ['TBS','Trabecular Bone Score (소주골 점수) — DXA에서 골 미세구조를 준정량적으로 평가. PHPT 보조 검사로 활용 가능.'],
+  ['VFA','Vertebral Fracture Assessment (척추 골절 평가) — DXA 부착 장치로 방사선 노출 최소화하면서 척추 골절 평가.'],
+  ['eGFR','Estimated Glomerular Filtration Rate (추정 사구체여과율) — 신기능 스크리닝에 유용. 크레아티닌 청소율이 더 정확하며 PHPT 모니터링에 선호.'],
+  ['FHH','Familial Hypocalciuric Hypercalcemia (가족성 저칼슘뇨성 고칼슘혈증) — CaSR/GNA11/AP2S1 돌연변이. 대부분 수술 금기. 소변 Ca/Cr 청소율 &lt;0.01이 감별 단서.'],
+  ['CaSR','Calcium-Sensing Receptor (칼슘 감지 수용체) — 부갑상선 세포 표면에 발현. 세포외 칼슘 감지 → PTH 분비 억제. PHPT에서 발현 감소.'],
+  ['1,25(OH)₂D','1,25-Dihydroxyvitamin D (칼시트리올) — 부갑상선 세포에서 PTH의 자극으로 신장 근위 세뇨관에서 생산. 장관 칼슘 흡수 촉진.'],
+  ['25OHD','25-Hydroxyvitamin D — 체내 비타민 D 저장량의 최적 지표. PHPT 목표: &gt;30 ng/mL, 검사실 상한 미초과.'],
+  ['HPT-JT','Hyperparathyroidism-Jaw Tumor syndrome — CDC73(parafibromin) 돌연변이. 부갑상선암 위험 증가 → 조기 양측 경부 탐색 필요.'],
+  ['MEN1','Multiple Endocrine Neoplasia Type 1 — 부갑상선 + 췌장 NET + 뇌하수체 종양. PHPT에서 다선 질환 → 양측 경부 탐색. 선택적 PTX 금기.'],
+  ['GRADE','Grading of Recommendations, Assessment, Development, and Evaluations — 권고 강도와 근거 수준을 체계적으로 등급화하는 방법론. 이 가이드라인은 수술·약물 관리 체계적 문헌고찰에 적용.'],
+  ['IoM','Institute of Medicine (미국 의학원) — 일반 인구 칼슘 섭취 기준 제시. 여성 &lt;50세·남성 &lt;70세: 800 mg/일; 여성 &gt;50세·남성 &gt;70세: 1000 mg/일.'],
+  ['PTHrP','Parathyroid Hormone-related Protein — 악성종양에서 생산되는 PTH 유사 단백질. PTH 어세이와 교차 반응 없음 → 악성종양 고칼슘혈증과 PHPT 감별 가능.'],
+  ['Cinacalcet','Calcimimetic agent — 칼슘 감지 수용체 작용제. 혈청 칼슘 감소에 효과적이나 BMD 개선 없음. PHPT 비수술 환자의 고칼슘혈증 치료에 사용.'],
+  ['Alendronate','Bisphosphonate (비스포스포네이트) — osteoclast 억제로 BMD 증가. 혈청 칼슘 감소 효과 없음. PHPT 비수술 환자의 저골밀도 치료에 사용.'],
+  ['Denosumab','RANKL inhibitor — RANKL 차단으로 골흡수 억제·BMD 증가. 혈청 칼슘 변화 없음, PTH 상승 가능. 임신 중 사용 금지.'],
+  ['FRAX','Fracture Risk Assessment Tool — WHO 개발 10년 골절 위험도 계산 도구. PHPT에서의 적용가능성 연구 중.'],
+  ['HRpQCT','High-Resolution peripheral Quantitative CT — 원위 요골·경골 미세구조 평가. 소주골·피질골 미세구조 이상 확인. 광범위 이용 가능하지 않아 표준 평가 불포함.'],
+  ['4D CT','4-Dimensional CT (4차원 CT) — 시간에 따른 조영 패턴 포함 CT. 부갑상선 선종 위치 확인용. 수술 전 영상의 하나.'],
+  ['KDIGO','Kidney Disease: Improving Global Outcomes — 만성 신장 질환 가이드라인. 연간 3 mL/min 크레아티닌 청소율 감소를 유의미한 감소로 정의.'],
+  ['LOH','Loss of Heterozygosity — MEN1 등에서 종양 억제유전자의 2-hit 기전. 부갑상선 종양의 분자적 기전.'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
