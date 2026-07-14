@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 ATA 임신·산후 갑상선 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0b6e4f;
+    --accent2: #0a5c42;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --purple: #57606a;
+    --text: #1f2328;
+    --text2: #57606a;
+    --str: #1a7f37;
+    --cond: #0550ae;
+    --gps: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .logo-badge { background: var(--accent); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0; overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; }
+  .tab { padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .icon { font-size: calc(14px * var(--fscale, 1)); }
+  .card-header .toggle { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── TABLE ── */
+  .bp-table { width: 100%; border-collapse: collapse; font-size: calc(12px * var(--fscale, 1)); }
+  .bp-table th { background: var(--surface2); color: var(--text2); font-weight: 600; padding: 7px 10px; text-align: left; font-size: calc(11px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; }
+  .bp-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .bp-table tr:last-child td { border-bottom: none; }
+  .bp-table tr:hover td { background: var(--surface2); }
+
+  /* ── STRENGTH/LOE BADGES ── */
+  .str   { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; background: #dafbe1; color: var(--str); border: 1px solid var(--str); }
+  .cond  { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; background: #ddf4ff; color: var(--cond); border: 1px solid var(--cond); }
+  .gps   { display: inline-block; padding: 1px 7px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; background: #fff8c5; color: var(--gps); border: 1px solid var(--gps); }
+  .loe   { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin-left: 3px; white-space: nowrap; background: #f6f8fa; color: var(--purple); border: 1px solid var(--border); }
+  .loe-h { background: #dafbe1; color: var(--green); border-color: var(--green); }
+  .loe-m { background: #fff8c5; color: var(--yellow); border-color: var(--yellow); }
+  .loe-l { background: #ffebe9; color: var(--red); border-color: var(--red); }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; min-width: 90px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--cond);   color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+
+  /* ── FLOW ── */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; }
+  .flow-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; text-align: center; font-size: calc(12px * var(--fscale, 1)); width: 92%; max-width: 460px; }
+  .flow-node.start    { background: #ddf4ff; border-color: var(--cond);   color: var(--cond);   font-weight: 600; }
+  .flow-node.decision { background: #fff8c5; border-color: var(--yellow); color: #7d4e00; }
+  .flow-node.action   { background: #dafbe1; border-color: var(--green);  color: var(--green); }
+  .flow-node.warn     { background: #fff1e5; border-color: var(--orange); color: var(--orange); }
+  .flow-node.danger   { background: #ffebe9; border-color: var(--red);    color: var(--red); }
+  .flow-row { display: flex; gap: 8px; width: 92%; max-width: 460px; }
+  .flow-row .flow-node { width: 100%; }
+  .flow-arrow { font-size: calc(14px * var(--fscale, 1)); color: var(--text2); }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── SP (special) accordion ── */
+  .sp-section { margin-bottom: 6px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid var(--accent); padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; user-select: none; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .sp-body.open { max-height: 2000px; padding: 8px 0; }
+
+  /* ── STAT BOXES ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 100px; text-align: center; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── MISC ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-new     { background: #dafbe1; color: var(--green); }
+  .pill-changed { background: #ddf4ff; color: var(--cond); }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .tsh-val { color: var(--red); font-weight: 700; }
+  .drug-ok  { color: var(--green); }
+  .drug-no  { color: var(--red); }
+  .drug-cau { color: var(--orange); }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">2026</span>
+      <h1 style="font-size:19px;font-weight:700;color:var(--text)">ATA 임신·산후 갑상선 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1177/10507256261445624" class="source-link" target="_blank">Thyroid 2026;36(5):481–544 ↗</a>
+      <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)"> · ATA 2026 · Korevaar &amp; Leung et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ATA</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('physiology')">🔬 생리·검사</div>
+    <div class="tab" onclick="showTab('hypo')">📉 갑상선기능저하증</div>
+    <div class="tab" onclick="showTab('hyper')">📈 갑상선기능항진증</div>
+    <div class="tab" onclick="showTab('iodine')">💊 요오드·자가면역</div>
+    <div class="tab" onclick="showTab('nodule')">🔵 결절·갑상선암</div>
+    <div class="tab" onclick="showTab('postpartum')">🤱 산후 갑상선</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색"
+          oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:500px;max-height:380px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div class="abbr-grid" id="abbr-grid" style="grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">GRADE</div><div class="stat-lbl">근거 평가 체계 (Strong / Conditional / GPS)</div></div>
+    <div class="stat-box"><div class="stat-val">0.1–4.0</div><div class="stat-lbl">1분기 TSH 참고 범위 (mU/L, 기관별 없을 때)</div></div>
+    <div class="stat-box"><div class="stat-val">250 mcg</div><div class="stat-lbl">임신·수유 중 일일 요오드 권장 섭취량</div></div>
+    <div class="stat-box"><div class="stat-val">6 mU/L</div><div class="stat-lbl">TSH 이 이상이면 즉시 LT4 치료 시작 기준</div></div>
+  </div>
+
+  <!-- 권고 등급 설명 -->
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">📋</span> 권고 강도 및 근거 수준 (GRADE)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+          <thead><tr><th>등급</th><th>의미</th><th>표현</th></tr></thead>
+          <tbody>
+            <tr><td><span class="str">Strong</span></td><td>강력 권고 — 이득이 해를 명백히 초과</td><td>"should"</td></tr>
+            <tr><td><span class="cond">Conditional</span></td><td>조건부 권고 — 이득 vs 해 균형 고려 필요</td><td>"may"</td></tr>
+            <tr><td><span class="gps">GPS</span></td><td>Good Practice Statement — 직접 근거 없으나 표준 진료</td><td>strong과 동급</td></tr>
+          </tbody>
+        </table>
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-top:8px">
+          <thead><tr><th>근거 수준</th><th>의미</th></tr></thead>
+          <tbody>
+            <tr><td><span class="loe loe-h">High</span></td><td>복수 RCT 또는 고품질 관찰연구</td></tr>
+            <tr><td><span class="loe loe-m">Moderate</span></td><td>단일 RCT 또는 중등도 관찰연구</td></tr>
+            <tr><td><span class="loe loe-l">Low / Very Low</span></td><td>전문가 의견·소규모·관찰 연구</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2026 주요 변경 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🆕</span> 2026 주요 변경 (vs 2017)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+          <li><span class="pill pill-new">NEW</span> TPO Ab 양성 갑상선기능정상 여성에서 <strong>LT4 비권고</strong> (3개 고품질 RCT 근거)</li>
+          <li><span class="pill pill-changed">변경</span> 경미한 불현성 갑상선기능저하증(TSH &lt;6): <strong>반복 측정 후 결정</strong></li>
+          <li><span class="pill pill-changed">변경</span> TPOAb 상태는 더 이상 LT4 결정 기준으로 사용 안 함</li>
+          <li><span class="pill pill-new">NEW</span> 1분기 이후 불현성 갑상선기능저하증 LT4: <strong>Strong High 비권고</strong></li>
+          <li><span class="pill pill-new">NEW</span> 전체 성인 대상 보편적 갑상선 선별검사: <strong>불충분 근거</strong></li>
+          <li><span class="pill pill-changed">변경</span> GRADE 방법론 체계적 적용 + GPS 범주 신설</li>
+          <li><span class="pill pill-new">NEW</span> 10개 국제학회 공동 승인 (AACE, ACOG, ESE, ETA 등)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 태반 통과 요약 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤰</span> 태반 통과 물질 요약 (Figure 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>물질</th><th>태반 통과</th><th>태아 영향</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TSH</strong></td><td style="color:var(--red)">통과 안 함</td><td>없음</td></tr>
+          <tr><td><strong>TPOAb / TgAb</strong></td><td class="drug-cau">통과함</td><td>태아·신생아에 갑상선 영향 없음</td></tr>
+          <tr><td><strong>TSHR-Ab (TRAb)</strong></td><td class="drug-no">통과함</td><td>소 유형에 따라 태아 갑상선 자극 또는 억제 가능</td></tr>
+          <tr><td><strong>요오드 (일반)</strong></td><td class="drug-cau">통과함</td><td>태아 갑상선 호르몬 합성에 필수; 과잉 시 태아·신생아 갑상선기능저하증</td></tr>
+          <tr><td><strong>방사성 요오드 (131I)</strong></td><td class="drug-no">통과함</td><td><strong>태아 갑상선 파괴 — 임신 중 절대 금기</strong></td></tr>
+          <tr><td><strong>PTU / MMI (항갑상선제)</strong></td><td class="drug-no">통과함</td><td>태아 갑상선 기능 억제 가능 — 용량 최소화 필요</td></tr>
+          <tr><td><strong>Propranolol</strong></td><td class="drug-cau">통과함</td><td>안전성 양호; 약간의 출생 체중 감소 관련</td></tr>
+          <tr><td><strong>T4 (레보티록신)</strong></td><td class="drug-cau">통과함</td><td>태아 성장·발달 조절에 필수</td></tr>
+          <tr><td><strong>T3 (리오티로닌)</strong></td><td class="drug-cau">통과함</td><td>태아 뇌 T3는 주로 모체 T4에서 국소 변환 → T3 투여는 태아 뇌 T4 공급 감소</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 위험인자 표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚠️</span> 임신 중 갑상선 기능 검사 위험인자 및 검사 빈도 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>위험인자</th><th>권장 TSH 검사 빈도</th></tr></thead>
+        <tbody>
+          <tr><td>(불현성)갑상선기능저하증/항진증 병력 또는 산후 갑상선염 기왕력</td><td>임신 확인 시</td></tr>
+          <tr><td>갑상선 항체(TPOAb) 양성 확인됨</td><td>임신 확인 시 + 임신 전반기 4–6주마다</td></tr>
+          <tr><td>갑상선 기능 이상 증상 또는 갑상선종</td><td>임신 확인 시</td></tr>
+          <tr><td>갑상선 기능에 영향 주는 약물 사용 (아미오다론·리튬·리팜핀·에티오나미드·페노바르비탈·페니토인·카르바마제핀·최근 6개월 내 암 면역치료·최근 2개월 내 조영제)</td><td>임신 확인 시 + 매 분기</td></tr>
+          <tr><td>자가면역 질환 병력 (T1DM·악성빈혈·복강병·애디슨병·백반증·조기 난소부전·다발성 경화증·류마티스 관절염·전신홍반루푸스 등)</td><td>임신 확인 시</td></tr>
+          <tr><td>유산 2회 이상 또는 불임 병력</td><td>임신 확인 시 (임신 전 검사한 경우 제외)</td></tr>
+          <tr><td>다운 증후군 또는 터너 증후군</td><td>임신 확인 시</td></tr>
+          <tr><td>두경부 방사선 치료 또는 방사성 요오드 치료 병력</td><td>임신 확인 시 + 매 분기</td></tr>
+          <tr><td>갑상선 수술 병력</td><td>임신 확인 시 + 매 분기</td></tr>
+          <tr><td>자가면역 갑상선 질환 가족력</td><td>임신 확인 시</td></tr>
+          <tr><td>중증 요오드 결핍 지역 거주 + 요오드 보충 미실시</td><td>임신 확인 시 + 임신 전반기 4–6주마다</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>보편적 임신 갑상선 선별 검사는 불충분한 근거로 <strong>권고되지 않음</strong>. 위 위험인자 기반 선택적 검사 시행.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ PHYSIOLOGY ═══════════════ -->
+<div id="tab-physiology" class="panel">
+
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">📉</span> 임신 중 갑상선 생리 변화</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+          <thead><tr><th>시기</th><th>주요 변화</th></tr></thead>
+          <tbody>
+            <tr><td>임신 전 → 난소 자극 시</td><td>에스트로겐↑ → TBG↑ → D3 활성↑ → TSH 소폭 상승 (평균 +1.50 mU/L)</td></tr>
+            <tr><td>7–16주</td><td>TBG 증가 최고 (16주에 안정); TT4·TT3 증가</td></tr>
+            <tr><td>1분기 말 (8–12주)</td><td>hCG 최고 → TSH 수용체 자극 → fT4 소폭 상승, TSH 하강; 정상에서 TSH &lt;0.4 mU/L 흔함</td></tr>
+            <tr><td>전체 임신</td><td>태반 D3 활성 → T4 분해↑; 신장 요오드 배설↑; 태아로 T4 이동↑</td></tr>
+            <tr><td>임신 진행</td><td>면역 관용 → 갑상선 항체 농도 최대 60% 감소 (3분기 TPOAb 음성 전환 최대 16%)</td></tr>
+            <tr><td>28주 이후</td><td>IgG 활발한 경태반 수송 시작; 제대혈 농도 모체 수준까지 상승 가능</td></tr>
+            <tr><td>산후</td><td>면역 반동 → PPT 및 Graves' 병 신규·재발 위험↑</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🔬</span> 임신 중 갑상선 기능 검사 정의 및 해석</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+            <div class="rec-text">임신 중 TSH·fT4 기준 범위: <strong>기관별·분기별 특이 기준 범위 우선 사용</strong> 권고.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+            <div class="rec-text">기관별 기준 없을 시 <strong>1·2분기: TSH 0.1–4.0 mU/L</strong> 사용 가능. (3분기는 비임신 기준 범위 적용)</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="gps">GPS</span></div>
+            <div class="rec-text">TSH가 모체 갑상선 상태를 가장 잘 반영 → <strong>fT4 해석이 불확실할 때 TSH 결과 우선 고려</strong>.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="gps">GPS</span></div>
+            <div class="rec-text">개인 추적 시 동일 TSH/fT4 검사법 사용 → 분석 변동 최소화.</div>
+          </li>
+        </ul>
+        <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>임신 중 갑상선 기능 이상 정의 (Box 1)</strong><br>
+        · 현성 갑상선기능저하증: TSH↑ + fT4↓<br>
+        · 불현성 갑상선기능저하증: TSH↑ + fT4 정상<br>
+        · 단독 모체 갑상선저하증(hypothyroxinemia): fT4↓ + TSH 정상<br>
+        · 현성 갑상선기능항진증: TSH↓ + fT4/T3↑<br>
+        · 불현성 갑상선기능항진증: TSH↓ + fT4·T3 정상</div></div>
+        <p style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">fT4 기준 범위 대안: ① TT4 (임신 전 기준치 × 주수별 보정: 7–16주 5%/주 증가, 16주 이후 50% 상한 적용) ② fT4 지수 ③ 비임신 fT4 기준 (단, 2분기 이후 과소 추정 가능)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- fT4 대안 검사 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧪</span> fT4 검사 방법론 비교 및 실용 지침</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>방법</th><th>장점</th><th>단점/주의</th></tr></thead>
+        <tbody>
+          <tr><td><strong>아날로그 면역측정법 (fT4)</strong></td><td>1분기에서 TSH와 가장 잘 상관; 산모·태아 결과와 연관성 입증</td><td>2분기 이후 과소 추정 가능 (결합단백 변화 영향)</td></tr>
+          <tr><td><strong>TT4 + 주수 보정</strong></td><td>결합단백 변화 영향 없음; 계산 간단</td><td>임신 기준 범위 미설정; 동적 변화 민감도 낮음</td></tr>
+          <tr><td><strong>fT4 지수 (TT4 × T3 섭취율)</strong></td><td>결합단백 보정 포함</td><td>임신 기준 범위 미설정; 가용성 낮음</td></tr>
+          <tr><td><strong>직접법 (평형 투석 + LC-MS/MS)</strong></td><td>결합단백 영향 최소</td><td>고비용·시간 소모; 결과 이질적; 광범위 이용 불가</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>임신 전반기 fT4 아날로그법은 적절한 갑상선 지표. 기관별·분기별 기준 범위 미구축 시 위 대안 고려. TSH 이상 시 TSH 결과 우선 해석.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ HYPO ═══════════════ -->
+<div id="tab-hypo" class="panel">
+
+  <!-- 임신 전 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📉</span> 임신 전·임신 중 갑상선기능저하증 관리 (Flowchart 1 &amp; 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px;margin-bottom:10px">
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">임신 전 TSH 증가 시 흐름 (Flowchart 1)</p>
+          <div class="flow">
+            <div class="flow-node start">임신 전 TSH 상승 확인</div>
+            <div class="flow-arrow">↓ fT4 측정</div>
+            <div class="flow-row">
+              <div class="flow-node danger" style="font-size: calc(11px * var(--fscale, 1))">현성 저하증<br>(TSH↑ + fT4↓)<br>→ LT4 즉시 시작<br>1.5–1.7 mcg/kg/일</div>
+              <div class="flow-node decision" style="font-size: calc(11px * var(--fscale, 1))">불현성 저하증<br>(TSH↑ + fT4 정상)<br>→ 4–6주 후 재확인</div>
+            </div>
+            <div class="flow-arrow">↓ 불현성 저하증 지속 시</div>
+            <div class="flow-node action">LT4 시작 25–50 mcg/일<br>목표 TSH 0.5–2.5 mU/L</div>
+            <div class="flow-arrow">↓ TSH 정상화 시</div>
+            <div class="flow-row">
+              <div class="flow-node action" style="font-size: calc(11px * var(--fscale, 1))">TPOAb 음성<br>→ 추적 불필요<br>(증상 시 내원)</div>
+              <div class="flow-node warn" style="font-size: calc(11px * var(--fscale, 1))">TPOAb 양성<br>→ 임신 계획 중<br>3–6개월마다 TSH</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:6px">임신 중 TSH 증가 시 흐름 (Flowchart 2)</p>
+          <div class="flow">
+            <div class="flow-node start">임신 중 TSH 상승 확인</div>
+            <div class="flow-arrow">↓ fT4 측정</div>
+            <div class="flow-row">
+              <div class="flow-node danger" style="font-size: calc(11px * var(--fscale, 1))">현성 저하증<br>(fT4↓)</div>
+              <div class="flow-node decision" style="font-size: calc(11px * var(--fscale, 1))">불현성 저하증<br>(fT4 정상)</div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-node action" style="font-size: calc(11px * var(--fscale, 1))">TSH &lt;6<br>→ 3주 내 재확인 고려</div>
+              <div class="flow-node danger" style="font-size: calc(11px * var(--fscale, 1))">TSH ≥6<br>→ 즉시 LT4 시작</div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-node action" style="font-size: calc(11px * var(--fscale, 1))">1분기: LT4 고려</div>
+              <div class="flow-node warn" style="font-size: calc(11px * var(--fscale, 1))">2–3분기:<br>LT4 비권고 (Strong High)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 현성 저하증 권고 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💊</span> 현성 갑상선기능저하증 권고 (Table 9)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">임신 중 신규 현성 저하증 TSH <strong>&lt;6 mU/L</strong>: LT4 치료 전 <strong>3주 내 재측정</strong> 고려 가능.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+          <div class="rec-text">TSH <strong>≥6 mU/L</strong> 또는 재검 후 지속되는 현성 저하증: <strong>LT4 치료 권고</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">임신 중 갑상선기능저하증: <strong>LT4 단독 치료</strong>. LT3 또는 건조 갑상선 추출물(desiccated thyroid) <strong>사용 금지</strong> — 태아 뇌 T4 공급 감소 위험.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>💡</span><div>
+        <strong>LT4 용량 지침:</strong><br>
+        · 신규 진단 완전 대체: 1.5–1.7 mcg/kg/일 + 임신 추가분 20–30%<br>
+        · 기존 LT4 복용자: 12주까지 약 25%↑, 20주까지 약 50%↑; 양성 임신 반응 시 즉시 증량 고려<br>
+        · LT3→LT4 전환: LT3 5 mcg = LT4 20 mcg<br>
+        · 건조 갑상선→LT4 전환: 60 mg grain = LT4 88 mcg<br>
+        · 추적: 4주마다(임신 전반기), 약 30주에 1회; 분만 시 임신 전 용량으로 복귀
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 불현성 저하증 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📊</span> 불현성 갑상선기능저하증 권고 (Table 10) <span class="pill pill-new">2026 변경</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">TSH <strong>&gt;10 mU/L</strong> (심각한 불현성 저하증): 임신 중 <strong>LT4 치료 권고</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text"><strong>1분기</strong>에 진단된 경증 불현성 저하증: LT4 치료 <strong>고려 가능</strong> (공동 결정).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-h">High</span></div>
+          <div class="rec-text"><strong>1분기 이후</strong> (2·3분기) 경증 불현성 저하증: LT4 치료 <strong>비권고</strong>. 4–6주 후 추적 TSH 가능.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>
+        불현성 저하증의 약 41–59%가 재검 시 자연 정상화 (특히 TSH &lt;6 mU/L). LT4 시작 전 재측정 권고. LT4 과잉 치료(overtreatment) 위험 — 자녀의 ADHD·행동 문제 가능성(CATS II 연구). 목표 TSH: 정상 범위 내, 2.5 mU/L 미만.
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 단독 hypothyroxinemia -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔻</span> 단독 모체 갑상선저하증 (Isolated Hypothyroxinemia) 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text"><strong>1분기</strong>에 진단된 단독 hypothyroxinemia: LT4 치료 <strong>비권고</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-h">High</span></div>
+          <div class="rec-text"><strong>1분기 이후</strong> 진단된 단독 hypothyroxinemia: LT4 치료 <strong>비권고</strong> (CATS, NIH 연구).</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>위험인자: 요오드 결핍, 철분 결핍, 높은 BMI, 내분비 교란물질 노출. 2–6주 후 재측정으로 갑상선기능저하증 진행 배제. 철분·요오드 상태 평가 권고.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ HYPER ═══════════════ -->
+<div id="tab-hyper" class="panel">
+
+  <!-- GTT vs Graves' 감별 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚖️</span> GTT vs Graves' 병 감별 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>특징</th><th>GTT (임신일과성갑상선중독증)</th><th>Graves' 병</th></tr></thead>
+        <tbody>
+          <tr><td>임신 전 갑상선중독 증상</td><td>없음</td><td>흔함</td></tr>
+          <tr><td>입덧/오심구토</td><td>흔함</td><td>대개 없음</td></tr>
+          <tr><td>개인·가족력</td><td>대개 없음</td><td>흔함</td></tr>
+          <tr><td>갑상선종</td><td>없음/낮음</td><td>미만성 갑상선종 가능</td></tr>
+          <tr><td>갑상선 안병증</td><td>없음</td><td>가능</td></tr>
+          <tr><td>혈청 fT3</td><td>정상 또는 약간 상승</td><td>상승</td></tr>
+          <tr><td>TRAb / TSI</td><td>정상</td><td>상승</td></tr>
+          <tr><td>TT3(ng/dL)/TT4(mcg/dL) 비율</td><td>통상 &lt;20</td><td>통상 &gt;20</td></tr>
+          <tr><td>혈청 TSH 경과</td><td>3분기까지 대부분 정상화</td><td>임신 전반에 걸쳐 억제 지속</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>임신 중 방사성 요오드 스캔 <strong>절대 금기</strong>. 갑상선 초음파는 GTT와 Graves' 감별에 유용하지 않음 (권고 비권고).</div></div>
+    </div>
+  </div>
+
+  <!-- GTT 관리 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤢</span> GTT 및 불현성 갑상선기능항진증 관리 (Table 15)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+          <div class="rec-text">불현성 갑상선기능항진증 또는 GTT: <strong>항갑상선제(ATD) 치료 비권고</strong>. 심계항진 등 증상은 propranolol로 완화.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">TSH &lt;0.1 mU/L 불현성 항진증: <strong>2–4주마다 추적 검사</strong> (치료 없이).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">입덧 + 다른 갑상선중독 임상 징후 없는 경우: 갑상선 기능 검사 일상적으로 시행 <strong>불필요</strong>.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Graves' 임신 중 관리 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🦋</span> Graves' 병 임신 중 관리 — ATD 치료 (Table 17)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">임신 확인 시 Graves' 병 저용량 ATD 사용 중 (MMI &lt;5–10 mg/일 또는 PTU &lt;100–200 mg/일, 6개월 이상 치료): <strong>ATD 중단 고려</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">임신 16주 미만에 ATD 시작 시: <strong>PTU 우선 사용</strong> (가능한 경우). PTU 불가 시 MMI를 최소 유효 용량으로.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">MMI 복용 중 임신 확인 시: 16주까지 PTU로 전환 고려 (MMI:PTU = 1:20 비율). 16주 이후 최적 선택 불명확.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">Graves' 병 + ATD 중: 임신 확인 즉시 TSH·fT4·TRAb/TSI 측정, 이후 2–4주마다 TSH·fT4 모니터링.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">갑상선중독 증상 완화: propranolol 일반 용량 사용 가능.</div>
+        </li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px"><span>🎯</span><div>
+        <strong>ATD 치료 목표:</strong> fT4를 기준 범위의 상위 1/3 또는 약간 초과로 유지 (그 이하이면 태아 갑상선기능저하증 위험)<br>
+        <strong>태아 초음파 모니터링:</strong> ATD 사용 중 또는 TRAb/TSI &gt;3×ULN이면 18–20주부터 월 1회 시행
+      </div></div>
+
+      <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin:10px 0 4px">ATD 1분기 선천성 기형 위험 (Figure 6)</p>
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>항목</th><th>미노출군</th><th>PTU 단독</th><th>MMI/CMZ 단독</th><th>PTU+MMI</th></tr></thead>
+        <tbody>
+          <tr><td>1년 내 선천성 기형 (덴마크 연구)</td><td>5.9%</td><td>7.0%</td><td>8.1%</td><td>8.0%</td></tr>
+          <tr><td>2년 내 선천성 기형 (한국 연구)</td><td>5.7%</td><td>8.0%</td><td>9.1%</td><td>10.1%</td></tr>
+          <tr><td>주요 영향 장기</td><td>—</td><td>얼굴·경부, 비뇨기계 (경미)</td><td>근골격계·피부계·소화기 등 7개 장기계 (중증)</td><td>—</td></tr>
+          <tr><td>대표 기형</td><td>—</td><td>수신증, 이전 누공·낭종</td><td>두피결손(aplasia cutis), 배꼽탈장</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Graves' 임신 전 관리 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💑</span> Graves' 병 임신 전 관리 옵션 비교 (Table 3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>치료</th><th>임신 계획 관련 장점</th><th>임신 계획 관련 단점</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>ATD 임신 후 지속</strong></td>
+            <td>신속한 정상화 가능(1–2개월); 빠른 TRAb 감소; 저용량 ATD는 영구 갑상선기능저하증 위험 낮음</td>
+            <td>선천성 기형 위험(PTU +3%, MMI +5%); 태아 갑상선기능저하증 위험; 산후 재발 위험</td>
+          </tr>
+          <tr>
+            <td><strong>ATD 임신 확인 시 중단</strong></td>
+            <td>기형 위험 기간 후 중단 가능; 관해 시 재발 위험 낮음</td>
+            <td>재발 위험 30–70%; 조기 임신·산후 재발 가능</td>
+          </tr>
+          <tr>
+            <td><strong>131I 치료</strong></td>
+            <td>비침습적·비경구 투여; 갑상선종 감소</td>
+            <td>임신 최소 6개월 연기; TRAb/TSI 일시 상승(1–3년); 영구 갑상선기능저하증 확실; 활성 중등도/중증 안병증 금기</td>
+          </tr>
+          <tr>
+            <td><strong>전갑상선절제술</strong></td>
+            <td>결정적 치료; TRAb 비교적 빠른 감소; LT4로 정상화 용이</td>
+            <td>영구 갑상선기능저하증; 수술 합병증(RLN 손상, 부갑상선기능저하증); 회복 기간</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-info" style="margin-top:6px"><span>💡</span><div>임신 전 MMI 복용 중이면 임신 시도 시 <strong>PTU로 전환 권고</strong> (Strong Moderate). PTU 불가 또는 금기 시 MMI 최소 용량 유지 + 양성 임신 반응 즉시 연락 지시.</div></div>
+    </div>
+  </div>
+
+  <!-- 태아·신생아 갑상선기능항진증 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">👶</span> 태아·신생아 갑상선기능항진증 모니터링 (Table 5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+          <div class="rec-text">Graves' 병 병력 모든 임산부: 1분기에 TSH·fT4·TRAb/TSI 측정.<br>TRAb/TSI &gt;3×ULN → 18–22주 및 30–34주 재측정 + 18–20주부터 태아 초음파 월 1회.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">TRAb/TSI &lt;3×ULN + 모체 정상 갑상선 기능 → 추가 TRAb/TSI 측정 및 태아 갑상선기능항진증 모니터링 중단.</div>
+        </li>
+      </ul>
+      <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin:8px 0 4px">태아·신생아 갑상선기능항진증 증상 (Table 6A)</p>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <p style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-bottom:4px">태아</p>
+          <ul style="list-style:none;padding:0;font-size: calc(11px * var(--fscale, 1));line-height:1.8">
+            <li>• 자궁 내 성장 제한 / 가속 골성숙</li>
+            <li>• 두개골 조기 유합(craniosynostosis)</li>
+            <li>• 심부전 / 태아 수종</li>
+            <li>• 빈맥 (지속 심박수 &gt;160–180회/분, 비교적 늦은 징후)</li>
+            <li>• 갑상선종 (태아 갑상선 기능항진증·저하증 모두 가능)</li>
+            <li>• 자궁 내 사망</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-bottom:4px">신생아</p>
+          <ul style="list-style:none;padding:0;font-size: calc(11px * var(--fscale, 1));line-height:1.8">
+            <li>• 소두증 / 이른 전천문</li>
+            <li>• 과흥분성 / 설사 / 성장 부전</li>
+            <li>• 안병증 / 황달</li>
+            <li>• 심부전·심부정맥 / 전신·폐 고혈압</li>
+            <li>• 간비종대 / 혈소판감소증</li>
+            <li>* ATD 복용 모체 → 신생아 초기 정상 → TRAb 지속으로 이후 갑상선중독증 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ IODINE ═══════════════ -->
+<div id="tab-iodine" class="panel">
+
+  <div class="grid2" style="gap:10px;margin-bottom:10px">
+    <!-- 요오드 권고 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🧂</span> 요오드 영양 권고 (Table 3)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item">
+            <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">임신·수유 중: <strong>식이 + 보충제로 일일 요오드 250 mcg 목표</strong>.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">요오드 결핍 위험 여성 (지역적 결핍, 식이 제한, 흡수 장애): 임신 <strong>3개월 전부터</strong> 요오드 150 mcg/일 보충 시작, 수유 완료까지 지속.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">저개발국 또는 식염 요오드화·보충제 불가 지역: 가임 여성·임신부에 <strong>연 1회 요오드화유 400 mg 경구 투여</strong> 가능.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">임신 중 <strong>과도한 요오드 노출 회피</strong> (의학적 적응증 제외 — SSKI, 조영제).</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">일일 <strong>500 mcg 초과 요오드 보충제 또는 지속적 과다 식이 요오드 섭취 금지</strong> (태아·모체 갑상선기능이상 위험).</div>
+          </li>
+        </ul>
+        <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>요오드 고함량 식품: 대구·명태·우유·요구르트·치즈·달걀·새우·견과류·요오드 첨가 소금.<br>저요오드 식품: 천일염·히말라야 소금·유제품 대체식품·채소·과일.</div></div>
+      </div>
+    </div>
+
+    <!-- 갑상선 자가면역 -->
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🛡️</span> TPOAb 양성 갑상선기능정상 여성 권고 <span class="pill pill-new">2026 NEW</span></div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item">
+            <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-h">High</span></div>
+            <div class="rec-text">갑상선기능정상 TPOAb 양성 임신부: <strong>LT4 치료 비권고</strong> (3개 고품질 RCT: 산과 결과 개선 없음).</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-m">Moderate</span></div>
+            <div class="rec-text">갑상선기능정상 TPOAb 양성 임신부: <strong>셀레늄 보충 비권고</strong>.</div>
+          </li>
+          <li class="rec-item">
+            <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+            <div class="rec-text">갑상선기능정상 TPOAb/TgAb 양성 임신부: <strong>글루코코르티코이드 또는 정맥 면역글로불린 비권고</strong>.</div>
+          </li>
+        </ul>
+        <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>
+          TPOAb 양성 임신부 절대 위험 증가 (음성 대비):<br>
+          · 유산: +2–8% · 조산: +2–3%<br>
+          → 그러나 LT4가 이 위험을 감소시키지 않음 (기전: 자가면역 자체가 아닌 다른 경로 가능)<br>
+          → 갑상선 기능 이상으로 진행 시 LT4 치료 (7–9% 위험)
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 불임 여성 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧬</span> 불임·반복 유산 여성의 갑상선 관리 (Tables 4–8)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">📌 기본 검사 권고 <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">불임 또는 반복 유산 여성 모두: <strong>TSH 검사 권고</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">불임·반복 유산 여성: <strong>TPOAb 검사 고려</strong> 가능 (갑상선기능저하증 진행·유산 위험 예측).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">LT4 복용 중 불임·반복 유산 여성: 임신 전 TSH 목표 <strong>0.5–2.5 mU/L</strong>.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">💊 불현성 저하증 치료 권고 (Table 6) <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">TSH &gt;10 mU/L: <strong>LT4 치료 권고</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-m">Moderate</span></div>
+              <div class="rec-text">신규 불현성 저하증 모든 여성: 임신 치료 연기 + <strong>4–6주 후 재측정으로 진단 확인</strong> 가능.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">재측정 후 정상화 시: TPOAb 음성 → 추적 불필요; TPOAb 양성 → 3–6개월마다 TSH 추적.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">지속되는 불현성 저하증: LT4 저용량 (25–75 mcg/일) 시작, 4–6주 후 TSH 재측정, 목표 TSH 0.5–2.5 mU/L.</div>
+            </li>
+          </ul>
+          <div class="alert alert-info" style="margin-top:6px"><span>💡</span><div>시간 제약(연령·동반 질환·비용 문제) 또는 TSH 정상화 가능성 낮을 때 (TSH &gt;6 또는 TPOAb 양성): 즉시 LT4 25–75 mcg 시작 공동 결정 가능.</div></div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🚫 TPOAb 양성 불임 여성 LT4 비권고 (Table 7) <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-h">High</span></div>
+              <div class="rec-text">갑상선기능정상 TPOAb/TgAb 양성 불임 여성: <strong>LT4 치료 비권고</strong> (3개 고품질 RCT: TSH 수준·유산 병력·연령 관계없이 효과 없음).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">갑상선기능정상 TPOAb 양성 임신 계획 여성: <strong>3–6개월마다 TSH·fT4 재측정</strong> 가능 (7–9% 갑상선기능저하증 진행 위험).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">TPOAb/TgAb 양성 불임 여성: <strong>경구 프레드니솔론 또는 정맥 면역글로불린 비권고</strong>.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ NODULE ═══════════════ -->
+<div id="tab-nodule" class="panel">
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔵</span> 갑상선 결절 및 분화 갑상선암(DTC) 관리 (Table 21)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">📋 임신 전 상담 <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">DTC 치료 옵션(수술 범위·RAI·TSH 억제)이 생식 능력 및 임신에 미치는 영향 <strong>임신 전 상담</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">임신 희망 여성: 필요한 DTC 초기 치료 <strong>임신 전 완료</strong> (피임 유지).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">RAI 치료 후 <strong>최소 6개월</strong> 임신 연기. 6개월 내 임신 시 태아 기형 모니터링 고려.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">임신 전 TSH 억제 목표: DTC 위험 분류 기준 (단 TSH 2.5 mU/L 초과 금지).</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🤰 임신 중 DTC 관리 <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe">Very Low</span></div>
+              <div class="rec-text">임신 중 의심 결절·DTC 확인: 종양 진행 위험 낮거나 즉각 합병증 없으면 <strong>산후 수술 연기 가능</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe">Very Low</span></div>
+              <div class="rec-text">고위험 진행 또는 즉각 합병증 위험 있는 DTC: 종양학적 적응증 기반 <strong>임신 중 수술</strong> 고려 가능.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+              <div class="rec-text">임신 중 DTC: <strong>임신 전 TSH 목표 유지</strong>. 임신 전반기 4주마다, 3분기 최소 1회, 조정 후 4–6주 TSH 추적.</div>
+            </li>
+          </ul>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>임신 중 방사성 의약품 사용 절대 금기. 갑상선 수술 필요 시 가능하면 2분기 권장. 1분기 수술 관련 유산은 수술 탓으로 오해 가능; 3분기는 태아 생존 가능 시점으로 태아 감시 필요.</div></div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSp(this)">🤱 수유 중 갑상선암 관리 (Table 22) <span>▸</span></div>
+        <div class="sp-body">
+          <ul class="rec-list">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">수유 중 갑상선 수술: <strong>마취 후 아기를 안을 수 있을 때 즉시 수유 재개 가능</strong> (과거 24시간 모유 폐기 권고 변경).</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">수유 중 RAI 치료 시: 수유 중단 후 <strong>최소 3개월</strong> 경과 후 투여. 123I 스캔은 수유 중단 <strong>3–4일</strong>, 99Tc는 <strong>36시간</strong>.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="gps">GPS</span></div>
+              <div class="rec-text">수유 중 표적 전신 치료(tyrosine kinase inhibitor 등): <strong>수유 중단 권고</strong>.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수질암/진행성 갑상선암 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚕️</span> 수질암(MTC) 및 진행성 갑상선암 (Table 23)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">MTC 진단 여성: 임신 전 <strong>수술 포함 초기 치료 완료</strong>, 피임 유지.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">MTC 여성: 임신 전 <strong>유전자 검사</strong> 시행.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe">Very Low</span></div>
+          <div class="rec-text">MTC 수술 후 임신 중 추적: 비임신 환자와 동일하게 시행. 단 <strong>혈청 칼시토닌이 임신·수유 중 최대 2–3배 ULN까지 상승 가능</strong> → CEA 병행 모니터링.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>미분화·진행성 갑상선암: 임신 중 비임신 환자와 동일한 긴급도로 치료 접근. 수술·외부 방사선·전신 치료 모두 다학제 결정. 대부분의 표적 치료제(tyrosine kinase inhibitor, anti-PD1)는 동물 실험에서 태아 독성 보고 → 임신 중 원칙적 비권고.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ POSTPARTUM ═══════════════ -->
+<div id="tab-postpartum" class="panel">
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤱</span> 산후 갑상선염(PPT) — 자연 경과 및 유형 (Figure 7)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1));margin-bottom:8px">
+        <thead><tr><th>유형</th><th>빈도</th><th>경과</th></tr></thead>
+        <tbody>
+          <tr><td>파괴성 갑상선염만</td><td>50%</td><td>갑상선중독 → 자연 정상화</td></tr>
+          <tr><td>이상성 (갑상선중독 + 저하증)</td><td>20%</td><td>갑상선중독 (1–6개월) → 저하증 (4–8개월) → 정상화</td></tr>
+          <tr><td>일과성 갑상선기능저하증만</td><td>25%</td><td>저하증 → 정상화</td></tr>
+          <tr><td>영구적 갑상선기능저하증</td><td>5%</td><td>저하증 지속</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-info" style="margin-bottom:8px"><span>📌</span><div>PPT 유병률 약 8%; TPOAb 양성 여성에서 33–50%까지 상승. 재발 위험: 이후 임신에서 70%. 장기 추적: 10–50%에서 영구 저하증 발생.</div></div>
+      <p style="font-size: calc(11px * var(--fscale, 1));font-weight:600;color:var(--accent2);margin-bottom:4px">PPT vs 산후 Graves' 병 감별 (Table 9)</p>
+      <table class="bp-table" style="font-size: calc(11px * var(--fscale, 1))">
+        <thead><tr><th>특징</th><th>PPT 갑상선중독기</th><th>Graves' 병</th></tr></thead>
+        <tbody>
+          <tr><td>발병 시기</td><td>분만 후 1–6개월</td><td>분만 후 3–12개월</td></tr>
+          <tr><td>TRAb/TSI</td><td>음성</td><td>대부분 양성</td></tr>
+          <tr><td>갑상선중독 증상</td><td>대개 경미</td><td>심할 수 있음</td></tr>
+          <tr><td>안증상</td><td>없음</td><td>가능</td></tr>
+          <tr><td>TT3/TT4 비율</td><td>통상 &lt;20</td><td>통상 &gt;20</td></tr>
+          <tr><td>갑상선 혈류 초음파</td><td>낮음</td><td>높음</td></tr>
+          <tr><td>방사성 요오드 섭취율</td><td>낮음 또는 없음</td><td>높음 (수유 중 금기)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PPT 치료 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💊</span> 산후 갑상선염 치료 권고 (Table 24)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">TPOAb 양성 또는 PPT 기왕력 여성: PPT 고위험 교육 + 증상 발생 시 갑상선 기능 검사 안내.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-h">High</span></div>
+          <div class="rec-text">PPT 갑상선중독기 증상 있는 여성: 최소 유효 용량 <strong>베타 차단제</strong> 투여 (propranolol 또는 metoprolol — 수유 중 안전).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">PPT 저하증기: 증상 있거나 수유 중이거나 6개월 내 임신 계획 시 <strong>LT4 치료 고려</strong>. 치료 시 12개월 후 감량 시도.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="gps">GPS</span></div>
+          <div class="rec-text">PPT 후 갑상선 기능 정상화 시: <strong>1년 후 또는 저하증 증상 발생 시 갑상선 기능 재검</strong>.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>PPT 갑상선중독기: <strong>ATD 치료 금기</strong> (파괴성 기전 — 갑상선 호르몬 생성 증가 아님). ATD는 Graves' 병에만 해당.</div></div>
+    </div>
+  </div>
+
+  <!-- 수유 중 갑상선기능항진증 ATD -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🍼</span> 수유 중 갑상선 기능 이상 관리 (Table 25)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-m">Moderate</span></div>
+          <div class="rec-text">수유 중 갑상선기능항진증 ATD 치료: <strong>최소 유효 용량 사용</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="str">Strong</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">수유 중 스캔 필요 시: <strong>123I → 3–4일 수유 중단·모유 폐기</strong>; <strong>99Tc → 36시간</strong>. 재개 전까지 미리 짜 둔 모유 사용.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">수유 중 131I 투여 <strong>비권고</strong>. 131I 필요 시 수유 중단 후 <strong>최소 3개월 경과</strong> 후 투여.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="cond">Conditional</span><span class="loe loe-l">Low</span></div>
+          <div class="rec-text">임신 중 시작한 LT4: 분만 후 임신 전 용량으로 복귀 + 6주 후 TSH 재검. 경미한 불현성 저하증(특히 LT4 ≤75 mcg/일): <strong>산후 LT4 중단 시도 고려</strong>.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>💡</span><div>
+        <strong>수유 중 ATD 안전 용량:</strong><br>
+        · MMI: 최대 20 mg/일 (일부 30 mg/일 가능)<br>
+        · PTU: 최대 450 mg/일 (최대 750 mg/일까지 안전 보고)<br>
+        · 모유 농도: PTU 경구 용량의 0.025%, MMI 0.14% → 신생아 갑상선 기능 및 발달 영향 없음<br>
+        · 수유 중 MMI 선호 (PTU 간독성 위험)
+      </div></div>
+    </div>
+  </div>
+
+  <!-- 산후 Graves' 병 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔄</span> 산후 Graves' 병 재발·신규 발생</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+        <li>• 산후 Graves' 병 재발 추정 위험: <strong>25–55%</strong> (임신 중 면역 관용 후 산후 면역 반동)</li>
+        <li>• 산후 신규 Graves' 병: 일부 연구에서 발생 빈도 증가 보고</li>
+        <li>• 임신 중 Graves' 병 관해 여성: 매 분기 갑상선 기능 추적 + 산후 3–6개월 또는 갑상선중독 증상 시 추적</li>
+        <li>• 산후 갑상선 기능 이상 평가 흐름: Flowchart 5 참고 (TSH 1년 이내 이상 시: 불현성 항진→Graves' 감별, 불현성 저하→TSH 10 초과 시 LT4)</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + name);
+  if (panel) panel.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  var body = hdr.nextElementSibling;
+  var isOpen = hdr.classList.contains('open');
+  if (isOpen) {
+    hdr.classList.remove('open');
+    body.classList.add('collapsed');
+  } else {
+    hdr.classList.add('open');
+    body.classList.remove('collapsed');
+  }
+}
+
+function toggleOsaAcc(hdr) {
+  var body = hdr.nextElementSibling;
+  var icons = hdr.querySelectorAll('span');
+  var icon = icons[icons.length - 1];
+  var isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '▸' : '▾';
+}
+
+function toggleSp(title) {
+  var body = title.nextElementSibling;
+  var icon = title.querySelector('span');
+  var isOpen = body.classList.contains('open');
+  if (isOpen) {
+    body.classList.remove('open');
+    icon.textContent = '▸';
+  } else {
+    body.classList.add('open');
+    icon.textContent = '▾';
+  }
+}
+
+// ── ABBREVIATIONS ──
+const abbrs = [
+  ["ATA","American Thyroid Association (미국 갑상선학회) — 본 2026 가이드라인 발행 학회"],
+  ["TSH","Thyrotropin / Thyroid Stimulating Hormone (갑상선 자극 호르몬) — 뇌하수체 분비; 모체 갑상선 상태의 최적 지표; 태반 통과 안 함"],
+  ["fT4","Free Thyroxine (유리 티록신) — 아날로그 면역측정법이 임신 1분기에 적합; 2분기 이후 과소 추정 가능"],
+  ["TT4","Total Thyroxine (총 티록신) — TBG 결합 포함; 임신 중 주수별 보정 필요 (7-16주: 5%/주 증가, 16주 이후 50% 상한)"],
+  ["TT3","Total Triiodothyronine (총 트리요오드티로닌) — GTT vs Graves 병 감별에 활용; TT3/TT4 비율 20 초과이면 Graves 병 시사"],
+  ["fT3","Free Triiodothyronine (유리 T3) — 갑상선기능항진증 특성화에 주로 사용; 임신 관리 목표로 사용 금지"],
+  ["TBG","Thyroxine-Binding Globulin (티록신 결합 글로불린) — 임신 중 에스트로겐 증가로 TBG 상승 -> TT4·TT3 증가"],
+  ["LT4","Levothyroxine (레보티록신) — 임신 중 갑상선기능저하증 유일 치료제; 임신 중 약 25-50% 용량 증량 필요"],
+  ["LT3","Liothyronine (리오티로닌) — 임신 중 사용 금지; 태아 뇌에 T4 공급 감소 위험"],
+  ["TPOAb","Thyroperoxidase Antibody (갑상선 과산화효소 항체) — 자가면역 갑상선 질환 주요 지표; 양성 시 LT4 비권고 (2026 신규)"],
+  ["TgAb","Thyroglobulin Antibody (티로글로불린 항체) — 갑상선 자가면역 반영; TPOAb보다 진단 정확도 낮음"],
+  ["TRAb","Thyrotropin Receptor Antibody (갑상선 자극 호르몬 수용체 항체) — Graves 병 진단; 태반 통과 -> 태아 갑상선기능항진증 위험"],
+  ["TSI","Thyroid Stimulating Immunoglobulin (갑상선 자극 면역글로불린) — TRAb와 동의어; Graves 병 진단 및 태아 위험 평가"],
+  ["ATD","Antithyroid Drug (항갑상선제) — PTU, MMI, carbimazole; 1분기 선천성 기형 위험 (PTU < MMI)"],
+  ["MMI","Methimazole (메티마졸) — 항갑상선제; 수유 중 선호 (1일 1회); 1분기 aplasia cutis, 배꼽탈장 등 기형 위험"],
+  ["CMZ","Carbimazole (카비마졸) — MMI의 전구체; MMI와 동일 위험 프로파일"],
+  ["PTU","Propylthiouracil (프로필티오우라실) — 항갑상선제; 1분기 우선 사용; 수신증·이전 누공 기형 위험 (MMI보다 경미); 간독성 주의"],
+  ["GTT","Gestational Transient Thyrotoxicosis (임신일과성갑상선중독증) — hCG에 의한 생리적 TSH 억제; 대부분 3분기까지 자연 정상화; ATD 치료 불필요"],
+  ["PPT","Postpartum Thyroiditis (산후 갑상선염) — 산후 12개월 내 자가면역 갑상선 기능 이상; TPOAb 양성에서 33-50% 발생; 재발 위험 70%"],
+  ["RAI","Radioactive Iodine / 131I (방사성 요오드) — 임신 중 절대 금기 (태아 갑상선 파괴); 임신 전 투여 후 최소 6개월 피임; 수유 중 금기"],
+  ["hCG","Human Chorionic Gonadotropin (인융모성 생식샘 자극 호르몬) — TSH 수용체 약한 친화성 -> 1분기 말 TSH 감소, fT4 상승"],
+  ["D3","Type 3 Deiodinase (3형 요오드 제거 효소) — 태반 발현; T4를 비활성 rT3로 분해; 임신 중 T4 소모 증가"],
+  ["DTC","Differentiated Thyroid Cancer (분화 갑상선암) — 유두암, 여포암; 임신 자체가 예후에 큰 영향 없음; 대부분 산후까지 수술 연기 가능"],
+  ["MTC","Medullary Thyroid Cancer (수질 갑상선암) — 칼시토닌 분비; 임신 중 칼시토닌 최대 2-3배 상승 가능; CEA가 더 신뢰할 수 있는 추적 지표"],
+  ["FNA","Fine-Needle Aspiration (세침 흡인 생검) — 갑상선 결절 악성 위험 평가; 임신 중 시행 가능 (공동 결정 후)"],
+  ["GRADE","Grading of Recommendations, Assessment, Development, and Evaluation — 근거 품질 평가 체계; Strong/Conditional 권고 + GPS"],
+  ["GPS","Good Practice Statement (좋은 임상 관행 성명) — 직접 근거 없으나 표준 진료와 일치; Strong과 동급 실행 권고"],
+  ["SSKI","Saturated Solution of Potassium Iodide (포화 요오드화칼륨 용액) — Graves 수술 전 준비 또는 대체 치료; 임신 중 단기 사용은 비교적 안전"],
+  ["ART","Assisted Reproductive Technology (보조 생식 기술) — IVF·ICSI 등; 난소 자극 시 TSH 상승 유발 -> LT4 필요량 증가"],
+  ["IVF","In Vitro Fertilization (체외수정)"],
+  ["ICSI","Intracytoplasmic Sperm Injection (세포질내 정자 주입술)"],
+  ["UIC","Urinary Iodine Concentration (소변 요오드 농도) — 집단 요오드 상태 평가 지표; 임신 여성 적절 범위: 중앙값 150-249 mcg/L"],
+  ["BMIC","Breast Milk Iodine Content (모유 요오드 함량) — 수유 중 요오드 상태 반영; 적절 범위 100-200 mcg/L"],
+  ["NIS","Sodium-Iodide Symporter (나트륨-요오드 공동 수송체) — 갑상선·유방에서 요오드 세포 내 흡수; 방사성 요오드 흡수 경로"],
+  ["CATS","Controlled Antenatal Thyroid Screening trial — LT4 고용량(150 mcg) 중앙값 12주 시작 -> 자녀 IQ 개선 없음; 과잉 치료 시 ADHD 위험"],
+  ["T4LIFE","Levothyroxine in Euthyroid TPOAb Positive Women with Recurrent Pregnancy Loss — LT4 vs 위약; 유산·임신 결과 차이 없음 (2022)"],
+  ["AMH","Anti-Mullerian Hormone (항뮬러관 호르몬) — 난소 예비력 지표; RAI 치료 후 일부 연구에서 감소 보고"],
+  ["RET","RET proto-oncogene — MEN2·MTC 관련; 임신 전 유전자 검사 권고"],
+  ["RFA","Radiofrequency Ablation (고주파 열치료) — 임신 중 데이터 극히 제한적"],
+  ["RLN","Recurrent Laryngeal Nerve (되돌이 후두 신경) — 갑상선 수술 주요 합병증; 일시적 손상 약 7%, 영구 1% 미만"]
+];
+
+function buildAbbr() {
+  const grid = document.getElementById('abbr-grid');
+  const sorted = abbrs.slice().sort((a,b) => a[0].localeCompare(b[0]));
+  if (grid) {
+    grid.innerHTML = sorted.map(a =>
+      `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+        <span class="abbr-term">${a[0]}</span>
+        <span class="abbr-def">${a[1]}</span>
+      </div>`
+    ).join('');
+  }
+  const countEl = document.getElementById('abbr-count');
+  if (countEl) countEl.textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 500;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('.abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.charAt(0) === v.charAt(0);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target))
+    drop.style.display = 'none';
+});
+document.getElementById('abbr-input').addEventListener('focus', () => {
+  const v = document.getElementById('abbr-input').value.trim();
+  if (v) { positionDropdown(); document.getElementById('abbr-dropdown').style.display = 'block'; }
+});
+
+// Init: card bodies
+document.querySelectorAll('.card-header').forEach(function(h) {
+  var body = h.nextElementSibling;
+  if (!body) return;
+  if (h.classList.contains('open')) {
+    body.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+  }
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
