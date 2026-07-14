@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2022 KSHF 심부전 진료지침</title>
+<style>
+  :root {
+    --bg:#f6f8fa;--surface:#fff;--surface2:#f0f2f5;--border:#d0d7de;
+    --accent:#0969da;--accent2:#0550ae;--green:#1a7f37;--yellow:#9a6700;
+    --red:#cf222e;--orange:#5a3ea0;--text:#1f2328;--text2:#57606a;
+    --teal:#0a7c8a;--purple:#5a3ea0;--fscale:1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size: calc(13px * var(--fscale, 1));line-height:1.5;}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;position:sticky;top:0;z-index:100;}
+  .header-inner{width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .logo-badge{background:var(--orange);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+  .tab-bar{display:flex;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .font-zoom-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;margin:4px 4px 4px 6px;padding:5px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--accent2);font-size:calc(11px * var(--fscale, 1));font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s;}
+  .font-zoom-btn:hover{background:var(--border);}
+  .font-zoom-btn .fz-icon{font-size:calc(12px * var(--fscale, 1));}
+  .tab-bar-inner{width:100%;max-width:980px;display:flex;align-items:center;gap:2px;padding:0 4px;}
+  .tab{padding:7px 11px;font-size: calc(11.5px * var(--fscale, 1));color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;user-select:none;flex-shrink:0;}
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--orange);border-bottom-color:var(--orange);}
+  .tab-abbr-wrap{display:flex;align-items:center;padding:4px 4px;margin-left:4px;flex-shrink:0;position:relative;}
+  .main{padding:12px 16px;max-width:980px;margin:0 auto;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+  .card-header{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+  .card-header .toggle{font-size: calc(13px * var(--fscale, 1));transition:transform .2s;}
+  .card-header.open .toggle{transform:rotate(180deg);}
+  .card-body{padding:10px 12px;}
+  .card-body.collapsed{display:none;}
+  .stat-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .stat-box{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 14px;flex:1;min-width:90px;text-align:center;}
+  .stat-box.clickable{cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+  .stat-box.clickable:hover{border-color:var(--orange);box-shadow:0 2px 8px rgba(90,62,160,.15);}
+  .stat-val{font-size: calc(18px * var(--fscale, 1));font-weight:700;color:var(--orange);}
+  .stat-lbl{font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:2px;}
+  .stat-hint{font-size: calc(9px * var(--fscale, 1));color:var(--orange);margin-top:4px;opacity:.7;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--surface);border-radius:12px;padding:20px;max-width:680px;width:92%;max-height:84vh;overflow-y:auto;box-shadow:0 16px 48px rgba(0,0,0,.22);position:relative;}
+  .modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size: calc(18px * var(--fscale, 1));cursor:pointer;color:var(--text2);line-height:1;}
+  .modal-title{font-size: calc(15px * var(--fscale, 1));font-weight:700;color:var(--text);margin-bottom:12px;padding-right:20px;line-height:1.4;}
+  .modal-section{margin-bottom:12px;}
+  .modal-section-title{font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:4px;}
+  .modal-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1));}
+  .modal-table th{background:var(--surface2);color:var(--text2);padding:4px 8px;font-size: calc(10.5px * var(--fscale, 1));font-weight:600;text-align:left;border-bottom:1px solid var(--border);}
+  .modal-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .modal-table tr:last-child td{border-bottom:none;}
+  .rec-list{list-style:none;}
+  .rec-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start;}
+  .rec-item:last-child{border-bottom:none;}
+  .rec-text{font-size: calc(12px * var(--fscale, 1));color:var(--text);line-height:1.65;}
+  .rec-text strong{color:#1f2328;}
+  .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+  .badge-1{background:#dafbe1;color:#116329;border:1px solid #1a7f37;}
+  .badge-2a{background:#ddf4ff;color:var(--accent2);border:1px solid var(--accent2);}
+  .badge-2b{background:#fff8c5;color:#7a4b00;border:1px solid #d4a017;}
+  .badge-3{background:#ffebe9;color:#82071e;border:1px solid var(--red);}
+  .badge-high{background:#dafbe1;color:#116329;border:1px solid #1a7f37;}
+  .badge-mod{background:#ddf4ff;color:var(--accent2);border:1px solid var(--accent2);}
+  .badge-low{background:#fff8c5;color:#7a4b00;border:1px solid #d4a017;}
+  .badge-vlow{background:#ffebe9;color:#82071e;border:1px solid var(--red);}
+  .alert{padding:8px 12px;border-radius:6px;font-size: calc(12px * var(--fscale, 1));margin:8px 0;display:flex;gap:8px;align-items:flex-start;}
+  .alert-info{background:#ddf4ff;border-left:3px solid var(--accent2);color:#0550ae;}
+  .alert-warn{background:#fff8c5;border-left:3px solid #d4a017;color:#7a4b00;}
+  .alert-danger{background:#ffebe9;border-left:3px solid var(--red);color:#82071e;}
+  .alert-success{background:#dafbe1;border-left:3px solid var(--green);color:#116329;}
+  .alert-teal{background:#e0f5f5;border-left:3px solid var(--teal);color:#075050;}
+  .alert-purple{background:#f3e5f5;border-left:3px solid var(--purple);color:#5a3ea0;}
+  .tc-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1));}
+  .tc-table th{background:var(--surface2);color:var(--text2);padding:5px 8px;font-size: calc(10.5px * var(--fscale, 1));text-transform:uppercase;letter-spacing:.3px;font-weight:600;text-align:left;border-bottom:1px solid var(--border);}
+  .tc-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .tc-table tr:last-child td{border-bottom:none;}
+  .tc-table tr:hover td{background:rgba(0,0,0,.02);}
+  .acc{border:1px solid var(--border);border-radius:6px;margin-bottom:6px;overflow:hidden;}
+  .acc-hdr{background:var(--surface2);padding:7px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .acc-hdr:hover{background:#e8eaec;}
+  .acc-body{display:none;padding:10px 12px;font-size: calc(12px * var(--fscale, 1));line-height:1.65;}
+  .flow-box{border:1px solid var(--border);border-radius:6px;background:var(--surface);padding:8px 12px;margin-bottom:6px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  .flow-arrow{text-align:center;color:var(--text2);font-size: calc(14px * var(--fscale, 1));margin:2px 0;}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0;margin-right:6px;}
+  ul.dot{padding-left:18px;}
+  ul.dot li{margin-bottom:3px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  ol.num{padding-left:18px;}
+  ol.num li{margin-bottom:4px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  .subhead{font-size:calc(13px * var(--fscale,1));font-weight:700;color:var(--orange);margin:14px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--orange);display:inline-block;}
+  .chnum{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:5px;background:var(--orange);color:#fff;font-size:calc(10.5px * var(--fscale,1));font-weight:700;margin-right:6px;padding:0 4px;}
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#c8d0d9;border-radius:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="logo-badge">KSHF 2022</span>
+      <h1 style="font-size:17px;font-weight:700;color:var(--text)">심부전 진료지침</h1>
+    </div>
+    <div style="text-align:center;line-height:1.5">
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">2022 KSHF Guideline for the Management of Heart Failure — 대한심부전학회</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2)">발행 2022.07.22 · Part I~V, 64개 챕터 + 부록(국민건강보험 요양급여기준)</span>
+    </div>
+    <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic;">본 도구는 대한심부전학회의 공식 자료가 아니며, 학습 참고용으로 제작되었습니다.</div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단</div>
+    <div class="tab" onclick="showTab('hfref')">💊 HFrEF 치료</div>
+    <div class="tab" onclick="showTab('device')">⚡ 기구·재관류</div>
+    <div class="tab" onclick="showTab('valve')">🫀 판막·HFmrEF·HFpEF</div>
+    <div class="tab" onclick="showTab('cardiomyopathy')">🧬 특수심근질환</div>
+    <div class="tab" onclick="showTab('multidisc')">👥 다학제·관리</div>
+    <div class="tab" onclick="showTab('comorbid')">⚕️ 동반질환</div>
+    <div class="tab" onclick="showTab('severe')">🆘 중증심부전</div>
+    <div class="tab" onclick="showTab('acute')">🚨 급성심부전</div>
+    <div class="tab" onclick="showTab('appendix')">📁 부록·약어</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:90px;outline:none;"
+          onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:440px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">64개</div><div class="stat-lbl">전체 챕터 수 (Part I~V)</div></div>
+    <div class="stat-box"><div class="stat-val">2.24%</div><div class="stat-lbl">국내 심부전 유병률(2018)</div></div>
+    <div class="stat-box clickable" onclick="openModal('classModal')"><div class="stat-val">EF 기준</div><div class="stat-lbl">HFrEF/HFmrEF/HFpEF 분류</div><div class="stat-hint">▸ 클릭하여 상세 보기</div></div>
+    <div class="stat-box clickable" onclick="openModal('gradeModal')"><div class="stat-val">Class I-III</div><div class="stat-lbl">권고 등급 체계</div><div class="stat-hint">▸ 클릭하여 상세 보기</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📋 만성 심부전 진단 알고리듬</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-box" style="border-left:3px solid var(--orange)">
+        <strong>① 심부전 의심</strong><br>
+        <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">위험인자, 증상 및/또는 징후, 심전도 이상</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--accent2)">
+        <strong>② 나트륨이뇨펩타이드 측정</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">NT-proBNP ≥125 pg/mL 또는 BNP ≥35 pg/mL → 양성, 또는 심부전 강력히 의심 시 / 검사 불가 시 → 심초음파로</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--teal)">
+        <strong>③ 심초음파검사</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">이상 소견 확인 → 심부전 진단, 좌심실 박출률(LVEF) 기준 표현형 결정</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--green)">
+        <strong>④ 표현형 결정</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">LVEF ≤40% HFrEF · 41-49% HFmrEF · ≥50% HFpEF → 원인 파악과 치료 시작</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🚑 새로 발생한 급성 심부전 진단 알고리듬</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-box" style="border-left:3px solid var(--orange)">
+        <strong>① 과거 병력, 급성 심부전 의심 증상/징후</strong>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--accent2)">
+        <strong>② 초기 검사</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">심전도, 맥박산소측정기, 심초음파검사, 초기 검사실 검사(troponin·creatinine·전해질·BUN·TSH·LFT·D-dimer 등), 흉부방사선, 폐초음파, 특수평가</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--teal)">
+        <strong>③ Natriuretic peptide 검사</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">BNP &lt;100 / NT-proBNP &lt;300 / MR-proANP &lt;120 pg/mL → 급성심부전 배제<br>BNP ≥100 / NT-proBNP ≥300 / MR-proANP ≥120 pg/mL → 급성심부전 진단 → 정밀 심초음파</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <span>📌 Part 구성 (64개 챕터)</span><span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item"><span class="badge badge-1">Part I</span><span class="rec-text"><strong>심부전의 정의와 진단</strong> (1~7장) — 정의·분류, 역학, 진단 알고리듬, 진단검사, 영상검사, 유전검사, HFpEF 진단</span></li>
+          <li class="rec-item"><span class="badge badge-1">Part II</span><span class="rec-text"><strong>심부전의 치료</strong> (8~37장) — HFrEF 표준치료(RAAS·BB·MRA·SGLT2 등), 재관류, ICD/CRT, 판막질환, HFmrEF·HFpEF, 우심부전, 심근염·아밀로이드·심근병증, 심낭질환, 선천성심장병, 다학제 접근, 재활, 전원, 질 지표</span></li>
+          <li class="rec-item"><span class="badge badge-1">Part III</span><span class="rec-text"><strong>원인질환과 동반질환 치료</strong> (38~52장) — 고혈압, 폐고혈압, 허혈성심장병, 부정맥(심방세동·심실부정맥·전도장애), 판막질환, 당뇨병, 신장·전해질, 호흡기, 빈혈, 수면무호흡, 우울증/인지장애, 임신, 항암치료 관련 심부전</span></li>
+          <li class="rec-item"><span class="badge badge-1">Part IV</span><span class="rec-text"><strong>중증 심부전</strong> (53~58장) — 정의·분류(INTERMACS), 심인성 쇼크, 임시형 기계순환보조(IABP/ECMO 등), LVAD, 심장이식, 완화의료</span></li>
+          <li class="rec-item"><span class="badge badge-1">Part V</span><span class="rec-text"><strong>급성 심부전</strong> (59~64장) — 정의·악화인자, 모니터링, 이뇨제, 혈관확장제, 강심제·혈관수축제, 퇴원 준비</span></li>
+          <li class="rec-item"><span class="badge badge-2a">부록</span><span class="rec-text"><strong>국민건강보험 요양급여기준</strong> — ICD/CRT, LVAD, 전극도자절제술 등 (2022년 현재)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-header open" onclick="toggleCard(this)">
+          <span>⚠️ 권고 등급(Class) 및 근거 수준</span><span class="toggle">▾</span>
+        </div>
+        <div class="card-body">
+          <table class="tc-table">
+            <tr><th>등급</th><th>의미</th></tr>
+            <tr><td><span class="badge badge-1">Class I</span></td><td>시행하는 것이 권고됨(이득 ≫ 위험)</td></tr>
+            <tr><td><span class="badge badge-2a">Class IIa</span></td><td>시행하는 것이 타당함(이득 &gt; 위험)</td></tr>
+            <tr><td><span class="badge badge-2b">Class IIb</span></td><td>시행을 고려할 수 있음(이득 ≥ 위험)</td></tr>
+            <tr><td><span class="badge badge-3">Class III</span></td><td>권고되지 않음/시행하지 않아야 함</td></tr>
+          </table>
+          <table class="tc-table" style="margin-top:8px">
+            <tr><th>근거 수준</th><th>의미</th></tr>
+            <tr><td><span class="badge badge-high">A</span></td><td>다수의 무작위 임상연구 또는 메타분석</td></tr>
+            <tr><td><span class="badge badge-mod">B</span></td><td>단일 무작위 연구 또는 대규모 비무작위 연구</td></tr>
+            <tr><td><span class="badge badge-low">C</span></td><td>전문가 합의 또는 소규모 연구, 후향적 연구</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header open" onclick="toggleCard(this)">
+          <span>🔑 핵심 개념</span><span class="toggle">▾</span>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-purple"><span>ℹ️</span><span>심부전 = 심장의 기능적/구조적 이상으로 심실의 혈액 박출 또는 충만에 이상이 발생하여 호흡곤란, 부종, 피로 등 증상이 생기는 임상 증후군</span></div>
+          <div class="alert alert-info"><span>📊</span><span><strong>표현형 3분류</strong>: 박출률 감소 심부전(HFrEF, EF≤40%) · 박출률 경도 감소 심부전(HFmrEF, EF 41-49%) · 박출률 보존 심부전(HFpEF, EF≥50%)</span></div>
+          <div class="alert alert-teal"><span>💡</span><span><strong>HFrEF 4대 기둥(Four Pillars)</strong>: ARNI/ACEI(또는 ARB) + 베타차단제 + MRA(알도스테론 길항제) + SGLT2 억제제 — 동시 또는 신속한 병용 시작이 강조됨 (Class I, Level A)</span></div>
+          <div class="alert alert-warn"><span>⚠️</span><span>국내 KorHF/KorAHF 레지스트리: 만성 심부전 원인 1위 허혈성 심장병(52.3%), 급성 심부전의 64%에서 허혈성 심장병 동반</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══ DIAGNOSIS (Part I, 1-7장) ═══ -->
+<div id="tab-diagnosis" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">1</span>심부전의 정의 및 분류</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>Type of HF</th><th>박출률 감소(HFrEF)</th><th>박출률 경도 감소(HFmrEF)</th><th>박출률 보존(HFpEF)</th></tr>
+        <tr><td>증상/징후</td><td>증상±징후*</td><td>증상±징후*</td><td>증상±징후*</td></tr>
+        <tr><td>좌심실 박출률</td><td>≤40%</td><td>41-49%</td><td>≥50%</td></tr>
+        <tr><td>추가 기준</td><td>-</td><td>-</td><td>나트륨이뇨펩타이드 상승 또는 좌심실 이완기 장애/충만압 상승에 합당한 심장의 기능적·구조적 이상의 객관적 증거</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>💡</span><span><strong>HFmrEF 용어 변경 배경</strong>: 과거 '경계형 박출률 심부전'으로 불렸으나, HFrEF 약물치료에 비슷한 효과를 보인다는 연구가 누적되며 'HFmrEF(mildly reduced)'로 명칭 변경. 국내 KorAHF 연구에서 경계형 박출률 심부전이 16% 존재.</span></div>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📌</span><span><strong>박출률 호전 심부전(HFimpEF)</strong>: 치료 후 EF가 40% 이하→40% 초과 & 이전 대비 10%p 이상 향상, 또는 EF 50% 이상으로 향상된 경우. 단, 독립 질환군이 아닌 '호전된 상태'로 보고 표준치료 지속 권고(소규모 연구에서 치료 중단 시 6개월 내 45% 재악화).</span></div>
+      <div class="alert alert-teal" style="margin-top:6px"><span>🇰🇷</span><span>국내 KorHF: 좌심실 박출률 평균 38.5±15.7%. HFrEF 57.6%, HFmrEF 17.3%, HFpEF 25.1%. KorAHF: HFrEF 60.5%, HFmrEF 14.3%, HFpEF 25.2%</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">2</span>심부전의 역학</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="dot">
+        <li>국내 심부전 보통유병률: 2002년 0.77% → 2018년 2.24%로 증가. 2018년 1,159,776명(2.24%) 추정</li>
+        <li>유병률은 연령에 급격히 증가: 50세 미만 0.1-0.7% → 50대 1.88% → 80대 16.9%. 80세 이상이 전체 유병률의 약 15배</li>
+        <li>보통사망률(10만 명당): 남성 2002-2018년 320%↑(39→231명), 여성 355%↑(39→259명)</li>
+        <li>원인질환: Framingham 연구 — 65세 이상 고령인구 1,000명당 10명 발생, 75%가 이미 고혈압 보유. 국내 KorHF: 허혈성 심장병 52.3%, 고혈압성 36.7%, 심근병증 26.5%, 심장판막증 12.7%(2004-2009년 입원 환자)</li>
+        <li>KorAHF(2011-2014년 급성 심부전): 허혈성 심장병 37.6%, 심근병증 20.6%, 심장판막증 14.3%, 빈맥(10%), 고혈압성 4%</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">3</span>심부전의 진단 알고리듬</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 심부전 의심 환자에서 BNP/NT-proBNP, 12유도 심전도, 흉부방사선촬영, 심초음파검사, 일반혈액검사(CBC·전해질·신기능·간기능·공복혈당·당화혈색소·지질·철·갑상선기능)를 초기검사로 권고 (Class I, Level B/C)</span></div>
+      <table class="tc-table" style="margin-top:8px">
+        <tr><th>증상</th><th>전형적</th><th>비전형적</th></tr>
+        <tr><td>증상</td><td>호흡곤란, 기좌호흡, 발작성 야간호흡곤란, 운동능력저하, 피로감, 운동 후 회복지연, 발목 부종</td><td>야간 기침/천명, 체중증가(&gt;2kg/주), 체중감소, 포만감, 식욕저하, 착란, 우울, 두근거림, 실신</td></tr>
+        <tr><td>징후</td><td>경정맥압 상승, 간경정맥 확장, 제3심음, 심첨박동 전위, 심잡음</td><td>말초부종, 폐비빔소리, 폐기저부 타진시 둔탁음, 빈맥, 불규칙맥, 빈호흡(&gt;16회/분), 간비대, 복수, 전신쇄약</td></tr>
+      </table>
+      <table class="tc-table" style="margin-top:8px">
+        <tr><th>NYHA</th><th>내용</th></tr>
+        <tr><td><strong>I</strong></td><td>신체활동 제한 없음, 일상에서 증상 없음</td></tr>
+        <tr><td><strong>II</strong></td><td>약간의 제한, 안정 시 증상 없으나 일상 활동에서 증상</td></tr>
+        <tr><td><strong>III</strong></td><td>심한 제한, 안정 시 증상 없으나 낮은 활동에도 증상</td></tr>
+        <tr><td><strong>IV</strong></td><td>안정 시에도 증상, 신체활동으로 증상 심해짐</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px"><span>💉</span><span>혈중 BNP&lt;35, NT-proBNP&lt;125, MR-proANP&lt;40 pg/mL일 경우 만성 심부전이 아닐 가능성 높음. 급성 심부전 진단 시: BNP&lt;100, NT-proBNP&lt;300, MR-proANP&lt;120 pg/mL이면 배제 가능 (55세 미만 &gt;450, 55-75세 &gt;900, 75세 이상 &gt;1,800 pg/mL이 진단 기준값)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">4</span>심부전의 진단을 위한 검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 6개:</strong><br>
+        1. BNP/NT-proBNP는 심부전 위험환자의 예방에 도움 (Class IIa, B)<br>
+        2. 심부전 의심 시 진단·배제 위해 BNP/NT-proBNP 필수 시행 (Class I, A)<br>
+        3. 중증도 평가·예후 예측에 유용 (Class I, A)<br>
+        4. 급성심부전 퇴원 전 측정은 퇴원 후 예후 예측에 도움 (Class IIa, B)<br>
+        5. 약물 용량 변경 목적의 추적 측정은 도움 안 됨 (Class III, B)<br>
+        6. 심근손상·전신염증·섬유화 반영 바이오마커(트로포닌, sST2, galectin-3, hs-CRP, GDF-15) 추가 측정은 위험도 분류에 고려 가능 (Class IIb, B)</span>
+      </div>
+      <div class="subhead">나트륨이뇨펩타이드 부정확 임상상황</div>
+      <table class="tc-table">
+        <tr><th>구분</th><th>예시</th></tr>
+        <tr><td>심부전 아닌데 NP 높음</td><td>고령, 빈혈, 뇌졸중, 신부전, 복수를 동반한 간경화, 급성관상동맥증후군, 만성폐쇄성폐질환, 중증 폐렴, 패혈증, 갑상선 중독증, 당뇨병케토산증</td></tr>
+        <tr><td>심부전인데 NP 낮음</td><td>비만(BMI&gt;30), 급성 폐부종 없이 좌심방 압력만 증가, 안정되고 증상 없는 심부전</td></tr>
+      </table>
+      <div class="subhead">기타 바이오마커</div>
+      <ul class="dot">
+        <li><strong>트로포닌</strong>: 심근허혈 없이도 혈역학적 스트레스에 증가, 입원 시 BNP와 함께 사망 독립 예측. 항암제 심독성 조기 발견에도 유용</li>
+        <li><strong>sST2</strong>: 비만·나이·심방세동·신장기능에 영향 적음, 1년 사망위험 예측, 급성 비대상성 심부전 진단엔 유용성 낮음</li>
+        <li><strong>Galectin-3</strong>: 조직 섬유화 반영, NT-proBNP와 병합 측정 시 예측력 향상</li>
+        <li><strong>GDF-15</strong>: NT-proBNP 보정 후에도 예후 예측 가능한 독특한 바이오마커</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">5</span>진단을 위한 영상검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 7개:</strong> 경흉부 심초음파(Class I, C) 1차 권고. CMR은 영상 질이 나쁠 때 또는 원인 규명·심근조직특성 분석에 권고(Class I, C). CTCA는 관상동맥질환 가능성 낮음/중간 시 도움(Class IIa, C). 침습적 관상동맥조영술은 협심증 증상이 있거나 증상 동반 심실부정맥 시 권고(Class I, B).</span>
+      </div>
+      <div class="subhead">심초음파 핵심 측정값</div>
+      <ul class="dot">
+        <li>좌심실 박출률(EF) = (이완기말 용적 − 수축기말 용적) / 이완기말 용적, Simpson법 권장</li>
+        <li>GLS(global longitudinal strain) — speckle tracking, 독립적 사망률 예측 인자</li>
+        <li>우심실 기능: FAC, TAPSE, Doppler tissue S' velocity</li>
+      </ul>
+      <div class="subhead">심부전 원인 감별 진단검사 (표1 발췌)</div>
+      <table class="tc-table">
+        <tr><th>원인</th><th>임상 양상</th><th>진단 검사</th></tr>
+        <tr><td>관상동맥질환</td><td>심근경색, 협심증, 부정맥</td><td>침습적 관상동맥조영술, 심장 CT, 부하 영상검사</td></tr>
+        <tr><td>고혈압</td><td>박출률 보존 심부전, 악성 고혈압</td><td>24시간 혈압검사, 혈중 metanephrines/renin/aldosterone</td></tr>
+        <tr><td>판막질환</td><td>일차성·이차성 판막질환, 선천성 판막질환</td><td>경흉부·경식도·부하 심초음파</td></tr>
+        <tr><td>심근병증</td><td>모든 종류(확장성·비후성·제한성·부정맥유발성·주산기·스트레스)</td><td>심장 자기공명영상, 유전자 검사, 도자술</td></tr>
+        <tr><td>선천성 심장병</td><td>TGA·shunt·Fallot 4징 교정 후</td><td>심장 자기공명영상</td></tr>
+        <tr><td>감염성</td><td>바이러스성 심근염, 샤가스병, HIV, 라임병</td><td>CMR, 심내막 심근생검, 혈청검사</td></tr>
+        <tr><td>약물 유발성</td><td>안트라사이클린, 트라스투주맙, VEGF 억제제, 면역관문억제제 등</td><td>심전기영동, 혈청 유리경쇄, CMR, PET</td></tr>
+        <tr><td>침윤성</td><td>아밀로이드증, 사르코이드증, 종양성</td><td>혈청 전기영동, CMR/CT-PET, 심내막 심근생검</td></tr>
+        <tr><td>축적질환</td><td>혈색소침착증, 파브리병, 당원축적병</td><td>철분 검사, α-galactosidase A, CMR(T1 mapping, T2*)</td></tr>
+        <tr><td>대사성</td><td>갑상선질환, 영양질환, 자가면역질환</td><td>갑상선기능검사, ANA/ANCA, 류마티스 진단</td></tr>
+        <tr><td>신경근육질환</td><td>프리드라이히 운동실조, 근이영양증</td><td>신경전도검사, 근전도, 유전자검사, CK</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">6</span>심부전(심근병증) 진단에 있어 유전 검사의 역할</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 3개:</strong><br>
+        1. 유전성 심근병증 의심 시 3대 이상 가족력 조사 필요(Class I, B)<br>
+        2. 유전성/가족성 심근병증 의심 시 유전 검사 권고(Class I, B)<br>
+        3. 명확한 유전 변이 발견 시 모든 직계가족(부모·형제자매·자식)도 유전 검사 받아야 함(Class I, B)</span>
+      </div>
+      <ul class="dot">
+        <li>심근병증 발병 빈도: 확장성 1:250~1:500, 비후성 1:500~1:5,000, 부정맥성 1:1,000~1:5,000</li>
+        <li>유전 변이 발견율: 확장성 최대 40%, 비후성 60%, 항암/음주/출산 관련 약 15%</li>
+        <li>추적: 확장성 심근병증 환자 직계가족은 5년마다 심초음파, 50세 이하/미세 이상 시 더 자주. 비후성/부정맥성 심근병증 직계가족은 2-5년마다, 미세 이상 시 더 자주</li>
+      </ul>
+      <table class="tc-table" style="margin-top:8px">
+        <tr><th>유전자</th><th>표현형</th></tr>
+        <tr><td>LMNA</td><td>DCM (원인+악화인자)</td></tr>
+        <tr><td>TTN</td><td>DCM, (HCM)</td></tr>
+        <tr><td>MYH7</td><td>DCM, HCM</td></tr>
+        <tr><td>MYBPC3</td><td>DCM, HCM</td></tr>
+        <tr><td>TNNT</td><td>DCM, HCM</td></tr>
+        <tr><td>PLN</td><td>DCM, HCM, AC</td></tr>
+        <tr><td>DSP</td><td>AC, DCM, 심근염 (원인+악화인자)</td></tr>
+        <tr><td>SCN5a</td><td>AC, (DCM) (원인+악화인자)</td></tr>
+        <tr><td>RBM20</td><td>DCM</td></tr>
+        <tr><td>Galactosidase-A(Fabry)</td><td>HCM</td></tr>
+      </table>
+      <div style="font-size:calc(10px*var(--fscale,1));color:var(--text2);margin-top:4px">DCM=확장성 심근병증, HCM=비후성 심근병증, AC=부정맥유발성 심근병증</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">7</span>박출률 보존 심부전의 진단</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-purple"><span>📌</span><span><strong>HFpEF 진단 3대 기준</strong>: (1) 심부전 증상과 징후 (2) 좌심실 박출률 ≥50% (3) 좌심실 이완기능 이상/충만압 증가(NP 증가 포함 또는 NT-proBNP/BNP)에 부합하는 심장 구조·기능 이상의 객관적 증거</span></div>
+      <div class="subhead">① 점수 기반 알고리듬</div>
+      <table class="tc-table">
+        <tr><th colspan="3">H2FPEF 점수</th></tr>
+        <tr><td><strong>H₂</strong> Heavy</td><td>체질량지수&gt;30</td><td>2점</td></tr>
+        <tr><td><strong>H</strong> Hypertensive</td><td>고혈압약 2개 이상</td><td>1점</td></tr>
+        <tr><td><strong>F</strong> Atrial Fibrillation</td><td>발작성/지속성 심방세동</td><td>3점</td></tr>
+        <tr><td><strong>P</strong> Pulmonary Hypertension</td><td>폐동맥수축기압력&gt;35mmHg</td><td>1점</td></tr>
+        <tr><td><strong>E</strong> Elder</td><td>나이&gt;60세</td><td>1점</td></tr>
+        <tr><td><strong>F</strong> Filling Pressure</td><td>E/e'&gt;9</td><td>1점</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:4px"><span>📊</span><span>총점 0-9점, HFpEF 가능성: 0점 0.2 → 5점 0.7 → 9점 0.95</span></div>
+      <table class="tc-table" style="margin-top:8px">
+        <tr><th colspan="4">HFA-PEFF 점수 (Major/Minor 기준)</th></tr>
+        <tr><th></th><th>기능적</th><th>구조적</th><th>생화학(동율동/AF)</th></tr>
+        <tr><td>Major</td><td>e'&lt;7-10cm/s, E/e'≥15, TR velocity≥2.8m/s</td><td>LAVI&gt;34, LVMI&gt;149/122, RWT&gt;0.42</td><td>NT-proBNP&gt;220/660, BNP&gt;80/240</td></tr>
+        <tr><td>Minor</td><td>average E/e' 9-14, GLS&lt;16%</td><td>LAVI 29-34, LVMI&gt;115/95, 벽두께≥12mm</td><td>NT-proBNP 125-220/365-660</td></tr>
+        <tr><td colspan="4">Major 2점 또는 Major1+Minor2 → &gt;5점: HFpEF 확진 / 2-4점: 추가 이완기부하검사 또는 침습적 혈역학 측정 필요</td></tr>
+      </table>
+      <div class="subhead">② 표준 검사</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">NT-proBNP 또는 BNP, 흉부X선, 심전도, 심초음파. 좌심방 충만압 상승 지표: 좌심방용적지수&gt;34mL/m²(동율동), &gt;40(심방세동); E/e'&gt;9; 좌심실비대지수≥115(남)/95(여); 삼첨판역류속도&gt;2.8m/s</p>
+      <div class="subhead">③ 이완기 기능 부하검사</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">표준검사로 확정 못할 시 운동부하 심폐기능검사, 운동부하 심초음파, 침습적 혈역학 검사 추가 진행. HFA-PEFF 점수 낮음(0-1)→다른 원인 조사, 중간(2-4)→이완기부하검사, 높음(5+)→HFpEF 확진</p>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ HFrEF TREATMENT (8-19장) ═══ -->
+<div id="tab-hfref" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">8</span>박출률 감소 심부전의 치료 알고리듬</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> ARNI(또는 ACEI) + 베타차단제 + MRA + SGLT2 억제제 — 표준치료로 사용 권고(Class I, A). 증상 개선·EF 40% 이상 향상되어도 표준치료 유지 권고(Class I, B).</span></div>
+      <div class="subhead">치료 전략 흐름</div>
+      <div class="flow-box" style="border-left:3px solid var(--orange)"><strong>1차 표준치료</strong> — ARNI/ACEI/ARB + 베타차단제 + MRA + SGLT2 억제제, 점진적 증량(증명된 또는 최대 내약 용량까지)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--accent2)">표준치료에도 증상·박출률 지속 감소 시 → <strong>ICD/CRT 적응증 검토</strong></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--teal)"><strong>2차 추가치료</strong> — 동율동 안정시 심박수≥70: ivabradine / 표준치료에도 악화·입원: vericiguat / 심박수 조절 필요 심방세동: digoxin</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--red)">NYHA III-IV 또는 중증 심부전 → LVAD, 심장이식 또는 완화치료</div>
+      <div class="alert alert-teal" style="margin-top:8px"><span>💡</span><span>SGLT2 억제제는 급성기 환자도 자료가 있어 안정형 심부전보다 폭넓은 환자군에서 증량 없이 사용 가능. 4계열 약제 모두 가능한 빠른 시작 + 3-6개월 내 목표 용량까지 증량 권고. EF 40% 이상으로 호전되어도 '회복'이 아닌 '호전된 상태'로 간주 — 표준치료 지속 권고(중단 시 6개월 내 45% 재악화 보고)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">9</span>레닌-안지오텐신계 차단제 (ACEI/ARB/ARNI)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 4개:</strong> ARNI 표준치료 권고, 내약성 없으면 ACEI(Class I, A). ACEI/ARNI 불가 시 ARB 권고(Class I, A). ACEI/ARB 사용 중 안정적이면 ARNI로 교체 권고(Class I, B). 급성 악화 후 안정 시 ARNI로 시작도 타당(Class IIa, B)</span></div>
+      <div class="subhead">① 안지오텐신전환효소억제제(ACEI) 시작/목표 용량</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>시작 용량</th><th>목표 용량</th></tr>
+        <tr><td>캡토프릴(Captopril)</td><td>6.25mg 1일3회</td><td>50mg 1일3회</td></tr>
+        <tr><td>에날라프릴(Enalapril)</td><td>2.5mg 1일2회</td><td>10-20mg 1일2회</td></tr>
+        <tr><td>포시노프릴(Fosinopril)</td><td>5-10mg 1일1회</td><td>40mg 1일1회</td></tr>
+        <tr><td>리시노프릴(Lisinopril)</td><td>2.5-5mg 1일1회</td><td>20-40mg 1일1회</td></tr>
+        <tr><td>페린도프릴(Perindopril)</td><td>2mg 1일1회</td><td>8-16mg 1일1회</td></tr>
+        <tr><td>라미프릴(Ramipril)</td><td>2.5mg 1일2회</td><td>5mg 1일2회</td></tr>
+        <tr><td>트란돌라프릴(Trandolapril)</td><td>0.5mg 1일1회</td><td>4mg 1일1회</td></tr>
+      </table>
+      <div class="subhead">② 안지오텐신수용체차단제(ARB) 시작/목표 용량</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>시작 용량</th><th>목표 용량</th></tr>
+        <tr><td>칸데사르탄(Candesartan)</td><td>4-8mg 1일1회</td><td>32mg 1일1회</td></tr>
+        <tr><td>발사르탄(Valsartan)</td><td>20-40mg 1일2회</td><td>160mg 1일2회</td></tr>
+        <tr><td>로자탄(Losartan)</td><td>25-50mg 1일1회</td><td>150mg 1일1회</td></tr>
+      </table>
+      <div class="subhead">③ ARNI 시작/목표 용량</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>시작 용량</th><th>목표 용량</th></tr>
+        <tr><td>사쿠비트릴/발사르탄</td><td>48/51mg 1일2회 (저혈압 과거력 시 24/26mg)</td><td>97/103mg 1일2회</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><span><strong>금기/주의:</strong> 임신 절대 금기, 심한 혈관부종 과거력, 수축기 혈압&lt;80mmHg, 크레아티닌&gt;3mg/dL, 칼륨&gt;5mEq/L. ACEI→ARNI 교체 시 혈관부종 위험 피하기 위해 최소 36시간 휴약 기간 필요</span></div>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>PARADIGM-HF: ARNI가 ACEI(에날라프릴) 대비 심혈관 사망 20%, 심부전 입원 21%, 모든 원인 사망 16% 감소 (27개월 추적)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">10</span>베타차단제</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 안정적인 HFrEF 환자에 투여 권고(Class I, A). 효과 검증된 약제: 비소프롤롤, 카르베디롤, 메토프롤롤 서방정(Class I, A). 70세 이상에서 네비볼롤 도움 가능(Class IIa, B)</span></div>
+      <table class="tc-table">
+        <tr><th>베타차단제</th><th>시작 용량</th><th>목표 용량</th></tr>
+        <tr><td>비소프롤롤(Bisoprolol)</td><td>1.25mg qd</td><td>10mg qd</td></tr>
+        <tr><td>카르베딜롤(Carvedilol)</td><td>3.125mg bid</td><td>25mg bid</td></tr>
+        <tr><td>메토프롤롤 호박산염 서방형</td><td>12.5-25mg qd</td><td>200mg qd</td></tr>
+        <tr><td>네비볼롤(Nebivolol)</td><td>1.25mg qd</td><td>10mg qd</td></tr>
+      </table>
+      <div class="subhead">사용 금기</div>
+      <ul class="dot"><li>2도/3도 방실차단</li><li>심각한 하지 허혈</li><li>천식(상대적/심정지적 베타차단제는 매우 조심스럽게 가능, COPD는 사용 가능)</li></ul>
+      <div class="subhead">매우 조심스럽게 사용해야 하는 경우</div>
+      <ul class="dot"><li>NYHA IV 심부전, 현재/최근 4주 이내 증상 악화, 심박수&lt;50/분</li><li>폐울혈/저혈압(SBP&lt;90)/복수/경정맥압상승/심한 말초부종 — 체액 안정화 후 시작</li></ul>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>증량 시 2주 이상 간격, 2배씩 증량. 증상 악화(피로·부종·체중증가) 시 이뇨제 증량 우선 고려. 맥박&lt;50/분이며 증상 악화 시 반용량 감량 또는 중단. Verapamil·diltiazem 병용 시 중단 필요</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">11</span>염류코르티코이드 수용체 길항제(알도스테론 길항제, MRA)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 입원율·사망률 감소 위해 사용 권고(Class I, A)</span></div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>eGFR&gt;50</th><th>eGFR 30-49</th></tr>
+        <tr><td>스피로놀락톤</td><td>초기 12.5-25mg → 유지 25mg(1-2회)</td><td>초기 12.5mg(1-2일1회) → 유지 12.5-25mg 1일1회</td></tr>
+        <tr><td>에플레레논</td><td>초기 25mg 1일1회 → 유지 50mg 1일1회</td><td>초기 25mg 2일1회 → 유지 25mg 1일1회</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>고칼륨혈증 부작용 주의. eGFR&lt;30 또는 K&gt;5.0mEq/L 시 신중 투여. K≥5.5 또는 Cr≥2.5(또는 eGFR&lt;30) 시 절반 감량+혈액검사 추적, K≥6.0 또는 Cr≥3.5(또는 eGFR&lt;20) 시 중단+전문가 상의. 스피로놀락톤은 남성 여성형 유방/유방통 발생(약 10%) — 에플레레논은 선택적 길항으로 발생률 낮음(0.5-0.7%)</span></div>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>RALES(스피로놀락톤): 사망률 30%, 재입원 35% 감소. EMPHASIS-HF(에플레레논, NYHA II): 심혈관사망+입원 37% 감소</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">12</span>나트륨-포도당 공동수송체2(SGLT2) 억제제</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 당뇨병 동반 유무와 관계없이 입원·심혈관 사망 감소 위해 dapagliflozin 또는 empagliflozin 투여 권고(Class I, A)</span></div>
+      <ul class="dot">
+        <li><strong>DAPA-HF</strong>(dapagliflozin): 1차 복합종료점(심부전악화+심혈관사망) 26% 감소, 전체 사망률도 감소</li>
+        <li><strong>EMPEROR-Reduced</strong>(empagliflozin): 심혈관사망+심부전입원 25% 감소, eGFR&gt;20까지 포함</li>
+        <li>초기 신장기능 평가 및 정기 모니터링 필요. eGFR 약간 감소는 가역적, 장기적으로는 신장 보호효과</li>
+        <li>당뇨병 환자는 혈당 모니터링, 케톤산증 위험 고지(특히 1형 당뇨병 등 위험요소 있는 경우)</li>
+        <li>금기: 약물 알러지, 임신/모유수유, eGFR&lt;20, 저혈압 증상 또는 SBP&lt;95mmHg</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">13</span>이뇨제</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 체액 저류 소견 있는 환자에서 적정 체액량 유지 위해 수축기능 동반 여부와 관계없이 사용해야 함(Class I, B)</span></div>
+      <table class="tc-table">
+        <tr><th>이뇨제</th><th>초기 용량</th><th>통상 유지 용량</th><th>최대 용량</th><th>작용시간</th></tr>
+        <tr><td colspan="5" style="background:var(--surface2);font-weight:700">고리작용 이뇨제</td></tr>
+        <tr><td>푸로세미드</td><td>20-40mg(1-2회)</td><td>40-240mg</td><td>600mg</td><td>6-8시간</td></tr>
+        <tr><td>토르세미드</td><td>10-20mg(1회)</td><td>10-20mg</td><td>200mg</td><td>12-16시간</td></tr>
+        <tr><td colspan="5" style="background:var(--surface2);font-weight:700">티아지드계 이뇨제</td></tr>
+        <tr><td>히이드로클로로티아지드</td><td>25mg(1-2회)</td><td>12.5-100mg</td><td>200mg</td><td>6-12시간</td></tr>
+        <tr><td>클로르탈리돈</td><td>12.5-25mg(1회)</td><td>25-100mg</td><td>100mg</td><td>24-72시간</td></tr>
+        <tr><td>메톨라존</td><td>2.5mg(1회)</td><td>2.5-10mg</td><td>20mg</td><td>12-24시간</td></tr>
+        <tr><td colspan="5" style="background:var(--surface2);font-weight:700">칼륨 보존 이뇨제</td></tr>
+        <tr><td>스피로놀락톤</td><td>12.5-25mg(1회)</td><td>12.5-50mg</td><td>50mg</td><td>1-3시간</td></tr>
+        <tr><td>아밀로라이드</td><td>5mg(1회)</td><td>5-10mg</td><td>20mg</td><td>24시간</td></tr>
+      </table>
+      <div class="subhead">처방 가이드 — 문제 해결</div>
+      <ul class="dot">
+        <li><strong>이뇨효과 불충분</strong>: 복약/수분(염분)섭취량 확인 → 푸로세미드→토르세미드 교체 → 알도스테론 길항제 추가/증량 → 티아지드/메톨라존 병합 → 한외여과 → 복용 횟수↑/정맥주사</li>
+        <li><strong>저칼륨혈증</strong>: ACEI 용량↑, 알도스테론 길항제 추가, 칼륨/마그네슘 보충</li>
+        <li><strong>저나트륨혈증</strong>: 고리작용계로 변경, 수분섭취 제한, 바소프레신 길항제 고려</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">14</span>바소프레신 V2 수용체 길항제(Tolvaptan)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 다른 치료에 불응하는 저나트륨혈증 동반 용적 과부하 심부전 환자에서 사용 고려 가능(Class IIb, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">SIADH나 갑상선기능저하증 등 다른 원인 배제 필요. 그렇지 않은 경우 수분 섭취 제한(800-1,000mL/일) 또는 안지오텐신II 억제 약물 사용 가능. 장기 사용이 생존율 개선시키지는 못함. 이뇨제 저항성 심부전에서 새로운 작용기전으로 유용성 기대.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">15</span>이바브라딘(Ivabradine)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> EF≤35%, 동율동, 안정시 맥박 ≥70/분, 표준치료에도 증상 지속 시 이바브라딘 타당(Class IIa, B). 베타차단제 불가 시도 타당(Class IIa, C)</span></div>
+      <table class="tc-table">
+        <tr><th>적응증</th><td>EF≤35%, 맥박≥70/분 동율동, 표준치료에도 증상 지속</td></tr>
+        <tr><th>금기증</th><td>심인성 쇼크, 급성심근경색/불안정 협심증, 중증 저혈압, 중증 간/신장애(CrCl&lt;15mL/min), 임부/수유부, 심방세동, 중증 망막질환</td></tr>
+        <tr><th>용법용량</th><td>초회 5mg 1일2회 → 2주 후 심박수&gt;60 시 7.5mg까지 증량 / 심박수&lt;50 또는 서맥증상 시 2.5mg로 감량 / 75세 이상은 2.5mg 1일2회로 시작 고려</td></tr>
+      </table>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>SHIFT 연구: 동율동·맥박≥70 환자에서 심혈관 사망+입원 유의하게 감소. 베타차단제 사용 못한 군(10%)에서도 위약 대비 입원 유의 감소</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">16</span>디곡신</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 2개:</strong> 심방세동 동반 HFrEF에서 베타차단제로 맥박조절 안 되거나 금기 시 도움 가능(Class IIa, B). 표준치료에도 증상 있는 HFrEF에서 재입원율 감소 위해 고려 가능(Class IIb, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">기전: Na/K ATPase 차단 → 세포내 칼슘 증가, 미주신경 항진. 1-2회/1일 0.125-0.25mg로 시작·유지. 독성 증상: 식욕부진·오심·구토(소화기), 시각장애·지남력장애·착란(신경계), 치명적 부정맥. 고령(&gt;70세)·신부전·저체중·전해질 이상·CYP 영향 약물(마크롤라이드·이트라코나졸·아미오다론·퀴니딘) 병용 시 독성 위험 증가. 혈중농도 0.5-0.9ng/mL 유지 목표.</p>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>DIG 연구(1997): EF≤45% NYHA II-IV — 사망률 차이 없었으나 재입원율은 유의하게 감소(특히 심부전 악화로 인한)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">17</span>베리시구앗(Vericiguat)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 표준치료에도 심부전 악화 경험한 EF&lt;45% 환자에서 심혈관계 사망·재입원 감소 위해 사용 도움 가능(Class IIa, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">Soluble guanylate cyclase receptor stimulator — cGMP 생성↑, NO 민감도 회복. VICTORIA 연구: 심혈관사망/심부전재입원 10% 위험감소(HR 0.90, p=0.02). 2021년 미국 FDA, EU EC, 국내 식약처 모두 승인. 고위험군에서 연간 절대위험감소 4.2%.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">18</span>오메캠티브(Omecamtiv mercabil)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> EF 감소 심부전에서 심혈관사망·입원 위험 낮추기 위해 사용 고려 가능(Class IIb, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">Cardiac myosin activator — 칼슘·산소소비 증가 없이 myosin actin 결합 강화로 수축력 증가. GALACTIC-HF: 1차 종말점(심혈관사망+심부전사건) 8% 감소. EF 낮을수록, 중증(NYHA 3-4, EF≤30%, 6개월 내 입원력) 환자에서 효과 증가.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">19</span>항응고제, 항혈소판제</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 7개:</strong> CHA₂DS₂-VASc 점수 시스템 업데이트(심부전 항목 정의 명확화). 뇌졸중 위험 중등도 이상(남 2점↑/여 3점↑) 항응고제 권고(Class I, A). NOAC을 비타민K 길항제보다 우선 권고(Class I, A). 1점(남)/2점(여)에서도 도움 될 수 있음(Class IIa, C). 관상동맥중재술 후 P2Y12 단독+NOAC/VKA 유지 권고(Class I, B/IIa, B). 혈전-색전 병력 없으면 심방세동 단독 시 항응고제 비추천(Class III, B)</span></div>
+      <div class="subhead">CHA₂DS₂-VASc 점수</div>
+      <table class="tc-table">
+        <tr><th>항목</th><th>정의</th><th>점수</th></tr>
+        <tr><td>C (심부전)</td><td>최근 악화된 심부전(EF 무관), 중등도 이상 HFrEF, 비후성 심근병증</td><td>1</td></tr>
+        <tr><td>H (고혈압)</td><td>고혈압 또는 약물치료</td><td>1</td></tr>
+        <tr><td>A2 (75세↑)</td><td>고령</td><td>2</td></tr>
+        <tr><td>D (당뇨병)</td><td>공복혈당≥125 또는 인슐린 치료중</td><td>1</td></tr>
+        <tr><td>S2 (뇌졸중)</td><td>과거 뇌졸중/일과성허혈/혈전-색전증</td><td>2</td></tr>
+        <tr><td>V (혈관질환)</td><td>CTA 확인 허혈성심장병, 말초혈관질환, 대동맥 동맥경화반</td><td>1</td></tr>
+        <tr><td>A (65-74세)</td><td>아시아인은 50-55세부터도 위험 증가</td><td>1</td></tr>
+        <tr><td>Sc (여성)</td><td>여성</td><td>1</td></tr>
+        <tr><td colspan="2">최고점수</td><td>9</td></tr>
+      </table>
+      <div class="subhead">NOAC 국내 허가 용량</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>권장용량</th><th>감량 기준</th></tr>
+        <tr><td>다비가트란</td><td>150mg 1일2회</td><td>출혈위험↑·신장애(30≤CrCL&lt;50)·75세↑·저체중 시 110mg 1일2회</td></tr>
+        <tr><td>리바록사반</td><td>20mg 1일1회</td><td>중등도 신장애(CrCL 30-49) 시 15mg</td></tr>
+        <tr><td>아픽사반</td><td>5mg 1일2회</td><td>나이≥80, 체중≤60kg, Cr≥1.5 중 2가지 이상 시 2.5mg 1일2회</td></tr>
+        <tr><td>에독사반</td><td>체중&gt;60kg: 60mg / ≤60kg: 30mg 1일1회</td><td>중등증 신장애(15≤CrCL≤50) 시 30mg</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ DEVICE & REVASCULARIZATION (20-22장) ═══ -->
+<div id="tab-device" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">20</span>관상동맥의 재관류치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 4개:</strong> EF≤35% 허혈성 심부전 — CABG 생존율 향상 위해 권고(Class I, B). EF 35-50% — CABG 우선 고려 타당(Class IIa, B). CABG 부적합 시 PCI 고려 가능(Class IIb, C). 재관류 적합·최적약물치료에도 협심증 지속 시 도움(Class IIa, C)</span></div>
+      <div class="subhead">1. 관상동맥우회로술(CABG)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6"><strong>STICH 연구</strong>(EF≤35% 허혈성 심부전): 5년 추적 시 1차종말점 전체사망률 유의차 없었으나 심혈관 사망 감소경향. <strong>10년 추적 연구</strong>(STICH Extension): 일차·이차종말점 모두 CABG군에서 유의하게 낮음(HR 0.84). 생존심근 범위 &gt;10%인 경우 이득 뚜렷.</p>
+      <div class="subhead">2. 경피적 관상동맥중재술(PCI)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">대규모 임상시험 데이터 부족(REVIVED-BCIS2 연구 진행 중). 국내 연구: 좌심실 박출률 35% 이하 환자에서 CABG가 PCI보다 낮은 사망률(28.4% vs 35.5%) 및 재관류시술 빈도(1.6% vs 16.5%) 보임.</p>
+      <div class="subhead">3. CABG vs PCI 비교</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">메타분석(8개 연구, 4,417명 vs 2,479명): CABG가 약물치료 대비 34% 위험비 감소. 네트워크 메타분석(23개 연구): PCI군이 CABG군에 비해 사망 발생비 1.32배, 급성심근경색 2.18배, 반복 재관류술 3.75배 높음.</p>
+      <div class="subhead">심인성 쇼크 동반 급성관상동맥증후군 환자 재관류 전략</div>
+      <ul class="dot">
+        <li>다혈관질환 시 원인병변(culprit) 먼저 치료 후 단계적 비원인병변 치료 vs 응급시술 시 동시 다혈관 치료 — culprit-only가 primary endpoint(사망·투석·신부전) 더 적게 발생</li>
+        <li>경피적 기계적 순환보조: ST분절상승 급성심근경색 + 심인성쇼크 합병증 동반 시 신속한 폐쇄혈관 재개통(door-to-balloon time) 중요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">21</span>삽입형 심율동전환 제세동기(ICD)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 6개:</strong><br>
+        1. 혈역학적 불안정 심실부정맥(가역적 원인 없음, 심근경색 48시간 이후, 1년 이상 생존 예상) → 2차 예방 ICD(Class I, A)<br>
+        2. NYHA II-III 허혈성 심부전, 3개월 이상 약물치료에도 EF≤35%, 1년 이상 생존 예상 → 1차 예방 ICD(Class I, A)<br>
+        3. NYHA II-III 비허혈성 심부전, EF≤35% → 1차 예방 ICD 타당(Class IIa, A)<br>
+        4. ICD 교체 전 필요성 재평가 타당(Class IIa, B)<br>
+        5. 심근경색 발생 40일 이내 ICD 삽입 금지(Class III, A)<br>
+        6. 약물 불반응 NYHA IV + CRT/MCS/이식 비예정 시 ICD 금지(Class III, C)</span>
+      </div>
+      <div class="subhead">1. 급성 심장사의 2차 예방</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">혈역학적으로 불안정한 심실 부정맥 경험 환자: 가역적 원인 없음, 심근경색 48시간 이내 발생 아님, 1년 이상 생존 예상 시 ICD 권고.</p>
+      <div class="subhead">2. 급성 심장사의 1차 예방</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">MADIT-II(허혈성, EF≤35%): 생존율 증가 입증. SCD-HeFT(허혈+비허혈, EF≤35%, NYHA II-III): 생존율 향상. 비허혈성 심부전에서도 메타분석·국내 연구에서 효과 확인. 3개월 이상 적절한 약물치료 후 결정해야 함. 심근경색 후 좌심실 박출률 35-40% 미만 고위험군에서도 발생 40일 이내 ICD 삽입은 기존 치료와 큰 차이 없음(다른 원인 사망 증가로 이득 상쇄) — 40일 이내는 금지.</p>
+      <div class="subhead">3. 피하 심율동전환 제세동기</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">경정맥 ICD만큼 효과적, 합병증 빈도 비슷. 혈관 접근 어렵거나 감염 병력 시 유용. 심실 조율 불가하므로 서맥/항빈맥조율/CRT 필요 시 경정맥 ICD 필요.</p>
+      <div class="subhead">4. 삽입 후 관리</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">심실부정맥 발생 감소+부적절 전기충격 감소 위해 부정맥 전문의와 협력. 1차예방 심실조율 범위 VVI 40/분, 빈맥치료 범위 200회/분 이상 권고.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">22</span>심장 재동기화 치료(CRT)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="subhead">동성리듬(Sinus rhythm)</div>
+      <ul class="dot">
+        <li>EF≤35%, 좌각차단, QRS≥150ms, NYHA II/III/IV(거동가능) → <span class="badge badge-1">Class I, A</span></li>
+        <li>EF≤35%, 좌각차단, QRS 130-149ms → <span class="badge badge-2a">Class IIa, B</span></li>
+        <li>EF≤35%, 비좌각차단, QRS≥150ms → <span class="badge badge-2a">Class IIa, B</span></li>
+        <li>EF≤35%, 비좌각차단, QRS 130-149ms → <span class="badge badge-2b">Class IIb, B</span></li>
+      </ul>
+      <div class="subhead">심방세동(Atrial fibrillation)</div>
+      <ul class="dot">
+        <li>EF&lt;40%, 방실결절절제술 필요 시 QRS 무관 → <span class="badge badge-1">Class I, B</span></li>
+        <li>EF 40-49%, 방실결절절제술 필요 시 → <span class="badge badge-2a">Class IIa, C</span></li>
+        <li>EF≥50%, 방실결절절제술 필요 시 → <span class="badge badge-2b">Class IIb, C</span></li>
+        <li>적응증(EF≤35%, QRS≥130ms) 맞는 경우 심방세동 환자도 타당 → <span class="badge badge-2a">Class IIa, C</span></li>
+      </ul>
+      <div class="subhead">방실차단 또는 심장박동기</div>
+      <ul class="dot">
+        <li>EF≤40%, 방실차단으로 20%↑ 심실조율 필요 → <span class="badge badge-1">Class I, A</span></li>
+        <li>박동기/제세동기 보유, 적절 약물치료에도 NYHA II-IV, EF≤35%, 20%↑ 심실조율 → <span class="badge badge-2a">Class IIa, B</span></li>
+      </ul>
+      <div class="subhead">기타</div>
+      <ul class="dot">
+        <li>CRT+ICD 적응증 모두 있으면 CRT-D 권고 → <span class="badge badge-1">Class I, A</span></li>
+        <li>QRS&lt;130ms이면서 우심실조율 불필요 시 비추천 → <span class="badge badge-3">Class III, A</span></li>
+        <li>His bundle/좌각부위/심외막 조율은 좌심실 전극선 삽입 못한 경우 타당 → <span class="badge badge-2a">Class IIa, B</span></li>
+      </ul>
+      <div class="alert alert-purple" style="margin-top:8px"><span>📊</span><span>MADIT-CRT(QRS≥150ms): Class I 적응증 형성. 좌각차단 QRS130-149ms도 효과 입증. 비좌각차단은 QRS≥150ms 또는 PR간격 연장 시 유용. 심실 비동기화로 인한 사망률 약 1.5배 증가</span></div>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>국내 건강보험 급여기준에는 NYHA I/말기심부전 효과 근거 미반영. 우각차단에 숨겨진(masked) 좌각차단은 CRT 도움 가능</span></div>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ VALVE / HFmrEF / HFpEF / RHF (23-26장) ═══ -->
+<div id="tab-valve" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">23</span>판막질환의 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="subhead">대동맥판막</div>
+      <ul class="dot">
+        <li>좌심실 박출률 감소 환자 — 협착 중증도 평가 주의, 저혈류-저압력차 시 도부타민 부하 심초음파/CT 고려 타당 → <span class="badge badge-2a">Class IIa, B</span></li>
+        <li>유증상 중증 대동맥판막 협착 → SAVR 또는 TAVI 권고 → <span class="badge badge-1">Class I, B</span></li>
+        <li>무증상 중증 협착 + EF&lt;50% → SAVR/TAVI 권고 → <span class="badge badge-1">Class I, B</span></li>
+        <li>중증 대동맥판막 역류 동반 급·만성 심부전 → 수술적 치료 권고 → <span class="badge badge-1">Class I, B</span></li>
+      </ul>
+      <div class="subhead">승모판막</div>
+      <ul class="dot">
+        <li>허혈성 심부전의 중증 이차성 승모판막 역류 → CABG와 함께 수술적 치료 고려 도움 → <span class="badge badge-2a">Class IIa, C</span></li>
+        <li>관상동맥질환 없이 최적약물치료에도 유증상 중증 이차성 역류 → 다학제팀 논의 후 수술/시술 권고 → <span class="badge badge-1">Class I, B</span></li>
+        <li>최적약물치료 후에도 증상 지속, 시술 적합 판막 구조 → 경피적 승모판 성형술(TEER) 도움 가능 → <span class="badge badge-2a">Class IIa, B</span></li>
+      </ul>
+      <div class="subhead">삼첨판막</div>
+      <ul class="dot">
+        <li>중증 삼첨판막 역류 + 대동맥/승모판막 수술 필요 시 함께 교정 권고 → <span class="badge badge-1">Class I, B</span></li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px"><span>📊</span><span><strong>TAVI vs SAVR</strong>: 고위험·중간위험군에서 TAVI가 나쁘지 않음. 저위험군(STS&lt;4%, 평균연령&lt;70세)도 TAVI 비열등. 75세 이상/수술고위험(STS/EuroSCOREII&gt;8%)은 TAVI 추천. 그 외엔 다학제팀에서 환자특성·수술위험도 평가 후 결정</span></div>
+      <div class="alert alert-warn" style="margin-top:6px"><span>📊</span><span><strong>MITRA-FR vs COAPT</strong>: TEER 효과 상반된 결과 — 환자선택, 심부전치료 충분성, 이차성역류 중증도에 따른 좌심실 확장 정도 차이 등 복합적 요인. COAPT는 24개월째 입원율·사망률 감소 확인</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">24</span>박출률 경도 감소 심부전(HFmrEF)의 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 6개:</strong><br>
+        1. 이뇨제 — 울혈 증상 경감 위해 사용해야 함(Class I, C)<br>
+        2. SGLT2 억제제 — 입원·심혈관사망 감소 위해 권고(Class I, B)<br>
+        3. ARNI — 타당함(Class IIa, B)<br>
+        4. ACEI/ARB — 고려 가능(Class IIb, C)<br>
+        5. 베타차단제 — 고려 가능(Class IIb, C)<br>
+        6. MRA — 도움 가능(Class IIa, B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">HFmrEF는 EF 41-49%. HFrEF에 가까운 임상특성(특히 젊은 남성, 관상동맥질환 과반 이상 보유). EMPEROR-Preserved 하위그룹(EF 41-49%)에서 empagliflozin 유의한 효과. PARAGON-HF/PARADIGM-HF 메타분석: ARNI는 정상보다 낮은 박출률 심부전군에서 심혈관사망/입원 감소 결과에 근거함. KorAHF 등록연구: HFmrEF 454명에서 RAAS차단제+MRA 사용이 사망감소와 관련, 베타차단제가 박출률 개선과 관련.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">25</span>박출률 보존 심부전(HFpEF)의 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 7개:</strong><br>
+        1. 동반 질환(고혈압·심방세동·당�고병·신부전 등) 선별·치료 필요(Class I, C)<br>
+        2. 울혈 증상 시 이뇨제 치료 필요(Class I, C)<br>
+        3. SGLT2 억제제 — 당뇨병 무관 입원·심혈관사망 감소 권고(Class I, B)<br>
+        4. ARNI — 도움 될 수 있음(Class IIa, B)<br>
+        5. ARB/ACEI — 사용 고려 가능(Class IIb, C)<br>
+        6. 베타차단제 — 심혈관계 사망 감소 위해 고려 가능(Class IIb, C)<br>
+        7. MRA — 입원·사망 감소 위해 고려 가능(Class IIb, C)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">HFpEF는 고령 여성에 많고 고혈압·심방세동·허혈성심장병·당뇨병·신부전 등 비심혈관계 질환 흔히 동반. 매우 다양한 원인에 의한 다양한 표현형(phenotype). 비교적 최근까지 질병경과 호전시키는 치료에 대한 권고사항이 충분하지 않았음.</p>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span><strong>EMPEROR-Preserved</strong>(EF&gt;40%, NYHA II-IV, 5,988명): 1차종말점(심혈관사망+입원) 유의 감소, 당뇨병 동반여부 무관. <strong>DELIVER</strong> 발표(2022, EF&gt;40%): dapagliflozin이 사망/심부전악화 감소 — SGLT2 억제제를 HFmrEF·HFpEF 전반에 권고하는 근거</span></div>
+      <div class="alert alert-info" style="margin-top:6px"><span>💊</span><span>미국 FDA는 ARNI 및 MRA의 사용을 "정상보다 낮은 박출률(below normal)" HFpEF 환자에서 허가(PARAGON-HF 하위분석, TOPCAT 하위분석 EF≤55% 근거)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:6px"><strong>기구 치료</strong>: 심방 단락술이 비교적 활발히 연구. 운동시 심박수 적응 조율 장치, CRT, 심근 수축력 조절 장치, 좌심방 조율 장치 등도 연구 중.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">26</span>우심부전의 진단과 치료</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 8개:</strong><br>
+        1. 우심실 심근경색 동반 STEMI — 관상동맥재관류 시행(Class I, A)<br>
+        2. Group 1 폐동맥고혈압 — 혈관확장제 생존율 향상 위해 권고(Class I, A)<br>
+        3. 좌측 판막수술 시 심한 삼첨판막역류 함께 교정(Class I, C)<br>
+        4. 울혈 증상 시 이뇨제 치료 필요(Class I, C)<br>
+        5. 진단 불명확 시 우심도자술 권고(Class I, C)<br>
+        6. 부정맥유발성 우심실 심근병증 + 급사 고위험 → 제세동기 권고(Class I, C)<br>
+        7. 부정맥유발성 우심실 심근병증 가족 — 임상 스크리닝·유전자검사 권고(Class I, C)<br>
+        8. 말초관류저하+저혈압 동반 → 승압제/강심제 사용 가능(Class IIb, C)</span>
+      </div>
+      <div class="subhead">우심부전 기전과 원인</div>
+      <table class="tc-table">
+        <tr><th>기전</th><th>원인</th></tr>
+        <tr><td>후부하의 증가</td><td>좌심부전(폐고혈압), 폐색전, 만성폐쇄성폐질환, 수면무호흡, 선천성 심장병</td></tr>
+        <tr><td>수축력의 감소</td><td>우심실 경색/허혈, 심근염, 심근병증, 부정맥유발성 우심실 심근병증</td></tr>
+        <tr><td>전부하의 이상</td><td>혈량 저하/과다, 심첨판막 역류, 심낭 압전, 만성 좌-우 단락</td></tr>
+        <tr><td>심실 상호의존성</td><td>심낭 질환, 심낭 압전</td></tr>
+        <tr><td>리듬 이상</td><td>서맥, 빈맥</td></tr>
+      </table>
+      <div class="subhead">우심기능 혈류역학적 평가 (표2 발췌)</div>
+      <table class="tc-table">
+        <tr><th>변수</th><th>임계치(LVAD 후 RHF)</th></tr>
+        <tr><td>RAP</td><td>&gt;15 mmHg</td></tr>
+        <tr><td>Right-to-left discordance</td><td>RAP:PCWP &gt;0.63</td></tr>
+        <tr><td>PA pulsatility index</td><td>&lt;1.85</td></tr>
+        <tr><td>RV stroke work index</td><td>&lt;0.25-0.30</td></tr>
+        <tr><td>PVR</td><td>&gt;3.6 WU</td></tr>
+        <tr><td>PA compliance</td><td>&lt;2.5 mL/mmHg</td></tr>
+      </table>
+      <div class="alert alert-teal" style="margin-top:6px"><span>💡</span><span>치료 핵심: 정맥 울혈 완화(이뇨제 1차 선택), 혈역학적 불안정 시 노르아드레날린·수축촉진제(levosimendan, milrinone — 저혈압 유발 가능하므로 노르에피네프린 병용). 후부하 약물 관리, 필요 시 기계적 순환보조장치(MCS) 고려. 폐모세혈관전/후 결합 폐고혈압(CpcPH) 환자는 좌심실보조장치+실데나필이 도움</span></div>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ SPECIAL CARDIOMYOPATHY (27-33장) ═══ -->
+<div id="tab-cardiomyopathy" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">27</span>심근염</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 4개:</strong> 빠르게 진행하는 원인불명 급성 중증 심부전 — 심내막 조직검사 권고(Class I, B). 거대세포심근염·호산구심근염 의심 시 진단·예후평가 도움(Class IIa, C). CMR검사 도움 가능(Class IIa, C). 일반적 면역억제치료는 생존율 향상에 도움 안 됨(Class III, B)</span></div>
+      <div class="subhead">급성 심근염의 원인</div>
+      <table class="tc-table">
+        <tr><th>분류</th><th>원인</th></tr>
+        <tr><td>바이러스</td><td>adenovirus, enterovirus, parvovirus B19, HHV-6, EBV, CMV, hepatitis C, HIV, coronavirus</td></tr>
+        <tr><td>기타 감염</td><td>Borrelia, Coxiella burnetii(Q열)</td></tr>
+        <tr><td>전신질환</td><td>sarcoidosis, giant cell myocarditis, eosinophilic myocarditis, SLE, ANCA혈관염, 류마티스관절염</td></tr>
+        <tr><td>약물/독소</td><td>면역관문억제제, anthracycline, clozapine, adrenergic drugs, 5-fluorouracil</td></tr>
+      </table>
+      <div class="subhead">CMR vs 심내막조직검사 선택</div>
+      <table class="tc-table">
+        <tr><th></th><th>CMR</th><th>심내막조직검사</th></tr>
+        <tr><td>심인성 쇼크</td><td>(−)</td><td>++</td></tr>
+        <tr><td>합병증 동반 급성 심근염</td><td>+</td><td>−</td></tr>
+        <tr><td>불안정 부정맥 동반 급성 심근염</td><td>(−)</td><td>+</td></tr>
+        <tr><td>염증성 확장성 심근병증</td><td>+</td><td>++(치료제 결정 시)</td></tr>
+        <tr><td>치료 반응 평가</td><td>+</td><td>(+)(치료 실패 시)</td></tr>
+      </table>
+      <div class="subhead">조직검사 결과에 따른 치료(요약)</div>
+      <table class="tc-table">
+        <tr><th>조직소견</th><th>맞춤 치료</th></tr>
+        <tr><td>바이러스 양성(adeno/entero)</td><td>인터페론 베타</td></tr>
+        <tr><td>HHV6, ciHHV6</td><td>Ganciclovir, acyclovir, valacyclovir</td></tr>
+        <tr><td>Parvovirus B19</td><td>DNA 지속 시 IVIG, 심한 염증 시 면역억제</td></tr>
+        <tr><td>거대세포 심근염, 사르코이드증, 호산구심근염</td><td>스테로이드 고려</td></tr>
+        <tr><td>확장성 심근병증(바이러스 음성)</td><td>유전자검사 고려</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>위험군별 치료: <strong>고위험</strong>(심인성쇼크, LVEF&lt;30%, LVEF30-40%+중증부정맥) → 상급병원이송+MCS+조직검사+스테로이드 고려. <strong>중등도위험</strong>(LVEF30-40% 또는 LVEF&gt;40%+중증부정맥) → CMR+조직검사 고려. <strong>저위험</strong> → CMR만 시행</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:6px">40-60%는 급성기 지나 완전 회복. 약 20%는 확장성 심근병증으로 진행. 심기능 회복(EF&gt;50%)+부정맥 소실 후 최소 6개월간 심부전 치료 유지, 4년간 매년 심전도·심초음파 추적 권고.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">28</span>심장 아밀로이드증</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 2개:</strong> Tafamidis — 유전자변이 확인 유전형 ATTR(NYHA I-III) 사용 권고(Class I, B). Tafamidis — 정상형(wild type) ATTR(NYHA I-III)에도 사용 권고(Class I, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 연령표준화 발생률 100,000명당 0.5명으로 드문 질환. 경쇄 면역글로불린(AL)과 transthyretin(ATTR) 2종이 주요 원인.</p>
+      <div class="subhead">임상 단서</div>
+      <ul class="dot">
+        <li>심장: 정상 혈압이지만 약 없이 조절됨, granular sparkling, 우심실벽 두께증가, 판막두께증가, longitudinal strain↓+apical sparing, pseudoinfarct pattern(ECG), subendocardial LGE/native T1 상승(CMR)</li>
+        <li>심장외: 말초신경이상, 자율신경계이상, 신부전, 단백뇨, 양측 carpal tunnel syndrome, 대설증(macroglossia), biceps tendon 파열</li>
+      </ul>
+      <div class="subhead">진단 알고리듬 핵심</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">Monoclonal light chain 선별검사 → 양성이면 조직검사(Congo red, immunohistochemistry)로 AL 확인 → 음성이면 핵의학검사(99mTc-PYP 등) Grade 2/3 uptake → 양성이면 ATTR로 진단 → TTR 변이 유전자 검사로 유전형/정상형 구분.</p>
+      <div class="subhead">아밀로이드증의 치료(표3 발췌)</div>
+      <table class="tc-table">
+        <tr><th>분류</th><th>치료</th><th>약제</th></tr>
+        <tr><td rowspan="2">AL</td><td>Anti-plasma cell</td><td>Mephalan, bortezomib, lenalidomide, daratumumab/isatuximab</td></tr>
+        <tr><td>(고용량화학+조혈모세포이식)</td><td>적합 환자에 우선 고려</td></tr>
+        <tr><td rowspan="3">ATTR</td><td>TTR silencers</td><td>Patisiran(siRNA), Inotersen(ASO)</td></tr>
+        <tr><td>TTR stabilizers</td><td>Diflunisal, <strong>Tafamidis</strong>(FDA 승인, hATTR+wATTR 모두)</td></tr>
+        <tr><td>TTR amyloid 제거</td><td>Doxycycline/TUDCA, PRX004 (연구중)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>심부전 치료: 베타차단제·디지털리스·ACEI·ARB·ARNI 투약 시 저혈압 유발 가능(저혈압/서맥으로 중단 빈번). 칼슘통로차단제도 저혈압·피로감 유발하여 사용 비권고. 항응고제: 정상 동율동에서도 색전 위험 고려 필요</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">29</span>심근병증(확장성 심근병증, 비후성 심근병증)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="subhead">1. 확장성 심근병증(DCM)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 심부전 레지스트리 15-23%. 좌심실/좌우심실 확장+수축기능저하. 20-40%에서 유전자 돌연변이, 비가족성도 10% 이상에서 발견. 다양한 후천적 원인(심근염, 자가면역, 알코올/중금속 독소, 항암제·약제, 당뇨병/갑상선질환, 주산기) 가능.</p>
+      <div class="alert alert-purple" style="margin-top:4px"><span>📊</span><span>원인 분류: Genetic(titin/lamin A·C/MYH7 등), Infection(post-myocarditis), Systemic immune-mediated(rheumatoid·SLE·sarcoidosis 등), Toxic/overload(alcohol·cocaine·anthracycline 등), Endocrine/metabolic(당뇨병·갑상선이상), Peripartum</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">치료는 일반적 심부전 약물치료/기구치료 진료지침 준수. 수축기능 호전된 환자가 약물치료 중단하면 6개월 내 약 44%에서 수축기능 저하·심실재형성 재발 — 지속적 관리 필요.</p>
+
+      <div class="subhead">2. 비후성 심근병증(HCM)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">심실 벽두께 15mm 이상(가족력 있으면 13mm 이상). 약 60%는 근육 sarcomere 유전자 돌연변이(MYH7, MYBPC3 등). 자연경과 다양: 무증상(60세 이후 진단), 급사·심실빈맥·심방세동·뇌졸중 등.</p>
+      <div class="alert alert-warn" style="margin-top:4px"><span>⚠️</span><span><strong>급사 위험인자</strong>: 심정지/지속성 심실빈맥 병력, 가족력(50세 미만 급사), 좌심실벽두께 30mm 이상, 원인 미상 실신(6개월 이내), 좌심실유출로폐쇄, 활동 심전도상 비지속성 심실빈맥, CMR 광범위 후기 가돌리늄 조영증강(15%↑)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">치료: 좌심실유출로폐쇄 동반 시 베타차단제 1차, 금기 시 verapamil/diltiazem. ACEI/ARB·칼슘통로차단제(dihydropyridine)·디곡신은 유출로폐쇄 악화시킬 수 있어 비폐쇄성이 아니면 중단 고려. 약물 불충분 시 심실중격 근육절제술 또는 알코올 절제술.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">30</span>심낭질환</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 만성 교착성 심낭염 — 심낭절제술 권고(Class I, C). 결핵성 등 일부 심낭염에서 교착성 진행 예방 약물치료 권고(Class I, C). 새로 진단된 교착성 심낭염에서 경험적 항염증 치료 고려 가능(Class IIb, C)</span></div>
+      <div class="subhead">교착성 심낭염 vs 제한성 심근병증 감별(심초음파)</div>
+      <table class="tc-table">
+        <tr><th>교착성 심낭염</th><th>제한성 심근병증</th></tr>
+        <tr><td>Septal bounce, 심낭 비후·석회화, 승모판 E속도 호흡변화&gt;25%, peak e'&gt;8cm/s, medial e'≥lateral e'</td><td>좌심실 작고 좌심방 큼, E/A&gt;2, 짧은 감속시간, peak e'&lt;8cm/s, 호흡변화 거의 없음</td></tr>
+      </table>
+      <div class="subhead">항염증제 처방 (표2)</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>Usual dosing</th><th>치료기간</th></tr>
+        <tr><td>아스피린</td><td>750-1,000mg 8시간마다</td><td>1-2주</td></tr>
+        <tr><td>이부프펜</td><td>600mg 8시간마다</td><td>1-2주</td></tr>
+        <tr><td>콜히친</td><td>70kg미만 0.6mg/일, 70kg이상 0.6mg 2회/일</td><td>3개월</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내는 결핵성 심낭염이 흔함(치료하지 않을 시 교착성 진행 17-40%). 결핵성 심낭염 강력 의심 시 경험적 항결핵제 투여 권고(리팜피신·이소니아지드·피라지나미드·에탐부톨 2개월 → 이소니아지드+리팜피신 이어서 6개월 요법). 항결핵치료와 함께 고용량 스테로이드는 교착성 심낭염 진행 감소 효과.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">31</span>스트레스 심근병증</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 정신·신체 스트레스, 카테콜아민 과다, 뇌출혈, 패혈증 등에 의해 관상동맥 폐색 없는 국소벽운동장애 발생 시 진단(Class I, C). 특정 약물조합 권고 불가, 기저질환 치료와 병행 일반 급성심부전 치료 고려(Class IIb, C). 심인성 쇼크 시 임시형 MCS 도움(Class IIa, C)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">1990년 일본 첫 보고(Takotsubo cardiomyopathy). 좌심실 중간~심첨부 일시적 협착/연축으로 풍선모양 확장(apical ballooning)+기능저하, 수주 내 회복.</p>
+      <div class="subhead">진단기준(InterTAK)</div>
+      <ul class="dot"><li>좌심실 중간~심첨부 일시적 벽운동장애(관상동맥 지배영역과 다른 분포)</li><li>관상동맥에 협착·동맥경화반 급성 파열 없음</li><li>새로운 심전도 이상 또는 심근효소 상승</li></ul>
+      <div class="subhead">다양한 유발 원인(표1 발췌)</div>
+      <table class="tc-table">
+        <tr><th>분류</th><th>원인</th></tr>
+        <tr><td>정신계</td><td>우울증, 외상후스트레스장애, 급성 스트레스장애</td></tr>
+        <tr><td>신경계</td><td>뇌출혈/뇌경색, 뇌동맥류 파열, 뇌전증, 편두통</td></tr>
+        <tr><td>내분비계</td><td>갈색세포종, 항이뇨호르몬 분비이상증후군, 고삼투성고혈당증후군, 당뇨병케토산증, 갑상선기능저하/항진증</td></tr>
+        <tr><td>순환기계</td><td>부정맥, 승압제 주입, 동율동 전환술</td></tr>
+        <tr><td>기타</td><td>수혈, 외상, 수술, 항암치료</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">유발 요인에 따라 예후 차이: 감정적 스트레스 원인은 비교적 양호, 신체적 스트레스/신경계 이상/패혈증은 불량한 예후.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">32</span>빈맥유발 심근병증</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 2개:</strong> 심방세동으로 인한 경우 심박수 조절 또는 동율동 전환 타당(Class IIa, B). 심방조동·심방빈맥이 급성기 심부전 직접 원인인 경우 전기적 동율동전환이나 전극도자절제술로 동율동 조절 시도 도움(Class IIa, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">맥박수 증가로 좌심실 기능저하 발생하는 심부전. 맥박수 조절되면 부분적/완전 회복. 주요 치료원칙: 동율동 유지+심실박동수 조절. 심방세동은 베타차단제·디곡신 또는 두 약제 병용, 디곡신이 동율동전환에 고려될 수 있음. 안정시 110회/분 미만 추천. 국내는 6주 이상 항부정맥제 불응성 증상 있는 심방세동에서 전극도자절제술 보험적용.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">33</span>성인 선천성 심장병</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 11개(요약):</strong> 중등도 이상 복잡성 — 경험 많은 센터 이송(Class I, C). 재발 monomorphic VT — ICD+전극도자절제술 권고(Class I, C). 폐동맥고혈압 확진 — 피임 권고(Class I, C). 폐혈관저항 5WU↑ 또는 Eisenmenger — 수술 비권고(Class III, C). 심방중격결손/동맥관개존증 — 적응증 시 결손 폐쇄(Class I, B/C). Ebstein기형 심한 삼첨판막역류+증상 — 수술적 교정(Class I, C). 팔로사징후 교정 후 중증 폐동맥판막역류+우심실유출로폐쇄 — 폐동맥판막 교체(Class I, C)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">심부전이 ACHD(adult congenital heart disease) 인구 20-50%에 영향, 주요 사망원인. 병태생리가 후천성 심장병과 확연히 다름(전신 우심실, 단일심실, 비대칭 등). 사쿠비트릴/발사르탄 소규모 연구만 있고 권고안 제시 어려움. CRT는 적응증/결과 근거 부족하나 임상관심 높음(해부학적 형태에 따라 효과 다름). 심장이식 후 결과는 지속 개선되나 수술중 사망률 여전히 높음.</p>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ MULTIDISCIPLINARY & MANAGEMENT (34-37장) ═══ -->
+<div id="tab-multidisc" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">34</span>비약물치료 및 의료의 질 향상 — 다학제 접근</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 다학제적 접근(Class I, A), 환자 자기관리(Class I, A), 가정/진료실 기반 심부전 관리 프로그램(Class I, A) — 모두 입원·사망 감소 위해 권고</span></div>
+      <div class="subhead">다학제팀 필수 요소</div>
+      <table class="tc-table">
+        <tr><td>심부전 진단·진행 모니터링</td><td>식이·운동 등 생활습관 개선</td></tr>
+        <tr><td>심부전 치료 최적화·적정화</td><td>정신사회적 평가·관리</td></tr>
+        <tr><td>동반 질환 관리</td><td>완화의료·적절한 상담</td></tr>
+        <tr><td>환자·보호자 교육</td><td></td></tr>
+      </table>
+      <div class="subhead">관리 프로그램 특징/구성요소</div>
+      <ul class="dot">
+        <li>환자/사람 중심, 다학제적 접근</li>
+        <li>증증 심부전 진행 예방+증상 조절+말기 시 원하는 곳에서 돌봄</li>
+        <li>능숙하고 전문적인 의료 인력, 자기관리 교육</li>
+        <li>퇴원 후 추적 관리(진료실/가정방문/전화/원격모니터링), 심부전 악화 예방 접근성 확보</li>
+      </ul>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:6px">메타분석: 5,624명 포함 20개 연구 — 자기관리 향상으로 예후 개선. 진료실+가정방문 병행 시 모든 원인 사망률 감소.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">35</span>심장재활</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 4개:</strong> 모든 심부전 환자에서 운동치료 권고(Class I, A). 중증/허약/동반질환 시 감독 하 운동기반 재활 도움(Class IIa, C). 참여 높이는 방법(inpatient liaison, automatic referral) 도움(Class IIa, B). 재택심장재활/원격의료/모바일 중재 장기 참여 도움(Class IIb, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">목표: 심폐지구력 향상→삶의 질 개선, 심부전 악화로 인한 재입원·사망 감소. 다학제 접근: 환자평가, 식이요법, 체중관리, 혈압관리, 혈중지질관리, 당뇨병관리, 금연, 심리사회적 관리, 신체활동 상담, 운동치료. 입원-심장재활/지역사회-심장재활(가정-심장재활)로 구분. 입원-심장재활은 NT-proBNP/심전도 48시간 이상 안정 시 시작, 통원-심장재활은 퇴원 후 1주 이내, 흉부 절개수술은 4주 후 추천.</p>
+      <div class="alert alert-teal" style="margin-top:6px"><span>💡</span><span>주2-3회 이상 권고, 운동 강도/기간/빈도/장소/종류(유산소운동 위주+근력운동+호흡강화운동)를 개별화. 고위험 개심술 환자, ICD/CRT 시행 환자, LVAD 삽입 환자, 심장이식 환자, 허약 노인은 병원기반 심장재활 우선 권고</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">36</span>상급병원 전원/심부전 전문가 의뢰</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">중증 심부전 환자는 이환율·사망률 높아 심장이식·MCS 등 근본적 치료를 위해 적절한 시기에 상급 심부전 센터 의뢰 필요.</p>
+      <div class="subhead">의뢰 위험요인 (요약)</div>
+      <ul class="dot">
+        <li>새롭게 발생한 심부전(좌심실 박출률 무관) — 가이드라인 추천 치료 및 관리(상위 영상검사, 심근조직검사, 유전적 검사 등)</li>
+        <li>지속적 주사용 강심제 필요, 폐울혈로 NYHA III-IV 증상/심각한 피로 지속, SBP&lt;90 또는 증상 동반 저혈압</li>
+        <li>Cr≥1.8mg/dL 또는 BUN≥43mg/dL, 심방세동/심실부정맥 발생 또는 반복 ICD쇼크</li>
+        <li>최근 12개월 내 2번 이상 응급실 방문/입원, 표준약제 적절 용량 사용에 제한 있는 경우</li>
+        <li>부종악화·바이오마커 상승·운동검사 악화·영상에서 심장재형성 진행 등 임상적 악화</li>
+        <li>3개월 이상 GDMT에도 지속적 LVEF≤35%, 특수 심근병증 의심/확진(비후성·부정맥유발성·사가스병·제한성·심장사르코이드증·대동맥협착)</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:6px"><span>📊</span><span>중증 심부전 분류·의뢰 알고리듬: 기대여명/삶의질 매우 낮음→완화치료 / NYHA III-IV+약물치료·ICD·CRT 불응 또는 위 위험요인(최근12개월 1회↑입원, 강심제 사용, 표준약제 사용 못함, LVEF&lt;20%, 우심실/신장/간기능 악화, 부정맥/ICD쇼크, 지속 폐울혈+이뇨제 증량 요구, SBP&lt;90+관류저하 증거) 중 하나라도 있으면 → <strong>상급 심부전센터 전원</strong>, 없으면 3-6개월 간격 재평가</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">37</span>심부전 환자에서 질 향상을 위한 성과 측정 혹은 임상 질 지표</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 치료 성과 측정과 임상 질 지표 평가는 치료의 질을 향상시키고 환자의 예후 개선에 도움 될 수 있음(Class IIa, B)</span></div>
+      <div class="subhead">심부전으로 입원한 환자의 질 지표(표1)</div>
+      <table class="tc-table">
+        <tr><th>도메인</th><th>지표 항목</th></tr>
+        <tr><td>구조</td><td>기구삽입/수술적 치료 위한 카운셀링 또는 다학제적 진료</td></tr>
+        <tr><td rowspan="4">치료</td><td>금기/부적응증 없을 시 베타차단제 사용</td></tr>
+        <tr><td>금기/부작용 없을 시 ACEI/ARB 또는 ARNI 사용</td></tr>
+        <tr><td>금기/부작용 없을 시 MRA 사용</td></tr>
+        <tr><td>금기/부작용 없을 시 SGLT2 억제제 사용</td></tr>
+        <tr><td rowspan="2">교육</td><td>퇴원 전 교육</td></tr>
+        <tr><td>재활 카운셀링</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">미국 Get with the Guideline 프로그램: 표준화된 성과측정지표 적용으로 재입원율·사망률 개선. ACEI/ARNI 사용 49%, 베타차단제 55%, 심부전교육 31%, 심율동전환 제세동기 36% 사망률 감소효과 보고. 국내는 아직 표준화된 질 관리 지표가 보편적으로 사용되고 있지 않으나 향후 한국형 임상 질 지표 개발이 중요.</p>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ COMORBIDITIES (38-52장) ═══ -->
+<div id="tab-comorbid" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">38</span>고혈압</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 6개:</strong><br>
+        1. EF 무관 혈압≥140/90 — 약물치료 도움 가능(Class IIa, B)<br>
+        2. HFrEF — ACEI/ARB+베타차단제+이뇨제+MRA 사용 권고(Class I, A)<br>
+        3. 목표혈압 미도달 시 디하이드로피리딘계 칼슘통로차단제 추가 고려(Class IIb, C)<br>
+        4. HFpEF — HFrEF와 비슷한 기준·목표혈압 타당(Class IIa, B)<br>
+        5. 좌심실비대 동반 — RAAS차단제+칼슘통로차단제+이뇨제 조합 권고(Class I, A)<br>
+        6. 좌심실비대 동반 — 수축기혈압 120-130mmHg까지 감소 도움(Class IIa, B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 KorHF 36.7%, KorAHF는 동반율 4%로 보고(레지스트리 간 차이 있으나 KorHF 46.5%, KorAHF 62.2%로 확인 — 다수 환자에서 발견되는 주요 심혈관 위험인자). SPRINT 연구: 수축기혈압 120 미만 철저 조절 시 심부전 포함 복합 심혈관질환 위험도 38% 감소.</p>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>HFrEF 환자에서 목표혈압을 130/80mmHg 이하로 권고(국내 고혈압진료지침도 동일). moxonidine(중추신경계 작용) 등은 나쁜 예후 연관으로 추천되지 않음. 급성 고혈압성 심부전: 초기 혈압강하 정도가 초기 혈압의 25% 초과하지 않도록 주의</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">39</span>폐고혈압</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 4개:</strong><br>
+        1. 폐고혈압 측정은 증상·예후 반영 위해 권고(Class I, A)<br>
+        2. 폐혈관저항 측정 포함 우심도자술 — 이식/MCS 고려 환자에서 권고(Class I, B)<br>
+        3. 클립 이용 승모판막 성형술 — 폐고혈압 감소+증상완화·예후개선(Class IIa, B)<br>
+        4. 폐동맥고혈압 전문치료제 — CpcPH 일부 환자에서 도움(Class IIa, C)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">2018년 WSPH에서 폐고혈압 정의를 평균폐동맥압&gt;20mmHg(기존 25mmHg)로 변경. 폐고혈압의 65%가 좌심질환에 의한 폐고혈압(PH-LHD). 중증 좌심질환은 폐모세혈관전/후 결합 폐고혈압(CpcPH) 형성 — 나쁜 예후. 심장이식 후보 환자에서 좌심실보조장치(LVAD)는 PVR을 지속적으로 감소시킴.</p>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>그림: 중증심부전 → 우심도자검사(mPAP≥25mmHg, PCWP&gt;15mmHg) → 폐혈관저항&lt;3WU(IpcPH)→심장이식/LVAD / 폐혈관저항≥3WU(CpcPH)→LVAD±실데나필→심장이식</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">40</span>허혈성 심장병</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 4개:</strong><br>
+        1. 관상동맥조영술 — 약물치료 반응없는 협심증 동반 심부전에 우선 권고(Class I, C)<br>
+        2. CMR·SPECT 이용 진단이 타당(Class IIa, C)<br>
+        3. 경피적 관상동맥중재술 또는 CABG로 임상적 상황 따라 결정 타당(Class IIa, B)<br>
+        4. 급성관상동맥증후군 심인성쇼크에 즉각 재관류 어려울 시 ECMO 고려(Class IIa, C)</span>
+      </div>
+      <div class="subhead">약물치료 요약</div>
+      <ul class="dot">
+        <li><strong>이뇨제</strong>: 증상 개선하나 예후 개선 근거 부족</li>
+        <li><strong>RAS차단제</strong>: ACEI는 심근경색 후 좌심실 재형성 감소로 사망률↓ (Enalapril, ramipril 효과 입증). ARB는 captopril만큼 효과적이지 못함(losartan 연구)</li>
+        <li><strong>베타차단제</strong>: 원인 무관 1차 치료제. Carvedilol이 동면심근 회복+좌심실 역재형성 촉진</li>
+        <li><strong>MRA</strong>: 급성심근경색 14일 이내 EF≤40% + 당뇨/심부전 동반 환자에서 효과(EPHESUS)</li>
+        <li><strong>항혈전제</strong>: 와파린은 신경학적 합병증 감소시키나 출혈위험. 아스피린은 2차예방 장기간 사용 시 효과 제한적</li>
+        <li><strong>지질강하제</strong>: 스타틴은 1·2차 예방 초석 약제이나 심부전 환자 대상 효과 근거 별도 부족(4S/CORONA 연구 상이)</li>
+      </ul>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px"><strong>재관류</strong>: STICH 연구 — EF&lt;35% 허혈성 심근병증, CABG+약물치료가 약물치료 단독보다 10년 추적 시 사망률 유의하게 낮음. 생존심근 범위&gt;10%일 때 이득 있음.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">41</span>심방세동</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 8개:</strong><br>
+        1. CHA₂DS₂-VASc≥2(남)/3(여) — 장기 항응고치료 권고(Class I, A)<br>
+        2. 중등도 이상 승모판막협착/기계판막 외엔 직접경구항응고제(NOAC) 권고(Class I, A)<br>
+        3. CHA₂DS₂-VASc=1(남)/2(여) — 장기 항응고치료 타당(Class IIa, B)<br>
+        4. 급성·장기 심박수조절 목적 베타차단제 도움(Class IIa, B)<br>
+        5. 베타차단제 금기/맥박 여전히 높음 — 디곡신 도움(Class IIa, C)<br>
+        6. 박동수 빠르고 혈역학적 불안정 동반 심부전 악화 — 조기 전기적 동율동전환 권고(Class I, C)<br>
+        7. 약물치료에도 지속되는 심방세동으로 인한 악화 의심 — 동율동전환 고려(Class IIb, B)<br>
+        8. 약물치료에도 증상악화 기여+심방세동 지속 — 전극도자절제술 도움(Class IIa, B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 급성 심부전 환자 약 30%에서 심방세동 동반. 일반 안정시 110/분 목표(근거 약함, 실제 임상연구 환자 10-17%만 포함). 급성기는 110/분 미만 목표. NYHA IV/혈역학적 불안정 시 아미오다론 고려.</p>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>CASTLE-AF: 심부전+심방세동 환자에서 전극도자절제술이 약물치료 대비 모든 사망·심부전 사망 위험 낮춤(HR 0.62, p=0.007). CABANA: NYHA&gt;II 환자에서 전극도자절제술군이 복합지표(사망/뇌졸중출혈/심급사) 위험도 낮음(HR 0.64). EAST-AFNET: 진단 1년 이내 적극적 율동조절 시 사망·뇌졸중·심부전 입원 등 복합지표 위험도 감소</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">42</span>심실 부정맥</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 9개(요약):</strong><br>
+        1. 혈역학적 불안정 심실빈맥/세동 — 즉각 직류 율동전환/제세동 권고(Class I, A)<br>
+        2. 혈역학적 안정 심실빈맥 — 직류전환 또는 아미오다론 정맥 도움(Class IIa, C/B)<br>
+        3. 직류전환/제세동 반응없거나 재발 — 아미오다론 투약 권고(Class I, A)<br>
+        4. 재발 방지 목적 베타차단제 도움(Class IIa, B)<br>
+        5. 단형 심실빈맥 약물 불응 — 전극도자절제술 도움(Class IIa, B)<br>
+        6. ICD 가진 환자 다수 적절 전기충격 — 아미오다론 권고(Class I, B)<br>
+        7. 적절 전기충격+약물불응 — 전극도자절제술 도움(Class IIa, B)<br>
+        8-9. 심실조기수축이 원인/악화인자 — 아미오다론·베타차단제(Class IIa, B) 또는 전극도자절제술(Class IIb, B) 고려</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">Electrical storm: 24시간 내 3회 이상 발생 또는 치료 후 5분 이내 재발. 다형(polymorphic) 심실빈맥/세동에서는 전극도자절제술 데이터 충분하지 않음. 심실조기수축이 심부전 원인/악화인자로 판단되면 빈도 줄이기 위해 아미오다론·베타차단제, 반응없을 시 전극도자절제술 고려.</p>
+      <div class="alert alert-warn" style="margin-top:6px"><span>📌</span><span>치료 알고리듬: 혈역학적으로 불안정 → 직류전환/제세동(Class I) → 동율동 전환 실패/재발/Electrical storm → 유발인자 교정+GDMT+아미오다론+전극도자절제술(Class IIa) ± 심교감신경절제술(Class IIb) ± 심장이식(불응시 Class IIa). 안정형은 직류전환/아미오다론(Class IIa) → 재발시 전극도자절제술(Class IIa)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">43</span>전도 장애</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 전도장애 박동기 삽입 기준은 심부전 환자에도 동일 적용(Class I, A). 동기능저하 박동기 시술 시 심실박동조율 최대한 줄임(Class I, A). 심실박동조율 필요한 HFrEF(EF≤40%)에서 우심실보다 양심실 박동조율 권고(Class I, A)</span></div>
+      <div class="subhead">동기능 부전 증후군(SSS)</div>
+      <ul class="dot"><li>서맥형 부정맥+증상 인과관계 명확 → 박동기 권고(Class I, B)</li><li>빈맥-서맥형, 인과관계 명확, 전극도자절제술 불가 → 박동기 권고(Class I, B)</li><li>심방세동/심방빈맥, 빈맥-서맥형 → 시술 전 전극도자절제술 우선 시도 도움(Class IIa, B)</li></ul>
+      <div class="subhead">방실 차단</div>
+      <ul class="dot"><li>완전/고도 방실차단, 2형 2도, 방실결절이하 2:1 차단 → 박동기 권고(Class I, C)</li><li>증상 있는 1형 2도+His다발 이하 차단 위치 → 도움 가능(Class IIa, C)</li><li>방실차단 존재 → DDD모드(synchronized atrial and ventricular pacing) 도움(Class IIa, A)</li></ul>
+      <div class="subhead">심부전</div>
+      <ul class="dot"><li>우심실 박동조율율 최소화 권고(Class I, A)</li><li>심실박동조율 필요 HFrEF(EF≤40%) → 양심실 박동조율 권고(NYHA 무관, Class I, A)</li><li>좌심실 박동선 삽입 어려움 → His속 박동조율 도움(Class IIa, B)</li><li>전도장애로 베타차단제 투약 어려움 → 박동기 삽입 도움(Class IIa, C)</li><li>심장수술 후 완전/고도 방실차단 → 5일 내외 관찰 후 영구성 판단 타당(Class I, C)</li><li>심장이식 6주 이상 지속 심박수변동부정맥 → 박동기 도움(Class IIa, C)</li></ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">44</span>판막질환</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 7개(요약):</strong><br>
+        대동맥판막: ① 저혈류-저압력차 협착 도부타민부하초음파/CT 고려(IIa,B) ② 유증상 중증협착 SAVR/TAVR 권고(I,B) ③ EF&lt;50% 무증상 중증협착 SAVR/TAVR 권고(I,B) ④ 중증역류+급만성심부전 수술적 치료(I,B)<br>
+        승모판막: ⑤ 허혈성+중증 이차역류 CABG와 함께 수술 도움(IIa,C) ⑥ 관상동맥질환 없고 유증상 중증 이차역류 다학제 후 수술/시술(I,B)<br>
+        삼첨판막: ⑦ 중증역류는 대동맥/승모판수술 시 함께 교정(I,B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">판막질환은 심부전 유발·악화의 주요 원인 중 하나. 다학제팀(판막질환전문의·심부전전문의·심장외과전문의·판막중재전문의·심장영상전문의) 통합적 논의 중요.</p>
+      <div class="subhead">1. 대동맥판막 협착</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">전형적 저혈류 협착(EF&lt;50%)과 역설적 저혈류 협착(EF≥50%)으로 분류. 저용량 도부타민 부하 심초음파에서 박출량지수 20%↑면 flow reserve 있다고 평가. Flow reserve 없으면 CT 칼슘점수 측정. TAVI는 고위험·중간위험군 SAVR과 비교해 나쁘지 않음. 저위험군(STS&lt;4%, 연령&lt;70세) 추적2년 SAVR이 추천, 75세이상/고위험(STS/EuroSCORE II&gt;8%) TAVI 추천.</p>
+      <div class="subhead">2. 승모판막</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">중등도-중증 이차성 승모판역류는 극히 불량한 예후 연관. 두 RCT(MITRA-FR vs COAPT) 상반된 결과 — 환자선택·심부전치료기간·심초음파평가지표·시술관련차이·승모판역류중증도에 따른 좌심실확장정도 차이가 원인으로 추정.</p>
+      <div class="subhead">3. 삼첨판막 역류</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">이차성(기능성) 삼첨판막역류가 우심실압력증가·용적과부하 연관되어 자연경과 중 흔히 관찰. 우심부전 증상/징후 악화시키므로 말초부종 경감 위해 이뇨제 투약. 삼첨판역류만으로 수술적 치료는 과거 높은 사망률(8.8%)로 잘 시행되지 않음.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">45</span>당뇨병</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 2개:</strong> 심혈관질환 보유 또는 발생위험 높은 당뇨병 환자 — 심부전 없어도 SGLT2 억제제 표준치료 권고(Class I, A). 심부전 동반 당뇨병 환자 — 입원·사망 감소 위해 SGLT2 억제제(empagliflozin/dapagliflozin) 표준치료 권고(Class I, A)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">당뇨병 환자 67.6%가 심부전 동반(대한심부전학회 자료). 당화혈색소 7.0% 이하 권고하나 동반질환·허약성에 따라 개별화, 중증 시 8.0% 미만으로 덜 엄격히.</p>
+      <ul class="dot">
+        <li><strong>SGLT2i</strong>: EMPA-REG OUTCOME, CANVAS, DECLARE-TIMI58, DAPA-HF, EMPEROR-Reduced/Preserved, DELIVER, SOLOIST-WHF 모두 일관된 심혈관 이득. 당뇨병 동반 여부와 무관하게 좌심실 박출률 전 범위에서 이득 확인됨</li>
+        <li><strong>메트포민</strong>: 안전, eGFR&gt;30 시 사용. 신장기능 저하 시 드물게 젖산혈증 위험</li>
+        <li><strong>DPP4 억제제</strong>: 삭사글립틴은 심부전 입원 27% 증가(SAVOR-TIMI53) — 다른 DPP4i는 무관, 권고되지 않음</li>
+        <li><strong>GLP-1 RA</strong>: LEADER(리라글루타이드) 심혈관사건 감소하나 입원은 차이없음. LIVE 연구 심혈관사건 더 많이 발생 — 안전성 추가연구 필요</li>
+        <li><strong>티아졸리딘디온</strong>: 수분저류 유발 — 증상 있는 심부전 환자 투약 금지</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">46</span>신장기능 장애 및 전해질 이상</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 이뇨제 치료에 반응하지 않는 저항성 체액과부하에 한외여과(ultrafiltration) 고려 가능(Class IIb, C)</span></div>
+      <div class="subhead">심장신장증후군(Cardiorenal syndrome) 5대 분류</div>
+      <table class="tc-table">
+        <tr><td>1형</td><td>심장기능 급격한 악화 → 급성 신장 손상</td></tr>
+        <tr><td>2형</td><td>만성 심장기능장애 → 만성 신장병</td></tr>
+        <tr><td>3형</td><td>급격한 신장기능 장애 → 급성 심장병</td></tr>
+        <tr><td>4형</td><td>만성 신장병 → 심장병 기여</td></tr>
+        <tr><td>5형</td><td>만성 전신 질환 → 심장+신장기능 장애</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">30-60% 심부전 환자에서 중등도 이상 신장기능 장애 동반. ARNI/SGLT2 억제제 사용 초기 사구체여과율 일시적 감소는 대부분 일시적, 장기 예후는 무관/개선됨 — 중단 불필요.</p>
+      <div class="subhead">전해질 이상</div>
+      <ul class="dot">
+        <li><strong>저나트륨혈증</strong>(Na&lt;136mEq/L): 입원환자 30% 동반. 교정 속도 1-2mEq/L/시간, 24시간 8mEq/L 초과 금지(삼투성 탈수초증 위험)</li>
+        <li><strong>저칼륨혈증</strong>(K&lt;3.5mEq/L): 환자 50%에서 발생. RAAS차단제/MRA로 교정, 중증 시 정맥 칼륨(말초&lt;40mEq/L, 중심정맥&lt;60mEq/L)</li>
+        <li><strong>고칼륨혈증</strong>(경증 5.0-5.5, 중등증 5.5-6.0, 중증&gt;6.0mEq/L): RAAS차단제 사용과 관련. K&gt;7 또는 심전도 변화 시 칼슘 정맥투여, 인슐린 정맥주사+베타작용제 흡입. 칼륨결합제(나트륨 폴리스티렌 설포네이트, 칼슘 폴리스티렌 설포네이트, 파티로머, 나트륨 지르코늄 시클로실리케이트)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">47</span>호흡기계 질환</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">심부전 환자 약 20%에서 만성폐쇄성폐질환(COPD) 동반(국내 KorAHF 11.3%). 증상·징후 상당부분 겹쳐 감별 어려움. 베타차단제는 GOLD/GINA 가이드라인에서 COPD·천식에 절대 금기 아님 — 단, 천식엔 심장선택적 베타차단제(bisoprolol·metoprolol succinate·nebivolol)만, 호기 연장·천명 등 기도폐쇄 징후 모니터링 필요.</p>
+      <div class="alert alert-info" style="margin-top:6px"><span>💡</span><span>흡입 코르티코스테로이드·베타-아드레날린 작용제는 심혈관 사건 증가시키지 않는 것으로 생각됨</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">48</span>철 결핍과 빈혈</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 3개:</strong> 원인불명 빈혈 — 적혈구 생성 자극제 추천 안 됨(Class III, B). 철결핍성 빈혈 — 철분제(ferric carboxymaltose) 정맥 투여 타당(Class IIa, A). 급성심부전 입원+EF≤50%+철결핍 — 철분제 정맥투여 입원감소 도움(Class IIa, B)</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">철 결핍: ferritin&lt;100ng/mL 또는 100-299ng/mL이면서 TSAT&lt;20%. 심부전 환자 50%에서 철결핍, 14-60%에서 빈혈(한국 36%). 절대적 철결핍(흡수 자체 부족)과 기능적 철결핍(체내 철 충분하나 항상성 조절 이상)으로 구분.</p>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span><strong>FAIR-HF</strong>(Hb 9.5-13.5): ferric carboxymaltose 증상·6분보행 개선. <strong>CONFIRM-HF</strong>(Hb&lt;15, EF&lt;45%): 6분보행·입원 감소. <strong>AFFIRM-HF</strong>: 전체 사망 차이 없었으나 전체 심부전 입원(RR0.74) 및 심혈관질환/심부전 입원(RR0.80) 유의 감소</span></div>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>경구 철분제는 효과 제한적(흡수율 문제로 추정) — 큰 도움 안 됨. 적혈구 생성 자극제는 오히려 예후 악화시킬 수 있음(혈전 위험)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">49</span>심부전과 수면무호흡</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">3가지 형태: 폐쇄성(OSA), 중추성(CSA), 혼합형. 심부전 환자 절반 이상에서 발견, 특히 중추성 수면무호흡과 Cheyne-Stokes Respiration(CSR)이 빈번. 심부전 환자는 주간졸림증 등 특징적 증상이 약하게 나타나 진단이 늦어지는 경우 많음 — full overnight 수면다원검사 필요(설문지만으론 불가).</p>
+      <div class="subhead">치료</div>
+      <ul class="dot">
+        <li><strong>폐쇄성</strong>: CPAP 적극 고려 — 좌심실 박출률 증가, 일부 연구에서 심초음파 지표 호전 보고</li>
+        <li><strong>중추성(CSA-CSR)</strong>: 확립된 치료 없음. SERVE-HF(EF&lt;35%, Adaptive Servo-Ventilation): 무호흡은 호전되었으나 ASV군에서 돌연사 증가, 종합사망률·심혈관계 사망률 통계적으로 의미있게 증가 → <strong>EF&lt;35% 중추성 수면무호흡에서 ASV는 금기</strong>. 정맥을 통한 횡격막 신경자극법 고려 가능하나 효과 확실하지 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">50</span>우울증/인지장애</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">만성 심부전 환자 우울증 유병률 20-40%(정상인구보다 4-5배 높음), 절반이 중증. 우울증 동반 환자가 나쁜 예후. 선택적 세로토닌 재흡수 억제제(SSRI, sertraline/escitalopram)는 안전성은 있으나 증상개선/예후호전 입증 못함. 삼환항우울제(TCA)는 저혈압·악화·부정맥 유발 위험으로 피하는 것이 타당.</p>
+      <div class="alert alert-info" style="margin-top:6px"><span>🧠</span><span>인지장애: 급성 비대상성 심부전 입원 환자의 45-80%에서 보고. 간단한 선별검사(MMSE, MoCA)가 일상적 임상 검사의 일부가 되어야 함. 아세틸콜린에스테라제억제제·메만틴이 혈관성 치매에 효과적이나 심부전 환자에서의 효과/안전성은 자료 부족</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">51</span>임신</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 4개:</strong><br>
+        1. ACEI·ARB·ARNI·MRA·이바브라딘·SGLT2 억제제 — 태아 독성으로 임신 중 중단(Class III, B)<br>
+        2. 베타차단제 — 임신 기간 유지 권고, 비소프롤롤/메토프롤롤 사용 타당(Class IIa, B)<br>
+        3. 항응고치료 필요 시 전 기간 저분자량 헤파린 타당(Class I, B). 와파린은 2분기 사용 고려 가능(Class IIa, B)<br>
+        4. DOAC은 임신 중 중단해야 함(Class III, B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">EF≤40% 산모는 임신 20주부터 면밀한 관찰. EF≤20% 임신 시 모성 사망률 매우 높음 — 환자상태에 따라 임신중단 고려. 분만은 최소 임신 35주부터 다학제팀(부인과·심장내과·마취과)에서 결정, 질식분만 선호.</p>
+      <div class="alert alert-warn" style="margin-top:6px"><span>📌</span><span><strong>주산기 심근병증</strong>: 명백한 원인 없이 임신 막기/분만 후 수개월 이내 좌심실 수축력 45% 이하 심부전. 대부분 출산 후 한달째 발생(52% 분만 후, 특히 분만 1주 이내 46%). 만 35세 이상, 전자간증, 임신성 당뇨병이 위험 — 위험인자 추가될수록 발생률 기하급수적 증가(위험인자 전혀 없는 산모 대비 약 200배)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span><span class="chnum">52</span>악성 종양 또는 항암치료와 연관된 심부전</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고:</strong> 심혈관 위험요인/이전 항암제 심부전 병력/항암제 종류 고려, 심부전 발생 위험 높은 환자는 CardioOncology 전문 심장전문의가 항암제 투약 전 심기능 평가 권고(Class I, C)</span></div>
+      <div class="subhead">심부전 유발 주요 항암제</div>
+      <table class="tc-table">
+        <tr><td>안트라사이클린</td><td>독소루비신, 에피루비신, 이다루비신</td></tr>
+        <tr><td>HER2 표적치료제</td><td>트라스투주맙, 퍼투주맙, T-DM1</td></tr>
+        <tr><td>VEGF 억제제</td><td>수니티닙, 파조파닙, 렌바티닙, 베바시주맙, 라무시루맙</td></tr>
+        <tr><td>Proteasome 억제제</td><td>카필조밉, 볼테조밉</td></tr>
+        <tr><td>면역관문억제제</td><td>펨브롤리주맙, 니볼루맙, 이필리무맙, 아테졸리주맙</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">안트라사이클린: 일정 용량(독소루비신 300mg/m² 또는 에피루비신 540mg/m² 이상) 초과 시 비가역적 심근손상 위험↑ — 덱스라족산 병용 고려. 트라스투주맙: 투약 전·중·후 일정 간격 심기능 확인, EF 기저치대비 10%↑감소하거나 50%이하 저하 시 ACEI/베타차단제 우선 사용, 40%이하 시 투약 재고. 면역관문억제제: 약 1.1%에서 심근염 발생 — 조기 발견 시 고용량 스테로이드+면역글로불린 정맥주사가 중요.</p>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ SEVERE HEART FAILURE (53-58장) ═══ -->
+<div id="tab-severe" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">53</span>중증 심부전의 정의 및 분류</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple"><span>📌</span><span><strong>중증 심부전</strong>: 가이드라인 약물치료·기구치료만으로는 증상이 호전되지 않거나 악화되어 심장대체치료(심장이식·기계순환보조)가 필요한 상태. 미국심장학회는 'D 단계'로 정의(말기/불응성 심부전이라는 용어도 사용되었으나 최근 '중증 심부전' 용어 주로 사용)</span></div>
+      <div class="subhead">중증 심부전의 정의 (표1, 모든 항목 만족 필요)</div>
+      <ol class="num">
+        <li>NYHA 기능등급 3-4 정도로 심한 심부전 증상 지속</li>
+        <li>아래 중 최소 한 가지 이상: 좌심실 박출률&lt;30%, 단독 우심부전, 수술 불가능한 심한 판막 이상, 수술 불가능한 심한 선천성 심장 이상, 박출률 보존 심부전인데 BNP/NT-proBNP 지속 상승하거나 심한 좌심실 이완부전/심장구조 이상</li>
+        <li>고용량 정맥 이뇨제 치료(또는 이뇨제 혼합치료) 필요한 폐의 수분 저류, 강심제 혹은 혈관수축제가 필요한 저관류 상태, 또는 악성 부정맥 등으로 지난 12개월간 2회 이상 예기치 않은 병원방문/입원 병력</li>
+        <li>운동할 수 없을 정도로 심하거나 6분보행검사상 300m 미만 혹은 최대 산소섭취량(peak VO₂) 12mL/kg/min 미만 혹은 예상치의 50% 미만의 심한 운동 능력 저하</li>
+      </ol>
+      <div class="subhead">INTERMACS 분류 및 중재치료 필요시기 (표2)</div>
+      <table class="tc-table">
+        <tr><th>프로파일</th><th>정의</th><th>중재 필요시기</th></tr>
+        <tr><td><strong>1: 심한 심인성 쇼크</strong></td><td>강심제 증량 등 불구 지속 생명위협 저혈압, 심한 장기 관류저하, 산혈증/혈청 젖산↑</td><td>수시간 이내 응급</td></tr>
+        <tr><td><strong>2: 지속적 악화</strong></td><td>정맥 강심제 사용중에도 악화, 신장기능·영양상태 악화, 조절 안 되는 수분저류</td><td>수일 이내</td></tr>
+        <tr><td><strong>3: 강심제 의존적 안정</strong></td><td>혈압·장기기능·증상이 지속적 강심제정주 또는 임시순환보조로 안정</td><td>수주~수개월</td></tr>
+        <tr><td><strong>4: 안정시 증상</strong></td><td>안정 시 정상수준 수분저류 상태, 약간의 기초 일상생활도 악화. 고용량이뇨제 필요</td><td>수주~수개월</td></tr>
+        <tr><td><strong>5: 일상활동 불능</strong></td><td>안정시 기초적 일상생활 가능하나 집안에서 일상활동도 증상발생, 약물치료에도 신장기능 저하 동반</td><td>영양/장기기능/활동상태 따라 다양</td></tr>
+        <tr><td><strong>6: 일상활동 제한</strong></td><td>다소간의 일상활동 가능하나 의미있는 활동에는 수분 이내 피로/호흡곤란으로 활동에 제한</td><td>영양/장기기능/활동상태 따라 다양</td></tr>
+        <tr><td><strong>7: 진행된 NYHA III</strong></td><td>불안정한 체액균형으로 인한 최근의 증상악화 경험이 없는 환자들로 경도의 신체운동을 동반한 일상활동 가능</td><td>심장이식/순환보조치료 적응증 아님</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:6px"><span>📌</span><span><strong>변형 요소(modifiers)</strong>: 임시 순환보조장치(TCS, IABP/ECMO/TandemHeart/Impella 등 — 입원 환자 프로파일1-3에 적용) / 부정맥(A) — 심실세동·세동, ICD 1주 2회↑ 작동, 모든 프로파일 / 잦은 악화(FF) — 이뇨제·신대체치료·일시적 정맥강심제 필요로 응급내원·입원, 프로파일4-6 가정치료중, 드물게 프로파일7</span></div>
+      <div class="subhead">전원/의뢰가 필요한 고위험 환자 특성 (표3)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">NYHA II 이상이면서 다음 중 하나라도 해당: 12개월 내 1회↑입원/예기치않은 방문, 과거 강심제 사용, 베타차단제·RAAS차단제/ARNI 복용 어려움, 우심실/신장/간기능 악화, 심실부정맥 및 ICD 전기충격, 지속 울혈증상으로 이뇨제 용량 증가 필요, 수축기혈압&lt;90 또는 말초관류저하, 제세동기/심실재동기화치료 필요.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">54</span>심인성 쇼크</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 5개:</strong><br>
+        1. 개별환자 위험도·예후 예측 위해 SCAI 분류 사용 고려(Class IIb, C)<br>
+        2. 저산소증 치료 위해 산소 치료 권고(Class I, C)<br>
+        3. 산소치료/비침습적 환기보조에도 호흡부전 지속 시 기관삽관·기계환기 도움(Class IIa, C)<br>
+        4. SBP&lt;90+조직저관류 증거+수액보충 반응없으면 강심제 사용 고려(Class IIb, C)<br>
+        5. 혈압 상승+장기관류 유지 위해 혈관수축제(노르에피네프린 선호) 고려(Class IIb, C)</span>
+      </div>
+      <div class="subhead">SCAI 심인성 쇼크 단계 (그림1)</div>
+      <table class="tc-table">
+        <tr><th>단계</th><th>명칭</th><th>특징</th></tr>
+        <tr><td><strong>A</strong></td><td>위험단계(At risk)</td><td>위험인자 보유, 증상/징후 없는 상태</td></tr>
+        <tr><td><strong>B</strong></td><td>초기단계(Beginning)</td><td>저혈압·빈맥 임상적 증거 있으나 관류저하 없음</td></tr>
+        <tr><td><strong>C</strong></td><td>전형적 단계(Classical)</td><td>용적보충 넘어서는 중재(승압제/ECMO 포함 기계적 도움) 필요한 관류저하 상태</td></tr>
+        <tr><td><strong>D</strong></td><td>악화단계(Doom)</td><td>초기 중재 반응 없는, 전형적단계와 비슷하나 더 악화되는 상태</td></tr>
+        <tr><td><strong>E</strong></td><td>극한단계(Extremis)</td><td>다양한 중재로 보조 받는 상태로, CPR 및/혹은 ECMO 없이는 심정지 발생 가능</td></tr>
+      </table>
+      <div class="subhead">치료 알고리듬 (그림2)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">급성관상동맥증후군+동반합병증 → 응급 PCI/수술. 아니면 다른 심인성쇼크 원인 확인+치료. 공통: 산소(IIa)/강심제·혈관수축제(IIb)/단기 MCS(IIa) → 관류저하·장기부전 개선 확인 → 개선되면 약물 탈피+원인치료 지속+약물치료 최적화(I) / 미개선이면 MCS(IIa)/신대체요법(IIa)/완화치료</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">55</span>임시형 기계적 순환보조장치</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 5개:</strong><br>
+        1. 심인성 쇼크 환자 — 일괄적 대동맥내 풍선펌프 사용은 추천 안 됨(Class III, B)<br>
+        2. 급성 승모판부전증/심실중격파열 동반 — IABP 도움(Class IIa, C)<br>
+        3. 약물 불응 급성심부전/심정지 환자 — ECMO 도움(Class IIa, C)<br>
+        4. 목격자 없는 병원 밖 심정지에서 비가역적 신경학적 손상 증거 명확 시 ECMO 이용 심폐소생술 비추천(Class III, C)<br>
+        5. ECMO 혈류 1-1.5L/min 이하에서 심초음파지표·젖산 등 고려한 이탈 결정 도움(Class IIa, C)</span>
+      </div>
+      <div class="subhead">임시형 MCS 특성 비교(표1)</div>
+      <table class="tc-table">
+        <tr><th></th><th>IABP</th><th>IMPELLA</th><th>TandemHeart</th><th>VA-ECMO</th></tr>
+        <tr><td>유속(L/min)</td><td>최대0.5-1.0</td><td>2.5-5.0</td><td>2.5-5.0</td><td>3.0-7.0</td></tr>
+        <tr><td>기전</td><td>대동맥</td><td>좌심실→대동맥</td><td>좌심방→대동맥</td><td>우심방→대동맥</td></tr>
+        <tr><td>최대 유지일</td><td>9일</td><td>7-10일(2.5,CP)/2-3주(5.0)</td><td>2-3주</td><td>3-4주</td></tr>
+        <tr><td>후부하</td><td>↓</td><td>↓</td><td>↑</td><td>↑↑↑</td></tr>
+        <tr><td>평균동맥압</td><td>↑</td><td>↑↑</td><td>↑↑</td><td>↑↑</td></tr>
+        <tr><td>좌심실이완기압</td><td>↓</td><td>↓↓</td><td>↓↓</td><td>↔ 또는 ↑</td></tr>
+        <tr><td>관상동맥 관류</td><td>↑</td><td>↑</td><td>−</td><td>−</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">국내는 Impella 사용 불가, 산소화기 장착 안되어 폐부종/우심실부전 동반 시 ECMO 적용이 보편화됨. ECMO 이탈 기준 미확립 — 최소한의 승압제 유지하며 최소 24시간 박동성 동맥파형 유지+주요 대사 장애 회복 후 시작.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">56</span>삽입형 좌심실보조장치(LVAD)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="subhead">LVAD 적응증 분류(표1)</div>
+      <table class="tc-table">
+        <tr><td>Bridge to candidacy(BTC)</td><td>심장이식 금기를 LVAD로 해결, 최종적으로 이식 시도 목적</td></tr>
+        <tr><td>Bridge to transplantation(BTT)</td><td>심장 공여자 나올 때까지 유지하여 성공적 이식 수행 목적</td></tr>
+        <tr><td>Bridge to recovery(BTR)</td><td>보조장치 없이도 생명 유지 가능할 정도로 심기능 회복 후 LVAD 제거 목적</td></tr>
+        <tr><td>Destination therapy(DT)</td><td>심장이식 불가능 환자에서 생명 연장 목적으로 사용</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">INTERMACS 프로파일 2-4에서 시행 가능, 프로파일5(급사/비가역적 장기부전 가능성)도 적용 가능. 적응증: 최적약물·전기생리학치료에도 심한 심부전 지속, 금기증 없으면서 LVEF&lt;25%+peak VO₂&lt;12mL/kg/min, 최근12개월3회↑입원, 강심제의존적/IABP·ECMO 제거불가, 신기능악화 등 장기부전 진행.</p>
+      <div class="alert alert-warn" style="margin-top:6px"><span>📊</span><span><strong>MOMENTUM3</strong>(Heartmate3, 국내유일 사용가능 이식형 LVAD): 2년 생존율 84.5%, 심각한 뇌졸중·펌프교체 없는 2년 생존율 76.9%. 합병증(2년): 뇌졸중 9.9%, 위장관출혈 24.5%, driveline 감염 23.3%, 우심실부전 34.2%, 심실부정맥 20.8%</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">국내 LVAD 수술 후 가장 흔한 사망원인은 출혈성 뇌졸중. 1년째 가장 흔한 합병증도 출혈로, 44%에서 위장관 출혈로 입원.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">57</span>심장이식</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info"><span>📋</span><span><strong>핵심 권고 2개:</strong> 중증 심부전에서 이식 필요성 평가 위해 운동부하 심폐검사 권고(Class I, B). 이식 결정 환자는 혈역학적 상태 평가 위해 매 해마다 우심도자술 권고(Class I, C)</span></div>
+      <div class="subhead">심장이식 적응증과 금기증 (표1)</div>
+      <table class="tc-table">
+        <tr><th colspan="2">적응증</th></tr>
+        <tr><td colspan="2">최적 약물·기구치료에도 증상 조절 안 되는 좌심실 박출률 감소 심부전, NYHA 3b-4</td></tr>
+        <tr><td colspan="2">운동부하 심폐검사: peak VO₂ 14mL/kg/min↓(베타차단제 복용 시 12↓) / 50세 미만 또는 여성: 예측치 50%미만 / VE/VCO₂ slope&gt;35</td></tr>
+        <tr><td colspan="2">호전되지 않을 심인성쇼크, 급성심근경색증, 급성심근염, 조절 안되는 협심증, 비후성/제한성 심근병증+심한 증상, 항부정맥제·전극도자술 불응 심실부정맥, 폐동맥고혈압 없는 선천성심장병, 전이없는 심장내 종양</td></tr>
+        <tr><th colspan="2">금기증</th></tr>
+        <tr><td>나이</td><td>70세 이상은 상대적 금기</td></tr>
+        <tr><td>비만</td><td>BMI≥35</td></tr>
+        <tr><td>감염</td><td>현성 감염</td></tr>
+        <tr><td>암</td><td>활동성 암 절대금기, 저등급/치료된 암은 논의 후 가능</td></tr>
+        <tr><td>당뇨병</td><td>조절안되거나 장기손상 동반</td></tr>
+        <tr><td>말초혈관/뇌혈관질환</td><td>우회술/재개통 불가능한 경우 절대금기</td></tr>
+        <tr><td>약물 남용</td><td>6개월 금연/금주, 신경정신과 논의 필요</td></tr>
+        <tr><td>폐고혈압</td><td>PVR≥3WU(혈관확장제/승압제 사용해도) — 보조장치 후 재평가 가능</td></tr>
+        <tr><td>사회경제적 문제</td><td>순응도 낮음, 가족 부재, 치매</td></tr>
+      </table>
+      <div class="subhead">국내 심장이식 응급도 체계 (2018 개정)</div>
+      <table class="tc-table">
+        <tr><th>응급도</th><th>주요 기준</th></tr>
+        <tr><td><strong>0</strong></td><td>ECMO 가동중, 침습적 기계호흡중, 기계적 순환보조 필요한 심실빈맥/세동, LVAD 가진 환자 중증 합병증으로 중환자실 입원, 비삽입형 심실보조장치</td></tr>
+        <tr><td><strong>1</strong></td><td>입원환자+인공심장/VAD/IABP, 4주이상 정맥강심제, 1주이상 고용량 단일 또는 2종이상 중등도이상 강심제</td></tr>
+        <tr><td><strong>2</strong></td><td>1주이상 강심제 투여중(응급도1 미해당)</td></tr>
+        <tr><td><strong>3/7</strong></td><td>응급도0,1,2 미해당 / 대기보류</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 연 200건 가까이 시행, 1년 생존율 90%, 중앙 생존기간 12.5년. 뇌사자 중 심장기증 진행율 약 30%로 낮음.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">58</span>심부전 환자의 완화의료 및 말기 돌봄(End-of-Life care)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 3개:</strong><br>
+        1. 약물 불응 말기심부전+심장이식/LVAD 적응증 안됨 — 완화의료·말기돌봄 도움(Class IIa, C)<br>
+        2. 모르핀·항구토제·산소치료·이뇨제로 울혈 증상 관리, 혈압 떨어뜨리는 장기치료제 감량/중단 고려(Class IIb, C)<br>
+        3. 인간 존엄성·자기결정권·생명권·사회경제적 사항 종합한 '연명의료계획서' 작성 타당(Class IIa, C)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">국내 65세 이상 노인 91.8%가 연명치료를 '반대', 42.6%는 '매우 반대'. 말기(진행된 중증) 심부전 환자는 독립적 일상생활 유지 힘들고 증상·삶의 질 나빠져 반복 입원. 심장 악액질, 이식/LVAD 적응증 안 되는 환자는 완화의료·말기돌봄 고려.</p>
+      <div class="subhead">호스피스·연명의료중단 결정 3대 원칙</div>
+      <ol class="num">
+        <li>환자의 인간으로서의 존엄과 가치를 침해 받아서는 안 됨</li>
+        <li>환자는 최선의 치료를 받고 자신의 상병상태와 예후 및 향후 시행될 의료행위에 대해 분명히 알고 스스로 결정할 권리를 가짐</li>
+        <li>의료인은 환자에게 최선의 치료를 제공하고 호스피스와 연명의료중단 등 결정에 관하여 정확하고 자세히 설명하며 그에 따른 환자의 결정을 존중해야 함</li>
+      </ol>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>국내 '연명의료결정에 관한 법률'(2018년 시행). 간이 DNR 서식으로 연명의료 유보 형식을 대체하는 경우 있으나, 법적으로 인정되지 않는 서식이므로 응급환자에 대해서는 연명의료법 적용이 어려운 면이 있음</span></div>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ ACUTE HEART FAILURE (59-64장) ═══ -->
+<div id="tab-acute" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">59</span>급성 심부전</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">증상/징후가 빠르게 발현·급속히 악화되어 신속한 치료 필요. 진단 검사를 즉시 시작하면서 동시에 치료 시행. 국내 코호트: 52%가 신생(de novo), 48%는 만성 심부전의 악화.</p>
+      <div class="subhead">급성 심부전의 악화인자 (표1)</div>
+      <table class="tc-table">
+        <tr><td>급성관상동맥증후군</td><td>감염(감염성 심내막염 포함)</td></tr>
+        <tr><td>부정맥(빈맥:심방세동·심실빈맥, 서맥:전도장애)</td><td>수술 및 수술 합병증</td></tr>
+        <tr><td>과도한 혈압 상승</td><td>교감신경 항진, 스트레스심근병증</td></tr>
+        <tr><td>저염/수분제한 약물복용 불이행</td><td>대사성 호르몬장애(갑상선·당뇨병케토산증·부신피질기능장애·임신/주산기)</td></tr>
+        <tr><td>독성 물질(알코올, 각성제)</td><td>뇌혈관 손상</td></tr>
+        <tr><td>약물(비스테로이드항염증제, 스테로이드, 심장독성 항암제)</td><td>급성 구조적 손상(심실외벽파열, 심실중격파열, 급성승모판역류, 흉벽손상, 관상동맥재관류술, 심내막염 부전판막)</td></tr>
+        <tr><td>만성폐쇄성폐질환의 악화</td><td>폐색전증</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">국내 병원 내 사망률 4.8%, 퇴원 후 1/3/6개월·1/2/3년 사망률 3.3%/8.4%/12.6%/18.2%/27.6%/36.7%. 재입원율 1/3/6개월·1/2/3년 7.0%/13.5%/17.9%/23.1%/30.3%/36.0%.</p>
+      <div class="subhead">진단 검사 권고수준 (표2)</div>
+      <table class="tc-table">
+        <tr><th>검사</th><th>임상적 의미</th><th>권고수준</th></tr>
+        <tr><td>심전도</td><td>부정맥, 심근허혈 확인</td><td>권고함</td></tr>
+        <tr><td>흉부방사선</td><td>울혈, 폐렴 확인</td><td>권고함</td></tr>
+        <tr><td>심초음파</td><td>심장 구조이상 확인</td><td>권고함</td></tr>
+        <tr><td>나트륨이뇨펩타이드</td><td>울혈확인, 높은 음성예측도</td><td>권고함</td></tr>
+        <tr><td>트로포닌</td><td>관상동맥증후군 확인, 예후예측</td><td>권고함</td></tr>
+        <tr><td>혈청 크레아티닌·전해질</td><td>치료상태 모니터링</td><td>권고함</td></tr>
+        <tr><td>갑상선 호르몬</td><td>원인 확인</td><td>권고함</td></tr>
+        <tr><td>헤모글로빈, 철분 상태</td><td>치료도움, 예후예측</td><td>권고함</td></tr>
+        <tr><td>젖산</td><td>관류 상태 평가</td><td>저관류 의심 시 권고</td></tr>
+        <tr><td>동맥혈가스검사</td><td>호흡 부전 평가</td><td>호흡부전 의심 시 권고</td></tr>
+        <tr><td>프로칼시토닌</td><td>폐렴 동반 확인</td><td>폐렴 의심 시 고려</td></tr>
+        <tr><td>D이형 접합체</td><td>폐동맥 색전증 스크리닝</td><td>의심 시 시행</td></tr>
+        <tr><td>폐 초음파</td><td>울혈확인, 예후예측</td><td>고려할 수 있음</td></tr>
+      </table>
+      <div class="subhead">급성 심부전의 4가지 분류 (표4)</div>
+      <table class="tc-table">
+        <tr><th></th><th>급성 비대상성 심부전</th><th>급성 폐부종</th><th>단독 우심부전</th><th>심인성 쇼크</th></tr>
+        <tr><td>작용기전</td><td>좌심실 기능부전+나트륨·수분 신장저류</td><td>후부하 상승/좌심실 이완기 장애/판막성 심부전</td><td>우심실 기능부전 또는 전모세혈관 폐고혈압</td><td>심한 심장 기능부전</td></tr>
+        <tr><td>발병양상</td><td>서서히(수일에 걸쳐)</td><td>급성(수시간)</td><td>서서히 또는 급성</td><td>서서히 또는 급성</td></tr>
+        <tr><td>임상소견</td><td>온-습 혹은 냉-습</td><td>온-습</td><td>냉-습</td><td>냉-습</td></tr>
+        <tr><td>치료</td><td>이뇨제, 강심제/혈관수축제(관류저하·저혈압 있는 경우)</td><td>이뇨제, 혈관이완제</td><td>이뇨제, 강심제/혈관수축제</td><td>강심제/혈관수축제, 임시MCS, 신대체요법</td></tr>
+      </table>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>치료 알고리듬: 울혈/체액축적 → 관류저하 여부 확인 → 정상이면 이뇨제(I) → 저하면 고리작용이뇨제+강심제/혈관수축제(I/IIb). 울혈호전 확인 → 미호전 시 이뇨제증량(I)/복합이뇨제(IIa) → 불응성/말기신부전 시 신대체요법(IIa) 또는 완화치료. 관류저하 지속+장기손상 시 기계적순환보조(IIa)+/-신대체요법(IIa)+기계적 인공호흡요법 또는 완화치료</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">60</span>급성 심부전의 모니터링</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 5개:</strong><br>
+        1. 활력징후(혈압·심박수·호흡수·체온)+산소포화도 지속적 모니터링(Class I, C)<br>
+        2. 매 회진 증상(기좌호흡)+징후(경정맥확장·말초부종·체중증가) 평가, 체액상태 확인, 수액투입/배출 정확히 기록(Class I, C)<br>
+        3. 주사용 이뇨제 또는 RAAS차단제 시작 시 신장기능·전해질 매일/자주 측정(Class I, C)<br>
+        4. 증상지속+체액·관류·폐혈관저항 불확실+저혈압·신장기능악화·강심제필요·MCS/이식 요구 시 동맥카테터 모니터링 도움(Class IIa, C)<br>
+        5. BNP/NT-proBNP+트로포닌 측정은 급성 비대상성 심부전 예후·중증도 확립에 권고(Class I, A)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">기좌호흡 민감도 90% — 호전 모니터링 핵심. 일상적 폐동맥 카테터 삽입은 권장 안 됨. <strong>CHAMPION</strong> 연구(폐동맥압력모니터): NYHA III 심부전 환자 입원 28% 감소. 최근 <strong>GUIDE-HF</strong>: 경미한 심부전군에서는 효과 불분명(COVID-19 시기 영향 있었음).</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">61</span>이뇨제 (급성기)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 5개:</strong><br>
+        1. 주사용 고리작용 이뇨제는 체액과다 상태 입원 모든 급성심부전 환자에 사용(Class I, C)<br>
+        2. 경구이뇨제 미복용자 초기 권장 푸로세미드 20-40mg, 기존 복용자는 최소 복용용량과 동등 용량(Class I, B)<br>
+        3. 주사용 이뇨제는 간헐적 주사/지속주입 모두 가능, 증상·임상상태 따라 조절(Class I, B)<br>
+        4. 신장기능·전해질 측정+배뇨량·소변나트륨 측정으로 반응 평가 도움(Class IIa, C)<br>
+        5. 고리작용+티아지드계 병합요법은 저항성 부종에 도움(Class IIa, C)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">목표: 최저 용량으로 정상 체액 상태 달성·유지. 이뇨제 반응 평가: 2시간 후 일회소변 나트륨&gt;50-70mEq/L 또는 6시간 동안 시간당 소변량 100-150mL 초과 시 충분. 불충분하면 최대용량(푸로세미드 400-600mg/일, 심한 신장기능저하 시 1,000mg까지)까지 2배씩 증량.</p>
+      <div class="alert alert-purple" style="margin-top:6px"><span>📊</span><span>치료 알고리듬: 기존 경구 이뇨제 복용여부에 따라 초기 용량 결정(20-40mg 또는 경구용량 1-2배) → 2시간 후 소변나트륨/6시간 소변량 평가 → 충분하면 12시간마다 동일용량 반복 → 2-6시간 재평가 → 완전 울혈해소까지 유지 또는 병합요법/최대용량 증량</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">62</span>혈관확장제 및 기타 약제들</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 3개:</strong><br>
+        1. 주사용 혈관확장제 — SBP&gt;110mmHg 급성심부전에서 증상·울혈 개선 위해 고려 가능(Class IIb, B)<br>
+        2. 혈전증 예방 위한 항응고요법 — 폐색전증 위험 낮추기 위해 권고(Class I, A)<br>
+        3. 마약류 통상적 사용은 조절안되는 심한 통증/불안 아니면 추천 안 됨(Class III, C)</span>
+      </div>
+      <div class="subhead">급성기 주사용 혈관확장제</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>용량</th><th>주된 부작용</th></tr>
+        <tr><td>니트로글리세린</td><td>10-20μg/min 시작, 200μg/min까지 증량</td><td>저혈압, 두통</td></tr>
+        <tr><td>질산 이소소르비드</td><td>1mg/h 시작, 10mg/h까지 증량</td><td>저혈압, 두통</td></tr>
+        <tr><td>니트로푸루시드</td><td>0.3μg/kg/min 시작, 5μg/kg/min까지 증량</td><td>저혈압, 티오시안산염 독성</td></tr>
+      </table>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:4px">현재까지 급성심부전 치료에서 주사용 혈관확장제의 임상적 근거는 부족(75세 이상 무작위배정 임상시험에서도 생존·퇴원일수 차이 없음). 마약류는 호흡곤란·불안 호전시키나 진정제 사용 시 비침습 양압환기 환자에서 사용 가능, 고용량에서 오심·저혈압·서맥·호흡저하 부작용 — 통상적 사용은 추천 안 됨.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">63</span>강심제와 혈관수축제</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 3개:</strong><br>
+        1. 저혈압+주요 장기 관류저하 증거, 표준치료 반응없을 때 강심제 사용 고려(Class IIb, C)<br>
+        2. 저혈압·관류저하 증거 없으면 일괄적 강심제 사용해서는 안됨(Class III, C)<br>
+        3. 심인성 쇼크에서 혈압상승+장기관류 유지 위해 혈관수축제 사용 가능, 노르에피네프린 우선 고려(Class IIb, B)</span>
+      </div>
+      <div class="subhead">작용기전과 혈역학적 효과(표1)</div>
+      <table class="tc-table">
+        <tr><th>약제</th><th>사용 용량</th><th>혈역학적 반응</th></tr>
+        <tr><td colspan="3" style="background:var(--surface2);font-weight:700">승압제/강심제</td></tr>
+        <tr><td>도파민 (저용량)</td><td>0.5-2μg/kg/min</td><td>CO↑</td></tr>
+        <tr><td>도파민 (고용량)</td><td>10-20μg/kg/min</td><td>CO↑, SVR↑↑</td></tr>
+        <tr><td>노르에피네프린</td><td>0.05-0.4μg/kg/min</td><td>CO↑, SVR↑↑</td></tr>
+        <tr><td>에피네프린</td><td>0.01-0.5μg/kg/min</td><td>CO↑↑, SVR↑↑</td></tr>
+        <tr><td>페닐에페드린</td><td>0.1-10μg/kg/min</td><td>SVR↑↑</td></tr>
+        <tr><td>바소프레신</td><td>0.02-0.04 U/min</td><td>SVR↑↑, PVR↔</td></tr>
+        <tr><td colspan="3" style="background:var(--surface2);font-weight:700">Inodilators</td></tr>
+        <tr><td>도부타민</td><td>2.5-20μg/kg/min</td><td>CO↑↑, SVR↓, PVR↓</td></tr>
+        <tr><td>이소프로테레놀</td><td>2-20μg/kg/min</td><td>CO↑↑, SVR↓, PVR↓</td></tr>
+        <tr><td>밀리논</td><td>0.125-0.75μg/kg/min</td><td>CO↑, SVR↓, PVR↓</td></tr>
+      </table>
+      <div class="subhead">적응증과 고려사항(표2)</div>
+      <table class="tc-table">
+        <tr><td>페닐에페드린</td><td>다양한 형태의 쇼크 — 후부하 증가시켜 심기능저하 시 주의</td></tr>
+        <tr><td>노르에피네프린</td><td>심인성 쇼크 1차 약제로 가장 흔히 사용, 도파민보다 우선</td></tr>
+        <tr><td>에피네프린</td><td>아나필락틱 쇼크 1차, 대부분 쇼크 2차</td></tr>
+        <tr><td>도파민</td><td>대부분 쇼크 2차 — SOAP II에서 부정맥·사망률 증가 보고</td></tr>
+        <tr><td>바소프레신</td><td>대부분 쇼크 2차, 단일용량 사용, 저나트륨혈증 주의</td></tr>
+        <tr><td>도부타민</td><td>심인성 쇼크에서 흔히 사용 — 저혈압 발생가능성</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><span>저용량부터 시작, 철저한 혈역학적 모니터링하며 증량(부정맥·심근허혈악화·사망률 증가 위험). KorAHF: 초기 수축기혈압 90mmHg 이상 환자에서 강심제·혈관수축제 사용 시 의미있는 사망률 증가 — 정상혈압 환자에서 상기 약제 사용은 많은 주의 필요</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span><span class="chnum">64</span>퇴원 준비</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📋</span><span><strong>핵심 권고 4개:</strong><br>
+        1. 퇴원 전 울혈 징후 해결 여부 평가(Class I, C)<br>
+        2. 퇴원 전 근거 중심 최적화된 경구 약물치료 시작(Class I, C)<br>
+        3. 울혈상태·내약성 평가, 약제 조절 위해 퇴원 후 1-2주 이내 추적관찰 권고(Class I, C)<br>
+        4. 철결핍 동반 시 ferric carboxymaltose가 증상개선+재입원감소 도움(Class IIa, B)</span>
+      </div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">심부전 입원 환자의 생존율(1/5/10/15년): 75%/55%/40%/30% — 외래 안정 환자보다 현저히 낮음. 퇴원 직후 사망률·재입원율 높은 '불안정한 시기(vulnerable phase)' 발생. '심부전 퇴원 전 체크리스트' 활용 유용.</p>
+      <div class="subhead">퇴원 전 체크리스트 핵심 항목</div>
+      <ul class="dot">
+        <li>Co-morbidities/심부전 원인 확인, ADHF 유발원인 파악, 울혈 조절(&lt;140/90mmHg)</li>
+        <li>ACEI/ARB(또는 ARNI로 대체), 베타차단제, MRA, ivabradine(적응증시) 처방 여부</li>
+        <li>ICD/CRT 적응증 검토</li>
+        <li>식생활관리(저염식·수분섭취제한), 매일체중/혈압측정, 응급시 대처법, 신체활동/운동량 안내</li>
+        <li>퇴원 후 추적관리 계획(F/U일정 잡힘) 수립</li>
+      </ul>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:6px"><strong>PIONEER-HF</strong>: 급성심부전 입원 후 혈역학적 안정 시(6시간 이상 수축기혈압≥100, 24시간 이상 정맥 혈관확장제/승압제 미사용) ARNI를 에날라프릴 대신 조기 시작 가능, 안전성 유의차 없음. 국내 KorAHF(5,625명): 퇴원 시 ACEI/ARB 68.8%, 베타차단제 52.2%, MRA 46.6% 처방 — 개선 필요. 심부전 입원 후 퇴원 7일 이내 병원방문이 30일 이내 재입원율 낮춤.</p>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ APPENDIX (부록 - 국민건강보험 요양급여기준) ═══ -->
+<div id="tab-appendix" class="panel">
+
+  <div class="alert alert-purple" style="margin-bottom:10px"><span>📁</span><span><strong>부록(Supplement)</strong> — 국민건강보험 요양급여기준(2022년 현재). 본문 해당 챕터와 연계되는 국내 보험 적용 기준을 정리한 부분입니다.</span></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔌 삽입형 심율동전환 제세동기(ICD) 거치술 급여기준 (21장 연계)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">다음과 같은 경우에 요양급여함:</p>
+      <ol class="num">
+        <li>일시적/가역적 원인 아닌 심실세동 또는 심실빈맥에 의한 심정지가 발생한 경우</li>
+        <li>구조적 심실환 있는 환자에서 자발성 지속성 심실빈맥 발생</li>
+        <li>급성심근경색 48시간 이후 ① 가역적원인 아닌 심실세동/혈역학적 불안정 심실빈맥 ② 재발성 지속성 심실빈맥</li>
+        <li>심부전: 심근경색 발생 후 40일 경과한 허혈성 심부전으로 적절한 약물치료에도 불구하고 1년 이상 생존 예상되며 — (가) EF≤30% (나) EF 31-35% + NYHA II,III 증상 (다) EF≤40%+비지속성 심실빈맥 있으며 전기생리학검사에서 혈역학적으로 의미있는 심실세동/지속성 심실빈맥 유발</li>
+        <li>비허혈성 심부전으로 3개월 이상 적절한 약물치료에도 불구 NYHA II, III 증상 보이는 EF≤35%인 환자로서 1년 이상 생존 예상되는 경우</li>
+      </ol>
+      <div class="alert alert-warn" style="margin-top:8px"><span>📌</span><span>요양급여 여부 필요 시 사전승인 신청 가능. '적절한 약물치료'에는 레닌-안지오텐신계 차단제와 베타차단제가 모두 포함되어야 함(단, 임상적 소견상 사용 불가 시 예외 인정)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>⚡ 비후성 심근병증의 심율동전환 제세동기 삽입 급여기준 (29장 연계)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;font-weight:600">1) 아래 급사의 위험인자가 1개 이상인 경우</p>
+      <ul class="dot"><li>좌심실 벽두께 30mm 이상(단, 16세 미만 환자는 Z-score≥6 포함)</li><li>비후성 심근병증에 의한 급사의 가족력</li><li>6개월 내 한번 이상의 원인 미상의 실신</li></ul>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;font-weight:600;margin-top:8px">2) 아래 급사의 부가적 위험인자 중 1개 이상을 동반한 비지속성 심실빈맥 또는 비정상적인 운동혈압반응이 있는 경우</p>
+      <ul class="dot"><li>30세 미만</li><li>심장 자기공명영상에서 후기 가돌리늄 조영증강</li><li>좌심실유출로폐쇄</li><li>과거의 실신</li><li>좌심실류</li><li>좌심실 박출률 50% 미만</li></ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🫀 심장 재동기화 치료(CRT)의 국민건강보험 급여인정기준 (22장 연계)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;font-weight:600">1. 심장재동기화치료는 다음과 같은 경우에 요양급여 인정</p>
+      <div class="subhead">가. CRT-P (CRT-Pacemaker) — 3개월 이상 적절한 약물치료에도 증상 지속되는 아래의 심부전 환자</div>
+      <ol class="num">
+        <li>동율동(Sinus Rhythm): (가) QRS≥130ms 좌각차단(LBBB)+EF≤35%+NYHA II,III 또는 거동가능 IV (나) QRS≥150ms 비좌각차단(non-LBBB)+EF≤35%+NYHA III 또는 거동가능 IV</li>
+        <li>영구형 심방세동(Permanent AF): (가) QRS≥130ms+EF≤35%+NYHA III 또는 거동가능 IV (나) EF≤35%인 환자에서 심박수 조절 위해 방실결절절단술(AV junction ablation) 필요한 경우</li>
+        <li>기존 박동기(Pacemaker)의 심방동전 제세동기(ICD)의 기능 향상이 필요한 경우 — EF≤35%+NYHA III 또는 거동가능IV+심조율 비율 40%이상</li>
+        <li>박동기(Pacemaker) 적응증에 해당하는 경우 — EF≤40%인 환자에서 심조율 비율이 40%이상으로 예상되는 경우(3개월 이상의 적절한 약물치료가 없는 경우에도 인정 가능)</li>
+      </ol>
+      <div class="subhead">나. CRT-D (CRT-Defibrillator)</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">CRT-P와 ICD 기준에 모두 적합한 경우에도 인정되되, 상기 가(1)에 해당되면서 NYHA class II인 경우엔 QRS≥130ms인 좌각차단(LBBB)이고 EF≤30%인 경우에 인정</p>
+      <div class="alert alert-info" style="margin-top:6px"><span>📌</span><span><strong>거동가능 NYHA class IV 적용기준</strong>: 다음을 모두 충족 — (가) 급성관상동맥증후군 보이지 않음 (나) 정맥강심제 사용하지 않음 (다) 대한심장학회 최신 만성심부전 진료지침에 따른 적절한 약물치료(GDMT) 중인 경우</span></div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6;margin-top:6px">사전승인제도: 요양급여 인정여부에 대해 건강보험심사평가원장이 정함. '적절한 약물치료' 적용기준은 ICD와 동일하게 레닌-안지오텐신계 차단제+베타차단제 모두 포함 필요(예외 인정 가능)</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🔥 심방빈맥 전극도자 절제술 보험 기준 (32장 연계)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ol class="num">
+        <li>심방빈맥(atrial tachycardia)/심방조동(atrial flutter): 증상이 있거나 지속성(incessant)인 경우</li>
+        <li>심방세동(atrial fibrillation): 항부정맥 약제(class I 또는 class III) 중 1가지 이상을 6주 이상 충분한 용량으로 투여한 이후에도 증상이 조절되지 않는 심방세동으로, 약제 투여 전·후 심전도검사에서 심방세동이 증명된 경우 / 약물치료에 실패하여 약제를 투여하지 못하거나, 항부정맥 약제에 대한 부작용 또는 동결절 기능부전을 동반한 빈맥-서맥 증후군(tachycardia-bradycardia syndrome)에서와 같이 약제 유지가 불가능한 심방세동으로서 심전도에 의해 확인된 경우</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🫧 삽입형 좌심실보조장치(LVAD) 요양급여 기준 (56장 연계)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="subhead">1. 적응증</div>
+      <ul class="dot">
+        <li>가. 심장이식 대기자로 등록된 말기심부전환자의 심장이식 가교 치료시(Bridge To Transplant, BTT)</li>
+        <li>나. 심장이식이 적합하지 않은 말기심부전 환자에서 약물치료(베타차단제 등) 또는 기계순환보조(IABP, ECMO) 치료에도 불구하고 심한 증상이 2개월 이상 지속되고, 다음 중 하나 이상을 충족하는 경우:
+          <ol class="num" style="margin-top:4px">
+            <li>LVEF&lt;25%이거나 이에 준하는 심실 기능부전의 증거가 있으면서, peak VO₂&lt;12mL/kg/min(단, 베타차단제 불응성인 경우 peak VO₂&lt;14mL/kg/min) 혹은 동등한 운동능력 검사 결과가 있는 경우</li>
+            <li>정맥 강심제에 의존적인 상태로 투여를 중단할 수 없는 경우</li>
+            <li>점진적 신장 손상 부전이 있고 이의 원인이 심부전으로 증명된 경우(PCWP 20mmHg이상이면서, 수축기 혈압 90mmHg이하 혹은 Cardiac Index가 2.0 L/min/m² 이하)</li>
+          </ol>
+        </li>
+      </ul>
+      <div class="subhead">2. 금기증</div>
+      <p style="font-size:calc(12px*var(--fscale,1));line-height:1.6">아래와 같은 경우 시술을 승인하지 않으며, 대상자가 다음의 경우에 부합되는지 여부는 VAD 위원회의 결정에 따름:</p>
+      <ul class="dot">
+        <li>가. 지속적 혈액투석을 하는 말기신부전</li>
+        <li>나. 비가역적 장기부전(신장, 간, 폐 등)</li>
+        <li>다. 중증 뇌손상</li>
+        <li>라. 패혈증</li>
+        <li>마. 장기적 항응고 치료가 불가한 경우</li>
+        <li>바. 말기 암 등으로 인해 장기적 생존이 제한적인 경우</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:10px"><span>ℹ️</span><span>본 부록은 2022년 발행 당시(고시 2019-28호, 공고 2020-340호, 2021-07-13 기준일 등) 자료를 정리한 것으로, 실제 임상 적용 시 보건복지부·건강보험심사평가원의 최신 고시 내용을 반드시 재확인하시기 바랍니다.</span></div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+function toggleCard(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('collapsed');
+}
+function toggleAcc(el){
+  const b=el.nextElementSibling;
+  b.style.display=b.style.display==='block'?'none':'block';
+  el.querySelector('span:last-child').textContent=b.style.display==='block'?'▴':'▾';
+}
+
+const abbrs=[
+  ['HF','Heart Failure (심부전) — 심장의 기능적/구조적 이상으로 심실의 혈액 박출 또는 충만에 이상이 생겨 호흡곤란·부종·피로 등 증상이 나타나는 임상 증후군.'],
+  ['HFrEF','HF with reduced Ejection Fraction (박출률 감소 심부전) — 좌심실 박출률 ≤40%.'],
+  ['HFmrEF','HF with mildly reduced EF (박출률 경도 감소 심부전) — 좌심실 박출률 41-49%.'],
+  ['HFpEF','HF with preserved EF (박출률 보존 심부전) — 좌심실 박출률 ≥50%.'],
+  ['HFimpEF','HF with improved EF (박출률 호전 심부전) — 치료 후 EF가 40% 초과로 향상되고 이전 대비 10%p 이상 호전된 경우.'],
+  ['NYHA','New York Heart Association — 심부전 증상의 중증도를 나타내는 기능등급 분류(I~IV).'],
+  ['ACEI','Angiotensin-Converting Enzyme Inhibitor (안지오텐신전환효소억제제) — 캡토프릴·에날라프릴·리시노프릴 등. HFrEF 표준치료 약제.'],
+  ['ARB','Angiotensin Receptor Blocker (안지오텐신수용체차단제) — 칸데사르탄·발사르탄·로자탄 등.'],
+  ['ARNI','Angiotensin Receptor-Neprilysin Inhibitor (안지오텐신수용체-네프릴리신억제제) — 사쿠비트릴/발사르탄. HFrEF 1차 표준치료.'],
+  ['MRA','Mineralocorticoid Receptor Antagonist (염류코르티코이드 수용체 길항제/알도스테론 길항제) — 스피로놀락톤·에플레레논.'],
+  ['SGLT2','Sodium-Glucose Cotransporter 2 (나트륨-포도당 공동수송체2) 억제제 — 다파글리플로진·엠파글리플로진. 모든 EF에서 표준치료.'],
+  ['BNP','B-type Natriuretic Peptide — 좌심실 벽 스트레스로 분비되는 나트륨이뇨펩타이드. 심부전 진단/예후 핵심 바이오마커.'],
+  ['NT-proBNP','N-terminal pro-BNP — BNP의 불활성 전구체 N말단 부분. neprilysin에 분해되지 않아 ARNI 치료중에도 측정 유용.'],
+  ['ICD','Implantable Cardioverter Defibrillator (삽입형 심율동전환 제세동기) — 급성 심장사 1차/2차 예방.'],
+  ['CRT','Cardiac Resynchronization Therapy (심장 재동기화 치료) — 좌각차단 등 비동기화 심부전에서 양심실 박동조율.'],
+  ['CRT-D','CRT-Defibrillator — CRT와 ICD 기능을 모두 가진 장치.'],
+  ['CRT-P','CRT-Pacemaker — 제세동 기능 없는 CRT 박동기.'],
+  ['LVAD','Left Ventricular Assist Device (좌심실보조장치) — 중증 심부전에서 이식 가교 또는 destination therapy로 사용.'],
+  ['MCS','Mechanical Circulatory Support (기계적 순환보조장치) — IABP, ECMO, Impella, TandemHeart 등 포함.'],
+  ['IABP','Intra-Aortic Balloon Pump (대동맥내 풍선펌프) — 임시형 기계순환보조장치 중 하나.'],
+  ['ECMO','Extracorporeal Membrane Oxygenator (체외막형 산화기) — 약물불응 심정지/심인성쇼크에서 사용.'],
+  ['VA-ECMO','Veno-Arterial ECMO — 정맥-동맥 체외막산소화. 심장+호흡 모두 보조.'],
+  ['INTERMACS','Interagency Registry for Mechanically Assisted Circulatory Support — 중증 심부전 환자의 프로파일(1-7) 분류체계.'],
+  ['SCAI','Society for Cardiovascular Angiography & Interventions — 심인성 쇼크 단계(A-E) 분류 제시 학회.'],
+  ['EF','Ejection Fraction (박출률) — 좌심실이 한 번 수축할 때 박출하는 혈액의 비율.'],
+  ['GLS','Global Longitudinal Strain — speckle tracking 기반 좌심실 수축기능 정량 지표. 독립적 사망 예측인자.'],
+  ['CMR','Cardiac Magnetic Resonance imaging (심장 자기공명영상) — 심근 조직특성 분석(LGE 등)에 가장 정확한 영상검사.'],
+  ['LGE','Late Gadolinium Enhancement (후기 가돌리늄 조영증강) — CMR에서 심근 섬유화·괴사를 반영하는 소견.'],
+  ['CTCA','Computed Tomography Coronary Angiography (심장 컴퓨터단층촬영 관상동맥조영술) — 관상동맥질환 가능성 낮음~중간일 때 배제 진단에 도움.'],
+  ['CABG','Coronary Artery Bypass Graft (관상동맥우회로술) — 허혈성 심부전(EF≤35%)에서 생존율 향상.'],
+  ['PCI','Percutaneous Coronary Intervention (경피적 관상동맥중재술).'],
+  ['H2FPEF','HFpEF 진단 점수 — Heavy·Hypertensive·AFib·Pulmonary HTN·Elder·Filling pressure 6개 항목, 0-9점.'],
+  ['HFA-PEFF','European HFA가 제시한 HFpEF 진단 점수 — 기능적·구조적·생화학적 지표(Major/Minor) 기반.'],
+  ['CHA2DS2-VASc','심방세동 환자의 뇌졸중 위험도 점수 — 심부전·고혈압·연령·당뇨병·뇌졸중·혈관질환·성별 포함.'],
+  ['NOAC','Novel(Non-vitamin K) Oral Anticoagulant (새로운 경구 항응고제) — 다비가트란·리바록사반·아픽사반·에독사반.'],
+  ['DOAC','Direct Oral Anticoagulant — NOAC과 동의어로 흔히 사용.'],
+  ['VKA','Vitamin K Antagonist (비타민K 길항제) — 와파린.'],
+  ['CPAP','Continuous Positive Airway Pressure (지속적 양압호흡) — 폐쇄성 수면무호흡 치료.'],
+  ['ASV','Adaptive Servo-Ventilation — 중추성 수면무호흡 치료기기. EF<35% 환자에서는 금기(SERVE-HF 연구, 사망률 증가).'],
+  ['CSA','Central Sleep Apnea (중추성 수면무호흡).'],
+  ['CSR','Cheyne-Stokes Respiration (체인-스톡스 호흡) — 심부전에서 보이는 주기적 호흡 패턴.'],
+  ['OSA','Obstructive Sleep Apnea (폐쇄성 수면무호흡).'],
+  ['ATTR','Transthyretin Amyloidosis (트랜스티레틴 아밀로이드증) — 유전형(hereditary)과 정상형(wild-type)으로 구분. Tafamidis로 치료.'],
+  ['AL amyloidosis','Light chain Amyloidosis (경쇄 아밀로이드증) — 형질세포 이형성에 의한 아밀로이드증, 항암치료/조혈모세포이식으로 치료.'],
+  ['DCM','Dilated Cardiomyopathy (확장성 심근병증).'],
+  ['HCM','Hypertrophic Cardiomyopathy (비후성 심근병증).'],
+  ['ARVC/AC','Arrhythmogenic (Right Ventricular) Cardiomyopathy (부정맥유발성 우심실 심근병증).'],
+  ['TAVI/TAVR','Transcatheter Aortic Valve Implantation/Replacement (경피적 대동맥판막 삽입/치환술).'],
+  ['SAVR','Surgical Aortic Valve Replacement (수술적 대동맥판막 치환술).'],
+  ['TEER','Transcatheter Edge-to-Edge Repair (경피적 승모판막 성형술, 클립 이용).'],
+  ['RAAS','Renin-Angiotensin-Aldosterone System (레닌-안지오텐신-알도스테론계).'],
+  ['GDMT','Guideline-Directed Medical Therapy (가이드라인에 근거한 적절한 약물치료) — ICD/CRT 등 기구치료 적응증 판단의 전제조건.'],
+  ['PVR','Pulmonary Vascular Resistance (폐혈관저항) — 단위 Wood Units(WU). 폐고혈압 분류·심장이식 적합성 판단에 중요.'],
+  ['PCWP','Pulmonary Capillary Wedge Pressure (폐모세혈관쐐기압) — 좌심방압을 반영하는 혈역학 지표.'],
+  ['CpcPH','Combined pre- and post-capillary Pulmonary Hypertension (폐모세혈관전/후 결합 폐고혈압) — PVR≥3WU인 좌심질환 동반 폐고혈압.'],
+  ['IpcPH','Isolated post-capillary Pulmonary Hypertension (단독 폐모세혈관후 폐고혈압) — PVR<3WU.'],
+  ['TAPSE','Tricuspid Annular Plane Systolic Excursion — 우심실 수축기능 평가 심초음파 지표.'],
+  ['FAC','Fractional Area Change — 우심실 기능 평가 지표.'],
+  ['INTERMACS profile','중증 심부전 환자의 임상상태를 1(심인성쇼크)~7(안정된 NYHA III)로 분류하는 체계.'],
+  ['BTT','Bridge To Transplant — 심장이식 대기 중 LVAD로 가교.'],
+  ['BTC','Bridge To Candidacy — LVAD로 이식 금기를 해결, 이식 후보가 되도록 가교.'],
+  ['DT','Destination Therapy — 이식 불가능한 환자에서 LVAD를 최종 치료로 사용.'],
+  ['SSS','Sick Sinus Syndrome (동기능부전 증후군).'],
+  ['TdCM','Tachycardia-induced(mediated) Cardiomyopathy (빈맥유발 심근병증).'],
+  ['Takotsubo','스트레스 심근병증(stress-induced cardiomyopathy) — 좌심실 심첨부 풍선모양 확장(apical ballooning)이 특징.'],
+  ['DAPA-HF','Dapagliflozin and Prevention of Adverse outcomes in Heart Failure — HFrEF에서 dapagliflozin 효과 입증 임상연구.'],
+  ['EMPEROR-Reduced','Empagliflozin 이용 HFrEF 임상연구.'],
+  ['PARADIGM-HF','사쿠비트릴/발사르탄(ARNI) vs 에날라프릴(ACEI) 비교, HFrEF에서 ARNI 우월성 입증.'],
+  ['VICTORIA','Vericiguat 임상연구 — HFrEF 악화 경험 환자에서 심혈관사망/재입원 감소.'],
+  ['SHIFT','Ivabradine 임상연구 — 동율동 HFrEF에서 효과 입증.'],
+  ['EMPHASIS-HF','Eplerenone(MRA) 임상연구 — 경증(NYHA II) HFrEF에서 효과 입증.'],
+  ['RALES','Spironolactone(MRA) 임상연구 — 중증 HFrEF에서 효과 입증.'],
+  ['KorHF','Korean Heart Failure Registry — 국내 만성 심부전 레지스트리.'],
+  ['KorAHF','Korean Acute Heart Failure Registry — 국내 급성 심부전 레지스트리.'],
+  ['STICH','Surgical Treatment for Ischemic Heart Failure — 허혈성 심부전에서 CABG 효과 입증 연구.'],
+  ['STEMI','ST-segment Elevation Myocardial Infarction (ST분절상승 심근경색).'],
+  ['DAPT','Dual Antiplatelet Therapy (2제 항혈소판요법).'],
+  ['eGFR','estimated Glomerular Filtration Rate (추정 사구체여과율) — 신장기능 평가, mL/min/1.73m².'],
+  ['BUN','Blood Urea Nitrogen (혈중 요소 질소).'],
+  ['TSAT','Transferrin Saturation (트랜스페린 포화도) — 철 결핍 진단 지표.'],
+];
+
+function buildAbbr(){
+  const sorted=abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  document.getElementById('abbr-grid-drop').innerHTML=sorted.map(a=>
+    `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;margin-bottom:4px;" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+       <span style="font-weight:700;color:var(--orange);font-size: calc(12px * var(--fscale, 1));font-family:'Courier New',monospace">${a[0]}</span>
+       <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);line-height:1.45;margin-top:2px">${a[1]}</div>
+     </div>`).join('');
+}
+function filterAbbr(val){
+  const v=val.toLowerCase().trim();
+  const drop=document.getElementById('abbr-dropdown');
+  const items=document.querySelectorAll('#abbr-grid-drop [data-term]');
+  if(!v){drop.style.display='none';return;}
+  const inp=document.getElementById('abbr-input');
+  const rect=inp.getBoundingClientRect();
+  const w=440;
+  let left=rect.right-w;if(left<8)left=8;
+  drop.style.top=(rect.bottom+4)+'px';drop.style.left=left+'px';
+  drop.style.display='block';
+  items.forEach(el=>{
+    const show=el.dataset.term.startsWith(v)||el.dataset.def.includes(v);
+    el.style.display=show?'':'none';
+  });
+}
+document.addEventListener('click',e=>{
+  const inp=document.getElementById('abbr-input');
+  const drop=document.getElementById('abbr-dropdown');
+  if(inp&&!inp.contains(e.target)&&drop&&!drop.contains(e.target))drop.style.display='none';
+});
+buildAbbr();
+</script>
+
+<!-- ═══ MODAL: 표현형 분류 ═══ -->
+<div id="classModal" class="modal-overlay" onclick="closeModalOutside(event,'classModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('classModal')">✕</button>
+    <div class="modal-title">📊 심부전 표현형 분류 (HFrEF / HFmrEF / HFpEF)</div>
+    <div class="modal-section">
+      <div class="modal-section-title">분류 기준</div>
+      <table class="modal-table">
+        <tr><th>Type of HF</th><th>박출률 감소</th><th>박출률 경도 감소</th><th>박출률 보존</th></tr>
+        <tr><td>증상/징후</td><td>증상±징후</td><td>증상±징후</td><td>증상±징후</td></tr>
+        <tr><td>좌심실 박출률</td><td>≤40%</td><td>41-49%</td><td>≥50%</td></tr>
+        <tr><td>추가 객관적 증거</td><td>−</td><td>−</td><td>NP 상승 또는 좌심실 이완기 장애/충만압 증가에 합당한 구조·기능 이상</td></tr>
+      </table>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">국내 레지스트리 분포</div>
+      <table class="modal-table">
+        <tr><th>레지스트리</th><th>HFrEF</th><th>HFmrEF</th><th>HFpEF</th></tr>
+        <tr><td>KorHF(만성)</td><td>57.6%</td><td>17.3%</td><td>25.1%</td></tr>
+        <tr><td>KorAHF(급성)</td><td>60.5%</td><td>14.3%</td><td>25.2%</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-purple"><span>📌</span><span><strong>HFimpEF(박출률 호전 심부전)</strong>: EF가 40% 이하→초과 & 10%p 이상 향상, 또는 50% 이상으로 향상된 경우. 독립 질환군이 아닌 '호전된 상태'로 간주 — 표준치료 지속 권고(중단 시 6개월 내 45% 재악화 보고)</span></div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: 권고등급 체계 ═══ -->
+<div id="gradeModal" class="modal-overlay" onclick="closeModalOutside(event,'gradeModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('gradeModal')">✕</button>
+    <div class="modal-title">⚠️ 권고 등급(Class) 및 근거 수준(Level of Evidence)</div>
+    <div class="modal-section">
+      <div class="modal-section-title">권고 등급(Class)</div>
+      <table class="modal-table">
+        <tr><th>등급</th><th>의미</th><th>표현</th></tr>
+        <tr><td><strong>Class I</strong></td><td>시행하는 것이 권고됨</td><td>"권고한다", "해야 한다"</td></tr>
+        <tr><td><strong>Class IIa</strong></td><td>시행하는 것이 타당함</td><td>"타당하다", "도움이 된다"</td></tr>
+        <tr><td><strong>Class IIb</strong></td><td>시행을 고려할 수 있음</td><td>"고려할 수 있다", "도움이 될 수 있다"</td></tr>
+        <tr><td><strong>Class III</strong></td><td>권고되지 않음/금기</td><td>"권고되지 않는다", "해서는 안 된다"</td></tr>
+      </table>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">근거 수준(Level of Evidence)</div>
+      <table class="modal-table">
+        <tr><th>수준</th><th>근거</th></tr>
+        <tr><td><strong>A</strong></td><td>다수의 무작위 대조 임상연구 또는 메타분석</td></tr>
+        <tr><td><strong>B</strong></td><td>단일 무작위 대조연구 또는 대규모 비무작위 연구</td></tr>
+        <tr><td><strong>C</strong></td><td>전문가 합의, 소규모 연구, 후향적 연구, 레지스트리</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-info"><span>💡</span><span>본 진료지침은 미국심장학회(ACC/AHA), 유럽심장학회(ESC) 가이드라인의 등급체계를 따르며, 국내 KorHF/KorAHF 레지스트리 근거를 함께 반영하였습니다.</span></div>
+  </div>
+</div>
+
+<script>
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
+</script>
+</body>
+</html>
