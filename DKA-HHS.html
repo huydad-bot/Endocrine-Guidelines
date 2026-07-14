@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DKA / HHS 고혈당 응급 진료 지침 2024</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #b45309;
+    --accent2: #92400e;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --blue: #0550ae;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pretendard','Noto Sans KR',-apple-system,sans-serif; background: var(--bg); color: var(--text); font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh; }
+
+  /* ── HEADER ── */
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 16px 8px; display: flex; flex-direction: column; align-items: center; gap: 4px; position: sticky; top: 0; z-index: 100; }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--accent); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--blue); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .grade::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .grade:hover::after,.grade:hover::before { display: block; }
+  .g-mild   { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .g-mod    { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .g-sev    { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .g-dka    { background: #fff3e0; color: #7c3900; border: 1px solid var(--orange); }
+  .g-hhs    { background: #e8f0fe; color: #1a3980; border: 1px solid #4a6cf7; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--blue);   color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-orange  { background: #fff3e0; border-left: 3px solid var(--accent); color: #7c3900; }
+
+  /* ── TABLE ── */
+  .ht { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ht th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .ht td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ht tr:last-child td { border-bottom: none; }
+  .ht tr:hover td { background: rgba(0,0,0,.02); }
+  .ht .sr td { background: var(--surface2); color: var(--accent); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr .osa-sub { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); font-weight: 400; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── SP ── */
+  .sp-section { margin-bottom: 6px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid var(--accent); padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; user-select: none; }
+  .sp-body { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .sp-body.open { max-height: 3000px; padding: 8px 0; }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-dka  { background: #fff3e0; color: #7c3900; }
+  .pill-hhs  { background: #e8f0fe; color: #1a3980; }
+  .pill-mild { background: #dafbe1; color: #116329; }
+  .pill-mod  { background: #fff8c5; color: #7d4e00; }
+  .pill-sev  { background: #ffebe9; color: #82071e; }
+  .pill-drug { background: #ddf4ff; color: #0550ae; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent); }
+
+  /* ── FLOW ── */
+  .flow-box { border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; background: var(--surface); font-size: calc(12px * var(--fscale, 1)); margin-bottom: 4px; }
+  .flow-arrow { text-align: center; color: var(--text2); font-size: calc(14px * var(--fscale, 1)); margin: 2px 0; }
+  .flow-branch { display: flex; gap: 6px; margin: 4px 0; }
+  .flow-branch-item { flex: 1; border: 1px solid var(--border); border-radius: 5px; padding: 6px 8px; font-size: calc(11px * var(--fscale, 1)); background: var(--surface2); }
+
+  /* ── STEP ── */
+  .step-box { display: flex; gap: 8px; align-items: flex-start; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: calc(12px * var(--fscale, 1)); }
+  .step-num { font-weight: 800; font-size: calc(14px * var(--fscale, 1)); min-width: 22px; text-align: center; }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── MISC ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .num-badge { display: inline-block; background: var(--accent); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">ADA/EASD/JBDS/AACE/DTS 2024</span>
+      <h1>DKA / HHS 고혈당 응급 진료 지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.2337/dci24-0032" class="source-link" target="_blank">Diabetes Care 2024;47:1257–1275 ↗</a>
+      <span class="meta"> · Umpierrez et al. · Consensus Report 2024</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ADA/EASD</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요·역학</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단 기준</div>
+    <div class="tab" onclick="showTab('treatment')">💉 치료 프로토콜</div>
+    <div class="tab" onclick="showTab('electrolytes')">⚗️ 전해질·보조</div>
+    <div class="tab" onclick="showTab('transition')">🔄 인슐린 전환</div>
+    <div class="tab" onclick="showTab('complications')">⚠️ 합병증·특수</div>
+    <div class="tab" onclick="showTab('prevention')">🛡️ 예방·퇴원</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════ OVERVIEW ═══════════ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">55%↑</div><div class="stat-lbl">최근 10년 DKA 입원 증가율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent)">&lt;1%</div><div class="stat-lbl">적절한 치료 시 DKA 사망률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--orange)">5–10×</div><div class="stat-lbl">HHS의 DKA 대비 사망 위험</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> DKA vs HHS 핵심 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-orange"><span>📌</span><div>두 질환 모두 <strong>인슐린 결핍 + 반조절호르몬 상승</strong>이 공통 기전. 핵심 차이는 <strong>인슐린 결핍 정도</strong>. 전체 고혈당 응급의 1/3이 DKA/HHS 혼합형으로 발현.</div></div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--orange);margin-bottom:5px"><span class="pill pill-dka">DKA</span> 당뇨병성 케톤산증</div>
+          <table class="ht">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>인슐린 결핍</td><td><strong>절대적</strong> 결핍</td></tr>
+            <tr><td>특징</td><td>고혈당 + 케톤증 + 대사성 산증 3징</td></tr>
+            <tr><td>발현 속도</td><td>수 시간~수 일</td></tr>
+            <tr><td>주요 당뇨형</td><td>T1D (70.6%), 흑인·히스패닉 T2D</td></tr>
+            <tr><td>주요 연령</td><td>18–44세 (61.7%)</td></tr>
+            <tr><td>복통/오심</td><td>흔함 (&gt;50%)</td></tr>
+            <tr><td>Kussmaul 호흡</td><td>있음 (대사성 산증 보상)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#1a3980;margin-bottom:5px"><span class="pill pill-hhs">HHS</span> 고삼투압 고혈당 상태</div>
+          <table class="ht">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>인슐린 결핍</td><td><strong>상대적</strong> — 케톤 생성 억제 가능, 고혈당 불제어</td></tr>
+            <tr><td>특징</td><td>심한 고혈당 + 고삼투압 + 탈수; 유의한 케톤증/산증 없음</td></tr>
+            <tr><td>발현 속도</td><td>수 일~1주</td></tr>
+            <tr><td>주요 당뇨형</td><td>T2D (88.1%)</td></tr>
+            <tr><td>주요 연령</td><td>45–64세 (47.5%)</td></tr>
+            <tr><td>인지 변화</td><td>흔함 (심한 탈수·고삼투압)</td></tr>
+            <tr><td>주요 유발</td><td>감염 30–60%, 뇌졸중, 심근경색, 항정신병약</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 역학 및 사망률</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="ht">
+            <tr><th>지표</th><th>DKA</th><th>HHS</th><th>혼합형</th></tr>
+            <tr><td>입원 내 사망률 (미국)</td><td>0.20–1.04%</td><td>0.77–5%</td><td style="color:var(--red)">8%</td></tr>
+            <tr><td>평균 재원기간 (미국)</td><td>3.0–3.7일</td><td>—</td><td>—</td></tr>
+            <tr><td>평균 재원기간 (영국)</td><td>5.6일</td><td>—</td><td>—</td></tr>
+            <tr><td>30일 재입원율</td><td colspan="3">10–20%; 40–65%가 재발 고혈당 응급</td></tr>
+            <tr><td>DKA 후 1년 사망률</td><td>T1D 0.9%</td><td></td><td>T2D 9.5%</td></tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">6회 이상 DKA 입원 시 사망 위험 6배↑</div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">주요 유발 인자 (DKA)</div>
+          <table class="ht">
+            <tr><th>순위</th><th>인자</th><th>비율</th></tr>
+            <tr><td>1</td><td>감염 (요로감염·폐렴)</td><td>14–58%</td></tr>
+            <tr><td>2</td><td>인슐린 중단·부족</td><td>19–59%</td></tr>
+            <tr><td>3</td><td>신규 발병 당뇨</td><td>6–23%</td></tr>
+            <tr><td>4</td><td>약물 (SGLT2i·스테로이드·항정신병약·체크포인트억제제)</td><td>다양</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>💊</span><div><strong>SGLT2i 관련 DKA:</strong> T1D에서 4% (비사용자 대비 5–17배↑). T2D에서도 RR 2.46. <strong>정상혈당 DKA(euglycemic DKA)</strong> 빈번 → 혈당이 낮아도 BOHB·pH 확인 필수.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 병태생리 핵심</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--orange);margin-bottom:4px">DKA 경로</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));line-height:1.9">인슐린↓↓ + 반조절호르몬↑<br>→ 지방분해↑(FFA, Glycerol)<br>→ 간 지방산 산화↑ → <strong>케톤체 과생성</strong><br>→ 케톤혈증 + 대사성 산증<br>+ 포도당신생↑·글리코겐분해↑<br>→ 삼투이뇨 → 탈수·전해질 소실</div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#1a3980;margin-bottom:4px">HHS 경로</div>
+          <div style="font-size: calc(11px * var(--fscale, 1));line-height:1.9">인슐린↓ (케톤 억제는 가능) + 반조절호르몬↑<br>→ 고혈당 → 삼투이뇨<br>→ 체액량↓ → <strong>고삼투압혈증</strong><br>→ 신기능↓ → 혈당 더 상승<br>→ 인지기능↓ (노인: 갈증 기전 저하)</div>
+          <div class="alert alert-info" style="margin-top:6px"><span>🔥</span><div>두 상태 모두 <strong>염증 사이토카인(TNF-α, IL-1/6/8), CRP, 산화 스트레스</strong> 동반. 인슐린+수액 치료 24h 내 정상화.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /overview -->
+
+<!-- ═══════════ DIAGNOSIS ═══════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="pill pill-dka">DKA</span> 진단 기준 (3가지 모두 충족)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ht">
+        <tr><th>기준</th><th>내용</th></tr>
+        <tr><td><strong>D — 당뇨/고혈당</strong></td><td>혈장 포도당 <strong>≥200 mg/dL (11.1 mmol/L)</strong> <em>또는</em> 당뇨병 기왕력 (혈당 무관)</td></tr>
+        <tr><td><strong>K — 케톤증</strong></td><td>혈중 β-Hydroxybutyrate(BOHB) <strong>≥3.0 mmol/L</strong> <em>또는</em> 소변 케톤 2+ 이상</td></tr>
+        <tr><td><strong>A — 산증</strong></td><td>pH &lt;7.3 <em>및/또는</em> 중탄산염 &lt;18 mmol/L</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>정상혈당 DKA (Euglycemic DKA)</strong>: 혈당 &lt;200 mg/dL이지만 BOHB·산증 기준 충족. 전체 DKA의 약 10%. 원인: 인슐린 주사, 감소 식이, 임신, 알코올, 간부전, <strong>SGLT2i</strong>. SGLT2i 복용 중이면 혈당이 낮아도 DKA 의심.</div></div>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">DKA 중증도 분류 및 입원 단위</div>
+      <table class="ht">
+        <tr><th></th><th><span class="grade g-mild" data-tip="경증 DKA">경증</span></th><th><span class="grade g-mod" data-tip="중등증 DKA">중등증</span></th><th><span class="grade g-sev" data-tip="중증 DKA">중증</span></th></tr>
+        <tr><td>포도당</td><td colspan="3">≥200 mg/dL</td></tr>
+        <tr><td>BOHB (mmol/L)</td><td>3.0–6.0</td><td>3.0–6.0</td><td style="color:var(--red);font-weight:600">&gt;6.0</td></tr>
+        <tr><td>pH</td><td>&gt;7.25~&lt;7.30</td><td>7.0–7.25</td><td style="color:var(--red);font-weight:600">&lt;7.0</td></tr>
+        <tr><td>HCO₃⁻ (mmol/L)</td><td>15–18</td><td>10~&lt;15</td><td style="color:var(--red);font-weight:600">&lt;10</td></tr>
+        <tr><td>의식</td><td>명료</td><td>명료/기면</td><td style="color:var(--red);font-weight:600">혼미/혼수</td></tr>
+        <tr><td>권장 입원 단위</td><td>일반 병동/관찰</td><td>Step-down/중간치료</td><td style="color:var(--red);font-weight:600">중환자실(ICU)</td></tr>
+      </table>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:4px">* 모든 기준을 충족할 필요는 없으며, 입원 단위는 최종적으로 임상 판단에 따름.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="pill pill-hhs">HHS</span> 진단 기준 (4가지 모두 충족)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ht">
+        <tr><th>기준</th><th>내용</th></tr>
+        <tr><td><strong>고혈당</strong></td><td>혈장 포도당 <strong>≥600 mg/dL (33.3 mmol/L)</strong></td></tr>
+        <tr><td><strong>고삼투압</strong></td><td>유효 혈청삼투압 &gt;300 mOsm/kg [= 2×Na(mmol/L) + 포도당(mmol/L)]<br>또는 총혈청삼투압 &gt;320 mOsm/kg [= 2×Na + 포도당 + 요소(mmol/L)]</td></tr>
+        <tr><td><strong>유의한 케톤증 없음</strong></td><td>BOHB &lt;3.0 mmol/L <em>또는</em> 소변 케톤 2+ 미만</td></tr>
+        <tr><td><strong>산증 없음</strong></td><td>pH ≥7.3 <em>및</em> HCO₃⁻ ≥15 mmol/L</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>DKA-HHS 혼합형이 전체 고혈당 응급의 1/3 이상. HHS에서도 경증 케톤증 동반 가능. 혼합형은 단독 DKA 또는 HHS보다 사망률 높음 (혼합형 8% vs HHS 5% vs DKA 3%).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> β-Hydroxybutyrate (BOHB) 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <ul class="rec-list">
+            <li class="rec-item"><div class="rec-text"><strong>진단·모니터링 기준: 혈중 BOHB</strong> — DKA의 주 케톤산. 소변 아세토아세트산보다 민감도·특이도 우수.</div></li>
+            <li class="rec-item"><div class="rec-text">BOHB <strong>≥3.0 mmol/L</strong>: 산염기 변화와 상관; DKA 진단 민감도·특이도 각 &gt;90%.</div></li>
+            <li class="rec-item"><div class="rec-text"><strong>POCT 모세혈 BOHB</strong>: 실험실과 동등 정밀도; 평가 시간 단축, 입원기간·회복 시간 감소.</div></li>
+            <li class="rec-item"><div class="rec-text"><strong>DKA 해소 기준</strong>: BOHB &lt;0.6 mmol/L + pH ≥7.3 또는 HCO₃⁻ ≥18 mmol/L.</div></li>
+          </ul>
+        </div>
+        <div>
+          <div class="alert alert-warn"><span>⚠️</span><div><strong>소변 케톤 (nitroprusside법) 한계:</strong><br>• 아세토아세트산만 측정 (BOHB 미검출)<br>• 초기 DKA: 아세토아세트산 지연 형성 → 과소평가<br>• 회복기: BOHB→아세토아세트산 전환으로 과대평가<br>• Captopril, valproate → 위양성<br>→ 소변케톤은 진단·경과 추적 기준으로 사용 <strong>비권장</strong></div></div>
+          <div class="alert alert-info" style="margin-top:4px"><span>ℹ️</span><div><strong>음이온 격차(AG)</strong> = Na − (Cl + HCO₃⁻). AG &gt;12 = 고AG 대사성 산증. 단, 과염화성 정상AG 산증(회복기)에 의해 오해 가능 → 해소 기준으로 사용 비권장.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 초기 검사 및 감별진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">초기 검사 항목</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;padding:0;line-height:1.9">
+            <li>✅ 혈장 포도당, 전해질, 혈청 삼투압</li>
+            <li>✅ 정맥 혈액가스(pH, HCO₃⁻)</li>
+            <li>✅ BOHB (혈중, POCT)</li>
+            <li>✅ 전혈구계산, 크레아티닌, BUN, 인산염</li>
+            <li>✅ 심전도 (고칼륨혈증 peaked T, 허혈)</li>
+            <li>✅ 감염 원인 탐색</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">케톤증 감별진단</div>
+          <table class="ht">
+            <tr><th>상태</th><th>감별 포인트</th></tr>
+            <tr><td>기아 케톤증</td><td>&lt;500 kcal/일 식이력; 인슐린↓, 무산증</td></tr>
+            <tr><td>알코올성 케톤산증</td><td>폭음→구토→급식이; 고혈당 없을 수 있음</td></tr>
+            <tr><td>임신 케톤증</td><td>임신오조증 → 반조절호르몬↑; 경한 케톤증</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /diagnosis -->
+
+<!-- ═══════════ TREATMENT ═══════════ -->
+<div id="tab-treatment" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💧</span> 수액 요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-orange"><span>📌</span><div>수액 투여 단독으로 혈장 포도당 <strong>50–70 mg/dL/h</strong> 감소 (인슐린 없이). HHS에서는 더 빠른 감소 가능.</div></div>
+      <div class="sec-sep"></div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>초기 소생 수액 (1단계)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            <strong>0.9% NaCl 또는 균형 결정질(Ringer's lactate, Plasmalyte-148)</strong><br>
+            심장·신장 기능 정상 시: 초기 <strong>500–1,000 mL/h, 2–4시간</strong><br>
+            균형 결정질이 0.9% 생리식염수보다 DKA 해소 속도 빠름, 과염화성 산증 발생 적음 (메타분석).
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>혈관내 용적 회복 후 (2단계)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            혈압·심박수·수분출납·혈청 Na 따라 조정.<br>
+            24–48시간 내 추정 결핍량 교정 목표.<br>
+            삼투압 하강 속도 ≤3.0–8.0 mOsm/kg/h 유지 (HHS).
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>혈당 &lt;250 mg/dL 도달 시 (DKA) / &lt;300 mg/dL (HHS)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            <strong>5–10% 포도당</strong>을 0.9% NaCl에 추가 → 저혈당 방지하며 인슐린 투여 지속 (케톤증 완전 교정까지).<br>
+            정상혈당 DKA: 처음부터 인슐린 시작 시 5–10% 포도당 동시 시작.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>HHS 특이 주의사항</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            혈당 감소 속도: ≤90–120 mg/dL/h (5–6.7 mmol/L/h) — 뇌부종 예방.<br>
+            혈청 Na 감소: ≤10 mmol/L/24h.<br>
+            혈당 100 mg/dL 감소 → Na 1.6 mmol/L 상승 (정상 반응; 저장성 수액 전환 불필요).<br>
+            삼투압 감소에도 불구하고 Na 계속 상승 → 삼투압 부적절 → 0.45% NaCl 고려.
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn"><span>🧓</span><div><strong>노인·심부전·말기 신부전(투석) 환자:</strong> 소량 볼루스(250 mL)로 조심스럽게 투여. 표준 프로토콜 → 수액 과부하·기계환기 위험.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 인슐린 요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-orange"><span>📌</span><div>인슐린은 DKA 치료의 근간. 진단 즉시 시작. 단, <strong>K⁺ &lt;3.5 mmol/L인 경우 K 교정 후 인슐린 시작</strong> (생명 위협 부정맥 예방).</div></div>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">정맥 인슐린 (중등~중증 DKA, HHS)</div>
+          <table class="ht">
+            <tr><th>단계</th><th>처방</th></tr>
+            <tr><td>초기 볼루스 (지연 시)</td><td>Regular insulin <strong>0.1 units/kg IV</strong> (정맥로 설치 지연 시)</td></tr>
+            <tr><td>고정 속도 주입</td><td>Short-acting insulin <strong>0.1 units/kg/h IV</strong></td></tr>
+            <tr><td>혈당 &lt;250 mg/dL 도달</td><td><strong>0.05 units/kg/h</strong>로 감량 + D5W or D10W 추가</td></tr>
+            <tr><td>DKA 목표 혈당</td><td><strong>150–200 mg/dL</strong> 유지 (해소 시까지)</td></tr>
+            <tr><td>HHS 목표 혈당</td><td><strong>200–250 mg/dL</strong> 유지 (해소 시까지)</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>HHS + 케톤 없음(BOHB ≥1.0~&lt;3.0): 고정 속도 <strong>0.05 units/kg/h</strong>.<br>HHS + 유의한 케톤증(BOHB ≥3.0 or pH &lt;7.3): <strong>0.1 units/kg/h</strong> (혼합형 DKA/HHS).</div></div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">피하 인슐린 (경증~중등증 DKA)</div>
+          <div class="alert alert-success"><span>✅</span><div>경증~중등증 비합병 DKA에서 <strong>속효성 인슐린 유사체(SC) q1–2h</strong>는 IV 인슐린과 동등 효과 (RCT, Cochrane). ICU 불필요 → 응급실·Step-down에서 가능.</div></div>
+          <table class="ht" style="margin-top:6px">
+            <tr><th>처방</th><th>내용</th></tr>
+            <tr><td>초기 SC 볼루스</td><td>Rapid-acting analog <strong>0.1 units/kg SC</strong></td></tr>
+            <tr><td>이후</td><td>0.1 units/kg q1h <em>또는</em> 0.2 units/kg q2h SC</td></tr>
+          </table>
+          <div class="alert alert-danger" style="margin-top:6px"><span>🚫</span><div>SC 인슐린은 <strong>중증·합병 DKA, HHS에서는 비권장</strong>.</div></div>
+        </div>
+      </div>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:5px">기저 인슐린 조기 병용 (선택적)</div>
+      <div class="alert alert-info"><span>ℹ️</span><div>IV 인슐린 주입 중 기저 인슐린(0.15–0.3 units/kg SC) 조기 병용 → DKA 해소 시간·주입 기간·입원기간 단축, 반동 고혈당 예방, 저혈당 증가 없음 (RCT). 단, 저혈당·저칼륨 위험에 주의하여 사용.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✅</span> DKA / HHS 해소 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--orange);margin-bottom:5px">DKA 해소</div>
+          <table class="ht">
+            <tr><td>혈중 케톤</td><td>BOHB <strong>&lt;0.6 mmol/L</strong></td></tr>
+            <tr><td>산염기</td><td>pH <strong>≥7.3</strong> 또는 HCO₃⁻ <strong>≥18 mmol/L</strong></td></tr>
+            <tr><td>혈당</td><td>&lt;200 mg/dL (이상적)</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>음이온 격차, 소변 케톤은 해소 기준으로 사용 <strong>비권장</strong> (과염화성 산증, BOHB→아세토아세트산 전환 오류 가능).</div></div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#1a3980;margin-bottom:5px">HHS 해소</div>
+          <table class="ht">
+            <tr><td>삼투압</td><td>측정/계산 혈청삼투압 <strong>&lt;300 mOsm/kg</strong></td></tr>
+            <tr><td>소변량</td><td><strong>&gt;0.5 mL/kg/h</strong></td></tr>
+            <tr><td>혈당</td><td><strong>&lt;250 mg/dL</strong></td></tr>
+            <tr><td>인지 상태</td><td>개선</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="alert alert-success" style="margin-top:8px"><span>🍽️</span><div>DKA/HHS 해소 후 경구 섭취 가능해지면 → <strong>SC 다회 인슐린 요법으로 전환</strong>. 전환 시 IV 인슐린과 1–2시간 <strong>중복 투여</strong> 필수 (반동 고혈당 방지).</div></div>
+    </div>
+  </div>
+</div><!-- /treatment -->
+
+<!-- ═══════════ ELECTROLYTES ═══════════ -->
+<div id="tab-electrolytes" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> 칼륨 (K⁺) 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger"><span>🚨</span><div>DKA 치료 중 저칼륨혈증(&lt;3.5 mmol/L) 발생률 55%, 중증(&lt;2.5 mmol/L) 16%. 중증 저칼륨혈증은 사망률 <strong>3배↑</strong> (aOR 4.9). 반드시 4시간마다 모니터링.</div></div>
+      <div class="sec-sep"></div>
+      <table class="ht">
+        <tr><th>입원 시 K⁺</th><th>처치</th></tr>
+        <tr>
+          <td><strong>&lt;3.5 mmol/L</strong> <span class="pill pill-sev">저칼륨</span></td>
+          <td style="color:var(--red)"><strong>인슐린 투여 지연</strong>. K⁺ 보충 먼저 시작: 10 mmol/h (빠른 교정 시 중심정맥로 필요). K⁺ &gt;3.5 도달 후 인슐린 시작.</td>
+        </tr>
+        <tr>
+          <td><strong>3.5–5.0 mmol/L</strong> <span class="pill pill-mild">정상</span></td>
+          <td>인슐린 시작. IV 수액 1L당 K⁺ <strong>20–30 mmol</strong> 추가. K⁺ <strong>4–5 mmol/L</strong> 유지 목표.</td>
+        </tr>
+        <tr>
+          <td><strong>&gt;5.0 mmol/L</strong> <span class="pill pill-mod">고칼륨</span></td>
+          <td>인슐린 시작. K⁺ 보충 없이 진행. 2시간마다 K⁺ 재검.</td>
+        </tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>DKA 환자는 대개 입원 시 K⁺ 정상 또는 높음 (산증 + 인슐린 결핍으로 세포 내 K → 세포 외 이동). 치료(인슐린, 산증 교정, 체액 팽창) 시작 후 48시간 내 1–2 mmol/L 감소. 총 체내 K 결핍 3–6 mmol/kg.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 중탄산염 (NaHCO₃) 투여</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>일반적 중탄산염 투여는 비권고.</strong> 수액 + 인슐린으로 대사성 산증 충분히 교정 가능. 투여 시 잠재적 해: 저칼륨혈증↑, 조직 산소 공급↓, 뇌부종, 역설적 CNS 산증.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>예외: pH &lt;7.0</strong>인 심한 산증 → 심각한 혈관 부작용 고려 시 투여 검토.</div></li>
+      </ul>
+      <div class="alert alert-warn"><span>💊</span><div><strong>처방 (pH &lt;7.0 시):</strong> 8.4% NaHCO₃ 100 mmol + 멸균 증류수 400 mL (등장성 용액) → 2시간마다 pH &gt;7.0 달성 시까지.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 인산염 (Phosphate)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>일반적 인산염 보충 비권고.</strong> RCT에서 인산염 보충이 DKA 임상 결과 개선 미입증. 과속 보충 시 저칼슘혈증 위험.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>예외:</strong> 근육 쇠약(호흡·심장 기능 저하 포함) + 인산염 &lt;1.0 mmol/L → KH₂PO₄ 형태로 <strong>20–30 mmol</strong> 교체 수액에 추가.</div></li>
+      </ul>
+      <div class="alert alert-info"><span>ℹ️</span><div>DKA에서 세포 내 → 세포 외 인산염 이동 + 삼투이뇨로 손실. 총 체내 손실 최대 1.0 mmol/kg. 대부분 임상적으로 유의한 저인산혈증 발생 안 함.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 모니터링 계획</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ht">
+        <tr><th>검사 항목</th><th>빈도</th></tr>
+        <tr><td>모세혈 혈당 (calibrated meter)</td><td>매 <strong>1–2시간</strong></td></tr>
+        <tr><td>전해질, 인산, 크레아티닌, BOHB, 정맥 pH</td><td>매 <strong>4시간</strong> (안정될 때까지)</td></tr>
+        <tr><td>HHS: 혈당 + 크레아티닌 + 전해질 + 삼투압</td><td>매 <strong>4시간</strong></td></tr>
+        <tr><td>K⁺ (인슐린 시작 후)</td><td><strong>2시간</strong> 후, 이후 <strong>4시간</strong>마다 해소 시까지</td></tr>
+        <tr><td>신기능</td><td>매일</td></tr>
+      </table>
+    </div>
+  </div>
+</div><!-- /electrolytes -->
+
+<!-- ═══════════ TRANSITION ═══════════ -->
+<div id="tab-transition" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> IV → SC 인슐린 전환 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-orange"><span>📌</span><div>DKA/HHS 해소 + 경구 섭취 가능 → SC 다회 인슐린 전환. <strong>SC 투여 1–2시간 후 IV 인슐린 중단</strong> (반동 고혈당·케톤증 예방).</div></div>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent);margin-bottom:6px">일일 총 인슐린 용량(TDD) 계산 방법 (3가지, 각각 제한점 있음)</div>
+      <div class="grid3" style="gap:8px">
+        <div class="flow-box">
+          <div style="font-weight:600;color:var(--accent);margin-bottom:4px">① 체중 기반</div>
+          <div style="font-size: calc(11px * var(--fscale, 1))">인슐린 미사용자: <strong>0.5–0.6 units/kg/일</strong><br>저혈당 고위험(신부전, 허약): <strong>0.3 units/kg/일</strong></div>
+        </div>
+        <div class="flow-box">
+          <div style="font-weight:600;color:var(--accent);margin-bottom:4px">② 입원 전 인슐린</div>
+          <div style="font-size: calc(11px * var(--fscale, 1))">외래 처방 용량 참고<br>(식이·순응도·HbA1c 영향 고려)</div>
+        </div>
+        <div class="flow-box">
+          <div style="font-weight:600;color:var(--accent);margin-bottom:4px">③ IV 인슐린 요구량</div>
+          <div style="font-size: calc(11px * var(--fscale, 1))">최근 안정 6시간 시간당 요구량 합산<br>(glucotoxicity로 과대 추정 주의)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> SC 인슐린 처방 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ht">
+        <tr><th>항목</th><th>권고 내용</th></tr>
+        <tr><td>선호 방식</td><td><strong>기저-식전(Basal-Bolus) 인슐린 유사체</strong> — 저혈당↓, 생리적 인슐린 패턴</td></tr>
+        <tr><td>기저 인슐린 비율</td><td>TDD의 <strong>40–60%</strong>를 기저로, 나머지를 3회 식전 분할</td></tr>
+        <tr><td>기저 인슐린 투여</td><td>SC 투여 후 <strong>1–2시간</strong> 대기 후 IV 중단 (필수)</td></tr>
+        <tr><td>NPO 상태</td><td>기저 인슐린 + 교정 속효성 인슐린 q4–6h</td></tr>
+        <tr><td>Human insulin (NPH+Regular)</td><td>24시간 커버 확보 조건으로 사용 가능</td></tr>
+        <tr><td>Ultra-long-acting (Degludec, U300)</td><td>전환 연구 없음 → 현재 권고 불가</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>기존 당뇨 환자: 입원 전 용량 재확인. HbA1c 높거나 DKA 유발 약물 있으면 퇴원 시 처방 변경 (외래로 미루지 말 것). T2D·케톤경향 T2D에서 비인슐린 약제 추가 고려 가능. SGLT2i는 입원 중 <strong>투여 중단, 재개 비권고(T1D)</strong>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 퇴원 계획 체크리스트</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
+        <li>✅ 기저-식전 인슐린 처방 확정 (퇴원 후 식이 변화·저혈당 위험 재반영)</li>
+        <li>✅ 인슐린 충분 공급, 혈당 측정기·CGM·케톤 측정기 제공</li>
+        <li>✅ 인슐린 주사 기법, 주사 부위, 혈당/케톤 모니터링 교육</li>
+        <li>✅ "Sick Day Rules" 교육 — 고혈당·케톤 상승 시 연락처 안내</li>
+        <li>✅ 2–4주 내 외래 추적 예약</li>
+        <li>✅ 정신건강(우울·당뇨 고통·섭식장애) 및 SDOH 스크리닝</li>
+        <li>✅ CGM 처방 (퇴원 후 — 입원 중 미승인이나 퇴원 후 제공 권고)</li>
+        <li>✅ 인슐린 비용 문제 → 사회사업 의뢰</li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /transition -->
+
+<!-- ═══════════ COMPLICATIONS & SPECIAL ═══════════ -->
+<div id="tab-complications" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 치료 중 합병증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ht">
+        <tr><th>합병증</th><th>발생률·위험</th><th>예방·처치</th></tr>
+        <tr>
+          <td><strong>저혈당</strong></td>
+          <td>&lt;70 mg/dL: 16–28%; 중증(&lt;40): 2%. 중증 저혈당 → 사망률 4.8배↑ (aOR 4)</td>
+          <td>1–2시간마다 혈당 모니터. 혈당 &lt;250 → 인슐린 0.05 units/kg/h로 감량 + D5W/D10W 추가</td>
+        </tr>
+        <tr>
+          <td><strong>저칼륨혈증</strong></td>
+          <td>DKA 55%, HHS 51%. 중증(&lt;2.5) 16%/9%. 중증 → 사망률 4.9배↑</td>
+          <td>4시간마다 K⁺ 모니터. K⁺ &lt;3.5 → 인슐린 지연, 보충 먼저. 목표 4–5 mmol/L</td>
+        </tr>
+        <tr>
+          <td><strong>과염화성 정상AG 산증</strong></td>
+          <td>0.9% NaCl 대량 주입 후 회복기 발생. 자기 제한적, 임상 결과 영향 적음</td>
+          <td>균형 결정질 사용 시 발생 감소. AG를 해소 기준으로 사용 금지</td>
+        </tr>
+        <tr>
+          <td><strong>혈전증</strong></td>
+          <td>DKA/HHS 모두 혈전 경향 (특히 HHS). 산증·탈수로 혈전 미세구조 변화 (가역적)</td>
+          <td>혈전 의심 시 예방적 저분자량헤파린 사용 검토</td>
+        </tr>
+        <tr>
+          <td><strong>뇌부종</strong></td>
+          <td>성인 드묾(&lt;0.1%). 급격한 삼투압 변화, 저관류, 염증. 사망률 30%</td>
+          <td>HHS: 삼투압 교정 속도 3–8 mOsm/kg/h 이하 유지. 의식 변화 시 뇌 영상 즉시. 치료: 만니톨, 기계환기</td>
+        </tr>
+        <tr>
+          <td><strong>삼투성 탈수초화 증후군(ODS)</strong></td>
+          <td>HHS에서 저나트륨혈증 급격 교정 시 위험. 빈도 불명</td>
+          <td>혈청삼투압 감소 속도 3–8 mOsm/kg/h 유지. 0.9% NaCl 사용</td>
+        </tr>
+        <tr>
+          <td><strong>급성 신손상(AKI)</strong></td>
+          <td>RIFLE 기준 DKA/HHS의 50%. 노인·고삼투압·고혈당에서 더 빈번. 수액 투여로 대부분 회복</td>
+          <td>신기능 매일 모니터링</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👥</span> 특수 집단 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>🧓 고령·허약 환자</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            고율의 동반이환; 병원 사망·장기 입원·재발 위험↑. 단독 HHS 및 혼합형이 DKA보다 더 빈번. 심혈관 사건·감염·약물 유발 원인 평가. 수액 속도 및 인슐린 용량 동반이환 고려. 다약제복용 검토. 인지·기능 상태 및 자기 관리 능력 평가.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>💊 SGLT2i 복용 환자</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            <strong>정상혈당 DKA</strong> 빈번. 혈당 &lt;200(또는 ≤250) mg/dL에서도 DKA 가능 → BOHB·pH 반드시 확인. 치료: 일반 DKA와 동일. 정상혈당 DKA 시 처음부터 D5W/D10W + 0.9% NaCl 병용. <span style="color:var(--red);font-weight:600">입원 즉시 SGLT2i 중단.</span> T1D: SGLT2i 재투여 비권고. T2D: DKA 해소 후 재투여 안전 데이터 부족 → 일반적으로 비권고.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>🩺 말기 신부전(투석 환자)</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            당뇨+말기신부전의 약 4%에서 DKA/HHS. 수액 과부하·심각한 고칼륨혈증 위험. 일반 환자보다 고혈당↑, 저나트륨혈증↑, 삼투압↑, 고칼륨혈증↑, BOHB↓. 조심스러운 수액·K 교정. 다학제적 집중 관리.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>🤰 임산부</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            임신 2% (T1D 기전). 정상혈당 DKA 가능. 임신오조증+혼합 산염기 장애로 진단 어려움. 즉각 산부인과 전문의 협진. 분만실 또는 고의존 병동 입원. 태아-모성 위험 즉각 전문 대응.
+          </div>
+        </div>
+      </div>
+      <div class="sp-section">
+        <div class="sp-title" onclick="toggleSP(this)"><span>🦠 COVID-19 동반</span><span>▾</span></div>
+        <div class="sp-body">
+          <div style="padding:6px 0 6px 12px;border-left:2px solid var(--accent);font-size: calc(12px * var(--fscale, 1))">
+            팬데믹 기간 DKA 증가, 특히 기존 T2D·소수인종. ICU 치료·장기 입원·사망 위험↑. 고용량 스테로이드 치료 시 불응 케톤증 → 인슐린 고용량 필요. 신규 발병 DKA: 당뇨병 표현형 분류(T1D vs T2D) 권고. 인슐린으로 퇴원 + 면밀한 추적.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /complications -->
+
+<!-- ═══════════ PREVENTION ═══════════ -->
+<div id="tab-prevention" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🛡️</span> DKA/HHS 예방 핵심 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="step-box" style="background:#fff3e0">
+        <span class="step-num" style="color:var(--accent)">1</span>
+        <div><strong>퇴원 전 교육</strong> — 인슐린 주사법, 혈당·케톤 모니터링, Sick Day Rules, 고혈당 증상 인식 및 연락처. 구조화 교육은 DKA 입원 대폭 감소 (RCT 근거).</div>
+      </div>
+      <div class="step-box" style="background:#fff3e0">
+        <span class="step-num" style="color:var(--accent)">2</span>
+        <div><strong>CGM(연속혈당모니터링)</strong> — 입원 후 퇴원 시 처방 권고. 프랑스 전국 연구: CGM 도입 후 T1D 53%, T2D 47% DKA 입원 감소.</div>
+      </div>
+      <div class="step-box" style="background:#fff3e0">
+        <span class="step-num" style="color:var(--accent)">3</span>
+        <div><strong>정신건강 스크리닝</strong> — 입원·퇴원 전 우울(PHQ-9), 당뇨 고통(T1-DDAS), 섭식장애, 약물남용 평가. 정신 질환은 재발 DKA의 독립 위험 인자.</div>
+      </div>
+      <div class="step-box" style="background:#fff3e0">
+        <span class="step-num" style="color:var(--accent)">4</span>
+        <div><strong>사회적 건강 결정요인(SDOH) 평가</strong> — 저소득, 불안정 주거, 무보험/보험 불충분, 식량 불안정. 인슐린 접근성 장벽 시 사회사업 의뢰.</div>
+      </div>
+      <div class="step-box" style="background:#fff3e0">
+        <span class="step-num" style="color:var(--accent)">5</span>
+        <div><strong>재발 DKA 다학제 접근</strong> — 심리 개입, 동료 지지, 행동-가족 치료, 원격 의료, 24시간 응급 의료 상담. 재발 DKA의 75%가 인슐린 부적절 사용이 직접 원인.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 모든 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>수액:</strong> 초기 0.9% NaCl 또는 균형 결정질 500–1,000 mL/h × 2–4h. 균형 결정질이 DKA 해소 빠르고 과염화성 산증↓. 혈당 &lt;250 → D5/D10W 추가.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>인슐린 (중등~중증 DKA/HHS):</strong> Regular insulin 0.1 units/kg/h IV. 혈당 &lt;250 → 0.05 units/kg/h + D5/D10W. 인슐린 시작 전 K⁺ &gt;3.5 확인 필수.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>피하 인슐린 (경증~중등증 DKA):</strong> Rapid-acting analog 0.1 units/kg SC + q1–2h → IV 인슐린과 동등. 응급실/Step-down 가능.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>K⁺ &lt;3.5 → 인슐린 지연, 보충 먼저.</strong> K⁺ 3.5–5.0 → 인슐린 시작, 20–30 mmol/L 수액에 추가. K⁺ &gt;5.0 → 보충 없이 인슐린.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>중탄산염:</strong> pH &lt;7.0 시에만 고려. 일반적 투여 비권고.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>인산염:</strong> 근육 쇠약 + 인산염 &lt;1.0 mmol/L 시만 보충. 일반적 투여 비권고.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>DKA 해소:</strong> BOHB &lt;0.6 + pH ≥7.3 또는 HCO₃⁻ ≥18. HHS 해소: 삼투압 &lt;300 + 소변 &gt;0.5 mL/kg/h + 혈당 &lt;250.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>IV→SC 전환:</strong> 기저 인슐린 SC 투여 1–2h 후 IV 중단. TDD = 0.5–0.6 units/kg (저위험) 또는 0.3 units/kg (고위험). 기저:식전 = 40–60%:나머지.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>SGLT2i:</strong> 입원 즉시 중단. T1D 재투여 비권고. T2D도 일반적으로 재투여 비권고.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>모니터링:</strong> 혈당 1–2h, 전해질·BOHB·pH 4h, K⁺ 인슐린 시작 2h 후 이후 4h마다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+</div><!-- /prevention -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TAB ───
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+// ─── SP ───
+function toggleSP(title) {
+  const body = title.nextElementSibling;
+  body.classList.toggle('open');
+  const arrow = title.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['DKA','Diabetic Ketoacidosis (당뇨병성 케톤산증) — 고혈당+케톤증+대사성 산증 3징; 주로 T1D'],
+  ['HHS','Hyperglycemic Hyperosmolar State (고삼투압 고혈당 상태) — 심한 고혈당+고삼투압+탈수; 유의한 케톤증·산증 없음; 주로 노인 T2D'],
+  ['BOHB','β-Hydroxybutyrate (베타하이드록시뷰티레이트) — DKA 주 케톤산; ≥3.0 mmol/L = DKA 진단 기준'],
+  ['AG','Anion Gap (음이온 격차) — Na − (Cl + HCO₃⁻); >12 = 고AG 대사성 산증; DKA 해소 기준으로 비권장'],
+  ['TDD','Total Daily Dose (일일 총 인슐린 용량) — SC 전환 시 계산 기준'],
+  ['POCT','Point-of-Care Testing (현장 검사) — 모세혈 BOHB 측정기; 실험실과 동등 정밀도'],
+  ['SGLT2i','Sodium-Glucose Cotransporter 2 Inhibitor — 정상혈당 DKA 위험↑; 입원 즉시 중단'],
+  ['Euglycemic DKA','정상혈당 DKA — 혈당 &lt;200 mg/dL + 케톤증+산증; SGLT2i 주요 원인; 혈당 낮아도 DKA 가능'],
+  ['T1D','Type 1 Diabetes Mellitus (제1형 당뇨병) — 자가면역 β세포 파괴; 절대적 인슐린 결핍; DKA 주요 대상'],
+  ['T2D','Type 2 Diabetes Mellitus (제2형 당뇨병) — 인슐린 저항성+상대적 결핍; HHS 주요 대상'],
+  ['PHQ-9','Patient Health Questionnaire-9 — 우울 스크리닝 도구; 당뇨+DKA에서 권고'],
+  ['T1-DDAS','Type 1-Diabetes Distress Assessment System — T1D 당뇨 고통 평가 도구'],
+  ['CGM','Continuous Glucose Monitoring (연속혈당모니터링) — DKA 입원↓ 53%(T1D) / 47%(T2D); 퇴원 시 처방 권고'],
+  ['ICU','Intensive Care Unit (중환자실) — 중증 DKA, HHS, 합병 DKA 입원 단위'],
+  ['AKI','Acute Kidney Injury (급성 신손상) — DKA/HHS 50%에서 동반; 수액으로 대부분 회복'],
+  ['ODS','Osmotic Demyelination Syndrome (삼투성 탈수초화 증후군) — 저나트륨혈증 급속 교정 시 위험; HHS 합병 가능'],
+  ['FFA','Free Fatty Acids (유리 지방산) — DKA에서 지방분해 증가 → 간 케톤 생성 기질'],
+  ['SDOH','Social Determinants of Health (사회적 건강 결정요인) — 저소득·주거 불안정·무보험 등 DKA 위험 40%'],
+  ['Kussmaul breathing','쿠스마울 호흡 — DKA 대사성 산증 보상 호흡; 깊고 빠른 호흡 + 아세톤 냄새'],
+  ['NPH insulin','Neutral Protamine Hagedorn insulin — 중간형 인슐린; 24h 커버 위해 2회 투여 권고'],
+  ['Basal-Bolus','기저-식전 인슐린 요법 — 기저(40–60% TDD) + 식전 속효성; DKA 후 SC 전환 선호 방식'],
+  ['Regular insulin','레귤러 인슐린 (속효성 인슐린) — IV 주입 표준; 0.1 units/kg/h 고정 속도'],
+  ['Rapid-acting analog','속효성 인슐린 유사체 (Lispro, Aspart, Glulisine) — 경증~중등증 DKA SC 치료에 사용'],
+  ['Balanced crystalloid','균형 결정질 (Ringer\'s lactate, Plasmalyte-148) — 0.9% NaCl보다 DKA 해소 빠름, 과염화성 산증↓'],
+  ['RIFLE','Risk, Injury, Failure, Loss criteria — AKI 분류 기준; DKA/HHS에서 50% 해당'],
+  ['Ketosis-prone T2D','케톤경향 T2D (Flatbush diabetes) — 흑인·히스패닉 T2D에서 급성 DKA 발현; 인슐린 단기 후 중단 가능'],
+  ['Checkpoint inhibitor','면역관문억제제 — 1–2%에서 자가면역 당뇨 유발; 발견 시 DKA 69.7%'],
+  ['Osmolality','삼투질 농도 — 유효 혈청삼투압 = 2×Na + 포도당(mmol/L); HHS: >300 mOsm/kg'],
+  ['D5W','5% Dextrose in Water (5% 포도당 수액) — 혈당 &lt;250 시 수액에 추가; 저혈당 방지하며 인슐린 지속'],
+  ['IV','Intravenous (정맥 내)'],
+  ['SC','Subcutaneous (피하)'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display='none'; document.getElementById('abbr-count').textContent=abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display='none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
