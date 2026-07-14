@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자가면역 다발성 내분비선 증후군 (APS) 가이드</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* APS 타입 색 */
+    --aps1: #7c3aed;   /* APS1 — 보라 (AIRE) */
+    --aps2: #1a7f6e;   /* APS2 — 청록 (다중 HLA) */
+    --aps3: #c47d00;   /* APS3 — 황금 */
+    --ipex: #9b1c2e;   /* IPEX — 진홍 */
+    --ici:  #0550ae;   /* 면역항암제 — 청 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-aps {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-aps span:nth-child(1) { background: var(--aps1); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-aps span:nth-child(2) { background: var(--aps2); color:#fff; padding:3px 6px; }
+  .logo-aps span:nth-child(3) { background: var(--ipex); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--aps1); border-bottom-color: var(--aps1); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-aps1    { background: #ede9fe; border-left: 3px solid var(--aps1);   color: #5b21b6; }
+  .alert-aps2    { background: #e0f4f1; border-left: 3px solid var(--aps2);   color: #0f5549; }
+  .alert-aps3    { background: #fff3cd; border-left: 3px solid var(--aps3);   color: #7d4e00; }
+  .alert-ipex    { background: #fce8eb; border-left: 3px solid var(--ipex);   color: var(--ipex); }
+  .alert-ici     { background: #ddf4ff; border-left: 3px solid var(--ici);    color: #0550ae; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+
+  /* ── 빈도 히트맵 ── */
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── TYPE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-aps1 { background: #ede9fe; color: var(--aps1); border: 1px solid var(--aps1); }
+  .t-aps2 { background: #e0f4f1; color: var(--aps2); border: 1px solid var(--aps2); }
+  .t-aps3 { background: #fff3cd; color: #7d4e00; border: 1px solid var(--aps3); }
+  .t-ipex { background: #fce8eb; color: var(--ipex); border: 1px solid var(--ipex); }
+  .t-ici  { background: #ddf4ff; color: var(--ici); border: 1px solid var(--ici); }
+
+  /* ── PILL / DRUG TAG ── */
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-steroid { background: #fff3cd; color: #7d4e00; }
+  .drug-immuno  { background: #ede9fe; color: #5b21b6; }
+  .drug-jaki    { background: #ddf4ff; color: #0550ae; }
+  .drug-replace { background: #dafbe1; color: #116329; }
+  .drug-mab     { background: #fce8eb; color: var(--ipex); }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── TYPE TIMELINE / COMPARISON ROW ── */
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(15px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-aps1 { background: #f3e8ff; }
+  .st-aps2 { background: #e0f4f1; }
+  .st-aps3 { background: #fff8e1; }
+  .st-ipex { background: #fde8eb; }
+  .st-ici  { background: #e6f0fb; }
+
+  /* ── 3-GEAR style visual (병태생리 박스) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-aps1 { background: #f3e8ff; border: 1.5px solid var(--aps1); color: #5b21b6; }
+  .gear-aps2 { background: #e0f4f1; border: 1.5px solid var(--aps2); color: #0f5549; }
+  .gear-aps3 { background: #fff8e1; border: 1.5px solid var(--aps3); color: #7d4e00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── 진행 막대 (% 빈도 시각화) ── */
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 150px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-aps">
+        <span>A</span><span>P</span><span>S</span>
+      </div>
+      <h1>자가면역 다발성 내분비선 증후군 (APS) 가이드</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://www.endotext.org" class="source-link" target="_blank">Endotext · Autoimmune Polyglandular Syndromes ↗</a>
+      <span style="color:var(--text2)"> · Sperling MA, Angelousi A, Yau M · Update Jul 18, 2024</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 Endotext의 공식 승인을 받지 않았습니다 (This tool is not officially endorsed by Endotext)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('aps1')">🟣 APS1</div>
+    <div class="tab" onclick="showTab('aps23')">🟢 APS2·3</div>
+    <div class="tab" onclick="showTab('adrenal')">🫘 부신부전</div>
+    <div class="tab" onclick="showTab('ici')">💉 면역항암제</div>
+    <div class="tab" onclick="showTab('ipex')">🔴 IPEX·미래</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--aps1)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--aps1)">4종</div><div class="stat-lbl">주요 분류<br>(APS1·APS2·APS3·IPEX)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--aps2)">21q22.3</div><div class="stat-lbl">AIRE 유전자 위치<br>(APS1 원인)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--aps3)">HLA DQ/DR</div><div class="stat-lbl">APS2·3 연관 영역<br>(6번 염색체 단완)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--ipex)">FOXP3</div><div class="stat-lbl">IPEX 원인 유전자<br>(Treg 마스터 인자)</div></div>
+  </div>
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> APS 정의 및 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-aps1">
+        <span>🧬</span>
+        <div><strong>자가면역 다발성 내분비선 증후군(Autoimmune Polyglandular Syndromes, APS)</strong> = 면역조절 이상을 가진 환자에서 일정한 패턴으로 발생하는 내분비 이상의 집합체로, 동반될 호르몬 결핍을 예측·치료할 수 있게 함.<br>
+        3대 주요 분류: <strong>APS1, APS2, APS3</strong> + X연관 희귀질환 <strong>IPEX</strong>(FOXP3 변이) + 최근 증가하는 <strong>면역관문억제제(ICI) 유발 내분비병증</strong>.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-aps1">
+          <div class="gear-title">🟣 APS1 (APECED)</div>
+          AIRE 유전자 변이<br>
+          <small>흉선 중심관용(central tolerance) 실패 · 소아기 발병 · 상염색체 열성</small>
+        </div>
+        <div class="gear-box gear-aps2">
+          <div class="gear-title">🟢 APS2 (Schmidt)</div>
+          HLA DQ/DR 다인자성<br>
+          <small>T1DM + Addison + 갑상선 자가면역 · 청년기 발병</small>
+        </div>
+        <div class="gear-box gear-aps3">
+          <div class="gear-title">🟡 APS3 (APS2b)</div>
+          APS2와 동일 기전<br>
+          <small>Addison병 없음 · T1DM 환자의 약 20%에서 흔히 동반</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>모든 형태의 APS에서 호르몬·효소·연결조직 항원에 대한 <strong>순환 자가항체</strong>가 검출됨. T세포·B세포 이상이 모두 관여. 자가항체 존재가 반드시 임상적 선낭부전을 예측하지는 않음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APS1 vs APS2/3 vs IPEX 비교 타임라인 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 주요 분류 한눈에 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-aps1" onclick="showTab('aps1')">
+          <div class="st-num" style="color:var(--aps1)">APS1</div>
+          <div class="st-lbl" style="color:#5b21b6"><strong>AIRE 변이</strong><br>5세 이전 발현 시작<br>점막피부 칸디다증·저PTH·Addison</div>
+        </div>
+        <div class="stage-box st-aps2" onclick="showTab('aps23')">
+          <div class="st-num" style="color:var(--aps2)">APS2</div>
+          <div class="st-lbl" style="color:#0f5549"><strong>HLA DQ/DR</strong><br>20–40세 호발<br>T1DM+Addison+갑상선염</div>
+        </div>
+        <div class="stage-box st-aps3" onclick="showTab('aps23')">
+          <div class="st-num" style="color:#7d4e00">APS3</div>
+          <div class="st-lbl" style="color:#7d4e00"><strong>APS2와 동일 기전</strong><br>Addison병 없음<br>T1DM의 ~20%에서 갑상선 항체</div>
+        </div>
+        <div class="stage-box st-ici" onclick="showTab('ici')">
+          <div class="st-num" style="color:var(--ici)">ICI</div>
+          <div class="st-lbl" style="color:#0550ae"><strong>면역관문억제제</strong><br>치료 수개월~수년 후<br>뇌하수체염·갑상선·T1DM</div>
+        </div>
+        <div class="stage-box st-ipex" onclick="showTab('ipex')">
+          <div class="st-num" style="color:var(--ipex)">IPEX</div>
+          <div class="st-lbl" style="color:var(--ipex)"><strong>FOXP3 변이</strong><br>생후 0.1–0.4세 발현<br>장염+피부염+T1DM, 영아기 치명적</div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:4px">
+        <span>⚠️</span><div>APS1은 비-내분비 증상(점막피부 칸디다증 등)이 내분비 증상보다 약 <strong>75%에서 선행</strong>. 전형적 3대 증상 중 <strong>2가지만 있어도 진단</strong> 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유전 기전 비교 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> 유전 기전 및 면역학적 특징 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>항목</th><th>APS1</th><th>APS2 / APS3</th><th>IPEX</th></tr>
+        <tr><td>원인 유전자</td><td><strong>AIRE</strong> (21q22.3)</td><td>HLA <strong>DQ2/DQ8</strong>, DR3/DR4 (복합 다인자성)</td><td><strong>FOXP3</strong> (X연관)</td></tr>
+        <tr><td>유전 양식</td><td>상염색체 열성 (일부 우성)</td><td>복합 유전 (다인자성)</td><td>X연관 열성</td></tr>
+        <tr><td>핵심 기전</td><td>흉선 내 말초항원 발현 실패 → 중심관용 소실</td><td>HLA 매개 항원제시 항진 + Treg 저하</td><td>Treg 마스터 전사인자 결핍</td></tr>
+        <tr><td>발병 연령</td><td>주로 5세 이전</td><td>20–40세</td><td>생후 0.1–0.4세</td></tr>
+        <tr><td>성별 분포</td><td>남녀 동등</td><td>여성 우세</td><td>남아만 (X연관)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: APS1 ══════════════════ -->
+<div id="tab-aps1" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> APS1 (APECED) 정의 및 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-aps1">
+        <span>🧬</span>
+        <div><strong>APECED</strong> = <strong>A</strong>utoimmune <strong>P</strong>oly<strong>E</strong>ndocrinopathy, <strong>C</strong>andidiasis, <strong>E</strong>ctodermal <strong>D</strong>ystrophy.<br>
+        3대 고전적 특징: ① 점막피부 칸디다증, ② 저칼슘혈증을 동반한 부갑상선저하증, ③ Addison병(코티솔 결핍 ± 알도스테론 결핍, ACTH 현저히 상승).<br>
+        <strong>3가지 중 2가지만 충족해도 진단</strong> 가능.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>특징</th><th>빈도</th><th>비고</th></tr>
+        <tr><td>점막피부 칸디다증</td><td><span class="stage t-aps1">~80%</span></td><td>가장 흔한 첫 비내분비 증상 (~60%)</td></tr>
+        <tr><td>부갑상선저하증</td><td><span class="stage t-aps1">70–80%</span></td><td>내분비 증상 중 가장 먼저 발현하는 경우가 흔함</td></tr>
+        <tr><td>Addison병</td><td><span class="stage t-aps1">~70%</span></td><td>부갑상선저하증 선행 시 60%에서 동반 발생</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>비내분비 증상이 내분비 증상보다 <strong>약 75%에서 선행</strong>. 내분비 증상까지 평균 간격 약 4년 (범위 0.1–33년). 환자당 평균 4–5개 증상 발현 (최소 1개~최대 20개까지 가능).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 빈도 막대그래프 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> APS1 임상 양상별 빈도 (핀란드 코호트 기반)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">점막피부 칸디다증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:80%;background:var(--aps1)"><span class="pct-bar-val">80%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">부갑상선저하증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:75%;background:var(--aps1)"><span class="pct-bar-val">70-80%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">난소 부전 (여성)</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:60%;background:var(--aps2)"><span class="pct-bar-val">60%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">Addison병</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:60%;background:var(--ipex)"><span class="pct-bar-val">60%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">외胚層 형성이상</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:33%;background:var(--aps3)"><span class="pct-bar-val">33%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">탈모증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:27%;background:var(--aps3)"><span class="pct-bar-val">27%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">각막병증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:22%;background:var(--aps3)"><span class="pct-bar-val">22%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">정소 부전 (남성)</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:14%;background:var(--aps2)"><span class="pct-bar-val">14%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">위벽세포 부전</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:15%;background:var(--aps2)"><span class="pct-bar-val">15%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">간염</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:13%;background:var(--aps2)"><span class="pct-bar-val">13%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">백반증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:13%;background:var(--aps3)"><span class="pct-bar-val">13%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">1형 당뇨병(T1DM)</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:12%;background:var(--aps2)"><span class="pct-bar-val">12%</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">갑상선기능저하증</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:4%;background:var(--aps2)"><span class="pct-bar-val">4%</span></div></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>당뇨병은 비교적 <strong>늦게(20~40대)</strong> 발현하는 후기 합병증. 갑상선 항체는 흔하지만 임상적 갑상선기능저하증으로의 진행은 약 5%에 불과.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 병태생리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 병태생리: AIRE 유전자와 중심관용(Central Tolerance)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-aps1">
+        <span>🔬</span>
+        <div><strong>AIRE (AUTOIMMUNE REgulator)</strong> 유전자는 21번 염색체에 위치하며, 흉선 내에서 정상적으로 특정 말초조직에서만 발현되는 항원(예: 췌장 β세포의 인슐린)을 <strong>이소성(ectopic)으로 발현</strong>시킴.<br><br>
+        발달 중인 T세포가 이 이소성 자가항원에 강한 친화력을 가진 수용체를 획득하면 흉선 내에서 <strong>세포자살(apoptosis)을 거쳐 제거</strong>됨(음성 선택, negative selection) → 말초로 진출하지 못해 자가면역 회피.<br><br>
+        AIRE 비활성 변이 시 이 과정이 실패 → 자가반응성 T세포가 말초로 유출되어 자가면역 반응 개시.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧫 AIRE의 추가 기전 — Treg 유도</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">AIRE는 흉선 내에서 FOXP3 양성 조절T세포(Treg)의 독특한 집단을 유도하여 자가반응성 세포를 억제하는 기능도 수행. AIRE 결핍 시 자가반응성 세포의 탈출뿐 아니라 이를 억제할 Treg도 정상 발달하지 못함.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🔥 JAK-STAT/IFN-γ 매개 조직 손상</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">최근 연구에서 APS1의 조직 손상이 <strong>JAK-STAT 신호전달 경로</strong>를 매개하며 인터페론 감마(IFN-γ)가 관여함이 입증됨. JAK-STAT 억제제인 <strong>룩솔리티닙(ruxolitinib)</strong>이 동물모델 및 인체에서 임상·생화학적 호전을 보여 향후 치료에 유망함.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유전학 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 유전학 — AIRE 변이 종류 및 지역적 분포</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>변이</th><th>위치</th><th>주요 분포 지역</th><th>유전 양식</th></tr>
+        <tr><td><strong>핀란드 주요 변이</strong><br>p.R257X</td><td>SAND 도메인</td><td>핀란드·러시아·동유럽</td><td>상염색체 열성</td></tr>
+        <tr><td><strong>13bp 결손</strong><br>p.C322del13</td><td>PHD1 도메인</td><td>노르웨이·영국·프랑스·북미</td><td>상염색체 열성</td></tr>
+        <tr><td>우성음성(dominant-negative) 변이</td><td>PHD1 / SAND 도메인</td><td>다양</td><td>상염색체 우성, 비교적 경증</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>고전적 동형접합 변이 외 <strong>단일 유전자 우성변이</strong>도 자가면역 조절에 중요한 역할을 하며, 빈도는 1:1000까지 추정(고전적 APS1보다 훨씬 흔함). 우성변이는 경한 경과를 보이며 악성빈혈·백반증·자가면역 갑상선염·T1DM을 동반하는 경우가 많아 APS2와 혼동될 수 있음.</div>
+      </div>
+      <div class="grid3" style="gap:8px;margin-top:8px">
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--aps1)">1:9,000</div><div class="stat-lbl">이란계 유대인</div></div>
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--aps1)">1:14,500</div><div class="stat-lbl">사르데냐인</div></div>
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--aps1)">1:25,000</div><div class="stat-lbl">핀란드인</div></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>다운증후군(Trisomy 21)에서 자가면역 빈도가 증가하는 것도 흉선 내 AIRE 발현 이상에 의한 것일 가능성이 제기됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 자가항체 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 진단적 자가항체</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>자가항체</th><th>표적/장기</th><th>임상적 의의</th></tr>
+        <tr><td><strong>NALP5</strong></td><td>부갑상선</td><td>APS1 동반 부갑상선저하증에 매우 특이적 (다른 자가면역 질환·부갑상선저하 없는 APS1에서는 음성)</td></tr>
+        <tr><td>Cyp21, Cyp17, Cyp11A1</td><td>부신 cytochrome P450 효소</td><td>다수 환자에서 양성, 글루코코르티코이드 치료로 감소 경향</td></tr>
+        <tr><td>GAD65, IA2</td><td>췌장 islet</td><td>흔히 존재하나 T1DM 발생의 강력한 예측인자는 아님</td></tr>
+        <tr><td>TPO, TG</td><td>갑상선</td><td>흔하지만 갑상선기능저하 발생을 예측하지 못함</td></tr>
+        <tr><td>위벽세포 항체 (H+/K+ ATPase α·β)</td><td>위 점막</td><td>악성빈혈·B12 결핍 동반 가능성</td></tr>
+        <tr><td><strong>항 1형 인터페론 (IFN-1α, IFN-1ω)</strong></td><td>사이토카인</td><td><strong>APS1에 95% 이상 특이적</strong> → 진단적 유용성 높음, 평가 권고</td></tr>
+        <tr><td>항 IL-17 family (특히 IL-22)</td><td>사이토카인</td><td>일부 코호트에서 90% 이상 양성, 만성 칸디다증과 연관</td></tr>
+        <tr><td>BPIFB1, KCNRG, transglutaminase-4</td><td>폐·전립선 등 비전형 조직</td><td>드문 자가항체, 간질성 폐질환·남성 불임 등과 연관 보고</td></tr>
+      </table>
+      <div class="alert alert-aps1" style="margin-top:8px">
+        <span>💡</span>
+        <div>AIRE 변이 환자는 <strong>고친화도의 질병 완화성(disease-ameliorating) 자가항체</strong>도 보유하는 것으로 밝혀짐 — APS1에서 T1DM이 비교적 드물고 늦게 나타나는 현상을 설명할 가능성.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> APS1 치료 및 모니터링</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#ede9fe;border:1.5px solid var(--aps1);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#5b21b6;margin-bottom:8px">🔬 면역억제·면역조절 (특정 장기침범 시)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:2">
+            <li><span class="drug drug-steroid">프레드니손</span> 등 글루코코르티코이드</li>
+            <li><span class="drug drug-immuno">사이클로스포린</span>, 칼시뉴린억제제(<span class="drug drug-immuno">타크롤리무스</span>·<span class="drug drug-immuno">시롤리무스</span>)</li>
+            <li><span class="drug drug-immuno">메토트렉세이트</span>, <span class="drug drug-immuno">마이코페놀레이트 모페틸</span></li>
+            <li><span class="drug drug-mab">리툭시맙</span> (CD20 억제제)</li>
+            <li>→ 자가면역 간염·장염·세뇨관간질성신염·간질성 폐질환·각막결막염에 주로 사용</li>
+          </ul>
+        </div>
+        <div style="background:#ddf4ff;border:1.5px solid var(--ici);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#0550ae;margin-bottom:8px">🧪 호르몬·비타민 보충 (필수)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:2">
+            <li><span class="drug drug-replace">코티솔(하이드로코르티손)</span> — Addison병 동반 시</li>
+            <li><span class="drug drug-replace">칼슘 + 활성형 비타민D</span> — 부갑상선저하증</li>
+            <li><span class="drug drug-replace">레보티록신</span> — 갑상선기능저하증 동반 시</li>
+            <li><span class="drug drug-replace">비타민 B12</span> — 위축성 위염 동반 시</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--aps1);margin-bottom:6px">부신부전 선별 및 코티솔 보충 프로토콜</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.8">
+        <li>부갑상선저하증·만성 칸디다증이 첫 증상일 때: <strong>오후 ACTH 농도</strong>를 6개월~매년 간격으로 선별</li>
+        <li>ACTH &gt; 80 pg/mL: 강력 의심 / ACTH &gt; 100 pg/mL: 거의 확진</li>
+        <li>일부는 ACTH 자극검사로 부신예비력 확인을 권고, 일부는 즉시 코티솔 보충 시작 후 Na/K 모니터링 권고</li>
+        <li>초기 진단 시 스트레스 용량(유지량의 2–3배, ~10mg/m²/day 수준)으로 며칠간 투여 후 정상 유지량(~8–10mg/m²/day, 1일 3회 분복)으로 전환</li>
+        <li>입원 시 또는 식도·하부위장관 칸디다증으로 흡수장애 우려 시 <strong>비경구(IV/IM) 투여</strong> 고려</li>
+        <li>케토코나졸 등 항진균제는 코티솔 합성을 억제할 수 있어 부신부전 악화 가능성 — 투여 시 주의</li>
+        <li>모든 환자는 Medic-Alert 팔찌/목걸이 착용 권고 (응급상황 시 코티솔 투여 지연 방지)</li>
+      </ul>
+
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>다학제팀(소아 또는 성인 내분비내과 주도, 3차 의료기관)에서 <strong>연 2회 이상 추적</strong> 권고. 무증상 변이 보유자도 최소 연 1회 추적. 모든 형제자매는 무증상이어도 검사 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 예후 및 위험 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 합병증 및 예후</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>만성 점막피부 칸디다증으로 인한 <strong>구강·식도 편평세포암</strong> 위험 증가</li>
+        <li>사망 위험 증가 원인: 암, 부신/저칼슘혈증 위기, 간염·신염·폐렴 등 자가면역 매개 합병증</li>
+        <li>드문 양상: 요붕증, 뇌하수체염 동반 성장호르몬 결핍, 정자/난소 항체에 의한 불임</li>
+        <li>드문 비전형 특징: 만성신질환, 겉보기 무기질코르티코이드 과다증, 무비증, 구강/식도 악성종양</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /aps1 -->
+
+
+<!-- ══════════════════ TAB 3: APS2/APS3 ══════════════════ -->
+<div id="tab-aps23" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> APS2 (Schmidt 증후군) 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-aps2">
+        <span>🧬</span>
+        <div><strong>APS2</strong> = <strong>1형 당뇨병(T1DM)</strong> + <strong>Addison병</strong> + <strong>갑상선 자가면역</strong>(갑상선기능저하증·항진증·하시모토 갑상선염)의 3대 축.<br>
+        T1DM과 Addison병은 <strong>필수(obligatory) 구성요소</strong>, 갑상선 자가면역은 필수가 아님.<br>
+        호발 연령: <strong>20–40세</strong>. HLA DR3/DR4 및 class II DQ2/DQ8과 강하게 연관 (셀리악병과도 공유).</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🔗 동반 가능 자가면역 질환</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>셀리악병 (조직트랜스글루타미네이즈·글리아딘 항체)</li>
+              <li>백반증, 탈모증</li>
+              <li>중증근무력증</li>
+              <li>악성빈혈, IgA 결핍</li>
+              <li>간염, 성선저하증</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧪 검출 자가항체</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>islet 항체: GAD65, IA2, ZnT8</li>
+              <li>갑상선 항체: anti-TG, anti-TPO</li>
+              <li>부신 항체: anti-21-hydroxylase, anti-17-hydroxylase</li>
+              <li>셀리악 항체: tissue transglutaminase, gliadin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>관련 자가항체는 <strong>임상 발현 수년 전부터 검출 가능</strong> — 자가면역 내분비병증 2가지 이상 동반 환자에서 주기적 검사 권고. 현재 APS2 특이적 단일 진단검사는 없음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> APS3 (APS2b, Carpenter 증후군) 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-aps3">
+        <span>🧬</span>
+        <div><strong>APS3</strong> = APS2와 <strong>동일한 자가면역 패턴</strong>이지만 <strong>Addison병이 없음</strong>.<br>
+        <strong>T1DM 환자의 약 20%</strong>가 갑상선글로불린(TG)·갑상선과산화효소(TPO) 항체를 보유하나, 이 중 임상적·생화학적 갑상선기능저하증으로 진행하는 비율은 소수 — 그만큼 비교적 흔한 동반질환.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비교표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> APS2 vs APS3 구성요소 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th></th><th>APS2 (= APS2a)</th><th>APS3 (= APS2b)</th></tr>
+        <tr><td>1형 당뇨병(T1DM)</td><td class="freq-vhigh">●</td><td class="freq-vhigh">●</td></tr>
+        <tr><td>갑상선 자가면역</td><td class="freq-vhigh">●</td><td class="freq-vhigh">●</td></tr>
+        <tr><td>Addison병</td><td class="freq-vhigh">● (필수)</td><td class="freq-low">없음</td></tr>
+        <tr><td>상대적 빈도</td><td>비교적 드묾</td><td>상대적으로 흔함</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 증례 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 예시 증례 — APS2 저혈당성 혼수</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div>16세 여아, 의식소실 및 심한 저혈당으로 입원. 혀·잇몸·입술의 색소 침착 및 전신 과다 색소침착 관찰. 12세부터 T1DM 진단받았으며 최근 식이·운동과 무관한 저혈당이 반복되어 인슐린 용량을 3개월 전의 50%로 감량한 상태였음.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>검사</th><th>결과</th><th>해석</th></tr>
+        <tr><td>ACTH</td><td>현저히 상승</td><td>1차성 부신부전 시사</td></tr>
+        <tr><td>아침 코티솔</td><td>저하</td><td>부신부전 확인</td></tr>
+        <tr><td>21-OH 항체</td><td>상승</td><td>자가면역성 Addison병</td></tr>
+        <tr><td>TSH / T4</td><td>현저히 상승 / 저하</td><td>원발성 갑상선기능저하증</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>저혈당의 기전: ① 코티솔 결핍으로 인한 호르몬 반조절(counter-regulation) 결핍, ② 갑상선기능저하증으로 인한 인슐린 청소율 지연 — 두 요인의 복합 작용. 이 환자는 APS2의 모든 진단기준을 충족.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 치료 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> APS2·APS3 치료 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>각 구성요소에 대해 <strong>현행 가이드라인에 따른 호르몬 대체요법</strong> 시행 (인슐린, 코티솔, 레보티록신 등)</li>
+        <li>이미 자가면역 내분비병증 1가지를 진단받은 환자는 <strong>추가 장기특이적 자가면역질환 발생 위험이 높음</strong> — 주기적 재평가 필요</li>
+        <li>입원 시 각 구성요소별 치료를 지속하되, <strong>스트레스 상황에 따른 코티솔 용량 조절</strong> 필수</li>
+        <li>가족 내 자가면역질환이 다발성·조기발현으로 집적되어 있다면 단일유전자 질환, 즉 <strong>"비전형(non-classical) APS1"</strong> 가능성 고려(특히 백반증·악성빈혈 동반 시)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /aps23 -->
+
+
+<!-- ══════════════════ TAB 4: 부신부전 ══════════════════ -->
+<div id="tab-adrenal" class="panel">
+
+  <div class="alert alert-danger" style="margin-bottom:10px">
+    <span>🚨</span>
+    <div><strong>[핵심]</strong> 부신부전은 APS1·APS2a의 핵심 특징이며 <strong>생명을 위협하는 가장 위험한 구성요소</strong>. 스트레스 상황(감염·수술·외상)에서 급성 부신위기(adrenal crisis)로 진행할 수 있음.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫘</span> 코티솔·알도스테론의 생리학적 역할</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:10px">
+        <div style="background:#fce8eb;border:1.5px solid var(--ipex);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--ipex);margin-bottom:8px">코티솔 (Zona Fasciculata)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>스트레스 시 정상혈당·혈류역학 안정성 유지에 필수</li>
+            <li>탄수화물 대사 조절 → 정상혈당 유지</li>
+            <li>모세혈관 투과성 저하 → 정상 혈압 유지</li>
+            <li>노르에피네프린 → 에피네프린 전환 효소 활성화</li>
+            <li>HPA축(시상하부-뇌하수체-부신) 음성 피드백으로 조절</li>
+          </ul>
+        </div>
+        <div style="background:#e0f4f1;border:1.5px solid var(--aps2);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:var(--aps2);margin-bottom:8px">알도스테론 (Zona Glomerulosa)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>레닌-안지오텐신계로 주로 조절</li>
+            <li>신장에서 나트륨·수분 재흡수, 칼륨 배설 촉진</li>
+            <li>고농도 코티솔도 무기질코르티코이드 수용체에 작용 가능 (11β-HSD2가 정상적으로 코티솔을 코티손으로 비활성화하여 차단)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> 임상 양상 — 만성 vs 급성(부신위기)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th></th><th>만성 부신부전</th><th>급성 부신위기</th></tr>
+        <tr><td>증상</td><td>피로, 식욕부진, 체중감소</td><td>오심·구토·복통, 탈수, 의식변화, 저혈압, 저혈당, 쇼크</td></tr>
+        <tr><td>색소침착</td><td>점막·피부주름 과다색소침착<br>(1차성에서만, ACTH↑→MSH↑)</td><td>동일 (1차성에서)</td></tr>
+        <tr><td>전해질</td><td>정상~경도 이상</td><td>저나트륨혈증·고칼륨혈증 (알도스테론 결핍 시 염소실)</td></tr>
+        <tr><td>혈압반응</td><td>-</td><td>수액만으로 반응 불충분 (β-아드레날린 수용체 활성화에 코티솔 필요)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>과다색소침착은 <strong>1차성 부신부전에서만</strong> 나타남 (ACTH 상승에 따른 MSH 동반 상승) — 2차성 부신부전에서는 ACTH가 상승하지 않아 색소침착이 없음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 진단 — 코티솔/ACTH 평가 및 자극검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>검사</th><th>기준값</th><th>해석</th></tr>
+        <tr><td>아침 혈청 코티솔</td><td>&lt;10 mcg/dL</td><td>부신부전 의심</td></tr>
+        <tr><td>급성질환 시 무작위 코티솔 (성인)</td><td>&lt;15 mcg/dL</td><td>부신부전 우려</td></tr>
+        <tr><td>코신트로핀(ACTH) 자극검사</td><td>자극 60분 후 peak 코티솔 &lt;18 mcg/dL</td><td>부신부전 진단</td></tr>
+        <tr><td>ACTH (1차성 부신부전)</td><td>상승</td><td>1차성 시사 (&gt;80 pg/mL 강력 의심, &gt;100 pg/mL 거의 확진 — APS1 맥락)</td></tr>
+        <tr><td>ACTH (2차성 부신부전)</td><td>저하/정상하한</td><td>2차성(시상하부-뇌하수체) 시사</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>코신트로핀 250mcg(IV/IM)을 이용한 ACTH 자극검사가 부신부전 진단에 가장 유용. 2차성 부전이 강력히 의심되나 ACTH 자극에 정상 반응을 보일 경우, 아침 코티솔·ACTH 동시 측정이 더 유용할 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗂️</span> 원인별 분류 — 1차성 vs 2차성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>1️⃣ 1차성 부신부전 — 주요 원인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>자가면역 질환 (APS1, APS2a 등) — 가장 흔함</li>
+              <li>후복막 외상</li>
+              <li>부신 형성·코티솔 생합성·ACTH 반응 관련 희귀 유전 증후군</li>
+              <li>중증 결손은 신생아기 발현 또는 패혈증·외상 등 생리적 스트레스 시 처음 드러날 수 있음</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>2️⃣ 2차성 부신부전 — 주요 원인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>시상하부/뇌하수체 손상 (외상, 신경외과 수술, 종양에 의한 압박)</li>
+              <li>선천성 ACTH 단독결핍/기능이상</li>
+              <li>장기간 고강도 글루코코르티코이드 치료에 의한 HPA축 억제 (가장 흔함)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /adrenal -->
+
+
+<!-- ══════════════════ TAB 5: 면역항암제(ICI) ══════════════════ -->
+<div id="tab-ici" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 면역관문억제제(ICI) 유발 내분비병증 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-ici">
+        <span>🧬</span>
+        <div>CTLA-4 억제제(<strong>이필리무맙</strong>) 및 PD-1/PD-L1 억제제(<strong>니볼루맙·펨브롤리주맙</strong> 등)는 종양의 면역회피 기전을 차단하여 항암효과를 내지만, 동시에 정상 자가면역 관문도 차단하여 <strong>내분비 자가면역 반응</strong>을 유발 — "암 면역치료의 아킬레스건"으로 불림.<br>
+        일부 내분비 부작용은 치료 시작 후 <strong>수개월~수년</strong> 뒤에도 나타날 수 있어 장기적 모니터링이 필요.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>약제 계열</th><th>전체 등급 면역관련 부작용(irAE) 발생률</th></tr>
+        <tr><td>CTLA-4 억제제</td><td class="freq-vhigh">53.8%</td></tr>
+        <tr><td>CTLA-4 + PD-1/PD-L1 병용</td><td class="freq-vhigh">61.1%</td></tr>
+        <tr><td>PD-1 억제제</td><td class="freq-mod">26.5%</td></tr>
+        <tr><td>PD-L1 억제제</td><td class="freq-low">17.1%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦋</span> 장기별 빈도 및 약제 특이성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>내분비병증</th><th>주요 연관 약제</th><th>빈도</th></tr>
+        <tr><td><strong>뇌하수체염</strong></td><td>CTLA-4 억제제 (이필리무맙) 우세</td><td>이필리무맙 4–20%, 이필리무맙+니볼루맙 8%, 니볼루맙 0.6%, 펨브롤리주맙 0.7%</td></tr>
+        <tr><td>갑상선기능저하증</td><td>주로 PD-1 억제제</td><td>임상적 6–13% (불현성 포함 시 최대 28%)</td></tr>
+        <tr><td>갑상선중독증</td><td>주로 PD-1 억제제</td><td>임상적 3–16% (불현성 포함 시 최대 22%)</td></tr>
+        <tr><td>1형 당뇨병(드묾)</td><td>anti-PD-1/PD-L1 (anti-CTLA-4에서는 보고 적음)</td><td>전체 약 0.4–0.9%</td></tr>
+        <tr><td>1차성 부신부전(드묾)</td><td>병용요법에서 더 흔함</td><td>단일요법 &lt;1%, 병용요법 4–8%</td></tr>
+        <tr><td>요붕증/부갑상선저하증</td><td>드묾</td><td>매우 낮음</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>전체 임상적으로 의미 있는 내분비병증 발생률은 메타분석 기준 <strong>약 10%</strong>. 뇌하수체염은 <strong>60세 이상 남성</strong>에서 2–5배 더 흔함. 위험은 용량의존적이며, CTLA-4 억제제의 경우 10mg/kg 초과 용량에서만 위험 증가가 관찰됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 관리 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>등급 2 이상의 유의한 면역관련 부작용(irAE): 전신 면역억제(주로 코르티코스테로이드) 시행</li>
+        <li>등급 2: <span class="drug drug-steroid">메틸프레드니솔론 0.5–1mg/kg</span></li>
+        <li>등급 2–3: <span class="drug drug-steroid">메틸프레드니솔론 1–2mg/kg</span></li>
+        <li>등급 4: 해당 약제 재투여 금기</li>
+        <li>스테로이드 무반응 또는 금기 시 드물게 <span class="drug drug-mab">항TNF-α 제제</span> 사용</li>
+        <li>호르몬 결핍이 영구적인 경우가 많음(특히 뇌하수체염·갑상선기능저하증·T1DM) → 장기 호르몬 대체요법 필요</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /ici -->
+
+
+<!-- ══════════════════ TAB 6: IPEX·미래 ══════════════════ -->
+<div id="tab-ipex" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> IPEX 증후군 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-ipex">
+        <span>🧬</span>
+        <div><strong>IPEX</strong> = <strong>I</strong>mmunodysregulation, <strong>P</strong>olyendocrinopathy, <strong>E</strong>nteropathy, <strong>X</strong>-linked.<br>
+        극히 희귀한 X연관 유전질환으로 <strong>FOXP3</strong> 유전자(Treg 마스터 전사인자) 변이가 원인. 조기발현 T1DM, 난치성 설사를 동반한 자가면역 장염, 습진형/어린선형/건선형 피부염이 특징.<br>
+        <strong>생후 0.1–0.4세</strong>에 발현 — APS1보다 훨씬 일찍 시작.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>구성요소</th><th>특징</th></tr>
+        <tr><td>조기발현 1형 당뇨병</td><td>생후 초기 발현</td></tr>
+        <tr><td>자가면역 장염</td><td>난치성 설사·흡수장애</td></tr>
+        <tr><td>피부염</td><td>습진형/어린선형/건선형</td></tr>
+        <tr><td>호산구증가증, IgE 상승</td><td>흔히 동반</td></tr>
+        <tr><td>신장 질환</td><td>막성신증·간질성신염 (일부)</td></tr>
+        <tr><td>후기 양상</td><td>자가면역 갑상선염, 탈모증, 자가면역 혈구감소증, 간염, 외분비 췌장염</td></tr>
+      </table>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>치료하지 않으면 생후 수년 내 <strong>치명적</strong>인 경우가 많음. 면역억제제 치료 또는 가능 시 <strong>동종 골수이식</strong>으로 완치 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> FOXP3와 Treg 생물학</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div>FOXP3는 조절T세포(Treg)에서 고도로 발현되는 <strong>마스터 전사인자</strong>로, CD4, CTLA4, CD25(고친화도 IL-2 수용체) 등 핵심 Treg 구성요소와 함께 작용. FOXP3 결핍 시 자가반응성 세포를 억제할 Treg가 기능부전 또는 미발달 상태가 됨.</div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>IPEX 연구는 Treg의 자가관용 유지 경로를 이해하는 핵심 모델이 되었으며, 이식·자가면역질환 치료에서 Treg 기능 강화 전략 개발에 영향을 주고 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔮</span> 새로운 방향 (New Directions)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>1️⃣ 조기진단 + 정밀유전체 기반 선제치료</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">유전자검사 및 자가항체 분석 발전으로 비가역적 장기손상 전 조기 면역조절치료 적용 가능성 모색.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>2️⃣ 흉선 상피 재생을 통한 면역관용 복원</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">줄기세포 공학을 이용해 정상적인 면역조절 기능을 갖춘 흉선 상피를 재생하는 장기적 목표가 추진 중.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>3️⃣ JAK-STAT 경로 표적치료</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">JAK-STAT 신호전달 조절은 APS1 및 관련 증후군의 유해 작용을 줄이는 초기단계의 유망한 치료전략으로 평가됨 (예: 룩솔리티닙).</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>4️⃣ 유전자 조작을 통한 흉선 감시 복원</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">특정 변이에 대한 유전자 조작을 통해 흉선의 자가항원 감시 기능을 회복시키는 방안이 미래 연구방향으로 제시됨.</div>
+        </div>
+      </div>
+
+      <div class="alert alert-aps1" style="margin-top:10px">
+        <span>💬</span>
+        <div><strong>핵심 메시지</strong>: APS는 면역조절 실패의 다양한 분자기전이 특징적인 임상 패턴으로 수렴하는 질환군이며, <strong>AIRE-JAK/STAT 경로의 표적치료</strong>가 향후 예후를 근본적으로 바꿀 잠재력을 가지고 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /ipex -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"ACTH",  def:"Adrenocorticotropic Hormone — 부신피질자극호르몬" },
+  { term:"AIRE",  def:"Autoimmune Regulator — 자가면역조절 유전자 (21q22.3, APS1 원인)" },
+  { term:"APECED",def:"Autoimmune Polyendocrinopathy, Candidiasis, Ectodermal Dystrophy — APS1의 다른 명칭" },
+  { term:"APS",   def:"Autoimmune Polyglandular Syndrome — 자가면역 다발성 내분비선 증후군" },
+  { term:"CTLA-4",def:"Cytotoxic T-Lymphocyte-Associated protein 4 — 세포독성 T림프구 연관 단백질 4 (면역관문)" },
+  { term:"FOXP3", def:"Forkhead box P3 — 조절T세포(Treg) 마스터 전사인자, IPEX 원인 유전자" },
+  { term:"GAD65", def:"Glutamic Acid Decarboxylase 65 — 췌장 islet 자가항체 표적, T1DM 관련" },
+  { term:"HLA",   def:"Human Leukocyte Antigen — 인간 백혈구 항원 (6번 염색체, APS2/3 연관 영역)" },
+  { term:"ICI",   def:"Immune Checkpoint Inhibitor — 면역관문억제제 (항암치료제)" },
+  { term:"IPEX",  def:"Immunodysregulation, Polyendocrinopathy, Enteropathy, X-linked — X연관 면역조절이상·다발내분비병증·장염 증후군" },
+  { term:"irAE",  def:"immune-related Adverse Event — 면역관련 부작용 (면역항암제 부작용)" },
+  { term:"NALP5", def:"NACHT Leucine-rich-repeat Protein 5 — 부갑상선 자가항원, APS1 부갑상선저하증에 특이적" },
+  { term:"PD-1",  def:"Programmed cell Death protein 1 — 세포사멸 단백질 1 (면역관문 수용체)" },
+  { term:"PD-L1", def:"Programmed Death-Ligand 1 — PD-1의 리간드 (면역관문 분자)" },
+  { term:"T1DM",  def:"Type 1 Diabetes Mellitus — 1형 당뇨병" },
+  { term:"TG",    def:"Thyroglobulin — 갑상선글로불린 (자가항체 표적)" },
+  { term:"TPO",   def:"Thyroid Peroxidase — 갑상선과산화효소 (자가항체 표적, 하시모토 갑상선염 표지자)" },
+  { term:"Treg",  def:"Regulatory T cell — 조절T세포 (자가면역 억제 담당)" },
+];
+
+// 약어 초기 렌더
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+// 탭 전환
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+// 카드 토글
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// 아코디언 토글
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// 약어 검색
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쿠싱증후군 치료 가이드라인 | Endocrine Society 2015</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --strong-rec: #1a7f37;
+    --weak-rec: #0550ae;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: #5a2d82;
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 68px;
+    z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; gap: 2px; padding: 0 8px; }
+  .tab {
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: auto;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-1high  { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-1mod   { background: #dafbe1; color: #116329; border: 1px solid #57606a; }
+  .grade-1low   { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .grade-1vlow  { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .grade-2high  { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-2mod   { background: #ddf4ff; color: #0550ae; border: 1px solid #88b4e8; }
+  .grade-2low   { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .grade-2vlow  { background: #fff8c5; color: #7d4e00; border: 1px solid #d0d7de; }
+  .grade-bp     { background: #f0e6ff; color: #5a2d82; border: 1px solid #9b59b6; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 2px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-purple  { background: #f0e6ff; border-left: 3px solid #9b59b6; color: #5a2d82; }
+
+  /* ── TABLE ── */
+  .g-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); margin: 6px 0; }
+  .g-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .g-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .g-table tr:last-child td { border-bottom: none; }
+  .g-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .g-table .sec-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-hdr .acc-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-arrow { transform: rotate(90deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.6; }
+  .acc-body p { margin-bottom: 6px; }
+  .acc-body p:last-child { margin-bottom: 0; }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-first  { background: #dafbe1; color: var(--green); }
+  .pill-second { background: #ddf4ff; color: var(--accent2); }
+  .pill-urgent { background: #ffebe9; color: #82071e; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  .v-red    { color: var(--red); font-weight: 700; }
+  .v-green  { color: var(--green); font-weight: 700; }
+  .v-blue   { color: var(--accent2); font-weight: 700; }
+  .v-orange { color: var(--orange); font-weight: 700; }
+  .v-purple { color: #5a2d82; font-weight: 700; }
+
+  /* drug table cell colors */
+  .drug-pro  { background: #dafbe1; color: #116329; font-size: calc(10px * var(--fscale, 1)); }
+  .drug-con  { background: #ffebe9; color: #82071e; font-size: calc(10px * var(--fscale, 1)); }
+  .drug-name { font-weight: 700; color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">Endocrine Society 2015</span>
+      <h1>쿠싱증후군 치료 임상진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.5">
+      <a href="https://doi.org/10.1210/jc.2015-1818" class="source-link" target="_blank">J Clin Endocrinol Metab 2015;100(8):2807–2831 ↗</a>
+      <span class="meta"> · Nieman LK et al. · ESE 공동후원</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 학회 공식 승인 자료가 아닙니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('goals')">🎯 치료목표</div>
+    <div class="tab" onclick="showTab('surgery')">🔪 수술치료</div>
+    <div class="tab" onclick="showTab('remission')">📉 관해·재발</div>
+    <div class="tab" onclick="showTab('second')">🔄 2차치료</div>
+    <div class="tab" onclick="showTab('meds')">💊 약물치료</div>
+    <div class="tab" onclick="showTab('followup')">📋 장기추적</div>
+    <div class="tab" onclick="showTab('abbr')">📖 약어집</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:120px;outline:none;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:340px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:#5a2d82">1.7–4.8×</div><div class="stat-lbl">활성 CS의 표준화사망비 (SMR)<br><span style="font-size: calc(9px * var(--fscale, 1))">일반 인구 대비 초과 사망</span></div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">73–76%</div><div class="stat-lbl">CD 미세선종 TSS 후<br>초기 관해율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">15–66%</div><div class="stat-lbl">CD 성공적 TSS 후<br>5–10년 내 재발률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">83%</div><div class="stat-lbl">통상 방사선치료 후<br>관해율 (성인)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 가이드라인 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>Endocrine Society가 유럽내분비학회(ESE)와 공동으로 제작한 CS 치료 임상진료지침. GRADE 시스템으로 권고등급 및 근거수준 표시. 계통적 문헌고찰 3건 포함(방사선치료 29편, 방사선수술 21편, TSS 87편 케이스시리즈).</div>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">GRADE 권고등급</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)"><span class="grade grade-1high">1|⊕⊕⊕⊕</span> 강한 권고 · 근거 높음</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)"><span class="grade grade-1mod">1|⊕⊕⊕○</span> 강한 권고 · 근거 중등도</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)"><span class="grade grade-1low">1|⊕⊕○○</span> 강한 권고 · 근거 낮음</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)"><span class="grade grade-2mod">2|⊕⊕⊕○</span> 약한 권고 · 근거 중등도</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)"><span class="grade grade-2low">2|⊕⊕○○</span> 약한 권고 · 근거 낮음</li>
+            <li style="padding:4px 0"><span class="grade grade-bp">BP</span> 비등급 모범진료 원칙</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">CS 병인별 분류</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🔵 <strong>쿠싱병 (CD)</strong>: 뇌하수체 ACTH 분비 선종 (~70%)</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🟠 <strong>이소성 ACTH 증후군 (EAS)</strong>: 비뇨하수체 종양 ACTH 분비 (~10%)</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🟢 <strong>부신 선종</strong>: 단측성 양성 코르티솔 분비 선종 (~10%)</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🔴 <strong>부신 암종 (ACC)</strong>: 악성 부신피질 종양</li>
+            <li style="padding:4px 0">🟣 <strong>양측성 부신 과형성</strong>: BMAH, PPNAD 등</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 치료 알고리즘 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;font-size: calc(12px * var(--fscale, 1));">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="background:#f0e6ff;border:1px solid #9b59b6;border-radius:6px;padding:8px;text-align:center;font-weight:700;color:#5a2d82;">CS 확진 + 원인 병변 국소화</div>
+          <div style="text-align:center;font-size: calc(16px * var(--fscale, 1));color:var(--text2)">↓</div>
+          <div style="background:#dafbe1;border:1px solid var(--green);border-radius:6px;padding:8px;text-align:center;font-weight:700;color:#116329;">🔪 1차: 원인 병변 수술적 절제 (Strong, 1⊕⊕⊕⊕)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;">
+            <div style="background:#dafbe1;border:1px solid #57606a;border-radius:5px;padding:6px;font-size: calc(11px * var(--fscale, 1));"><strong>수술 성공 (관해)</strong><br>→ GC 보충요법<br>→ HPA축 회복 모니터링<br>→ 재발 추적관찰</div>
+            <div style="background:#ffebe9;border:1px solid var(--red);border-radius:5px;padding:6px;font-size: calc(11px * var(--fscale, 1));"><strong>수술 실패/불가</strong><br>→ 2차 치료 (공유 의사결정)<br>• 재수술 / 방사선치료<br>• 약물치료 / 양측 부신절제</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> 응급: 생명위협 상황</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚨</span>
+        <div><strong>권고 8.1</strong> <span class="grade grade-1mod">1|⊕⊕⊕○</span> — 감염, 폐혈전색전증, 심혈관 합병증, 급성 정신증 등 생명위협 상황이 있는 경우 <strong>24–72시간 이내</strong> 긴급 치료.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-text">대부분은 심각한 동반질환(감염, 폐색전증, 심혈관 문제)을 동반한 <strong>이소성 ACTH 증후군</strong>. 경우에 따라 경증 CD도 급성 정신증 + 자살위험으로 즉각 치료 필요.</span>
+        </li>
+        <li class="rec-item">
+          <span class="rec-text">응급 치료 옵션: <strong>Etomidate IV</strong> (경구 불가 시), <strong>Ketoconazole + Metyrapone 병합</strong>, 약물 불응 시 <strong>양측 부신절제술</strong>.</span>
+        </li>
+        <li class="rec-item">
+          <span class="rec-text">Mitotane + Metyrapone + Ketoconazole <strong>삼중 병합요법</strong>으로 24–48시간 내 UFC 정상화 가능 (11명 연구).</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 치료목표 ═══════════════ -->
+<div id="tab-goals" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 1. 치료 목표 (권고 1.1–1.3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod" data-tip="강한 권고 | 근거 중등도">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 1.1</strong> — 현성 CS 환자에서 코르티솔 수치 또는 수용체 작용을 정상화하여 CS의 증상·징후를 제거하고, 고코르티솔혈증 관련 동반질환을 치료할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1vlow" data-tip="강한 권고 | 근거 매우 낮음">1|⊕○○○</span></div>
+          <div class="rec-text"><strong>권고 1.2</strong> — CS가 확진되지 않은 상태에서 코르티솔 감소를 목적으로 치료하는 것은 권장하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2vlow" data-tip="약한 권고 | 근거 매우 낮음">2|⊕○○○</span></div>
+          <div class="rec-text"><strong>권고 1.3</strong> — HPA 축의 경계선적 생화학 이상만 있고 CS의 특이 징후가 없는 경우, 코르티솔 정상화 치료를 권장하지 않는다. 경증 또는 주기성 고코르티솔혈증(정상 상한의 ≤1.5배)에서 치료의 이득은 확립되어 있지 않다.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 2. 최적 보조 관리 (권고 2.1–2.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp" data-tip="비등급 모범진료 원칙">BP</span></div>
+          <div class="rec-text"><strong>권고 2.1</strong> — 환자 및 가족/보호자에게 질환, 치료 옵션, 관해 후 예상 경과에 대해 교육할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp" data-tip="비등급 모범진료 원칙">BP</span></div>
+          <div class="rec-text"><strong>권고 2.2</strong> — 모든 환자에서 코르티솔 의존성 동반질환(정신과 질환, 당뇨병, 고혈압, 저칼륨혈증, 감염, 이상지질혈증, 골다공증, 체력 저하)에 대한 모니터링 및 보조 치료를 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp" data-tip="비등급 모범진료 원칙">BP</span></div>
+          <div class="rec-text"><strong>권고 2.3</strong> — 경험 있는 내분비전문의를 포함한 다학제팀이 환자의 가치와 선호도를 고려하여 치료 옵션을 결정할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low" data-tip="약한 권고 | 근거 낮음">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 2.4</strong> — CS 환자에서 정맥혈전증 위험인자를 평가할 것을 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low" data-tip="약한 권고 | 근거 낮음">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 2.5</strong> — 수술 받는 CS 환자에서 <strong>수술 전후 정맥혈전색전증 예방</strong>을 권장한다. 고코르티솔혈증은 수술 후 4주까지 혈전증 위험 증가. 응고인자 이상은 수술 후 1년까지 지속될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp" data-tip="비등급 모범진료 원칙">BP</span></div>
+          <div class="rec-text"><strong>권고 2.6</strong> — CS 환자에게 연령에 적합한 예방접종(특히 <strong>인플루엔자, 대상포진, 폐렴구균</strong>)을 권고한다. 면역억제 상태로 세균·진균·기회감염 위험 증가.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 수술치료 ═══════════════ -->
+<div id="tab-surgery" class="panel">
+
+  <div class="alert alert-success" style="margin-bottom:10px">
+    <span>✅</span>
+    <div><strong>핵심 원칙:</strong> 원인 종양(부신, 이소성, 뇌하수체)의 완전한 수술 절제가 CS의 최적 치료. 정상 HPA축을 보존하면서 고코르티솔혈증을 해소.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 3.1 1차 치료: 원인 병변 절제 (권고 3.1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1high" data-tip="강한 권고 | 근거 높음">1|⊕⊕⊕⊕</span></div>
+          <div class="rec-text"><strong>권고 3.1</strong> — 수술이 불가능하거나 글루코코르티코이드 과잉을 유의미하게 감소시킬 가능성이 없는 경우를 제외하고, CD·이소성·부신(암종, 선종, 양측성 질환) 원인의 원발 병변 절제를 초기 치료로 권고한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>🟢 3.1a 양성 단측성 부신 질환 — 단측 부신절제술</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <p>경험 있는 부신외과의에 의한 단측 부신절제술. 복강경(경복막 또는 후복막) 접근이 표준.</p>
+          <p>경험 있는 외과의 시행 시 코르티솔 분비 부신선종에서 성인·소아 모두 완치율 <strong>~100%</strong>.</p>
+          <p><strong>ACC:</strong> 완전 절제 시도. 소아 완치율 80%, 절제 불가 시 예후 매우 불량. 일부는 복강경 논란 → 병기 평가 및 en-bloc 절제를 위해 개복 권장.</p>
+          <div class="alert alert-warn" style="margin-top:8px">
+            <span>⚠️</span>
+            <div>부신 우연종 + 미세 코르티솔 분비 이상(소위 무증상 CS)에서 부신절제술의 역할(vs 동반질환 집중 치료)은 불명확. 단, 대사이상 환자에서 수술이 유익하다는 후향적 연구 있음.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>🟠 3.1b 이소성 ACTH 분비 종양 — 국소화 및 절제</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-1high">1|⊕⊕⊕⊕</span></div>
+          <p>이소성 ACTH 분비 종양의 국소화 및 적절한 림프절 절제를 포함한 절제를 권고.</p>
+          <p>명백한 전이가 없는 경우 종양 절제 후 76% 완치(관찰 연구).</p>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>🔵 3.1c 쿠싱병 — 경접형동 선택적 선종 절제술 (TSS)</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-1high">1|⊕⊕⊕⊕</span></div>
+          <p>경접형동 선택적 선종 절제술(TSS)을 소아·성인 CD 환자 모두에서 최적 치료로 권고.</p>
+          <p>내시경적 경비 접근법이 기존 경비 접근법을 대체하고 있으나 양쪽 모두 효과적.</p>
+          <p>성공 가능성은 고볼륨 신경외과의가 시행할 때 가장 높음.</p>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>📊</span>
+            <div>뇌하수체 MRI에서 약 60%(성인) · 55%(소아)에서 종양 확인. MRI에서 확인되지 않는 ACTH 의존성 CS → <strong>양측 하추체 정맥동 혈액 채취(BIPSS)</strong>로 뇌하수체 vs 이소성 감별. BIPSS의 위치 측방화 정확도는 56–69%(성인)로 제한적.</div>
+          </div>
+
+          <div style="margin-top:8px;font-weight:600;font-size: calc(11px * var(--fscale, 1));color:var(--text2);text-transform:uppercase">TSS 후 모니터링</div>
+          <ul class="rec-list" style="margin-top:6px">
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1low">1|⊕⊕○○</span></div>
+              <div class="rec-text"><strong>3.1ci</strong> 수술 후 <strong>5–14일간</strong> 혈청 나트륨을 수차례 측정. 저나트륨혈증 5–10%(주로 5–10일째), 요붕증(보통 일시적). 환자에게 응급 증상 발생 시 연락처 제공.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-1low">1|⊕⊕○○</span></div>
+              <div class="rec-text"><strong>3.1cii</strong> 수술 후 <strong>1–2주 내</strong> Free T4 및 프로락틴 측정 → 현성 뇌하수체기능저하증 평가. 프로락틴 결핍은 심한 GH 결핍의 지표.</div>
+            </li>
+            <li class="rec-item">
+              <div class="rec-badges"><span class="grade grade-bp">BP</span></div>
+              <div class="rec-text"><strong>3.1ciii</strong> 성공적 TSS 후 <strong>1–3개월 내</strong> 뇌하수체 MRI 시행 → 향후 재발 기준 영상으로 활용.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>🟣 3.1d 양측성 부신 질환 — 양측 부신절제술</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-1low">1|⊕⊕○○</span></div>
+          <p>양측성 부신 질환(BMAH, PPNAD)에서 수술적 절제를 권고.</p>
+          <p><strong>BMAH:</strong> 이상 수용체가 확인되고 코르티솔 분비와 명확히 연결된 경우 수용체 길항제 약물 치료도 제안(2|⊕⊕○○). ARMC5 유전자 돌연변이 관련. 가족 스크리닝 권고.</p>
+          <p><strong>PPNAD:</strong> 복강경 양측 부신절제술이 선택적 치료. 일부 소아에서 단측 절제로 호전 가능하나 반대측 절제 필요한 경우 많음. Carney 복합체 동반 가능 → 심장 점액종 등 관련 질환 스크리닝.</p>
+          <p><strong>McCune-Albright 증후군:</strong> BMAH 양상으로 발현 가능. 중증·생명위협 시 양측 부신절제술 적응증. 경증 시 자연 관해 가능 → 약물 치료 고려 가능.</p>
+
+          <div class="alert alert-warn" style="margin-top:8px">
+            <span>⚠️</span>
+            <div><strong>양측 부신절제술 결과 (23개 연구, 739명):</strong> 수술 이환율 18%, 중앙값 사망률 3%. CD에서 수술 사망률 &lt;1%. 평생 GC·MC 보충 필요. 10년 사망률: CD 3%, 양측 부신 과형성 10%, EAS 44%.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 관해·재발 ═══════════════ -->
+<div id="tab-remission" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📉</span> 4. 수술 후 관해 판정 (권고 4.1–4.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>CD에서는 유의한 재발률 때문에 "완치"보다 "관해"가 적절한 용어. 정상 코르티코트로프는 지속적 고코르티솔혈증에 의해 억제됨 → ACTH 분비 종양 절제 후 ACTH·코르티솔 저하.</div>
+      </div>
+      <table class="g-table">
+        <tr><th>관해 기준</th><th>수치</th><th>비고</th></tr>
+        <tr><td>아침 혈청 코르티솔</td><td class="v-blue">&lt;5 μg/dL (138 nmol/L)</td><td>선택적 종양 절제 후 7일 이내</td></tr>
+        <tr><td>24h 요 유리 코르티솔 (UFC)</td><td class="v-blue">&lt;28–56 nmol/d (10–20 μg/d)</td><td>-</td></tr>
+        <tr><td>엄격 기준 (소아)</td><td class="v-blue">&lt;1 μg/dL (28 nmol/L) 또는 &lt;1.8 μg/dL (50 nmol/L)</td><td>소아에서 재발 매우 드묾</td></tr>
+      </table>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp">BP</span></div>
+          <div class="rec-text"><strong>권고 4.1</strong> — 수술 후 혈청 코르티솔 값에 따라 저코르티솔혈증·고코르티솔혈증·정코르티솔혈증으로 분류하여 개별화된 관리 접근법을 적용할 것을 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1high">1|⊕⊕⊕⊕</span></div>
+          <div class="rec-text"><strong>권고 4.2</strong> — 지속적 현성 고코르티솔혈증 환자에서 추가 치료를 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1low">1|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 4.3</strong> — TSS 후 정코르티솔혈증 환자(수술 전 약물 치료로 정코르티솔혈증 달성한 경우 포함)에서 <strong>심야 타액 또는 혈청 코르티솔</strong>을 측정할 것을 권고한다. 정상 일주기리듬 확인이 관해 판정에 중요.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 4.4</strong> — ACTH 의존성 CS 환자에서 고코르티솔혈증 스크리닝 검사를 이용하여 재발 여부를 정기적으로 평가할 것을 권고한다.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 재발률 및 재발 감시</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">성인 CD 재발률</div>
+          <table class="g-table">
+            <tr><th>종양 크기</th><th>재발률</th></tr>
+            <tr><td>미세선종</td><td class="v-orange">23% (5–10년)</td></tr>
+            <tr><td>거대선종</td><td class="v-red">33% (5–10년)</td></tr>
+            <tr><td>전체 범위</td><td class="v-red">15–66% (5–10년)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">재발의 조기 지표</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🔴 <strong>심야 타액/혈청 코르티솔 상승</strong>이 UFC 상승보다 먼저 나타남 (종단 연구 2편)</li>
+            <li style="padding:4px 0;border-bottom:1px solid var(--border)">🟡 HPA축 조기 회복(6개월 이내)이 재발 위험 증가와 연관</li>
+            <li style="padding:4px 0">🔵 수술 후 저코르티솔혈증 지속 기간이 길수록 재발 위험 낮음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>수술 성공 후 HPA축 회복 시점부터 매년 재발 스크리닝. 임상 증상이 있으면 더 조기 검사. CRH·데스모프레신 검사는 예측 정확도가 높지 않아 보조적으로만 활용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 5. 글루코코르티코이드 보충 및 HPA축 회복 (권고 5.1–5.3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1high">1|⊕⊕⊕⊕</span></div>
+          <div class="rec-text"><strong>권고 5.1</strong> — 저코르티솔혈증 환자에서 수술 후 관해 후 <strong>GC 보충요법</strong>과 부신기능저하증에 대한 교육을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 5.2</strong> — 최소 1개의 부신이 남아있는 환자에서 HPA축 회복 평가를 위한 추적 아침 코르티솔 및/또는 ACTH 자극 검사 또는 인슐린 유발 저혈당 검사를 권고한다. 검사 결과 정상화 시 GC 중단 권고.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 5.3</strong> — 수술 후 다른 뇌하수체 호르몬 결핍 치료 필요성을 재평가할 것을 권고한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">GC 보충요법 실무 지침</div>
+      <table class="g-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td style="font-weight:600">선호 약제</td><td>Hydrocortisone (HC) — 더 강력한 합성 GC는 HPA 억제 연장 위험</td></tr>
+        <tr><td style="font-weight:600">용량</td><td class="v-blue">10–12 mg/m²/d</td> <td>2–3회 분할 투여; 기상 즉시 첫 투여</td></tr>
+        <tr><td style="font-weight:600">HPA 회복 기간</td><td>성인 ACTH 분비 종양 절제 후 <strong>6–12개월</strong>, 단측 부신절제 후 ~18개월, 소아 평균 12.6개월</td></tr>
+        <tr><td style="font-weight:600">회복 평가</td><td>아침 코르티솔 ≥7.4 μg/dL (200 nmol/L) → ACTH 자극 검사. 자극 후 ≥18 μg/dL (500 nmol/L) → 회복</td></tr>
+        <tr><td style="font-weight:600">스트레스 용량</td><td>질환 시 용량 증가 방법, 응급 주사제, 의료경고 팔찌 교육 필수</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>GC 금단 증후군:</strong> 식욕 감소, 오심, 체중감소, 피로, 독감 유사 근육통·관절통, 무기력, 피부 각질. 성공적 수술 후 수일~수주 이내 발생 흔함. 1년 이상 지속 가능. 우울증·불안 증상도 동반 가능. 가장 중요한 중재는 의료팀의 빈번한 지지와 안심.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 2차 치료 ═══════════════ -->
+<div id="tab-second" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 6.1 2차 치료 — 공유 의사결정 (권고 6.1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 6.1</strong> — 비완치 수술 또는 수술 불가 ACTH 의존성 CS 환자에서, 여러 2차 치료 옵션(재수술, 방사선치료, 약물치료, 양측 부신절제술)이 존재하므로 공유 의사결정 접근을 제안한다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>2차 치료 선택 시 고려 요소: 환자 선호도·치료 목표·생화학적 조절·잔존 종양 크기·위치·치료 긴급성·약물 상호작용·비용·성별·나이·각 치료법의 접근성.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚔️</span> 6.1a 양측 부신절제술 — 이소성 ACTH 또는 응급 (권고 6.1a)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2mod">2|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.1a</strong> — 잠재성 또는 전이성 EAS에서, 또는 약물치료로 신속히 조절되지 않는 매우 심한 ACTH 의존성 질환에서 생명 유지를 위한 응급 치료로 양측 부신절제술을 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.1b</strong> — 양측 부신절제 받은 CD 환자 및 잠재성 EAS 추정 환자(일부는 뇌하수체 종양)에서 코르티코트로프 종양 진행(Nelson 증후군)을 평가하기 위해 뇌하수체 MRI와 ACTH를 <strong>정기적</strong>으로 모니터링할 것을 권고한다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div><strong>Nelson 증후군:</strong> 부신절제 후 CD에서 21%에서 발생. MRI에서 코르티코트로프 종양 진행은 50%까지. 종양이 없던 환자에서는 Nelson 증후군 발생 드묾. ACTH 수치가 높을수록 위험 증가. 방사선치료로 예방 가능한지 불확실.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔁</span> 6.2 재수술 (권고 6.2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 6.2</strong> — 특히 불완전 절제의 증거가 있거나 영상에서 뇌하수체 병변이 확인되는 경우 재수술을 제안한다.</div>
+        </li>
+      </ul>
+      <div style="font-size: calc(12px * var(--fscale, 1));color:var(--text);margin-top:8px">
+        <p>지속성 고코르티솔혈증 환자 17명 중 12명에서 조기 재수술로 저코르티솔혈증 유도. 재발성 고코르티솔혈증 31명에서 재수술: 22명 저코르티솔혈증 달성.</p>
+        <p style="margin-top:4px">재수술은 초회 수술보다 뇌하수체기능저하증 위험 증가. 그러나 전문 뇌하수체 외과의가 있는 경우 일부 2차 치료 중 가장 빠른 관해 가능.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> 6.3 방사선치료 / 방사선수술 (권고 6.3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1vlow">1|⊕○○○</span></div>
+          <div class="rec-text"><strong>권고 6.3</strong> — 방사선치료/방사선수술을 시행하기 전, 방사선 효과를 기다리는 동안 약물치료가 코르티솔을 효과적으로 정상화할 수 있는지 먼저 확인할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 6.3a</strong> — TSS 실패 또는 재발성 CD 환자에서 방사선치료/방사선수술을 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.3b</strong> — 코르티코트로프 선종의 종괴 효과 또는 침범이 우려되는 경우 방사선치료 사용을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.3c</strong> — 방사선 효과 평가를 위해 투약 중단 상태에서 혈청 코르티솔 또는 UFC를 <strong>6–12개월 간격</strong>으로 측정하고, 안정적 약물 용량 중 부신기능저하증 증상 발생 시에도 측정할 것을 권고한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="grid2">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">통상 분할 방사선치료</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">총선량 45 Gy / 6주 (3면 기법)</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">성인 관해율 최대 <strong>83%</strong> (6–60개월)</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">소아 ~78% 완치 (9–18개월)</li>
+            <li style="padding:3px 0">뇌하수체기능저하증 <strong>2/3까지</strong> 발생 가능</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">정위 방사선수술 (Gamma Knife 등)</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">단일 치료일, 환자 편의 우수</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">생화학적 조절: <strong>28–86%</strong></li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">종양 크기 조절: 83–100%</li>
+            <li style="padding:3px 0">시신경 보호 위해 종양과 시각 구조물 간 수 mm 여유 필요</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>방사선치료는 수개월~수년 후에야 효과 나타남 → 그 사이 약물치료 필수. 소아에서 GH 결핍, 성선기능저하증 흔함. 부신기능저하증, 시신경병증(1–2%), 두개신경병증(2–4%), 2차 종양(주로 수막종) 위험.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 약물치료 ═══════════════ -->
+<div id="tab-meds" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 6.4 약물치료 개요 (권고 6.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.4</strong> — 스테로이드 합성 억제제를 다음 상황에서 권고: ① CD에서 TSS 후 2차 치료(방사선치료 동반 여부 무관), ② 잠재성·전이성 EAS의 1차 치료, ③ ACC의 보조 치료.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2mod">2|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.4a</strong> — 수술 비적응증이거나 TSS 후 지속성 CD 환자에서 뇌하수체 표적 약물치료를 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2mod">2|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 6.4b</strong> — 수술 비적응증이거나 TSS 후 지속성 CD 환자 중 당뇨병 또는 내당능 장애가 있는 경우 글루코코르티코이드 길항제 투여를 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2vlow">2|⊕○○○</span></div>
+          <div class="rec-text"><strong>권고 6.4c</strong> — 이소성 ACTH 증후군 치료를 위한 표적 치료를 제안한다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>치료 전략:</strong> "차단 후 보충(block-and-replace)" 전략(코르티솔을 최소치로 낮추고 GC 추가) 또는 "정상화(normalization)" 전략(정상 코르티솔 유지) 중 선택. 심한 주기성이 있는 경우 차단 후 보충 선호. 대부분 약제는 CYP3A4 유도·억제 → 약물상호작용 검토 필수. QT 간격 연장 주의.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 스테로이드 합성 억제제 상세</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Ketoconazole — 이미다졸 유도체, 항진균제</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">기전</div>
+              <p>부신·생식선 스테로이드 합성 억제. Side-chain cleavage, 17,20-lyase, 11β-hydroxylase 효소 억제.</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">용량</div>
+              <p class="v-blue">400–1,600 mg/d (6–8시간마다 분할 투여)</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">효능</div>
+              <p>단독 요법으로 UFC 정상화: CD 환자의 57/82명(25–93%). 200명 연구에서 UFC >50% 감소: 75%.</p>
+            </div>
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">주요 부작용</div>
+              <ul style="font-size: calc(11px * var(--fscale, 1));list-style:none;">
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)" class="v-red">특발성 간독성 (1/15,000): FDA Black Box Warning (2013)</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">경증 무증상 AST/ALT 상승: 10–15% (용량 증가 초기)</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">남성 성선기능저하증</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">위장관 증상</li>
+                <li style="padding:3px 0">산성 환경 필요 (약물 흡수) — PPI 사용 시 효과 감소</li>
+              </ul>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">모니터링</div>
+              <p style="font-size: calc(11px * var(--fscale, 1))">간기능 검사 정기 측정. 3× ULN 초과 시 감량 또는 중단. EMA: CS 전문의만 처방 가능.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Metyrapone — 11β-hydroxylase 억제제</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">기전</div>
+              <p>11-deoxycortisol → cortisol 전환 촉매하는 11β-hydroxylase 억제.</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">용량</div>
+              <p class="v-blue">500 mg/d ~ 6 g/d (6–8시간마다, 음식과 함께 복용)</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">효능</div>
+              <p>CS 환자 50–75% 고코르티솔혈증 조절. 91명 연구: ACTH 증가에도 불구하고 지속 조절.</p>
+            </div>
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">주요 부작용</div>
+              <ul style="font-size: calc(11px * var(--fscale, 1));list-style:none;">
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">위장관 증상 (음식과 함께 복용으로 감소)</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">다모증·여드름 악화 (안드로겐 전구체 축적)</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">고혈압, 부종, 저칼륨혈증 (무기코르티코이드 전구체)</li>
+                <li style="padding:3px 0">임신 중 사용 보고 있으나 일반 승인 아님</li>
+              </ul>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">주의사항</div>
+              <p style="font-size: calc(11px * var(--fscale, 1))" class="v-orange">11-deoxycortisol이 면역측정법에서 코르티솔과 교차반응 → UFC/혈청 코르티솔 위양성 높음. LC-MS/MS로 측정 권장.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Mitotane — 부신피질 세포독성 약제</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">기전</div>
+              <p>CYP11A1(P450 side-chain cleavage) 억제 + 부신피질에 직접 세포독성. 지방조직에 저장 → 반감기 길어 효과 지속.</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">용량/혈중농도</div>
+              <p class="v-blue">시작 250 mg → 500 mg/d ~ 8 g/d. UFC 정상화 목표 혈중농도: 중앙값 8.5 mg/L (ACC보다 낮음)</p>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">효능 (CD)</div>
+              <p>72–82% 지속적 관해. UFC 정상화까지 약 <strong>6개월</strong> 소요.</p>
+            </div>
+            <div>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:4px">주요 부작용</div>
+              <ul style="font-size: calc(11px * var(--fscale, 1));list-style:none;">
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">28%에서 중단 필요</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">위장관 증상, CNS 부작용</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)">여성형 유방, WBC 감소, 간효소 상승</li>
+                <li style="padding:3px 0;border-bottom:1px solid var(--border)" class="v-red">최기형성 — 투약 중단 후 수개월 이상 피임 필요</li>
+                <li style="padding:3px 0">CBG 증가 → total cortisol 상승 → UFC 또는 타액 코르티솔로 모니터링</li>
+              </ul>
+              <div style="font-size: calc(10px * var(--fscale, 1));font-weight:700;color:var(--text2);margin:8px 0 4px">GC 보충 주의</div>
+              <p style="font-size: calc(11px * var(--fscale, 1))" class="v-orange">CYP3A4 강한 유도 → 하이드로코르티손 청소율 증가. 초기 하이드로코르티손 용량을 1/3 증가 권고. Dexamethasone 금기(CYP3A4 유도제).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Etomidate — 응급 IV 치료</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="alert alert-danger" style="margin-bottom:8px">
+            <span>🚨</span>
+            <div>경구 약물 복용 불가한 중증 고코르티솔혈증 응급 상황에서 <strong>유일한</strong> 주사 가능 약물. ICU 모니터링 필수.</div>
+          </div>
+          <div class="grid2">
+            <div>
+              <p><strong>기전:</strong> 이미다졸 유도체. 저최면 용량에서 11-hydroxylase와 cholesterol side-chain cleavage 억제. 12–24시간 내 스테로이드 합성 억제.</p>
+              <p style="margin-top:6px"><strong>용량:</strong> Loading dose 3–5 mg → 지속 주입 0.03–0.10 mg/kg/h (2.5–3.0 mg/h)</p>
+            </div>
+            <div>
+              <p><strong>모니터링:</strong> 4–6시간마다 코르티솔 측정. 목표 혈청 코르티솔 10–20 μg/dL (280–560 nmol/L). 또는 차단 후 보충 전략.</p>
+              <p style="margin-top:6px"><strong>주의:</strong> propylene glycol 함유 제제 → 중심정맥로 권장. 신부전 시 유리 농도 증가 → 용량 감소.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 뇌하수체 표적 약물 (CD)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Cabergoline — 도파민 작용제</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <p><strong>기전:</strong> D2 수용체 고친화성 도파민 작용제. 코르티코트로프 선종 대부분에서 D2 수용체 발현.</p>
+              <p style="margin-top:6px"><strong>용량:</strong> <span class="v-blue">1–7 mg/주 (중앙값 2.1–3.5 mg/주)</span> — 고프로락틴혈증 치료 용량보다 높음.</p>
+            </div>
+            <div>
+              <p><strong>효능:</strong> 30–40% 환자에서 2–3년 후에도 정상 UFC 유지. 단, 초기 반응자의 29%에서 효과 소실.</p>
+              <p style="margin-top:6px"><strong>병합요법:</strong> Pasireotide 비반응자에 추가 시 추가 정상화 가능. Ketoconazole과의 병합도 효과적.</p>
+              <p style="margin-top:6px"><strong>부작용:</strong> 오심, 어지러움, 무기력. 고용량 시 판막 질환 모니터링 필요.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">
+          <span>Pasireotide — 소마토스타틴 유사체 (FDA 승인)</span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-2mod">2|⊕⊕⊕○</span> <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">CD (수술 비적응증 또는 수술 후 지속성)</span></div>
+          <div class="grid2">
+            <div>
+              <p><strong>기전:</strong> SST1,2,3,5 수용체에 결합. 코르티코트로프 선종에서 SST5 고발현. Octreotide·Lanreotide보다 SST1·5 친화성 높음.</p>
+              <p style="margin-top:6px"><strong>용량:</strong> <span class="v-blue">600–900 μg SC 1일 2회</span></p>
+              <p style="margin-top:6px"><strong>FDA 승인:</strong> 2012년 (미국·EU). 수술 비적응증 또는 수술 후 CD 적응증.</p>
+            </div>
+            <div>
+              <p><strong>효능 (Phase 3, 162명):</strong> 6개월 후 UFC 정상화 20%. 1–2개월 내 미반응자의 ~90%는 6–12개월에도 비조절 → 조기 효과 예측 가능.</p>
+              <p style="margin-top:6px"><strong>종양 효과:</strong> 종양 부피 44% 감소 (MRI에서 병변 있는 경우).</p>
+              <p style="margin-top:6px" class="v-red"><strong>핵심 부작용:</strong> 고혈당 <strong>73%</strong> — UFC 조절 여부와 무관하게 발생. DKA·고삼투압 혼수는 보고 없음. 담석·담즙 정체, 위장관 증상.</p>
+            </div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:8px">
+            <span>⚠️</span>
+            <div><strong>시작 전 검사:</strong> 간기능, 갑상선기능(free T4), IGF-1, 공복혈당/HbA1c, 담낭 초음파, 심전도(QTc). 식후 혈당 모니터링, 식후 투약 권고(식전 X). 저칼륨혈증·저마그네슘혈증 교정 후 시작.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> 글루코코르티코이드 수용체 길항제 — Mifepristone (FDA 승인)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-badges" style="margin-bottom:8px"><span class="grade grade-2mod">2|⊕⊕⊕○</span> <span style="font-size: calc(11px * var(--fscale, 1));color:var(--text2)">수술 비적응증 또는 수술 후 지속성 CS + 당뇨병/내당능 장애</span></div>
+      <div class="grid2">
+        <div>
+          <p><strong>기전:</strong> GC 수용체 길항제 + 항프로게스틴.</p>
+          <p style="margin-top:6px"><strong>용량:</strong> <span class="v-blue">300 mg/d부터 시작, 천천히 증량 → 300–1,200 mg/d</span>. 임상 지표(혈당, 체중) 기반으로 적정.</p>
+          <p style="margin-top:6px"><strong>FDA 승인:</strong> 수술 비적응증 또는 수술 후 지속성 CS 중 당뇨병/내당능 장애 환자에서 혈당 조절.</p>
+          <p style="margin-top:6px"><strong>효능:</strong> 고혈압/당뇨 개선 40/60%. 87%에서 임상 지표(체중, 우울, 인지, QOL) 1개 이상 개선.</p>
+        </div>
+        <div>
+          <div class="alert alert-danger" style="margin-bottom:8px">
+            <span>🚨</span>
+            <div><strong>핵심 모니터링 문제:</strong> 코르티솔 수치가 변화 없거나 상승 → <strong>코르티솔로 효과 및 부신기능저하증 판정 불가</strong>. 임상 증상(코르티솔 의존 변수)으로만 평가 가능하므로 용량 조절 매우 어려움.</div>
+          </div>
+          <p><strong>주요 부작용:</strong> 피로, 오심, 관절통, 두통(피질저하증 증상), 고혈압·저칼륨혈증·부종(무기코르티코이드 효과), 자궁내막 비후(항프로게스틴 효과).</p>
+          <p style="margin-top:6px">CD 환자에서 ACTH 2배 이상 상승, 거대선종 3개 크기 증가 가능 → 선종 크기 모니터링 필요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 약물치료 비교 요약표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="g-table">
+        <tr><th>약제</th><th>분류</th><th>FDA/EMA 승인</th><th>주요 장점</th><th>주요 단점</th><th>용량</th></tr>
+        <tr>
+          <td class="drug-name">Ketoconazole</td>
+          <td>합성억제</td>
+          <td>EMA 승인 (CS)</td>
+          <td class="drug-pro">빠른 효과, 경구</td>
+          <td class="drug-con">간독성 (Black Box), 약물상호작용</td>
+          <td>400–1,600 mg/d</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Metyrapone</td>
+          <td>합성억제</td>
+          <td>EMA 승인 (CS)</td>
+          <td class="drug-pro">빠른 효과, 경구</td>
+          <td class="drug-con">다모증, 코르티솔 측정 교란</td>
+          <td>500 mg ~ 6 g/d</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Mitotane</td>
+          <td>합성억제 + 세포독성</td>
+          <td>FDA 승인 (ACC)</td>
+          <td class="drug-pro">부신피질 세포독성, ACC 적응증</td>
+          <td class="drug-con">느린 효과, 최기형성, 약물상호작용 다수</td>
+          <td>250 mg ~ 8 g/d</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Etomidate</td>
+          <td>합성억제 (IV)</td>
+          <td>응급 비적응증</td>
+          <td class="drug-pro">빠른 IV 효과, 응급 사용</td>
+          <td class="drug-con">ICU 필요, 주사만 가능</td>
+          <td>0.03–0.10 mg/kg/h</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Pasireotide</td>
+          <td>뇌하수체 표적</td>
+          <td>FDA+EMA 승인 (CD)</td>
+          <td class="drug-pro">종양 부피 감소, CD 특이적</td>
+          <td class="drug-con">고혈당 73%, 주사, 비용 高</td>
+          <td>600–900 μg BID SC</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Cabergoline</td>
+          <td>뇌하수체 표적</td>
+          <td>비적응증 (off-label)</td>
+          <td class="drug-pro">경구, 내약성 양호</td>
+          <td class="drug-con">효과 소실 가능, 고용량 필요</td>
+          <td>1–7 mg/주</td>
+        </tr>
+        <tr>
+          <td class="drug-name">Mifepristone</td>
+          <td>GC 수용체 길항제</td>
+          <td>FDA 승인 (CS + DM/IGT)</td>
+          <td class="drug-pro">당뇨·혈압 개선</td>
+          <td class="drug-con">코르티솔 모니터링 불가, 용량 조절 어려움</td>
+          <td>300–1,200 mg/d</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 장기추적 ═══════════════ -->
+<div id="tab-followup" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 7. 장기 추적관찰 원칙 (권고 7.1–7.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1mod">1|⊕⊕⊕○</span></div>
+          <div class="rec-text"><strong>권고 7.1</strong> — 모든 CS 환자에서 심혈관 위험인자, 골다공증, 정신과 증상 등 CS 관련 동반질환을 <strong>해소될 때까지 평생 치료</strong>할 것을 권고한다. 또한 평생 재발 검사를 권고한다. 단, CT 밀도 &lt;10 HU 부신 선종을 절제한 경우는 예외.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-bp">BP</span></div>
+          <div class="rec-text"><strong>권고 7.2</strong> — 환자와 가족에게 관해의 임상적 특징에 대해 교육할 것을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-2low">2|⊕⊕○○</span></div>
+          <div class="rec-text"><strong>권고 7.3</strong> — 부신 선종 환자에서 CT 밀도 &lt;10 HU인 경우 CS 관련 동반질환에 대한 추적검사를 제안한다. 밀도 높거나 악성 가능성이 있는 경우 악성도 평가를 위한 영상검사를 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-1high">1|⊕⊕⊕⊕</span></div>
+          <div class="rec-text"><strong>권고 7.4</strong> — Carney 복합체 환자에서 심장 점액종 및 관련 질환(고환 종양, 말단비대증, 갑상선 병변)에 대한 <strong>평생 추적관찰</strong>을 권고한다.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❤️</span> 대사·심혈관 위험</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>CS 환자의 최소 2/3에서 대사증후군(중심비만, 고혈압, 인슐린저항성, 내당능 장애, 이상지질혈증). 심혈관 이환율 증가에 기여.</div>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">관해 후 개선 경과</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">체중·혈압: 수주~1년 내 개선</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">고혈압 25%에서 지속 가능</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">당뇨·이상지질혈증: 개선되나 BMI 대조군보다 유병률 높음</li>
+            <li style="padding:3px 0">5년 후에도 심혈관 위험 증가 지속</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">지속적 모니터링 필요 항목</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">🩸 혈압 — 주요 조절 가능한 심혈관 위험인자</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">🍬 혈당 (OGTT 권장; 공복혈당은 DM 과소진단)</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">📊 지질 프로필</li>
+            <li style="padding:3px 0">💊 GH 보충 시 당뇨 위험 모니터링 강화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 정신과·인지 기능</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: calc(12px * var(--fscale, 1));margin-bottom:8px">CS 환자에서 정신과적 이상 흔함. 관해 후 수년 경과 시에도 불안·우울·부적응적 인격 특성 유병률 증가. 단기 연구에서 1년 내 유의한 개선 보고.</p>
+      <div class="grid2">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">인지 장애</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">선언적 단기 기억 결핍이 주요 특징</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">주의력·시공간 능력·작업 기억 저하</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">해마·편도체·전두엽 위축 (영상)</li>
+            <li style="padding:3px 0">장기 관해 후에도 실행기능·기억력 지속 저하</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase">소아 특징</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">기분 변화, 과민성, 강박 행동, 학업 과잉 성취</li>
+            <li style="padding:3px 0">인지 기능 변화: 소아·성인 모두 연구 부족</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>정신건강의학과 의뢰 고려. 환자 및 가족에게 기분 개선은 서서히 이루어지며 1년 이상 지속적으로 향상됨을 설명.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골다공증·골절</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: calc(12px * var(--fscale, 1));margin-bottom:8px">코르티솔의 뼈세포 직접 효과 및 성선기능저하증·이차성 부갑상선기능항진증·GH 결핍·근무력증에 의한 간접 효과로 골다공증 발생. 완치 후 4–5년에 걸쳐 BMD 회복.</p>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>수술 후 과도한 하이드로코르티손 용량은 골회복 지연. 관해 후 증상 있는 골절 위험 소실. CS 완치 후 BMD 완전 정상화 여부는 불명확.</div>
+      </div>
+      <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-top:10px;margin-bottom:6px;text-transform:uppercase">권고 사항</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+        <li style="padding:4px 0;border-bottom:1px solid var(--border)">✅ 골절 평가, 척추·고관절 BMD 측정</li>
+        <li style="padding:4px 0;border-bottom:1px solid var(--border)">✅ 척추 측면 형태측정 영상</li>
+        <li style="padding:4px 0;border-bottom:1px solid var(--border)">✅ 칼슘·비타민D 충분 섭취</li>
+        <li style="padding:4px 0;border-bottom:1px solid var(--border)">✅ 과도한 GC 보충 회피</li>
+        <li style="padding:4px 0">✅ 글루코코르티코이드 유발 골다공증 합의문 참조</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 삶의 질 (QOL)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: calc(12px * var(--fscale, 1));margin-bottom:8px">활성 CS에서 다른 뇌하수체 종양 환자보다 HRQOL 현저히 저하. 완치 후에도 장기적 신체·사회적 기능 손상, 일상활동 제한, 피로·수면 문제·활력 감소 지속.</p>
+      <div class="grid2">
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px">관해 후 개선되는 것</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">체중·멍·안면 외모: 가장 먼저 개선</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">우울·감정 불안정: 개선</li>
+            <li style="padding:3px 0">QOL: 고코르티솔혈증 시보다 향상</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--text2);margin-bottom:6px">장기적 잔여 손상</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));list-style:none;">
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">신체·사회적 기능 지속 손상</li>
+            <li style="padding:3px 0;border-bottom:1px solid var(--border)">심리·인지 장애 잔존</li>
+            <li style="padding:3px 0">직장 복귀 불가 등 사회경제적 결과</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>💡</span>
+        <div>관해 후 6–9개월은 몸 상태가 좋지 않을 수 있고, 기분은 서서히 개선됨을 환자에게 미리 설명. 근력·체중 최적화를 위한 재활의학·영양 상담 권장.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ 약어집 ═══════════════ -->
+<div id="tab-abbr" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 약어 및 용어 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+/* ── Abbreviations ── */
+const abbrs = [
+  ["ACC","부신피질 암종 (Adrenocortical carcinoma) — 악성 부신피질 종양; 미토탄 승인 적응증"],
+  ["ACTH","부신피질자극호르몬 (Adrenocorticotropic hormone) — 뇌하수체 전엽에서 분비; 부신 코르티솔 합성 자극"],
+  ["ARMC5","Armadillo repeat-containing protein 5 — BMAH 관련 종양억제유전자; 가족성 검사 적응증"],
+  ["BIPSS","양측 하추체 정맥동 혈액 채취 (Bilateral inferior petrosal sinus sampling) — 뇌하수체 vs 이소성 ACTH 감별"],
+  ["BMAH","양측성 거대결절성 부신 과형성 (Bilateral macronodular adrenal hyperplasia)"],
+  ["BMD","골밀도 (Bone mineral density)"],
+  ["BP","모범진료 원칙 (Best practice statement) — GRADE 비등급 권고"],
+  ["CBG","코르티솔 결합 글로불린 (Cortisol-binding globulin) — 미토탄 투여 시 증가 → total cortisol 상승"],
+  ["CD","쿠싱병 (Cushing disease) — 뇌하수체 ACTH 분비 선종에 의한 쿠싱증후군"],
+  ["CS","쿠싱증후군 (Cushing syndrome) — 장기적 고코르티솔혈증에 의한 증후군 총칭"],
+  ["CRH","부신피질자극호르몬 방출 호르몬 (Corticotropin-releasing hormone) — 시상하부 분비; ACTH 자극"],
+  ["CT","전산화단층촬영 (Computerized tomography)"],
+  ["CYP3A4","사이토크롬 P450 3A4 — 간 주요 대사 효소; 미토탄이 강하게 유도"],
+  ["EAS","이소성 ACTH 증후군 (Ectopic ACTH secretion) — 비뇨하수체 종양에서 ACTH 분비"],
+  ["ESE","유럽내분비학회 (European Society of Endocrinology)"],
+  ["FDA","미국 식품의약국 (Food and Drug Administration)"],
+  ["GC","글루코코르티코이드 (Glucocorticoid)"],
+  ["GH","성장호르몬 (Growth hormone)"],
+  ["GRADE","권고등급 평가·개발·평가 시스템 (Grading of Recommendations Assessment Development and Evaluation)"],
+  ["HC","하이드로코르티손 (Hydrocortisone) — GC 보충요법 선호 약제"],
+  ["HPA","시상하부-뇌하수체-부신 축 (Hypothalamic-pituitary-adrenal axis)"],
+  ["HRQOL","건강 관련 삶의 질 (Health-related quality of life)"],
+  ["IGT","내당능 장애 (Impaired glucose tolerance)"],
+  ["LC-MS/MS","액체 크로마토그래피/탠덤 질량분석법 — 메티라폰 사용 시 코르티솔 특이적 측정"],
+  ["MC","무기코르티코이드 (Mineralocorticoid) — 양측 부신절제 후 평생 보충 필요"],
+  ["MRI","자기공명영상 (Magnetic resonance imaging)"],
+  ["Nelson","Nelson 증후군 — 양측 부신절제 후 CD에서 코르티코트로프 종양 진행; 색소침착·ACTH 극도 상승"],
+  ["PPNAD","원발성 색소침착성 결절성 부신피질이형성증 (Primary pigmented nodular adrenocortical disease)"],
+  ["QOL","삶의 질 (Quality of life)"],
+  ["RT","방사선치료 (Radiation therapy)"],
+  ["SMR","표준화사망비 (Standardized mortality ratio) — 관찰/기대 사망수 비율"],
+  ["SST","소마토스타틴 수용체 (Somatostatin receptor) — Pasireotide 작용 표적"],
+  ["TSS","경접형동 선택적 선종 절제술 (Transsphenoidal selective adenomectomy) — CD 1차 수술 치료"],
+  ["UFC","24시간 요 유리 코르티솔 (Urine free cortisol) — CS 진단·치료 모니터링 주요 지표"],
+  ["VTE","정맥혈전색전증 (Venous thromboembolism) — CS에서 위험 증가; 수술 후 4주 위험 최고"],
+];
+
+function buildAbbr() {
+  const sorted = abbrs.slice().sort((a, b) => a[0].localeCompare(b[0]));
+  const html = sorted.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  document.getElementById('abbr-main-grid').innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 460;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+// Initialize cards collapsed by default (except first card in each panel which starts open)
+document.querySelectorAll('.card-header').forEach(hdr => {
+  if (!hdr.classList.contains('open')) {
+    hdr.nextElementSibling.classList.add('collapsed');
+  }
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

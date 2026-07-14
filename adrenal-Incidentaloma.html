@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESE 2023 부신 우연종 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #7c3aed;
+    --accent2: #5b21b6;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --rec-strong: #1a7f37;
+    --rec-weak: #0550ae;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); font-weight: 600; }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 100px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES (GRADE system) ── */
+  .grade { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  /* Recommend = strong */
+  .grade-rec { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  /* Suggest = weak */
+  .grade-sug { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  /* Good practice */
+  .grade-gp  { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  /* Evidence quality */
+  .grade-vl { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }   /* very low ⊕○○○ */
+  .grade-lo { background: #ffe4c4; color: #bc4c00; border: 1px solid #bc4c00; }   /* low ⊕⊕○○ */
+  .grade-mo { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }   /* moderate ⊕⊕⊕○ */
+  .grade-hi { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }   /* high ⊕⊕⊕⊕ */
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    max-width: 260px;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-num { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: var(--text2); white-space: nowrap; margin-top: 2px; min-width: 32px; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+  .rec-text em { color: var(--orange); font-style: normal; font-weight: 600; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid #0550ae;       color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-purple  { background: #f3e8ff; border-left: 3px solid var(--accent); color: var(--accent2); }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,0.02); }
+  .tbl .section-row td { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── HU COLOR CELLS ── */
+  .hu-low   { background: #dafbe1; color: #116329; font-weight: 600; text-align: center; }
+  .hu-mid   { background: #fff8c5; color: #7d4e00; font-weight: 600; text-align: center; }
+  .hu-high  { background: #ffe4c4; color: #bc4c00; font-weight: 600; text-align: center; }
+  .hu-vhigh { background: #ffebe9; color: #82071e; font-weight: 600; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-hdr .acc-toggle { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.6; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-new     { background: #dafbe1; color: var(--green); }
+  .pill-changed { background: #fff8c5; color: var(--yellow); }
+  .pill-major   { background: #ffebe9; color: var(--red); }
+
+  /* ── BADGE ── */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .badge-benign   { background: #dafbe1; color: #116329; }
+  .badge-indet    { background: #fff8c5; color: #7d4e00; }
+  .badge-malig    { background: #ffebe9; color: #82071e; }
+  .badge-macs     { background: #f3e8ff; color: var(--accent2); }
+  .badge-pheo     { background: #ffe4c4; color: #bc4c00; }
+  .badge-pa       { background: #ddf4ff; color: #0550ae; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .text-muted { color: var(--text2); }
+
+  /* ── FLOWCHART ── */
+  .flow-box {
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: calc(11px * var(--fscale, 1));
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 600;
+    background: var(--surface);
+    position: relative;
+    margin: 2px 0;
+  }
+  .flow-box.blue  { border-color: #0550ae; background: #ddf4ff; color: #0550ae; }
+  .flow-box.green { border-color: #1a7f37; background: #dafbe1; color: #116329; }
+  .flow-box.yellow{ border-color: #9a6700; background: #fff8c5; color: #7d4e00; }
+  .flow-box.red   { border-color: var(--red); background: #ffebe9; color: #82071e; }
+  .flow-box.purple{ border-color: var(--accent); background: #f3e8ff; color: var(--accent2); }
+  .flow-box.gray  { border-color: var(--border); background: var(--surface2); color: var(--text); }
+  .flow-arrow { text-align: center; font-size: calc(16px * var(--fscale, 1)); color: var(--text2); margin: 1px 0; line-height: 1; }
+  .flow-row { display: flex; gap: 8px; align-items: flex-start; justify-content: center; margin: 4px 0; }
+  .flow-row .flow-box { flex: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">ESE·ENSAT 2023</span>
+      <h1>부신 우연종(Adrenal Incidentaloma) 진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1093/ejendo/lvad066" class="source-link" target="_blank">Eur J Endocrinol 2023;189:G1–G42 (Fassnacht M et al.) ↗</a>
+      <span class="meta"> · ESE / ENSAT · June 2023</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ESE or ENSAT</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('imaging')">🖼️ 영상 평가</div>
+    <div class="tab" onclick="showTab('hormone')">🧪 호르몬 검사</div>
+    <div class="tab" onclick="showTab('macs')">⚡ MACS</div>
+    <div class="tab" onclick="showTab('surgery')">🔪 수술</div>
+    <div class="tab" onclick="showTab('followup')">📅 추적관찰</div>
+    <div class="tab" onclick="showTab('special')">👥 특수상황</div>
+    <div class="tab" onclick="showTab('changes')">🆕 주요변경</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ TAB 1: 개요 ═══ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">3%</div><div class="stat-lbl">성인 &gt;50세 영상에서 부신 우연종 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--orange)">80–85%</div><div class="stat-lbl">부신피질 선종 (대부분 비기능성)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent)">20–50%</div><div class="stat-lbl">MACS 빈도 (선종 중)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">0.4–4%</div><div class="stat-lbl">부신피질암(ACC) 빈도</div></div>
+  </div>
+
+  <!-- 정의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 핵심 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple">
+        <span>📌</span>
+        <div><strong>부신 우연종(Adrenal Incidentaloma)</strong> = 부신 질환이 의심되지 않는 상태에서 시행된 영상 검사에서 우연히 발견된 부신 종괴 (≥1 cm).<br>
+        유전성 증후군 관련 부신 종양, 악성 종양 병기 결정 중 발견된 종양은 엄격한 의미의 정의에서 제외.</div>
+      </div>
+
+      <div class="grid2" style="margin-top:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">4가지 핵심 임상 질문</div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="toggleAcc(this)"><span>① 악성 위험도 평가</span><span class="acc-toggle">▾</span></div>
+            <div class="acc-body">영상(비조영 CT HU, MRI chemical shift, FDG-PET/CT)으로 양성/악성 감별. HU ≤10이면 양성으로 추가 영상 불필요.</div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="toggleAcc(this)"><span>② MACS 정의 및 관리</span><span class="acc-toggle">▾</span></div>
+            <div class="acc-body">1 mg DST 후 코르티솔 &gt;50 nmol/L인 경우 MACS. 과거 "가능 자율성 분비" vs "자율성 분비" 이분법 폐기. MACS 단일 용어로 통일.</div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="toggleAcc(this)"><span>③ 수술 여부와 방법</span><span class="acc-toggle">▾</span></div>
+            <div class="acc-body">호르몬 과잉 또는 영상상 악성 의심 시 수술. 비기능성 양성 병변은 수술 불필요. 양성 병변 수술 시 최소침습법 권고.</div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="toggleAcc(this)"><span>④ 추적관찰 전략</span><span class="acc-toggle">▾</span></div>
+            <div class="acc-body">명확한 양성 병변: 추가 영상 불필요(크기 제한 없음). 불확정 병변: 6–12개월 후 비조영 CT/MRI. MACS: 연 1회 동반질환 평가.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--accent2);margin-bottom:6px">원인별 빈도</div>
+          <table class="tbl">
+            <tr><th>원인</th><th>빈도</th></tr>
+            <tr><td>부신피질 선종 (비기능성)</td><td>40–70%</td></tr>
+            <tr><td><span class="badge badge-macs">MACS</span> 동반 선종</td><td>20–50%</td></tr>
+            <tr><td>원발성 알도스테론증(PA)</td><td>2–5%</td></tr>
+            <tr><td>현성 쿠싱증후군</td><td>1–4%</td></tr>
+            <tr><td>골수지방종(Myelolipoma)</td><td>3–6%</td></tr>
+            <tr><td><span class="badge badge-pheo">갈색세포종(PPGL)</span></td><td>1–5%</td></tr>
+            <tr><td><span class="badge badge-malig">부신피질암(ACC)</span></td><td>0.4–4%</td></tr>
+            <tr><td>전이성 악성 병변</td><td>3–7%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전체 처음 접근 흐름도 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 전체 관리 알고리즘 (Figure 4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="max-width:560px;margin:0 auto">
+        <div class="flow-box blue">부신 우연종 발견<br><small style="font-weight:400">부신 외 악성 병력자 → 특수 섹션 참조</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-row">
+          <div class="flow-box yellow">악성 위험도 평가<br><small style="font-weight:400">비조영 CT (1차)<br>HU &gt;10 → 추가 영상</small></div>
+          <div class="flow-box yellow">기능성 평가<br><small style="font-weight:400">1 mg DST<br>혈장/소변 메타네프린<br>알도스테론/레닌비 (HTN·저K⁺)</small></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-row">
+          <div class="flow-box green" style="flex:1">비기능성<br>양성 병변<br><small style="font-weight:400">추가 검사 불필요</small></div>
+          <div class="flow-box yellow" style="flex:1">불확정 종괴<br><small style="font-weight:400">MDT 논의 후 결정</small></div>
+          <div class="flow-box purple" style="flex:1">MACS 동반<br>양성 병변<br><small style="font-weight:400">동반질환 평가</small></div>
+          <div class="flow-box red" style="flex:1">임상적 호르몬 과잉<br>또는 악성 의심<br><small style="font-weight:400">수술 고려</small></div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span><div>MDT(다학제팀) 논의 필요 상황: ① 양성 영상 소견 불충족, ② MACS + 임상적으로 의미있는 동반질환, ③ 수술 고려, ④ 추적 영상에서 유의한 성장.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R.1.1 MDT -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👥</span> R.1.1 다학제팀(MDT) 논의 — 일반 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.1.1</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec" data-tip="Recommend (강권고)">RECOMMEND</span>
+          </div>
+          <div class="rec-text">다음 중 하나 이상에 해당하면 <strong>다학제 전문팀 회의</strong>에서 논의할 것:
+          <ul style="margin-top:4px;padding-left:16px;line-height:1.8">
+            <li>영상이 양성 병변에 합당하지 않은 경우</li>
+            <li>호르몬 과잉 근거 (임상적으로 의미있는 동반질환 동반 MACS 포함)</li>
+            <li>수술 고려 시</li>
+            <li>추적 영상에서 유의한 종양 성장 근거</li>
+          </ul>
+          <div style="margin-top:4px"><span class="badge" style="background:#f3e8ff;color:var(--accent2)">MDT 구성</span> <small>부신 경험 풍부한 내분비내과, 영상의학과, 외과 — 핵심 3인</small></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+
+<!-- ═══ TAB 2: 영상 평가 ═══ -->
+<div id="tab-imaging" class="panel">
+
+  <!-- 요약 권고표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 영상별 양성 판단 기준 (Table 4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>영상 방법</th><th>양성 판단 기준</th><th>근거 수준</th></tr>
+        <tr>
+          <td><strong>비조영 CT</strong><br><small class="text-muted">1차 선택</small></td>
+          <td>HU ≤ 10 (균질, 크기 무관)</td>
+          <td><span class="grade grade-mo">⊕⊕⊕○ 중등도</span></td>
+        </tr>
+        <tr>
+          <td><strong>FDG-PET/CT</strong></td>
+          <td>FDG 섭취 없거나 간보다 낮음<br><small class="text-muted">⚠ 일부 신장암·저등급 림프종은 FDG 음성 가능</small></td>
+          <td><span class="grade grade-vl">⊕○○○ 매우 낮음</span></td>
+        </tr>
+        <tr>
+          <td><strong>MRI Chemical Shift</strong></td>
+          <td>Out-of-phase에서 신호강도 소실 (지질풍부 선종)</td>
+          <td><span class="grade grade-vl">⊕○○○ 매우 낮음</span></td>
+        </tr>
+        <tr>
+          <td><strong>CT Washout (지연조영)</strong></td>
+          <td>상대적 washout &gt;58%<br><small class="text-muted">⚠ 단일 연구 기반; 외부 검증 필요. 균질 병변에만 적용</small></td>
+          <td><span class="grade grade-vl">⊕○○○ 매우 낮음</span></td>
+        </tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span><div>Washout CT는 <strong>균질 병변에만</strong> 적용. 불균질 병변에는 MRI나 PET/CT 적용 금지. 측정 ROI는 병변의 75% 이상 포함.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HU 기반 알고리즘 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖼️</span> 비조영 CT HU 기반 의사결정 (Figure 5 / R.2.2–R.2.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl" style="margin-bottom:10px">
+        <tr><th>HU / 크기 / 균질성</th><th>악성 위험</th><th>즉각 처치</th><th>추적관찰</th></tr>
+        <tr>
+          <td><strong>HU ≤ 10</strong> (크기·균질성 무관)<br><small class="text-muted">R.2.3 ⊕⊕⊕○</small></td>
+          <td class="hu-low">양성<br>(매우 낮음)</td>
+          <td>추가 영상 불필요</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>HU 11–20</strong>, 균질, 크기 &lt;4 cm<br><small class="text-muted">R.2.4 ⊕○○○</small></td>
+          <td class="hu-mid">낮음<br>(&gt;90% 양성)</td>
+          <td>즉각 추가 영상 권장<br><small>(FDG-PET/CT, MRI, Washout CT 중 택1)</small></td>
+          <td>또는 12개월 후 비조영 CT/MRI</td>
+        </tr>
+        <tr>
+          <td><strong>HU &gt; 20</strong>, 균질, 크기 &lt;4 cm<br>또는 HU 11–20, 크기 ≥4 cm<br>또는 불균질, 크기 &lt;4 cm<br><small class="text-muted">R.2.6 ⊕○○○</small></td>
+          <td class="hu-high">중간<br>(낮지만 주의)</td>
+          <td>MDT 논의 후 추가 영상 우선<br><small>(FDG-PET/CT 선호)</small></td>
+          <td>수술 미시행 시 6–12개월 비조영 CT/MRI</td>
+        </tr>
+        <tr>
+          <td><strong>HU &gt; 20</strong> + 불균질 + 크기 ≥4 cm<br><small class="text-muted">R.2.5 ⊕○○○</small></td>
+          <td class="hu-vhigh">높음<br>(최대 50%)</td>
+          <td>MDT 논의 → 대부분 즉각 수술<br><small>수술 전 전신 병기 (흉부 CT 필수 ± FDG-PET/CT)</small></td>
+          <td>수술 미시행 시 6–12개월 영상</td>
+        </tr>
+      </table>
+
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>악성 의심 없는 경우 종괴 크기만으로 수술 결정 금지 (2016 가이드라인의 4 cm 기준 <strong>폐기</strong>). 영상 소견·호르몬·환자 상태·환자 선호를 종합 판단.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R.2.7 생검 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> R.2.7–R.2.8 생검 / 스테로이드 프로파일링</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.2.7</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec" data-tip="Recommend (강권고)">RECOMMEND</span>
+            <span class="grade grade-rec" data-tip="Against (반대 강권고)">AGAINST</span>
+          </div>
+          <div class="rec-text"><strong>부신 생검은 원칙적으로 금지</strong>. 단, 부신 외 악성 종양 병력 있는 환자에서 아래 3가지 모두 충족 시에만 고려 (R.6.3.5):
+            <ul style="margin-top:4px;padding-left:16px;line-height:1.8">
+              <li>① 호르몬 비활성 (특히 PPGL 제외됨)</li>
+              <li>② 영상으로 양성 확정 불가</li>
+              <li>③ 생검 결과가 임상 관리를 바꿀 경우</li>
+            </ul>
+            <div class="alert alert-danger" style="margin-top:6px"><span>⚠️</span><div>ACC 의심 시 생검 절대 금지 — 종양 파종 위험, R0 절제 불가 및 생존 악화.</div></div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.2.8</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">영상 또는 임상적으로 <strong>ACC 의심 시</strong>: 다중 스테로이드 프로파일링(tandem mass spectrometry)으로 성 호르몬·스테로이드 전구체 측정.<br>
+          <small class="text-muted">DHEA-S, 안드로스텐디온, 17-OHP, 11-deoxycortisol, 여성 testosterone, 남성·폐경 후 여성 estradiol.</small></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-imaging -->
+
+
+<!-- ═══ TAB 3: 호르몬 검사 ═══ -->
+<div id="tab-hormone" class="panel">
+
+  <div class="alert alert-purple" style="margin-bottom:10px">
+    <span>📌</span><div><strong>모든</strong> 부신 우연종 환자에서 임상 평가 + 1 mg DST 필수. 비조영 CT HU ≤10인 경우에도 DST는 시행.</div>
+  </div>
+
+  <!-- 권고안 목록 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> R.3.1–R.3.10 호르몬 검사 권고안</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.3.1</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">모든 환자: 부신 호르몬 과잉의 증상·징후에 대한 <strong>철저한 임상 평가</strong> (병력청취 + 신체검진).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.2</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-mo" data-tip="Moderate quality ⊕⊕⊕○">⊕⊕⊕○</span>
+          </div>
+          <div class="rec-text">모든 환자: <strong>1 mg 야간 덱사메타손 억제검사(DST)</strong> 시행하여 자율 코르티솔 분비 배제.<br>
+          <small class="text-muted">예외: 기대여명이 짧은 허약한 환자에서는 생략 가능.</small></div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.3</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">DST 결과는 이분법(예/아니오)이 아닌 <strong>연속변수</strong>로 해석. 단, 자율 코르티솔 분비 <strong>배제 기준</strong>: 덱사메타손 후 혈청 코르티솔 <strong>≤50 nmol/L (≤1.8 µg/dL)</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.4</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">현성 쿠싱 징후 없는 환자에서 덱사메타손 후 코르티솔 <strong>&gt;50 nmol/L</strong>: 억제 정도와 무관하게 <strong>MACS</strong>로 진단.<br>
+          확인 후: ① ACTH 비의존성 확인, ② DST에 영향을 주는 인자 고려, ③ DST 반복 확인 권장.
+          <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>2016 가이드라인의 "가능 자율성 분비 (51–138 nmol/L)" vs "자율성 분비 (&gt;138 nmol/L)" 이분 구분 <strong>폐기</strong>. MACS 단일 용어 사용.</div></div>
+          </div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.5</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-mo" data-tip="Moderate quality ⊕⊕⊕○">⊕⊕⊕○</span>
+          </div>
+          <div class="rec-text">MACS 환자를 <em>현성 쿠싱증후군으로 진행할 고위험군으로 간주하지 말 것</em>. 진행률 &lt;1%.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.6</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">MACS 환자: <strong>고혈압, 2형 당뇨</strong> 선별 필수, 적절한 치료 제공.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.7</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">MACS 환자: <strong>척추 골절</strong> 선별 고려 및 적절한 치료.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.9</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text"><strong>갈색세포종(PPGL) 배제</strong>: 양성 선종에 전형적이지 않은 영상 소견 (HU &gt;10) 모든 환자에서 혈장 유리 메타네프린 또는 소변 분획 메타네프린 측정.<br>
+          <small class="text-muted">비조영 CT HU ≤10 → PPGL 가능성 거의 없으므로 측정 생략 가능.</small></div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.3.10</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">동반된 <strong>고혈압 또는 원인불명 저칼륨혈증</strong>: <strong>알도스테론/레닌비(ARR)</strong>로 원발성 알도스테론증 선별.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 추가 검사 지침 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 검사별 함정 및 해석 주의사항</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>검사</th><th>주의사항</th></tr>
+        <tr><td>1 mg DST</td><td>위양성 원인: CYP3A4 유도 약물(리팜피신, 페니토인), 고용량 에스트로겐, 우울증, 알코올, 비만. 덱사메타손 혈중농도 동시 측정으로 위양성 감별 가능.</td></tr>
+        <tr><td>DHEA-S</td><td>저하 시 HPA 억제 지표 → MACS 진단 보조. 연령·성별 보정 필요. 일부 전문가는 MACS 스크리닝에 활용.</td></tr>
+        <tr><td>메타네프린</td><td>삼환계 항우울제, 레복시에틴, 레보도파, 메클로페나민 등이 위양성 유발. 앙와위 vs 좌위 채혈 기준 차이 주의.</td></tr>
+        <tr><td>ARR</td><td>약물 영향(베타차단제, 이뇨제, ACE억제제 등) 고려. 아침 기립 후 2시간 경과 후 채혈 표준.</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /tab-hormone -->
+
+
+<!-- ═══ TAB 4: MACS ═══ -->
+<div id="tab-macs" class="panel">
+
+  <!-- MACS 정의 강조 -->
+  <div class="alert alert-purple" style="margin-bottom:10px">
+    <span>⚡</span>
+    <div><strong>MACS (Mild Autonomous Cortisol Secretion)</strong> = 현성 쿠싱 징후 없이, 1 mg DST 후 코르티솔 &gt;50 nmol/L (&gt;1.8 µg/dL). 억제 정도와 무관하게 단일 진단 기준 적용.</div>
+  </div>
+
+  <!-- MACS 의사결정 알고리즘 Figure 6 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> MACS 관리 알고리즘 (Figure 6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="max-width:500px;margin:0 auto">
+        <div class="flow-box gray">외관상 양성 부신 우연종</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box blue">1 mg DST</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-row">
+          <div>
+            <div class="flow-box green" style="font-size: calc(11px * var(--fscale, 1))">코르티솔 ≤50 nmol/L<br><small>자율 분비 없음</small></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box green" style="font-size: calc(10px * var(--fscale, 1))">치료 불필요<br>추적 불필요</div>
+          </div>
+          <div style="font-size: calc(18px * var(--fscale, 1));align-self:center;color:var(--text2);padding:0 8px">→</div>
+          <div style="flex:2">
+            <div class="flow-box yellow" style="font-size: calc(11px * var(--fscale, 1))">코르티솔 &gt;50 nmol/L<br><small>현성 쿠싱 증상?</small></div>
+            <div class="flow-arrow">↓ 없음</div>
+            <div class="flow-box purple" style="font-size: calc(11px * var(--fscale, 1))">MACS</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box gray" style="font-size: calc(11px * var(--fscale, 1))">코르티솔 관련 동반질환?<br><small>(당뇨·고혈압·이상지질혈증·골다공증)</small></div>
+            <div class="flow-row" style="margin-top:4px">
+              <div class="flow-box green" style="font-size: calc(10px * var(--fscale, 1))">동반질환 없음<br>ACTH 독립성 확인<br>→ 연 1회 동반질환 모니터링</div>
+              <div class="flow-box yellow" style="font-size: calc(10px * var(--fscale, 1))">동반질환 있음<br>ACTH 독립성 확인<br>→ 수술 논의 고려</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MACS 동반질환 데이터 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> MACS 관련 이환율·사망률 (Figure 3 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>결과 지표</th><th>MACS vs 비기능성 (RR 또는 HR)</th><th>연구 수 / 환자 수</th></tr>
+        <tr><td>전원인 사망률</td><td><strong style="color:var(--red)">HR 1.54 (1.27–1.81)</strong></td><td>4개 연구 / 5,921명</td></tr>
+        <tr><td>2형 당뇨</td><td>RR 1.44 (1.23–1.69) — 15–40% 높음</td><td>14개 / 9,375명</td></tr>
+        <tr><td>고혈압</td><td>RR 1.24 (1.16–1.32)</td><td>18개 / 10,031명</td></tr>
+        <tr><td>이상지질혈증</td><td>RR 1.23 (1.13–1.34)</td><td>12개 / 7,769명</td></tr>
+        <tr><td>척추 골절</td><td>RR 1.08 (0.68–1.71)<br><small class="text-muted">컷오프 3 µg/dL 적용 시 일부 연구에서 유의</small></td><td>3개 / 637명</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span><div>사망 위험 증가는 주로 <strong>65세 미만 MACS</strong> 환자에서 현저. 특히 65세 미만 여성에서 두드러짐 (Deutschbein 2022, Lancet Diabetes Endocrinol).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MACS 수술 권고 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> R.3.8 MACS 수술 고려 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.3.8</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">
+            단측 종괴 + MACS + 관련 동반질환 → 수술 옵션 논의.<br>
+            수술 고려 동반질환 특성 (1개 이상 해당 시):
+            <ul style="margin-top:4px;padding-left:16px;line-height:1.9">
+              <li>① 진행성</li>
+              <li>② 치료 어려움</li>
+              <li>③ 연령 대비 부적절한 장기 손상</li>
+              <li>④ 연령 대비 이례적이거나 가족력과 불일치</li>
+              <li>⑤ 복수 동반질환</li>
+            </ul>
+            <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>고려 인자: 나이, 성별, 전신 상태, 덱사메타손 억제 정도·지속성, 동반질환 중증도, 환자 선호. <strong>반드시 MDT 논의</strong> 후 결정.</div></div>
+            수술 전 확인 필수: ① 반복 DST로 MACS 확인, ② 낮은/억제된 아침 ACTH로 ACTH 비의존성 확인.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MACS 추적 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📅</span> R.5.4 MACS 비수술 추적관찰</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.5.4</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">
+            수술 미시행 MACS: <strong>연 1회 동반질환 평가</strong>만 권장. 내분비 전문의 추적 불필요 시 1차 의료기관으로 이관 가능.<br>
+            <div style="margin-top:6px">연 1회 평가 항목: HbA1c, 혈압(활동혈압 이상적), LDL/HDL, 중성지방, 체중</div>
+            <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>동반질환이 악화되거나 새로 발생하면 내분비 전문의에게 재의뢰 → 내분비 재평가 + 수술 재논의.</div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-macs -->
+
+
+<!-- ═══ TAB 5: 수술 ═══ -->
+<div id="tab-surgery" class="panel">
+
+  <!-- 수술 알고리즘 Figure 7 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 수술 적응증 알고리즘 (Figure 7)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="max-width:560px;margin:0 auto">
+        <div class="flow-box blue">단측 부신 종괴 (MDT 논의 선행)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box gray">영상상 악성 의심?</div>
+        <div class="flow-row">
+          <div style="flex:1">
+            <div class="flow-arrow">↓ 아니오</div>
+            <div class="flow-box gray" style="font-size: calc(11px * var(--fscale, 1))">임상적으로 의미있는<br>호르몬 과잉?</div>
+            <div class="flow-row">
+              <div style="flex:1"><div class="flow-arrow">↓ 아니오</div><div class="flow-box green" style="font-size: calc(10px * var(--fscale, 1))">수술 불필요</div></div>
+              <div style="flex:1"><div class="flow-arrow">↓ 예</div><div class="flow-box purple" style="font-size: calc(10px * var(--fscale, 1))">최소침습 부신절제술</div></div>
+            </div>
+          </div>
+          <div style="flex:1">
+            <div class="flow-arrow">↓ 예</div>
+            <div class="flow-box gray" style="font-size: calc(11px * var(--fscale, 1))">국소 침윤 소견?</div>
+            <div class="flow-row">
+              <div style="flex:1">
+                <div class="flow-arrow">↓ 아니오</div>
+                <div class="flow-box gray" style="font-size: calc(10px * var(--fscale, 1))">직경 ≤6 cm?</div>
+                <div class="flow-row">
+                  <div style="flex:1"><div class="flow-arrow">↓ 예</div><div class="flow-box purple" style="font-size: calc(9px * var(--fscale, 1))">고볼륨 전문 외과의에 의한 최소침습 부신절제술</div></div>
+                  <div style="flex:1"><div class="flow-arrow">↓ 아니오</div><div class="flow-box yellow" style="font-size: calc(9px * var(--fscale, 1))">개별화 수술 방법 (MDT 논의)</div></div>
+                </div>
+              </div>
+              <div style="flex:1">
+                <div class="flow-arrow">↓ 예</div>
+                <div class="flow-box red" style="font-size: calc(10px * var(--fscale, 1))">고볼륨 전문 외과의에 의한 개복 부신절제술</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수술 권고안 목록 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> R.4.1–R.4.8 수술 권고안</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.4.1</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">임상적으로 유의한 호르몬 과잉 동반 단측 종양: <strong>부신절제술이 표준치료</strong> (PA, 현성 쿠싱, PPGL). MACS + 관련 동반질환 시 개별화 판단.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.2</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-rec">AGAINST</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">증상 없는 비기능성 단측 종괴 + 영상상 명확한 양성: <strong>수술 금지</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.3</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">호르몬 과잉 동반 양성 종괴 수술 (MACS 포함): <strong>최소침습법 권장</strong>. <small class="text-muted">(신규 권고안)</small></div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.4</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">악성 의심 종괴 (R.2.4–2.6), 직경 <strong>≤6 cm</strong>, 국소 침윤 없음: <strong>고볼륨 전문 외과의에 의한 최소침습법</strong>. 최소 연 12회, 이상적으로 연 20회 이상 부신절제술 경험 필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.5</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">악성 의심 + <strong>국소 침윤 소견</strong>: 고볼륨 전문 외과의에 의한 <strong>개복 부신절제술</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.7</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">수술 전 1 mg DST 아침 코르티솔 &gt;50 nmol/L인 모든 수술 환자: <strong>수술 스트레스 용량 글루코코르티코이드 투여</strong>.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.4.8</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+          </div>
+          <div class="rec-text">수술 후 MACS 환자: <strong>HPA 축 회복 확인까지 내분비 전문의 추적 관찰</strong> 필수. 글루코코르티코이드 금단 증후군 발생 가능. <small class="text-muted">(신규 권고안)</small></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-surgery -->
+
+
+<!-- ═══ TAB 6: 추적관찰 ═══ -->
+<div id="tab-followup" class="panel">
+
+  <!-- 핵심 변경 강조 -->
+  <div class="alert alert-success" style="margin-bottom:10px">
+    <span>✅</span><div><strong>2023 가이드라인 핵심 변경</strong>: 양성 병변 확정 시 크기 제한 없이 추가 영상 불필요 (2016년 4 cm 미만 기준 폐기). 비기능성 병변 호르몬 재검사도 원칙적으로 불필요.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📅</span> R.5.1–R.5.4 추적관찰 권고안</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.5.1</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-rec">AGAINST</span>
+            <span class="grade grade-mo" data-tip="Moderate quality ⊕⊕⊕○">⊕⊕⊕○</span>
+          </div>
+          <div class="rec-text">영상상 <strong>명확한 양성 소견</strong>: <em>추가 영상 추적관찰 금지</em> (크기 무관). <span class="pill pill-changed">2016 변경: 4 cm 크기 기준 삭제</span></div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.5.2</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+            <span class="grade grade-vl" data-tip="Very low quality ⊕○○○">⊕○○○</span>
+          </div>
+          <div class="rec-text">영상상 <strong>불확정 종괴</strong> + 수술 미시행: <strong>6–12개월 후 1회 비조영 CT 또는 MRI</strong> 시행.<br>
+          수술 권고 기준: 최대 직경 <strong>&gt;20% 증가 + 최소 5 mm 이상 증가</strong> 시. 그 미만 성장 시 추가 6–12개월 영상 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.5.3</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-rec">AGAINST</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">초기 호르몬 검사 정상 → <em>반복 호르몬 검사 금지</em>. 단, 새 내분비 활성 징후 또는 동반질환 악화 시 재검사.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.5.4</span>
+          <div class="rec-badges">
+            <span class="grade grade-rec">RECOMMEND</span>
+            <span class="grade grade-lo" data-tip="Low quality evidence ⊕⊕○○">⊕⊕○○</span>
+          </div>
+          <div class="rec-text">수술 미시행 MACS: <strong>연 1회 코르티솔 관련 동반질환 재평가</strong>. 1차 의료기관 이관 가능. 동반질환 발생·악화 시 내분비 의뢰.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 추적관찰 요약표 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 추적관찰 전략 요약표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>병변 유형</th><th>영상 추적</th><th>호르몬 추적</th></tr>
+        <tr>
+          <td><span class="badge badge-benign">명확한 양성 (HU ≤10)</span></td>
+          <td class="hu-low">불필요</td>
+          <td>불필요 (새 증상 시 재평가)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-indet">불확정 (HU 11–20, &lt;4cm)</span></td>
+          <td>즉각 추가 영상 또는 12개월 후 비조영 CT</td>
+          <td>불필요 (새 증상 시 재평가)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-indet">불확정 (기타)</span></td>
+          <td>6–12개월 후 비조영 CT/MRI × 1회</td>
+          <td>불필요 (새 증상 시 재평가)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-macs">MACS (비수술)</span></td>
+          <td>불필요</td>
+          <td>연 1회 동반질환 평가 (내분비 재검 불필요)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-malig">악성 의심</span></td>
+          <td>수술 미시행 시 6–12개월 영상</td>
+          <td>개별 판단</td>
+        </tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>악성 종양으로의 전환 위험: 양성 병변 추적 중 악성 발생률 0.2% (SR 추정). 오버쿠싱 진행률 &lt;1%.</div></div>
+    </div>
+  </div>
+
+</div><!-- /tab-followup -->
+
+
+<!-- ═══ TAB 7: 특수상황 ═══ -->
+<div id="tab-special" class="panel">
+
+  <!-- 양측성 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> R.6.1 양측성 부신 우연종</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>각 병변을 단측 병변과 동일한 영상 프로토콜로 <strong>개별 평가</strong>. 호르몬 검사도 동일하게 시행.</div></div>
+
+      <table class="tbl">
+        <tr><th>유형</th><th>영상 특징</th><th>추가 검사</th><th>임상적 처치</th></tr>
+        <tr>
+          <td><strong>양측 과형성</strong><br>(macronodular)</td>
+          <td>양쪽 부신에 다수 결절, HU &lt;10, 잔존 부신 두꺼움</td>
+          <td>MACS 없으면 17-OHP 측정 (선천성 부신 과형성 배제)<br>ARMC5 유전자 검사 고려 (MACS + 다수 결절 시)</td>
+          <td>MACS 시: 동반질환 평가. 단측 절제 개별 고려.</td>
+        </tr>
+        <tr>
+          <td><strong>양측 선종</strong></td>
+          <td>각각 명확한 선종, 잔존 부신 정상</td>
+          <td>표준 호르몬 검사</td>
+          <td>MACS 시 우세 병변 단측 절제 개별 고려.</td>
+        </tr>
+        <tr>
+          <td><strong>양측 유사 불확정 병변</strong></td>
+          <td>두 병변이 영상상 유사, 선종 非전형적</td>
+          <td>부신 외 악성 종양 배제, 침윤성 질환·출혈 시 부신 부전 평가</td>
+          <td>악성 의심 시 생검 고려. 부신 부전 발생 시 호르몬 보충.</td>
+        </tr>
+        <tr>
+          <td><strong>양측 이형 병변</strong></td>
+          <td>두 병변의 영상 소견이 서로 다름</td>
+          <td>각 병변 별도 평가</td>
+          <td>개별 원인 규명 필요.</td>
+        </tr>
+      </table>
+
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R.6.1.8</span>
+          <div class="rec-badges">
+            <span class="grade grade-sug" data-tip="Suggest (약권고)">SUGGEST</span>
+            <span class="grade grade-sug">AGAINST</span>
+          </div>
+          <div class="rec-text">현성 쿠싱 없는 환자: <strong>양측 부신절제술 금지</strong> — 영구 부신 부전, 평생 호르몬 보충, 부신위기 위험.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 젊은·고령 환자 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶👴</span> R.6.2 젊은 환자 / 고령·허약 환자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.6.2.1</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text"><strong>임신부 및 40세 미만</strong>: 악성 종양·호르몬 과잉 가능성이 더 높으므로 <em>긴급 평가</em> 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.2.2</span>
+          <div class="rec-badges"><span class="grade grade-sug">SUGGEST</span></div>
+          <div class="rec-text">소아·청소년·임신부 전용 영상: <strong>MRI 우선</strong> (방사선 노출 최소화). 저선량 비조영 CT도 대안.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.2.3</span>
+          <div class="rec-badges"><span class="grade grade-sug">SUGGEST</span></div>
+          <div class="rec-text">소아·청소년·임신부·40세 미만 성인: 영상상 불확정 → <strong>수술적 절제 권장</strong>. <span class="pill pill-new">신규</span></div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.2.4</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">전신 상태 불량·고령 허약 환자: <strong>임상적 이득에 비례한</strong> 검사·치료 시행. 과도한 검사 지양.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 부신 외 악성종양 병력 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> R.6.3 부신 외 악성종양 병력 환자 (Figure 9)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn" style="margin-bottom:8px"><span>⚠️</span><div>이 환자군에서 불확정 부신 종괴의 악성 빈도는 최대 70%. 2cm 이상 이중 부신 전이 시 부신 부전 위험 20%.</div></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R.6.3.1</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">부신 외 악성종양 + 불확정 부신 종괴: <strong>PPGL 배제를 위해 혈장/소변 메타네프린 필수</strong> (전이 가능성 높더라도).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.3.2</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">부신 외 악성종양 병력 + 비조영 CT에서 양성 확정 → 추가 부신 영상 추적 불필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.3.3</span>
+          <div class="rec-badges"></div>
+          <div class="rec-text">PET-CT에서 <strong>강한 FDG 섭취</strong> → 전이 시사. 중등도 또는 FDG 음성 → 비조영 CT 추가 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.3.4</span>
+          <div class="rec-badges"><span class="grade grade-sug">SUGGEST</span></div>
+          <div class="rec-text">불확정 병변 + 병리 확인이 치료를 바꾸는 경우: FDG-PET/CT, 수술적 절제, 또는 생검 중 선택.<br>
+          그 외: 원발성 악성종양 영상 주기에 맞춰 추적.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R.6.3.6</span>
+          <div class="rec-badges"><span class="grade grade-rec">RECOMMEND</span></div>
+          <div class="rec-text">양측 대형 전이: <strong>잔존 부신 기능 평가</strong> (아침 코르티솔 + ACTH, 필요 시 synacthen test).</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-special -->
+
+
+<!-- ═══ TAB 8: 주요변경 ═══ -->
+<div id="tab-changes" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🆕</span> 2023 vs 2016 주요 변경사항 (Table 1 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>항목</th><th>2016 가이드라인</th><th>2023 가이드라인</th><th>변경 유형</th></tr>
+        <tr>
+          <td>R.2.3 양성 CT 기준</td>
+          <td>HU ≤10 + 크기 &lt;4 cm → 추가영상 불필요 (약권고, ⊕○○○)</td>
+          <td><strong>HU ≤10 + 균질 → 크기 무관</strong>하게 추가영상 불필요 (강권고, ⊕⊕⊕○)</td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>R.2.4–2.6 불확정 CT 분류</td>
+          <td>불확정 단일 그룹 → MDT 3가지 옵션</td>
+          <td><strong>HU·크기·균질성 조합으로 3개 위험군 세분화</strong></td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>MACS 용어 및 기준</td>
+          <td>"가능 자율성 분비" (51–138) vs "자율성 분비" (&gt;138) 구분</td>
+          <td><strong>MACS 단일 용어</strong> (DST 후 코르티솔 &gt;50 nmol/L)</td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>R.3.5 현성 쿠싱 진행 위험</td>
+          <td>약권고 반대 (⊕⊕○○)</td>
+          <td>강권고 반대 (⊕⊕⊕○) — 증거 강화</td>
+          <td><span class="pill pill-changed">권고 강도↑</span></td>
+        </tr>
+        <tr>
+          <td>R.3.6 MACS 동반질환 선별</td>
+          <td>약권고 (⊕○○○)</td>
+          <td>강권고 (⊕⊕○○) — 증거 강화</td>
+          <td><span class="pill pill-changed">권고 강도↑</span></td>
+        </tr>
+        <tr>
+          <td>R.3.8 MACS 수술 고려</td>
+          <td>자율성 분비 + 동반질환 → 개별 수술 고려 (약권고)</td>
+          <td><strong>수술 고려 동반질환 특성 5가지 명시</strong>. MDT 논의 필수화.</td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>R.3.9 PPGL 배제 대상</td>
+          <td>모든 환자</td>
+          <td><strong>HU &gt;10 등 양성 선종 비전형 소견 환자만</strong> (대상 축소)</td>
+          <td><span class="pill pill-changed">적응증 변경</span></td>
+        </tr>
+        <tr>
+          <td>R.4.3 수술 방법 (양성 호르몬 과잉)</td>
+          <td>없음</td>
+          <td><strong>신규: 최소침습법 권장</strong></td>
+          <td><span class="pill pill-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>R.4.4 악성 의심 최소침습술</td>
+          <td>"복강경" 명시</td>
+          <td><strong>"최소침습법" (복강경·후복강경 포함)</strong> + 고볼륨 외과의 강조</td>
+          <td><span class="pill pill-changed">표현 변경</span></td>
+        </tr>
+        <tr>
+          <td>R.4.8 수술 후 HPA 추적</td>
+          <td>없음</td>
+          <td><strong>신규: MACS 수술 후 HPA 회복까지 내분비 추적</strong></td>
+          <td><span class="pill pill-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>R.5.1 양성 병변 영상 추적</td>
+          <td>크기 &lt;4 cm 양성 병변 → 추적 불필요 (약권고, ⊕○○○)</td>
+          <td><strong>크기 무관</strong> 양성 병변 → 추적 불필요 (강권고, ⊕⊕⊕○)</td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>R.5.3 호르몬 반복 검사</td>
+          <td>약권고 반대 (⊕○○○)</td>
+          <td>강권고 반대 (⊕⊕○○)</td>
+          <td><span class="pill pill-changed">권고 강도↑</span></td>
+        </tr>
+        <tr>
+          <td>R.5.4 MACS 비수술 추적</td>
+          <td>연 1회 임상 재평가 + 수술 이득 고려</td>
+          <td><strong>연 1회 동반질환 평가만</strong>. 1차 의료기관 이관 가능. 내분비 호르몬 재검 불필요.</td>
+          <td><span class="pill pill-major">주요변경</span></td>
+        </tr>
+        <tr>
+          <td>R.6.1 양측성: 4개 범주 분류</td>
+          <td>없음</td>
+          <td><strong>신규: 4유형 체계</strong> (과형성/양측선종/유사불확정/이형)</td>
+          <td><span class="pill pill-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>R.6.2.3 40세 미만 불확정 병변</td>
+          <td>없음</td>
+          <td><strong>신규: 수술적 절제 권장</strong></td>
+          <td><span class="pill pill-new">신규</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 10대 향후 연구과제 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 10대 향후 연구과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ol style="padding-left:16px;font-size: calc(12px * var(--fscale, 1));line-height:2">
+        <li>HU &gt;10 종괴에서 최적의 2차 영상 방법 대규모 코호트 연구 (AI·방사성 포함)</li>
+        <li>소변 스테로이드 대사체학 임상 실환경 검증 데이터</li>
+        <li>MACS와 심혈관 사건·암·사망 관련 전향적 코호트 연구</li>
+        <li>MACS 수술 vs 보존적 치료 무작위 대조 시험 (적절한 대리 종말점 포함)</li>
+        <li>MACS와 골다공증 관계: 비침습 방사성 골 미세구조 평가 대규모 연구</li>
+        <li>MACS 장기 반복 DST — 비기능성 vs MACS 재분류 가능성</li>
+        <li>임상적으로 의미있는 코르티솔 과잉의 새 바이오마커</li>
+        <li>ACC 잠재 악성 종괴에서 복강경 vs 개복 무작위 연구</li>
+        <li>부신 우연종 장기 연간 호르몬 검사 이득 평가 연구</li>
+        <li>삶의 질·인지기능·허약도에 관한 대규모 코호트 연구</li>
+      </ol>
+    </div>
+  </div>
+
+</div><!-- /tab-changes -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"ACC",  def:"Adrenocortical Carcinoma — 부신피질암" },
+  { term:"ACTH", def:"Adrenocorticotropic Hormone — 부신피질자극호르몬" },
+  { term:"ARR",  def:"Aldosterone-to-Renin Ratio — 알도스테론/레닌비" },
+  { term:"ARMC5",def:"Armadillo Repeat Containing 5 — 양측 거대결절성 부신 과형성 관련 유전자" },
+  { term:"CAH",  def:"Congenital Adrenal Hyperplasia — 선천성 부신 과형성" },
+  { term:"CT",   def:"Computed Tomography — 전산화 단층촬영" },
+  { term:"DHEA-S",def:"Dehydroepiandrosterone Sulfate — 황산 데히드로에피안드로스테론" },
+  { term:"DST",  def:"Dexamethasone Suppression Test — 덱사메타손 억제검사" },
+  { term:"FDG",  def:"Fluorodeoxyglucose — 불소포도당 (PET 추적자)" },
+  { term:"FDG-PET/CT",def:"18F-FDG Positron Emission Tomography/CT — PET-CT" },
+  { term:"GC-MS", def:"Gas Chromatography-Mass Spectrometry — 가스 크로마토그래피 질량분석" },
+  { term:"HPA",  def:"Hypothalamic-Pituitary-Adrenal axis — 시상하부-뇌하수체-부신 축" },
+  { term:"HU",   def:"Hounsfield Unit — 하운스필드 단위 (CT 밀도 단위)" },
+  { term:"LC-MS",def:"Liquid Chromatography-Mass Spectrometry — 액체 크로마토그래피 질량분석" },
+  { term:"MACS", def:"Mild Autonomous Cortisol Secretion — 경증 자율 코르티솔 분비 (1mg DST 후 코르티솔 >50 nmol/L)" },
+  { term:"MDT",  def:"Multidisciplinary Team — 다학제팀 (내분비·영상·외과)" },
+  { term:"MRI",  def:"Magnetic Resonance Imaging — 자기공명영상" },
+  { term:"NMN",  def:"Normetanephrine — 노르메타네프린" },
+  { term:"17-OHP",def:"17-Hydroxyprogesterone — 17-하이드록시프로게스테론 (CAH 선별)" },
+  { term:"PA",   def:"Primary Aldosteronism — 원발성 알도스테론증" },
+  { term:"PBMAH",def:"Primary Bilateral Macronodular Adrenal Hyperplasia — 원발성 양측 거대결절성 부신 과형성" },
+  { term:"PET",  def:"Positron Emission Tomography — 양전자 방출 단층촬영" },
+  { term:"PPGL", def:"Pheochromocytoma and Paraganglioma — 갈색세포종·부신경절종" },
+  { term:"RECIST",def:"Response Evaluation Criteria In Solid Tumors — 고형 종양 반응평가 기준 (v1.1: >20%+5mm 증가 = 진행)" },
+  { term:"ROI",  def:"Region Of Interest — 관심 영역 (영상 밀도 측정 기준)" },
+  { term:"SUV",  def:"Standard Uptake Value — 표준 섭취값 (PET)" },
+  { term:"SUVmax",def:"Maximum Standard Uptake Value — 최대 표준 섭취값" },
+  { term:"17-OHP",def:"17-Hydroxyprogesterone — 선천성 부신 과형성 선별" },
+  { term:"ENS@T",def:"European Network for the Study of Adrenal Tumors — 유럽 부신종양 연구 네트워크" },
+  { term:"ESE",  def:"European Society of Endocrinology — 유럽내분비학회" },
+  { term:"GRADE",def:"Grading of Recommendations Assessment Development and Evaluation — 권고 등급 평가 체계" },
+  { term:"Washout CT",def:"Delayed contrast CT — 조영 지연 CT (60초 vs 10–15분 후 감쇠 비교)" },
+];
+
+// ── 탭 전환 ──
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── 카드 토글 ──
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// ── 아코디언 토글 ──
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// ── 약어 필터 ──
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length ? hits.length : '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  // 드롭다운 위치 계산
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 480) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><span class="abbr-term">${a.term}</span><span class="abbr-def">${a.def}</span></div>`
+  ).join('');
+}
+
+// 드롭다운 외부 클릭 시 닫기
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태 (open 클래스 붙은 것은 열려있음)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const body = h.nextElementSibling;
+    if (body) body.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

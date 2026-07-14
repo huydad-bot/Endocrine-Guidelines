@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2023 KES 원발성 알도스테론증 진료지침</title>
+<style>
+  :root {
+    --bg:#f6f8fa;--surface:#fff;--surface2:#f0f2f5;--border:#d0d7de;
+    --accent:#0969da;--accent2:#0550ae;--green:#1a7f37;--yellow:#9a6700;
+    --red:#cf222e;--orange:#bc4c00;--text:#1f2328;--text2:#57606a;
+    --teal:#0a7c8a;--purple:#5a3ea0;--fscale:1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size: calc(13px * var(--fscale, 1));line-height:1.5;}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;position:sticky;top:0;z-index:100;}
+  .header-inner{width:100%;max-width:920px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .logo-badge{background:var(--teal);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+  .tab-bar{display:flex;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .font-zoom-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;margin:4px 4px 4px 6px;padding:5px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--accent2);font-size:calc(11px * var(--fscale, 1));font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s;}
+  .font-zoom-btn:hover{background:var(--border);}
+  .font-zoom-btn .fz-icon{font-size:calc(12px * var(--fscale, 1));}
+  .tab-bar-inner{width:100%;max-width:920px;display:flex;align-items:center;gap:2px;padding:0 4px;}
+  .tab{padding:7px 11px;font-size: calc(11.5px * var(--fscale, 1));color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;user-select:none;flex-shrink:0;}
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+  .tab-abbr-wrap{display:flex;align-items:center;padding:4px 4px;margin-left:4px;flex-shrink:0;position:relative;}
+  .main{padding:12px 16px;max-width:920px;margin:0 auto;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+  .card-header{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+  .card-header .toggle{font-size: calc(13px * var(--fscale, 1));transition:transform .2s;}
+  .card-header.open .toggle{transform:rotate(180deg);}
+  .card-body{padding:10px 12px;}
+  .card-body.collapsed{display:none;}
+  .stat-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .stat-box{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 14px;flex:1;min-width:90px;text-align:center;}
+  .stat-val{font-size: calc(18px * var(--fscale, 1));font-weight:700;color:var(--teal);}
+  .stat-lbl{font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:2px;}
+  .rec-list{list-style:none;}
+  .rec-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start;}
+  .rec-item:last-child{border-bottom:none;}
+  .rec-text{font-size: calc(12px * var(--fscale, 1));color:var(--text);line-height:1.6;}
+  .rec-text strong{color:#1f2328;}
+  .badge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:10px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+  .badge-screen{background:#e6f4ea;color:#1a7f37;border:1px solid #1a7f37;}
+  .badge-caution{background:#fff8c5;color:#7a4b00;border:1px solid #d4a017;}
+  .badge-confirm{background:#ddf4ff;color:var(--accent2);border:1px solid var(--accent2);}
+  .badge-rx{background:#f3e5f5;color:#5a3ea0;border:1px solid #5a3ea0;}
+  .badge-tip{background:#f0f2f5;color:var(--text2);border:1px solid var(--border);}
+  .alert{padding:8px 12px;border-radius:6px;font-size: calc(12px * var(--fscale, 1));margin:8px 0;display:flex;gap:8px;align-items:flex-start;}
+  .alert-info{background:#ddf4ff;border-left:3px solid var(--accent2);color:#0550ae;}
+  .alert-warn{background:#fff8c5;border-left:3px solid #d4a017;color:#7a4b00;}
+  .alert-danger{background:#ffebe9;border-left:3px solid var(--red);color:#82071e;}
+  .alert-success{background:#dafbe1;border-left:3px solid var(--green);color:#116329;}
+  .alert-teal{background:#e0f5f5;border-left:3px solid var(--teal);color:#075050;}
+  .tc-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1));}
+  .tc-table th{background:var(--surface2);color:var(--text2);padding:5px 8px;font-size: calc(10.5px * var(--fscale, 1));text-transform:uppercase;letter-spacing:.3px;font-weight:600;text-align:left;border-bottom:1px solid var(--border);}
+  .tc-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .tc-table tr:last-child td{border-bottom:none;}
+  .tc-table tr:hover td{background:rgba(0,0,0,.02);}
+  .acc{border:1px solid var(--border);border-radius:6px;margin-bottom:6px;overflow:hidden;}
+  .acc-hdr{background:var(--surface2);padding:7px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .acc-hdr:hover{background:#e8eaec;}
+  .acc-body{display:none;padding:10px 12px;font-size: calc(12px * var(--fscale, 1));line-height:1.65;}
+  .flow-box{border:1px solid var(--border);border-radius:6px;background:var(--surface);padding:8px 12px;margin-bottom:6px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  .flow-arrow{text-align:center;color:var(--text2);font-size: calc(14px * var(--fscale, 1));margin:2px 0;}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0;margin-right:6px;}
+  .tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size: calc(10px * var(--fscale, 1));font-weight:700;}
+  .tag-fp{background:#ffebe9;color:#82071e;}
+  .tag-fn{background:#ddf4ff;color:var(--accent2);}
+  .tag-up{background:#fff8c5;color:#7a4b00;}
+  .tag-down{background:#f3e5f5;color:#5a3ea0;}
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#c8d0d9;border-radius:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="logo-badge">KES 2023</span>
+      <h1 style="font-size:17px;font-weight:700;color:var(--text)">원발성 알도스테론증 진료지침</h1>
+    </div>
+    <div style="text-align:center;line-height:1.5">
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">2023 Korean Endocrine Society Consensus Guidelines for the Diagnosis and Management of Primary Aldosteronism</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2)">Ha J, et al. · Endocrinol Metab 2023;38:597–618 · doi: 10.3803/EnM.2023.1789</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 대한내분비학회 공식 승인 자료가 아닙니다.</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('epidemiology')">📊 역학·정의</div>
+    <div class="tab" onclick="showTab('genetics')">🧬 유전학</div>
+    <div class="tab" onclick="showTab('screening')">🔍 선별</div>
+    <div class="tab" onclick="showTab('diagnosis')">🧪 진단</div>
+    <div class="tab" onclick="showTab('subtype')">🎯 아형 감별</div>
+    <div class="tab" onclick="showTab('avs')">🩸 부신정맥채혈</div>
+    <div class="tab" onclick="showTab('comorbidity')">❤️ 동반질환</div>
+    <div class="tab" onclick="showTab('treatment')">💊 치료</div>
+    <div class="tab" onclick="showTab('followup')">📅 추적관찰</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:90px;outline:none;"
+          onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:420px;max-height:340px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">5.9–34%</div><div class="stat-lbl">고혈압 환자 중 PA 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">6.1%</div><div class="stat-lbl">국내 3차병원 확진 PA (2022)</div></div>
+    <div class="stat-box"><div class="stat-val">ARR &gt;30</div><div class="stat-lbl">선별검사 기준 (PAC ng/dL / PRA ng/mL/hr)</div></div>
+    <div class="stat-box"><div class="stat-val">AVS</div><div class="stat-lbl">아형 감별 gold standard</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📋 진단 프로세스 요약 (Fig. 1)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-box" style="border-left:3px solid var(--teal)">
+        <strong>① 선별 적응증 확인</strong> (9가지 — 아래 선별 탭 참조)
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--accent2)">
+        <strong>② 선별검사: ARR 측정</strong><br>
+        ARR &gt;30 (PAC ng/dL / PRA ng/mL/hr) → 양성<br>
+        <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">※ 레닌이 과도하게 억제된 경우 PAC &gt;15 ng/dL 기준 고려</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--green)">
+        <strong>③ 확진 검사</strong> (4가지 중 택일 — 진단 탭 참조)<br>
+        <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">예외: PAC &gt;20 ng/dL + 자발성 저칼륨혈증 + PRA (또는 DRC) 검출 한계 이하 → 확진 검사 불필요</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--purple)">
+        <strong>④ 부신 CT</strong> (확진 후 모든 환자)<br>
+        아형 감별 + 부신피질암 배제
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--orange)">
+        <strong>⑤ 부신정맥채혈(AVS) 또는 CT 직접 수술 결정</strong><br>
+        편측: 복강경 부신절제술 권고<br>
+        양측: MRA 약물치료
+      </div>
+      <div class="alert alert-teal" style="margin-top:8px">
+        <span>💡</span>
+        <div>CT 직접 수술 가능 조건 (3가지 모두 충족): ① 나이 &lt;35세 ② PAC &gt;30 ng/dL + 자발성 저칼륨혈증 ③ CT에서 전형적 일측성 선종 + 반대쪽 정상</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🎯 치료 목표 & 핵심 원칙</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-tip">원칙</span><div class="rec-text">BP 및 저칼륨혈증 정상화만으로는 PA 치료로 <strong>불충분</strong>. 알도스테론 과잉 차단이 필수.</div></li>
+        <li class="rec-item"><span class="badge badge-screen">수술</span><div class="rec-text"><strong>편측 부신절제술</strong> 우선 권고: BP·저칼륨혈증 교정, 심혈관 이환율 감소, 삶의 질 향상 효과 우월.</div></li>
+        <li class="rec-item"><span class="badge badge-rx">약물</span><div class="rec-text"><strong>MRA(스피로놀락톤)</strong> 권고: 양측성 PA, 수술 불가, 수술 거부 환자. 한국에서 유일하게 사용 가능한 MRA.</div></li>
+        <li class="rec-item"><span class="badge badge-caution">주의</span><div class="rec-text">MRA 부작용(여성화유방, 성기능 장애) 발생 시: 에플레레논(국내 미허가) 또는 아밀로라이드(국내 가능) 대안.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EPIDEMIOLOGY ═══ -->
+<div id="tab-epidemiology" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📊 유병률</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table" style="margin-bottom:10px">
+        <tr><th>환자군</th><th>유병률</th></tr>
+        <tr><td>고혈압 전체 (메타분석)</td><td>5.9–34%</td></tr>
+        <tr><td>1차 의료기관 고혈압</td><td>3.2–12.7%</td></tr>
+        <tr><td>3차 의뢰 센터</td><td>최대 29.8%</td></tr>
+        <tr><td>정상혈압 (확진검사 기반)</td><td>11.3%</td></tr>
+        <tr><td>난치성 고혈압</td><td>22.0%</td></tr>
+        <tr><td>국내 3차병원 (2022, 확진)</td><td>6.1%</td></tr>
+        <tr><td>부신우연종 동반 PA</td><td>1.0–4.0%</td></tr>
+        <tr><td>OSA + 고혈압</td><td>8.9%</td></tr>
+      </table>
+      <div class="alert alert-info"><span>ℹ️</span><div>저칼륨혈증은 PA 환자의 9–37%에서만 나타나므로, <strong>저칼륨혈증이 없다고 PA를 배제해서는 안 됨</strong>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🏷️ 정의 & 병리생리</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-tip">정의</span><div class="rec-text">레닌-안지오텐신 II에 비의존적인 <strong>자율적 알도스테론 과분비</strong>가 특징. 신세관의 Na⁺ 재흡수 ↑→ 체액 팽창 → 고혈압 + 저칼륨혈증.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">분류</span><div class="rec-text">
+          <strong>편측성</strong>: APA(알도스테론 분비 선종), UAH(일측성 부신증식)<br>
+          <strong>양측성</strong>: IAH(특발성 양측성 부신증식), 양측성 APA
+        </div></li>
+        <li class="rec-item"><span class="badge badge-caution">ARR</span><div class="rec-text">알도스테론 자율 분비 → 레닌 억제 → <strong>ARR 상승</strong>. PA의 가장 중요한 스크리닝 지표.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GENETICS ═══ -->
+<div id="tab-genetics" class="panel">
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>PA의 90% 이상에서 체세포 돌연변이 확인. 조발성(20세 이전)이거나 PA 가족력 있으면 유전자 검사 권고.</div></div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧬 산발성 PA의 체세포 돌연변이</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>유전자</th><th>단백질</th><th>한국 APA 빈도</th></tr>
+        <tr><td><em>KCNJ5</em></td><td>칼륨 채널 Kir3.4</td><td><strong>71.2%</strong> (아시아 유사)</td></tr>
+        <tr><td><em>CACNA1D</em></td><td>Ca²⁺ 채널 CaV1.3</td><td>—</td></tr>
+        <tr><td><em>ATP1A1</em></td><td>Na-K ATPase α1</td><td>—</td></tr>
+        <tr><td><em>ATP2B3</em></td><td>PMCA3</td><td>—</td></tr>
+        <tr><td><em>CACNA1H</em></td><td>Ca²⁺ 채널 CaV3.2</td><td>—</td></tr>
+        <tr><td><em>CLCN2</em></td><td>Cl⁻ 채널 ClC-2</td><td>—</td></tr>
+        <tr><td><em>CTNNB1</em></td><td>β-catenin</td><td>—</td></tr>
+        <tr><td><em>GNAQ/11</em></td><td>G-단백질 α q/11</td><td>—</td></tr>
+      </table>
+      <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">대부분의 돌연변이 → 부신세포 탈분극 또는 세포내 Ca²⁺ 증가 → 지속적 알도스테론 생산</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>👨‍👩‍👧 가족성 알도스테론증 아형 (FH)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>아형</th><th>유전자</th><th>특징</th><th>치료</th></tr>
+        <tr><td><strong>FH-I</strong><br><small>글루코코르티코이드 반응성</small></td><td><em>CYP11B1/B2</em></td><td>덱사메타손 억제 반응, 혼성 스테로이드</td><td>덱사메타손 0.125–0.25 mg/일 ± MRA</td></tr>
+        <tr><td><strong>FH-II</strong></td><td><em>CLCN2</em></td><td>불완전 침투율</td><td>MRA</td></tr>
+        <tr><td><strong>FH-III</strong></td><td><em>KCNJ5</em></td><td>가변적 증식, 혼성 스테로이드<br>매우 조발성 PA에서 배제 필요</td><td>MRA, 양측성 부신절제술</td></tr>
+        <tr><td><strong>FH-IV</strong></td><td><em>CACNA1H</em></td><td>불완전 침투율</td><td>MRA</td></tr>
+        <tr><td><strong>PASNA</strong></td><td><em>CACNA1D</em></td><td>경련, 신경이상, 심장결손, 저혈당 (de novo 돌연변이)</td><td>MRA, 칼슘 길항제(?)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>FH-III: 매우 조발성 PA를 보이는 <strong>모든</strong> 환자에서 배제 필요. <em>KCNJ5</em> 직접 염기서열 분석으로 진단.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREENING ═══ -->
+<div id="tab-screening" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔍 선별 적응증 (9가지)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="step-num">1</span><div class="rec-text">서로 다른 날 3회 측정에서 <strong>지속적으로 BP ≥160/100 mmHg</strong></div></li>
+        <li class="rec-item"><span class="step-num">2</span><div class="rec-text">3가지 표준 강압제에 <strong>저항성 고혈압</strong> (수축기 ≥140 또는 이완기 ≥90 mmHg)</div></li>
+        <li class="rec-item"><span class="step-num">3</span><div class="rec-text"><strong>4가지 이상</strong> 강압제 복용 중 조절되는 고혈압</div></li>
+        <li class="rec-item"><span class="step-num">4</span><div class="rec-text"><strong>젊은 연령(&lt;40세)</strong>에서 발생한 고혈압</div></li>
+        <li class="rec-item"><span class="step-num">5</span><div class="rec-text">고혈압 + <strong>저칼륨혈증</strong> (자발성 또는 이뇨제 유발)</div></li>
+        <li class="rec-item"><span class="step-num">6</span><div class="rec-text">고혈압 + <strong>부신우연종</strong></div></li>
+        <li class="rec-item"><span class="step-num">7</span><div class="rec-text">고혈압 + <strong>단독 심방세동(AF)</strong></div></li>
+        <li class="rec-item"><span class="step-num">8</span><div class="rec-text">고혈압 + <strong>조기 발생 고혈압 또는 젊은 나이(&lt;40세) 뇌혈관 질환 가족력</strong></div></li>
+        <li class="rec-item"><span class="step-num">9</span><div class="rec-text">PA 환자의 <strong>1촌 가족</strong>에서 발생한 고혈압</div></li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:8px"><span>💡</span><div>국제 지침 일치 의견: 고혈압 환자 전체를 선별하도록 강력 권고 (높은 유병률 + 심혈관·신장 예후 불량과의 연관성 고려).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DIAGNOSIS ═══ -->
+<div id="tab-diagnosis" class="panel">
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧪 ARR 선별검사</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="margin-bottom:10px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px">ARR 양성 기준</div>
+          <table class="tc-table">
+            <tr><th>PAC 단위</th><th>PRA (ng/mL/hr)</th><th>DRC (mIU/L)</th></tr>
+            <tr><td>ng/dL</td><td>20 / <strong>30</strong> / 40</td><td>2.4 / <strong>3.7</strong> / 4.9</td></tr>
+            <tr><td>pmol/L</td><td>550 / 830 / 1100</td><td>67 / 101 / 134</td></tr>
+          </table>
+          <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:4px">가장 널리 사용: <strong>ARR &gt;30</strong> (ng/dL / ng/mL/hr)</p>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px">검체 채취 조건</div>
+          <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>✅ 저칼륨혈증 교정 후 측정</li>
+            <li>✅ 염분 섭취 제한 없이 (자유롭게)</li>
+            <li>✅ 오전 중, 기상 후 2시간 이상 활동</li>
+            <li>✅ 채혈 전 5–15분 앉은 자세</li>
+            <li>⚠️ MRA는 4–6주 중단 고려</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-info"><span>ℹ️</span><div>레닌이 매우 낮을 때 PAC도 낮은 경우 위양성 가능. 일부 기준에서 <strong>PAC &gt;15 ng/dL</strong> 최솟값 적용. 단, ARR 양성 PA 환자의 30–40%에서 PAC &lt;15 ng/dL이므로 단독 적용 주의.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>💊 ARR에 영향을 미치는 약물 및 요인</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>요인</th><th>알도스테론</th><th>레닌</th><th>ARR 순효과</th></tr>
+        <tr style="background:#fff0f0"><td>ACEi / ARB</td><td>↓</td><td>↑↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#fff0f0"><td>K⁺ 보존 이뇨제 (MRA, 아밀로라이드)</td><td>↑</td><td>↑↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#fff0f0"><td>K⁺ 소실 이뇨제 (티아지드, 루프)</td><td>→/↑</td><td>↑↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#fff0f0"><td>CCB (DHP 계열)</td><td>→/↓</td><td>↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#fff0f0"><td>Na 제한식</td><td>↑</td><td>↑↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#fff0f0"><td>저칼륨혈증</td><td>↓</td><td>→/↑</td><td><span class="tag tag-fn">위음성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>β-차단제</td><td>↓</td><td>↓↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>중추성 α₂ 작용제 (클로니딘)</td><td>↓</td><td>↓↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>NSAIDs</td><td>↓</td><td>↓↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>고염식</td><td>↓</td><td>↓↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>고령(&gt;65세)</td><td>↓</td><td>↓↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+        <tr style="background:#f0f5ff"><td>신기능 저하</td><td>→</td><td>↓</td><td><span class="tag tag-fp">위양성</span></td></tr>
+      </table>
+      <div class="alert alert-success" style="margin-top:8px"><span>✅</span><div><strong>ARR 측정 중 강압제 유지 가능</strong>: 약물 효과를 고려하여 해석. PAC 높고 레닌 억제 → 약물 복용 중에도 PA 진단 가능. 온MRA 투여 중 레닌이 억제되어 있으면 PA 강력 의심 (약물 중단 불필요).</div></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--text2);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.4px">최소 영향 대체 약물</div>
+      <table class="tc-table">
+        <tr><th>약물</th><th>분류</th><th>용량</th></tr>
+        <tr><td>베라파밀 서방형</td><td>비-DHP CCB</td><td>90–120 mg 1일 2회</td></tr>
+        <tr><td>히드랄라진</td><td>혈관확장제</td><td>10–12.5 mg 1일 2회</td></tr>
+        <tr><td>프라조신 / 독사조신 / 테라조신</td><td>α₁-차단제</td><td>기립성 저혈압 모니터링</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>✅ 확진 검사 4가지 (Table 5)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">① 경구 식염 부하 검사 (SLT) <span>▸</span></div>
+        <div class="acc-body">
+          <strong>방법</strong>: 3일간 나트륨 섭취 &gt;200 mmol (6 g)/일<br>
+          <strong>판독</strong>: 3일째 오전~4일째 오전까지 24시간 요중 알도스테론<br>
+          &nbsp;&nbsp;• &gt;12–14 μg/일: PA 강력 가능성<br>
+          &nbsp;&nbsp;• &lt;10 μg/일: PA 가능성 낮음<br>
+          <strong>금기</strong>: 중증 조절불량 고혈압, 신부전, 심부정맥, 심부전, 중증 저칼륨혈증
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">② 플루드로코르티손 억제 검사 (FST) <span>▸</span></div>
+        <div class="acc-body">
+          <strong>방법</strong>: 4일간 플루드로코르티손 0.1 mg q6h + KCl + NaCl 보충<br>
+          <strong>판독</strong>: 4일째 오전 10시 기립 PAC &gt;6 ng/dL + PRA &lt;1 ng/mL/hr → PA 강력 가능성<br>
+          <strong>주의</strong>: 오전 10시 코르티솔 &lt; 오전 7시 코르티솔 → ACTH 교란 효과 배제 확인
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">③ 생리식염수 주입 검사 (SIT) — 가장 널리 사용 <span>▸</span></div>
+        <div class="acc-body">
+          <strong>방법</strong>: 0.9% NaCl 2 L를 4시간에 걸쳐 주입 (오전 8–9:30시 시작)<br>
+          &nbsp;&nbsp;• 누운 자세: 주입 1시간 전부터 유지<br>
+          &nbsp;&nbsp;• 앉은 자세: 30분 전부터 유지<br>
+          <strong>판독 (누운 자세)</strong>: 주입 후 PAC &gt;10 ng/dL: PA 강력 가능성 / 5–10: 중간 / &lt;5: 낮음<br>
+          <strong>판독 (앉은 자세)</strong>: 주입 후 PAC &gt;6 ng/dL: PA 확진 (코르티솔 기저보다 낮아야)<br>
+          <strong>금기</strong>: 중증 조절불량 고혈압, 신부전, 심부정맥, 심부전, 중증 저칼륨혈증
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)">④ 캡토프릴 검사 (CCT) <span>▸</span></div>
+        <div class="acc-body">
+          <strong>방법</strong>: 1–2시간 앉기/서기 후 캡토프릴 25–50 mg 경구 복용; 투약 후 2시간까지 앉은 자세 유지<br>
+          <strong>판독</strong>: 2시간 후 PAC &gt;11 ng/dL + PRA 억제 또는 ARR &gt;20: PA 강력 가능성 / PAC &lt;8.5 ng/dL: PA 가능성 낮음<br>
+          <strong>단점</strong>: 위음성/불확정 결과 상당수
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>확진 검사 생략 가능</strong>: 자발성 저칼륨혈증 + PAC &gt;20 ng/dL + PRA(또는 DRC) 검출 한계 이하인 경우.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SUBTYPE ═══ -->
+<div id="tab-subtype" class="panel">
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🖥️ 부신 CT/MRI</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-confirm">필수</span><div class="rec-text">확진 후 <strong>모든 환자에서 부신 CT</strong> 시행: 부신피질암 배제 + 아형 감별 보조 + 수술 전 해부학적 확인.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">APA CT</span><div class="rec-text">일반적으로 직경 &lt;2 cm의 저음영 결절로 나타남. 크고 양성 소견의 일측성 종괴는 알도스테론+코르티솔 동시 분비 선종 가능 → <strong>덱사메타손 억제 검사</strong> 추가 권고.</div></li>
+        <li class="rec-item"><span class="badge badge-caution">CT 한계</span><div class="rec-text">CT와 AVS 불일치율 <strong>35.6–42.7%</strong> (한국 466명 연구: 35.6% 불일치). CT 정확도는 연령 증가할수록 감소. CT 단독으로 수술 결정은 위험.</div></li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px"><span>⛔</span><div>초기 Mayo Clinic 연구: CT는 <strong>53%에서만 정확</strong>하며, 22%는 수술 부당 배제, 25%는 불필요한/부적절한 수술 시행. → <strong>AVS가 표준 아형 감별법</strong>.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔬 기능영상 & 스테로이드 프로파일링 (신기술)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>방법</th><th>민감도/특이도</th><th>비고</th></tr>
+        <tr><td>¹¹C-metomidate PET-CT</td><td>76% / 87% (AVS 비교)</td><td>온사이트 사이클로트론 필요 → 적용 제한</td></tr>
+        <tr><td>¹⁸F-CDP2230 PET</td><td>더 높은 선택성·반감기</td><td>덱사메타손 전처치 불필요 → 유망한 대안</td></tr>
+        <tr><td>⁶⁸Ga-pentixafor PET</td><td>88% / 100%</td><td>APA에서 CXCR4 과발현 기반</td></tr>
+      </table>
+      <p style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">※ 현재 어떤 기능영상도 AVS를 대체하기에 충분한 민감도·특이도 없음. 추가 연구 필요.</p>
+      <div style="margin-top:8px;font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--text2)">스테로이드 프로파일링</div>
+      <ul style="list-style:none;font-size: calc(12px * var(--fscale, 1));line-height:1.8;margin-top:4px">
+        <li>• <strong>18-OHB</strong>: APA &gt; BAH에서 높음 (알도스테론 합성 중간체)</li>
+        <li>• <strong>18-OHF / 18-oxoF</strong> (혼성 스테로이드): APA &gt; BAH, FH-I·일부 FH-III에서 매우 높음</li>
+        <li>• LC/MS + 머신러닝 알고리즘 → 단일 단계 분류 가능성 연구 중</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🏥 HISTALDO 병리 분류 (편측성 PA)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tc-table">
+        <tr><th>병리 유형</th><th>종양성</th><th>Classical?</th><th>H&E 가시</th><th>CYP11B2(+) 크기</th></tr>
+        <tr><td>APACC (부신피질암)</td><td>종양성</td><td>고전형</td><td>가시</td><td>≥10 mm</td></tr>
+        <tr><td><strong>APA</strong></td><td>종양성</td><td>고전형</td><td>가시</td><td>≥10 mm</td></tr>
+        <tr><td>APN (알도스테론 분비 결절)</td><td>비종양/증식</td><td>고전형</td><td>가시</td><td>&lt;10 mm</td></tr>
+        <tr><td>APM (미세결절)</td><td>비종양/증식</td><td>비고전형</td><td>불가시</td><td>&lt;10 mm</td></tr>
+        <tr><td>MAPN/MAPM (다발 결절)</td><td>비종양/증식</td><td>비고전형</td><td>가시/불가시</td><td>&lt;10 mm, 다발</td></tr>
+        <tr><td>APDH (미만성 증식)</td><td>비종양/증식</td><td>비고전형</td><td>불가시</td><td>zona glomerulosa의 ≥50%</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>비고전형 조직병리 → 고전형보다 생화학적 관해율 낮음. 단, 임상적 관해율은 유의한 차이 없음.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AVS ═══ -->
+<div id="tab-avs" class="panel">
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🩸 AVS 시행 전 준비</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-caution">중단</span><div class="rec-text">루프·티아지드 이뇨제, 아밀로라이드, MRA → AVS <strong>4주 전 중단</strong>. 대체: α₁차단제, 비-DHP 장기형 CCB (베라파밀, 딜티아젬).</div></li>
+        <li class="rec-item"><span class="badge badge-screen">예외</span><div class="rec-text">PRA 또는 혈장 레닌 농도가 억제된 경우 → 약물 중단 타임라인에 관계없이 AVS 진행 가능. 레닌 억제 지속 시 MRA 유지하면서 AVS 가능.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📐 AVS 해석 지표 (Table 7)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table" style="margin-bottom:10px">
+        <tr><th>지표</th><th>계산식</th><th>기준값</th><th>임상 해석</th></tr>
+        <tr><td><strong>선택성 지수 (SI)</strong></td><td>(Cortisol)AV / (Cortisol)PV</td><td>비자극: ≥2–3<br>코신트로핀: ≥5</td><td>부신정맥 성공적 삽관 확인</td></tr>
+        <tr><td><strong>편측성 지수 (LI)</strong></td><td>(Aldo/Cortisol)D-AV / (Aldo/Cortisol)ND-AV</td><td>비자극: ≥2<br>코신트로핀: ≥4</td><td>우세 측에서 알도스테론 과분비 확인</td></tr>
+        <tr><td><strong>반대측 비율 (CLR)</strong></td><td>(Aldo/Cortisol)ND-AV / (Aldo/Cortisol)PV</td><td>&lt;1</td><td>반대측 알도스테론 억제 확인</td></tr>
+        <tr><td><strong>동측 비율 (ILR)</strong></td><td>(Aldo/Cortisol)D-AV / (Aldo/Cortisol)PV</td><td>&gt;2</td><td>CLR &lt;1일 때 사용 (LI 보조)</td></tr>
+      </table>
+      <div class="alert alert-info"><span>ℹ️</span><div>
+        <strong>한국 연구 (251명, 코신트로핀 자극)</strong>:<br>
+        • LI ≥10 → 생화학적 관해율 91.7% (LI=3–4 비교: 66.7%)<br>
+        • ILR &gt;2 + CLR &lt;0.25 → 생화학적 성공에 적합<br>
+        • ILR &gt;2 + CLR &lt;1 → 임상적 성공에 적합
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>⚗️ 코신트로핀 사용 & AVS 시행 방법</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-tip">ACTH(1-24)</span><div class="rec-text">
+          ① 연속 주입: 50 μg/hr, 첫 채혈 30분 전 시작<br>
+          ② 볼루스 주입: 250 μg (10 IU) 일회 투여<br>
+          효과: 코르티솔 기울기 최대화, 알도스테론 변동 최소화, APA에서 알도스테론 생산 증가
+        </div></li>
+        <li class="rec-item"><span class="badge badge-tip">동시 vs 순차적</span><div class="rec-text">동시 삽관과 순차적 삽관 간 선택성·편측성 지수 유의한 차이 없음 (단, 두 정맥 삽관 시간 간격이 짧은 경우). 방사선과/기관 선호도에 따라 결정.</div></li>
+        <li class="rec-item"><span class="badge badge-caution">합병증</span><div class="rec-text">전체 합병증률 약 <strong>0.61%</strong>. 가장 심각한 합병증: 부신 출혈 (드물고 대부분 경미).</div></li>
+        <li class="rec-item"><span class="badge badge-tip">성공률</span><div class="rec-text">숙련된 술기자(연간 PA 30명 이상 시행 센터): 기술적 성공률 &gt;90%.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMORBIDITY ═══ -->
+<div id="tab-comorbidity" class="panel">
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <span>❤️ 심혈관 합병증</span><span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item"><span class="badge badge-caution">AF</span><div class="rec-text">PA 환자에서 AF 위험 <strong>필수 고혈압 대비 12배</strong>. AF + 고혈압 환자에서 PA 선별 권고.</div></li>
+          <li class="rec-item"><span class="badge badge-tip">구조 변화</span><div class="rec-text">알도스테론 과잉 → 심장 섬유화·리모델링·비대·전기생리적 이상 → AF 유발.</div></li>
+          <li class="rec-item"><span class="badge badge-tip">OSA</span><div class="rec-text">고혈압 + OSA: PA 선별 권고 (2016 Endocrine Society 지침 일치).</div></li>
+          <li class="rec-item"><span class="badge badge-tip">대사증후군</span><div class="rec-text">PA 환자에서 대사증후군, 인슐린 저항성, 2형 당뇨 발생 증가.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <span>🫘 신장 합병증</span><span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item"><span class="badge badge-caution">신기능</span><div class="rec-text">PA 환자: 필수 고혈압 대비 eGFR 높고 알부민뇨 심함 (46개 연구 메타분석).</div></li>
+          <li class="rec-item"><span class="badge badge-tip">치료 후</span><div class="rec-text">치료(수술·약물) 후 eGFR 감소 + 알부민뇨 감소 + Cr 상승 → <strong>부분적 가역성</strong> 의미.</div></li>
+          <li class="rec-item"><span class="badge badge-screen">MRA 조기 투여</span><div class="rec-text">알도스테론이 신장 조직 전체를 MR 통해 손상 가능 → 비가역적 신장 손상 예방을 위해 <strong>조기 MRA 치료</strong> 권고.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🦴 골격 합병증</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-caution">골밀도</span><div class="rec-text">PA 환자: 골다공증 유병률 ↑, BMD ↓, 소주골 질 ↓, 척추 골절 위험 ↑.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">기전</span><div class="rec-text">알도스테론 과잉 → 저칼슘혈증·이차성 부갑상선기능항진증 → BMD 감소. PA 환자의 PTH가 필수 고혈압 대비 높음.</div></li>
+        <li class="rec-item"><span class="badge badge-screen">치료 후</span><div class="rec-text">수술 또는 약물 치료 후 PTH 수치 감소 (25-OH 비타민D 동일 수준에서도).</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TREATMENT ═══ -->
+<div id="tab-treatment" class="panel">
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>✂️ 수술적 치료 (편측성 PA)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-screen">1차 선택</span><div class="rec-text"><strong>복강경 편측 부신절제술</strong>: 낮은 수술 위험, 짧은 재원 기간. AVS로 확인된 편측성 알도스테론 과분비 확인 필수.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">대안</span><div class="rec-text"><strong>경피적 고주파절제술(RFA)</strong>: 국소마취 하 시행, 최소 절개. 수술 거부 또는 수술 불가 환자에서 대안. 소규모 연구 생화학적 관해율 90–100%.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">다학제</span><div class="rec-text">내분비내과 + 숙련된 외과의 + 마취과 + 중재적 방사선과 다학제 팀 최종 결정.</div></li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>수술 전 관리</strong>: 저항성 고혈압·저칼륨혈증·심혈관 합병증 유병률 높음. 전신마취 위험 감소를 위해 수술 전 적절한 평가·치료 필요. MRA 1차 약물 권고.</div></div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)">수술 후 관리 <span>▸</span></div>
+        <div class="acc-body">
+          • 수술 직후: BP, 전해질, 혈청 Cr 모니터링<br>
+          • MRA·K 보충제 즉시 중단 (수술 후 1일째 고칼륨혈증 예방)<br>
+          • 필요 시 다른 강압제 감량 또는 중단<br>
+          • 일시적 저혈압, 고칼륨혈증, eGFR 감소 발생 가능 (보통 일시적)<br>
+          • 수술 후 일시적 저알도스테론증 발생 시: 플루드로코르티손 대체 요법 필요 (최대 5%)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>💊 약물치료 (양측성 PA / 수술 불가)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table" style="margin-bottom:8px">
+        <tr><th>약물</th><th>특징</th><th>한국 가용 여부</th></tr>
+        <tr><td><strong>스피로놀락톤</strong></td><td>1차 권고 MRA. 항안드로겐·프로게스테론 유사 작용 → 여성화유방, 발기부전 (용량 의존적)</td><td>✅ 가용</td></tr>
+        <tr><td>에플레레논</td><td>선택적 MRA. 성호르몬 부작용 없음. 스피로놀락톤보다 효능 낮음. FDA/EMA 미승인 (PA 적응증)</td><td>❌ 미가용</td></tr>
+        <tr><td>아밀로라이드</td><td>K⁺ 보존 이뇨제. 성호르몬 관련 부작용 없음. 스피로놀락톤 대안 가능</td><td>✅ 가용</td></tr>
+        <tr><td>피네레논</td><td>비스테로이드 MRA. 당뇨 CKD에 허가. PA 부작용 없이 사용 가능성</td><td>미국에서만 현재 가용</td></tr>
+        <tr><td>에사제레논</td><td>일본 연구: 고혈압 + PA에서 양호한 효능·안전성</td><td>미가용</td></tr>
+        <tr><td>박스드로스타트</td><td>선택적 알도스테론 합성효소 억제제. 2상 시험: 난치성 고혈압에서 유의한 BP 감소</td><td>미가용</td></tr>
+      </table>
+      <div class="alert alert-info"><span>ℹ️</span><div>
+        <strong>MRA 적정 용량 지표</strong>: BP 조절 + 칼륨 정상화 + 혈장 레닌 억제 해소 (PRA ≥1 μg/L/hr)<br>
+        불충분한 MRA 용량 → 알도스테론 과잉 억제 불완전 → 심혈관 위험 증가.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>🤰 임신 중 PA</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-screen">원칙</span><div class="rec-text">편측성 PA 여성 → <strong>임신 계획 전 부신절제술</strong> 권고.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">진단</span><div class="rec-text">임신 중 PA 진단: 생화학적 방법 주로 의존 (낮은 레닌 활성 + 높은 알도스테론). 생리적 변화로 확진·위치 결정 검사 금기.</div></li>
+        <li class="rec-item"><span class="badge badge-caution">강압제</span><div class="rec-text">임신 허가 약물: α-메틸도파, 히드랄라진, 라베탈롤, 니페디핀 (20주 이후에만). 스피로놀락톤 <strong>금기</strong> (항안드로겐 작용 → 태아 성발달 영향 우려).</div></li>
+        <li class="rec-item"><span class="badge badge-rx">대안</span><div class="rec-text">에플레레논, 아밀로라이드: 일부 임신부에서 부작용 없이 안전 사용 보고 → 지속적 저항성 고혈압·저칼륨혈증에서 신중히 고려 가능.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">수술</span><div class="rec-text">자발성 저칼륨혈증 + 현저한 알도스테론 과잉 + MRI에서 편측 선종 강력 의심 → 약물 치료 저항성 발생 시 2기 이후 수술 고려.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOLLOWUP ═══ -->
+<div id="tab-followup" class="panel">
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📅 수술 후 추적관찰</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-tip">생화학</span><div class="rec-text">PRA + PAC 측정: 수술 후 <strong>최소 1개월, 6개월</strong> 시점에 생화학적 관해 평가.</div></li>
+        <li class="rec-item"><span class="badge badge-screen">관해율</span><div class="rec-text">AVS 유도 하 성공적 부신절제술 → 생화학적 관해율 <strong>거의 100%</strong>. 임상적(혈압) 관해율은 약 50% (메타분석).</div></li>
+        <li class="rec-item"><span class="badge badge-caution">지속 고혈압</span><div class="rec-text">생화학적 관해 후에도 고혈압 지속 → 치료 실패 아님. 기존 본태성 고혈압 또는 다른 요인에 의한 것. MRA 이외 강압제로 관리.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">PASO 점수</span><div class="rec-text">PA 수술 결과 점수(PASO): 고혈압 기간, 성별, 강압제 용량, BMI, 표적 장기 손상, 영상 최대 결절 크기 → 임상적 관해 예측.</div></li>
+      </ul>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)">임상적 관해 예측 인자 <span>▸</span></div>
+        <div class="acc-body">
+          <strong>유리한 예후 인자</strong>:<br>
+          • 고혈압 기간 짧음<br>
+          • 수술 전 강압제 적음<br>
+          • 젊은 연령<br>
+          • 여성<br>
+          • eGFR 높음<br>
+          • BMI 낮음<br><br>
+          BP는 수술 후 1–6개월 내 최대 개선. 일부 환자는 최대 1년까지 지속 감소.
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>PA 치료 후 최대 3년간 새로운 AF 발생 위험 증가. 특히 부신절제술 후 이 기간 동안 AF 모니터링 권고.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>💊 약물치료 추적</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-confirm">MRA 용량 적정</span><div class="rec-text">BP 조절 + K⁺ 정상화 + PRA ≥1 μg/L/hr (레닌 억제 해소)를 지표로 MRA 용량 결정.</div></li>
+        <li class="rec-item"><span class="badge badge-tip">추적 지표</span><div class="rec-text">정기적으로 BP, 혈청 K⁺, 혈청 Cr, PRA/PAC 측정. 불충분한 MRA 용량 → 심혈관 위험 증가 주의.</div></li>
+        <li class="rec-item"><span class="badge badge-caution">신기능</span><div class="rec-text">eGFR 저하 시 MRA 부작용(고칼륨혈증) 주의. 저하된 eGFR은 수술 후 고칼륨혈증의 예측인자.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggleCard(h){
+  h.classList.toggle('open');
+  h.nextElementSibling.classList.toggle('collapsed');
+}
+function toggleAcc(h){
+  const b=h.nextElementSibling;
+  const ic=h.querySelector('span:last-child');
+  const open=getComputedStyle(b).display!=='none';
+  b.style.display=open?'none':'block';
+  ic.textContent=open?'▸':'▾';
+}
+
+const abbrs=[
+  ['PA','Primary Aldosteronism (원발성 알도스테론증) — 부신에서 알도스테론의 자율적 과분비. 이차성 고혈압의 가장 흔한 내분비 원인.'],
+  ['ARR','Aldosterone-to-Renin Ratio (알도스테론-레닌 비율) — PA 선별검사. 기준값: PAC(ng/dL)/PRA(ng/mL/hr) > 30.'],
+  ['PAC','Plasma Aldosterone Concentration (혈장 알도스테론 농도) — ng/dL 또는 pmol/L로 표시. 1 ng/dL = 27.7 pmol/L.'],
+  ['PRA','Plasma Renin Activity (혈장 레닌 활성도) — ng/mL/hr. 한국에서 사용 가능한 레닌 측정법 (DRC는 현재 미가용).'],
+  ['DRC','Direct Renin Concentration (직접 레닌 농도) — mIU/L. 면역방사측정법 또는 화학발광법으로 측정. 한국 미가용.'],
+  ['AVS','Adrenal Venous Sampling (부신정맥채혈) — 편측성과 양측성 PA 감별의 gold standard. 성공적 삽관 확인 위해 SI 계산.'],
+  ['APA','Aldosterone-Producing Adenoma (알도스테론 분비 선종) — 편측성 PA의 주요 원인. 대개 <2 cm 저음영 결절.'],
+  ['UAH','Unilateral Adrenal Hyperplasia (일측성 부신증식) — 편측성 PA의 또 다른 원인.'],
+  ['IAH','Idiopathic Adrenal Hyperplasia (특발성 부신증식) — 양측성 PA의 주요 원인. MRA 약물치료 대상.'],
+  ['BAH','Bilateral Adrenal Hyperplasia (양측성 부신증식) — IAH와 유사 개념. 약물치료 적응.'],
+  ['MRA','Mineralocorticoid Receptor Antagonist (무기질코르티코이드 수용체 길항제) — 스피로놀락톤(한국 가용), 에플레레논(한국 미가용).'],
+  ['FH','Familial Hyperaldosteronism (가족성 알도스테론증) — FH-I, II, III, IV, PASNA. PA 환자의 약 5%.'],
+  ['SIT','Saline Infusion Test (생리식염수 주입 검사) — 가장 널리 사용되는 확진 검사. 0.9% NaCl 2L 4시간 주입.'],
+  ['FST','Fludrocortisone Suppression Test — 4일간 플루드로코르티손 투여 후 알도스테론 억제 확인.'],
+  ['SLT','Sodium Loading Test (경구 식염 부하 검사) — 3일간 고염식 후 24시간 요중 알도스테론 측정.'],
+  ['CCT','Captopril Challenge Test — 캡토프릴 25–50 mg 복용 2시간 후 알도스테론 억제 확인.'],
+  ['SI','Selectivity Index (선택성 지수) — (Cortisol)AV/(Cortisol)PV. 비자극: ≥2–3, 코신트로핀: ≥5. AVS 삽관 성공 확인.'],
+  ['LI','Lateralization Index (편측성 지수) — (Aldo/Cortisol)D/(Aldo/Cortisol)ND. 비자극: ≥2, 코신트로핀: ≥4.'],
+  ['CLR','Contralateral Ratio (반대측 비율) — (Aldo/Cortisol)ND/(Aldo/Cortisol)PV. <1 → 반대측 억제 확인.'],
+  ['ILR','Ipsilateral Ratio (동측 비율) — (Aldo/Cortisol)D/(Aldo/Cortisol)PV. >2 → 우세 측 과분비 확인.'],
+  ['KCNJ5','칼륨 채널 Kir3.4 유전자 — 한국 APA의 71.2%에서 체세포 돌연변이. 아시아인에서 서구보다 빈도 높음.'],
+  ['HISTALDO','Histopathology of Primary Aldosteronism (원발성 알도스테론증 병리분류) — APA, APN, APM, MAPN, MAPM, APDH.'],
+  ['PASO','PA Surgical Outcome Score — 6개 수술 전 인자(고혈압 기간, 성별, 강압제 용량, BMI, 표적장기손상, 결절 크기)로 임상적 관해 예측.'],
+  ['SPARACUS','SPARTACUS trial — CT vs AVS 무작위 비교 연구. 1년 추적 후 환자 결과 유의한 차이 없음. 단, AVS가 일부 선택적 PA에서 불필요할 수 있음을 시사.'],
+  ['OSA','Obstructive Sleep Apnea (폐쇄성 수면무호흡) — PA 선별 적응증. 고혈압 + OSA에서 PA 유병률 8.9%.'],
+  ['AF','Atrial Fibrillation (심방세동) — PA 환자에서 필수 고혈압 대비 12배 높음. 단독 AF + 고혈압 → PA 선별 권고.'],
+  ['CYP11B2','알도스테론 합성효소 (Aldosterone Synthase) — APA 내 발현이 PA 중증도와 상관. 면역조직화학 염색으로 알도스테론 분비 병소 확인에 사용.'],
+  ['RFA','Radiofrequency Ablation (고주파절제술) — 수술 불가 환자에서 편측성 PA 대안 치료. 소규모 연구 생화학적 관해율 90–100%.'],
+  ['LC-MS/MS','Liquid Chromatography Tandem Mass Spectrometry — PAC 정밀 측정법. 분석 정확도 높으나 아직 광범위 사용 제한.'],
+];
+
+function buildAbbr(){
+  const sorted=abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  document.getElementById('abbr-grid-drop').innerHTML=sorted.map(a=>
+    `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;margin-bottom:4px;" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+       <span style="font-weight:700;color:var(--teal);font-size: calc(12px * var(--fscale, 1));font-family:'Courier New',monospace">${a[0]}</span>
+       <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);line-height:1.45;margin-top:2px">${a[1]}</div>
+     </div>`).join('');
+}
+function filterAbbr(val){
+  const v=val.toLowerCase().trim();
+  const drop=document.getElementById('abbr-dropdown');
+  const items=document.querySelectorAll('#abbr-grid-drop [data-term]');
+  if(!v){drop.style.display='none';return;}
+  const inp=document.getElementById('abbr-input');
+  const rect=inp.getBoundingClientRect();
+  const w=420;
+  let left=rect.right-w;if(left<8)left=8;
+  drop.style.top=(rect.bottom+4)+'px';drop.style.left=left+'px';
+  drop.style.display='block';
+  items.forEach(el=>{
+    const show=el.dataset.term.startsWith(v)||el.dataset.def.includes(v);
+    el.style.display=show?'':'none';
+  });
+}
+document.addEventListener('click',e=>{
+  const inp=document.getElementById('abbr-input');
+  const drop=document.getElementById('abbr-dropdown');
+  if(inp&&!inp.contains(e.target)&&drop&&!drop.contains(e.target))drop.style.display='none';
+});
+buildAbbr();
+</script>
+</body>
+</html>

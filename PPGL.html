@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPGL 진단 가이드라인 (한국 2021)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --rec-a: #116329;   /* Grade A */
+    --rec-b: #0550ae;   /* Grade B */
+    --rec-c: #57606a;   /* Grade C */
+    --rec-e: #bc4c00;   /* Grade E */
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: #7c3aed;
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 900px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 14px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: #7c3aed; border-bottom-color: #7c3aed; }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #7c3aed; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-a { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-b { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-c { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .grade-e { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: #7c3aed; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: #f5f0ff; border-left: 3px solid #7c3aed; color: #5b21b6; }
+
+  /* ── TABLE ── */
+  .ppgl-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ppgl-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .ppgl-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ppgl-table tr:last-child td { border-bottom: none; }
+  .ppgl-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ppgl-table .section-row td { background: var(--surface2); color: #7c3aed; font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr span { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── SP ── */
+  .sp-section { margin-bottom: 8px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid #7c3aed; padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; margin-bottom: 1px; user-select: none; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .sp-body.open { max-height: 2000px; padding: 8px 0; }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-meta { background: #f5f0ff; color: #7c3aed; }
+  .pill-gene { background: #dafbe1; color: var(--green); }
+  .pill-image { background: #ddf4ff; color: var(--accent2); }
+  .pill-path { background: #fff8c5; color: var(--yellow); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: #7c3aed; font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .risk-high { background: #ffebe9; color: #82071e; font-weight: 600; text-align: center; padding: 4px 6px; border-radius: 4px; }
+  .risk-mod { background: #fff8c5; color: #7d4e00; font-weight: 600; text-align: center; padding: 4px 6px; border-radius: 4px; }
+  .risk-low { background: #dafbe1; color: #116329; font-weight: 600; text-align: center; padding: 4px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">KES·KSS·KSNM·KSP·KSLM 2021</span>
+      <h1>갈색세포종/부신경절종(PPGL) 진단 지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.3803/EnM.2020.908" class="source-link" target="_blank">Endocrinol Metab 2021;36:322–338 ↗</a>
+      <span class="meta"> · 한국 내분비학회 외 4개 학회 공동 Position Statement</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by KES</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('biochem')">🧪 생화학 검사</div>
+    <div class="tab" onclick="showTab('imaging')">📷 영상 진단</div>
+    <div class="tab" onclick="showTab('pathology')">🔬 병리 등급</div>
+    <div class="tab" onclick="showTab('genetics')">🧬 유전자 검사</div>
+    <div class="tab" onclick="showTab('summary')">📋 권고 요약</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;min-width:130px;max-width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:#7c3aed">1.8</div><div class="stat-lbl">국내 연간 발생률 (100만 명당)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">~40%</div><div class="stat-lbl">생식세포 돌연변이 보유율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">9–10%</div><div class="stat-lbl">진단 시 원격전이 비율</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> PPGL 정의 및 핵심 특성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div><strong>PPGL</strong> = 크로마핀 세포 유래 희귀 신경내분비종양. <strong>갈색세포종(Pheochromocytoma)</strong>은 부신 수질, <strong>부신경절종(Paraganglioma)</strong>은 부신 외 교감 또는 부교감 신경절 기원.</div>
+      </div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="ppgl-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td style="font-weight:600">주 분비 카테콜아민</td><td>노르에피네프린, 에피네프린</td></tr>
+            <tr><td style="font-weight:600">주요 증상</td><td>고혈압, 두통, 발한, 심계항진</td></tr>
+            <tr><td style="font-weight:600">전이 가능성</td><td>모든 PPGL은 전이 잠재성 보유 (WHO 2017)</td></tr>
+            <tr><td style="font-weight:600">유전성 비율</td><td>≥30% (생식세포 돌연변이)</td></tr>
+            <tr><td style="font-weight:600">악성 용어</td><td>"악성/양성" 폐기 → "전이성/비전이성"으로 대체</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div>인식 지연 시 치명적 부정맥, 심근경색, 뇌혈관 사건, 돌연사 발생 가능. <strong>조기·정확한 진단</strong>이 필수.</div>
+          </div>
+          <div class="alert alert-warn">
+            <span>🧬</span>
+            <div>한국인 PPGL 환자 21% (겉보기 산발성)에서도 생식세포 돌연변이 검출 → <strong>가족력 없어도 유전자 검사 권고.</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO 2017 분류 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> WHO 2017 분류 및 AJCC TNM 병기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">WHO 2017 — 부신 수질·부신 외 신경절 종양</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 갈색세포종 (Pheochromocytoma)</li>
+            <li>• 두경부 부신경절종</li>
+            <li>• 교감신경 부신경절종</li>
+            <li>• 부신 신경모세포성 종양 (신경모세포종 등)</li>
+            <li>• 복합 갈색세포종/부신경절종</li>
+          </ul>
+          <div class="alert alert-info" style="margin-top:8px">
+            <span>ℹ️</span>
+            <div>"양성/악성" 분류 폐기 → 전이성 여부로 기술. <span class="grade grade-a" data-tip="근거 수준 A: 충분한 RCT/메타분석">A</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">AJCC TNM 병기 (2017)</div>
+          <table class="ppgl-table">
+            <tr><th>T</th><th>기준</th></tr>
+            <tr><td>T1</td><td>갈색세포종 &lt;5 cm</td></tr>
+            <tr><td>T2</td><td>갈색세포종 ≥5 cm <em>또는</em> 교감신경 부신경절종</td></tr>
+            <tr><td>T3</td><td>주변 조직 침범 (부신 외 지방 포함)</td></tr>
+          </table>
+          <table class="ppgl-table" style="margin-top:6px">
+            <tr><th>M</th><th>전이 위치</th></tr>
+            <tr><td>M1a</td><td>골 전이</td></tr>
+            <tr><td>M1b</td><td>비국소 림프절·간·폐</td></tr>
+            <tr><td>M1c</td><td>골 + 다발 부위 전이</td></tr>
+          </table>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">* 두경부 부교감 부신경절종은 T 병기에서 제외</div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>📈</span>
+        <div>전이성 PPGL의 5년 생존율 60% vs 비전이성 90%. 전이성 환자에서 사망 위험비 2배(한국 전국 연구). 뼈 전이 중앙생존 12년 vs 비골격 전이 5–7.5년.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 진단 알고리즘 요약 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 진단 접근 알고리즘</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;flex-direction:column;gap:6px;font-size: calc(12px * var(--fscale, 1))">
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f5f0ff;border-radius:6px;border-left:3px solid #7c3aed">
+          <span style="font-weight:700;color:#7c3aed;min-width:24px">①</span>
+          <div><strong>생화학 검사</strong> — 혈장 유리 메타네프린 <em>또는</em> 소변 분획 메타네프린 측정 <span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#ddf4ff;border-radius:6px;border-left:3px solid var(--accent2)">
+          <span style="font-weight:700;color:var(--accent2);min-width:24px">②</span>
+          <div><strong>해부학적 영상</strong> — CT 우선 (복부·골반), 두경부 부신경절종 MRI 우선 <span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#dafbe1;border-radius:6px;border-left:3px solid var(--green)">
+          <span style="font-weight:700;color:var(--green);min-width:24px">③</span>
+          <div><strong>기능적 영상</strong> — 고위험군(종양 >5 cm, 부신 외, 양측성, 유전성)에서 <sup>123</sup>I-MIBG / <sup>68</sup>Ga-DOTA-SSA PET/CT / <sup>18</sup>F-DOPA PET/CT <span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff8c5;border-radius:6px;border-left:3px solid var(--yellow)">
+          <span style="font-weight:700;color:var(--yellow);min-width:24px">④</span>
+          <div><strong>병리 및 IHC</strong> — SDHB 면역조직화학 (SDHx 생식세포 돌연변이 검출) <span class="grade grade-b" data-tip="근거 수준 B: 코호트 연구 기반">B</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#ffebe9;border-radius:6px;border-left:3px solid var(--red)">
+          <span style="font-weight:700;color:var(--red);min-width:24px">⑤</span>
+          <div><strong>유전자 검사</strong> — 모든 PPGL 환자에서 시행. Targeted NGS 권고 <span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+<!-- ═══════════════ BIOCHEM ═══════════════ -->
+<div id="tab-biochem" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 2.1 초기 생화학 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거 수준 A: RCT/메타분석 기반 권고">A</span></div>
+          <div class="rec-text">PPGL 초기 생화학 검사로 <strong>혈장 유리 메타네프린(plasma free metanephrines)</strong> 또는 <strong>소변 분획 메타네프린(urinary fractionated metanephrines)</strong>을 측정한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">메타네프린의 생화학적 근거</div>
+          <div style="font-size: calc(12px * var(--fscale, 1));line-height:1.7;color:var(--text)">
+            메타네프린 = 에피네프린·노르에피네프린의 O-메틸화 대사산물. 종양 세포질 내 COMT에 의해 <em>지속적·자발적</em>으로 생성 → 카테콜아민 분비와 무관하게 항상 상승 → <strong>카테콜아민 자체보다 민감도 우수.</strong>
+          </div>
+          <table class="ppgl-table" style="margin-top:8px">
+            <tr><th>검사</th><th>민감도</th><th>특이도</th></tr>
+            <tr><td>혈장 유리 메타네프린</td><td style="color:var(--green);font-weight:600">97–99%</td><td>89–94%</td></tr>
+            <tr><td>소변 분획 메타네프린</td><td style="color:var(--green);font-weight:600">96%</td><td>94%</td></tr>
+            <tr><td>소변 카테콜아민</td><td>84%</td><td>낮음</td></tr>
+            <tr><td>소변 VMA</td><td>64%</td><td>낮음</td></tr>
+          </table>
+          <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:4px">한국인 단일기관 연구: 혈장 96%/76%, 소변 96%/94%</div>
+        </div>
+        <div>
+          <div class="alert alert-info">
+            <span>📋</span>
+            <div><strong>채혈 자세</strong>: 앙와위(supine) 권장. 직립자세 → 노르에피네프린 자극 → 노르메타네프린 상승 → 위양성↑. 모호한 결과 재검 시 특히 중요.</div>
+          </div>
+          <div class="alert alert-warn">
+            <span>⚙️</span>
+            <div><strong>측정법</strong>: LC-MS/MS 또는 전기화학 검출 HPLC 권장 (간섭 낮음, 재현성 높음).</div>
+          </div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div>혈장 vs 소변 메타네프린 간 우선순위 없음 — 두 검사 모두 초기 검사로 동등하게 사용 가능.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 2.2 도파민·3-메톡시티라민</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거 수준 C: 소규모 연구/관찰 연구">C</span></div>
+          <div class="rec-text">도파민 주로 분비하는 PPGL이나 <strong>전이 고위험</strong> PPGL에서 <strong>소변 도파민</strong> 및 <strong>혈장 3-메톡시티라민(3-MT)</strong> 측정이 유용하다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <table class="ppgl-table">
+        <tr><th>지표</th><th>임상적 의의</th></tr>
+        <tr><td style="font-weight:600">혈장 3-메톡시티라민</td><td>도파민의 O-메틸화 대사산물. 도파민 생성 PGL에서 ~100배 상승. 전이성 PPGL에서 비전이성 대비 ~4배 상승.</td></tr>
+        <tr><td style="font-weight:600">소변 도파민</td><td>전이성 PPGL 코호트(365명)에서 전이군(105명)이 유의하게 높음.</td></tr>
+        <tr><td style="font-weight:600">SDHB 돌연변이와 연관</td><td>SDHB 돌연변이 PPGL → 종양 대사체학상 도파민 과생성 → 3-MT·소변 도파민 상승 → 전이 위험↑.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 2.3 크로모그라닌 A (생화학적 침묵 PPGL)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거 수준 C">C</span></div>
+          <div class="rec-text"><strong>생화학적 침묵 PPGL</strong> (메타네프린·노르메타네프린·3-MT 모두 정상)에서 <strong>크로모그라닌 A(CgA)</strong>를 바이오마커로 사용할 수 있다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="alert alert-info">
+        <span>ℹ️</span>
+        <div>생화학적 침묵 PPGL에서 분비 과립 보존, 티로신히드록실라제 발현 소실 → 카테콜아민 생산 불가능하나 CgA는 지속 분비. CgA는 PPGL과 정상인 감별에 고민감도·고특이도.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-biochem -->
+
+<!-- ═══════════════ IMAGING ═══════════════ -->
+<div id="tab-imaging" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖥️</span> 3.1 해부학적 영상 (CT / MRI)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+          <div class="rec-text">생화학적 증거 확인 후 PPGL 위치 확인을 위한 <strong>1차 영상</strong>은 <strong>CT(조영증강)</strong>. MRI는 CT 결과 불명확하거나 조영 CT 불가 시 2차 선택.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <table class="ppgl-table">
+        <tr><th>영상 방법</th><th>민감도</th><th>적응증 / 비고</th></tr>
+        <tr><td style="font-weight:600">CT (조영증강)</td><td>88–100%</td><td>복부·골반 PPGL 1차; 폐 전이 감지 우수</td></tr>
+        <tr><td style="font-weight:600">MRI</td><td>90–95%</td><td>두경부 PGL 1차; 조영제 알레르기, 임산부, 소아, 유전성 돌연변이 보유자, 과도 방사선 노출 시</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>CT는 폐 전이에 유리, MRI는 두개저·경부 PGL 민감도 90–95%로 CT 우위. 임산부·소아·반복 유전성 검사 환자는 방사선 제한으로 MRI 선호.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> 3.2–3.3 기능적 영상 (핵의학)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+          <div class="rec-text"><strong>전이 고위험군·다발 병변</strong>에서 기능적 영상 시행 권고. 고위험: 종양 >5 cm, 부신 외, 양측성, 유전성.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B: 코호트 연구">B</span></div>
+          <div class="rec-text">기능적 영상 선택 시 <strong>유전자형·위치·방사성의약품 가용성·임상 상황</strong>에 따라 <sup>123</sup>I-MIBG 신티그래피/SPECT, <sup>68</sup>Ga-DOTA-SSA PET/CT, <sup>18</sup>F-DOPA PET/CT 중 선택.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <table class="ppgl-table">
+        <tr><th>기능적 영상</th><th>검출률</th><th>강점</th><th>한계</th></tr>
+        <tr><td><span class="pill pill-image">⁶⁸Ga-DOTA-SSA PET/CT</span></td><td style="color:var(--green);font-weight:600">93–100%</td><td>유전자 불명 PPGL 최고 민감도; 부신 외 PGL, 두경부 PGL; 전이성 PPGL; SDHx 돌연변이 선호; PRRT 계획 시 필수</td><td>⁶⁸Ga 생성기 대형센터 한정</td></tr>
+        <tr><td><span class="pill pill-image">¹²³I-MIBG SPECT</span></td><td>6.9–100%</td><td>¹³¹I-MIBG 치료 전 필수; VHL·RET·NF1·MAX·HIF2A·PHD1/2·FH 돌연변이에 적합</td><td>SDHx 관련 PPGL에서 민감도 낮음</td></tr>
+        <tr><td><span class="pill pill-image">¹⁸F-DOPA PET/CT</span></td><td>61.4–97.4%</td><td>두경부 PGL; VHL·RET·NF1·MAX 등 비SDHx 돌연변이; 국내 상업적 공급 가능</td><td>SDHx 관련에서 ⁶⁸Ga-DOTA-SSA 보다 열등</td></tr>
+        <tr><td><span class="pill pill-image">¹⁸F-FDG PET/CT</span></td><td>49.2–85.8%</td><td>대안 (위 3가지 불가 시); SDHx+ 전이성 PPGL 일부에서 유용</td><td>특이도 낮음; 1차 선택 아님</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 알고리즘 플로우차트 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 기능적 영상 선택 알고리즘</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <div class="sp-section">
+          <div class="sp-title" onclick="toggleSP(this)"><span>① 겉보기 산발성 갈색세포종(PHEO)</span><span>▾</span></div>
+          <div class="sp-body">
+            <div style="padding:4px 0 4px 12px;border-left:2px solid #7c3aed">
+              <strong>1차:</strong> <sup>123</sup>I-MIBG <em>또는</em> <sup>68</sup>Ga-DOTA-SSA <em>또는</em> <sup>18</sup>F-DOPA PET/CT<br>
+              (가용성 따라 선택; 각 기관의 방사성의약품 확보 여부 확인)
+            </div>
+          </div>
+        </div>
+        <div class="sp-section">
+          <div class="sp-title" onclick="toggleSP(this)"><span>② 두경부 부신경절종(HNPGL)</span><span>▾</span></div>
+          <div class="sp-body">
+            <div style="padding:4px 0 4px 12px;border-left:2px solid #7c3aed">
+              <strong>1차:</strong> <sup>18</sup>F-DOPA PET/CT<br>
+              불가 시: <sup>68</sup>Ga-DOTA-SSA PET/CT
+            </div>
+          </div>
+        </div>
+        <div class="sp-section">
+          <div class="sp-title" onclick="toggleSP(this)"><span>③ 전이성 + 교감신경 PPGL + SDHx 음성</span><span>▾</span></div>
+          <div class="sp-body">
+            <div style="padding:4px 0 4px 12px;border-left:2px solid #7c3aed">
+              <strong>1차:</strong> <sup>68</sup>Ga-DOTA-SSA PET/CT<br>
+              불가 시: <sup>18</sup>F-DOPA → 불가 시: <sup>18</sup>F-FDG
+            </div>
+          </div>
+        </div>
+        <div class="sp-section">
+          <div class="sp-title" onclick="toggleSP(this)"><span>④ 전이성 + 교감신경 PPGL + SDHx 양성</span><span>▾</span></div>
+          <div class="sp-body">
+            <div style="padding:4px 0 4px 12px;border-left:2px solid #7c3aed">
+              <strong>1차:</strong> <sup>68</sup>Ga-DOTA-SSA PET/CT<br>
+              불가 시: <sup>18</sup>F-FDG (HIF2A·PHD1/2 제외)
+            </div>
+          </div>
+        </div>
+        <div class="sp-section">
+          <div class="sp-title" onclick="toggleSP(this)"><span>⑤ VHL·RET·NF1·MAX·HIF2A·PHD1/2·FH 돌연변이</span><span>▾</span></div>
+          <div class="sp-body">
+            <div style="padding:4px 0 4px 12px;border-left:2px solid #7c3aed">
+              <strong>1차:</strong> <sup>123</sup>I-MIBG <em>또는</em> <sup>18</sup>F-DOPA PET/CT<br>
+              불가 시: <sup>68</sup>Ga-DOTA-SSA (HIF2A·PHD1/2 제외: <sup>18</sup>F-FDG)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 3.4 방사성핵종 치료 계획 시 영상</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text"><strong>¹³¹I-MIBG 치료</strong> 계획 시: 치료 결정·반응 모니터링을 위해 <strong>¹²³I-MIBG 신티그래피</strong>가 필수.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text"><strong>PRRT(펩타이드 수용체 방사성핵종 치료)</strong> 계획 시 전이성 PPGL에서 <strong>⁶⁸Ga-DOTA-SSA PET/CT</strong>가 필수.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div class="alert alert-info">
+          <span>💊</span>
+          <div><strong>¹³¹I-MIBG 치료</strong>: 고비활성 ¹³¹I-MIBG (Azedra®) — 전이/국소진행 PPGL에서 FDA 승인. 방사선학적 반응률 92%, 생화학적 반응 68%.</div>
+        </div>
+        <div class="alert alert-info">
+          <span>💊</span>
+          <div><strong>PRRT</strong>: ¹⁷⁷Lu-DOTA-TATE 등. 전체 질병 조절률 84%, 생화학적 반응 61–64% (메타분석). 한국에서 시판 중이나 PPGL에 공식 승인 미완.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-imaging -->
+
+<!-- ═══════════════ PATHOLOGY ═══════════════ -->
+<div id="tab-pathology" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 4.1 PASS 및 GAPP 병리 등급 시스템</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text"><strong>PASS</strong>와 <strong>GAPP</strong> 모두 악성 진단 확인에 사용할 수 없다. 두 시스템 모두 전이 예측에 한계가 있음.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>PASS/GAPP 어느 것도 전이 위험을 100% 예측하지 못함. PASS: 관찰자 간 변이 문제, 유전자·임상 인자 미포함. GAPP: PASS보다 관찰자 간 변이 작으나 두 시스템 모두 PPGL 사망과의 연관성 부족.</div>
+      </div>
+
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <!-- PASS -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>PASS (갈색세포종 전용)</span>
+            <span>▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <div style="font-size: calc(11px * var(--fscale, 1));margin-bottom:6px;color:var(--text2)">Thompson, 2002. 총점 0–20. <strong>≥4점</strong>: 생물학적 공격성</div>
+            <table class="ppgl-table">
+              <tr><th>항목</th><th>점수</th></tr>
+              <tr><td>큰 둥지 또는 미만성 성장</td><td>2</td></tr>
+              <tr><td>중심성/융합성 종양 괴사</td><td>2</td></tr>
+              <tr><td>고세포밀도</td><td>2</td></tr>
+              <tr><td>단조로운 세포 양상</td><td>2</td></tr>
+              <tr><td>방추형 세포</td><td>2</td></tr>
+              <tr><td>핵분열 >3/10 HPF</td><td>2</td></tr>
+              <tr><td>비정형 핵분열</td><td>2</td></tr>
+              <tr><td>지방조직 침범</td><td>2</td></tr>
+              <tr><td>혈관 침범</td><td>1</td></tr>
+              <tr><td>피막 침범</td><td>1</td></tr>
+              <tr><td>현저한 핵 다형성</td><td>1</td></tr>
+              <tr><td>핵 과염색성</td><td>1</td></tr>
+            </table>
+            <div style="margin-top:6px;font-size: calc(10px * var(--fscale, 1));color:var(--text2)">민감도 100%, 특이도 75%</div>
+          </div>
+        </div>
+        <!-- GAPP -->
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)">
+            <span>GAPP (갈색세포종+부신경절종)</span>
+            <span>▾ 펼치기</span>
+          </div>
+          <div class="osa-body">
+            <div style="font-size: calc(11px * var(--fscale, 1));margin-bottom:6px;color:var(--text2)">Kimura, 2014. 총점 0–10. <strong>0–2: 고분화 / 3–6: 중등분화 / 7–10: 저분화</strong></div>
+            <table class="ppgl-table">
+              <tr><th>항목</th><th>점수</th></tr>
+              <tr><td>조직학적 패턴 (Zellballen/불규칙 큰 둥지/위장미/pseudorosette)</td><td>0/1/1</td></tr>
+              <tr><td>세포밀도 (저/중/고)</td><td>0/1/2</td></tr>
+              <tr><td>코메도 괴사 (없음/있음)</td><td>0/2</td></tr>
+              <tr><td>혈관 또는 피막 침범 (없음/있음)</td><td>0/1</td></tr>
+              <tr><td>Ki-67 지수 (&lt;1% / 1–3% / &gt;3%)</td><td>0/1/2</td></tr>
+              <tr><td>카테콜아민 형 (에피/노에피/비기능)</td><td>0/1/0</td></tr>
+            </table>
+            <div style="margin-top:6px;font-size: calc(10px * var(--fscale, 1));color:var(--text2)">민감도 90%, 특이도 87%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 4.2 SDHB 면역조직화학 (IHC)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text">종양 세포에서 <strong>SDHB 단백 소실(IHC 음성)</strong>은 SDHx 유전자 생식세포 돌연변이를 시사한다. SDHB 돌연변이 PPGL은 전이 위험이 높다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-danger">
+            <span>🚨</span>
+            <div><strong>SDHB 돌연변이 = 최대 40% 이상 전이</strong>. 5년 생존율 36% vs 비돌연변이 67% (상대위험비 2.6). 중앙 생존: 42개월 vs 244개월.</div>
+          </div>
+          <table class="ppgl-table" style="margin-top:8px">
+            <tr><th>지표</th><th>수치</th></tr>
+            <tr><td>SDHx 돌연변이에 대한 민감도</td><td style="color:var(--green);font-weight:600">100%</td></tr>
+            <tr><td>특이도</td><td>84%</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div><strong>SDHB IHC는 기술적으로 쉽고 비용효과적</strong> → 가족력·임상 적응증 여부와 무관하게 모든 PPGL에서 시행 권고. SDH 단백 복합체 불안정화 시 SDHB 소실 발생.</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>Modified GAPP (M-GAPP): 생화학·조직학·SDHB IHC 조합 → 전이 PPGL 예측 보완. (Koh et al. 2017)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-pathology -->
+
+<!-- ═══════════════ GENETICS ═══════════════ -->
+<div id="tab-genetics" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 5.1 유전자 검사 적응증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거 수준 A">A</span></div>
+          <div class="rec-text">PPGL로 진단된 <strong>모든 환자에서 유전자 검사를 권고</strong>한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="alert alert-purple">
+        <span>🧬</span>
+        <div>PPGL은 인간에서 <strong>가장 유전성이 높은 종양</strong> (≥30–40% 유전성). 유전자 검사의 5대 이유:</div>
+      </div>
+      <div style="font-size: calc(12px * var(--fscale, 1));margin-top:8px;display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;gap:8px;align-items:flex-start;padding:6px 10px;background:var(--surface2);border-radius:5px">
+          <span style="font-weight:700;color:#7c3aed;min-width:18px">①</span>
+          <div>모든 PPGL의 1/3 이상이 감수성 유전자의 병원성 생식세포 돌연변이 보유</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;padding:6px 10px;background:var(--surface2);border-radius:5px">
+          <span style="font-weight:700;color:#7c3aed;min-width:18px">②</span>
+          <div>SDHB 돌연변이 환자의 40% 이상이 전이성 표현형 → 악성도 예측의 주요 인자</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;padding:6px 10px;background:var(--surface2);border-radius:5px">
+          <span style="font-weight:700;color:#7c3aed;min-width:18px">③</span>
+          <div>유전성/증후군 PPGL 환자는 산발성보다 합병증 위험 높음</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;padding:6px 10px;background:var(--surface2);border-radius:5px">
+          <span style="font-weight:700;color:#7c3aed;min-width:18px">④</span>
+          <div>가족력 없는 산발성 PPGL의 11–13%에서 감수성 유전자 돌연변이 발견 (메타분석); 한국인 산발성 21%에서 생식세포 돌연변이 검출</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;padding:6px 10px;background:var(--surface2);border-radius:5px">
+          <span style="font-weight:700;color:#7c3aed;min-width:18px">⑤</span>
+          <div>발단자의 유전자 변이 확인 시 가족 구성원 감시에 직결</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👨‍👩‍👧</span> 5.2 가족 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text">유전성 PPGL 환자의 <strong>1차 직계가족</strong>에서도 유전자 검사를 고려한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="alert alert-info">
+        <span>👨‍👩‍👧</span>
+        <div>대부분 상염색체 우성 전파. SDHD·SDHAF2 관련: 2차 직계까지 확장 검사 고려. SDHB·SDHA·SDHC·FH·TMEM127·MAX 돌연변이에서 전이 관련 시 2차 직계도 포함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 5.3–5.4 NGS 패널 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거 수준 B">B</span></div>
+          <div class="rec-text">PPGL 유전 진단의 선호 방법으로 <strong>검증된 표적 NGS(next-generation sequencing)</strong>를 사용한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거 수준 C">C</span></div>
+          <div class="rec-text">병원성 근거 수준에 따라 <strong>기본 패널 10개</strong> 유전자 및 <strong>확장 패널 5개</strong> 추가 유전자를 권고한다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">기본 패널 (n=10) — 근거 수준 3–4</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+            <span class="pill pill-gene">FH</span>
+            <span class="pill pill-gene">MAX</span>
+            <span class="pill pill-gene">NF1</span>
+            <span class="pill pill-gene">RET</span>
+            <span class="pill pill-gene">SDHA</span>
+            <span class="pill pill-gene">SDHB</span>
+            <span class="pill pill-gene">SDHC</span>
+            <span class="pill pill-gene">SDHD</span>
+            <span class="pill pill-gene">TMEM127</span>
+            <span class="pill pill-gene">VHL</span>
+          </div>
+          <table class="ppgl-table">
+            <tr><th>유전자</th><th>연관 증후군</th></tr>
+            <tr><td>RET</td><td>MEN2 (갑상선수질암, 부갑상선기능항진증)</td></tr>
+            <tr><td>VHL</td><td>von Hippel-Lindau (신장암, 혈관모세포종)</td></tr>
+            <tr><td>NF1</td><td>신경섬유종증 1형</td></tr>
+            <tr><td>SDHA/B/C/D</td><td>부신경절종 증후군 (PGL 1–4)</td></tr>
+            <tr><td>MAX</td><td>양측성 갈색세포종</td></tr>
+            <tr><td>TMEM127</td><td>양측성 갈색세포종</td></tr>
+            <tr><td>FH</td><td>유전성 평활근종증 신세포암 (HLRCC)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:#7c3aed;margin-bottom:6px">확장 패널 추가 5개 — 근거 수준 2</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+            <span class="pill pill-gene" style="background:#e9d8fd;color:#5b21b6">EGLN1/PHD2</span>
+            <span class="pill pill-gene" style="background:#e9d8fd;color:#5b21b6">EPAS1</span>
+            <span class="pill pill-gene" style="background:#e9d8fd;color:#5b21b6">KIF1B</span>
+            <span class="pill pill-gene" style="background:#e9d8fd;color:#5b21b6">MET</span>
+            <span class="pill pill-gene" style="background:#e9d8fd;color:#5b21b6">SDHAF2</span>
+          </div>
+          <div class="alert alert-warn">
+            <span>💡</span>
+            <div>한국인 PPGL 57명 연구: 32.6%에서 생식세포 돌연변이 — SDHB(31.4%) &gt; RET(22.3%) &gt; VHL(17.1%) &gt; NF1·EPAS1(5.7%).</div>
+          </div>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>🔬</span>
+            <div>NGS 동정 변이는 Sanger 염기서열분석 등 직교법으로 별도 DNA에서 확인 권고. 기본 패널에서 미발견 시 whole-exome/genome sequencing 추가 고려.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-sep"></div>
+      <div class="alert alert-success">
+        <span>⚡</span>
+        <div><strong>NGS 패러다임 전환</strong>: "환자 → 후보 유전자" 방식에서 "돌연변이 유전자 → 영향받은 환자" 방식으로. 단일 검사로 모든 감수성 유전자 동시 스크리닝 가능.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-genetics -->
+
+<!-- ═══════════════ SUMMARY ═══════════════ -->
+<div id="tab-summary" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 전체 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="pill pill-meta">분류</span></div>
+          <div class="rec-text" style="font-weight:600;color:#7c3aed">1. 분류</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A: 충분한 RCT/메타분석">A</span></div>
+          <div class="rec-text">1.1 모든 PPGL은 전이 잠재성을 가진다. "양성/악성" 용어를 사용하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div>
+          <div class="rec-text">1.2 PPGL 진단 시 <strong>AJCC TNM 병기</strong>를 적용한다.</div>
+        </li>
+
+        <li class="rec-item">
+          <div class="rec-badges"><span class="pill pill-meta">생화학</span></div>
+          <div class="rec-text" style="font-weight:600;color:#7c3aed">2. 생화학 검사</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div>
+          <div class="rec-text">2.1 초기 생화학: <strong>혈장 유리 메타네프린</strong> 또는 <strong>소변 분획 메타네프린</strong> 측정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 소규모 관찰 연구">C</span></div>
+          <div class="rec-text">2.2 도파민 주분비 PPGL/전이 고위험 PPGL에서 <strong>소변 도파민 + 혈장 3-메톡시티라민</strong> 추가 측정.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">2.3 생화학적 침묵 PPGL에서 <strong>크로모그라닌 A</strong> 바이오마커로 활용 가능.</div>
+        </li>
+
+        <li class="rec-item">
+          <div class="rec-badges"><span class="pill pill-image">영상</span></div>
+          <div class="rec-text" style="font-weight:600;color:#7c3aed">3. 영상 진단</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div>
+          <div class="rec-text">3.1 생화학적 증거 확인 후 <strong>CT가 1차 영상</strong>. MRI는 CT 불명확하거나 조영 CT 금기 시 2차.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div>
+          <div class="rec-text">3.2 종양 >5 cm, 부신 외, 양측성, 유전성 등 전이 고위험에서 <strong>기능적 영상</strong> 시행.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 코호트 연구">B</span></div>
+          <div class="rec-text">3.3 기능적 영상: 유전자형·위치·가용성에 따라 <strong>¹²³I-MIBG/SPECT, ⁶⁸Ga-DOTA-SSA PET/CT, ¹⁸F-DOPA PET/CT</strong> 중 선택.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">3.4 ¹³¹I-MIBG 치료 시 ¹²³I-MIBG 필수; PRRT 계획 시 ⁶⁸Ga-DOTA-SSA PET/CT 필수.</div>
+        </li>
+
+        <li class="rec-item">
+          <div class="rec-badges"><span class="pill pill-path">병리</span></div>
+          <div class="rec-text" style="font-weight:600;color:#7c3aed">4. 병리</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">4.1 PASS·GAPP는 악성 진단 확인에 사용할 수 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">4.2 모든 PPGL에서 <strong>SDHB IHC</strong> 시행. 소실 시 SDHx 생식세포 돌연변이 시사; SDHB 돌연변이 = 전이 고위험.</div>
+        </li>
+
+        <li class="rec-item">
+          <div class="rec-badges"><span class="pill pill-gene">유전자</span></div>
+          <div class="rec-text" style="font-weight:600;color:#7c3aed">5. 유전자 검사</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div>
+          <div class="rec-text">5.1 <strong>모든 PPGL 환자에서 유전자 검사 권고.</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">5.2 유전성 PPGL 환자의 <strong>1차 직계가족</strong>에서도 검사 고려.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">5.3 유전 진단에 <strong>검증된 표적 NGS</strong> 선호.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">5.4 <strong>기본 패널(10개)</strong>: FH, MAX, NF1, RET, SDHA, SDHB, SDHC, SDHD, TMEM127, VHL + <strong>확장 패널(+5개)</strong>: EGLN1/PHD2, EPAS1, KIF1B, MET, SDHAF2.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 근거 수준 범례 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 근거 수준 및 권고 등급</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>등급</th><th>정의</th></tr>
+        <tr>
+          <td><span class="grade grade-a" data-tip="근거 수준 A">A</span></td>
+          <td>권고를 뒷받침하는 명확한 근거. 충분한 검정력을 가진 다중 RCT 또는 메타분석 결과.</td>
+        </tr>
+        <tr>
+          <td><span class="grade grade-b" data-tip="근거 수준 B">B</span></td>
+          <td>권고의 신뢰할 수 있는 근거. 잘 수행된 코호트 연구 또는 환자-대조군 연구에 의해 지지.</td>
+        </tr>
+        <tr>
+          <td><span class="grade grade-c" data-tip="근거 수준 C">C</span></td>
+          <td>권고의 가능한 근거. 소규모 RCT, 증례 보고, 관찰 연구에서 확인되나 신뢰도 제한.</td>
+        </tr>
+        <tr>
+          <td><span class="grade grade-e" data-tip="근거 수준 E: 전문가 의견">E</span></td>
+          <td>전문가 권고. 근거 부재하나 전문가 의견 또는 임상 경험에 의해 지지.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 약어 전체 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-summary -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TABS ───
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+  // Initialize: if card-header has 'open' class on load, body should be visible
+}
+// On load: set initial state
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) {
+      body.classList.add('collapsed');
+    }
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  const span = hdr.querySelector('span:last-child');
+  span.textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+// ─── SP ───
+function toggleSP(title) {
+  const body = title.nextElementSibling;
+  body.classList.toggle('open');
+  const arrow = title.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['PPGL','Pheochromocytoma and Paraganglioma (갈색세포종과 부신경절종) — 크로마핀 세포 유래 신경내분비종양'],
+  ['PHEO','Pheochromocytoma (갈색세포종) — 부신 수질 기원 PPGL'],
+  ['PGL','Paraganglioma (부신경절종) — 부신 외 교감/부교감 신경절 기원'],
+  ['HNPGL','Head and Neck Paraganglioma (두경부 부신경절종) — 부교감 신경절 기원; 주로 비기능성'],
+  ['MEN2','Multiple Endocrine Neoplasia Type 2 — RET 유전자 돌연변이; 갑상선수질암·PPGL·부갑상선기능항진증'],
+  ['VHL','Von Hippel-Lindau 병 — VHL 유전자; PPGL·신장암·혈관모세포종'],
+  ['NF1','Neurofibromatosis Type 1 — NF1 유전자; PPGL 위험 증가'],
+  ['RET','Rearranged During Transfection — MEN2 원인 유전자; 생식세포 돌연변이 시 PPGL·갑상선수질암'],
+  ['SDHA','Succinate Dehydrogenase Subunit A — SDH 복합체 A 서브유닛; PPGL 감수성 유전자'],
+  ['SDHB','Succinate Dehydrogenase Subunit B — 전이 위험의 핵심 예측 인자; 돌연변이 시 40% 이상 전이'],
+  ['SDHC','Succinate Dehydrogenase Subunit C — PPGL 감수성 유전자; 주로 두경부 PGL'],
+  ['SDHD','Succinate Dehydrogenase Subunit D — 부계 각인 유전자; 아버지로부터 유전 시 표현형 발현'],
+  ['SDHAF2','SDH Assembly Factor 2 — SDH 복합체 조립 인자; PGL 원인 유전자'],
+  ['SDHx','SDH 관련 유전자군 (SDHA/B/C/D/AF2) — 집합적 표현'],
+  ['MAX','MYC-Associated Protein X — PPGL 감수성 유전자; 주로 양측성 갈색세포종'],
+  ['TMEM127','Transmembrane Protein 127 — PPGL 감수성 유전자'],
+  ['FH','Fumarate Hydratase — 유전성 평활근종증 신세포암(HLRCC)의 원인 유전자; PPGL 관련'],
+  ['EGLN1/PHD2','Egl-9 Family HIF 1/Prolyl Hydroxylase Domain 2 — 저산소 신호 경로; PPGL 확장 패널'],
+  ['EPAS1','Endothelial PAS Domain-Containing Protein 1 (= HIF2A) — 저산소 경로; PPGL 확장 패널'],
+  ['KIF1B','Kinesin Family Member 1B — PPGL 확장 패널'],
+  ['MET','Receptor Tyrosine Kinase — 간세포성장인자 수용체; PPGL 확장 패널'],
+  ['NGS','Next-Generation Sequencing (차세대 염기서열분석) — PPGL 유전 진단 선호 방법'],
+  ['IHC','Immunohistochemistry (면역조직화학) — SDHB 단백 발현 확인에 사용'],
+  ['PASS','Pheochromocytoma of the Adrenal Gland Scaled Score — 갈색세포종 전용 조직학적 등급 시스템. 총점 0–20; ≥4 = 생물학적 공격성'],
+  ['GAPP','Grading of Adrenal Pheochromocytoma and Paraganglioma — 갈색세포종+부신경절종 공통 등급 시스템. 총점 0–10'],
+  ['TNM','Tumor-Node-Metastasis — PPGL AJCC 병기 시스템. 2017 AJCC 8판 최초 수록'],
+  ['AJCC','American Joint Committee on Cancer (미국 암연합위원회)'],
+  ['CgA','Chromogranin A (크로모그라닌 A) — 신경내분비 바이오마커; 생화학적 침묵 PPGL에서 유용'],
+  ['MIBG','Metaiodobenzylguanidine — 카테콜아민 전구체 유사체; ¹²³I-MIBG 진단, ¹³¹I-MIBG 치료에 사용'],
+  ['SPECT','Single-Photon Emission Computed Tomography — ¹²³I-MIBG와 병용 시 진단 성능 향상'],
+  ['PET/CT','Positron Emission Tomography/Computed Tomography — ⁶⁸Ga-DOTA-SSA, ¹⁸F-DOPA, ¹⁸F-FDG 등 방사성의약품과 병용'],
+  ['DOTA','1,4,7,10-Tetraazacyclododecane-1,4,7,10-Tetraacetic Acid — 금속 킬레이터; Ga-68 결합에 사용'],
+  ['SSA','Somatostatin Receptor Analogs (소마토스타틴 수용체 유사체) — DOTA-TOC, DOTA-TATE 등'],
+  ['DOPA','Dihydroxyphenylalanine — ¹⁸F-DOPA: 도파민 합성 경로 추적 방사성의약품'],
+  ['FDG','Fluorodeoxyglucose — ¹⁸F-FDG PET: 당대사 기반 영상; PPGL에서 1차 선택 아님'],
+  ['PRRT','Peptide Receptor Radionuclide Therapy (펩타이드 수용체 방사성핵종 치료) — ¹⁷⁷Lu-DOTA-TATE 등; 소마토스타틴 수용체 발현 종양 치료'],
+  ['Lu-177','Lutetium-177 — β 방출 방사성핵종; DOTA-TATE와 결합하여 PRRT에 사용'],
+  ['COMT','Catechol-O-Methyltransferase (카테콜-O-메틸전이효소) — 카테콜아민을 메타네프린으로 대사'],
+  ['3-MT','3-Methoxytyramine (3-메톡시티라민) — 도파민의 O-메틸화 대사산물; 도파민 분비 PPGL 및 전이성 PPGL 바이오마커'],
+  ['VMA','Vanillylmandelic Acid (바닐만델산) — 노르에피네프린 최종 대사산물; 메타네프린보다 진단 민감도 낮음'],
+  ['WHO','World Health Organization (세계보건기구) — 2017년 4판 내분비종양 분류에서 PPGL 분류 개정'],
+  ['WES','Whole Exome Sequencing (전체 엑솜 염기서열분석) — 표적 NGS 음성 시 보완적 고려'],
+  ['WGS','Whole Genome Sequencing (전체 게놈 염기서열분석)'],
+  ['LC-MS/MS','Liquid Chromatography-Tandem Mass Spectrometry — 메타네프린 측정 선호 방법; 간섭 낮음'],
+  ['HPLC','High-Performance Liquid Chromatography — 전기화학 검출기와 병용; 메타네프린 측정에 사용'],
+  ['COPPs','Composite Pheochromocytoma/Paraganglioma Prognostic Score — 전이 잠재성 예측 복합 점수'],
+  ['M-GAPP','Modified GAPP — GAPP에 SDHB IHC 추가; Koh et al. 2017'],
+  ['Ki-67','세포 증식 마커 — GAPP 구성 요소 중 하나; <1%/1–3%/>3% 기준'],
+  ['HPF','High Power Field (고배율 시야) — PASS 핵분열 기준: >3/10 HPF'],
+  ['ACMG','American College of Medical Genetics and Genomics — 유전 변이 분류 가이드라인'],
+  ['ClinVar','NCBI 유전 변이 데이터베이스 — PPGL 변이 근거 수준 분류에 활용'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
