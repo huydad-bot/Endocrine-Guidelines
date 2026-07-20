@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선천성 부신과형성증 (CAH) 가이드</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* CAH 표현형/영역 색 */
+    --sw:  #9b1c2e;   /* 염분소실형 — 진홍 */
+    --sv:  #c47d00;   /* 단순남성화형 — 황금 */
+    --nc:  #1a7f6e;   /* 비고전형 — 청록 */
+    --gen: #7c3aed;   /* 유전학 — 보라 */
+    --crisis: #cf222e; /* 부신위기 — 적색 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-cah {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-cah span:nth-child(1) { background: var(--sw); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-cah span:nth-child(2) { background: var(--sv); color:#fff; padding:3px 6px; }
+  .logo-cah span:nth-child(3) { background: var(--nc); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--sw); border-bottom-color: var(--sw); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-sw      { background: #fce8eb; border-left: 3px solid var(--sw);     color: #7a1425; }
+  .alert-sv      { background: #fff3cd; border-left: 3px solid var(--sv);     color: #7d4e00; }
+  .alert-nc      { background: #e0f4f1; border-left: 3px solid var(--nc);     color: #0f5549; }
+  .alert-gen     { background: #ede9fe; border-left: 3px solid var(--gen);    color: #5b21b6; }
+  .alert-crisis  { background: #ffebe9; border-left: 3px solid var(--crisis); color: #82071e; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+
+  /* ── 빈도 히트맵 ── */
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── TYPE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-sw  { background: #fce8eb; color: var(--sw); border: 1px solid var(--sw); }
+  .t-sv  { background: #fff3cd; color: #7d4e00; border: 1px solid var(--sv); }
+  .t-nc  { background: #e0f4f1; color: var(--nc); border: 1px solid var(--nc); }
+  .t-gen { background: #ede9fe; color: var(--gen); border: 1px solid var(--gen); }
+
+  /* ── PILL / DRUG TAG ── */
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-steroid { background: #fff3cd; color: #7d4e00; }
+  .drug-mineral { background: #e0f4f1; color: #0f5549; }
+  .drug-new     { background: #ede9fe; color: #5b21b6; }
+  .drug-replace { background: #dafbe1; color: #116329; }
+  .drug-caution { background: #fce8eb; color: var(--sw); }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── TYPE TIMELINE / COMPARISON ROW ── */
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(15px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-sw  { background: #fde8eb; }
+  .st-sv  { background: #fff8e1; }
+  .st-nc  { background: #e0f4f1; }
+  .st-gen { background: #f3e8ff; }
+
+  /* ── GEAR BOX (병태생리) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-sw { background: #fde8eb; border: 1.5px solid var(--sw); color: #7a1425; }
+  .gear-sv { background: #fff8e1; border: 1.5px solid var(--sv); color: #7d4e00; }
+  .gear-nc { background: #e0f4f1; border: 1.5px solid var(--nc); color: #0f5549; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── 진행 막대 (% 빈도 시각화) ── */
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 150px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  /* ── PATHWAY BOX (스테로이드 합성경로) ── */
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 8px 0; font-size: calc(11.5px * var(--fscale, 1)); }
+  .path-step { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 9px; font-weight: 600; }
+  .path-arrow { color: var(--text2); font-weight: 700; }
+  .path-block { color: var(--red); font-weight: 800; }
+  .path-end { border-width: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-cah">
+        <span>C</span><span>A</span><span>H</span>
+      </div>
+      <h1>선천성 부신과형성증 (CAH) 가이드</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://doi.org/10.1210/endrev/bnab016" class="source-link" target="_blank">Endocrine Reviews 2022;43(1):91–159 · Congenital Adrenal Hyperplasia—Current Insights ↗</a>
+      <span style="color:var(--text2)"> · Claahsen-van der Grinten HL, Speiser PW, Ahmed SF, Arlt W, Auchus RJ, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 원저자 및 Endocrine Society의 공식 승인을 받지 않았으며 실제 진료 시 최신 가이드라인 확인이 필요합니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('patho')">🧬 병태생리·유전</div>
+    <div class="tab" onclick="showTab('dx')">🔬 진단</div>
+    <div class="tab" onclick="showTab('tx')">💊 치료</div>
+    <div class="tab" onclick="showTab('crisis')">🚨 부신위기</div>
+    <div class="tab" onclick="showTab('longterm')">📋 장기합병증</div>
+    <div class="tab" onclick="showTab('special')">🔮 특수상황·신약</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--sw)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--sw)">90–99%</div><div class="stat-lbl">21-수산화효소결핍<br>(CYP21A2)이 원인인 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--sv)">1:14,000<br>~1:18,000</div><div class="stat-lbl">고전형 CAH 발생빈도<br>(신생아 선별검사 기준)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--nc)">~1:200</div><div class="stat-lbl">비고전형(NC) CAH 추정 유병률<br>(백인 인구)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--gen)">6p21.3</div><div class="stat-lbl">CYP21A2 유전자 위치<br>(HLA class III 영역)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> CAH 정의 및 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-sw">
+        <span>🧬</span>
+        <div><strong>선천성 부신과형성증(Congenital Adrenal Hyperplasia, CAH)</strong> = 코티솔 생합성에 관여하는 효소의 상염색체 열성 유전질환군. 효소활성 저하 → 코티솔 부족 → ACTH 상승(음성되먹임 소실) → 부신피질 만성 자극 및 차단 부위 전(前) 단계 전구체 축적.<br>
+        가장 흔한 원인은 <strong>CYP21A2</strong> 유전자 변이에 의한 <strong>21-수산화효소결핍(21OHD)</strong>이며, 임상에서 "CAH"는 통상 21OHD와 동의어로 사용됨.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-sw">
+          <div class="gear-title">🔴 고전형 — 염분소실형(SW)</div>
+          잔여효소활성 거의 없음(&lt;1%)<br>
+          <small>코티솔+알도스테론 결핍, 신생아기 염분소실위기 위험, 여아 외성기 남성화 심함</small>
+        </div>
+        <div class="gear-box gear-sv">
+          <div class="gear-title">🟡 고전형 — 단순남성화형(SV)</div>
+          잔여효소활성 1–5%<br>
+          <small>코티솔 결핍 심함·알도스테론은 경미하게 유지, 안드로겐 과다로 남성화</small>
+        </div>
+        <div class="gear-box gear-nc">
+          <div class="gear-title">🟢 비고전형(NC, 지연발현형)</div>
+          잔여효소활성 20–50%<br>
+          <small>기저 코티솔·알도스테론 정상, 경미한 안드로겐 과다 — 사춘기 이후 발현 흔함</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>현재는 SW·SV·NC를 엄격히 구분하기보다 <strong>CYP21A2 대립유전자 변이가 표현형의 연속선(continuum)</strong>을 이룬다고 이해함. 고전형은 신생아 선별검사 기준 <strong>1:14,000~1:18,000</strong>, NC는 <strong>약 1:200</strong>(백인)로 실제로는 고전형보다 훨씬 흔함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 3가지 표현형 한눈에 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-sw"><div class="st-num" style="color:var(--sw)">SW</div><div class="st-lbl">염분소실형<br>잔여활성 &lt;1%</div></div>
+        <div class="stage-box st-sv"><div class="st-num" style="color:var(--sv)">SV</div><div class="st-lbl">단순남성화형<br>잔여활성 1–5%</div></div>
+        <div class="stage-box st-nc"><div class="st-num" style="color:var(--nc)">NC</div><div class="st-lbl">비고전형<br>잔여활성 20–50%</div></div>
+      </div>
+      <table class="tbl">
+        <tr><th>항목</th><th>SW</th><th>SV</th><th>NC</th></tr>
+        <tr><td>코티솔</td><td class="freq-vhigh">결핍</td><td class="freq-high">결핍</td><td class="freq-low">정상(기저)</td></tr>
+        <tr><td>알도스테론</td><td class="freq-vhigh">결핍(±위기)</td><td class="freq-mod">경도 저하 가능</td><td class="freq-low">정상</td></tr>
+        <tr><td>안드로겐 과다</td><td>심함</td><td>심함</td><td>경미</td></tr>
+        <tr><td>여아 외성기 남성화</td><td>있음(Prader 1–5)</td><td>있음</td><td>없음(출생 시)</td></tr>
+        <tr><td>발현 시기</td><td>신생아기</td><td>신생아~영유아기</td><td>소아~성인(사춘기 전후 흔함)</td></tr>
+        <tr><td>기저 17OHP (ng/dL)</td><td>23,000–41,000</td><td>10,000–18,000</td><td>3,000–8,000</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>유전형(0/A/B/C군)과 표현형의 상관관계는 강하지만 절대적이지 않음 — Group 0 동형접합의 96%가 SW, Group C 보유자의 97%가 NC. 관리는 <strong>임상·호르몬 데이터를 종합</strong>하여 결정해야 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌍</span> 국가별 신생아 선별검사 발생빈도(예)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>국가/지역</th><th>발생빈도</th></tr>
+        <tr><td>프랑스</td><td>1:15,699</td></tr>
+        <tr><td>스웨덴</td><td>1:14,260</td></tr>
+        <tr><td>네덜란드</td><td>1:17,468</td></tr>
+        <tr><td>이스라엘</td><td>1:16,910</td></tr>
+        <tr><td>일본(도쿄)</td><td>1:21,264</td></tr>
+        <tr><td>독일(바이에른)</td><td>1:12,457</td></tr>
+        <tr><td>체코</td><td>1:12,520</td></tr>
+        <tr><td>UAE</td><td>1:9,030</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>지역·인종에 따라 편차가 크며, 근친혼이 흔한 지역(예: 중동)에서 빈도가 높은 경향. 국내(한국) 대규모 공식 발생빈도 데이터는 원문에 포함되지 않음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✅</span> Essential Points (원문 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>CAH는 대부분 <strong>CYP21A2</strong>가 부호화하는 21-수산화효소 결핍이 원인</li>
+        <li>대립유전자 변이는 다양한 표현형 스펙트럼과 연관</li>
+        <li>중증 고전형 CAH는 코티솔·알도스테론 결핍과 안드로겐 과다를 모두 포함</li>
+        <li>스테로이드 합성경로·호르몬 및 유전 진단도구·신약치료에 대한 이해가 최근 크게 확장됨</li>
+        <li>장기 후유증에 대한 상세 보고가 축적되었고 삶의 질 향상 전략이 개발되고 있음</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: 병태생리·유전 ══════════════════ -->
+<div id="tab-patho" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚗️</span> 부신 스테로이드 합성경로 — 21-수산화효소의 위치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-sw">
+        <span>🧬</span>
+        <div>부신피질 3개 층(사구대·속상대·망상대)에서 콜레스테롤 → 각 최종 스테로이드로 전환. <strong>CYP21A2(21-수산화효소)</strong>는 프로게스테론→11-디옥시코르티코스테론(사구대, 알도스테론 경로), 17OH프로게스테론→11-디옥시코티솔(속상대, 코티솔 경로) 두 반응을 촉매.</div>
+      </div>
+      <div class="path-flow">
+        <div class="path-step">콜레스테롤</div><div class="path-arrow">→</div>
+        <div class="path-step">프레그네놀론</div><div class="path-arrow">→</div>
+        <div class="path-step">프로게스테론</div><div class="path-arrow path-block">✕21OHD</div>
+        <div class="path-step">DOC</div><div class="path-arrow">→</div>
+        <div class="path-step path-end" style="border-color:var(--sw);color:var(--sw)">알도스테론</div>
+      </div>
+      <div class="path-flow">
+        <div class="path-step">17OH프레그네놀론</div><div class="path-arrow">→</div>
+        <div class="path-step">17OH프로게스테론(17OHP)</div><div class="path-arrow path-block">✕21OHD</div>
+        <div class="path-step">11-디옥시코티솔</div><div class="path-arrow">→</div>
+        <div class="path-step path-end" style="border-color:var(--sv);color:var(--sv)">코티솔</div>
+      </div>
+      <div class="path-flow">
+        <div class="path-step">17OHP(축적)</div><div class="path-arrow">→</div>
+        <div class="path-step">안드로스테네디온</div><div class="path-arrow">→</div>
+        <div class="path-step">테스토스테론</div><div class="path-arrow">→</div>
+        <div class="path-step path-end" style="border-color:var(--gen);color:var(--gen)">DHT (안드로겐 과다)</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>21-수산화효소가 차단되면 <strong>17OHP·프로게스테론이 축적</strong>되어 안드로겐 생합성 경로로 우회 → 안드로겐 과다 발생. 코티솔 결핍으로 ACTH 상승 → 부신피질 만성 자극이 이 과정을 증폭시킴.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚪</span> 대체(백도어) 경로 및 11-옥소안드로겐</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🚪 "백도어(Backdoor)" 경로</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">17OHP·프로게스테론이 SRD5A1에 의해 5α환원 → AKR1C 효소로 3α환원 → CYP17A1의 17,20-lyase 활성으로 안드로스테론 생성 → 최종 <strong>5α-DHT</strong>로 직접 전환(테스토스테론을 경유하지 않음). 태아기(임신 6~10주 및 2삼분기)에 활성이 높아 <strong>21OHD 여아 태아의 외성기 남성화</strong>에 크게 기여.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧪 11-옥소안드로겐 (11KT, 11OHA4 등)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">망상대에서 안드로스테네디온·테스토스테론이 CYP11B1에 의해 11β-수산화 → <strong>11-케토테스토스테론(11KT)</strong>은 테스토스테론과 유사한 강력한 안드로겐 활성을 지님. 부신 기원 안드로겐의 질병 조절 상태를 반영하는 <strong>신규 바이오마커</strong>로 연구 중이며 성인기까지 유용할 가능성 (아직 임상 상용화 전).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> CYP21A2 유전자와 CYP21A1P 위유전자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-gen">
+        <span>🔬</span>
+        <div><strong>CYP21A2</strong>(기능유전자)와 <strong>CYP21A1P</strong>(비기능성 위유전자)는 6p21.3의 HLA class III 영역에서 C4A/C4B 보체유전자와 함께 <strong>RCCX 모듈(30kb 단위)</strong>로 탠덤 배열됨.<br><br>
+        <strong>90% 이상</strong>의 변이는 이 반복영역 내 <strong>유전자간 재조합</strong>(불균등 감수분열 교차 → 결실 / 유전자변환 → 위유전자 변이 전이)에 의해 발생. 나머지 소수는 위유전자와 무관한 산발적 변이.</div>
+      </div>
+      <div class="grid3" style="gap:8px;margin-top:8px">
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--gen)">~20%</div><div class="stat-lbl">결실(deletion)에 의한 변이</div></div>
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--gen)">70–75%</div><div class="stat-lbl">유전자변환(gene conversion)</div></div>
+        <div class="stat-box"><div class="stat-val" style="font-size:16px;color:var(--gen)">1–2%</div><div class="stat-lbl">신생(de novo) 변이</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 유전형-표현형 상관관계 (4개 변이군)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>변이군</th><th>대표 변이</th><th>잔여효소활성</th><th>연관 표현형</th><th>예측력</th></tr>
+        <tr><td><span class="stage t-sw">Group 0</span></td><td>결실, 큰 유전자변환, 넌센스/프레임시프트</td><td>거의 없음</td><td>SW (96%)</td><td class="freq-vhigh">0.96</td></tr>
+        <tr><td><span class="stage t-sw">Group A</span></td><td>Intron 2 스플라이싱(c.293-13A/C&gt;G)</td><td>미량</td><td>SW/SV 혼재</td><td class="freq-high">0.89</td></tr>
+        <tr><td><span class="stage t-sv">Group B</span></td><td>p.Ile172Asn (I172N)</td><td>&lt;5%</td><td>SV (79%)</td><td class="freq-mod">0.79</td></tr>
+        <tr><td><span class="stage t-nc">Group C</span></td><td>p.Val281Leu (V281L), p.Pro30Leu(P30L)</td><td>20–50%</td><td>NC (97%)</td><td class="freq-low">0.97</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>복합이형접합(compound heterozygote)인 경우 <strong>덜 심각한 대립유전자가 표현형을 결정</strong>. <strong>V281L</strong>은 NC CAH에서 가장 흔한 변이(아슈케나지 유대인에서 특히 高빈도), <strong>Intron 2 splicing 변이·I172N·결실</strong>은 대부분 인구집단에서 가장 흔한 변이.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 인구집단별 주요 대립유전자 빈도(예)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>변이</th><th>북미</th><th>유럽</th><th>중국</th></tr>
+        <tr><td>결실/유전자변환</td><td>21.1%</td><td>28.8%</td><td>21.9%</td></tr>
+        <tr><td>Intron 2 splicing(I2G)</td><td>23.1%</td><td>26.7%</td><td>33.8%</td></tr>
+        <tr><td>I172N</td><td>9.0%</td><td>15.6%</td><td>15.1%</td></tr>
+        <tr><td>V281L</td><td>22.2%</td><td>6.2%</td><td>1.4%</td></tr>
+        <tr><td>Q318X</td><td>3.6%</td><td>3.5%</td><td>5.3%</td></tr>
+        <tr><td>R356W</td><td>3.8%</td><td>4.3%</td><td>6.6%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔗</span> CAH-X 증후군 (TNXB 반수체부전)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>일부 재조합은 <strong>TNX(tenascin-X)</strong> 유전자까지 확장되어 C4B·CYP21A2 결실과 함께 <strong>TNXB/TNXA 키메라</strong>를 형성. 동형접합 시 CAH + Ehlers-Danlos 증후군의 <strong>연속유전자증후군(contiguous gene syndrome)</strong>이 발생하나 드묾.<br>
+        CAH 환자의 <strong>7–14%</strong>는 이형접합 TNXB 변이(CAH-X)를 가지며 <strong>관절과운동성, 만성관절통, 관절아탈구, 탈장, 심장기형</strong>과 연관됨.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /patho -->
+
+
+<!-- ══════════════════ TAB 3: 진단 ══════════════════ -->
+<div id="tab-dx" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 신생아 선별검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-sw">
+        <span>🧪</span>
+        <div>1차 선별검사: 건조혈반(Guthrie 카드)에서 <strong>17OHP 면역측정법</strong>(주로 DELFIA). 선별검사는 진단 지연에 따른 이환·사망(특히 남아의 염분소실위기)을 줄이기 위해 도입됨.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>제한요인</th><th>내용</th></tr>
+        <tr><td>미숙아 위양성</td><td>미숙아는 부신 효소 미성숙으로 17OHP가 생리적으로 높음 → 재태연령별 cut-off 필요</td></tr>
+        <tr><td>출생 후 시간</td><td>생후 첫 2일은 정확도 낮음 → 2차 검체(2차 선별)로 민감도·양성예측도 개선</td></tr>
+        <tr><td>산전 스테로이드</td><td>다회 산전 코르티코스테로이드 투여 시 17OHP가 낮아져 위음성 가능성</td></tr>
+        <tr><td>여아 민감도</td><td>여아는 평균 17OHP가 낮아 선별 민감도가 다소 낮으나, 대부분 외성기 이상으로 임상 진단됨</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>2차 검사(second-tier)로 <strong>LC-MS/MS 스테로이드 프로파일</strong>(17OHP, 안드로스테네디온, 21-디옥시코티솔, 코티솔 비율 등)을 병행하면 낮은 양성예측도(대개 &lt;5%)를 크게 개선(문헌 보고 최대 71%까지).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 생화학적 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>검사</th><th>고전형 CAH 시사 소견</th><th>비고</th></tr>
+        <tr><td>기저 17OHP</td><td>현저히 상승 (군별 3,000~41,000 ng/dL)</td><td>면역측정법은 미숙아·신생아·NC에서 교차반응으로 과대평가 가능</td></tr>
+        <tr><td>ACTH 자극 후 17OHP</td><td>NC 진단에 유용 (경계 시)</td><td>기저치 애매한 NC 환자 확진에 사용</td></tr>
+        <tr><td>21-디옥시코티솔</td><td>상승</td><td>LC-MS/MS 기반, 진단 특이도 높은 신규 지표로 제안됨</td></tr>
+        <tr><td>안드로스테네디온/테스토스테론</td><td>상승</td><td>치료 모니터링에도 사용</td></tr>
+        <tr><td>혈장 레닌</td><td>상승(알도스테론 결핍 시)</td><td>무기질코르티코이드 용량 적정에 사용</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>면역측정법은 <strong>17-OH프레그네놀론 황산염</strong> 등 구조 유사 스테로이드와 교차반응하여 위양성/과대평가 위험 — <strong>LC-MS/MS·GC-MS</strong>가 특이도가 높은 확진법.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 유전자 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li><strong>MLPA(multiplex ligation-dependent probe amplification)</strong>: 결실·중복·키메라 유전자 검출에 가장 널리 사용되는 1차 검사</li>
+        <li>위유전자(CYP21A1P)와 서열이 98% 이상 동일 → <strong>CYP21A2 특이 프라이머</strong> 설계가 핵심(위유전자 증폭 오류 방지)</li>
+        <li>직접 서열분석 + 결실/키메라 검출법을 병행해야 거의 100%의 변이 검출 가능</li>
+        <li>가능하면 <strong>부모 검사(carrier testing)</strong>로 phase 확인 → 복합이형접합 확진, 재발위험 산정에 필요</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>유전자검사는 확진·유전상담·산전진단에 유용하나, <strong>치료 방침은 임상·호르몬 소견에 근거</strong>해야 함(유전형만으로 결정하지 않음).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 산전 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="tbl">
+        <tr><th>방법</th><th>시기</th><th>특징</th></tr>
+        <tr><td>융모막융모생검(CVS)</td><td>임신 10–11주</td><td>침습적, 유산 위험 소폭 증가</td></tr>
+        <tr><td>양수천자</td><td>임신 12–14주</td><td>침습적, CVS보다 늦음</td></tr>
+        <tr><td>모체혈 유리태아DNA (SRY)</td><td>임신 6–9주부터</td><td>비침습적, 태아 성별 조기 판별에 사용(산전 덱사메타손 치료 여부 결정에 활용)</td></tr>
+        <tr><td>모체혈 유리태아DNA 정밀 haplotyping</td><td>연구/일부 센터</td><td>비침습적, 아직 상용화 제한적, 비용·전문인력 필요</td></tr>
+        <tr><td>착상전 유전진단(PGD)</td><td>체외수정 단계</td><td>배아 이식 전 선별, 윤리적 고려 필요</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /dx -->
+
+
+<!-- ══════════════════ TAB 4: 치료 ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 치료 목표 및 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-sw">
+        <span>🎯</span>
+        <div>① 코티솔(±알도스테론) <strong>보충</strong> → 부신위기 예방, ② 과다 ACTH를 억제하여 <strong>안드로겐 과다 조절</strong> → 정상 성장·사춘기·생식기능 유지.<br>
+        코티솔의 생리적 일주기 리듬을 완전히 재현하기 어렵고, ACTH 정상화에는 <strong>초생리적(supraphysiologic) 용량</strong>이 필요해 <strong>과다치료(성장억제·대사이상) vs 저치료(위기·남성화)</strong>의 균형이 핵심 과제.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 연령별 유지요법 용량 (고전형 CAH)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>대상</th><th>약제</th><th>1일 총량</th><th>분복 횟수</th></tr>
+        <tr><td rowspan="3">소아</td><td>하이드로코르티손(HC)</td><td>10–15 mg/m²/day</td><td>3–4회</td></tr>
+        <tr><td>플루드로코르티손</td><td>0.05–0.2 mg</td><td>1–2회</td></tr>
+        <tr><td>NaCl 보충(영아기)</td><td>1–2 g (17–24 mEq/day)</td><td>수회</td></tr>
+        <tr><td rowspan="6">성인</td><td>하이드로코르티손</td><td>15–25 mg</td><td>2–3회</td></tr>
+        <tr><td>프레드니손</td><td>5–7.5 mg</td><td>2회</td></tr>
+        <tr><td>프레드니솔론</td><td>4–6 mg</td><td>2회</td></tr>
+        <tr><td>메틸프레드니솔론</td><td>4–6 mg</td><td>2회</td></tr>
+        <tr><td>덱사메타손</td><td>0.25–0.5 mg</td><td>1회 (가능한 회피 또는 단기간만)</td></tr>
+        <tr><td>플루드로코르티손</td><td>0.05–0.2 mg</td><td>1회</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>하이드로코르티손이 성장기 소아의 1차 선택약</strong> — 반감기가 짧아 장기 고용량 스테로이드의 성장억제·대사 부작용을 최소화. 코티손 아세테이트는 전환효율 문제로 권장되지 않음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 성인 글루코코르티코이드 제제별 특징</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>제제</th><th>임상적 위치</th><th>장점</th><th>단점</th></tr>
+        <tr><td><span class="drug drug-replace">하이드로코르티손</span></td><td>1차 선택</td><td>대사·심혈관·골 건강에 가장 유리</td><td>반감기 짧아 1일 3회 필요, 야간 안드로겐 상승 억제 불충분 가능</td></tr>
+        <tr><td><span class="drug drug-steroid">프레드니솔론/프레드니손</span></td><td>순응도 문제 시 대안, 임신 중 가임력 유도 시</td><td>반감기 길어 1일 2회 가능</td><td>HC보다 대사·심혈관·골 부작용 위험 다소 높음</td></tr>
+        <tr><td><span class="drug drug-caution">덱사메타손</span></td><td>TART 치료, 가임력 유도(단기)</td><td>강력한 ACTH 억제, 1일 1회</td><td>대사 부작용 최고 수준, <strong>태반 통과 → 임신 중 금기</strong></td></tr>
+        <tr><td><span class="drug drug-new">서방형 HC (Plenadren®)</span></td><td>1일 1회 제형(유럽 승인, CAH 자료 제한적)</td><td>대사지표 개선 보고</td><td>CAH에서 새벽 ACTH 상승 억제 불충분 → 저녁 추가 투여 필요할 수 있음</td></tr>
+        <tr><td><span class="drug drug-new">지연방출형 HC (Chronocort®)</span></td><td>CAH 특화 개발, 임상3상 완료</td><td>야간~새벽 생리적 코티솔 리듬 재현</td><td>국내 상용화 여부 확인 필요</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 모니터링 지표 및 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>지표</th><th>목표/해석</th></tr>
+        <tr><td>아침 기저 17OHP</td><td>정상상한~1200 ng/dL(3–36 nmol/L) 목표 — <strong>완전 정상화 시도는 과다치료 위험</strong></td></tr>
+        <tr><td>안드로스테네디온</td><td>연령·성별 정상범위</td></tr>
+        <tr><td>ACTH</td><td>치료조절 지표로는 유용성 낮음(정상화 시 과다치료 시사)</td></tr>
+        <tr><td>테스토스테론/안드로스테네디온 비</td><td>여성 &gt;4, 남성 &gt;0.5 → 안드로겐이 주로 부신 기원임을 시사</td></tr>
+        <tr><td>혈장 레닌·전해질·기립혈압</td><td>무기질코르티코이드 용량 적정에 사용(ACTH보다 우선)</td></tr>
+        <tr><td>골연령(X-ray)</td><td>2세 이후 매년 — 안드로겐 과다에 의한 조기 골성숙 감시</td></tr>
+        <tr><td>신장·체중·혈압·BMI</td><td>매 3–6개월(연령별)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>17OHP를 정상 범위까지 억제하려는 시도는 <strong>의인성 쿠싱증후군</strong> 위험을 높이므로 피해야 함 — 약간 상승된 상태를 목표로 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟢</span> 비고전형(NC) CAH 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li><strong>무증상 환자는 치료하지 않음</strong> — 치료는 안드로겐 과다 증상(조기 음모발생, 여드름, 다모증, 무월경/희발월경, 골연령 조기진행) 존재 시에만 개별화</li>
+        <li>치료 시 HC가 1차 선택, 글루코코르티코이드 치료 시작 시 <strong>부신위기 스트레스 용량 교육 필요</strong>(HPA축 억제 가능성)</li>
+        <li><strong>무기질코르티코이드 보충은 불필요</strong></li>
+        <li>다모증에는 항안드로겐 성분 경구피임약(시프로테론아세테이트, 드로스피레논 등) ± 에플로르니틴 크림 ± 미용적 제모</li>
+        <li>불임/반복유산 시 임신 시도 전후 저~중등도 용량 HC 또는 프레드니솔론으로 임신율·유산율 개선 가능</li>
+        <li>성인기 도달 후 무증상이면 치료 중단 고려 가능</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+
+<!-- ══════════════════ TAB 5: 부신위기 ══════════════════ -->
+<div id="tab-crisis" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚨</span> 부신위기 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-crisis">
+        <span>⚠️</span>
+        <div>스웨덴 코호트에서 CAH 사망원인의 <strong>42%가 부신위기</strong>. 소아에서 위기 발생률은 연 <strong>4.9–6.5건/100 환자-년</strong>, 성인 전체 부신부전에서 <strong>5–10건/100 환자-년</strong>(사망률 0.5/100 환자-년).<br>
+        가장 흔한 유발요인: <strong>감염성 질환(위장관염·상기도감염)</strong>. 소아에서는 전해질이상보다 <strong>저혈당</strong>이 이환/사망과 더 밀접히 연관.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏠</span> 가정에서 — 아픈 날 규칙 (Sick Day Rules)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>상황</th><th>소아 HC 조정</th><th>성인 HC 조정</th></tr>
+        <tr><td>경미한 질환/저열(&gt;38℃)</td><td>평소 용량의 2–3배, 3–4회 분복</td><td>+10mg 1일3회 추가 또는 평소용량 2배</td></tr>
+        <tr><td>고열(소아 &gt;39℃)/중등도 질환</td><td>평소 용량의 3배, 4회 분복(6시간마다)</td><td>+20mg 1일3회 추가 또는 3배</td></tr>
+        <tr><td>구토·설사 동반 위장관염</td><td>3배, 조기 비경구 투여 고려</td><td>+10–20mg 1일3–4회, 중증도에 따라 조정</td></tr>
+        <tr><td>격렬한 신체활동</td><td>평소 1회 용량 추가(운동 30–60분 전)</td><td>10mg 추가(운동 30–60분 전)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>경구 복용 후 <strong>1시간 이내 구토</strong> 시 재복용. 반복 구토 또는 경구 섭취 불가 시 <strong>근육주사용 HC 자가주사(50–100mg, 소아 50–100mg/m²)</strong> 시행 후 응급실 방문.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 수술·시술 시 스트레스 용량</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>상황</th><th>용량</th></tr>
+        <tr><td>대수술</td><td>IV bolus 50–100mg(소아 50–100mg/m²) 후 지속정주 100–200mg/24hr, 이후 2–3일간 감량하며 평소용량으로 복귀</td></tr>
+        <tr><td>단기 수술(전신마취)</td><td>마취 전 IM/IV 50–100mg(소아 50mg/m²) 또는 평소 아침용량의 3배 경구</td></tr>
+        <tr><td>분만</td><td>대수술과 동일하게 적용</td></tr>
+        <tr><td>치과 수술</td><td>시술 1시간 전 아침용량 추가 1회, 필요 시 반복</td></tr>
+        <tr><td>경미한 시술(국소마취만)</td><td>용량 조정 불필요</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🆘</span> 급성 부신위기 처치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-crisis">
+        <span>🚨</span>
+        <div><strong>즉시 시행:</strong><br>
+        ① 0.9% 생리식염수 급속 수액(1000mL 첫 1시간, 소아 20mL/kg 반복 최대 60mL/kg까지)<br>
+        ② <strong>HC 정주 bolus 100mg(소아 50–100mg/m²)</strong> 후 지속정주 200mg/24hr 또는 6시간마다 50mg 분할투여(소아 50–100mg/m²/day)<br>
+        ③ 저혈당 시 덱스트로스 투여, 전해질·혈당 모니터링, 필요 시 항생제 고려</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>HC 용량이 50mg/24hr를 초과하면 자체 무기질코르티코이드 활성이 충분하여 <strong>별도의 플루드로코르티손 투여가 필요하지 않음</strong>(단, 경구 전환 시에는 일반적으로 재개).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🪪</span> 예방 — 환자 교육 및 응급 대비</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>모든 환자는 <strong>의료경고 팔찌/목걸이 또는 응급카드(스마트폰 포함)</strong> 항상 소지</li>
+        <li>반복적·구조화된 "아픈 날 규칙" 교육이 부신위기 예방에 가장 효과적</li>
+        <li>가정 내 HC 근육주사 키트 보유 및 사용법 교육(특히 원거리 거주 환자)</li>
+        <li>일상적인 정신적 스트레스, 경미한 질환, 통상적 운동 전에는 스트레스 용량이 필요하지 않음</li>
+        <li>NC CAH 환자 중 글루코코르티코이드 치료를 받는 경우에도 스트레스 용량 원칙 적용</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /crisis -->
+
+
+<!-- ══════════════════ TAB 6: 장기합병증 ══════════════════ -->
+<div id="tab-longterm" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>♂️</span> 남성 생식기능 — 고환 부신잔유조직(TART)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-sw">
+        <span>🔬</span>
+        <div><strong>TART</strong> = 부신피질 유사세포 기원의 양성 고환 종양. 대개 <strong>양측성·무통성</strong>. 청소년 평균 25%, 성인 남성 평균 46%에서 발견. 만성 정세관 폐쇄 → 무정자증·불임 유발 가능.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>구분</th><th>TART</th><th>Leydig세포종양(감별 필요)</th></tr>
+        <tr><td>양측성</td><td>흔함(70–100%)</td><td>드묾(대개 편측)</td></tr>
+        <tr><td>에스트로겐 분비</td><td>없음</td><td>흔히 있음</td></tr>
+        <tr><td>Reinke 결정체</td><td>없음</td><td>일부에서 관찰됨</td></tr>
+        <tr><td>악성 가능성</td><td>없음(양성)</td><td>있음</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>정기 <strong>고환 초음파(2–5년 간격)</strong> 권고. 조기 발견 시 <strong>글루코코르티코이드 강화</strong>로 크기 감소·가임력 회복 가능하나, 진행된 경우 비가역적 손상으로 반응 저하. TART 발견 시 정자 냉동보존 상담 고려.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>♀️</span> 여성 생식기능 및 임신</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>초경 시기는 치료가 적절할 경우 정상 — 저치료 시 지연</li>
+        <li>다낭성난소증후군과 유사한 임상상(불규칙 월경·여드름·다모증) 흔함</li>
+        <li>스웨덴 연구: CAH 여성 <strong>25.4%</strong>만 출산 경험(대조군 45.8%) — SW형에서 특히 낮음</li>
+        <li>출산율 저하의 주된 원인은 <strong>임신 시도 자체를 덜 함</strong>(파트너 부재, 외성기 외관 불만족, 성기능장애 등) — 임신을 시도한 경우 성공률은 일반인구와 큰 차이 없음</li>
+        <li>임신 시도 시 우선 <strong>글루코코르티코이드·무기질코르티코이드 최적화</strong>(난포기 프로게스테론 정상화), 필요 시 배란유도/보조생식술</li>
+        <li>NC CAH는 자연임신 비율이 높음(53–68%); 불임/반복유산 시 임신 전후 저~중등도 HC 투여로 유산율 정상화 가능</li>
+        <li>임신 중 <strong>덱사메타손은 태반을 통과하므로 금기</strong> — HC/프레드니솔론 사용, 3분기에 용량 증량 필요할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골밀도 및 심대사 위험</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🦴 골 건강</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">평생 글루코코르티코이드 노출로 골밀도 저하·골절 위험 증가 가능(연구간 결과는 다소 상반). 성인 여성에서 골절 위험 증가 보고(남성은 뚜렷하지 않음). HC가 장기작용 제제(특히 덱사메타손)보다 골에 미치는 부정적 영향이 적음. <strong>고용량·장기간 치료력 또는 비외상성 골절 병력 시 골밀도 검사</strong> 권고.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>❤️ 심혈관·대사 위험</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">인슐린저항성(HOMA-IR) 증가, 수축기·이완기 혈압 경도 상승, 경동맥 내중막두께 경도 증가가 메타분석에서 확인됨. 스웨덴 코호트에서 심혈관 사망률 증가(부신위기 다음으로 흔한 사망원인). 정기적 체중·혈압·혈당·지질 모니터링 및 생활습관 중재 권고.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 신경정신과적 측면</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>대조군 대비 <strong>불안·우울·알코올남용·자살경향·적응장애</strong> 유병률 증가(스웨덴 전국 코호트)</li>
+        <li>신생아기 이후 늦게 진단된 남성, 중증 null 유전형 여성이 특히 위험군</li>
+        <li>여성의 외성기 성형술 관련 신체상·성기능·낙인 문제가 심리사회적 적응에 중요한 영향</li>
+        <li>다학제팀(내분비내과+정신건강 전문가+비뇨기과/산부인과) 통합진료가 권장됨</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /longterm -->
+
+
+<!-- ══════════════════ TAB 7: 특수상황·신약 ══════════════════ -->
+<div id="tab-special" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 산전(태아기) 덱사메타손 치료 — 논쟁</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>여아 외성기 남성화 <strong>예방 목적</strong>으로 임신 6–7주부터 산모에게 저용량 덱사메타손(20μg/kg/day, 최대 1.5mg/day)을 투여하는 방법. 확진 전에 시작해야 효과적이므로 <strong>위험에 처한 임신 8건당 실제 이환 여아 1명만 혜택</strong> — 나머지 7건은 불필요하게 노출됨.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>보고된 우려</th><th>내용</th></tr>
+        <tr><td>출생체중</td><td>평균 약 400g 감소</td></tr>
+        <tr><td>구개열</td><td>1분기 글루코코르티코이드 노출과 연관(오즈비 1.41)</td></tr>
+        <tr><td>인지·행동</td><td>일부 코호트에서 언어작업기억·실행기능 저하(성별차 존재, 여아에서 뚜렷) — 결과는 연구간 비일관적</td></tr>
+        <tr><td>대사</td><td>인슐린분비 저하, 콜레스테롤·LDL 상승(장기추적 연구)</td></tr>
+      </table>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>학회들은 이 치료를 <strong>실험적(experimental)</strong>으로 간주 — <strong>장기추적 연구에 참여하는 전문센터에서만</strong> 시행할 것을 권고. 무작위대조시험 데이터는 없음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 외성기 재건수술 — 시기 논쟁</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>📌</span>
+        <div>전통적으로 영유아기 조기 여성화 수술이 시행되어 왔으나, 최근 <strong>신체 자기결정권·동의 능력 부재</strong>에 대한 우려로 <strong>수술 연기 또는 회피</strong> 옵션도 제시됨. 메타분석(29개 연구, 1178명): 수술 후 평균 10.3년 추적에서 여성 성정체성 88.7%, 이성애 76.2%, 성기능지수는 정상보다 낮은 경향, 환자 79.4%·의료진 71.8%가 만족.</div>
+      </div>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>Endocrine Society 가이드라인: 부모·내분비내과·비뇨기과/산부인과·정신건강 전문가가 참여하는 <strong>공유의사결정(shared decision-making)</strong> 과정을 권고 — 특정 수술 시기나 술기를 일률적으로 권장할 근거는 부족.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 신약 및 미래 치료 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>💊 CRHR1 길항제 (크리네서펜트 등)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">CRH수용체1 차단으로 ACTH 분비 자체를 억제 → 안드로겐 과다 조절, 글루코코르티코이드 용량 감량 가능성. <strong>crinecerfont, tildacerfont</strong> 등 임상시험 진행. 글루코코르티코이드 대체요법은 여전히 필요.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>💊 아비라테론 아세테이트 (CYP17A1 억제제)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">전립선암 치료제를 CAH에 재적용 — 안드로겐/에스트로겐 생성을 억제. 사춘기 전 소아에서 유망하나, 사춘기 이후 여아는 병용 에스트로겐 보충이 필요할 수 있음. 고전형 CAH에서는 DOC 축적에 의한 고혈압 위험이 없음(효소경로 특성상).</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>💉 지속피하주입 HC / 서방형 제형</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">인슐린펌프와 유사한 방식의 지속피하 HC 주입 또는 <strong>Chronocort®</strong> 등 지연방출형 제제로 생리적 코티솔 리듬 재현 시도 — 야간 ACTH 상승 억제 개선 보고.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧬 유전자·세포치료</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">AAV 벡터를 이용한 CYP21A2 유전자 전달(동물모델), iPSC 기반 부신피질세포 재프로그래밍 등이 연구 초기 단계 — 부신피질의 지속적 자가재생 특성으로 인해 <strong>장기 지속효과 확보가 과제</strong>.</div>
+        </div>
+      </div>
+      <div class="alert alert-gen" style="margin-top:8px">
+        <span>🔮</span>
+        <div><strong>핵심 메시지</strong>: 향후 치료는 초생리적 글루코코르티코이드 용량에 의존하지 않고 <strong>ACTH 분비 자체를 억제(CRHR1 길항제)</strong>하거나 <strong>안드로겐 생성/작용을 표적</strong>하는 방향으로 발전 중이며, 근본적으로는 <strong>유전자치료</strong>가 장기적 목표.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌏</span> 개발도상국에서의 CAH 관리 과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>신생아 선별검사 미비 → 진단 지연, 특히 외성기 이상이 없는 남아 사망률 증가</li>
+        <li>소아내분비 전문의 부족, 3차 병원 후송 지연</li>
+        <li>호르몬 검사 접근성·비용 문제, 필수 약제가 암시장에서만 구득 가능한 경우도 보고됨</li>
+        <li>모호생식기에 대한 사회문화적 낙인, 늦은 성별 재지정 시 저항/거부 문제</li>
+        <li>현지 언어 교육자료·개발도상국 맞춤 임상가이드라인·신생아 선별검사 확대 정책이 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /special -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"CAH",   def:"Congenital Adrenal Hyperplasia — 선천성 부신과형성증" },
+  { term:"21OHD", def:"21-Hydroxylase Deficiency — 21-수산화효소결핍 (CAH의 90–99% 원인)" },
+  { term:"CYP21A2", def:"21-수산화효소를 부호화하는 기능유전자 (6p21.3, HLA class III 영역)" },
+  { term:"CYP21A1P", def:"CYP21A2의 비기능성 위유전자(pseudogene)" },
+  { term:"17OHP", def:"17-Hydroxyprogesterone — 17알파수산화프로게스테론, CAH 진단·모니터링 핵심지표" },
+  { term:"SW",    def:"Salt-Wasting — 염분소실형 (가장 중증 고전형)" },
+  { term:"SV",    def:"Simple Virilizing — 단순남성화형 (고전형)" },
+  { term:"NC",    def:"Nonclassic — 비고전형 (지연발현형, 경증)" },
+  { term:"ACTH",  def:"Adrenocorticotropic Hormone — 부신피질자극호르몬" },
+  { term:"HC",    def:"Hydrocortisone — 하이드로코르티손 (1차 선택 글루코코르티코이드)" },
+  { term:"DOC",   def:"11-Deoxycorticosterone — 11-디옥시코르티코스테론, 알도스테론 전구체" },
+  { term:"DHEA",  def:"Dehydroepiandrosterone — 디하이드로에피안드로스테론" },
+  { term:"DHT",   def:"5α-Dihydrotestosterone — 5알파 디하이드로테스토스테론, 최강 내인성 안드로겐" },
+  { term:"11KT",  def:"11-Ketotestosterone — 11-케토테스토스테론, 부신 기원 안드로겐 바이오마커" },
+  { term:"POR",   def:"P450 Oxidoreductase — CYP효소 전자전달에 필요한 보조단백질, 결핍 시 별도 CAH 아형 유발" },
+  { term:"TART",  def:"Testicular Adrenal Rest Tumor — 고환 부신잔유조직 종양" },
+  { term:"MLPA",  def:"Multiplex Ligation-dependent Probe Amplification — 유전자 결실/중복 검출법" },
+  { term:"LC-MS/MS", def:"Liquid Chromatography-Tandem Mass Spectrometry — 고특이도 스테로이드 정밀분석법" },
+  { term:"CVS",   def:"Chorionic Villus Sampling — 융모막융모생검 (산전진단)" },
+  { term:"PGD",   def:"Preimplantation Genetic Diagnosis — 착상전 유전진단" },
+  { term:"CRH",   def:"Corticotropin-Releasing Hormone — 코티코트로핀분비호르몬" },
+  { term:"CRHR1", def:"CRH Receptor Type 1 — 신약(크리네서펜트 등) 표적 수용체" },
+  { term:"DSD",   def:"Disorders/Differences of Sex Development — 성분화이상" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
