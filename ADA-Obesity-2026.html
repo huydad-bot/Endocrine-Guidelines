@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비만 선별·진단·평가·병기 ADA 2026 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역 색 */
+    --screen: #1a7f6e;   /* 선별·진단 — 청록 */
+    --eval: #0550ae;     /* 평가·병력 — 청 */
+    --stage: #9b1c2e;    /* 위험도·병기 — 진홍 */
+    --clinic: #7c3aed;   /* 임상운영 — 보라 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-ada {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-ada span:nth-child(1) { background: var(--screen); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-ada span:nth-child(2) { background: var(--eval); color:#fff; padding:3px 6px; }
+  .logo-ada span:nth-child(3) { background: var(--stage); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 18px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--screen); border-bottom-color: var(--screen); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-screen  { background: #e0f4f1; border-left: 3px solid var(--screen); color: #0f5549; }
+  .alert-eval    { background: #ddf4ff; border-left: 3px solid var(--eval);   color: #0550ae; }
+  .alert-stage   { background: #fce8eb; border-left: 3px solid var(--stage);  color: var(--stage); }
+  .alert-clinic  { background: #ede9fe; border-left: 3px solid var(--clinic); color: #5b21b6; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  /* ── 히트맵 ── */
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── BADGE ── */
+  .stage-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-screen { background: #e0f4f1; color: var(--screen); border: 1px solid var(--screen); }
+  .t-eval   { background: #ddf4ff; color: var(--eval); border: 1px solid var(--eval); }
+  .t-stage  { background: #fce8eb; color: var(--stage); border: 1px solid var(--stage); }
+  .t-rec-a  { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-rec-b  { background: #ddf4ff; color: var(--eval); border: 1px solid var(--eval); }
+  .t-rec-c  { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+
+  /* ── PILL ── */
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-initial  { background: #fff3cd; color: #7d4e00; }
+  .drug-followup { background: #ede9fe; color: #5b21b6; }
+  .drug-annual   { background: #dafbe1; color: #116329; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── TIMELINE / COMPARISON ── */
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 110px; padding: 10px 8px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(15px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-0 { background: #f0f2f5; }
+  .st-1 { background: #fff3cd; }
+  .st-2 { background: #ffd8a8; }
+  .st-3 { background: #f5c6cb; }
+  .st-4 { background: #e8a5ad; }
+
+  /* ── GEAR BOX ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-screen { background: #e0f4f1; border: 1.5px solid var(--screen); color: #0f5549; }
+  .gear-eval   { background: #e6f0fb; border: 1.5px solid var(--eval); color: #0550ae; }
+  .gear-stage  { background: #fde8eb; border: 1.5px solid var(--stage); color: var(--stage); }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── 진행 막대 ── */
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 170px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  /* ── 6As FLOW ── */
+  .flow-6a { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .flow-6a-item { flex: 1; min-width: 90px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px; text-align: center; }
+  .flow-6a-item .fa-letter { font-weight: 800; font-size: calc(15px * var(--fscale, 1)); color: var(--accent); }
+  .flow-6a-item .fa-label { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-ada">
+        <span>A</span><span>D</span><span>A</span>
+      </div>
+      <h1>비만 선별·진단·평가·병기 ADA 2026 가이드라인</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://doi.org/10.2337/doci26-0003" class="source-link" target="_blank">ADA Professional Practice Committee for Obesity. Diabetes, Obesity, and CardioMetabolic CARE. 2026 ↗</a>
+      <span style="color:var(--text2)"> · Standards of Care in Overweight and Obesity — 2026</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 American Diabetes Association의 공식 승인을 받지 않았습니다 (This tool is not officially endorsed by ADA)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">📏 선별·진단기준</div>
+    <div class="tab" onclick="showTab('evaluation')">📋 평가·병력</div>
+    <div class="tab" onclick="showTab('staging')">🎯 위험도·병기</div>
+    <div class="tab" onclick="showTab('complications')">🏥 관련질환</div>
+    <div class="tab" onclick="showTab('clinical')">💡 임상운영</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--screen)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--screen)">매년 1회</div><div class="stat-lbl">BMI 기반 과다체지방<br>선별검사 최소주기</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--eval)">1–1.5kg/년</div><div class="stat-lbl">3년 초과 지속 시<br>위험 증가 시사 체중증가</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--stage)">Stage 0–4</div><div class="stat-lbl">Edmonton Obesity<br>Staging System</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--clinic)">6As</div><div class="stat-lbl">Ask·Assess·Advise·<br>Agree·Assist·Arrange</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 2026 가이드라인 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-screen">
+        <span>✅</span>
+        <div>비만은 <strong>이질적인 만성질환</strong>으로, 과다한 체지방이 이환율·사망률을 증가시킴. ADA 산하 Obesity Association이 성인 비만의 선별·진단·평가·병기 분류에 대한 근거기반 가이드라인을 개발함. <strong>인종·민족별 BMI 기준값</strong>과 <strong>허리둘레 기반 보조지표</strong>를 병용하여 과소진단 위험을 낮추는 것이 핵심.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-screen">
+          <div class="gear-title">📏 선별·진단</div>
+          BMI로 최소 연 1회 선별<br>
+          <small>인종별 기준 + WHtR/WC 보조지표로 과소진단 감소</small>
+        </div>
+        <div class="gear-box gear-eval">
+          <div class="gear-title">📋 종합평가</div>
+          병력·신체검진·검사실검사<br>
+          <small>체중력, 생활습관, 사회적 요인, 정신건강 포괄평가</small>
+        </div>
+        <div class="gear-box gear-stage">
+          <div class="gear-title">🎯 위험도·병기</div>
+          내장지방 분포 + EOSS<br>
+          <small>이환율·사망률 예측 및 치료계획 수립에 활용</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗣️</span> 6As 상담 프레임워크</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>체중 관련 대화는 반드시 <strong>허락을 구하는 것(Ask)</strong>에서 시작 — 환자가 거부하면 자율성을 존중하고 1년 후 재평가. 6As 활용은 자기효능감 증가, 행동변화 의도, 체중감량과 관련됨.</div>
+      <div class="flow-6a">
+        <div class="flow-6a-item"><div class="fa-letter">Ask</div><div class="fa-label">체중상태 평가<br>허락 구하기</div></div>
+        <div class="flow-6a-item"><div class="fa-letter">Assess</div><div class="fa-label">BMI·WHtR 측정<br>위험도 평가</div></div>
+        <div class="flow-6a-item"><div class="fa-letter">Advise</div><div class="fa-label">이환율·사망률<br>위험 설명</div></div>
+        <div class="flow-6a-item"><div class="fa-letter">Agree</div><div class="fa-label">목표에 대한<br>합의</div></div>
+        <div class="flow-6a-item"><div class="fa-letter">Assist</div><div class="fa-label">관리계획<br>지원</div></div>
+        <div class="flow-6a-item"><div class="fa-letter">Arrange</div><div class="fa-label">추적관찰<br>일정 조정</div></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>임상에서는 "Ask"·"Advise"는 비교적 잘 시행되나 바쁜 진료환경에서 <strong>"Assist"·"Arrange"가 누락되기 쉬움</strong> — 체중집중방문(weight-focused visit) 등 workflow 개선이 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 체중 모니터링 권고 (3.1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div><strong>권고 3.1 [B]</strong>: 비만 및 관련 질환 발생 고위험군 식별을 위해 지속적인 체중증가를 모니터링. <strong>3년 초과 기간 동안 연 1–1.5kg 이상 체중증가</strong>는 잠재적 위험 증가를 시사함 [C].</div>
+      <ul style="padding-left:18px;margin-top:8px;line-height:1.8">
+        <li>청년기~중년기 체중증가는 특히 중요 — NHANES 분석에서 청중년기 체중증가는 전체 사망률(HR 1.22) 및 심장질환 사망률(HR 1.49) 증가와 연관</li>
+        <li>현재 청년층은 20년 전 청년층 대비 평균 <strong>4kg 더 무겁고 1.7배 빠르게</strong> 체중증가</li>
+        <li>급속한 체중증가(연 1.7kg 초과)는 중년기 당뇨병·고혈압·골관절염 위험 증가와 연관</li>
+        <li>체중증가 확인 시 갑상선기능저하증, 다낭성난소증후군, 고코르티솔혈증 등 <strong>이차성 원인 감별</strong> 위한 병력·신체검진 시행</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> Wilson-Jungner 기준 적용 — 왜 선별검사가 필요한가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>중요한 건강문제</strong>: 1980~2025년 70개국 이상에서 비만 유병률 2배 증가, 200개국 이상에서 저체중보다 장애보정생존년(DALY) 기여도 더 큼</li>
+        <li><strong>인식 가능한 조기단계</strong>: 과체중 단계(BMI 25–29.9)에서 이미 건강위험 시작 — 남성 20–25%, 여성 32–38% 체지방률에 해당</li>
+        <li><strong>적절한 검사 존재</strong>: BMI는 과다체지방·건강위험과 밀접한 상관관계, WHO 1995년 기준 확립</li>
+        <li><strong>수용 가능성</strong>: 의사의 비만 진단은 치료 관심도·체중감량 시도 증가와 연관되나, 일부 환자는 체중측정 거부 가능</li>
+        <li><strong>인정된 치료법 존재</strong>: 1998년부터 다수의 미국 임상진료지침에서 비만 치료 기술</li>
+        <li><strong>비용 효과성</strong>: 1차의료에서의 선별·치료가 비용효과적일 수 있음</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>과다체지방 선별검사가 실제 임상결과에 미치는 영향을 조사한 전향적 연구·무작위시험은 아직 없음. 일본 중심비만 국가선별프로그램의 후향적 평가에서 생활습관 상담을 받은 대상자는 BMI·혈압·A1C에서 소폭 개선을 보임.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 선별·진단기준 ══════════════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <div class="alert alert-screen">
+    <span>📏</span>
+    <div><strong>선별검사는 BMI 단독</strong>으로 최소 연 1회 시행. 그러나 <strong>진단</strong>은 BMI만으로 부족한 경우 허리둘레(WC)·허리-신장비(WHtR) 등 추가 인체계측이 필요할 수 있음 (특히 BMI 25–29.9 구간).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 진단기준 (Table 3.1) — 비아시아계 vs 아시아계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>상태</th><th>비아시아계 기준</th><th>아시아계 기준*</th></tr>
+          <tr><td>과다체지방(선별기준)</td><td>BMI ≥25 kg/m²</td><td>BMI ≥23 kg/m²</td></tr>
+          <tr><td>과체중(Overweight)</td><td>BMI 25–29.9 + WHtR &lt;0.5<br>(또는 WC &lt;88cm 여/&lt;102cm 남)</td><td>BMI 23–27.4 + WHtR &lt;0.5<br>(또는 WC &lt;80cm 여/&lt;90cm 남)</td></tr>
+          <tr><td>비만(Obesity)</td><td class="freq-vhigh">BMI ≥30<br>또는 BMI 25–29.9 + WHtR ≥0.5<br>(또는 WC ≥88cm 여/≥102cm 남)</td><td class="freq-vhigh">BMI ≥27.5<br>또는 BMI 23–27.4 + WHtR ≥0.5<br>(또는 WC ≥80cm 여/≥90cm 남)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>*아시아계 기준값은 일반적 목표치이며, 특정 아시아 국가별로 다른 값이 존재할 수 있음. 아시아계 배경은 동아시아(중국·일본·한국 등) + 남아시아 아대륙(인도·파키스탄·방글라데시 등)을 포함. 혼합 인종/민족에 대한 근거는 아직 부족 — 현재는 환자가 스스로 밝힌 배경을 기준으로 적용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 진단 권고사항 (3.3a–3.3d)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>3.3a — 비아시아계 비만 진단</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">다음 중 하나 충족 시: BMI ≥30 <span class="stage-badge t-rec-b">B</span> · BMI ≥25 + WHtR ≥0.5 <span class="stage-badge t-rec-b">B</span> · BMI ≥25 + WC ≥88cm(여)/≥102cm(남) <span class="stage-badge t-rec-b">B</span></div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>3.3b — 아시아계 비만 진단</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">다음 중 하나 충족 시: BMI ≥27.5 <span class="stage-badge t-rec-b">B</span> · BMI ≥23 + WHtR ≥0.5 <span class="stage-badge t-rec-b">B</span> · BMI ≥23 + WC ≥80cm(여)/≥90cm(남) <span class="stage-badge t-rec-b">B</span></div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>3.3c — 비아시아계 과체중 진단</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">중심비만 없이 과다체지방 존재 시: BMI 25–29.9 + WHtR &lt;0.5 <span class="stage-badge t-rec-b">B</span> · BMI 25–29.9 + WC &lt;88cm(여)/&lt;102cm(남) <span class="stage-badge t-rec-b">B</span></div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>3.3d — 아시아계 과체중 진단</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">중심비만 없이 과다체지방 존재 시: BMI 23–27.4 + WHtR &lt;0.5 <span class="stage-badge t-rec-b">B</span> · BMI 23–27.4 + WC &lt;80cm(여)/&lt;90cm(남) <span class="stage-badge t-rec-b">B</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> BMI의 진단 성능 — 민감도/특이도</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="pct-bar-row"><div class="pct-bar-label">BMI 민감도 (여성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:51.4%;background:var(--red)"><span class="pct-bar-val">51.4%</span></div></div></div>
+      <div class="pct-bar-row"><div class="pct-bar-label">BMI 특이도 (여성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:95.4%;background:var(--screen)"><span class="pct-bar-val">95.4%</span></div></div></div>
+      <div class="pct-bar-row"><div class="pct-bar-label">BMI 민감도 (남성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:49.6%;background:var(--red)"><span class="pct-bar-val">49.6%</span></div></div></div>
+      <div class="pct-bar-row"><div class="pct-bar-label">BMI 특이도 (남성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:97.3%;background:var(--screen)"><span class="pct-bar-val">97.3%</span></div></div></div>
+      <div class="pct-bar-row"><div class="pct-bar-label">WC 민감도 (여성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:62.4%;background:var(--yellow)"><span class="pct-bar-val">62.4%</span></div></div></div>
+      <div class="pct-bar-row"><div class="pct-bar-label">WC 민감도 (남성)</div><div class="pct-bar-track"><div class="pct-bar-fill" style="width:57.0%;background:var(--yellow)"><span class="pct-bar-val">57.0%</span></div></div></div>
+      <div class="alert alert-danger" style="margin-top:10px">
+        <span>🚨</span>
+        <div><strong>과소진단(위음성)이 중요한 우려사항</strong> — BMI 단독 사용 시 최대 남성 25%, 여성 48%가 오진될 수 있음. BMI ≥30은 특이도는 높으나(위양성 적음) 민감도는 낮음 — 따라서 BMI &lt;30인 사람 중에서도 WC 기반 추가평가가 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👥</span> BMI 과소진단 취약군</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>아시아계 배경</strong>: 동일 BMI에서도 내장지방 축적이 더 많아 낮은 BMI에서도 비만관련질환·사망 위험 증가 — 인종별 기준값(≥27.5) 적용 필요</li>
+        <li><strong>고령자</strong>: 근육량 감소로 BMI 정확도 저하 → 비만 과소진단 위험. 그러나 BMI는 여전히 고령자의 심혈관질환·일부 암·이동성 저하 위험을 식별함</li>
+        <li><strong>근육량이 많은 사람</strong> (반대 방향 오류): BMI가 체지방을 과대추정할 수 있음 — 신체검진에서 근육량 우세 의심 시 WHtR·WC 또는 DEXA/BIA로 확인. 이 경우 체지방률 <strong>≥35%(여)·≥25%(남)</strong>일 때만 비만 진단</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> 허리둘레(WC) 측정 모범사례</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>1단계 — 대상자 준비</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>낙인을 줄이기 위해 개인공간(프라이빗룸) 사용</li>
+              <li>맨살 측정이 필요한 이유를 사전 설명 및 동의</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>2단계 — 해부학적 지표 확인</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>양발을 모으고 체중을 균등히 분배한 채 직립</li>
+              <li>장골능(iliac crest)을 좌우 모두 촉지하여 위치 확인</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>3단계 — 줄자 위치</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>양측 장골능 최상단 외측 경계에서 수평으로 줄자 위치</li>
+              <li>줄자가 피부를 누르지 않으면서 몸에 밀착되도록 확인</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>4~5단계 — 측정·기록</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>정상 호기 끝에서 0.1cm 단위로 측정·기록</li>
+              <li>WHtR(허리-신장비) 계산 후 의무기록에 문서화</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>WC는 임상시험에서 흔히 <strong>장골능 바로 위</strong>에서 측정하나, 최하위 늑골과 장골능 사이 중간지점 측정이 임상에서 사용 가능하며 내장지방·체지방률의 가장 정확한 지표이자 시간경과에 따른 변화에 가장 민감한 측정으로 보고됨. 측정부위 일관성이 핵심.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /diagnosis -->
+
+<!-- ══════════════════ TAB 3: 평가·병력 ══════════════════ -->
+<div id="tab-evaluation" class="panel">
+
+  <div class="alert alert-eval">
+    <span>📋</span>
+    <div><strong>권고 3.4a</strong>: 과체중/비만 진단 후 초기 방문에서 체중력·체중증가 기여요인·전반적 건강상태·치료력 및 장벽·비만관련질환·동반 의학/심리적 상태·지지체계·건강의 사회적결정요인을 포괄하는 <strong>종합평가</strong>를 시행 [B/C].</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 체중력(Weight History) — 핵심 요소</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div class="gear-title" style="color:var(--eval)">평가 항목</div>
+          <ul style="padding-left:16px;line-height:1.8">
+            <li>생애주기별 체중궤적·변화패턴 ("life events weight graph" 활용)</li>
+            <li>성인기 최대·최소 체중</li>
+            <li>비만 발병연령</li>
+            <li>1촌 가족력</li>
+            <li>이전·현재 치료계획 및 반응</li>
+            <li>체중편견·낙인 경험</li>
+          </ul>
+        </div>
+        <div>
+          <div class="gear-title" style="color:var(--stage)">임상적 의의</div>
+          <ul style="padding-left:16px;line-height:1.8">
+            <li>성인기 최대 BMI가 높을수록 전체 사망률·심혈관질환·암·호흡기질환 사망률 <strong>유의하게 증가</strong> (225,072명 분석)</li>
+            <li>조기발병(소아기)은 성인기 비만을 예측하며, 초기~중년기 체중증가는 심혈관질환·2형당뇨·MASLD·일부 암과 연관</li>
+            <li>비만노출기간("years lived with obesity")이 길수록 전체 사망률 위험 최고</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>성인기 최저체중 회귀는 <strong>1차 치료목표가 아님</strong> — 치료목표는 비만관련질환 예방·개선 등 임상적으로 의미있는 건강·삶의질 개선에 협력적으로 설정되어야 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗂️</span> 종합평가 구성요소 요약 (Table 3.3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>영역</th><th>초기방문</th><th>추적방문</th><th>연간</th></tr>
+          <tr><td>체중력 (궤적·최대/최소·발병연령·가족력·낙인경험)</td><td class="freq-vhigh">✓</td><td>-</td><td>-</td></tr>
+          <tr><td>치료계획·반응, 약물·보충제 사용, 체중유발약물</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>대사-비만수술/시술력</td><td class="freq-vhigh">✓</td><td>-</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>생활습관(식이·신체활동·스트레스·수면·기술이용)</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>사회적 요인(보험상태·물질사용·사회적지지·SDOH)</td><td class="freq-vhigh">✓</td><td>-</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>비만관련질환 병력/증상 (당뇨·고혈압·이상지질혈증 등)</td><td class="freq-vhigh">✓</td><td>-</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>정신건강(섭식장애·우울·불안 선별)</td><td class="freq-vhigh">✓</td><td>-</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>인체계측(신장·체중·BMI, WC 필요시)</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>활력징후(혈압·심박수)</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td><td class="freq-vhigh">✓</td></tr>
+          <tr><td>검사실검사(A1C, 지질프로파일, AST/ALT/혈소판·FIB-4 등)</td><td class="freq-vhigh">✓</td><td>일부</td><td class="freq-vhigh">✓</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💬</span> 병력청취 실전 예시 질문 (Table 3.4 발췌)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>체중력 · 낙인경험</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          "평생 동안 체중이 어떻게 변화해왔나요?" · "어떤 사건이 체중증가/감소에 영향을 주었나요?" · "체중 때문에 놀림이나 부당한 대우를 받은 적이 있나요?"
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>준비도·동기</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">"1~10점 척도로, 체중관리를 위해 변화할 준비가 얼마나 되어 있나요?" · "이 변화가 당신에게 얼마나 중요한가요?" (동기면담 기법 활용)</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>식이·신체활동</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">"전형적인 하루 일과는 어떻게 되나요?" (typical day recall) · "일주일에 며칠, 몇 분간 중강도 신체활동을 하시나요?" (REAP-S, Exercise Vital Sign 도구 활용 가능)</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>사회적 결정요인</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">"현재 거주환경은 어떤가요?" · "최근 식비 마련에 어려움을 겪은 적이 있나요?" (Accountable Health Communities 선별도구 활용 가능, 민감할 수 있음을 사전 안내)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 정신건강 관련 선별</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>비만 인구의 <strong>20~60%</strong>가 심리사회적 문제 경험 — 우울·불안·섭식장애·이상섭식행동이 가장 흔함</li>
+        <li>비만-우울 양방향 관계: 비만인은 평생 우울증 발생위험 55% 증가, 우울증 환자는 비만 발생위험 58% 증가 (메타분석)</li>
+        <li>폭식장애는 대사-비만수술 희망자의 5~15%에서 관찰되며, 비만 중증도가 높을수록 유병률 증가</li>
+        <li>권장 선별도구: 섭식장애(Questionnaire on Eating and Weight Patterns, EDE-Q7-Brief), 우울(PHQ-2/PHQ-9), 불안(GAD-2/GAD-7)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 체중유발약물(Weight-promoting medication)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>All of Us 연구프로그램 132,057명 분석: 과체중/비만 환자의 <strong>36%가 최소 1개, 약 20%가 2개 이상</strong>의 체중유발약물 사용</li>
+        <li>Look AHEAD 연구: 체중유발약물 노출 시 5% 이상 체중감량 달성 확률 32% 감소, 10% 이상 감량 달성 확률 19% 감소</li>
+        <li>체중유발약물 개수가 증가할수록 BMI가 시간에 따라 더 크게 증가하는 경향</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /evaluation -->
+
+<!-- ══════════════════ TAB 4: 위험도·병기 ══════════════════ -->
+<div id="tab-staging" class="panel">
+
+  <div class="alert alert-stage">
+    <span>🎯</span>
+    <div><strong>권고 3.4b</strong>: 종합평가 정보를 활용하여 위험도를 층화하고 관리계획을 수립 — 지방분포 확인 [B], <strong>Edmonton Obesity Staging System(EOSS)</strong> 사용 고려 [B], 환자와 협력한 목표 설정 [A], 지속치료 계획 수립 [B].</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> Edmonton Obesity Staging System (EOSS) — 5단계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>EOSS는 비만의 의학적·신체적·심리적·기능적 영향을 5단계로 평가하며, 기존 체지방 평가를 넘어 <strong>사망률을 독립적으로 예측</strong>함. 치료결정에 활용 가능.</div>
+      <div class="stage-timeline" style="margin-top:10px">
+        <div class="stage-box st-0"><div class="st-num">Stage 0</div><div class="st-lbl">위험요인·증상 없음<br>A1C&lt;5.7%, BP&lt;130/80</div></div>
+        <div class="stage-box st-1"><div class="st-num">Stage 1</div><div class="st-lbl">아임상적 위험요인<br>경미한 증상</div></div>
+        <div class="stage-box st-2"><div class="st-num">Stage 2</div><div class="st-lbl">확립된 질환<br>중등도 증상</div></div>
+        <div class="stage-box st-3"><div class="st-num">Stage 3</div><div class="st-lbl">중증 질환<br>중증 증상</div></div>
+        <div class="stage-box st-4"><div class="st-num">Stage 4</div><div class="st-lbl">말기 질환<br>매우 중증 증상</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> EOSS 단계별 상세기준 (Table 3.6 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>단계</th><th>비만관련질환</th><th>신체증상</th><th>기능적제한</th></tr>
+          <tr><td><strong>0</strong></td><td>없음 (A1C&lt;5.7%, BP&lt;130/80, TG&lt;150)</td><td>없음</td><td>없음, 일상생활 지장 없음</td></tr>
+          <tr><td><strong>1</strong></td><td>아임상 (전당뇨, BP 130–139/80–89)</td><td>경도 노작성 호흡곤란</td><td>경미한 제한, 삶의 질 영향 없음</td></tr>
+          <tr><td><strong>2</strong></td><td class="freq-mod">확립됨 (2형당뇨, 고혈압, MASLD, OSA 진단)</td><td>중등도 노작성 호흡곤란, 관절강직</td><td>중등도 제한, 삶의질 영향</td></tr>
+          <tr><td><strong>3</strong></td><td class="freq-high">중증 (합병증 동반 2형당뇨, ASCVD, HFrEF)</td><td>안정시 호흡곤란, 협심증</td><td>근로불가, 유의한 기능제한</td></tr>
+          <tr><td><strong>4</strong></td><td class="freq-vhigh">말기 (말기신질환, 말기심부전, 간경변)</td><td>지속적 호흡곤란, 심한 무기력</td><td>침상와상, 일상기능 수행 불가</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>Stage 4에 대한 연구는 아직 없어 <strong>전문가 합의</strong>로 내용을 구성함. 심폐운동부하검사 가능 시 VO2 peak/kg 추가로 EOSS 성능 향상 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 내장지방(Visceral Adiposity) 분포와 위험도</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>WHtR·WC로 확인하는 내장지방은 <strong>BMI 단독보다 심대사질환 위험 예측력이 높음</strong> — 대사증후군, 2형당뇨, 지방간질환, 심혈관질환, 사망률과 독립적 연관</li>
+        <li>내장지방 변화와 심대사 위험 간 <strong>용량-반응 관계</strong> 존재 — 치료목표 설정에 활용 가능</li>
+        <li>고령자에서 WC와 사망률의 연관성은 연구간 상충되는 결과 존재 — 주의 필요</li>
+        <li>내장지방은 대장선종·천식·담낭질환·낙상위험 등 <strong>비심대사 질환</strong>과도 연관될 가능성 — 연구가 진행 중인 영역</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /staging -->
+
+<!-- ══════════════════ TAB 5: 관련질환 ══════════════════ -->
+<div id="tab-complications" class="panel">
+
+  <div class="alert alert-eval">
+    <span>🏥</span>
+    <div>비만은 <strong>200개 이상의 질환·합병증</strong>과 연관 — 모든 장기계통에 영향. UK Biobank 코호트(n=392,541)에서 비만은 27개 비전염성 만성질환 위험 증가와 연관되며, 가장 위험이 높은 질환은 <strong>2형당뇨(HR 6.61)</strong>, <strong>골관절염(HR 2.59)</strong>, <strong>고혈압(HR 2.35)</strong>.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 영역별 비만관련질환 (Table 3.5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>영역</th><th>주요 질환</th></tr>
+          <tr><td>대사/내분비</td><td>이상지질혈증, 임신성당뇨, 대사증후군, 전당뇨, 2형당뇨</td></tr>
+          <tr><td>심혈관</td><td>심방세동, 관상동맥질환, HFpEF/HFrEF, 고혈압, 말초혈관질환</td></tr>
+          <tr><td>위장/간</td><td>담석증, 위식도역류질환, MASH, MASLD</td></tr>
+          <tr><td>근골격</td><td>퇴행성관절질환, 통풍, 골관절염, 족저근막염</td></tr>
+          <tr><td>호흡기</td><td>천식, 폐동맥고혈압, 비만저환기증후군, 폐쇄성수면무호흡증</td></tr>
+          <tr><td>종양/혈액</td><td>유방암, 대장암, 심부정맥혈전증, 자궁내막암, 폐색전증, 전립선암, 난소암</td></tr>
+          <tr><td>신경/안과</td><td>특발성두개내압상승, 뇌졸중</td></tr>
+          <tr><td>신장/비뇨기</td><td>국소분절사구체경화증, 복압성요실금</td></tr>
+          <tr><td>생식</td><td>불임, 남성성선기능저하증, 다낭성난소증후군, 자궁근종</td></tr>
+          <tr><td>피부</td><td>화농성한선염, 림프부종, 정맥울혈</td></tr>
+          <tr><td>면역/감염</td><td>감염(예: COVID-19) 예후불량, 감염취약성</td></tr>
+          <tr><td>정신과</td><td>불안, 폭식장애, 우울, 야간섭식증후군, 낙인</td></tr>
+          <tr><td>기능적 제한</td><td>이동성 제한, 일상생활수행능력(ADL) 제한</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>이 목록은 비만관련 질환을 <strong>모두 포괄하지 않음</strong> — 자원·시간 제약 시 개인/가족력과 관련된 질환에 우선순위를 두고 평가.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 평가 우선순위 핵심질환</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>전당뇨/2형당뇨, 고혈압, 이상지질혈증, 죽상경화성심혈관질환(ASCVD)</li>
+        <li>박출률보존심부전(HFpEF), 대사이상관련지방간염(MASH)</li>
+        <li>폐쇄성수면무호흡증(STOP-Bang 설문 등으로 선별), 무릎골관절염</li>
+        <li>섭식장애·이상섭식행동, 우울, 불안</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>🧪</span>
+        <div>다수 환자에서 <strong>A1C</strong>로 전당뇨/2형당뇨 선별, <strong>지질프로파일</strong>로 이상지질혈증·ASCVD 위험 평가, <strong>AST·ALT·혈소판수 → FIB-4 점수</strong>로 MASH 평가가 합리적.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /complications -->
+
+<!-- ══════════════════ TAB 6: 임상운영 ══════════════════ -->
+<div id="tab-clinical" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 임상실무 권고사항 (3.5–3.9)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>권고</th><th>내용</th></tr>
+          <tr><td>3.5</td><td>치료전략에 맞는 간격으로 정기 추적방문 시행 [B]; 효능·안전성·내약성 평가 [B]; 인체계측·활력징후·검사실수치 모니터링 [A]; 치료장벽 문진 및 문제해결 지원 [C/B]; 심리사회·행동요인 재평가 [B]</td></tr>
+          <tr><td>3.6</td><td>의료진에게 비만치료 교육 [A] 및 전문적·기술적 지원 제공 [A]</td></tr>
+          <tr><td>3.7</td><td>과체중/비만 환자에게 의학적 지원이 가능함을 알리는 진료과정 수립 [A]</td></tr>
+          <tr><td>3.8</td><td>비만 평가·병기분류·치료에 충분한 시간을 배정하는 진료 프로토콜 구축 (체중집중방문 등) [A/C]</td></tr>
+          <tr><td>3.9</td><td>진단기준 충족 성인의 의무기록에 비만진단 추가, 비낙인적 진단코드 사용 [C]</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🛣️</span> PATHWEIGH 근거기반 진료과정 4단계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>단계적쐐기형 클러스터무작위시험(PATHWEIGH)에서 검증된 다요소 진료과정 — <strong>인구집단 수준 체중증가를 제거한 최초의 중재</strong>로 평가됨.</div>
+      <div class="stage-timeline" style="margin-top:10px">
+        <div class="stage-box st-0" style="background:#e0f4f1"><div class="st-num" style="color:var(--screen);font-size:13px">1단계</div><div class="st-lbl">의료진 교육·자원·지원</div></div>
+        <div class="stage-box st-0" style="background:#e6f0fb"><div class="st-num" style="color:var(--eval);font-size:13px">2단계</div><div class="st-lbl">체중집중방문 예약<br>(안내문·EHR 포털)</div></div>
+        <div class="stage-box st-0" style="background:#fde8eb"><div class="st-num" style="color:var(--stage);font-size:13px">3단계</div><div class="st-lbl">진료효율화로<br>평가·병기·치료 시간 확보</div></div>
+        <div class="stage-box st-0" style="background:#ede9fe"><div class="st-num" style="color:var(--clinic);font-size:13px">4단계</div><div class="st-lbl">공유의사결정으로<br>장기치료 계획</div></div>
+      </div>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>PATHWEIGH 시행 시 BMI ≥25인 성인이 체중관련 진료를 받을 가능성이 <strong>유의하게 증가</strong>. 핵심전략은 원내 안내표지 등으로 체중관리 지원 가능성을 알리는 것 — 낙인을 줄이면서 인지도를 높임.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏷️</span> ICD-10 진단코드 실무 적용</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>코드</th><th>적용대상</th></tr>
+          <tr><td>E66.3</td><td>과체중(Overweight) 진단기준 충족 성인</td></tr>
+          <tr><td>E66.8 / E66.9</td><td>비만 진단기준 충족 성인(기타/미분류)</td></tr>
+          <tr><td>E66.811</td><td>Class 1 비만 (BMI 30–34.9)</td></tr>
+          <tr><td>E66.812</td><td>Class 2 비만 (BMI 35–39.9)</td></tr>
+          <tr><td>E66.813</td><td>Class 3 비만 (BMI ≥40)</td></tr>
+          <tr><td>Z68.__</td><td>초진 시점 BMI 식별용 보조코드(Z-code) — 치료반응에 따라 갱신</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>비만은 <strong>만성질환</strong>이므로 E66 진단코드는 치료 후 BMI가 개선되어도 <strong>유지</strong>되어야 하며(2형당뇨·고혈압과 동일한 원리), Z-code만 BMI 변화를 반영해 갱신. 의무기록의 비만 진단은 <strong>치료 가능성 증가 및 체중감량 성공률 증가</strong>와 연관됨(680,000명 이상 관찰연구).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 진료현장 장벽과 해결전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>1️⃣ 교육 부족</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">전공의 교육과정 내 비만교육 프로그램이 전세계적으로 부족. 비만 관련 교육 제공 시 치료옵션 이해도·자기효능감이 향상됨.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>2️⃣ 시간 제약</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">한 시뮬레이션 연구는 1차의료 의료진이 모든 예방·만성질환·급성진료 및 문서작업을 지침대로 수행하려면 <strong>하루 약 27시간</strong>이 필요하다고 추정 — 체중집중방문 등 특화된 진료유형 신설이 해법으로 제시됨.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>3️⃣ EHR 기반 지원도구</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">BMI 상승에 대한 EHR 기반 모범진료 알림(best practice alert)은 비만 진단율을 일관되게 향상시킴. 방문 전 설문지, 비만진료용 기록템플릿, 임상의사결정지원 시스템이 유망한 전략.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>4️⃣ 전문의 연계</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">비만의학 전문의(board-certified obesity medicine physician)에게 의뢰된 환자는 대조군보다 근거기반 비만치료를 받고 더 큰 체중감량을 달성할 가능성이 유의하게 높음.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /clinical -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"A1C",     def:"Hemoglobin A1c — 당화혈색소" },
+  { term:"ASCVD",   def:"Atherosclerotic Cardiovascular Disease — 죽상경화성 심혈관질환" },
+  { term:"BIA",     def:"Bioelectrical Impedance Analysis — 생체전기저항분석법" },
+  { term:"BMI",     def:"Body Mass Index — 체질량지수" },
+  { term:"DEXA",    def:"Dual X-ray Absorptiometry — 이중에너지 X선 흡수계측법" },
+  { term:"EHR",     def:"Electronic Health Record — 전자의무기록" },
+  { term:"EOSS",    def:"Edmonton Obesity Staging System — 에드먼턴 비만 병기분류체계" },
+  { term:"FIB-4",   def:"Fibrosis-4 Score — 간섬유화 지표(AST·ALT·혈소판·연령 기반)" },
+  { term:"GAD-7",   def:"Generalized Anxiety Disorder 7-item scale — 범불안장애 선별도구" },
+  { term:"HFpEF",   def:"Heart Failure with preserved Ejection Fraction — 박출률보존심부전" },
+  { term:"HFrEF",   def:"Heart Failure with reduced Ejection Fraction — 박출률감소심부전" },
+  { term:"MASH",    def:"Metabolic dysfunction-Associated Steatohepatitis — 대사이상관련 지방간염" },
+  { term:"MASLD",   def:"Metabolic dysfunction-Associated Steatotic Liver Disease — 대사이상관련 지방간질환" },
+  { term:"OSA",     def:"Obstructive Sleep Apnea — 폐쇄성수면무호흡증" },
+  { term:"PCOS",    def:"Polycystic Ovarian Syndrome — 다낭성난소증후군" },
+  { term:"PHQ-9",   def:"Patient Health Questionnaire-9 — 우울증 선별도구" },
+  { term:"REAP-S",  def:"Rapid Eating and Activity Assessment for Participants (Short) — 간이 식이·활동 평가도구" },
+  { term:"SDOH",    def:"Social Determinants of Health — 건강의 사회적 결정요인" },
+  { term:"WC",      def:"Waist Circumference — 허리둘레" },
+  { term:"WHtR",    def:"Waist-to-Height Ratio — 허리-신장비" },
+  { term:"6As",     def:"Ask, Assess, Advise, Agree, Assist, Arrange — 비만 상담을 위한 6단계 프레임워크" },
+];
+
+// 약어 초기 렌더
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+// 탭 전환
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+// 카드 토글
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+// 아코디언 토글
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+// 약어 검색
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+// 초기 카드 상태
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
