@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>당뇨발질환 (IWGDF 2023) 가이드</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 당뇨발 영역 색 */
+    --neuro: #0550ae;   /* 신경병증(LOPS) — 청 */
+    --pad:   #9b1c2e;   /* 말초동맥질환(PAD) — 진홍 */
+    --infect:#c47d00;   /* 감염 — 황금 */
+    --charcot:#7c3aed;  /* 샤르코 관절병증 — 보라 */
+    --heal:  #1a7f6e;   /* 상처치유/예방 — 청록 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-df {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-df span:nth-child(1) { background: var(--neuro); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-df span:nth-child(2) { background: var(--pad); color:#fff; padding:3px 6px; }
+  .logo-df span:nth-child(3) { background: var(--infect); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--pad); border-bottom-color: var(--pad); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-neuro   { background: #ddf4ff; border-left: 3px solid var(--neuro);   color: #0550ae; }
+  .alert-pad     { background: #fce8eb; border-left: 3px solid var(--pad);     color: #7a1425; }
+  .alert-infect  { background: #fff3cd; border-left: 3px solid var(--infect);  color: #7d4e00; }
+  .alert-charcot { background: #ede9fe; border-left: 3px solid var(--charcot); color: #5b21b6; }
+  .alert-heal    { background: #e0f4f1; border-left: 3px solid var(--heal);    color: #0f5549; }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+
+  /* ── 빈도/위험도 히트맵 ── */
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  /* ── ACCORDION ── */
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  /* ── TYPE BADGE ── */
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-neuro  { background: #ddf4ff; color: var(--neuro); border: 1px solid var(--neuro); }
+  .t-pad    { background: #fce8eb; color: var(--pad); border: 1px solid var(--pad); }
+  .t-infect { background: #fff3cd; color: #7d4e00; border: 1px solid var(--infect); }
+  .t-charcot{ background: #ede9fe; color: var(--charcot); border: 1px solid var(--charcot); }
+
+  /* ── PILL / TAG ── */
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-device  { background: #ddf4ff; color: #0550ae; }
+  .drug-abx     { background: #fff3cd; color: #7d4e00; }
+  .drug-surg    { background: #fce8eb; color: var(--pad); }
+  .drug-care    { background: #dafbe1; color: #116329; }
+  .drug-adjunct { background: #ede9fe; color: #5b21b6; }
+
+  /* ── ABBR ── */
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  /* ── STAGE TIMELINE / RISK ROW ── */
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(15px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-r0 { background: #d4edda; }
+  .st-r1 { background: #ddf4ff; }
+  .st-r2 { background: #fff3cd; }
+  .st-r3 { background: #fde8eb; }
+
+  /* ── GEAR BOX (병태생리) ── */
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-neuro { background: #ddf4ff; border: 1.5px solid var(--neuro); color: #0550ae; }
+  .gear-pad   { background: #fde8eb; border: 1.5px solid var(--pad); color: #7a1425; }
+  .gear-infect{ background: #fff8e1; border: 1.5px solid var(--infect); color: #7d4e00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  /* ── 진행 막대 (% 시각화) ── */
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 160px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  /* ── FLOW (병태생리 화살표) ── */
+  .path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 8px 0; font-size: calc(11.5px * var(--fscale, 1)); }
+  .path-step { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 9px; font-weight: 600; }
+  .path-arrow { color: var(--text2); font-weight: 700; }
+  .path-end { border-width: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-df">
+        <span>D</span><span>F</span><span>U</span>
+      </div>
+      <h1>당뇨발질환 (IWGDF 2023) 가이드</h1>
+    </div>
+    <div class="meta-line">
+      <a href="https://iwgdfguidelines.org" class="source-link" target="_blank">IWGDF 2023 Practical Guidelines on the Prevention and Management of Diabetes-related Foot Disease ↗</a>
+      <span style="color:var(--text2)"> · Schaper NC, van Netten JJ, Apelqvist J, Bus SA, Fitridge R, Game F, Monteiro-Soares M, Senneville É</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 IWGDF의 공식 승인을 받지 않았으며 실제 진료 시 원문 가이드라인 확인이 필요합니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('prevention')">🦶 예방</div>
+    <div class="tab" onclick="showTab('assess')">🩹 궤양 평가</div>
+    <div class="tab" onclick="showTab('treat')">💉 궤양 치료</div>
+    <div class="tab" onclick="showTab('charcot')">🦴 샤르코</div>
+    <div class="tab" onclick="showTab('care')">🏥 진료체계</div>
+    <div class="tab" onclick="showTab('exam')">📋 검사법·교육</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--pad)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--heal)">7종</div><div class="stat-lbl">IWGDF 2023 개별 가이드라인<br>(예방·분류·감염·PAD·오프로딩·<br>치유촉진·샤르코)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--neuro)">~50%</div><div class="stat-lbl">당뇨발궤양 환자 중<br>PAD 동반 비율</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--pad)">4단계</div><div class="stat-lbl">IWGDF 위험도 계층화<br>(0–3)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--infect)">3단계</div><div class="stat-lbl">진료체계 레벨<br>(Level 1–3)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 당뇨발질환 정의 및 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-heal">
+        <span>🦶</span>
+        <div><strong>당뇨발질환(Diabetes-related foot disease)</strong> = 현재 또는 과거 당뇨병 진단을 받은 사람의 발에 발생하는 <strong>말초신경병증, 말초동맥질환(PAD), 감염, 궤양, 신경병증성 관절병증(샤르코), 괴사, 절단</strong> 중 하나 이상을 포함하는 질환군.<br>
+        전 세계적으로 유병률·양상은 다르지만 궤양 발생 경로는 대체로 유사 — <strong>신경병증/PAD + 유발 사건(trauma)</strong>의 조합으로 발생.</div>
+      </div>
+
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-neuro">
+          <div class="gear-title">🔵 말초신경병증(LOPS)</div>
+          보호감각 소실 + 발 변형<br>
+          <small>비정상적 생체역학적 부하 → 굳은살 → 피하출혈 → 궤양</small>
+        </div>
+        <div class="gear-box gear-pad">
+          <div class="gear-title">🔴 말초동맥질환(PAD)</div>
+          대부분 죽상경화증 기인<br>
+          <small>궤양 치유 지연·괴사·하지절단의 주요 위험인자, 최대 50%에서 동반</small>
+        </div>
+        <div class="gear-box gear-infect">
+          <div class="gear-title">🟡 감염</div>
+          궤양의 흔한 합병증<br>
+          <small>적절히 치료하지 않으면 급속 파급, 특히 PAD 동반 시 위험</small>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>당뇨발 미세혈관병증은 관찰되나 <strong>궤양이나 치유 지연의 주 원인은 아님</strong>으로 판단됨 — 신경병증과 PAD가 핵심 병태생리.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 궤양 발생 기전 (병태생리 흐름)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="path-flow">
+        <div class="path-step">신경병증/변형 ± PAD</div><div class="path-arrow">→</div>
+        <div class="path-step">보호감각 소실(LOPS)</div><div class="path-arrow">→</div>
+        <div class="path-step">비정상 생체역학적 부하</div><div class="path-arrow">→</div>
+        <div class="path-step">굳은살(callus)</div>
+      </div>
+      <div class="path-flow">
+        <div class="path-step">굳은살 축적</div><div class="path-arrow">→</div>
+        <div class="path-step">부하 추가 증가</div><div class="path-arrow">→</div>
+        <div class="path-step">피하출혈</div><div class="path-arrow">→</div>
+        <div class="path-step path-end" style="border-color:var(--pad);color:var(--pad)">피부궤양</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>경미한 외상(꽉 끼는 신발, 급성 기계적/열손상)도 신경병증 환자에서는 궤양을 유발할 수 있음. 원인이 무엇이든 <strong>감각이 없는 발로 계속 보행하면 치유가 저해</strong>됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>✅</span> 5가지 예방 핵심요소 미리보기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ol style="font-size: calc(12px * var(--fscale, 1));padding-left:18px;line-height:2">
+        <li>고위험군(at-risk foot) 식별</li>
+        <li>정기적인 발 검진 및 진찰</li>
+        <li>환자·가족·의료진 대상 구조화된 교육</li>
+        <li>적절한 신발 상시 착용 권장</li>
+        <li>궤양 발생 위험요인 치료</li>
+      </ol>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>다학제 발관리팀 구성 및 이 원칙에 따른 예방·관리는 전 세계 여러 연구에서 <strong>하지절단 빈도 감소</strong>와 연관됨이 확인됨.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ══════════════════ TAB 2: 예방 ══════════════════ -->
+<div id="tab-prevention" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 고위험군 식별 및 IWGDF 위험도 분류</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-heal">
+        <span>🔍</span>
+        <div>매우 낮은 위험군(risk 0)도 <strong>연 1회</strong> LOPS·PAD 징후 선별검사 시행. 무증상이라도 무증상 신경병증·PAD·궤양전 병변·궤양이 있을 수 있음.<br>
+        연간 선별 항목: <strong>궤양 유무, 보호감각 소실(LOPS), 혈관 상태(파행력·족부맥박 촉지)</strong>.</div>
+      </div>
+      <div class="stage-timeline">
+        <div class="stage-box st-r0"><div class="st-num" style="color:var(--green)">0</div><div class="st-lbl">매우 낮음<br>LOPS·PAD 없음<br>연 1회 검진</div></div>
+        <div class="stage-box st-r1"><div class="st-num" style="color:var(--neuro)">1</div><div class="st-lbl">낮음<br>LOPS 또는 PAD<br>6–12개월마다</div></div>
+        <div class="stage-box st-r2"><div class="st-num" style="color:#7d4e00">2</div><div class="st-lbl">중등도<br>LOPS+PAD 또는<br>+변형 동반<br>3–6개월마다</div></div>
+        <div class="stage-box st-r3"><div class="st-num" style="color:var(--pad)">3</div><div class="st-lbl">높음<br>LOPS/PAD +<br>궤양력·절단력·<br>말기신질환<br>1–3개월마다</div></div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>치유된 궤양을 가진 환자는 <strong>재발위험이 가장 높은 군(관해 상태, in remission)</strong>으로 간주 — 평생에 걸친 예방전략과 통합진료팀 관리가 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 정기 검진 항목 (Risk 1 이상)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>영역</th><th>평가 항목</th></tr>
+        <tr><td>병력</td><td>궤양·절단 과거력, 말기신질환, 이전 발 교육 이력, 사회적 고립·의료접근성·경제상황, 발 통증(보행/안정 시)·저림, 이동성</td></tr>
+        <tr><td>혈관</td><td>족부맥박 촉지 안됨/PAD 징후 시 도플러 파형 + 발목/발가락 압력·ABI/TBI 측정 고려</td></tr>
+        <tr><td>피부</td><td>피부색·온도, 굳은살·부종, 진균감염, 출혈·균열 등 궤양전 징후</td></tr>
+        <tr><td>골/관절</td><td>변형(갈퀴발가락·망치발가락), 비정상적 골융기, 관절가동범위 제한 — 앙와위/기립위 모두 검진</td></tr>
+        <tr><td>인지</td><td>인지장애 여부</td></tr>
+        <tr><td>신발</td><td>맞지 않거나 부적절한 신발, 신발 미착용</td></tr>
+        <tr><td>자가관리</td><td>부적절한 발톱관리, 발 미세척 등</td></tr>
+        <tr><td>신체적 제약</td><td>시력저하·비만 등 자가관리를 방해하는 요인</td></tr>
+        <tr><td>지식</td><td>발관리 관련 지식 수준</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 구조화된 환자 교육</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>매일 발 세척·검사, 궤양전 병변 인지법 교육 — 발견 시 신속히 전문 의료진에게 연락</li>
+        <li>건조한 피부에 보습제 사용, 실내외 <strong>항상 양말+신발 착용</strong>(양말만 착용은 보호효과 없음을 특히 강조)</li>
+        <li>발톱을 일자로 자르는 법 등 구체적 기술 시범</li>
+        <li>개별 또는 소그룹, 다회에 걸쳐, 주기적으로 반복 강화 — 문화적 적합성·성별차이·건강문해력 고려</li>
+        <li>환자(및 가족/돌봄제공자)가 메시지를 이해했는지, 실천 동기와 자가관리 기술을 갖췄는지 반드시 확인</li>
+        <li>의료진도 발위험 환자 관리 기술에 대해 주기적 재교육 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>4️⃣</span> 적절한 신발 착용</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-neuro">
+        <span>👟</span>
+        <div>맨발 보행·부적절한 신발이 발 외상의 주요 원인. <strong>신발 내부 길이는 발보다 1–2cm 길게</strong>, 폭은 발볼(중족지골관절부) 너비와 동일하게, 모든 발가락이 들어갈 충분한 높이 확보.<br>
+        평가는 <strong>선 자세, 가급적 하루 중 늦은 시간(부종 있을 때)</strong>에 시행.</div>
+      </div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9;margin-top:6px">
+        <li>기성품 신발이 변형된 발에 맞지 않거나 비정상 부하 징후(발적·굳은살·궤양력)가 있으면 <strong>치료용 신발(맞춤신발·깔창·발가락 보조기 포함)</strong> 처방</li>
+        <li>족저부 궤양 치유 후에는 <strong>보행 중 족저압 감소 효과가 입증된 치료용 신발</strong> 처방 필수</li>
+        <li>궤양을 유발했던 신발은 다시 신지 않도록 교육</li>
+        <li>(일시적) 와상 환자의 발뒤꿈치 궤양 예방을 위한 보호조치 시행</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>5️⃣</span> 위험요인 및 궤양전 병변 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>과다 굳은살, 내향성 발톱, 발 진균감염에 대한 적절한 치료</li>
+        <li>수포 등 교정 가능한 궤양전 병변 보호, 필요 시 배액</li>
+        <li>중등도~고위험군(risk 2–3)에게 <strong>1일 1회 발 피부온도 자가측정</strong> 코칭 고려 — 온도 상승 시 활동량 감소 및 발관리팀 상담</li>
+        <li>비강직성 망치발가락 첨부/원위부의 과다 굳은살·궤양전 병변 시 <strong>굴곡건 건절개술(tenotomy)</strong> 또는 보조기 처방 고려</li>
+        <li>궤양 위험이 있다고 해서 신체활동 참여를 제한할 필요는 없음 — 적절한 신발 착용 하 <strong>1일 1000보 추가 증량</strong> 점진적 시행, 발-발목 운동프로그램 고려 가능</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /prevention -->
+
+
+<!-- ══════════════════ TAB 3: 궤양 평가 ══════════════════ -->
+<div id="tab-assess" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> SINBAD 분류체계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-heal">
+        <span>📋</span>
+        <div>궤양 발견 시 <strong>SINBAD</strong> 6항목으로 1차 평가 — 치료계획 수립과 의료진 간 의사소통의 기본 틀.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td><strong>S</strong>ite (위치)</td><td>전족부/중족부/후족부, 족저/지간/내측/외측/배측 구분</td></tr>
+        <tr><td><strong>I</strong>schemia (허혈)</td><td>족부혈류 정상(맥박 1개 이상 촉지) 여부, 도플러 파형·발목/발가락압·ABI/TBI 평가</td></tr>
+        <tr><td><strong>N</strong>europathy (신경병증)</td><td>보호감각 정상/소실 여부(Appendix 1 참조)</td></tr>
+        <tr><td><strong>B</strong>acterial infection (세균감염)</td><td>염증 임상징후(발적·발열감·경화·통증) 2개 이상 또는 화농성 분비물</td></tr>
+        <tr><td><strong>A</strong>rea (면적)</td><td>궤양 면적 측정(cm²)</td></tr>
+        <tr><td><strong>D</strong>epth (깊이)</td><td>피부/피하조직 국한 / 근육·건 도달 / 골 도달</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>궤양 유형은 <strong>신경병증성(LOPS만)</strong>, <strong>신경허혈성(LOPS+PAD)</strong>, <strong>허혈성(PAD만)</strong>으로 구분. 감염중증도는 IWGDF/IDSA 체계, 허혈은 WIfI 체계로 별도 상세평가.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦠</span> 감염 중증도 분류 (IWGDF/IDSA)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>등급</th><th>정의</th></tr>
+        <tr><td><span class="stage t-infect">경증(Mild)</span></td><td>표재성 궤양 + 최소한의 봉와직염(2cm 이내)</td></tr>
+        <tr><td><span class="stage t-infect" style="background:#ffd8a8;color:#7d3b00;border-color:#c47d00">중등증(Moderate)</span></td><td>피부보다 깊은 궤양 또는 더 광범위한 봉와직염 (±농양)</td></tr>
+        <tr><td><span class="stage t-pad">중증(Severe)</span></td><td>전신 패혈증 징후 동반</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>신경병증·허혈로 인해 염증징후가 <strong>둔화될 수 있고</strong>, 경증~중등증에서는 전신소견(발열·백혈구증가)이 흔히 없음 — 임상적 의심을 유지해야 함.</div>
+      </div>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--infect);margin-bottom:6px">골수염 평가</div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.8">
+        <li>멸균 금속 탐침으로 <strong>probe-to-bone 검사</strong> 시행</li>
+        <li>피부보다 깊은 궤양·조직 내 가스·이물질 존재 시 단순방사선촬영</li>
+        <li>probe-to-bone 양성 + 방사선 이상 소견 병합 시 골수염 가능성 높음; 높은 ESR·CRP·프로칼시토닌이 추가 뒷받침</li>
+        <li>애매한 경우 <strong>MRI</strong> 시행(불가 시 방사성핵종/PET 스캔 고려)</li>
+        <li>임상적 감염 창상에서는 <strong>배양용 조직검체(소파술/생검)</strong> 채취 — 면봉 사용 지양, 골수염 의심 시 골생검 고려</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 허혈 평가 — WIfI 및 관류 기준치</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>지표</th><th>정상/PAD 배제 기준</th></tr>
+        <tr><td>도플러 파형</td><td>3상(triphasic) 또는 2상(biphasic)이면 PAD 가능성 낮음</td></tr>
+        <tr><td>ABI</td><td>0.9–1.3</td></tr>
+        <tr><td>TBI</td><td>≥0.70</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>관류 결핍 정도는 치유·절단 가능성 예측에 도움이 되나, <strong>창상 깊이·감염 중증도를 함께 고려하는 WIfI 점수체계</strong>가 더 나은 위험 예측을 제공. 선별적으로 경피산소분압(TcpO2) 측정도 유용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔎</span> 원인 파악 및 환자 관련 인자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>비정상 보행패턴, 변형, 골융기 등 궤양 유발 요인을 항상 파악(앙와위·기립위 모두 검진)</li>
+        <li>맞지 않는 신발·맨발보행은 순수 허혈성 궤양 환자에서도 흔한 유발요인 — 신발과 착용습관을 반드시 검토</li>
+        <li>환자 관련 인자: 신기능/말기신질환, 부종, 영양불량, 혈당조절 불량, 우울/심리사회적 문제, 노쇠(frailty) — 치유에 영향</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /assess -->
+
+
+<!-- ══════════════════ TAB 4: 궤양 치료 ══════════════════ -->
+<div id="tab-treat" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> ① 감염 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div style="background:#fce8eb;border:1.5px solid var(--pad);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#7a1425;margin-bottom:8px">🚨 심부/광범위(사지위협) 감염 — 중등증·중증</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>괴사조직(감염된 뼈 포함) 제거·구획압 감압·농양 배농을 위한 <strong>즉시 수술적 개입</strong> 필요성 긴급 평가</li>
+            <li>PAD 동반 시 감염 조절 후 <strong>혈행재건</strong> 고려</li>
+            <li><span class="drug drug-abx">경험적 광범위 비경구 항생제</span>(그람양성·음성·혐기균 포괄) 시작</li>
+            <li>임상반응·배양결과에 따라 항생제 조정(가능하면 범위 축소)</li>
+            <li>연부조직감염 항생제 <strong>1–2주</strong>면 충분한 경우 많음(서서히 호전되거나 중증 PAD 동반 시 연장)</li>
+            <li>절개·배농이 불필요한 경우 골수염을 <strong>항생제만으로 보존적 치료</strong> 고려 가능</li>
+          </ul>
+        </div>
+        <div style="background:#fff8e1;border:1.5px solid var(--infect);border-radius:8px;padding:12px">
+          <div style="font-weight:700;font-size: calc(13px * var(--fscale, 1));color:#7d4e00;margin-bottom:8px">🟡 표재성/경증 감염</div>
+          <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+            <li>세정, 괴사조직 및 주변 굳은살 <strong>완전 변연절제</strong></li>
+            <li><span class="drug drug-abx">경험적 경구 항생제</span> — Staphylococcus aureus, β-용혈성 연쇄구균 표적(다른 원인균 의심 시 조정)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> ② 조직관류 회복 (혈행재건)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>발목압 &lt;50mmHg 또는 ABI &lt;0.4 → <strong>긴급 혈관영상(하슬와/족부동맥 상세 확인) 및 혈행재건</strong> 고려</li>
+        <li>발가락압 &lt;30mmHg 또는 TcpO2 &lt;25mmHg에서도 긴급 혈행재건 평가 고려 (조직손실·감염이 광범위하면 더 높은 압력에서도 고려 — WIfI 점수 참조)</li>
+        <li>최적 치료에도 <strong>4–6주 내 치유 징후가 없으면</strong> 혈관검사 결과와 무관하게 혈관조영술·혈행재건 고려</li>
+        <li>발목 상부(major) 절단을 고려 중이라면 <strong>먼저 혈행재건 옵션</strong>을 검토</li>
+        <li>목표: 최소 1개 이상, 가급적 <strong>창상 부위를 공급하는 동맥</strong>에 연속혈류 재개통 — 성공확률 대비 위험이 불리한 경우는 회피</li>
+        <li>술식 선택은 개인별 인자(PAD 분포, 자가정맥 유무, 동반질환) + 시술자 숙련도 기준</li>
+        <li>시술 후 <strong>객관적 관류 측정으로 효과 평가</strong></li>
+        <li>관류 개선 약물치료는 효과가 입증되지 않음</li>
+        <li>PAD 동반 당뇨병 환자의 심혈관위험 감소 노력 병행: <strong>금연, 혈압/이상지질혈증 조절, 항혈소판제, SGLT2억제제 또는 GLP1작용제</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦿</span> ③ 압력분산(오프로딩) 및 궤양 보호</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tbl">
+        <tr><th>상황</th><th>1차 선택</th></tr>
+        <tr><td>신경병증성 족저궤양</td><td><span class="drug drug-device">비탈착형 무릎높이 오프로딩 장치</span> — 총접촉깁스(TCC) 또는 탈착불가하게 처리한 워커</td></tr>
+        <tr><td>비탈착형 장치 금기/불내약</td><td>탈착형 무릎높이/발목높이 오프로딩 장치 (순응도 교육 필수)</td></tr>
+        <tr><td>다른 오프로딩 수단 불가</td><td>펠트폼 + 적절한 신발 병용</td></tr>
+        <tr><td>2–5번째 발가락, 유연성 변형 동반</td><td>금기 없다면 굴곡건 건절개술</td></tr>
+        <tr><td>비족저부 궤양</td><td>탈착형 장치, 신발 개조, 발가락분리대, 보조기, 건절개술 (부위·유형에 따라)</td></tr>
+        <tr><td>비수술적 치료로 치유 실패 시(중족골두 궤양)</td><td>아킬레스건 연장술, 중족골두 절제술, 중족골 절골술 + 오프로딩 병용</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>감염 또는 허혈 동반 시에도 오프로딩은 여전히 중요하나 <strong>더 신중하게 접근</strong>해야 함(원문 오프로딩 가이드라인 참조).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩹</span> ④ 국소 창상관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>훈련된 의료진의 <strong>정기적 궤양 검사</strong> — 중증도·감염·삼출량에 따라 빈도 결정</li>
+        <li>날카로운 수술기구를 이용한 변연절제 및 주변 굳은살 제거, 필요 시 반복</li>
+        <li>과도한 삼출 조절 및 습윤환경 유지에 적합한 드레싱 선택</li>
+        <li>발은 씻되 <strong>불리지 않도록</strong>(피부연화 방지)</li>
+        <li>수술 후 창상 치유 촉진에 <strong>음압창상치료</strong> 고려</li>
+      </ul>
+      <div class="sec-sep"></div>
+      <div style="font-weight:600;font-size: calc(12px * var(--fscale, 1));color:var(--heal);margin-bottom:6px">4–6주 최적치료에도 미치유 시 고려 가능한 보조요법 (비감염 궤양)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+        <span class="drug drug-adjunct">수크로스옥타설페이트 함침 드레싱</span>
+        <span class="drug drug-adjunct">자가백혈구·혈소판·피브린 다층 패치</span>
+        <span class="drug drug-adjunct">태반막 동종이식</span>
+        <span class="drug drug-adjunct">국소 산소치료</span>
+        <span class="drug drug-adjunct">전신 고압산소치료(허혈성 궤양)</span>
+      </div>
+      <div class="alert alert-danger" style="margin-top:4px">
+        <span>🚫</span>
+        <div><strong>일상적 사용이 권장되지 않는 치료</strong>: 생물학적 활성 제품(콜라겐·성장인자·생체공학조직, 신경병증성 궤양), 국소 소독제 및 항균 드레싱/도포제.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👤</span> ⑤ 환자중심 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>혈당조절 최적화(필요 시 인슐린)</li>
+        <li>부종·영양불량 치료</li>
+        <li>심혈관 위험요인 치료</li>
+        <li>우울증 등 심리사회적 문제 치료</li>
+        <li>환자와 돌봄제공자에게 치료 정보 제공 및 자가관리·감염 악화 징후(발열, 창상 변화, 혈당악화) 인지 교육, 반대쪽/비침범 부위 궤양 예방 교육 병행</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /treat -->
+
+
+<!-- ══════════════════ TAB 5: 샤르코 ══════════════════ -->
+<div id="tab-charcot" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 활동성 샤르코 신경병증성 관절병증(CNO) 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-charcot">
+        <span>🦴</span>
+        <div>당뇨병 환자에서 <strong>발적·발열감·부종을 보이는 발</strong>은 항상 활동성 CNO를 의심해야 함.<br>
+        CNO = 신경병증 환자에서 발생하는 <strong>무균성 염증과정</strong>으로 뼈·관절·연부조직 손상 유발. 적절히 치료하지 않으면 <strong>진행성 골절·탈구 → 발 변형</strong>으로 이어짐.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>영상검사 단계</th><th>소견</th></tr>
+        <tr><td>1차: 단순방사선(X-ray)</td><td>이상소견 없으면 다음 단계로</td></tr>
+        <tr><td>2차: MRI</td><td>1차 정상이나 임상적으로 의심될 때 시행</td></tr>
+        <tr><td>3차: CT 또는 방사성핵종 스캔</td><td>MRI 불가 시</td></tr>
+        <tr><td>고급영상 모두 불가</td><td><strong>추정 활동성 CNO로 간주하여 치료</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦿</span> 치료 — 오프로딩 및 고정</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-r0"><div class="st-num" style="font-size:13px;color:var(--charcot)">1순위</div><div class="st-lbl">비탈착형<br>무릎높이 TCC</div></div>
+        <div class="stage-box st-r1"><div class="st-num" style="font-size:13px;color:var(--charcot)">2순위</div><div class="st-lbl">무릎높이 워커<br>(탈착불가 처리)</div></div>
+        <div class="stage-box st-r2"><div class="st-num" style="font-size:13px;color:var(--charcot)">3순위</div><div class="st-lbl">탈착형 무릎높이<br>상시착용(효과 낮음)</div></div>
+      </div>
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div><strong>발목 이하(below-the-ankle) 오프로딩 장치는 권장되지 않음.</strong> 목발 등 보조기구로 환측 체중부하 경감 가능. 진단이 의심되는 즉시 치료 시작 → 골절 유합을 동반한 <strong>임상적 관해</strong>까지 지속(수개월 소요 가능).</div>
+      </div>
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9;margin-top:6px">
+        <li>염증의 임상징후가 있는 한 오프로딩 지속 — 장기치료는 궤양·근위축·반대쪽 다리 과부하 등 합병증 위험 동반, <strong>면밀한 추적관찰 필요</strong></li>
+        <li>현재 질병기간을 단축하거나 변형을 예방하는 <strong>약물치료는 없음</strong> — 사용 권장하지 않음</li>
+        <li>비타민D 결핍 위험군에는 현지 가이드라인에 따라 비타민D·칼슘 보충</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌡️</span> 질병활동성 모니터링 및 관해 판정</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>표준화된 프로토콜에 따른 <strong>양측 적외선 피부온도측정</strong>이 간편하고 객관적인 활동성 모니터링법</li>
+        <li>편측성 질환에서는 매 방문 시 좌우 온도차 계산</li>
+        <li>관해 정의를 위한 <strong>절대적 온도 컷오프는 없음</strong> — 온도·부종·영상소견을 종합하여 판단</li>
+        <li>임상적 염증징후가 없고 단순방사선상 골절 유합이 확인되면 무릎높이 깁스 중단 가능</li>
+        <li>관해 후에도 <strong>맞춤형 신발/보조기</strong>로 발·발목 모양을 지지 — 재활성화 예방 및 족저압 분산 최적화</li>
+        <li>변형/관절불안정 동반 시 무릎아래 맞춤형 장치로 추가 보호 고려</li>
+        <li>관해 후 보행·부하는 재활성화 위험을 고려해 <strong>점진적으로 증가</strong>, 재발 징후 시 즉시 팀에 연락</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /charcot -->
+
+
+<!-- ══════════════════ TAB 6: 진료체계 ══════════════════ -->
+<div id="tab-care" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 발관리 진료체계의 3단계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-heal">
+        <span>🤝</span>
+        <div>성공적인 예방·치료는 <strong>잘 조직된 다학제 팀</strong>에 좌우됨 — 궤양을 다장기질환의 신호로 보는 통합적(holistic) 접근이 핵심.</div>
+      </div>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>레벨</th><th>구성 전문인력</th></tr>
+        <tr><td><span class="stage t-neuro">Level 1</span></td><td>일반의, 족부치료사(podiatrist), 당뇨병 전문간호사</td></tr>
+        <tr><td><span class="stage t-infect">Level 2</span></td><td>당뇨병 전문의, 외과의(일반/정형외과/족부), 혈관전문의(혈관내·개방 혈행재건), 감염내과/임상미생물전문의, 족부치료사, 당뇨병 전문간호사 + 보조기기 전문가(pedorthist/orthotist/prosthetist) 협진</td></tr>
+        <tr><td><span class="stage t-pad">Level 3</span></td><td>Level 2 발센터 + 당뇨발질환에 특화된 다수 전문가가 협업하는 <strong>3차 의뢰센터</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> 조직화된 발관리가 갖춰야 할 요소</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>환자·돌봄제공자, 병원 의료진, 1차 의료진 대상 교육</li>
+        <li>모든 당뇨병 환자의 <strong>연간 발 검진</strong>을 포함한 고위험군 발견 체계</li>
+        <li>족부치료·적절한 신발/깔창 제공 등 위험 감소 수단 접근성</li>
+        <li>궤양·감염에 대한 신속하고 효과적인 치료 접근성</li>
+        <li>혈관내·수술적 우회 혈행재건 시술에 대한 신속한 접근 또는 전문성</li>
+        <li>오프로딩 수단 접근성</li>
+        <li>최소한 정기적 검사·변연절제·비유착성 드레싱, 필요 시 삼출조절 드레싱을 포함한 창상관리 접근성</li>
+        <li>서비스의 전 영역에 대한 감사(audit)로 문제 발견 및 표준 충족 확인</li>
+        <li>급성 대응이 아닌 <strong>만성질환 관리에 맞춘 전체 구조</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌍</span> 맺음말</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div>전 세계 연구들은 <strong>다학제 발관리팀 구성 및 본 원칙에 따른 예방·관리</strong>가 하지절단 빈도 감소와 연관됨을 일관되게 보여줌. 처음부터 완전한 팀을 구성하기 어렵다면 <strong>단계적으로</strong> 각 전문분야를 도입할 것을 권고. 팀은 상호존중 하에 1·2차 의료현장 모두에서 활동하며, 언제든 상담·평가 가능한 인력을 최소 1명 확보해야 함.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /care -->
+
+
+<!-- ══════════════════ TAB 7: 검사법·교육 ══════════════════ -->
+<div id="tab-exam" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖊️</span> 감각검사 — 10g 모노필라멘트</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>먼저 환자 손(또는 팔꿈치·이마)에 적용하여 감각을 시연</li>
+        <li>양발에서 <strong>3개 부위</strong>를 검사, 환자가 적용 여부/위치를 볼 수 없도록 함</li>
+        <li>피부에 수직으로, 필라멘트가 <strong>휘어질 정도의 힘</strong>으로 적용</li>
+        <li>접촉~제거까지 총 <strong>약 2초</strong></li>
+        <li>궤양·굳은살·흉터·괴사조직에는 직접 적용하지 않음, 미끄러뜨리거나 반복접촉 금지</li>
+        <li>부위당 <strong>실제 적용 2회 + 가짜(mock) 적용 최소 1회</strong>(총 3회 질문)</li>
+        <li>판정: <strong>3회 중 2회 정답 = 감각 있음</strong> / 2회 오답 = 감각 소실</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>필라멘트는 같은 날 10–15명 검사 후 24시간 휴지, 70–90명 사용 후 교체 권장(제품별 상이).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎵</span> 감각검사 — 128Hz 음차 / Light Touch(Ipswich)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>🎵 128Hz 음차</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">엄지발가락 원위지골 배측 골성 부위에 수직으로 일정한 압력으로 적용(엄지 없으면 다른 발가락). 실제 2회 + 가짜(진동없음) 1회 이상 교대 적용. 3회 중 2회 정답=양성(정상), 2회 오답=음성(소실). 발가락에서 느끼지 못하면 더 근위부(복사뼈·경골조면)에서 재시행.</div>
+        </div>
+        <div class="acc">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>👆 Light Touch(Ipswich) 검사</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">모노필라멘트·음차가 없을 때 사용하는 간이검사. 환자 눈을 감게 하고 검사자 검지 끝으로 <strong>양발 1·3·5번째 발가락 끝</strong>을 1–2초간 가볍게 터치(누르거나 두드리지 않음). <strong>2군데 이상</strong>에서 느끼지 못하면 LOPS 가능성. 궤양 예측 정확도는 아직 확립되지 않음.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> ABI 측정 프로토콜</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>측정 전 <strong>2시간 금주·금연·카페인 금지</strong>, 앙와위 10분 안정 후 측정, 조용하고 쾌적한 실온(22–24℃)</li>
+        <li>상완압: 커프를 상완에 감고 상완동맥에 젤 도포 → 신호 소실점보다 30mmHg 높게 가압 후 초당 2–3mmHg로 서서히 감압, 신호 재출현 시점=수축기압. 양팔 모두 측정</li>
+        <li>발목압: 복사뼈 2cm 위 커프 → 후경골동맥·족배동맥 각각에서 도플러 각도 40–60°로 최적 신호 탐색 → 동일 방법으로 압력 측정</li>
+        <li><strong>단상(monophasic)/신호 소실 = PAD 시사</strong> (정상은 2–3상 파형)</li>
+      </ul>
+      <table class="tbl" style="margin-top:8px">
+        <tr><th>지표</th><th>계산법</th><th>이상소견</th></tr>
+        <tr><td>ABI</td><td>해당 발의 족배/후경골동맥압 중 <strong>낮은 값</strong> ÷ 좌우 상완압 중 <strong>높은 값</strong></td><td>&gt;1.3 또는 &lt;0.9</td></tr>
+        <tr><td>TBI (광용적맥파, PPG)</td><td>발가락압 ÷ 좌우 상완압 중 높은 값</td><td>&lt;0.70</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>당뇨병 환자는 슬와 이하 동맥질환이 흔해 <strong>한쪽 경골동맥만 침범</strong>될 수 있음 — 전통적으로는 더 높은 값을 사용했으나(최선의 시나리오), <strong>더 낮은 값 사용이 진단에 권장</strong>됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 위험군(Risk 1+) 환자교육 체크리스트</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="font-size: calc(12px * var(--fscale, 1));padding-left:16px;line-height:1.9">
+        <li>환자가 스스로 발 검사를 할 수 있는지 확인 — 불가하면 도와줄 사람과 상의(시력장애·신체적 불능 시 불가)</li>
+        <li>매일 <strong>양발 전체 표면(발가락 사이 포함)</strong> 검사의 필요성 설명</li>
+        <li>발 온도 상승 감지, 수포·상처·궤양 발생 시 담당 의료진에게 알리는 방법 숙지</li>
+        <li>맨발·양말만·얇은 슬리퍼로 실내외 보행 금지</li>
+        <li>너무 조이거나 가장자리가 거칠거나 이음새가 튀어나온 신발 착용 금지</li>
+        <li>신발을 신기 전 <strong>육안 확인 + 손으로 내부 확인</strong></li>
+        <li>이음새 없는(또는 뒤집어 신는) 양말, 조이거나 무릎까지 오는 양말 금지, 매일 교체</li>
+        <li>37℃ 이하 물로 매일 세척, 특히 발가락 사이를 꼼꼼히 건조</li>
+        <li>히터·온수주머니로 발을 데우지 않음</li>
+        <li>티눈·굳은살 제거에 화학제제·파스 사용 금지 — 전문가에게 의뢰</li>
+        <li>보습제는 사용하되 발가락 사이는 제외</li>
+        <li><strong>발톱은 일자로</strong> 자르기</li>
+        <li>정기적으로 의료진에게 발 검진 받기</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /exam -->
+
+</div><!-- /main -->
+
+<!-- ════ 약어 데이터 ════ -->
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"IWGDF", def:"International Working Group on the Diabetic Foot — 국제당뇨발연구회" },
+  { term:"LOPS",  def:"Loss Of Protective Sensation — 보호감각 소실" },
+  { term:"PAD",   def:"Peripheral Artery Disease — 말초동맥질환" },
+  { term:"CNO",   def:"Charcot Neuro-Osteoarthropathy — 샤르코 신경병증성 관절병증" },
+  { term:"SINBAD",def:"Site, Ischemia, Neuropathy, Bacterial infection, Area, Depth — 궤양 분류체계" },
+  { term:"WIfI",  def:"Wound, Ischemia, foot Infection — 허혈/감염 통합 중증도 점수체계" },
+  { term:"IDSA",  def:"Infectious Diseases Society of America — 미국감염학회" },
+  { term:"ABI",   def:"Ankle-Brachial Index — 발목상완지수" },
+  { term:"TBI",   def:"Toe-Brachial Index — 발가락상완지수" },
+  { term:"TcpO2", def:"Transcutaneous pressure of Oxygen — 경피산소분압" },
+  { term:"PPG",   def:"Photoplethysmography — 광용적맥파 (발가락압 측정에 사용)" },
+  { term:"TCC",   def:"Total Contact Cast — 총접촉깁스 (오프로딩 1차 선택)" },
+  { term:"CRP",   def:"C-Reactive Protein — C반응단백" },
+  { term:"ESR",   def:"Erythrocyte Sedimentation Rate — 적혈구침강속도" },
+  { term:"MRI",   def:"Magnetic Resonance Imaging — 자기공명영상, 골수염/CNO 확진에 사용" },
+  { term:"GRADE", def:"Grading of Recommendations Assessment, Development and Evaluation — 가이드라인 근거등급 평가체계" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
