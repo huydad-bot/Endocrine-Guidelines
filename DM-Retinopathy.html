@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>당뇨망막병증(DR) AAO PPP 2024 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --screen: #0f6e5c;   /* 선별·진단 — 청록 */
+    --vegf: #0550ae;     /* 항VEGF — 청 */
+    --laser: #9b1c2e;    /* 레이저/PRP — 진홍 */
+    --steroid: #7c3aed;  /* 스테로이드·수술 — 보라 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--screen); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--vegf); color:#fff; padding:3px 6px; }
+  .logo-dr span:nth-child(3) { background: var(--laser); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 17px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--screen); border-bottom-color: var(--screen); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-screen  { background: #e0f4f1; border-left: 3px solid var(--screen);  color: #0f5549; }
+  .alert-vegf    { background: #ddf4ff; border-left: 3px solid var(--vegf); color: #0550ae; }
+  .alert-laser   { background: #fce8eb; border-left: 3px solid var(--laser);  color: var(--laser); }
+  .alert-steroid { background: #ede9fe; border-left: 3px solid var(--steroid); color: #5b21b6; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-screen { background: #e0f4f1; color: var(--screen); border: 1px solid var(--screen); }
+  .t-vegf   { background: #ddf4ff; color: var(--vegf); border: 1px solid var(--vegf); }
+  .t-laser  { background: #fce8eb; color: var(--laser); border: 1px solid var(--laser); }
+  .t-pref   { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref{ background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-annual  { background: #fff3cd; color: #7d4e00; }
+  .drug-mo      { background: #fce8eb; color: var(--laser); }
+  .drug-q8w     { background: #ddf4ff; color: #0550ae; }
+  .drug-ext     { background: #dafbe1; color: #116329; }
+  .drug-steroid { background: #ede9fe; color: #5b21b6; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(14px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-screen { background: #e0f4f1; }
+  .st-vegf   { background: #e6f0fb; }
+  .st-laser  { background: #fde8eb; }
+  .st-steroid{ background: #ede9fe; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-screen { background: #e0f4f1; border: 1.5px solid var(--screen); color: #0f5549; }
+  .gear-vegf   { background: #e6f0fb; border: 1.5px solid var(--vegf); color: #0550ae; }
+  .gear-laser  { background: #fde8eb; border: 1.5px solid var(--laser); color: var(--laser); }
+  .gear-steroid{ background: #ede9fe; border: 1.5px solid var(--steroid); color: #5b21b6; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 190px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>D</span><span>R</span><span>P</span>
+      </div>
+      <h1>당뇨망막병증(DR) AAO Preferred Practice Pattern 2024</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">American Academy of Ophthalmology · Retina/Vitreous PPP Committee · 2024년 9월 승인 (5년 주기, 2029년 재평가)</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 AAO의 공식 승인을 받지 않은 개인 참고자료입니다 (This tool is not officially endorsed by AAO)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('screen')">📅 선별·진단</div>
+    <div class="tab" onclick="showTab('vegf')">💉 항VEGF</div>
+    <div class="tab" onclick="showTab('laser')">🔺 레이저·PRP</div>
+    <div class="tab" onclick="showTab('steroid')">💊 스테로이드·수술</div>
+    <div class="tab" onclick="showTab('special')">👥 특수상황</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--screen)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--screen)">28.5%</div><div class="stat-lbl">미국 40세 이상<br>당뇨환자 DR 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--vegf)">60%</div><div class="stat-lbl">권고된 연 1회<br>선별검사 시행률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--laser)">90%</div><div class="stat-lbl">적절한 치료 시<br>중증 시력손실 예방률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--steroid)">5년</div><div class="stat-lbl">본 PPP<br>재평가 주기(2029)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약 (Highlighted Findings)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-screen">
+        <span>✅</span>
+        <div>1형 당뇨는 <strong>발병 5년 후부터</strong>, 2형 당뇨는 <strong>진단 즉시</strong>부터 매년 산동 안저검사가 필요함. 대변·혈액검사와 달리 안저검사는 <strong>무증상 시기에도 필수</strong> — 시력이 좋아도 진행성 병변이 있을 수 있음.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-screen">
+          <div class="gear-title">📸 선별·진단</div>
+          산동 안저검사, OCT, (필요시) FA/OCTA<br>
+          <small>비산동 눈은 50%만 정확 분류 — 산동검사 권장</small>
+        </div>
+        <div class="gear-box gear-vegf">
+          <div class="gear-title">💉 항VEGF (1차 치료)</div>
+          아플리버셉트·베바시주맙·라니비주맙·파리시맙<br>
+          <small>CI-DME 1차 치료로 국소레이저 대체</small>
+        </div>
+        <div class="gear-box gear-laser">
+          <div class="gear-title">🔺 PRP (범망막광응고)</div>
+          고위험 PDR의 핵심 치료<br>
+          <small>항VEGF와 비열등, 시야손실 부작용 있음</small>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>세마글루타이드 등 <strong>GLP-1 제제로 급격한 혈당강하 시 DR이 일시적으로 악화</strong>될 수 있음(SUSTAIN 6 결과) — 급속한 혈당조절 시작 시 안과 모니터링 강화 필요.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>유리체강내 주사의 가장 심각한 합병증은 <strong>감염성 안내염</strong> — 시행 시 반드시 <strong>포비돈요오드 점안</strong> 사용(미사용 시 안내염 위험 상승 보고). 예방적 항생제 점안은 권장되지 않음(내성만 증가, 감염 예방효과 없음).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> DR 중증도 척도 한눈에 보기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-screen" onclick="showTab('screen')">
+          <div class="st-num" style="color:var(--screen)">경도~중등도 NPDR</div>
+          <div class="st-lbl" style="color:#0f5549"><strong>미세동맥류만 / 일부 출혈</strong><br>연 1회~6-12개월 추적</div>
+        </div>
+        <div class="stage-box st-vegf" onclick="showTab('laser')">
+          <div class="st-num" style="color:var(--vegf)">중증 NPDR</div>
+          <div class="st-lbl" style="color:#0550ae"><strong>4-2-1 규칙 충족</strong><br>2-4개월 추적, PRP 고려</div>
+        </div>
+        <div class="stage-box st-laser" onclick="showTab('laser')">
+          <div class="st-num" style="color:var(--laser)">PDR (증식성)</div>
+          <div class="st-lbl" style="color:var(--laser)"><strong>신생혈관·유리체출혈</strong><br>고위험시 PRP 신속 시행</div>
+        </div>
+        <div class="stage-box st-steroid" onclick="showTab('vegf')">
+          <div class="st-num" style="color:var(--steroid)">DME (황반부종)</div>
+          <div class="st-lbl" style="color:#5b21b6"><strong>CI-DME vs NCI-DME</strong><br>모든 단계에서 동반 가능</div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap" style="margin-top:10px">
+        <table class="tbl">
+          <tr><th>중증도</th><th>소견(미국 기준)</th></tr>
+          <tr><td>망막병증 없음</td><td>이상소견 없음</td></tr>
+          <tr><td>경도 NPDR</td><td>미세동맥류만 존재</td></tr>
+          <tr><td>중등도 NPDR</td><td>미세동맥류 이상이나 중증 NPDR 미만</td></tr>
+          <tr><td class="freq-high">중증 NPDR (4-2-1 규칙)</td><td>① 4분면 모두에 심한 망막출혈·미세동맥류 <strong>또는</strong> ② 2분면 이상 정맥주름 <strong>또는</strong> ③ 1분면 이상 중등도 IRMA — 증식망막병증 소견은 없음</td></tr>
+          <tr><td class="freq-vhigh">PDR (증식성)</td><td>신생혈관 <strong>또는</strong> 유리체/망막앞출혈</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>중증 NPDR 특징 중 <strong>2개 이상</strong> 해당 시 "매우 중증(very severe) NPDR"로 분류 — 1년 내 고위험 PDR 진행 위험 약 50%.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 역학 — 유병률·위험요인 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>미국 40세 이상 당뇨환자 DR 유병률 <strong>28.5%(약 420만명)</strong>, 시력위협 DR(VTDR) <strong>4.4%(약 70만명)</strong>; 전세계 DR 유병률 34.6%, VTDR 10.2%</li>
+        <li>당뇨 유병기간이 핵심 위험요인 — 1형 당뇨 <strong>5년 후 약 25%, 10년 후 약 60%, 15년 후 약 80%</strong>에서 망막병증 발생</li>
+        <li><strong>혈당·혈압 조절이 가장 중요한 조절 가능 위험요인</strong> — HbA1c 7% 이하가 대부분 환자의 목표(선택된 환자는 6.5%까지)</li>
+        <li>피노피브레이트는 조기 망막병증 환자에서 진행/치료필요 위험을 <strong>27% 감소</strong>시킴(1형·2형 동등 효과)</li>
+        <li>대사증후군 동반 시 망막병증·알부민뇨·관상동맥질환 비율 유의하게 상승</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 선별·진단 ══════════════════ -->
+<div id="tab-screen" class="panel">
+
+  <div class="alert alert-screen">
+    <span>📅</span>
+    <div><strong>산동 안저검사</strong>가 표준이며, 검증된 디지털 영상(자동 AI 판독 포함)도 효과적인 대안. DR은 수년간 무증상일 수 있어 정기 선별검사 교육이 필수.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗓️</span> 권장 안과검사 일정 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>당뇨 유형</th><th>초회 검사</th><th>추적검사</th></tr>
+          <tr><td><span class="stage t-screen">1형</span></td><td>진단 5년 후</td><td class="freq-vhigh">매년</td></tr>
+          <tr><td><span class="stage t-screen">2형</span></td><td>진단 시점</td><td class="freq-vhigh">매년</td></tr>
+          <tr><td><span class="stage t-notpref">임신(1형·2형)</span></td><td>임신 초기(1trimester)</td><td>무/경증-중등도 NPDR: 3-12개월<br>중증 NPDR 이상: 1-3개월</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>사춘기 환자는 진행 가속 위험(비사춘기 대비 상대위험 4.8배) → <strong>더 자주 추적 필요</strong>. <strong>임신성 당뇨</strong>는 임신 중 안과검사 불필요 — DR 위험 증가와 무관.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>2019년 자료: 당뇨 진단자의 <strong>11.8%가 심한 시력장애·실명</strong> 보고. 2021년 자료 기준 DR 유병률 26.43%, VTDR 5.06%로 추정 — 선별검사 격차가 지속 중.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 초기 병력·검진 항목</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>병력 청취 항목</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>당뇨 유병기간, 과거 혈당조절(HbA1c) 이력</li>
+              <li>복용 약물 (특히 GLP-1 제제·SGLT-2 억제제)</li>
+              <li>병력: 비만, 신질환, 전신고혈압, 혈중지질, 임신, 신경병증</li>
+              <li>안과력: 외상, 다른 안질환, 안구주사·수술(레이저 포함) 이력</li>
+              <li>현재 시력저하 증상 및 진행속도</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>초기 검진 항목</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>시력, 세극등 생체현미경검사, 안압측정</li>
+              <li>산동 전 방수각경검사(홍채신생혈관 의심 시)</li>
+              <li>동공 반응, 입체 정밀 안저검사(후극부)</li>
+              <li>주변부 망막·유리체 검사(간접검안경 또는 세극등, 90D/78D 렌즈)</li>
+              <li>황반부종 평가(OCT 포함), NVD/NVE, 유리체·망막앞출혈, 고혈압성 망막소견 확인</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🖥️</span> 보조검사 — OCT·FA·OCTA 사용 지침</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div><strong>OCT</strong> — DME 진단·정량화·추적에 표준. CI-DME 여부, 항VEGF 치료 반응 판단에 핵심적. 망막두께는 시력과 항상 일치하지는 않음.</div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>상황</th><th>OCT</th><th>FA(형광안저혈관조영)</th></tr>
+          <tr><td>설명되지 않는 시력저하 평가</td><td class="freq-vhigh">주로 시행</td><td class="freq-high">주로 시행</td></tr>
+          <tr><td>DME 검출·정량·추적</td><td class="freq-vhigh">주로 시행</td><td class="freq-mod">가끔</td></tr>
+          <tr><td>CSME 레이저 치료 계획 수립</td><td>-</td><td class="freq-vhigh">주로 시행</td></tr>
+          <tr><td>임상적으로 불명확한 신생혈관 의심</td><td>-</td><td class="freq-vhigh">주로 시행</td></tr>
+          <tr><td>무/경미 DR 선별검사</td><td class="freq-low">권장 안됨</td><td class="freq-low">권장 안됨(전혀 시행 안함)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>FA는 침습적 시술로 <strong>사망 위험 약 1/200,000</strong>, 오심 3-15%, 두드러기 0.5% 보고 — 시행 전 응급대응 체계 필수. 태반 통과 및 모유 내 최대 72시간 검출되나 태아 유해성은 입증되지 않음.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>OCTA</strong>는 비침습적으로 모세혈관 수준 이상소견·황반허혈 정량화 가능하나 누출은 시각화 불가 — FA를 완전히 대체하지는 못함. 3개 FDA 승인 <strong>자동 AI 선별시스템</strong>(LumeneticsCore, EyeArt, AEYE-DS)이 1차의료기관에서 활용 중.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /screen -->
+
+<!-- ══════════════════ TAB 3: 항VEGF ══════════════════ -->
+<div id="tab-vegf" class="panel">
+
+  <div class="alert alert-vegf">
+    <span>💉</span>
+    <div>다수의 고품질 임상시험이 <strong>항VEGF 치료가 CI-DME에서 국소레이저 단독보다 효과적</strong>임을 입증 — 국소레이저를 대체하여 1차 치료로 자리잡음. PDR에서도 PRP의 대안으로 사용 가능.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⏸️</span> 치료 연기(Deferral) 기준 — CI-DME + 좋은 시력</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>ETDRS에서 CI-DME 눈의 약 <strong>40%가 20/20 이상</strong> 시력 보유. DRCR Protocol V 결과, 시력 20/25 이상인 CI-DME는 관찰·국소레이저·항VEGF 3개 전략 간 2년 시점 시력 차이 없음(모두 평균 20/20 도달).</div>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div>좋은 시력(20/25 이상) CI-DME는 <strong>시력이 20/30 이하로 저하될 때까지 치료 연기 가능</strong> — 2-4개월마다 추적. 단, 임신·신부전·심부전으로 인한 체액저류 등은 예외 — 이 경우 일시적 약물치료 후 재평가 고려.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 항VEGF 약제별 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>아플리버셉트 (EYLEA / EYLEA HD)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>2mg: VIVID/VISTA 시험 — 4·8주 간격 모두 레이저 대조군보다 우수한 시력개선</li>
+              <li>8mg(고용량): PHOTON 시험 — 12·16주 간격이 2mg 8주 간격과 비열등, 93%가 48주까지 12주 이상 간격 유지</li>
+              <li>바이오시밀러 4종 FDA 승인(2024): Yesafili, Opuviz, Ahzantive, Pavblu</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>베바시주맙 (Avastin, off-label)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>BOLT 시험 — 국소레이저 대비 2년 시점 시력 결과 유의하게 우수</li>
+              <li>Protocol T에서 20/50 이하 그룹은 아플리버셉트·라니비주맙보다 다소 열등</li>
+              <li>비용 대비 효과 우수 — 광범위 사용됨(off-label)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>라니비주맙 (Lucentis, Cimerli 바이오시밀러)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>RISE/RIDE 시험 — 매월 주사로 시력 신속·지속 개선</li>
+              <li>Protocol S — PDR에서 PRP 대비 비열등, 시야손실 적고 DME 발생 적음</li>
+              <li>2025년 2월 이식형 라니비주맙(Susvimo) DME 적응증 승인(항VEGF 2회 이상 반응자)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>파리시맙 (Vabysmo) — anti-VEGF/Ang-2 이중항체</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>YOSEMITE/RHINE 시험 — 최대 16주 간격까지 개인맞춤(PTI) 투여로 비열등 시력 개선</li>
+              <li>2년차 78%가 12주 이상, 60-65%가 16주 간격 유지 — 주사 부담 감소</li>
+              <li>안내염 제외 안내염증 발생률 1.3%(아플리버셉트군 0.6%) — 새로운 안전성 신호는 없음</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>브롤루시주맙 (Beovu)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>KESTREL/KITE 시험 — 아플리버셉트 대비 비열등, 12주 간격 유지율 50-55%</li>
+              <li>안구내 염증(망막혈관염 포함) 발생률 아플리버셉트보다 높음(3.7% vs 0.5%) — 폐쇄성 망막혈관염 보고 있어 주의 필요</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> Protocol T — 3제 비교 (2년 결과)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">20/50 이하 · 아플리버셉트</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:94%;background:var(--vegf)"><span class="pct-bar-val">+18.9자</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">20/50 이하 · 라니비주맙</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:71%;background:var(--text2)"><span class="pct-bar-val">+14.2자</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">20/50 이하 · 베바시주맙</div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:59%;background:var(--text2)"><span class="pct-bar-val">+11.8자</span></div></div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>기저시력 20/40 이상 그룹은 3제 간 유의한 차이 없음. 2년차에는 라니비주맙-아플리버셉트 간 차이 소실(아플리버셉트는 베바시주맙보다는 지속 우수). <strong>국소레이저 병용 비율</strong>: 아플리버셉트 41%, 베바시주맙 64%, 라니비주맙 52%.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🛡️</span> 전신 안전성 — ATE·사망률 논쟁</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>2021년 메타분석: 항VEGF가 주요 심혈관 사건을 증가시키지 않으나, <strong>DR 환자에서 사망률 증가</strong> 관찰됨</li>
+        <li>2023년 Cochrane 리뷰: 사망 위험 증가 근거 없음(단, 근거 확실성 낮아 임상적으로 유의한 증가 배제 불가)</li>
+        <li>DME 하위군에서 치료강도와 사망률 사이 경미한 연관성 보고(IRR 1.17)</li>
+        <li>RISE/RIDE 3년 결과: 0.5mg군 사망률 6.4%, 0.3mg군 4.4% — 인과관계는 배제할 수 없으나 진행성 당뇨 합병증에 전형적인 사망원인들이 포함됨</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /vegf -->
+
+<!-- ══════════════════ TAB 4: 레이저·PRP ══════════════════ -->
+<div id="tab-laser" class="panel">
+
+  <div class="alert alert-laser">
+    <span>🔺</span>
+    <div><strong>범망막광응고(PRP)</strong>는 중증 NPDR·PDR에서 중증 시력손실 위험을 감소시키는 근거가 확립된 치료. <strong>국소/격자레이저</strong>는 NCI-DME에서 여전히 권장되는 옵션(항VEGF 역할은 아직 연구되지 않음).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 고위험 PDR (High-risk PDR) 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>다음 4가지 중 <strong>3가지 이상</strong> 해당 시 고위험 PDR:</div>
+      <ul style="padding-left:18px;margin-top:6px;line-height:1.8">
+        <li>어느 위치든 신생혈관(NV) 존재</li>
+        <li>시신경유두 위/근처 신생혈관(NVD)</li>
+        <li>중등도 이상 신생혈관 — 유두 1디스크직경 이내 NV가 1/4~1/3디스크 면적 초과, 또는 다른 부위 NV가 1/2디스크 면적 이상</li>
+        <li>유리체 또는 망막앞출혈 동반</li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>고위험 PDR 또는 신생혈관녹내장 환자는 <strong>신속한 PRP + 항VEGF 치료</strong> 필요 — DRS 근거로 중증 시력손실 위험이 크게 감소함이 입증됨.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚔️</span> PRP vs 항VEGF (Protocol S, 5년 결과)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>지표</th><th>라니비주맙</th><th>PRP</th></tr>
+          <tr><td>2년 시력변화</td><td class="freq-vhigh">+2.8자</td><td>+0.2자</td></tr>
+          <tr><td>주변부 시야손실</td><td class="freq-vhigh">적음</td><td>많음(-422dB vs -23dB)</td></tr>
+          <tr><td>유리체절제술 시행률</td><td class="freq-vhigh">4%</td><td>15%</td></tr>
+          <tr><td>DME 발생률</td><td class="freq-vhigh">9%</td><td>28%</td></tr>
+          <tr><td>추적탈락 시 예후</td><td class="freq-high">PRP군보다 불량</td><td>상대적으로 양호</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>항VEGF 단독요법은 <strong>규칙적 추적이 가능한 환자에서만</strong> 신중히 고려 — PDR 환자의 22-25%가 4년 내 추적탈락 보고되며, 이 경우 신생혈관녹내장 등 심각한 합병증 위험 상승.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧭</span> 관리 권고 요약표 (Table 5 발췌)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>중증도 / DME</th><th>추적(개월)</th><th>PRP</th><th>국소/격자레이저</th><th>항VEGF</th></tr>
+          <tr><td>경도 NPDR, DME 없음</td><td>12</td><td>-</td><td>-</td><td>-</td></tr>
+          <tr><td>중증 NPDR, DME 없음</td><td>3-4</td><td class="freq-mod">가끔</td><td>-</td><td>-</td></tr>
+          <tr><td>중증 NPDR + CI-DME</td><td>1*</td><td class="freq-mod">가끔</td><td class="freq-mod">가끔</td><td class="freq-vhigh">주로</td></tr>
+          <tr><td>Non-high-risk PDR + CI-DME</td><td>1*</td><td class="freq-mod">가끔</td><td class="freq-mod">가끔</td><td class="freq-vhigh">주로</td></tr>
+          <tr><td class="freq-vhigh">고위험 PDR, DME 없음</td><td>2-4</td><td class="freq-vhigh">권고</td><td>-</td><td class="freq-mod">가끔</td></tr>
+          <tr><td class="freq-vhigh">고위험 PDR + CI-DME</td><td>1*</td><td class="freq-vhigh">권고</td><td class="freq-mod">가끔</td><td class="freq-vhigh">주로</td></tr>
+        </table>
+      </div>
+      <div style="margin-top:6px"><small>* 유리체강내 항VEGF 주사 후 1개월 이내 재검사 가능. 전체 표는 원문 Table 5 참조.</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> PRP 시술 기법·부작용</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div>ETDRS 프로토콜: <strong>1200-1600 spot</strong>, 0.1초 중등도 화상, 반화상폭 간격, 중심와에서 2디스크직경 이상 떨어진 곳부터 적도부까지. <strong>부분 PRP는 권장되지 않음</strong>(완전 PRP 시행 필요).</div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>치료</th><th>주요 부작용</th></tr>
+          <tr><td><span class="stage t-laser">PRP</span></td><td>일시적 중심시력저하, 주변시야 협착·야간암순응 지연, 유리체출혈(신생혈관 존재시), 조절력 저하, 산동, 백내장 진행 가속</td></tr>
+          <tr><td><span class="stage t-laser">국소레이저</span></td><td>중심암점(중심와 근접 화상시), 레이저반흔 확대(수년에 걸쳐), 맥락막신생혈관·망막하섬유화(드묾)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>PDR과 <strong>동반 CI-DME</strong>가 있는 경우, PRP로 인한 황반부종 악화를 막기 위해 <strong>PRP 이전 또는 동시에</strong> 국소레이저·항VEGF 치료를 시행. 단, 고위험 특징(광범위 NVD, 최근 유리체출혈)이 있으면 PRP를 지연해서는 안 됨.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /laser -->
+
+<!-- ══════════════════ TAB 5: 스테로이드·수술 ══════════════════ -->
+<div id="tab-steroid" class="panel">
+
+  <div class="alert alert-steroid">
+    <span>💊</span>
+    <div>유리체강내 스테로이드는 백내장·안압상승 위험으로 <strong>주로 2차 치료제(항VEGF 반응 불충분 시)</strong>로 사용 — 특히 위수정체안에서 유용.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 스테로이드 임플란트 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>덱사메타손 임플란트 (Ozurdex, 0.7mg)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>MEAD 3상 — 3년간 위수정체안 백내장 관련 부작용 67.9%(대조군 20.4%)</li>
+              <li>약 1/3에서 치료 필요한 안압상승 발생</li>
+              <li>REINFORCE 연구: 36%에서 15자 이상 시력개선, 평균 치료간격 5개월</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>플루오시놀론 아세토니드 임플란트 (Iluvien, 0.19mg)</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>기존 스테로이드 치료 이력 있고 안압상승 없었던 환자에만 승인</li>
+              <li>FAME 3상 — 3년 백내장적출률 80.0%(위약 27.3%), 절개녹내장수술 4.8%(위약 0.5%)</li>
+              <li>PALADIN 연구(4상) — 36개월째 CST -60.7μm, 시력 +3.6자; 안압 &gt;30mmHg 발생률 10.9%</li>
+              <li>레이저·항VEGF·스테로이드 재치료 필요성을 각각 55%, 36%, 78% 감소</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>임플란트의 <strong>전방 이동(migration)</strong>은 주로 무수정체안·후낭 개방 위수정체안에서 발생 — 각막내피 손상 위험으로 <strong>응급 제거 또는 재위치</strong> 필요할 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 유리체절제술 (Vitrectomy)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div><strong>전형적 적응증</strong></div>
+      <ul style="padding-left:18px;margin-top:4px;line-height:1.8">
+        <li>지속되는 유리체출혈(자연흡수 없음)</li>
+        <li>황반을 침범/위협하는 견인망막박리</li>
+        <li>열공성+견인성 복합 망막박리</li>
+        <li>치밀한 황반전 유리체하출혈</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>DRVS: 유리체출혈 발생 <strong>1-6개월 내 조기 유리체절제술이 1년 후 시행보다 예후 우수</strong> — 특히 1형 당뇨에서 유의(2형에서는 유의한 차이 없음). Protocol AB: 유리체출혈에서 아플리버셉트 단독요법과 유리체절제술+PRP는 24주 시력 결과 동등하나, <strong>수술군에서 출혈 제거가 더 빠름</strong>(4주 vs 36주).</div>
+      </div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>합병증</th><th>내용</th></tr>
+          <tr><td>안구 관련</td><td>유리체출혈, 망막열공/박리, 감염성 안내염, 백내장, 낭 파열</td></tr>
+          <tr><td>시력 관련</td><td>시력저하 가능(문헌마다 다양)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>➕</span> 병용요법 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>Cochrane 리뷰: 스테로이드+항VEGF 병용은 <strong>항VEGF 단독 대비 추가이득 없음</strong>(근거 확실성은 낮음)</li>
+        <li>수술 전 항VEGF 전처치는 <strong>수술시간·망막열공 수·수술 중 출혈량 감소</strong>에 유리(메타분석, 근거수준 I+)</li>
+        <li>Cochrane 리뷰: 수술 전후 베바시주맙이 <strong>수술 후 유리체출혈 발생률 감소</strong>시킬 가능성(근거수준 I+)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /steroid -->
+
+<!-- ══════════════════ TAB 6: 특수상황 ══════════════════ -->
+<div id="tab-special" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 관련 DR 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>임신 계획 중인 당뇨 환자는 <strong>임신 전 안과검사</strong> 및 임신 중 DR 발생·진행 위험 상담 필요</li>
+        <li>임신 1삼분기에 검사 시행 후 중증도에 따라 3-12개월(경증) 또는 1-3개월(중증 NPDR 이상) 간격 추적</li>
+        <li><strong>임신성 당뇨</strong>는 안과검사 불필요 — DR 위험 증가와 무관함</li>
+        <li>DR은 임신 자체의 생리적 변화 또는 대사조절 변화로 임신 중 악화될 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧒</span> 소아·사춘기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>사춘기 전 시력위협 망막병증 발생은 드묾</li>
+        <li>사춘기 환자는 DR 진행 상대위험 <strong>4.8배</strong> — 유사한 당뇨 유병기간에도 더 자주 추적 필요</li>
+        <li>2형 소아당뇨 환자, 진단 후 5년 이상 경과 시 DR 발생률 약 28.1%(메타분석)</li>
+        <li>소아 2형 당뇨 환자는 1형 소아 이상의 빈도로 안과검진 권장</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 신규 당뇨약제와 DR</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div><strong>GLP-1 제제(세마글루타이드 등)</strong> — SUSTAIN 6 시험: 위약 대비 유리체출혈·실명·치료필요 DR 사건 위험 상승(HR 1.76). 23개 RCT 메타분석에서도 세마글루타이드군 DR 위험 상승(RR 1.24) — 고령(60세 이상)·유병기간 10년 이상에서 위험 더 높음.</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>SGLT-2 억제제</strong> — 대규모 후향 코호트(6,065명)에서 NPDR 진행과 유의한 연관성 없음. 단, 고령·진행 신질환 환자에서 망막정맥폐쇄 증가 보고 있음. <strong>PPAR-γ작용제(글리타존)</strong>는 특이 DME 사례보고 존재.</div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚨</span>
+        <div>DCCT에서 확인된 <strong>급격한 혈당강하로 인한 DR 조기악화 현상</strong>은 신약에서도 재현됨 — 급속 혈당조절 시작 시 첫 1년간 면밀한 안과 모니터링 권고.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 유리체강내 주사 시행 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>안내염 발생률 <strong>0.019-0.09%</strong>(임상시험 기준) — <strong>포비돈요오드 점안 필수</strong></li>
+        <li>예방적 항생제 점안은 <strong>권장되지 않음</strong>(안내염 예방효과 없고 내성만 증가)</li>
+        <li>주사 후 1개월 시점 재검사 가능</li>
+        <li>망막박리, 백내장, 낭 손상, 지속적 안압상승 등은 드문 합병증</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💰</span> 사회경제적 고려사항</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>DR 선별·치료는 <strong>사회적 비용 대비 효과가 매우 높음</strong> — 1996년 분석 기준 QALY당 $3,190(1형 당뇨 $1,996, 인슐린 사용 2형 $2,933)</li>
+        <li>국소레이저+베바시주맙 병용이 QALY당 비용 효율이 가장 우수한 DME 치료 옵션 중 하나($11,138/QALY)</li>
+        <li>CI-DME 동반 PDR에서 항VEGF는 PRP 대비 비용효율적이나, CI-DME 없는 PDR에서는 그렇지 않음</li>
+        <li>선별검사 격차: 히스패닉계·남성·저교육수준 환자에서 검사율 낮고 DR 발생률 높음 — 사회적 건강결정요인이 격차의 주요 원인으로 지목됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /special -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"AAO",     def:"American Academy of Ophthalmology — 미국안과학회" },
+  { term:"ATE",      def:"Arterial Thromboembolic Event — 동맥혈전색전사건" },
+  { term:"CI-DME",   def:"Center-Involved Diabetic Macular Edema — 중심포함 당뇨황반부종" },
+  { term:"CSME",     def:"Clinically Significant Macular Edema — 임상적으로 유의한 황반부종" },
+  { term:"CST",      def:"Central Subfield Thickness — 중심부 망막두께(OCT)" },
+  { term:"DCCT",     def:"Diabetes Control and Complications Trial" },
+  { term:"DME",      def:"Diabetic Macular Edema — 당뇨황반부종" },
+  { term:"DR",       def:"Diabetic Retinopathy — 당뇨망막병증" },
+  { term:"DRCR.net", def:"Diabetic Retinopathy Clinical Research Network — 당뇨망막병증 임상연구네트워크" },
+  { term:"DRS",      def:"Diabetic Retinopathy Study" },
+  { term:"DRSS",     def:"Diabetic Retinopathy Severity Scale — 당뇨망막병증 중증도 척도" },
+  { term:"DRVS",     def:"Diabetic Retinopathy Vitrectomy Study" },
+  { term:"EDIC",     def:"Epidemiology of Diabetes Interventions and Complications" },
+  { term:"ETDRS",    def:"Early Treatment Diabetic Retinopathy Study" },
+  { term:"FA",       def:"Fluorescein Angiography — 형광안저혈관조영술" },
+  { term:"GLP-1",    def:"Glucagon-Like Peptide-1 receptor agonist — 글루카곤유사펩타이드-1 작용제" },
+  { term:"HbA1c",    def:"Hemoglobin A1c — 당화혈색소" },
+  { term:"IOP",      def:"Intraocular Pressure — 안압" },
+  { term:"IRMA",     def:"Intraretinal Microvascular Abnormalities — 망막내미세혈관이상" },
+  { term:"NCI-DME",  def:"Non-Center-Involved Diabetic Macular Edema — 비중심포함 당뇨황반부종" },
+  { term:"NPDR",     def:"Nonproliferative Diabetic Retinopathy — 비증식당뇨망막병증" },
+  { term:"NVD",      def:"Neovascularization of the Disc — 시신경유두 신생혈관" },
+  { term:"NVE",      def:"Neovascularization Elsewhere — 기타부위 신생혈관" },
+  { term:"OCT",      def:"Optical Coherence Tomography — 빛간섭단층촬영" },
+  { term:"OCTA",     def:"OCT Angiography — 빛간섭단층혈관조영술" },
+  { term:"PDR",      def:"Proliferative Diabetic Retinopathy — 증식당뇨망막병증" },
+  { term:"PRP",      def:"Panretinal Photocoagulation — 범망막광응고술" },
+  { term:"QALY",     def:"Quality-Adjusted Life-Year — 삶의질보정생존년" },
+  { term:"SGLT-2",   def:"Sodium-Glucose Co-transporter 2 inhibitor — 나트륨-포도당 공동수송체2 억제제" },
+  { term:"VEGF",     def:"Vascular Endothelial Growth Factor — 혈관내피성장인자" },
+  { term:"VTDR",     def:"Vision-Threatening Diabetic Retinopathy — 시력위협 당뇨망막병증" },
+  { term:"WESDR",    def:"Wisconsin Epidemiologic Study of Diabetic Retinopathy" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

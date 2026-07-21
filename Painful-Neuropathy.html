@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통증성 당뇨신경병증(PDN) AAN 2022 가이드라인</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --oral: #0550ae;     /* 경구약물 — 청 */
+    --topical: #7c3aed;  /* 국소·비약물 — 보라 */
+    --opioid: #9b1c2e;   /* 오피오이드 — 진홍(경고) */
+    --reco: #0f6e5c;     /* 임상권고 — 청록 */
+    --accent: #0550ae;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--oral); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--topical); color:#fff; padding:3px 6px; }
+  .logo-dr span:nth-child(3) { background: var(--opioid); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 17px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--oral); border-bottom-color: var(--oral); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-oral    { background: #ddf4ff; border-left: 3px solid var(--oral); color: #0550ae; }
+  .alert-topical { background: #ede9fe; border-left: 3px solid var(--topical); color: #5b21b6; }
+  .alert-opioid  { background: #fce8eb; border-left: 3px solid var(--opioid);  color: var(--opioid); }
+  .alert-reco    { background: #e0f4f1; border-left: 3px solid var(--reco);  color: #0f5549; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-oral    { background: #ddf4ff; color: var(--oral); border: 1px solid var(--oral); }
+  .t-topical { background: #ede9fe; color: var(--topical); border: 1px solid var(--topical); }
+  .t-opioid  { background: #fce8eb; color: var(--opioid); border: 1px solid var(--opioid); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+
+  .level-badge { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 800; color: #fff; white-space: nowrap; cursor: help; }
+  .level-a { background: #b91c1c; }
+  .level-b { background: #0550ae; }
+  .level-c { background: #6b7280; }
+
+  .reco-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--reco); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: background .15s; }
+  .reco-card:hover { background: var(--surface2); }
+  .reco-card.op { border-left-color: var(--opioid); }
+  .reco-head { display: flex; align-items: center; justify-content: space-between; }
+  .reco-num { font-weight: 800; color: var(--reco); font-size: calc(12px * var(--fscale, 1)); margin-right: 6px; }
+  .reco-card.op .reco-num { color: var(--opioid); }
+  .reco-toggle { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; flex-shrink: 0; }
+  .reco-card.open .reco-toggle { transform: rotate(180deg); }
+  .reco-text { font-size: calc(12.5px * var(--fscale, 1)); line-height: 1.6; margin-top: 4px; }
+  .reco-detail { display: none; font-size: calc(11.5px * var(--fscale, 1)); line-height: 1.75; color: var(--text2); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); cursor: default; }
+  .reco-card.open .reco-detail { display: block; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-oral    { background: #e6f0fb; border: 1.5px solid var(--oral); color: #0550ae; }
+  .gear-topical { background: #ede9fe; border: 1.5px solid var(--topical); color: #5b21b6; }
+  .gear-opioid  { background: #fde8eb; border: 1.5px solid var(--opioid); color: var(--opioid); }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .pct-bar-label { width: 210px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 16px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 5px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>P</span><span>D</span><span>N</span>
+      </div>
+      <h1>통증성 당뇨신경병증(PDN) 경구·국소 치료 AAN 2022 개정 가이드라인</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">American Academy of Neurology Guideline Subcommittee · Neurology 2022;98:31-43 · 2011년판 개정</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 AAN의 공식 승인을 받지 않은 개인 참고자료입니다 (This tool is not officially endorsed by AAN)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('oral')">💊 경구약물</div>
+    <div class="tab" onclick="showTab('topical')">🧴 국소·비약물</div>
+    <div class="tab" onclick="showTab('opioid')">🚫 오피오이드</div>
+    <div class="tab" onclick="showTab('reco')">📋 임상권고 9선</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--oral)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--oral)">&gt;16%</div><div class="stat-lbl">당뇨환자 중<br>PDN 유병률</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--topical)">32-53%</div><div class="stat-lbl">말초신경병증 원인 중<br>당뇨병 비중</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--reco)">149편</div><div class="stat-lbl">Class Ⅰ·Ⅱ<br>분석대상 논문</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--opioid)">12주</div><div class="stat-lbl">치료반응 판정<br>표준 기간(4-16주)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-reco">
+        <span>✅</span>
+        <div>4개 경구약물군(<strong>TCA·SNRI·gabapentinoid·나트륨채널차단제</strong>)이 효과크기가 서로 유사하여 우열을 가리기 어려움 — 부작용 프로파일, 동반질환, 비용, 환자 선호를 기준으로 선택할 것(Level B).</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-oral">
+          <div class="gear-title">💊 경구 1차 치료</div>
+          TCA, SNRI, gabapentinoid, 나트륨채널차단제<br>
+          <small>4개 계열 효과크기 유사 — 병용 시 상가효과 기대</small>
+        </div>
+        <div class="gear-box gear-topical">
+          <div class="gear-title">🧴 국소·비약물 대안</div>
+          캡사이신, GTN 스프레이, CBT, 운동<br>
+          <small>환자가 국소·비전통 치료를 선호할 경우 고려(Level C)</small>
+        </div>
+        <div class="gear-box gear-opioid">
+          <div class="gear-title">🚫 오피오이드 금지</div>
+          오피오이드·트라마돌·타펜타돌 비권장<br>
+          <small>장기효과 근거 부족 + 의존·과다복용 위험(Level B/C)</small>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>치료 목표는 <strong>통증 소실이 아닌 감소</strong> — 임상시험 기준 약 30% 통증감소가 치료 성공으로 간주됨을 환자에게 사전 설명할 것(Level B).</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>PDN 환자는 일반인구 대비 <strong>기분장애(특히 주요우울증)·수면장애(특히 폐쇄성수면무호흡)</strong> 동반율이 높음 — 이를 평가·치료하면 통증 자체와 별개로 삶의 질 개선에 도움(Level B).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 경구약물 5개군 효과크기 비교 (vs 위약, SMD)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">Gabapentinoid <small>(중등도 확신도)</small></div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:44%;background:var(--oral)"><span class="pct-bar-val">0.44</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">SNRI <small>(중등도 확신도)</small></div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:47%;background:var(--oral)"><span class="pct-bar-val">0.47</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">나트륨채널차단제 <small>(중등도 확신도)</small></div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:56%;background:var(--oral)"><span class="pct-bar-val">0.56</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">SNRI/오피오이드 이중기전 <small>(중등도, 비권장계열)</small></div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:62%;background:var(--opioid)"><span class="pct-bar-val">0.62</span></div></div>
+      </div>
+      <div class="pct-bar-row">
+        <div class="pct-bar-label">TCA <small>(낮은 확신도)</small></div>
+        <div class="pct-bar-track"><div class="pct-bar-fill" style="width:95%;background:var(--topical)"><span class="pct-bar-val">0.95</span></div></div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>TCA의 SMD 0.95는 가장 크지만 95% CI가 0.15-1.8로 매우 넓어 <strong>확신도가 낮음</strong> — 실제 임상효과가 다른 계열과 큰 차이가 없을 가능성이 있어 "1차약 우위"로 해석하면 안 됨. SNRI/오피오이드 이중기전 계열(트라마돌·타펜타돌)은 효과와 별개로 오피오이드 관련 위해성 때문에 비권장됨(🚫 오피오이드 탭 참조).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 검토 방법론 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>2017년 AAN 임상진료지침 프로세스 매뉴얼 기준 체계적 문헌고찰(2008년 1월~2020년 4월, MEDLINE·Cochrane·EMBASE·ClinicalTrials.gov)</li>
+        <li>1,044편 중 155편 전문 검토 → 95편 신규 선정 + 2011년판에서 이월된 34편(Class Ⅰ·Ⅱ) = <strong>총 149편</strong> 위험비뚤림 평가</li>
+        <li>모든 효과크기는 표준화평균차(SMD)로 환산 후 무작위효과 메타분석; 위약반응이 &lt;10%인 경우 근거등급 1단계, ≤5%인 경우 2단계 하향 조정</li>
+        <li>권고 등급: "반드시(Must)"=Level A, "해야 함(Should)"=Level B, "고려할 수 있음(May)"=Level C — 수정델파이법으로 80% 이상 합의 도출</li>
+        <li>효과크기 해석 기준: 0.2=작음, 0.5=중간, 0.8=큼</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 경구약물 ══════════════════ -->
+<div id="tab-oral" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> Gabapentinoid <span class="stage t-oral">SMD 0.44 (0.25-0.63) · 중등도</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물</th><th>SMD (95% CI)</th><th>확신도</th><th>용량</th><th>기간</th></tr>
+          <tr><td>가바펜틴</td><td>0.53 (0.22-0.84)</td><td class="freq-mod">중등도</td><td>900-3,600mg/day</td><td>4-8주</td></tr>
+          <tr><td>프레가발린</td><td>0.29 (0.13-0.45)</td><td class="freq-low">낮음</td><td>300-600mg/day</td><td>5-12주</td></tr>
+          <tr><td>미로가발린</td><td>0.21 (0.02-0.40)</td><td class="freq-low">낮음</td><td>15-30mg/day</td><td>5주</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>말초부종 유발 가능 — 심부전·신부전·간질환 등 부종 소인이 있는 환자에서 주의</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> SNRI <span class="stage t-oral">SMD 0.47 (0.34-0.60) · 중등도</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물</th><th>SMD (95% CI)</th><th>확신도</th><th>용량</th><th>기간</th></tr>
+          <tr><td>둘록세틴</td><td>0.50 (0.26-0.74)</td><td class="freq-mod">중등도</td><td>40-60mg/day</td><td>12주</td></tr>
+          <tr><td>데스벤라팍신</td><td>0.25 (0.07-0.43)</td><td class="freq-low">낮음</td><td>200mg/day</td><td>13주</td></tr>
+          <tr><td>벤라팍신</td><td colspan="2">개별 SMD 미보고(class 분석에만 포함)</td><td>150-225mg/day</td><td>6주</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>오심·피로·어지럼 등 부작용 — 기존 증상이 있는 환자에서 내약성 저하 가능</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> TCA <span class="stage t-oral">SMD 0.95 (0.15-1.8) · 낮음</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물</th><th>SMD (95% CI)</th><th>확신도</th><th>용량</th><th>기간</th></tr>
+          <tr><td>아미트립틸린</td><td>0.95 (0.15-1.8)</td><td class="freq-low">낮음</td><td>75-150mg/day</td><td>6주</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>다른 TCA(노르트립틸린·이미프라민 등)에 대해서는 Class Ⅰ·Ⅱ 근거가 없어 계열효과는 아미트립틸린 자료로만 추정됨(이질성 I²=80%)</div></div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>항콜린성 부작용(변비·요저류·기립성저혈압) — 해당 증상이 있는 환자에서 내약성 저하 가능</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 나트륨채널차단제 <span class="stage t-oral">SMD 0.56 (0.25-0.87) · 중등도</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물</th><th>SMD (95% CI)</th><th>확신도</th><th>용량</th><th>기간</th></tr>
+          <tr><td>발프로산</td><td>0.86 (0.38-1.33)</td><td class="freq-low">낮음</td><td>1,000-1,200mg/day 또는 20mg/kg/day</td><td>4-12주</td></tr>
+          <tr><td>옥스카르바제핀</td><td colspan="2">Class Ⅱ 1편(계열분석에만 포함)</td><td>1,400-1,800mg/day</td><td>16주</td></tr>
+          <tr><td>라모트리진</td><td colspan="2">Class Ⅱ 1편(계열분석에만 포함)</td><td>200-400mg/day</td><td>6주</td></tr>
+          <tr><td>라코사마이드</td><td colspan="2">Class Ⅱ 2편(계열분석에만 포함)</td><td>400mg/day</td><td>12주</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚫</span>
+        <div><strong>발프로산 제한 권고</strong> — 가임기 여성에서는 신경관결손 등 기형유발 위험으로 <strong>사용하지 말 것(Level B)</strong>. 모든 환자에서 간독성·췌장염·저나트륨혈증·범혈구감소증 등 중대 부작용 위험이 있어 <strong>다른 효과적 약물들이 모두 실패한 경우가 아니면 처방하지 말 것(Level B)</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> SNRI/오피오이드 이중기전제 <span class="stage t-opioid">SMD 0.62 (0.38-0.86) · 중등도, 비권장</span></div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물</th><th>SMD (95% CI)</th><th>확신도</th><th>DEA 분류</th></tr>
+          <tr><td>타펜타돌</td><td>0.78 (0.54-1.03)</td><td class="freq-low">낮음</td><td>Schedule Ⅱ</td></tr>
+          <tr><td>트라마돌</td><td colspan="2">Class Ⅱ 3편(계열분석에만 포함)</td><td>Schedule Ⅳ</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-opioid" style="margin-top:8px"><span>🚫</span><div>효과크기와 무관하게 오피오이드 관련 위해성으로 <strong>PDN에 사용하지 말 것(Level C)</strong> — 상세 근거는 🚫 오피오이드 탭 참조.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 직접비교(Head-to-head) 연구</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>비교</th><th>SMD (95% CI)</th><th>해석</th></tr>
+          <tr><td>프레가발린 vs 카르바마제핀</td><td>0.86 (0.50-1.21)</td><td>프레가발린 우위(중등도 확신도)</td></tr>
+          <tr><td>프레가발린 vs 벤라팍신</td><td>0.84 (0.48-1.20)</td><td>프레가발린 우위(중등도 확신도)</td></tr>
+          <tr><td>벤라팍신 vs 카르바마제핀</td><td>-0.02 (-0.32~0.35)</td><td>차이 없음</td></tr>
+          <tr><td>둘록세틴 vs 노르트립틸린</td><td>1.64 (0.63-2.65)</td><td>둘록세틴 우위(1편, 낮은 확신도)</td></tr>
+          <tr><td>아미트립틸린 vs 가바펜틴</td><td>0.33 (-0.32~0.98)</td><td>차이 없음(낮은 확신도)</td></tr>
+          <tr><td>둘록세틴+프레가발린 병용 vs 고용량 단독</td><td>-0.10 (-0.33~0.13)</td><td>병용이 고용량 단독요법 대비 우위 없음</td></tr>
+          <tr><td>프레가발린+N-아세틸시스테인 vs 프레가발린 단독</td><td>1.00 (0.56-1.44)</td><td>병용 우위(1편, 낮은 확신도)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 기타 시험된 경구제(비표준 치료)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>약물/제제</th><th>SMD (95% CI)</th><th>결과</th></tr>
+          <tr><td>나빌론(합성 카나비노이드)</td><td>1.32 (0.52-2.13)</td><td class="freq-low">위약 대비 우위(중등도 확신도, 1편)</td></tr>
+          <tr><td>은행잎추출물</td><td>0.83 (0.48-1.18)</td><td class="freq-low">위약 대비 우위(낮은 확신도, 1편)</td></tr>
+          <tr><td>ABT-639 (Nav1.7/T형 Ca채널차단제, 미출시)</td><td>-0.04 (-0.41~0.32)</td><td>차이 없음</td></tr>
+          <tr><td>ABT-894 (니코틴성 ACh수용체작용제, 미출시)</td><td>-0.06 (-0.24~0.13)</td><td>차이 없음</td></tr>
+          <tr><td>필로렉산트(오렉신길항제, 미출시)</td><td>0.21 (-0.36~0.79)</td><td>차이 없음, 근거 부족</td></tr>
+          <tr><td>토코트리에놀(비타민E군)</td><td>0.09 (-0.14~0.32)</td><td>차이 없음</td></tr>
+          <tr><td>육두구추출물</td><td>-0.01 (-0.46~0.44)</td><td>차이 없음</td></tr>
+          <tr><td>Metanx(엽산·B12 복합제)</td><td>-0.43 (-0.86~0.001)</td><td>차이 없음(경계값)</td></tr>
+          <tr><td>PF-05089771 (Nav1.7/1.8차단제, 미출시)</td><td>0.34 (-0.10~0.78)</td><td>근거 부족</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>대부분 1편 소규모 시험 기반이거나 시판되지 않는 실험용 물질 — 표준 1차 치료로 권고되지 않음</div></div>
+    </div>
+  </div>
+
+</div><!-- /oral -->
+
+<!-- ══════════════════ TAB 3: 국소·비약물 ══════════════════ -->
+<div id="tab-topical" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧴</span> 국소치료제 (Level C — 환자 선호 시 고려)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>제제</th><th>SMD (95% CI)</th><th>확신도</th><th>용법</th></tr>
+          <tr><td>캡사이신</td><td>0.30 (0.14-0.47)</td><td class="freq-low">낮음</td><td>8% 30분/회 또는 0.075% 1일 4회, 12주</td></tr>
+          <tr><td>글리세릴트리나이트레이트(GTN) 스프레이</td><td>1.19 (0.55-1.83)</td><td class="freq-low">낮음(1편)</td><td>-</td></tr>
+          <tr><td>Citrullus colocynthis</td><td>0.91 (0.36-1.45)</td><td class="freq-low">낮음(1편)</td><td>-</td></tr>
+          <tr><td>Nitrosense 패치</td><td>0.59 (0.03-1.15)</td><td class="freq-low">낮음(1편)</td><td>-</td></tr>
+          <tr><td>국소 클로니딘</td><td>0.29 (-0.01~0.58)</td><td class="freq-low">낮음, 유의성 경계</td><td>-</td></tr>
+          <tr><td>부프레노르핀 경피패치</td><td>0.23 (-0.09~0.55)</td><td class="freq-low">차이 없음</td><td>오피오이드 계열</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-topical" style="margin-top:8px"><span>ℹ️</span><div>대부분 1편의 소규모 Class Ⅱ 연구에 기반 — GTN 스프레이·Citrullus colocynthis·Nitrosense는 국내 상용화 여부 확인 필요</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧘</span> 비약물적 치료 (Level C)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>인지행동치료(CBT)</strong> — 만성통증 전반에 대해 중등도의 일관된 근거 존재; PDN 특이적 직접근거는 아직 부족하나 예비연구 결과는 긍정적</li>
+        <li><strong>운동</strong> — 신체활동과 심리적 대처전략이 PDN 관리에 도움이 될 수 있음</li>
+        <li><strong>타이치(Tai Chi), 마음챙김</strong> — 최소 1편의 무작위대조시험 근거 존재</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>국소·비전통·비약물적 접근은 <strong>환자 선호를 우선 평가한 뒤</strong> 제안할 것(Rec 5a, Level C) — 경구 1차 치료를 대체하기보다 보완적 옵션으로 활용</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>➕</span> 병용요법 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>병용</th><th>SMD (95% CI)</th><th>비고</th></tr>
+          <tr><td>발프로산 + GTN</td><td>1.14 (0.52-1.77)</td><td>위약 대비 우위(1편, 낮은 확신도) — 발프로산 제한 권고 고려할 것</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>부분 반응 시 <strong>다른 계열 약물을 추가하는 병용요법</strong>이 단독요법보다 더 큰 효과를 낼 수 있음(Rec 7d, Level B) — 단, 개별 병용조합에 대한 직접근거는 제한적</div></div>
+    </div>
+  </div>
+
+</div><!-- /topical -->
+
+<!-- ══════════════════ TAB 4: 오피오이드 ══════════════════ -->
+<div id="tab-opioid" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> 오피오이드 비권장 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div><strong>PDN 치료에 오피오이드를 사용하지 말 것(Rec 8a, Level B)</strong> — 만성 비암성 통증에서 장기효과에 대한 근거가 약하거나 없는 반면, 장기 중대 부작용 위험은 높음.</div>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>실제 임상에서는 말초신경병증 통증 처방 1위가 여전히 <strong>오피오이드</strong>이며, 그 뒤를 가바펜틴·프레가발린·둘록세틴·아미트립틸린·벤라팍신이 잇는 현실과 괴리가 있음</li>
+        <li>NIH 체계적 고찰: "만성통증에서 장기 오피오이드요법의 효과를 입증할 근거는 불충분하며, 심각한 위해는 용량의존적으로 증가한다"</li>
+        <li>요통·고관절/슬관절 골관절염 통증에 대한 1년 추적연구에서 오피오이드는 비오피오이드 약물 대비 <strong>비열등하지 않음(우위 없음)</strong>으로 보고됨</li>
+        <li>의존은 <strong>투약 시작 후 수일~수주 내</strong> 시작될 수 있음(CDC 자료)</li>
+        <li>특히 진정수면제와 병용 시 과다복용 위험이 높아짐(비교적 흔한 병용 패턴)</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>현재 오피오이드를 복용 중인 환자에게는 <strong>안전한 감량(taper)</strong> 옵션과 비오피오이드 대체전략을 논의할 수 있음(Rec 8b, Level C).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 트라마돌·타펜타돌 개별 경고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="gear-box gear-opioid">
+          <div class="gear-title">트라마돌 (DEA Schedule Ⅳ)</div>
+          "오피오이드보다 위험이 낮다"는 초기 인식과 달리 <strong>FDA 블랙박스 경고</strong>(호흡억제·중독·과다복용) 존재<br>
+          골관절염 환자 대상 연구에서 전체 사망률 증가와 연관성 보고<br>
+          세로토닌증후군 연관 사례 보고<br>
+          남용사례 비율이 모르핀보다 높음
+        </div>
+        <div class="gear-box gear-opioid">
+          <div class="gear-title">타펜타돌 (DEA Schedule Ⅱ)</div>
+          다른 강오피오이드와 동급인 <strong>Schedule Ⅱ</strong> 분류<br>
+          <strong>FDA 블랙박스 경고</strong>(생명을 위협하는 호흡억제·중독·과다복용·사망)<br>
+          남용사례 비율이 하이드로코돈보다 높음<br>
+          효능 근거는 단기 연구에 국한됨
+        </div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚫</span>
+        <div><strong>트라마돌·타펜타돌(SNRI/오피오이드 이중기전제)을 PDN에 사용하지 말 것(Rec 9a, Level C)</strong>. 현재 복용 중이라면 안전한 감량과 비오피오이드 대체전략을 논의할 수 있음(Rec 9b, Level C).</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /opioid -->
+
+<!-- ══════════════════ TAB 5: 임상권고 9선 ══════════════════ -->
+<div id="tab-reco" class="panel">
+
+  <div class="alert alert-reco">
+    <span>📋</span>
+    <div>Level A=반드시(Must) · <span class="level-badge level-b" title="해야 함">Level B=해야 함(Should)</span> · <span class="level-badge level-c" title="고려할 수 있음">Level C=고려할 수 있음(May)</span></div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 1</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">당뇨병 환자에서 말초신경병증성 통증 유무와 그것이 <strong>기능·삶의 질에 미치는 영향</strong>을 평가할 것.</div>
+    <div class="reco-detail">당뇨병 유병기간이 길고 혈당조절이 불량할수록 통증성 말초신경병증이 더 흔함. 적절한 평가 주기는 명확히 정립되어 있지 않음. 임상에서는 VAS(시각아날로그척도)·NRS(숫자평가척도) 등이 흔히 쓰이지만 이는 기능·삶의 질에 미치는 영향을 반영하지 못함 — 통증간섭 평가에는 Brief Pain Inventory-Diabetic Peripheral Neuropathy(BPI-DPN), 삶의 질 평가에는 Norfolk QOL-DN 같은 도구가 치료 필요성·성공 여부 판단에 더 유용한 정보를 줄 수 있음.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 2</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">약물치료 시작 시, 목표는 통증의 <strong>완전소실이 아닌 감소</strong>임을 환자에게 상담할 것.</div>
+    <div class="reco-detail">약물치료로도 증상이 완전히 해소되지 않는 경우가 많음. 그러나 환자들은 흔히 높은 수준의 통증 경감, 심지어 완전한 소실을 기대함. 임상시험에서는 통상 <strong>약 30% 통증감소</strong>를 치료 성공 기준으로 삼음 — 치료 시작 전에 이러한 현실적 기대치를 환자와 공유하면 환자 만족도를 높이는 데 도움이 됨.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 3</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">PDN 환자에서 동반 <strong>기분장애·수면장애</strong> 유무를 평가하고 적절히 치료할 것.</div>
+    <div class="reco-detail">당뇨병 환자는 일반인구보다 기분장애(특히 주요우울증)·수면장애(특히 폐쇄성수면무호흡)의 동반율이 높음. 기분과 수면은 모두 통증 지각에 영향을 미치는 것으로 알려져 있어, 이를 치료하면 신경병증 자체에 대한 직접 치료와 별개의 경로로 통증 경감·삶의 질 개선에 기여할 수 있음. TCA·SNRI 등 일부 PDN 치료제는 기분·수면에도 긍정적 효과가 있어 이러한 경로를 통해 추가적인 이득을 줄 수 있음.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 4</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">통증 감소를 위해 <strong>TCA, SNRI, gabapentinoid, 나트륨채널차단제</strong> 중에서 제공할 것.</div>
+    <div class="reco-detail">PDN은 유병률이 높고 삶의 질에 큰 영향을 미치는 질환. 메타분석 결과 통증감소 근거가 확인된 경구약물 계열은 TCA, SNRI, gabapentinoid, 나트륨채널차단제 4가지임. 이들 계열의 효과크기 추정치와 95% 신뢰구간이 서로 비슷한 범위에 있어, 어느 한 계열을 다른 계열보다 우선적으로 권고하기는 어려움 — 즉 4개 계열이 사실상 동등한 1차 선택지로 취급됨.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 5a</span><span class="level-badge level-c">Level C</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">효과가 입증된 경구·국소·비전통·비약물적 치료에 대한 <strong>환자 선호</strong>를 평가할 수 있음.</div>
+    <div class="reco-detail">일부 환자는 국소·비전통·비약물적 개입을 선호함. 오피오이드 치료의 여러 단점을 고려할 때, 초기 치료에 실패한 환자에게 제시할 수 있는 효과적인 비오피오이드 대안을 폭넓게 갖추는 것이 중요함 — 이를 위해서는 먼저 환자가 어떤 형태의 치료를 선호하는지 파악하는 과정이 선행되어야 함.</div>
+  </div>
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 5b</span><span class="level-badge level-c">Level C</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">국소·비전통·비약물적 치료를 선호하는 환자에게는 국소(캡사이신, GTN 스프레이, Citrullus colocynthis), 비전통(은행잎추출물), 비약물적(CBT, 운동, 타이치, 마음챙김) 치료를 제공할 수 있음.</div>
+    <div class="reco-detail">TCA·SNRI·gabapentinoid·나트륨채널차단제만큼 폭넓게 연구되지는 않았으나, 이들 대안적 개입도 최소 1편 이상의 무작위대조시험에서 지지 근거가 확인됨. 특히 인지행동치료(CBT)는 만성통증 전반에 대해 중등도의 일관된 근거가 축적되어 있음 — PDN 특이적 직접 근거는 아직 충분히 견고하지 않지만 예비(pilot) 연구 결과는 고무적임.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 6a</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">4개 계열의 효과가 유사하므로, <strong>부작용·동반질환·비용·환자 선호</strong> 등 효능 이외 요소를 고려하여 치료를 권고할 것.</div>
+    <div class="reco-detail">TCA·SNRI·gabapentinoid·나트륨채널차단제 계열 내 개별약물들은 신경병증성 통증에 대해 대체로 유사한 효능을 보이지만, 계열·약물별로 잠재적 부작용의 종류와 정도는 다름. TCA의 항콜린성 부작용(변비·요저류·기립성저혈압)은 관련 기저증상이 있는 환자에서 내약성이 떨어질 수 있고, SNRI·나트륨채널차단제의 오심·피로·어지럼도 유사 기저증상이 있는 환자에서 덜 견딜 수 있음. Gabapentinoid는 말초부종을 유발할 수 있어 심장·신장·간질환으로 인한 부종 소인이 있는 환자에서는 신중히 사용해야 함. 다수 약물에서 신기능에 따른 용량조절이 필요하므로 처방 전 반드시 확인할 것. 우울/불안(TCA·SNRI에 이중 적응증), 경련(gabapentinoid·나트륨채널차단제에 이중 적응증) 등 동반질환이 있으면 해당 계열이 더 적합할 수 있음.</div>
+  </div>
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 6b</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">가임기 여성 PDN 환자에게는 <strong>발프로산을 제공하지 말 것</strong>(기형유발 위험).</div>
+    <div class="reco-detail">발프로산은 신경관결손을 포함한 태아 기형유발 가능성이 있는 약물로 알려져 있음. 가임기 여성에서는 계획되지 않은 임신 가능성을 배제할 수 없으므로, 다른 효과적인 대체 계열(TCA·SNRI·gabapentinoid·다른 나트륨채널차단제)이 존재하는 한 발프로산은 처방 대상에서 제외할 것.</div>
+  </div>
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 6c</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">모든 PDN 환자에서 발프로산은 중대 부작용 위험 때문에 <strong>다른 여러 효과적 약물이 실패한 경우가 아니면 처방하지 말 것</strong>.</div>
+    <div class="reco-detail">발프로산은 기형유발성 외에도 간독성·췌장염·저나트륨혈증·범혈구감소증 등 다양한 중대 이상반응이 보고되어 있음. 통증 효과크기 자체는 크게 보고되었으나(SMD 0.86) 확신도는 낮은 편이며, 부작용 프로파일을 고려할 때 1차 선택지가 아니라 다른 효과적 계열들을 모두 시도한 이후에 고려하는 최후 옵션으로 위치시켜야 함.</div>
+  </div>
+
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 7a</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">환자에게 최적 효과를 내는 약물을 찾기까지 <strong>여러 약물을 순차적으로 시도</strong>해야 할 수 있음을 상담할 것.</div>
+    <div class="reco-detail">개별 환자가 어떤 약물에 가장 잘 반응할지 사전에 예측할 방법은 아직 없음(통증 표현형 기반 예측을 연구 중이나 임상 적용 근거는 제한적). 따라서 첫 시도 약물이 효과가 없거나 내약성이 나쁠 수 있음을 미리 설명하여, 환자가 여러 단계의 시행착오 과정을 치료 실패로 오해하지 않도록 할 것.</div>
+  </div>
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 7b</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">유효용량으로 <strong>약 12주</strong> 투여 후에도 임상적으로 의미있는 통증감소가 없거나, 부작용이 이득을 상회하면 치료 실패로 판정할 것.</div>
+    <div class="reco-detail">치료 실패는 두 가지 기준으로 판단함: ① 입증된 유효용량까지 적정한 뒤 약 12주(연구별 4-16주 범위) 투여했음에도 임상적으로 의미있는 통증감소가 없는 경우, ② 신경병증 통증 감소의 이득보다 부작용이 더 큰 경우(불내약). 어지럼·졸음·피로는 경구 약물 계열 공통으로 보고되며, 국소제제는 적용부위 반응이 공통적으로 보고됨.</div>
+  </div>
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 7c</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">초기 치료계열에서 의미있는 개선이 없거나 유의한 부작용이 있으면 <strong>다른 효과적 계열</strong>의 약물로 전환할 것.</div>
+    <div class="reco-detail">한 계열에서의 실패가 다른 계열(또는 같은 계열 내 다른 약물)에 대한 좋은 반응 가능성을 배제하지는 않음. 작용기전이 다른 계열로 전환하면 통증 경감을 얻거나 이전 약물에서 겪은 부작용을 피할 가능성이 높아지는 것으로 기대됨.</div>
+  </div>
+  <div class="reco-card" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 7d</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">초기 계열에서 <strong>부분 개선</strong>을 보인 환자에게는 다른 효과적 계열로의 전환 또는 <strong>다른 계열 약물 추가(병용요법)</strong>를 제공할 것.</div>
+    <div class="reco-detail">부분적으로만 효과가 있는 경우, 다른 계열 약물을 추가하는 병용요법이 각 약물을 단독으로 사용할 때보다 더 큰 종합적 효과를 낼 수 있음. 다만 특정 병용조합에 대한 직접적인 비교연구는 제한적이므로, 환자별 반응·내약성을 지켜보며 조정이 필요함.</div>
+  </div>
+
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 8a</span><span class="level-badge level-b">Level B</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">PDN 치료에 <strong>오피오이드를 사용하지 말 것</strong>.</div>
+    <div class="reco-detail">만성 비암성 통증에 대한 오피오이드 사용은 2014년 AAN 입장문과 CDC 체계적 고찰에서 강하게 지양됨 — 장기효과에 대한 근거가 미약하거나 없는 반면 심각한 장기 부작용 가능성은 높기 때문. NIH 체계적 고찰도 장기 오피오이드요법의 효과 근거는 불충분하며 심각한 위해는 용량의존적으로 증가한다고 결론지음. 요통·고관절/슬관절 골관절염 통증 대상 1년 연구에서도 오피오이드는 비오피오이드 약물 대비 우위를 보이지 못함. 가장 심각한 장기 결과는 거의 보편적인 의존, 심각한 의존·오피오이드사용장애의 높은 비율, 과다복용으로 인한 이환·초과 사망임. 의존은 투약 시작 후 수일에서 수주 내 시작될 수 있음. 중대 이상반응은 임상시험에서 상대적으로 드물고 시험기간이 짧아 과소보고되는 경향이 있으며, 특히 진정수면제와의 병용(비교적 흔함)은 과다복용 위험을 높임. 단기 통증감소는 확인되었으나, 잠재적 부작용의 심각성을 정당화할 만큼의 장기적 통증·기능 개선을 입증한 장기 무작위대조시험은 없음.</div>
+  </div>
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 8b</span><span class="level-badge level-c">Level C</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">현재 오피오이드를 복용 중인 환자에게는 <strong>안전한 감량(taper)</strong> 및 비오피오이드 대체전략 논의를 제공할 수 있음.</div>
+    <div class="reco-detail">이미 오피오이드를 복용 중인 환자에서 급격한 중단은 금단·통증악화 등의 위험이 있으므로, 안전한 감량 계획을 세우고 그 과정에서 TCA·SNRI·gabapentinoid·나트륨채널차단제 등 비오피오이드 대체전략으로의 전환을 함께 논의할 것.</div>
+  </div>
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 9a</span><span class="level-badge level-c">Level C</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">PDN 치료에 <strong>트라마돌·타펜타돌(오피오이드/SNRI 이중기전제)을 사용하지 말 것</strong>.</div>
+    <div class="reco-detail">트라마돌은 원래 "오피오이드보다 덜 위험하다"는 인식으로 Schedule Ⅳ로 분류되어 시판되었고 최근까지 대부분의 주(state) 처방약감시프로그램에 포함되지 않았으나, 실제로는 호흡억제·중독·과다복용에 대한 FDA 블랙박스 경고가 있으며 골관절염 환자 대상 최근 연구에서 전체 사망률 증가와 연관됨이 보고됨. 세로토닌증후군과의 연관성도 보고됨. 남용사례 비율은 모르핀보다 높음. 타펜타돌 또한 생명을 위협하는 호흡억제·중독·과다복용·사망에 대한 FDA 블랙박스 경고가 있는 Schedule Ⅱ 약물이며, 남용사례 비율이 하이드로코돈보다 높음. 두 약물 모두 효능 근거는 단기 연구에 국한되어 있어, 잠재적 부작용의 심각성을 정당화할 장기 효능·안전성 근거가 부족함.</div>
+  </div>
+  <div class="reco-card op" onclick="toggleReco(this)">
+    <div class="reco-head"><div><span class="reco-num">권고 9b</span><span class="level-badge level-c">Level C</span></div><span class="reco-toggle">▾</span></div>
+    <div class="reco-text">현재 트라마돌·타펜타돌을 복용 중인 환자에게는 <strong>안전한 감량</strong> 및 비오피오이드 대체전략 논의를 제공할 수 있음.</div>
+    <div class="reco-detail">권고 8b와 같은 원칙 — 이미 복용 중인 환자에서는 급격한 중단보다 안전한 감량 스케줄을 계획하고, 그 과정에서 효과가 입증된 비오피오이드 계열(TCA·SNRI·gabapentinoid·나트륨채널차단제)로의 전환을 함께 논의할 것.</div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔭</span> 향후 연구 필요 영역</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>삶의 질·기능·기분·수면에 대한 효과를 직접 평가한 연구 부족</li>
+        <li>2개 이상 활성비교군을 포함한 직접비교(head-to-head) 연구 부족 — PAIN-CONTRoLS 연구(둘록세틴·노르트립틸린이 프레가발린·멕실레틴보다 우수)가 예외적 사례</li>
+        <li>병용요법 vs 단독요법, 최적 적정용량 스케줄에 대한 근거 부족</li>
+        <li>모든 개입에 대해 16주를 초과하는 장기 자료 부재 — 만성 통증의 특성상 장기연구 필요</li>
+        <li>통증 표현형(phenotyping) 기반의 개인 맞춤 치료전략 연구가 진행 중이나 아직 임상 적용 근거는 제한적</li>
+        <li>계열 내 개별약물 간 우열 가능성 — 이번 분석은 계열 단위로 약물을 묶어 평가함</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /reco -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const ABBR_DATA = [
+  { term:"AAN",    def:"American Academy of Neurology — 미국신경과학회" },
+  { term:"CBT",    def:"Cognitive Behavioral Therapy — 인지행동치료" },
+  { term:"CDC",    def:"Centers for Disease Control and Prevention — 미국질병통제예방센터" },
+  { term:"CI",     def:"Confidence Interval — 신뢰구간" },
+  { term:"COI",    def:"Conflict of Interest — 이해상충" },
+  { term:"DEA",    def:"Drug Enforcement Administration — 미국마약단속국" },
+  { term:"FDA",    def:"Food and Drug Administration — 미국식품의약국" },
+  { term:"GRADE",  def:"Grading of Recommendations Assessment, Development and Evaluation — 근거등급 평가체계" },
+  { term:"GS",     def:"Guidelines Subcommittee — (AAN) 가이드라인 소위원회" },
+  { term:"LCL/UCL",def:"Lower/Upper Confidence Limit — 신뢰구간 하한/상한" },
+  { term:"PDN",    def:"Painful Diabetic Neuropathy — 통증성 당뇨신경병증" },
+  { term:"SMD",    def:"Standardized Mean Difference — 표준화평균차" },
+  { term:"SNRI",   def:"Serotonin-Norepinephrine Reuptake Inhibitor — 세로토닌-노르에피네프린 재흡수억제제" },
+  { term:"TCA",    def:"Tricyclic Antidepressant — 삼환계항우울제" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleReco(card) {
+  card.classList.toggle('open');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
