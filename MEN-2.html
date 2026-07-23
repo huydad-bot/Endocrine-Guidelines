@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다발성 내분비 선종증 2형 (MEN2) — GeneReviews</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #6e40c9;
+    --accent2: #553098;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+    --main: #6e40c9;
+    --main-light: #f1eaff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--main);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--main); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; font-weight: 600;}
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: flex-start; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--main); border-bottom-color: var(--main); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600;
+    color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform: none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width:110px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--main); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-hst { background: #ffebe9; color: #82071e; border: 1px solid var(--red); }
+  .grade-h { background: #fff1e5; color: #7d3f00; border: 1px solid var(--orange); }
+  .grade-mod { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-info { background: var(--main-light); color: var(--accent2); border: 1px solid var(--accent); }
+  .grade-yn { background: #dafbe1; color: #116329; border: 1px solid var(--green); }
+
+  .grade::after {
+    content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5;
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; max-width:60px;}
+  .rec-num { font-size: calc(10px * var(--fscale,1)); color: var(--text2); font-weight:700; margin-top:1px; flex-shrink:0; min-width:20px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--main); }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: var(--main-light); border-left: 3px solid var(--main); color: #3d1d78; }
+
+  .ppgl-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ppgl-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .ppgl-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ppgl-table tr:last-child td { border-bottom: none; }
+  .ppgl-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ppgl-table .section-row td { background: var(--surface2); color: var(--main); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--main); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sub-title { font-weight:700; font-size: calc(13px * var(--fscale,1)); color: var(--main); margin: 10px 0 4px; padding-top:6px; border-top:1px dashed var(--border);}
+  .sub-title:first-child{border-top:none; padding-top:0; margin-top:0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">GeneReviews</span>
+      <h1>다발성 내분비 선종증 2형 (MEN2)</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://www.ncbi.nlm.nih.gov/books/" class="source-link" target="_blank">Eng C, Plitt G. Multiple Endocrine Neoplasia Type 2. GeneReviews® 1999 Sep 27 [Updated 2023 Aug 10] ↗</a>
+      <span class="meta"> · 진단·치료는 ATA 2015(Wells et al) 및 NCCN 2022 가이드라인 인용 반영</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">진료 참고용 요약 도구이며, 최신 지침 원문 확인을 대체하지 않는다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🧬 진단</div>
+    <div class="tab" onclick="showTab('genotype')">🔬 유전형-표현형</div>
+    <div class="tab" onclick="showTab('management')">💊 치료</div>
+    <div class="tab" onclick="showTab('surveillance')">📅 감시·주의사항</div>
+    <div class="tab" onclick="showTab('genetics')">👪 유전상담</div>
+    <div class="tab" onclick="showTab('summary')">📚 요약·약어</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:110px;min-width:110px;max-width:110px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--main)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ===================== TAB: OVERVIEW ===================== -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">1:35,000</div><div class="stat-lbl">추정 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">AD</div><div class="stat-lbl">상염색체 우성 유전</div></div>
+    <div class="stat-box"><div class="stat-val">RET</div><div class="stat-lbl">원인 유전자 (10q11.21)</div></div>
+    <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">표현형: MEN2A·FMTC·MEN2B</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 임상 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>MEN2는 <strong>RET</strong> 유전자의 이형접합 생식세포 기능획득(gain-of-function) 변이로 발생하는 상염색체 우성 질환으로, <strong>MEN2A, 가족성 갑상선 수질암(FMTC, MEN2A의 아형으로 간주), MEN2B</strong>의 3가지 표현형을 포함한다. 세 표현형 모두 <strong>갑상선 수질암(MTC)</strong> 발생 고위험을 가지며, MEN2A·MEN2B는 <strong>갈색세포종(pheochromocytoma)</strong> 위험이, MEN2A는 <strong>부갑상선 선종/과형성</strong> 위험이 증가한다.</div>
+      </div>
+      <table class="ppgl-table">
+        <tr><th>표현형</th><th>MTC</th><th>갈색세포종</th><th>부갑상선질환</th><th>MTC 발생시기</th></tr>
+        <tr><td><strong>MEN2A</strong> (70–80%)</td><td>95%</td><td>50%</td><td>20–30%</td><td>초기 성인기</td></tr>
+        <tr><td><strong>FMTC</strong> (10–20%)</td><td>100%</td><td>&lt;1%*</td><td>&lt;1%*</td><td>중년</td></tr>
+        <tr><td><strong>MEN2B</strong> (~5%)</td><td>100%</td><td>50%</td><td>&lt;1%</td><td>소아 초기</td></tr>
+      </table>
+      <div class="rec-text" style="margin-top:6px">*FMTC는 갈색세포종·부갑상선질환 위험이 일반인구와 유사하다고 알려져 있으나, 이러한 질환이 발생한 FMTC 추정 환자는 실제로는 MEN2A일 가능성이 더 높다. 따라서 FMTC 표현형이라도 <strong>MEN2A와 동일한 선별검사</strong>를 시행해야 한다.</div>
+      <div class="sub-title">MEN2B 추가 특징</div>
+      <div class="rec-text">입술·혀의 점막 신경종, 두꺼운 입술을 포함한 특징적 얼굴모양, 위장관 신경절신경종증(약 40%에서 복부팽만·거대결장·변비·설사), 마르판양 체형(약 75%, 척추측만·관절이완·피하지방 감소). MEN2B는 조기 발현하는 공격적 MTC가 특징이며, 조기 예방적 갑상선절제술 이전에는 <strong>중앙 사망연령이 25세(범위 0.5–66세)</strong>였다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏷️</span> 동의어 및 관련 질환</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">MEN2A = <strong>Sipple 증후군</strong></div></li>
+        <li class="rec-item"><div class="rec-text">MEN2B = <strong>점막신경종 증후군</strong>, 초기 Wagenmann-Froboese 증후군</div></li>
+        <li class="rec-item"><div class="rec-text">Exon 10 (codon 618, 620) 변이는 <strong>MEN2A/FMTC와 히르쉬슈프룽병(Hirschsprung disease)이 동반</strong>될 수 있다 (같은 변이가 이득/손실 기능을 모두 유발할 수 있다는 모델이 제시됨)</div></li>
+        <li class="rec-item"><div class="rec-text">RET는 산발성 유두암(20–40%), 산발성 MTC·갈색세포종에서도 체세포 변이 형태로 흔히 발견되나, 이 경우 <strong>유전되지 않음</strong></div></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+<!-- ===================== TAB: DIAGNOSIS ===================== -->
+<div id="tab-diagnosis" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🩺</span> 임상 진단 기준</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-mod" data-tip="임상진단">MEN2A</span></div><div class="rec-text">한 개인 또는 근친에서 <strong>MTC, 갈색세포종, 부갑상선 선종/과형성 중 2가지 이상</strong>의 특정 내분비 종양이 발생할 때 진단</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-mod" data-tip="임상진단">FMTC</span></div><div class="rec-text">가족 내 <strong>2명 이상에서 MTC</strong>가 발생하고 갈색세포종·부갑상선 선종/과형성이 없을 때 진단</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-h" data-tip="임상진단">MEN2B</span></div><div class="rec-text">조기발병 MTC, 입술·혀의 점막신경종, 유수화 각막신경섬유, 두꺼운 입술의 특징적 얼굴모양, 무력형 마르판양 체형의 존재로 진단</div></li>
+    </ul>
+    <div class="alert alert-info" style="margin-top:6px">
+      <span>ℹ️</span>
+      <div>임상진단 기준은 Kloos et al 2009, Wells et al 2015(ATA), NCCN 2022에 근거한다. <strong>분자유전검사는 임상진단을 받은 모든 환자에게 권고</strong>되는데, 유전형에 따른 감시·치료 권고가 다르고 가족연구가 가능하기 때문이다.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧬</span> 분자유전검사</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">MEN2은 <strong>기능획득(gain-of-function) 기전</strong>으로 발생하므로, 유전자-표적 결실/중복 분석(deletion/duplication analysis)은 적응증이 되지 않는다 — 서열분석(sequence analysis)이 핵심이다.</div>
+    <table class="ppgl-table">
+      <tr><th>검사법</th><th>MEN2A</th><th>FMTC</th><th>MEN2B</th></tr>
+      <tr><td>전체 서열분석</td><td>&gt;98%</td><td>&gt;95%</td><td>&gt;98%</td></tr>
+      <tr><td>MEN2A/FMTC 연관 특정 엑손 서열분석 (엑손 10,11,13–16)</td><td>98%</td><td>95%</td><td>NA</td></tr>
+      <tr><td>MEN2B 연관 표적분석 (p.Met918Thr, p.Ala883Phe)</td><td>NA</td><td>NA</td><td>98%</td></tr>
+    </table>
+    <ul class="rec-list" style="margin-top:8px">
+      <li class="rec-item"><div class="rec-text">MEN2A·FMTC 의심 시 <strong>선택적 엑손(10, 11, 13–16) 검사</strong>를 먼저 고려할 수 있으며, 음성이면 RET 전체 서열분석을 포함한 다유전자 패널로 진행</div></li>
+      <li class="rec-item"><div class="rec-text">MEN2B 의심 시 <strong>p.Met918Thr, p.Ala883Phe 표적분석</strong>을 먼저 고려 가능</div></li>
+      <li class="rec-item"><div class="rec-text">암 소인 다유전자 패널(RET 포함)로 다른 감별질환 유전자를 함께 분석 가능하나, 의미불명 변이(VUS) 검출 가능성 증가에 유의</div></li>
+    </ul>
+    <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>RET <strong>의미불명 변이(VUS)</strong> 확인은 진단을 확정하거나 배제하지 않는다.</div></div>
+  </div>
+</div>
+
+</div><!-- /tab-diagnosis -->
+
+<!-- ===================== TAB: GENOTYPE-PHENOTYPE ===================== -->
+<div id="tab-genotype" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧬</span> RET 변이-표현형 상관관계</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <table class="ppgl-table">
+      <tr><th>영향 코돈</th><th>엑손</th><th>ATA 위험군</th><th>MEN2 아형</th><th>갈색세포종</th><th>부갑상선질환</th><th>기타 특징</th></tr>
+      <tr><td>p.Cys609/611/618/620</td><td>10</td><td><span class="grade grade-mod">MOD</span></td><td>MEN2A; FMTC</td><td>+</td><td>+</td><td>히르쉬슈프룽병(HSCR)</td></tr>
+      <tr><td>p.Cys630</td><td>11</td><td><span class="grade grade-mod">MOD</span></td><td>MEN2A</td><td>+</td><td>+</td><td>−</td></tr>
+      <tr><td>p.Cys634</td><td>11</td><td><span class="grade grade-h">H</span></td><td>MEN2A</td><td>+</td><td>+</td><td>피부 태선 아밀로이드증(CLA)</td></tr>
+      <tr><td>p.Leu790</td><td>13</td><td><span class="grade grade-mod">MOD</span></td><td>MEN2A</td><td>+</td><td>−</td><td>유두암(PTC)</td></tr>
+      <tr><td>p.Val804Leu</td><td>14</td><td><span class="grade grade-mod">MOD</span></td><td>MEN2A</td><td>+</td><td>+</td><td>−</td></tr>
+      <tr><td>p.Val804Met</td><td>14</td><td><span class="grade grade-mod">MOD</span></td><td>MEN2A</td><td>+</td><td>+</td><td>PTC, CLA</td></tr>
+      <tr><td>p.Ala883Phe</td><td>15</td><td><span class="grade grade-h">H</span></td><td>MEN2B</td><td>+</td><td>−</td><td>−</td></tr>
+      <tr><td>p.Met918Thr</td><td>16</td><td><span class="grade grade-hst">HST</span></td><td>MEN2B</td><td>+</td><td>−</td><td>−</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">MOD=중등도위험, H=고위험, HST=최고위험. 634번 코돈 변이는 갈색세포종·부갑상선질환 발생률이 높고, p.Cys634Arg는 진단 시 전이 확률이 더 높다는 보고가 있다.</div>
+
+    <div class="sub-title">주요 유전형별 특기사항</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text"><strong>코돈 609/611/618/620</strong>: MEN2A/FMTC 가족의 약 10%, FMTC 가족의 50% 이상에서 발견되며 RET 형질전환활성이 낮다. 히르쉬슈프룽병과 공동분리(cosegregate)될 수 있다.</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>코돈 634</strong>: 어떤 634 변이든 갈색세포종·HPT 발생률이 높다. FMTC 계통의 25%가 634 변이를 가지나 p.Cys634Arg는 FMTC에서는 거의 없다.</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>코돈 790/804</strong>: MTC 외 유두암과의 연관성이 보고됨. 804 변이의 질병 발현은 <strong>동일 가족 내에서도 매우 다양</strong>하다(5세에 MTC 발생 대 86세까지 무증상인 사례 모두 보고).</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>p.Met918Thr</strong>: MEN2B에서만 생식세포 변이로 확인되며, 가족력 없는 산발성 MTC에서는 체세포 변이로 흔히 관찰(더 공격적인 경과와 연관)</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧪</span> 분자병인기전</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text">RET는 세포외·경막·세포내 도메인을 가진 수용체 티로신인산화효소로, GDNF 계열 리간드(GDNF, neurturin, persephin, artemin)와 GFRα 수용체를 매개로 신호전달에 관여한다. MEN2 유발 변이는 티로신인산화효소의 <strong>구성적 활성화(기능획득)</strong>를 초래한다.</div>
+    <div class="rec-text" style="margin-top:6px">MEN2A의 대다수 변이는 세포외 시스테인 풍부 도메인에 위치하여 비정상적 분자간 이황화결합을 형성, 리간드 비의존적 RET 이합체화 및 구성적 활성화를 유발한다. MEN2B의 p.Met918Thr은 ATP 결합·자가인산화 증가를 통해 <strong>이합체화 비의존적 활성화</strong>를 일으킨다.</div>
+    <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>반대로 히르쉬슈프룽병 변이는 RET 분자가 소포체에 갇혀 세포표면에 도달하지 못하게 하여 <strong>형질전환활성을 감소</strong>시킨다 — 동일 유전자의 이득/손실 기능이 대비된다.</div></div>
+  </div>
+</div>
+
+</div><!-- /tab-genotype -->
+
+<!-- ===================== TAB: MANAGEMENT ===================== -->
+<div id="tab-management" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🎯</span> 표적치료: 예방적 갑상선절제술</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">확인된 생식세포 RET 병원성 변이가 있는 개인에서 <strong>예방적 갑상선절제술</strong>이 1차 예방조치이다. C세포 과형성 단계에서 시행하면 림프절 보존과 함께 갑상선절제술만으로 국한될 수 있다. 모든 연령에서 안전하나 <strong>시기는 코돈 위치에 따른 위험군</strong>에 근거한다.</div>
+    <table class="ppgl-table">
+      <tr><th>MTC 위험군</th><th>대표 병원성 변이</th><th>권고 예방적 갑상선절제술 시기</th></tr>
+      <tr><td><span class="grade grade-hst">최고위험(HST)</span></td><td>p.Met918Thr</td><td><strong>생후 1년 이내 최대한 조기</strong></td></tr>
+      <tr><td><span class="grade grade-h">고위험(H)</span></td><td>p.Cys634(Arg/Gly/Phe/Ser/Trp/Tyr), p.Ala883Phe</td><td><strong>5세 이전</strong></td></tr>
+      <tr><td><span class="grade grade-mod">중등도위험(MOD)</span></td><td>기타 모든 RET 기능획득 변이</td><td>기준 충족 시 5세 이후로 연기 가능*</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">*연기 기준: 매년 시행하는 기저·자극 혈청 칼시토닌 정상, 매년 시행하는 경부초음파 정상, 덜 공격적인 MTC의 가족력. 위험이 확인되지 않은 위험군에게는 예방적 갑상선절제술을 정례적으로 시행하지 않는다.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🩹</span> 지지치료 (표현형별)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">수술 전 필수 확인</div>
+    <div class="alert alert-danger" style="margin-bottom:8px"><span>⚠️</span><div>MEN2A·MEN2B·FMTC 환자는 <strong>모든 수술 전 혈장 유리 메타네프린 또는 24시간 소변 분획 메타네프린</strong>을 측정하여 기능성 갈색세포종 여부를 확인해야 한다. 갈색세포종이 확인되면 <strong>갑상선절제술 전 부신절제술을 먼저 시행</strong>하여 수술 중 카테콜아민 위기를 예방한다. (전향적 연구에서 RET 변이 보유 위험군의 8%가 MTC와 동시에 갈색세포종이 발견됨)</div></div>
+
+    <div class="sub-title">MTC</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">표준치료는 <strong>갑상선 전절제술 및 림프절절제술</strong>. 불완전 절제나 양성절연이 있는 갑상선외 침범 시 외부방사선치료·세기조절방사선치료 고려</div></li>
+      <li class="rec-item"><div class="rec-text">HPT 증거가 없으면 갑상선절제술 시 부갑상선절제술을 함께 시행하지 않는 것이 일반적</div></li>
+      <li class="rec-item"><div class="rec-text">전이성 MTC: <strong>다중키나아제억제제(1차, vandetanib·cabozantinib)</strong>, <strong>RET-선택적억제제(2차, selpercatinib·pralsetinib)</strong> 고려. 종양변이부담이 높고 1차치료에 진행한 전이성 질환에는 pembrolizumab 고려</div></li>
+    </ul>
+    <div class="sub-title">갈색세포종</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">부신절제술 전 <strong>α·β 아드레날린 수용체 차단제</strong>로 고혈압 조절 (일부 센터는 수술 중 nitroprusside 사용, α차단 없이 시행)</div></li>
+      <li class="rec-item"><div class="rec-text">비디오보조 복강경 부신절제술 가능. <strong>단측 갈색세포종은 편측 부신절제술</strong>, 잔여 부신 1개 또는 양측 갈색세포종에서는 피질보존 부신수술과 잔여조직 면밀 관찰 권고</div></li>
+    </ul>
+    <div class="sub-title">부갑상선 선종/과형성</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">갑상선절제술 시 HPT 진단 시: 육안적으로 비대한 선 절제, 아전절제 또는 전절제+전완 자가이식</div></li>
+      <li class="rec-item"><div class="rec-text">이전 갑상선절제술을 받은 원발성 HPT: 수술 전 국소화 후 절제, 4선 질환은 전절제+자가이식. 수술위험 높거나 기대여명 제한 시 <strong>약물치료</strong>(PTH 분비 억제) 고려</div></li>
+    </ul>
+    <div class="sub-title">기타</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">갑상선절제술 후 갑상선기능저하증: 표준 갑상선호르몬 대체요법</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-management -->
+
+<!-- ===================== TAB: SURVEILLANCE ===================== -->
+<div id="tab-surveillance" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>📅</span> 권고 감시 일정</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">MTC</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text"><strong>혈청 칼시토닌</strong> — 예방적 갑상선절제술을 받지 않은 경우: MEN2A/FMTC는 3–5세부터, MEN2B는 <strong>생후 6개월부터</strong> 매년 측정. 갑상선절제술 후에는 수술 3개월 후 및 매년(잔여 MTC가 있으면 더 자주)</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>혈장 CEA</strong> — 갑상선절제술 후 3개월 및 매년(잔여질환 시 더 자주)</div></li>
+    </ul>
+    <div class="sub-title">갈색세포종</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">모든 환자에서 <strong>수술 전</strong> 혈장 유리 메타네프린 또는 24시간 소변 분획 메타네프린 측정</div></li>
+      <li class="rec-item"><div class="rec-text">MEN2A/FMTC: ATA <span class="grade grade-h">H</span> 변이는 <strong>11세부터</strong>, ATA <span class="grade grade-mod">MOD</span> 변이는 <strong>16세부터</strong> 매년 시행. MEN2B: <strong>11세부터</strong> 매년</div></li>
+      <li class="rec-item"><div class="rec-text">여성: <strong>임신 계획 전</strong> 또는 계획되지 않은 임신 시 가능한 한 조기에 선별검사</div></li>
+      <li class="rec-item"><div class="rec-text">생화학 결과 이상 시 MRI 및/또는 CT 추가</div></li>
+    </ul>
+    <div class="sub-title">부갑상선 선종/과형성</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">부갑상선절제술·자가이식을 받지 않은 경우: <strong>알부민보정칼슘 또는 이온화칼슘</strong>을 MEN2A/FMTC ATA H 변이는 11세부터, MOD 변이는 16세부터 매년 측정. <strong>MEN2B는 선별검사 불필요</strong>(부갑상선질환 위험 증가와 무관)</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🚫</span> 피해야 할 약제·상황</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-danger">
+      <span>⚠️</span>
+      <div><strong>도파민 D2 수용체 길항제</strong>(예: metoclopramide, veralipride)와 <strong>베타-아드레날린 수용체 길항제(베타차단제)</strong>는 갈색세포종이 있는 환자에서 부작용 위험이 높다.</div>
+    </div>
+    <div class="rec-text" style="margin-top:6px">모노아민산화효소억제제, 교감신경흥분제(예: 에페드린), 일부 펩타이드·부신피질호르몬 제제도 합병증을 유발할 수 있다. 삼환계 항우울제의 부작용 발생은 일관되지 않는다.</div>
+  </div>
+</div>
+
+</div><!-- /tab-surveillance -->
+
+<!-- ===================== TAB: GENETIC COUNSELING ===================== -->
+<div id="tab-genetics" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>👪</span> 유전 양식 및 가족 위험도</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">MEN2A·FMTC·MEN2B 모두 <strong>상염색체 우성</strong>으로 유전한다.</div>
+    <table class="ppgl-table">
+      <tr><th>항목</th><th>MEN2A</th><th>MEN2B</th></tr>
+      <tr><td>이환된 부모를 가진 비율</td><td>최대 95%</td><td>50%</td></tr>
+      <tr><td>드노보(de novo) 변이 비율</td><td>5–9%</td><td>50% (대부분 부계 기원)</td></tr>
+    </table>
+    <ul class="rec-list" style="margin-top:8px">
+      <li class="rec-item"><div class="rec-text">FMTC는 정의상 여러 가족 구성원이 이환되어 있다.</div></li>
+      <li class="rec-item"><div class="rec-text">MEN2 환자 자녀 각각은 RET 병원성 변이를 물려받을 확률이 <strong>50%</strong>이다.</div></li>
+      <li class="rec-item"><div class="rec-text">양친에서 변이가 검출되지 않으면 드노보 변이 또는 <strong>생식세포 모자이시즘</strong>의 가능성을 고려해야 한다 — 이 경우 형제자매의 재발위험은 이론적으로 <strong>약 1%</strong>로 추정된다.</div></li>
+      <li class="rec-item"><div class="rec-text">가족력이 외견상 음성으로 보이는 경우는 인지되지 않은 이환, 감소된 침투율, 발병 전 부모의 조기 사망, 늦은 발병 등으로 설명될 수 있어 — <strong>임상평가·분자검사 없이는 음성 가족력을 확정할 수 없다.</strong></div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🔍</span> 위험군 친족 평가 및 예측유전검사</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">가족 내 RET 병원성 변이가 확인된 경우, <strong>MEN2A: 5세까지</strong> 위험군 자녀에게 분자유전검사를 제공. 생후 12개월 아동에서 MTC가 확인된 사례가 있어 가능하면 더 조기 검사 고려</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>MEN2B: 출생 직후 가능한 한 빨리</strong> 위험군 모든 아동에게 분자유전검사 시행</div></li>
+      <li class="rec-item"><div class="rec-text">가족 내 병원성 변이가 알려지지 않은 경우: 경부초음파·기저/자극 칼시토닌(MTC), 매년 알부민보정칼슘/이온화칼슘(HPT), 매년 혈장 유리 메타네프린/24시간 소변 분획 메타네프린(갈색세포종) 선별검사 시행</div></li>
+    </ul>
+    <div class="alert alert-purple" style="margin-top:6px"><span>💡</span><div>예측유전검사는 조기진단과 적절한 선별·감시체계 도입을 촉진하여 C세포 과형성의 악성전환 전 예방적 갑상선절제술, MTC의 조기진단, 갈색세포종·부갑상선질환의 조기진단으로 임상결과를 개선할 잠재력이 있다.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🤰</span> 임신 관리 및 가족계획</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">MEN2 여성은 <strong>임신 계획 전</strong> 갈색세포종 선별검사를 받아야 하며, 계획되지 않은 임신에서는 가능한 한 조기에 검사</div></li>
+      <li class="rec-item"><div class="rec-text">RET 병원성 변이가 가족 내에서 확인된 이후에는 착상전 및 산전 유전검사가 가능하다. 산전검사 이용에 대해서는 의료진·가족 간 관점 차이가 있을 수 있어 논의가 도움이 될 수 있다.</div></li>
+      <li class="rec-item"><div class="rec-text">고위험/최고위험군에서 산발성(가족력 없는) MTC이면서 RET 생식세포 변이가 확인되지 않은 경우, 자녀의 RET 변이 상속 확률은 약 <strong>0.15–0.18%</strong>로 추정된다(산발성 MTC 환자의 6–7%가 생식세포 변이를 가진다는 경험적 자료 기반).</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-genetics -->
+
+<!-- ===================== TAB: SUMMARY ===================== -->
+<div id="tab-summary" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 감별진단 — 갈색세포종 소인 유전자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>유전자</th><th>질환</th><th>핵심 특징</th></tr>
+        <tr><td>VHL</td><td>Von Hippel-Lindau 증후군</td><td>중추신경계/망막 혈관모세포종, 신낭종·투명세포신세포암, 갈색세포종, 췌장낭종·신경내분비종양, 내림프낭종양</td></tr>
+        <tr><td>SDHx, MAX, TMEM127 등</td><td>유전성 부신경절종-갈색세포종 증후군</td><td>부신경절종·갈색세포종, GI 기질종양, 폐연골종, 신투명세포암, 유두갑상선암, 뇌하수체선종. <strong>두경부 부신경절종은 MEN2에서는 극히 드묾</strong></td></tr>
+        <tr><td>NF1</td><td>1형 신경섬유종증</td><td>카페오레반점, 간찰부 주근깨, 다발성 피부신경섬유종. 갈색세포종/부신경절종은 성인의 1% 미만</td></tr>
+      </table>
+      <div class="rec-text" style="margin-top:6px">MEN2A/MEN1/MEN4는 명칭이 유사하나 <strong>서로 무관한 별개 질환</strong>이다. MEN1은 MEN1 유전자, MEN4는 CDKN1B 유전자 변이로 발생하며 부갑상선·뇌하수체종양이 특징적이다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-summary -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) { body.classList.add('collapsed'); }
+  });
+});
+
+const abbrs = [
+  ['MEN2','Multiple Endocrine Neoplasia Type 2 (다발성 내분비 선종증 2형)'],
+  ['MEN2A','MEN2 아형 A'],
+  ['MEN2B','MEN2 아형 B'],
+  ['FMTC','Familial Medullary Thyroid Carcinoma (가족성 갑상선 수질암)'],
+  ['MTC','Medullary Thyroid Carcinoma (갑상선 수질암)'],
+  ['CCH','C-cell Hyperplasia (C세포 과형성)'],
+  ['PCC','Pheochromocytoma (갈색세포종)'],
+  ['PGL','Paraganglioma (부신경절종)'],
+  ['HPT','Hyperparathyroidism (부갑상선기능항진증)'],
+  ['HSCR','Hirschsprung Disease (히르쉬슈프룽병)'],
+  ['CLA','Cutaneous Lichen Amyloidosis (피부 태선 아밀로이드증)'],
+  ['PTC','Papillary Thyroid Carcinoma (갑상선 유두암)'],
+  ['CEA','Carcinoembryonic Antigen (암배아항원)'],
+  ['RET','REarranged during Transfection 원종양유전자 (수용체 티로신인산화효소)'],
+  ['GDNF','Glial cell line-Derived Neurotrophic Factor'],
+  ['ATA','American Thyroid Association (미국갑상선학회)'],
+  ['NCCN','National Comprehensive Cancer Network'],
+  ['ACMG/AMP','American College of Medical Genetics and Genomics / Association for Molecular Pathology (변이해석 표준)'],
+  ['VUS','Variant of Uncertain Significance (의미불명 변이)'],
+  ['H / MOD / HST','ATA 위험군: 고위험 / 중등도위험 / 최고위험'],
+  ['MOI','Mode of Inheritance (유전양식)'],
+  ['AD','Autosomal Dominant (상염색체 우성)'],
+  ['VHL','Von Hippel-Lindau (증후군/유전자)'],
+  ['NF1','Neurofibromatosis type 1 (1형 신경섬유종증)'],
+  ['MIBG','Metaiodobenzylguanidine (신티그라피 조영제)'],
+  ['PET','Positron Emission Tomography (양전자방출단층촬영)'],
+  ['SPECT','Single-Photon Emission CT'],
+  ['PRRT','Peptide Receptor Radionuclide Therapy (펩타이드 수용체 방사성핵종치료)'],
+];
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+buildAbbr();
+</script>
+</body>
+</html>
