@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMS 2025 여성 중년기 건강 및 폐경 권고안</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --rec-a: #116329;
+    --rec-b: #0550ae;
+    --rec-c: #57606a;
+    --rec-e: #bc4c00;
+    --fscale: 1;
+    --main: #b83280;
+    --main-light: #fbe7f1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--main);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--main); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; font-weight: 600;}
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+  }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px; row-gap: 4px; }
+  .tab {
+    padding: 8px 12px;
+    font-size: calc(11.5px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--main); border-bottom-color: var(--main); }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width:110px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--main); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-a { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-b { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-c { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .grade-d { background: #ffebe9; color: #82071e; border: 1px solid var(--red); }
+  .grade-gpp { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+  .grade-km { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; max-width:50px;}
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--main); }
+  .rec-sub { list-style:none; margin:6px 0 0 0; padding-left:14px; border-left:2px solid var(--border); }
+  .rec-sub .rec-item { padding: 6px 0; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: var(--main-light); border-left: 3px solid var(--main); color: #99215f; }
+
+  /* ── TABLE ── */
+  .ppgl-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ppgl-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .ppgl-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ppgl-table tr:last-child td { border-bottom: none; }
+  .ppgl-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ppgl-table .section-row td { background: var(--surface2); color: var(--main); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  /* ── ACCORDION (chapter sub-section) ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr span { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-meta { background: var(--main-light); color: var(--main); }
+  .pill-gene { background: #dafbe1; color: var(--green); }
+  .pill-image { background: #ddf4ff; color: var(--accent2); }
+  .pill-path { background: #fff8c5; color: var(--yellow); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--main); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .sub-title { font-weight:700; font-size: calc(13px * var(--fscale,1)); color: var(--main); margin: 10px 0 4px; padding-top:6px; border-top:1px dashed var(--border);}
+  .sub-title:first-child{border-top:none; padding-top:0; margin-top:0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">IMS 2025</span>
+      <h1>여성 중년기 건강 및 폐경 권고안 (IMS Recommendations)</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://www.tandfonline.com/doi/full/10.1080/13697137.2025.2585487" class="source-link" target="_blank">Climacteric 2025 (IMS Recommendations and Key Messages) ↗</a>
+      <span class="meta"> · International Menopause Society · 342개 권고 + 40개 핵심 메시지, 30개 섹션</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by IMS · 원문 요약 참고용</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('lifestyle')">🍎 생활습관·대사</div>
+    <div class="tab" onclick="showTab('vms')">🔥 혈관운동증상</div>
+    <div class="tab" onclick="showTab('gsm')">🌸 비뇨생식기·성기능</div>
+    <div class="tab" onclick="showTab('msk')">🦴 근골격계</div>
+    <div class="tab" onclick="showTab('cvneuro')">❤️ 심혈관·혈전·신경계</div>
+    <div class="tab" onclick="showTab('cancer')">🎗️ 암</div>
+    <div class="tab" onclick="showTab('qol')">🧠 삶의질·특수치료</div>
+    <div class="tab" onclick="showTab('poi')">👧 조기난소부전(POI)</div>
+    <div class="tab" onclick="showTab('cam')">🌿 보완대체·신기술</div>
+    <div class="tab" onclick="showTab('issues')">📰 쟁점·방법론</div>
+    <div class="tab" onclick="showTab('summary')">📋 권고요약·약어</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:120px;min-width:120px;max-width:120px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--main)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ TAB PLACEHOLDER: OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">30</div><div class="stat-lbl">전체 섹션 수</div></div>
+    <div class="stat-box"><div class="stat-val">342</div><div class="stat-lbl">권고 (근거기반 285 + GPP 57)</div></div>
+    <div class="stat-box"><div class="stat-val">40</div><div class="stat-lbl">핵심 메시지(Key Message)</div></div>
+    <div class="stat-box"><div class="stat-val">2025</div><div class="stat-lbl">발행 연도 (Climacteric)</div></div>
+  </div>
+
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div><strong>IMS(International Menopause Society) 2025 권고안</strong>은 2016년 개정 이후 처음 나온 전면 개정판으로, GRADE 및 AGREE II 방법론을 적용해 여성 중년기 건강·폐경·폐경호르몬요법(MHT)에 대한 30개 주제, 342개 권고와 40개 핵심 메시지를 제시한다.</div>
+      </div>
+      <table class="ppgl-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td style="font-weight:600">저자단</td><td>38명 저자 + 27명 지원팀 (IMS 및 관련 학회)</td></tr>
+        <tr><td style="font-weight:600">방법론</td><td>GRADE(근거 질 평가) + AGREE II(가이드라인 개발 평가) 적용, 체계적 문헌고찰 기반</td></tr>
+        <tr><td style="font-weight:600">용어</td><td>MHT(Menopause Hormone Therapy) = 에스트로겐·프로게스토겐·병합요법을 포괄하는 용어로 사용</td></tr>
+        <tr><td style="font-weight:600">승인 학회</td><td>APMF, AMS, BMS, CMS, EMAS, FLASCYM, ISGE, RCOG, SAMS, Thai Menopause Society 등</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>본 도구는 원문(Climacteric 2025;IMS 홈페이지 상시 업데이트판)의 핵심 권고를 재구성한 진료 참고용 요약이며 IMS의 공식 승인을 받은 자료가 아니다. 상세 근거·참고문헌·표·그림은 원문을 참조한다.</div>
+      </div>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 근거 수준 및 권고 등급 체계 (GRADE + AGREE II)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="rec-text" style="margin-bottom:8px">근거의 질(⨁⨁⨁⨁ 높음 ~ ⨁◯◯◯ 매우낮음)과 권고 강도(A–D)는 <strong>별개의 축</strong>으로 평가된다. 근거의 질이 높아도 실행 가능성·가치·이해득실에 따라 권고 강도가 낮아질 수 있고, 반대로 근거가 중등도라도 미실행 시 건강에 미치는 악영향이 크면 강한 권고(A)가 부여될 수 있다.</div>
+      <table class="ppgl-table">
+        <tr><th>표기</th><th>의미</th></tr>
+        <tr><td><span class="grade grade-a" data-tip="권고 강도 A">A</span></td><td>강한 권고</td></tr>
+        <tr><td><span class="grade grade-b" data-tip="권고 강도 B">B</span></td><td>중등도 권고</td></tr>
+        <tr><td><span class="grade grade-c" data-tip="권고 강도 C">C</span></td><td>약한 권고</td></tr>
+        <tr><td><span class="grade grade-d" data-tip="권고 강도 D">D</span></td><td>매우 약한 권고</td></tr>
+        <tr><td><span class="grade grade-gpp" data-tip="Good Practice Point">GPP</span></td><td>Good Practice Point — 형식적 체계적 문헌고찰 대상은 아니나 광범위한 임상 경험에 근거한 권고</td></tr>
+        <tr><td><span class="grade grade-km" data-tip="Key Message">KM</span></td><td>Key Message — 권고가 아닌 근거기반 정보 제시 (권고 강도 미부여, 근거 수준만 부여 가능)</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>주제 27–29(미디어의 영향, 제약산업의 역할, 출판윤리)는 체계적 문헌고찰이 어려운 주제로, 전문가 의견에 근거하여 작성되었다.</div>
+      </div>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 폐경 진단 및 STRAW+10 병기 분류</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">생식 노화의 병기 분류는 일반적으로 <strong>STRAW+10</strong> 기준을 따른다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">폐경 진단은 <strong>임상적 진단</strong>으로 특수 검사에 의존하지 않는다. 월경주기만으로 병기를 정할 수 없는 여성에서는 STRAW+10의 보조 기준을 사용한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">현재 STRAW+10의 표준 기준은 월경주기 양상(규칙성, 주기 누락 여부)이며, 에스트라디올·FSH·AMH 혈액검사는 보조적 기준 또는 병기 판정이 불가능한 여성에서의 주요 기준으로만 시행한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">STRAW+10 기준이 월경 불규칙성에 의존하지만, 실제 폐경 증상 발현은 이보다 이를 수 있으며 혈관운동증상(VMS)과 월경 양상 변화가 폐경이행기 시작을 시사할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">40세 이상 여성에서 월경주기 변화 여부와 관계없이 중등도~중증의 VMS가 새로 발생하면 생식 병기에 대한 임상 평가를 시행해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">40세 미만 여성에서 4개월 이상 무월경 또는 불규칙 월경이 있고 FSH >25 IU/L로 확인되면 조기난소부전(POI)을 의심해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">40세~45세 미만 폐경은 <strong>조기폐경(early menopause)</strong>으로 정의한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 핵심 실천 과제 (Key Action Points)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <table class="ppgl-table">
+        <tr><th>대상</th><th>실천 과제</th></tr>
+        <tr><td style="font-weight:600">여성</td><td>근거기반의 균형 잡힌 정보 접근성을 높여 건강 문해력을 높이고, 정보에 근거한 의사결정과 자기관리 역량을 강화한다.</td></tr>
+        <tr><td style="font-weight:600">정부·기관</td><td>여성 건강, 특히 폐경이행기 전후의 연구 및 임상관리를 지원하는 정책 발전을 장려한다.</td></tr>
+        <tr><td style="font-weight:600">의료진(HCP)</td><td>근거기반 폐경 관리 최적화를 위한 교육·훈련을 지속적으로 확대한다.</td></tr>
+        <tr><td style="font-weight:600">미디어</td><td>선정적이지 않은 근거기반 정보의 중요성을 강조하며 건설적으로 참여한다.</td></tr>
+        <tr><td style="font-weight:600">제약산업</td><td>부작용을 최소화하고 이익을 극대화하는 치료제 연구개발을 장려하고, 특히 중저소득국가에 대한 적정가 의약품 공급을 개선한다.</td></tr>
+        <tr><td style="font-weight:600">MHT 및 대체요법</td><td>작용·위험 프로파일의 차이를 명확히 하여 이익은 극대화하고 부작용은 최소화하며, 개인 맞춤 치료를 위한 최대한 다양한 치료 옵션을 제공한다.</td></tr>
+      </table>
+      <div class="alert alert-purple" style="margin-top:8px">
+        <span>💡</span>
+        <div>MHT 처방 전 고려할 5가지 원칙(2024 IMS White Paper "5 Ws"): <strong>Who</strong>(누구에게) · <strong>What</strong>(어떤 종류·용량) · <strong>When</strong>(언제 시작·중단) · <strong>Why</strong>(왜 필요한가) · <strong>Where</strong>(어디서 접근 가능한가)</div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /tab-overview -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: LIFESTYLE ═══════════════ -->
+<div id="tab-lifestyle" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 1. 중년기 신체 변화 (Midlife Body Changes, MBC) — 대사 및 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>중년 여성의 체중 증가(연평균 0.7kg)는 주로 <strong>연령에 따른 노화</strong>가 원인이며 폐경 자체가 주 원인은 아니다. 다만 폐경에 따른 에스트로겐 감소는 복부지방 재분배(중심비만)의 주된 원인이다.</div></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">중년기 체중 증가 및 체성분 변화는 흔하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">중년 여성의 체중 증가는 대부분 연령 노화의 결과이며 폐경 자체는 아니다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">연령 관련 총에너지소비 감소가 중년기 체중 증가의 가장 중요한 원인이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">폐경으로 인한 에스트로겐 감소는 중년 여성의 복부지방 증가의 주된 원인이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">정상 BMI에서도 복부비만 증가는 폐경 후 여성에서 유의한 심대사 위험을 의미한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">MHT는 폐경 증상을 효과적으로 관리하지만 체중에 직접적 영향은 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">중년 여성은 체중 증가에 대해 선별검사를 받아야 하며, 적절한 상담과 관리 옵션을 제공해야 한다. 행동수정·열량제한·규칙적 신체활동이 중년기 체중 관리에 가장 중요한 중재이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">VMS·수면장애·기분장애 등 폐경 증상을 적극적으로 관리하는 것이 건강한 생활습관 이행 순응도 개선에 도움이 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">금기가 없다면 폐경 증상 관리를 위해 MHT를 고려할 수 있으나, <strong>체중 관리나 체성분 개선 목적으로는 사용하지 않는다.</strong></div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">에스트로겐 기반 MHT는 용량·제형에 따라 체지방 분포 변화를 완화하고 인슐린저항성을 낮출 수 있으나, 이를 목적으로 MHT를 사용하지는 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">항비만제는 BMI 기준을 충족하는 중년 여성에서 생활습관 중재의 중요한 보조제가 될 수 있으나 고비용이며 대개 장기간 사용이 필요하다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>💊</span><div>체중 증가를 유발할 수 있는 약제: 가바펜틴, 클로니딘, 파록세틴, 시탈로프람, 아미트리프틸린, 이미프라민, 미르타자핀, 클로자핀. 체중 중립적/감소 경향 약제: 에스시탈로프람, 서트랄린, 플루옥세틴, 벤라팍신, 데스벤라팍신, 플루복사민, 페졸리네탄트, 엘린자네탄트, 옥시부티닌.</div></div>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🥗</span> 3. 생활습관 — 식이 및 운동 실천 지침</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">비만은 폐경 증상, 특히 VMS를 악화시킬 수 있으며 과일·채소가 풍부한 식이가 증상 완화에 도움될 수 있으나 그 효과는 논란이 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">5–10%의 체중 감소만으로도 인슐린저항성 관련 이상소견 다수가 개선될 수 있음을 의료진은 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">채소·과일·콩류·견과류·통곡물·올리브유·생선은 건강증진 식이 패턴의 핵심 구성요소로 대사경로 보호 및 장기 체중 조절에 도움이 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">지중해식 식단은 연령 관련 BMI·허리둘레 증가를 완화하며, 저열량식이 및 규칙적 신체활동과 병행 시 효과가 더 뚜렷하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">지중해식 식단 준수는 심혈관질환 위험 감소 <span class="grade grade-a" data-tip="근거의 질: 높음">A</span>, 혈압·지질·대사증후군·제2형당뇨병 예방 등 중간 심혈관 지표 개선 <span class="grade grade-b" data-tip="근거의 질: 중등도">B</span>, 인지기능·기분조절·일부 암종·전체 사망률 감소 <span class="grade grade-c" data-tip="근거의 질: 낮음">C</span>와 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">DASH(고혈압 예방) 식단은 지질프로파일 개선과 혈압 감소를 보이나 장기 임상결과에 대한 근거는 제한적이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">중년·노년 여성에서 규칙적 운동은 뼈·근육 건강 개선, 심혈관·전체 사망률 감소, 낙상·골절 위험 감소를 위해 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">주당 최소 150분의 중강도 유산소 운동이 최적이며, 여기에 주 2회 저항운동을 추가하면 추가적 이득이 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">유산소 운동 강도를 권고할 때는 노년기 체력 수준을 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">흡연은 중단하거나 피해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">건강한 생활습관에는 사회적 교류와 신체적·정신적 활동성 유지가 포함됨을 여성에게 안내해야 한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-lifestyle -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: VMS ═══════════════ -->
+<div id="tab-vms" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔥</span> 4a. 혈관운동증상(VMS) — 폐경호르몬요법(MHT)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">안면홍조·야간발한 등 VMS는 폐경이행기·폐경의 대표 증상이며 삶의 질을 현저히 저하시킬 수 있음을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text"><strong>MHT는 VMS에 가장 효과적인 치료</strong>이다. 이용 가능하고 중대한 금기가 없으며 MHT를 거부하지 않는 증상성 여성에게 제공되어야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">VMS 치료 목적의 MHT는 이익·위험을 충분히 평가한 후 일반적으로 <strong>60세 미만 또는 폐경 후 10년 이내</strong> 여성에게 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">경피 및 경구 에스트로겐 경로 모두 VMS 치료에 효과적이며, 저~중등도 용량의 MHT로 폐경 후 여성의 80% 이상에서 증상이 완화됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">저~중등도 용량으로 증상 조절이 불충분한 경우, 적절한 검사·용량 증량·제형 또는 투여경로 변경의 단계적 접근을 통해 위험은 줄이면서 치료 반응을 최적화할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁이 없는 여성에는 <strong>에스트로겐 단독요법(ET)</strong>을, 자궁이 있는 여성에는 <strong>에스트로겐-프로게스토겐 병합요법(EPT)</strong>을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">선택적 조직 에스트로겐 활성 조절제(STEAR)인 티볼론은 위약 대비 VMS를 유의하게 감소시킨다 (OR 0.33, 95%CI 0.27–0.41).</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">에스테트롤(E4, 태아 간 유래 천연 에스트로겐, 경구 15mg/일)은 중등도~중증 안면홍조의 빈도와 중증도를 감소시킨다. (집필 시점 시판 허가 전)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT 적정 용량 결정을 위한 일상적 혈청 에스트라디올 측정은 권고되지 않는다. 다만 증상 조절이 불충분하거나 지속적 부작용이 있는 경우, 또는 POI/조기폐경 여성에서는 도움이 될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT 중단의 최적 방법에 대한 확립된 근거기반 지침은 없으며, 중단 후 최대 87%에서 VMS가 재발할 수 있음을 상담해야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">표 1. 폐경호르몬요법(MHT) 용량 요약 (Panay 2020 수정 인용)</div>
+      <div style="overflow-x:auto">
+      <table class="ppgl-table" style="min-width:680px">
+        <tr><th>제형 (24시간당)</th><th>순차병합 · 저/표준용량</th><th>순차병합 · 고용량</th><th>연속병합 · 저/표준용량</th><th>연속병합 · 고용량</th></tr>
+        <tr><td style="font-weight:600">패치 (경피, μg/24h)</td><td>25–50</td><td>75–100</td><td>25–50</td><td>75–100</td></tr>
+        <tr><td style="font-weight:600">젤 사쉐(sachet,1회용) (경피, mg)</td><td>0.5–1.5</td><td>2.0–3.0</td><td>0.5–1.5</td><td>2.0–3.0</td></tr>
+        <tr><td style="font-weight:600">젤 펌프 (1회=0.75mg)</td><td>1–2회</td><td>3–4회</td><td>1–2회</td><td>3–4회</td></tr>
+        <tr><td style="font-weight:600">경피 스프레이 (1회=1.53mg)</td><td>1–2회</td><td>3–4회</td><td>1–2회</td><td>3–4회</td></tr>
+        <tr><td style="font-weight:600">경구 (mg)</td><td>1.0–2.0</td><td>2.5–4.0</td><td>1.0–2.0</td><td>2.0–4.0</td></tr>
+        <tr><td style="font-weight:600">CEE (결합형 에스트로겐, mg)</td><td>0.3–0.625</td><td>0.9–1.25</td><td>0.3–0.625</td><td>0.9–1.25</td></tr>
+        <tr class="section-row"><td colspan="5">프로게스토겐</td></tr>
+        <tr><td style="font-weight:600">미분화 프로게스테론 (경구/질, mg)</td><td>100–200</td><td>≥200 (예 300–400)</td><td>100</td><td>≥200</td></tr>
+        <tr><td style="font-weight:600">디드로게스테론 (경구, mg)</td><td>10</td><td>20</td><td>5.0</td><td>10</td></tr>
+        <tr><td style="font-weight:600">MPA (경구, mg)</td><td>5.0*–10</td><td>10–20</td><td>2.5</td><td>5.0</td></tr>
+        <tr><td style="font-weight:600">노르에티스테론아세테이트 (경구, mg)</td><td>2.5–5.0</td><td>2.5–10</td><td>1.25–2.5**</td><td>2.5–5.0</td></tr>
+        <tr><td style="font-weight:600">LNG-IUD (52mg)</td><td colspan="4">20μg/일 방출 — 저/표준 및 POI 용량 모두에 충분</td></tr>
+        <tr class="section-row"><td colspan="5">에스트로겐/프로게스토겐 고정용량 복합제제</td></tr>
+        <tr><td style="font-weight:600">E2/미분화 프로게스테론 (경구, mg)</td><td>해당없음</td><td>2.0–3.0/200–300</td><td>1.0–2.0/100–200</td><td>3.0–4.0/300–400</td></tr>
+        <tr><td style="font-weight:600">E2/노르에티스테론아세테이트 (경피, μg)</td><td>25–50/85–170</td><td>75–100/255–340</td><td>25–50/85–170</td><td>75–100/255–340</td></tr>
+        <tr><td style="font-weight:600">E2/디드로게스테론 (경구, mg)</td><td>1.0–2.0/10</td><td>2.0/10</td><td>0.5–1.0/2.5–5.0</td><td>3.0–4.0/7.5–10</td></tr>
+        <tr><td style="font-weight:600">E2/노르에티스테론아세테이트 (경구, mg)</td><td>1.0–2.0/1.0</td><td>3.0–4.0/2.0–4.0</td><td>0.1–2.0/0.5–1.0</td><td>3.0–4.0/1.5–2.0</td></tr>
+        <tr><td style="font-weight:600">CEE/MPA</td><td>0.625/5.0</td><td>해당없음</td><td>0.3–0.625/1.5–5.0</td><td>해당없음</td></tr>
+        <tr class="section-row"><td colspan="5">고정용량 요법 (Fixed Dose Regimes)</td></tr>
+        <tr><td style="font-weight:600">TSEC (조직선택적 에스트로겐 복합제)</td><td colspan="4">결합형 에스트로겐(CEE) 0.45mg + 바제독시펜 20mg</td></tr>
+        <tr><td style="font-weight:600">STEAR (선택적 조직 에스트로겐활성 조절제)</td><td colspan="4">티볼론 2.5mg</td></tr>
+      </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">*순차 MPA 정식 허가 용량은 10mg; 5mg은 저용량 에스트로겐 병용 시 프로게스토겐 불내약 환자를 위한 절충안. **노르에티스테론아세테이트 1mg은 표준용량 연속병합요법에 적절하나 E2 고정용량 복합제로만 존재 (5mg 정제의 ¼~½). 순차요법은 자궁내막보호를 위해 주기당 12–14일 프로게스토겐이 필요하며, 미분화 프로게스테론 5년 초과 사용 시 자궁내막 안전성 근거는 부족.</div>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 4b. 혈관운동증상(VMS) — 비호르몬 약물요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">MHT는 건강한 증상성 폐경 여성에서 폐경 초기에 시작 시 안면홍조 치료의 표준 요법으로 남아있다. 다만 강한 금기가 있거나 MHT를 원치 않는 여성에서는 비호르몬 약물요법이 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">신경키닌(NK) 표적 치료제는 새로운 비호르몬 치료군으로, 시상하부 KNDy(kisspeptin·neurokinin B·dynorphin) 신경세포 조절을 통해 VMS의 빈도·중증도를 감소시키며 효과는 MHT보다 다소 낮다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">NKT(신경키닌 표적치료)는 높은 질의 RCT 근거에 기반한 효과적 비호르몬 우선 옵션으로 고려되어야 한다.</div>
+        </li>
+      </ul>
+      <ul class="rec-sub"><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text"><strong>페졸리네탄트</strong>: NK3 수용체 길항제. 3상 임상시험에서 효과 확인, 다수 국가에서 VMS 적응증 허가, 유방암 환자에서도 시험 중.</div>
+        </li><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text"><strong>엘린자네탄트</strong>: NK1/NK3 이중 수용체 길항제. 3상 임상시험에서 효과 확인, 다수 국가 허가, 유방암 환자의 내분비요법 관련 VMS에도 효과 입증.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">멘습 관련 VMS 감소에 효과가 입증되었으나 (미국 파록세틴염 7.5mg 제외) VMS 적응증 정식 허가는 없는 비호르몬 약물: SSRI/SNRI, 가바펜티노이드, 옥시부티닌, 클로니딘.</div>
+        </li>
+      </ul>
+      <ul class="rec-sub"><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">가바펜틴은 효과적이나 SSRI/SNRI 대비 졸음이 주요 부작용이다.</div>
+        </li><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">과민성방광 치료제인 옥시부티닌도 VMS 감소에 효과를 보인다.</div>
+        </li><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">타목시펜 복용 여성에서는 CYP2D6 억제 효과로 인해 파록세틴을 피해야 한다.</div>
+        </li><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">성상신경절차단은 소규모 연구에서 효과가 있으나 숙련된 시술자가 필요하다.</div>
+        </li><li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">클로니딘은 효력이 낮고 부작용으로 인해 더 이상 1차 치료로 권고되지 않는다.</div>
+        </li>
+      </ul>
+      <div class="sec-sep"></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">비호르몬제를 이용한 VMS 치료 기간은 호르몬요법과 마찬가지로 주기적으로 재평가해야 한다.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div><!-- /tab-vms -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: GSM ═══════════════ -->
+<div id="tab-gsm" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌸</span> 5. 폐경비뇨생식기증후군(GSM) 및 성기능</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="sub-title">GSM 정의 및 총론</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">외음질위축(VVA)과 GSM은 동일하지 않다. GSM은 더 넓은 범위의 징후·증상을 포함하며 원인도 다양할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">GSM은 매우 흔하며 임상 양상이 다양하고 삶의 질에 큰 영향을 줄 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">GSM의 영향이 과소평가되고 충분히 치료되지 않으므로 의료진은 적극적으로 선별·진단해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">근거기반 자료, 여성의 선호·필요, 옵션 접근성을 고려한 개별화된 치료를 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">삶의 질과 친밀한 관계 개선을 목표로 증상성 GSM을 치료해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">GSM은 치료 없이는 호전되지 않고 치료 중단 시 재발할 수 있는 만성 질환임을 인지·안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">치료 중단 시 증상이 재발할 수 있어 장기 치료가 필요한 경우가 많다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">질 저역가/저용량 에스트로겐에서 전신 위험은 확인되지 않았다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">증상이 시간에 따라 발생할 수 있으므로 무증상이나 GSM 징후가 있는 여성도 조기 치료를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경 관련 비뇨생식기·성기능 증상 개선을 위해 질 에스트로겐요법을 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT 사용 중에도 GSM 증상이 지속되면 질 에스트로겐요법 추가를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">질내 DHEA와 오스페미펜은 질 에스트로겐요법의 대안이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">질 에스트로겐요법·DHEA·오스페미펜의 효과를 비교한 자료는 부족함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">질건조·성교통 여성에게 질 윤활제·보습제 치료를 제공해야 하며, 단독 또는 다른 치료와 병용 가능하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">GSM 치료 목적의 전신 또는 질 테스토스테론 사용에 대한 자료가 부족함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">GSM 여성은 매년 또는 임상적으로 필요시 재평가해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">치료 반응이나 제품 이용 가능성이 다를 수 있으므로 장기 사용 시 다양한 제품을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">치료법의 특성에 따라 장기 안전성이 다를 수 있음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">레이저 치료는 권고할 근거가 불충분함을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">보완의학/요법은 권고할 근거가 불충분함을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">골반저 이상이 GSM과 동반된 경우 물리치료사 의뢰를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">심리성적 요인이 동반된 경우 심리치료사/성치료사 의뢰를 고려해야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">방광 및 골반저</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">비뇨생식기 노화 증상·징후는 폭넓은 개인차가 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">빈뇨·야간뇨·절박뇨 등 하부요로증상은 폐경 후 여성에서 매우 흔하며 요실금 유병률은 연령 증가에 따라 높아짐을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">방광 증상과 폐경의 동시 발생이 반드시 폐경이 주된 원인임을 의미하지는 않음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">생활습관 개선과 방광 재훈련이 과민성방광 증상의 1차 치료로 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">복압성요실금을 호소하는 모든 여성은 우선 골반저근훈련의 도움을 받을 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">하부요로증상이 있는 폐경 후 여성에서는 질 에스트로겐요법을 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">재발성 요로감염(RUTI) 예방을 위해 질 에스트로겐요법이 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">질 에스트로겐요법의 최적 제형·기간은 알려져 있지 않음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">항무스카린제와 질 에스트로겐요법 병용이 과민성방광 의심 증상이 있는 폐경 후 여성의 1차 약물치료를 구성한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">전신 MHT는 요실금 예방에 효과가 없어 보이며 요실금이나 재발성 하부요로감염 관리에 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">DHEA·오스페미펜·질 레이저 등 비에스트로겐 요법을 폐경 후 요로증상 관리에 권고할 근거는 현재 불충분하다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">성기능</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경이 성적 웰빙과 기능에 상당한 영향을 미칠 수 있음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">폐경 상담 시 성 문제를 일상적으로, 그리고 민감하게 다루어야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">성기능의 가장 흔한 변화, 즉 성욕저하장애(HSDD)의 평가·관리에 표준화된 진료 절차를 따라야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">전반적 성기능 개선에 대한 근거는 불충분하지만 성기능 변화 관리의 일환으로 GSM을 인지하고 효과적으로 치료해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">성생활의 질 개선을 위해 생물심리사회적 모델에 기반한 개별화된 관리가 필요함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">배우자가 있는 여성의 성 증상 해결을 위해 배우자의 전반적·성적 건강, 친밀감·관계 문제를 함께 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">다른 적응증으로 처방된 MHT가 성기능을 개선할 수 있으나 대개 효과는 작음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">HSDD로 진단된 폐경 여성의 성기능 변화 치료에 폐경 전 생리적 테스토스테론 농도에 가까운 용량의 경피 테스토스테론 사용을 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">브레멜라노타이드 등 기타 약물요법의 근거는 제한적이다. 최근 플리반세린이 폐경 여성 사용에 대해 FDA 승인되었다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">보완의학/요법이 성반응의 특정 영역(욕구·흥분·오르가슴)을 개선한다는 근거는 불충분함을 상담해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">심리교육이 폐경 후 여성에게 유의한 이득이 있음이 입증되었음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">성기능의 폐경 관련 변화 개선을 위해 개인·대인관계 심리사회적 중재를 고려해야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">특수 집단 — POI</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">비뇨생식기·성 증상 개선을 위해 질 에스트로겐요법을 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">전신 HT로 비뇨생식기 증상이 완전히 완화되지 않는 POI 여성에게는 질 에스트로겐요법을 제공할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI 여성의 질 불편감·성교통 치료에 질 윤활제·보습제를 사용할 수 있으며 다른 치료와 병용 가능하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">POI 여성의 비뇨생식기 증상 관리에 질 레이저·열에너지를 권고할 근거는 현재 불충분하다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">특수 집단 — 유방암 및 부인과암</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">유방암 생존자에서 GSM은 흔하고 중증일 수 있음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">GSM이 있는 유방암 생존자에서 질건조·성교통 1차 치료로 질 윤활제·보습제를 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">근거가 제한적인 경우 가장 보수적인 GSM 치료 전략을 적용해야 함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">유방암 생존자에서 질 에스트로겐요법·DHEA·오스페미펜을 1차 치료로 사용해서는 안 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">근거자료·종양 특성·여성의 선호와 필요·치료 옵션 접근성을 고려하여 개별 유방암 생존자에서 질 에스트로겐요법·DHEA·오스페미펜을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">대부분의 부인과암에서 종양 특성에 주의하며 질 에스트로겐요법·프라스테론·오스페미펜을 사용할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">GSM 관리를 위한 질 레이저·열에너지 사용을 권고할 근거는 현재 불충분함을 안내해야 한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-gsm -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: MSK ═══════════════ -->
+<div id="tab-msk" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 6. 골다공증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">골다공증은 완치되지 않는 평생 질환임을 안내하고, 치료 시작 시점부터 약제 순서(sequencing)와 휴약기 계획을 논의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">치료 기간, 약제 순서, 휴약기는 약제별로 다르다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">동화작용제와 항흡수제는 일상적으로 병용하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">순차요법에서는 동화작용제를 항흡수제보다 먼저 투여하는 것이 바람직하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">폐경 후 골다공증·골절은 예방 가능한 심각한 질환이나 과소진단·과소치료되고 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경은 다양한 약물로 예방 가능한 유의한 골소실과 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">골다공증은 낮은 골밀도(BMD)로 정의되나 이는 골절 위험인자 중 하나에 불과하다. 향후 골절 확률 및 중재 역치는 FRAX, Garvan 등 위험 계산기를 이용해 전체 위험인자를 반영해 평가해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">중재 역치는 향후 10년 주요 골다공증성 골절(MOF) 또는 고관절골절 FRAX 확률에 근거해야 한다. 국가별 연령보정 역치는 동일 연령·평균 BMI 여성의 기존 골절 위험에 상응하는 값으로 산출한다(예: 영국 NOGG 모델). 없을 경우 정해진 기준값(미국 모델)을 사용한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">골절위험을 저위험·고위험·초고위험으로 층화하는 것이 치료 필요성·종류 결정에 도움이 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">모든 폐경이행기·조기폐경 여성은 FRAX(DXA 없이) 또는 지역 개발 선별도구로 선별하고, 위험이 확인되면 DXA를 시행한다. 이전에 선별받지 않았다면 모든 여성은 65세에 DXA를 시행한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">모든 폐경 후 여성은 뼈 친화적 생활습관(저항/체중부하 운동, 낙상예방, 칼슘·비타민D 적정 섭취 식이)에 대해 교육받아야 한다. 이는 모든 약물치료의 필수 보조요법이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT는 폐경 관련 골소실 예방의 1차 치료이다. 폐경 후 10년 이내 또는 60세 이전 시작 시 이익이 위험을 상회할 가능성이 가장 높다. 중단 시 급속한 골소실이 발생하며, MHT는 골다공증 관련 골절 위험을 유의하게 감소시킨다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">비스포스포네이트(BP)는 강력한 골흡수억제제로 모든 골다공증성 골절 예방에 효과가 입증되었다. 고위험·초고위험 골절 여성에 적응증이 있다. 정맥주사 3년, 경구 5년 후 휴약기를 고려하며, 재투여는 FRAX 값 또는 골전환표지자(리세드로네이트·이반드로네이트 중단 18개월 후, 알렌드로네이트 2년 후, 졸레드로네이트 3년 후)에 근거한다. 턱뼈괴사·비정형 대퇴골절은 드문 합병증이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">선택적 에스트로겐수용체조절제(SERM) 랄록시펜은 척추골절·유방암 위험이 있는 무증상 여성에 적응증이 있다. 바제독시펜은 고관절골절 고위험 여성에서 고관절골절 보호효과도 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">데노수맙은 모든 골다공증성 골절 발생률을 감소시키며 고위험·초고위험 여성에 적응증이 있다. 치료기간 제한은 없으나 중단 시 골소실 가속·골절위험 증가가 있어 BP 등 항흡수제로의 전환이 필수적이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">테리파라타이드는 모든 골다공증성 골절 위험을 감소시키는 골형성촉진제로, 초고위험 여성의 1차 치료이다. 치료기간은 2년으로 제한되며 이후 BP·데노수맙 등 항흡수제로 이어져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">아발로파라타이드는 척추·비척추 골절 위험을 감소시키는 골형성촉진제로 초고위험 여성의 1차 치료이다. 치료기간은 18개월로 제한되며 이후 항흡수요법이 이어져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">로모소주맙은 골형성촉진과 골흡수억제의 이중작용을 가지며 모든 골다공증성 골절을 감소시켜 초고위험 여성의 1차 치료이다. 치료기간은 12개월로 제한되며 이후 항흡수요법이 이어져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">초고위험 골절 여성에서는 테리파라타이드·아발로파라타이드·로모소주맙을 항흡수요법에 앞서 사용해야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">표 1. 골절 위험 계층화</div>
+      <table class="ppgl-table">
+        <tr><th>위험군</th><th>기준</th></tr>
+        <tr><td style="font-weight:600;color:var(--green)">저위험 (모두 충족)</td><td>취약골절 없음 · DXA T-score −1~−2.5 사이 · FRAX 10년 확률(TBS 보정): MOF &lt;20%, 고관절 &lt;3%, 또는 국가별 역치 미만</td></tr>
+        <tr><td style="font-weight:600;color:var(--yellow)">고위험 (하나라도 해당)</td><td>취약골절 있음 · T-score &lt;−2.5 · FRAX 10년 확률(TBS 보정): MOF &gt;20%, 고관절 &gt;3%, 또는 국가별 역치 초과</td></tr>
+        <tr><td style="font-weight:600;color:var(--red)">초고위험 (하나라도 해당)</td><td>최근 골절 · 다발골절 · 중증골절 · 치료 중 골절 · 골독성 약물(스테로이드 등) 복용 중 골절 · T-score &lt;−3.0 · FRAX 10년 확률(TBS 보정): MOF &gt;30%, 고관절 &gt;4.5%, 또는 국가별 상한 역치 초과 · 매우 높은 낙상위험 등 기타 요인</td></tr>
+      </table>
+      <div class="sub-title">표 2. 골절 위험도별 치료 권고</div>
+      <table class="ppgl-table">
+        <tr><th>위험도</th><th>치료 권고</th></tr>
+        <tr><td style="font-weight:600">저위험</td><td>칼슘·비타민D 최적화 · 뼈 친화적 생활습관</td></tr>
+        <tr><td style="font-weight:600">고위험</td><td>칼슘·비타민D 최적화 · 뼈 친화적 생활습관 · 낙상예방 · 적절한 항흡수요법 시작</td></tr>
+        <tr><td style="font-weight:600">초고위험</td><td>칼슘·비타민D 최적화 · 뼈 친화적 생활습관 · 낙상예방 · 적절한 동화작용제 후 항흡수요법 고려</td></tr>
+      </table>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💪</span> 7. 근감소증 (Sarcopenia)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">근력·근량·신체기능 저하를 특징으로 하는 근육질환인 근감소증은 에스트로겐 결핍으로 인해 폐경 후 여성에서 유병률이 더 높음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">근감소증 진단 기준은 학회마다 다르나 가장 널리 쓰이는 것은 EWGSOP2(European Working Group on Sarcopenia in Older People) 기준: 낮은 근력, 낮은 근량, 낮은 신체수행능력이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">적절한 진단·중재 전략을 위해 근감소증 평가는 골다공증 확인과 함께 이루어져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT는 근량·근력의 유의한 개선을 보이지 않아 폐경 후 여성의 근감소증 치료에 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">규칙적 신체운동(유산소+저항운동)의 비약물적 치료가 근감소증에 가장 효과적인 중재로 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">장기 자료는 부족하나 운동에 더해 단백질(유청·류신), 크레아틴, L-시트룰린 보충을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">다른 종류의 단백질 보충이나 마그네슘의 역할은 잘 확립되어 있지 않아 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">비타민D 보충의 근감소증 효과는 일관되지 않으나 낙상 감소·골건강에는 이득이 관찰됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">지중해식 식단은 폐경 후 여성의 근량 증가·골질 개선과 연관되는 반면 친염증성 식이는 근감소증 위험 증가와 연관됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">체중감량을 위한 열량제한 시 근량 유지·근손실 방지를 위해 단백질이 풍부한 식이와 규칙적 신체활동을 병행해야 한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 8. 피부·연골·결합조직</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">에스트로겐 수용체는 모든 결합조직에 광범위하게 발현된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">에스트로겐 결핍은 피부·모발·힘줄 구성·질의 부정적 변화와 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">에스트로겐 결핍은 관절통 증가 및 관절연골 얇아짐과 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">난소호르몬은 SLE·류마티스관절염 등 자가면역질환의 발현·중증도·진행에 역할을 할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">성호르몬이 결합조직·자가면역기능 이상에 미치는 영향을 다룬 현재까지 연구의 질은 낮아 치료 권고를 도출할 수 없다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-msk -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: CVNEURO ═══════════════ -->
+<div id="tab-cvneuro" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❤️</span> 9. 심대사 건강 (Cardiometabolic)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">일부 심혈관 위험인자는 여성에게 고유하거나 불균형적으로 영향을 미치며 특히 당뇨병이 그러하다. 고유 위험인자로는 조기폐경/POI, 임신성 고혈압질환, 임신성 당뇨병, 조산, 다낭성난소증후군, 자가면역질환이 포함된다. 정확한 심혈관 위험 층화를 위해 이러한 성별 특이 인자 평가가 필수적이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">60세 미만, 최근 폐경, 심혈관질환이 없는 여성에서 에스트로겐요법은 관상동맥질환(CHD)과 전체 사망률을 감소시킨다. Cochrane 리뷰, 메타분석, WHI 18년 추적 등 다수 분석에서 60세 이전 또는 폐경 후 10년 이내 시작 시 일관된 사망률 이득이 확인되었다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">경구 CEE+MPA 매일 연속병합요법 자료는 상대적으로 제한적이나, 덴마크·핀란드 연구에서 나타난 것처럼 다른 병합요법들도 심혈관 보호효과를 보이는 것으로 나타난다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">60세 미만 또는 폐경 후 10년 이내의 건강한 폐경 후 여성에서 MHT 시작을 결정할 때, 전체 사망률 감소와 CHD 예방에 대한 잠재적 이익을 고려할 것을 권고한다. CHD 1차 예방 단독 목적의 MHT 사용은 "허가 외(off-label)" 사용이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT는 신규 당뇨병 발생률을 감소시키며, 이는 60세 미만·심혈관질환 근거가 없는 여성에서 골다공증·골절·대장암·CVD·전체 사망률 감소 등 MHT의 다른 예방 효과와 함께 고려되어야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">MHT는 2차 예방 목적으로 사용하지 않으나 CVD 사건 위험을 증가시키는 것으로 보이지는 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">경피 에스트로겐은 혈전·염증 위험이 낮아 심혈관 위험인자가 조절되지 않는 여성에서 증상 완화를 위한 합리적 선택일 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">미국 FDA의 최근 "HRT" 블랙박스 경고 삭제는 이익-위험비에서 심대사적 이득이 주요하게 기여함을 부각시킨다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 10. 응고 — 정맥혈전색전증(VTE)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">비만, 유전성 혈전성향증, VTE 과거력이 있는 경우 VTE 위험이 증가한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT가 필요한 여성은 VTE 위험에 대해 평가·상담받아야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">경구 에스트로겐요법은 VTE 위험을 증가시키므로 VTE 고위험군에는 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">경구와 달리 경피 에스트로겐요법은 비만·유전성 혈전성향증·VTE 과거력 등 추가 위험인자가 있어도 VTE 위험을 증가시키지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">MHT가 필요한 고위험 여성에는 자궁이 있는 경우 적합한 프로게스토겐과 병용한 경피 에스트로겐이 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">병합요법에서는 프로게스토겐 선택이 중요하며 미분화 프로게스테론, 디드로게스테론, 레보노르게스트렐 방출 자궁내장치 등 적합한 프로게스토겐 사용이 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT 시작 전 일상적 혈전성향증 검사의 적응증은 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT 시작 여성에서 일상적 예방적 항응고요법의 적응증은 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">경구 MHT 복용 중 VTE가 발생한 여성이 항응고요법 중이라면 MHT의 즉각적 중단이 반드시 필요하지는 않다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 11. 중추신경계 (치매 포함)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="sub-title">알츠하이머병(AD)</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">CEE+MPA는 65세 이상에서 MHT를 시작한 여성의 전체원인 치매 위험을 증가시키며, 가장 흔한 치매 유형은 알츠하이머병이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">난소절제술을 받은 폐경 전 여성에서 ET는 치매 위험 감소와 연관되어, POI·조기폐경 여성의 치매 예방 목적 ET 사용을 뒷받침한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">현재 자료는 자연폐경 여성에서 AD 1차 예방 목적의 MHT 시작을 권고하지 않는다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">파킨슨병(PD)</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">통상 연령대(45세 이후)에 폐경을 경험한 대부분의 여성에서 PD 예방·치료 목적의 ET는 사용하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">조기(40세 미만) 또는 이른(40~45세 미만) 폐경(자연 또는 의인성)을 경험한 여성에서는 PD 예방을 위해 ET를 고려해야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">뇌졸중</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT가 뇌졸중 위험에 미치는 영향은 시작 시점에 따라 다르다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경 후 10년 이내 또는 60세 미만에 MHT를 시작한 여성은 MHT를 사용하지 않는 여성과 뇌졸중 위험이 유사하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경 후 10년 초과 또는 60세 초과에 시작한 경우, 경구 에스트로겐 함유 MHT는 뇌졸중 위험 증가와 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">뇌졸중 위험은 MHT 투여경로·용량·제형에 따라 다를 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">경피 투여경로 및 저용량 MHT는 경구·고용량 대비 위험이 낮을 수 있다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">편두통</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">조짐편두통이 있는 폐경이행기·폐경 후 여성에서 에스트로겐 함유 경구피임제는 뇌졸중 위험 증가와 연관되며, 경구 에스트로겐 함유 HT에서도 정도는 낮지만 위험 증가가 있을 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">무조짐편두통이 있는 폐경이행기 여성에서 연속 복용하는 병합경구피임제(COC)는 배란을 억제하여 에스트로겐 금단으로 인한 월경관련편두통 유발을 예방하는데 도움이 될 수 있다. 에스트라디올·에스테트롤(E4) 함유 제형이 혈전색전 프로파일이 더 양호하여 더 안전한 것으로 간주된다. 다만 다른 혈관위험인자가 있는 폐경이행기 여성에서는 COC를 피해야 하며 투여 후 편두통이 발생하면 중단해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">편두통이 있는 폐경 후 여성에서는 에스트로겐 수치 변동이 적은 경피 제형이 경구 제형보다 선호된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">편두통의 경우 경피 MHT 제형이 혈전색전 프로파일이 더 양호하여 경구 제형보다 선호된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">조짐편두통이 있는 여성에서는 폐경 관련 VMS에 대해 비호르몬 중재가 효과적인 대체 치료이다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-cvneuro -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: CANCER ═══════════════ -->
+<div id="tab-cancer" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 12. 유방암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT 처방 시 유방암 위험을 고려할 때는 기저 위험 평가가 중요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">MHT에 따른 유방암 위험은 요법·개인 기저위험에 따라 다르다. Gail, IBIS, CanRisk 등 무료 위험평가 도구가 있으나 특정 도구 사용을 권고할 근거는 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">낮은 유방밀도 등 기저위험이 낮은 여성을 선택하고, 체중감량·절주·신체활동 증가 등 예방적 생활습관에 대한 교육을 통해 MHT 관련 유방암 위험을 부분적으로 낮출 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">유방밀도 증가는 유방암 위험 증가와 연관되므로 MHT는 신중히 처방해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">유방밀도가 높은 MHT 사용 여성에서는 세심한 방사선학적 추적관찰을 고려해야 한다. 병합(에스트로겐-프로게스토겐) MHT는 유방밀도를 증가시킬 수 있어 추가 방사선학적 추적이 필요할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT로 인한 유방암 위험은 작으며, 신체활동 감소·비만·음주 등 흔한 생활습관 요인에 따른 위험 증가와 비슷하거나 더 낮다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">병합 MHT는 사용기간이 길수록 유방암 위험이 증가하며 중단 후 점진적으로 감소한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">순차병합요법은 연속병합요법보다 위험이 낮을 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">에스트로겐 단독요법은 병합요법보다 유방암 위험이 낮다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">경구·경피 에스트라디올 간 위험 차이는 없다. 용량과 위험의 연관성에 대한 확실한 근거도 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">유방암 위험 증가는 주로 에스트로겐요법에 합성 프로게스토겐을 추가하는 것(예: CEE+MPA 연속병합)과 관련되며 사용기간에 비례한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">미분화 프로게스테론 또는 디드로게스테론은 다른 합성 프로게스토겐 대비 위험이 더 낮은 것으로 보여 유방암에 대해 더 나은 위험 프로파일과 연관될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">프로게스토겐·안드로겐의 종류·용량·투여경로에 따른 유방암 발생률 차이를 완전히 평가하기에는 자료가 부족하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">유방암 과거력이 없는 여성에서 질내 호르몬 투여로 인한 유방암 위험 증가는 시사되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">레보노르게스트렐 자궁내장치는 유방암 기저위험이 높은 여성에게는 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">티볼론을 포함한 MHT는 유방암 환자 또는 유방암 고위험군에게 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경 후 여성의 테스토스테론요법에서 유방암 발생률·유방밀도 증가는 관찰되지 않았다. 장기 위험 평가를 위한 RCT 자료는 부족하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT 중 유방통이 발생하면 유방 내약성이 좋지 않다는 신호일 수 있어 용량/종류 조정이 필요할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">유방암 생존자의 폐경 증상에 대한 적극적 관리는 삶의 질과 약물순응도를 개선한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">유방암 환자는 폐경 증상에 대한 일상적·적극적 문진을 제공받고 이를 해결해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">유방암 후 VMS 치료에 사용되는 비호르몬요법이 재발률·사망률에 영향을 준다는 근거는 없어 1차 치료로 제공할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">GSM에 대한 비호르몬요법이 유방암 재발률·사망률에 영향을 준다는 근거는 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">질 에스트로겐요법은 유방암 생존자의 GSM에 효과적이며 타목시펜 복용 여성에서도 안전한 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">비호르몬 치료에 반응하지 않는 아로마타제억제제 복용 여성에서는 유방암 전문의와 개별화된 치료 옵션을 논의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">유방암 생존자에서 MHT(에스트로겐요법 또는 에스트로겐-프로게스토겐요법)의 안전성을 뒷받침하는 자료는 부족하다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 13. 자궁내막 안전성 및 부정출혈</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">BMI·당뇨병 등 조절 가능한 인자를 최적화하면 MHT 중 예정 외 출혈 및 자궁내막암 위험을 줄일 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">처방된 약제 순응도를 확인하고 특히 정제/젤/패치/스프레이 적용 시점과 프로게스토겐 투여 시점·기간에 주의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁이 있는 여성에서는 에스트로겐 용량에 비례한 용량의 월별 프로게스토겐(순차 또는 연속)이 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">순차 MHT 사용 여성은 28일 주기당 최소 10일의 NET 또는 MPA, 또는 12일의 디드로게스테론/미분화 프로게스테론이 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">권고된 기간보다 짧게 주기적 프로게스토겐을 복용하는 여성은 자궁내막증식증·암 위험이 증가하며 이는 용량·기간에 비례함을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">적정 용량의 순차 미분화 프로게스테론을 복용하는 여성은 자궁내막암 위험이 증가하지 않는 것으로 보이나 5년 초과 사용에 대한 근거는 제한적임을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">연속병합 MHT(표준용량)를 복용하며 무월경 상태인 폐경 후 여성은 MHT 비사용자보다 자궁내막암 위험이 낮음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">45세 초과 여성이 순차 MHT를 사용 중이면 5년 후 또는 54세 중 먼저 도래하는 시점에 연속병합 MHT로 전환을 제안해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">고용량 에스트로겐 사용 여성은 자궁내막 보호에 필요한 최적 프로게스토겐 용량에 대한 자료가 제한적임을 안내받아야 한다. 에스트로겐 용량에 비례해 더 높은 프로게스토겐 용량이 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">52mg LNG-IUD는 초저용량~고용량 에스트로겐에 대해 폐경이행기·폐경 후 여성 모두에서 최대 5년까지 자궁내막 보호를 제공한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">52mg LNG-IUD 위치 이상 시 MHT의 일환으로 적절한 자궁내막 보호가 되는지 불확실하다. 자궁저부에서 2cm 초과 이탈, 경부관 내 위치, 또는 관련 증상(통증·출혈)이 있으면 제거 후 재삽입을 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT 중 예정 외 출혈이 있는 여성은 자궁내막암 개별 위험인자, 출혈 양상, MHT 제제 종류·용량에 대해 평가받아야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">해당되는 경우 골반·복부 진찰을 시행하고, 자궁경부세포검사·하부생식기 감염 선별·골반초음파 등 초기 검사를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁내막암 위험인자가 없는 경우 전체 자궁내막암 위험은 MHT 비사용 동연령군보다 낮을 가능성이 높아, 추가 검사 전 프로게스토겐 용량/종류 조정을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT 사용 6개월 후에도 예정 외 출혈이 지속되면 프로게스토겐 요법의 검사 및 추가 조정이 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁내막암 주요 위험인자 1개 또는 경미한 위험인자 2개가 있으면 즉시 추가 검사를 시행해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">초기 검사는 경질초음파를 시행해야 한다. 검사의 우선순위는 자궁내막암 위험인자, MHT 제제 종류, 출혈 양상, 지역 자원 등 여러 요인에 따라 결정된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">연속병합 MHT에서 자궁내막두께 &gt;4mm는 비정상으로 간주한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">순차병합 MHT에서는 주기 중 자궁내막두께가 변할 수 있다. 이상적으로 금단출혈 직후 초음파를 시행해야 하며 &gt;7mm 측정 시 추가 검사가 필요하다. 이 시기 외 자궁내막두께 증가는 적절한 시점에 재검사를 시행해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁내막두께가 정상 범위인 여성은 안심시키고 MHT 조정을 제공한다. 정상 결과에도 6개월 초과하여 출혈이 지속되면 자궁내막 평가를 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁내막두께가 비정상이거나 충분히 관찰되지 않으면 추가 자궁내막 평가를 권고한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">중대한 자궁내막암 위험인자가 없으면 검사 전 MHT를 중단할 필요는 없으며, 이 기간 중 프로게스토겐의 적절한 조정이 가능하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">자궁내막 평가는 여성이 수용 가능하고 진료 자원이 허락한다면 외래 맹검 자궁내막생검 또는 자궁내막 채취를 동반한 자궁경검사로 시행할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">음성 맹검생검 3개월 후에도 예정 외 출혈이 지속되면 자궁경검사가 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">맹검생검에서 검체 불충분 시 자궁경검사를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">연속병합 MHT 여성에서 맹검생검상 증식성 자궁내막이 보고되고 자궁내막암 위험인자가 있으면 자궁경검사가 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">비정형증식증 또는 자궁내막암이 보고되면 MHT를 서서히 중단하고 비호르몬 대안을 논의하며 관련 전문의에게 긴급 의뢰해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">이전 음성 자궁경검사 6개월 후에도 예정 외 출혈이 지속되면 재검사를 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">연속병합 MHT에서 예정 외 출혈이 지속되는 경우, 특히 여전히 폐경이행기 연령이면 순차 MHT로 전환을 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">저용량 에스트로겐에서 무월경률이 더 높으므로 에스트로겐 용량 감량을 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">프로게스토겐 용량 및(순차요법의 경우) 기간 증량을 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">미분화 프로게스테론보다 무월경률이 높은 경구 NETA 또는 MPA로의 전환을 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">임상적으로 안전하다면, 경구 MHT가 경피 MHT보다 더 높은 누적 무월경률을 달성할 수 있어 경구 제형 전환을 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">특히 자궁내막암 위험인자가 있는 여성에서 이용 가능하다면 52mg LNG-IUD를 옵션으로 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">대안으로 이용 가능하다면 CEE+바제독시펜 또는 티볼론이 있다. 50세 미만이고 혈전위험 인자가 없다면 에스트라디올 함유 병합경구피임제를 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">출혈이 지속되면 MHT 감량 또는 중단을 고려하고 비호르몬 대안을 제공한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 14. 난소암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">난소가 있는 개인에서 병합 MHT 사용 시 난소암 위험이 매우 경미하게 증가한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">난소가 있는 개인에서 5년 이상 사용한 에스트로겐 단독 MHT도 난소암 위험을 매우 경미하게 증가시킨다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">진단 전 MHT 사용은 난소암 예후에 불리한 영향을 미치지 않는 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">상피성 난소암 치료 후 MHT는 통상 금기가 아니며 잠재적 위험·이익을 여성과 논의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">고등급 장액성·자궁내막양 난소암 대부분이 에스트로겐 수용체를 발현하지만, 제한적인 RCT 자료는 전신 MHT에 따른 재발 위험 증가를 시사하지 않는다. 조기/조기폐경으로 인한 건강 영향이 없는 여성에서는 비호르몬 옵션을 우선 제공하는 것이 적절할 수 있다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 15. 폐암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">건강한 폐 조직과 암 조직 모두에 에스트로겐 수용체가 존재하나, 최근 연구들은 자연/수술적 폐경 상태와 폐암 위험 간의 확실한 연관성을 확인하지 못한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">MHT와 폐암에 대한 자료는 일관되지 않으며 MHT가 폐암 발생률·사망률에 명확한 영향을 미친다는 근거는 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">폐경 및 MHT가 폐암 발생률·사망률에 미치는 역할은 아직 결론이 나지 않았음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT 상담 시 폐암 위험을 고려하되, 다른 위험이나 금기가 없다면 이를 이유로 처방을 회피해서는 안 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">폐암 위험인자 상담 시 흡연 등 핵심 조절 가능 위험인자를 강조하는 것이 중요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">폐암 위험을 최소화하는 최적 MHT 요법·기간은 아직 불분명하며 확인을 위한 추가 연구가 필요함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">MHT로 이득을 보고 있는 폐암 진단 여성은 생존기간에 부정적 영향이 없어 보이고 오히려 유익할 수도 있어 중단할 필요가 없을 수 있다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 16. 대장암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">세계적으로 세 번째로 흔한 악성종양인 대장암(CRC)의 높은 유병률을 고려할 때 효과적인 위험 완화 전략 시행이 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">역학연구는 남성 대비 여성에서 CRC 발생률이 낮음을 일관되게 보여준다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">여성의 낮은 CRC 발생률은 에스트로겐의 보호효과를 반영할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">내인성 에스트로겐 수치와 CRC 위험 간 역상관을 보고한 연구들이 있으나 근거는 아직 결론적이지 않다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">WHI 병합 에스트로겐-프로게스틴군과 포괄적 우산리뷰(umbrella review)는 MHT의 보호적 역할을 뒷받침하나, 이 보호효과는 시간이 지나며 약화되었고 CRC 특이 사망률의 유의한 감소는 관찰되지 않았다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">에스트로겐 신호전달의 유전적 개인차가 에스트로겐 매개 보호에 대한 반응 차이를 설명할 수 있어 CRC 결과의 이질성에 영향을 줄 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">시사적 근거에도 불구하고 HT는 현재 CRC 위험 감소 전략으로 인정되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">현행 공중보건 지침은 과일·채소·통곡물이 풍부한 건강한 생활습관, 대장내시경 또는 잠혈검사를 통한 정기적 CRC 선별검사를 CRC 발생률·사망률 감소에 가장 효과적인 근거기반 중재로 권장한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 17. 자궁경부암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">HPV 비의존성 자궁경부암을 가진 증상성 여성, 특히 치료로 인한 조기/조기폐경 여성에서 MHT를 고려할 수 있다. 다만 이 하위군에서의 안전성 자료가 제한적이므로 신중한 개별 평가가 권고되며 위험이 불확실한 경우 비호르몬 옵션이 선호될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">MHT가 자궁경부암 발생을 예방할 가능성은 낮으며, MHT와 HPV 비의존성 자궁경부암 간 연관성 평가를 위한 추가 연구가 필요하다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 18. 상부 위장관암</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경 후 여성은 남성과 유사하게 관리되어야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT는 (조기) 간세포암의 예방 및 진행 지연에 어느 정도 이득이 있어 예후 개선에 도움이 될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 B">B</span></div>
+          <div class="rec-text">대부분의 여성에서 생활습관 개선이 MHT보다 간 관련 결과에 더 큰 이득을 준다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">관찰연구들은 MHT가 폐경 후 여성의 위암 위험 감소와 연관될 수 있음을 시사한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">늦은 폐경·높은 출산력 등 장기간 에스트로겐 노출과 관련된 생식 요인도 낮은 위암 위험과 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">식도암의 경우 MHT의 보호효과에 대한 근거가 덜 명확하나 선암종에 대해서는 보호적 연관성 가능성이 일부 시사된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">기전 연구들은 간암·위암에서 에스트로겐의 보호적 역할에 대한 생물학적 개연성을 제공하며 이 분야 추가 연구의 필요성을 강조한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-cancer -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: QOL ═══════════════ -->
+<div id="tab-qol" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 19. 삶의 질 — 정신심리·인지 건강</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="sub-title">삶의 질 및 불안</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">불편한 폐경 증상이 있는 여성에서 MHT는 폐경 관련 삶의 질을 개선한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">불편한 폐경 증상이 있는 여성에서 MHT는 전반적·일반적 건강 관련 삶의 질은 개선하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경이행기는 불안이 없던 여성에서 불안 증상 발생에 취약한 시기일 수 있다. 불안 성향이 높은 여성에서는 폐경이행기 동안 불안 증상이 지속적으로 높을 수 있으나, 폐경 단계 자체는 불안 증상과 관련이 없다. VMS가 폐경 단계보다 불안 증상과 더 강하게 관련되는 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">불안 증상은 중등도~중증 VMS, 수면불량 등 폐경 증상과 흔히 동반됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">불안장애에 대한 MHT의 효과는 알려져 있지 않다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경이행기·폐경 후 여성의 불안 증상 치료를 위한 MHT 사용을 권고할 근거는 불충분하다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">인지</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">조기난소부전·조기폐경을 제외하고, 어떤 연령에서도 인지저하 예방·치료 목적으로 MHT는 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">65세 초과 여성에서 CEE+MPA는 인지에 해로울 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자연 폐경 초기에는 MHT가 인지에 중립적 영향을 미친다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">자궁절제술과 동시 양측난소절제술 직후 시작한 MHT는 인지에 이득이 될 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">중등도~중증 VMS 여성 및 폐경이행기 여성에서 MHT가 인지에 미치는 영향은 알려져 있지 않다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">기분·우울</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">우울장애가 없는 폐경이행기 여성에서 ET가 무쾌감증을 개선한다는 일부 근거가 있다. ET가 폐경이행기 여성의 우울 증상을 보다 일반적으로 개선하는지는 아직 알려져 있지 않다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">ET는 VMS 유무와 관계없이 우울장애가 있는 폐경이행기 여성의 우울 증상을 개선할 수 있으며, 이 집단에서 ET의 효능은 항우울제와 유사한 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">ET는 우울장애가 없는 폐경 후 여성에서 우울 증상을 낮추는 데 효과적일 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">ET는 우울장애가 있는 폐경 후 여성의 우울 증상 개선에는 효과가 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">MHT는 폐경이행기 전반에 걸쳐 정서적으로 안정된(euthymic) 여성에서 임상적으로 유의한 우울 증상의 발현을 예방할 수 있으나, 이 용도로 권고하기 전 더 많은 근거가 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">우울장애가 있는 중년 여성에서 기분 개선은 수면 개선과 관련이 있었으나 VMS 개선과는 관련이 없었다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">ET는 VMS가 있는 폐경이행기 여성에서 항우울제에 대한 임상 반응을 증강시킬 수 있다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">수면</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">수면장애, 특히 수면 중 각성 후 재입면 곤란은 흔한 폐경 증상임을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">야간 VMS는 각성과 강하게 연관됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">폐경이행기 전반의 수면 불량은 기분·인지 변화는 물론 알츠하이머병, 고혈압, 심혈관질환, 당뇨병, 전체 사망률을 포함한 다양한 건강 결과와 관련됨을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">MHT는 VMS가 있는 여성의 수면을 개선하나 중년 여성 전반의 수면에는 영향을 미치지 않는 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">경피 에스트로겐은 VMS 및 기타 증상에 대한 효과를 넘어 폐경이행기 여성의 수면의 질을 개선할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">취침 전 복용하는 미분화 프로게스테론은 폐경 후 여성의 다양한 수면 결과를 개선한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">불면증 인지행동치료(CBT-I)는 폐경이행기 전반 여성의 수면장애에 대한 1차 치료로 권고된다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💪</span> 20. 안드로겐 요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">테스토스테론 혈중농도는 가임기 동안 감소하고 자연폐경에 급격한 변화는 없으며 70대부터 다시 증가한다. DHEA 혈중농도는 연령에 따라 점진적으로 감소한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">대부분의 면역측정법은 여성 범위의 테스토스테론 측정 정밀도가 부족하고 검사법 간 참고범위가 다르며, 그 미만이면 테스토스테론 결핍으로 규정할 수 있는 혈중 수치는 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경 후 성욕저하장애(HSDD)는 생리적 용량 테스토스테론요법의 치료적 시도가 근거기반으로 인정되는 적응증이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">테스토스테론 처방 전 성 관련 문제를 호소하는 모든 여성은 포괄적 생물심리사회적 평가를 받고 조절 가능한 요인이 다루어져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">현재 자료는 폐경 후 HSDD 이외의 어떠한 증상·상태 또는 질병예방 목적의 테스토스테론 처방을 뒷받침하지 않는다. (근거 수준 B~A 범위)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">전신 DHEA요법이 여성의 성기능 변화나 다른 임상 증상·상태 치료에 효과적이라는 근거는 자료가 뒷받침하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">질내 DHEA(프라스테론)는 외음질위축(VVA)으로 인한 성교통 치료의 효과적 옵션이다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 21. 폐경이행기 피임</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경이행기 여성에게 피임 옵션 고려는 중요하다. 피임 상담은 동반질환·위험인자·개인 선호를 고려해 개별화되어야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">폐경이행기 여성에서 출혈 양상 변화는 흔하다. 52mg LNG-IUD, 일부 프로게스토겐단독제(POP), 병합호르몬피임제(CHC)는 출혈을 감소시키고 삶의 질 개선과 연관되나, 대사 위험인자가 있는 여성에서 CHC의 장기 사용은 당뇨병전단계·제2형당뇨병 위험을 증가시킨다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">노메게스트롤아세테이트(NOMAC)와 17β-에스트라디올(E2) 함유 병합경구피임제는 레보노르게스트렐 함유 COC 대비 VTE 위험 증가가 없어 폐경이행기 여성에게 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">처방 시 프로게스토겐단독 피임법 간의 이익·위험(예: 출혈 감소의 이득, 데포medroxy프로게스테론아세테이트(DMPA)의 골건강 위험)을 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">DMPA는 골밀도(BMD)를 경도로 가역적으로 감소시키며 이는 폐경으로 악화되지 않는다. 에스트라디올·노르에티스테론(NETA)과 병용하는 GnRH 길항제인 렐루골릭스를 포함한 다른 피임법에서는 이러한 소견이 관찰되지 않았다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">렐루골릭스를 에스트라디올·NETA와 병용하는 요법은 자궁근종·자궁내막증 치료제로서 피임 효과와 함께 출혈·통증을 줄여 삶의 질을 높이고 골밀도를 유지한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">CHC와 프로게스토겐단독 피임법 모두에서 유방암 발생 위험의 경미한 증가가 보고되었다. 이 자료는 폐경이행기 여성에 특이적이지 않으며 중단 후 위험이 감소해 10년 후에는 유방암 관련 위험이 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">저용량 에스트로겐을 병용한 52mg LNG-IUD 사용은 폐경이행기 증상 완화 및 자궁내막 보호·출혈 조절 등 장기 건강 이득 제공에 가장 효과적인 옵션으로 보인다. 52mg LNG-IUD에 적합하지 않거나 이를 거부하는 여성에게는 COC 또는 프로게스토겐단독 피임법이 옵션이 될 수 있으나 폐경이행기 여성에 대한 추가 이득은 상대적으로 적을 수 있다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-qol -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: POI ═══════════════ -->
+<div id="tab-poi" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👧</span> 22. 조기난소부전(POI) / 조기폐경(EM)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="alert alert-purple" style="margin-bottom:8px"><span>📌</span><div><strong>POI</strong>는 40세 미만 여성에서 난소 활동이 소실된 내분비·성선 질환이다. <strong>조기폐경(40~45세)</strong>도 유사한 영향을 미친다. 전 세계 유병률은 최대 3.5~3.7%로 드문 질환이 아니다.</div></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">POI는 내분비 질환이자 성선 질환으로 40세 미만 여성의 난소 활동 소실로 정의되며, 조기폐경(40~45세)도 유사한 영향을 미친다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">POI 진단은 ESHRE 2024 POI 가이드라인에 따라 4개월 이상의 월경 이상/무월경과 FSH &gt;25 IU/L 1회 이상 확인에 기반한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">진단이 불확실한 경우 4–6주 후 FSH를 재검사해야 한다. POI 진단을 위한 FSH 검사는 월경주기 특정일에 맞출 필요가 없다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI는 드문 질환이 아니며 전세계 인구의 최대 3.5–3.7%에서 발생함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">POI의 임상 양상은 다양하며 희발/무월경, 에스트로겐 결핍 증상, 불임, 또는 원인 질환의 증상을 포함한다. 증상은 미미하거나 간헐적이거나 중증도가 다를 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI는 다양한 원인을 가진 이질적 질환이며 가장 흔한 원인은 특발성이다. 정밀 유전자 검사 발전으로 더 많은 유전적 원인이 밝혀지고 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI는 폐경 증상, 불임, 삶의 질 저하, 심리·성적 웰빙 저하, 심혈관질환·골다공증·근육 이상·인지저하·치매·파킨슨증 위험 증가와 연관됨을 안내해야 한다. 미치료 POI는 기대수명 감소와 연관된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">POI 원인 조사에는 호르몬 검사, 자가면역 원인 선별, 골반초음파가 포함되어야 한다. 이용 가능하다면 적절한 상담 후 핵형검사, 취약X 전돌연변이 검사, 차세대 유전자 시퀀싱 등 추가 유전자 검사를 고려한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">POI 진단을 공감을 담아 민감하고 세심하게 전달하는 것이 중요하다. 여성은 근거기반 정보와 상담을 제공받아야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">진단 후 치료 개별화, 삶의 질 최적화, 장기 건강 유지를 위해 포괄적 평가가 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">POI 특이적 자료는 부족하나 심대사·골 건강 최적화를 위해 생활습관·식이·운동에 대해 상담받아야 한다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">치료</div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI의 주요 치료는 HT(호르몬대체요법 또는 병합경구피임제)이며 조기에 시작하여 통상적인 폐경 연령까지는 최소한 지속해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">이환율·사망률 위험 감소를 위한 1차 예방 목적으로, 증상 유무와 관계없이 HT를 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">HRT는 자궁내 프로게스토겐 방출 장치와 병용하지 않는 한 피임 효과가 있는 것으로 간주해서는 안 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">POI 여성은 적절한 증상 조절과 골 보호를 위해 통상 폐경 연령의 여성보다 더 높은 용량의 HT가 필요할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자궁이 있는 모든 POI 여성에서 자궁내막 보호를 위해 에스트로겐과 함께 프로게스토겐을 병용해야 하며, 고용량 에스트로겐 사용 시 프로게스토겐 용량도 증량해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">POI 여성은 HT에 따른 유방암 위험이 동일 연령대의 정상 난소기능 여성보다 높다는 근거가 없음을 안내받을 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">POI 여성의 HSDD 진단·관리에는 생물심리사회적 접근을 사용해야 하며, 적절한 경우 테스토스테론요법 처방을 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">HT가 금기인 경우 비호르몬 약물·비약물 치료를 고려할 수 있으나 POI 특이적 근거가 부족함을 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">POI 여성에서 보완요법의 일상적 사용에 대한 유효성·안전성 근거가 불충분함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">POI 여성은 현재 난소 활동과 자연 임신율을 신뢰성 있게 높이는 중재가 없음을 안내받아야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">자연 임신에 이르지 못한 POI 여성은 현재 최선의 가임력 옵션이 보조생식술(ART)을 이용한 난자/배아 공여 또는 입양임을 안내받아야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">POI 여성의 최적 관리를 위해 정기적 추적관찰과 다학제 진료가 권고된다.</div>
+        </li>
+      </ul>
+      <div class="sub-title">표 1. 조기난소부전(POI)의 주요 원인</div>
+      <table class="ppgl-table">
+        <tr><th>범주</th><th>주요 원인</th></tr>
+        <tr><td style="font-weight:600">유전적</td><td>염색체 이상(X염색체 이수성·모자이시즘, 구조이상, X-상염색체 전좌 등 터너증후군 포함) · 핵유전자 변이(FMR1 전돌연변이, NOBOX·FSHR·BMP15·FOXL2·GDF9·NR5A1·STAG3 등) · 증후군성 POI(AIRE 유전자 변이에 의한 자가면역다발내분비병증후군1형 등) · 미토콘드리아 유전자(MT-CO1) · 비암호화 RNA</td></tr>
+        <tr><td style="font-weight:600">대사성</td><td>갈락토스혈증(GALT 유전자) 등</td></tr>
+        <tr><td style="font-weight:600">자가면역질환</td><td>자가면역 갑상선질환, 다발내분비병증후군, 부신기능부전, 원형탈모, 백반증, 악성빈혈, 셀리악병, 부갑상선기능저하증, 크론병, 특발성혈소판감소증, 원발성담즙성간경변, 사구체신염, 중증근무력증, 다발성경화증, 류마티스관절염·루푸스·건선 등</td></tr>
+        <tr><td style="font-weight:600">감염</td><td>유행성이하선염, HIV, 거대세포바이러스, 수두, 결핵, 이질균, 말라리아, 대상포진</td></tr>
+        <tr><td style="font-weight:600">환경 독성물질</td><td>흡연, 유기오염물질, 프탈레이트, 카드뮴·탈륨·비소 등 중금속, 다환방향족탄화수소</td></tr>
+        <tr><td style="font-weight:600">의인성</td><td>항암화학요법·방사선치료 · 양측난소절제술(수술적 POI) · 난소절제 없는 자궁절제술/자궁동맥색전술/자궁내막증 수술, 일측난소절제술</td></tr>
+      </table>
+      <div class="sub-title">표 2. POI 표준 및 특이 용량 HRT 요법 요약 (Panay 2020 수정 인용)</div>
+      <div style="overflow-x:auto">
+      <table class="ppgl-table" style="min-width:680px">
+        <tr><th>제형 (24시간당)</th><th>순차병합 · 저/표준용량</th><th>순차병합 · POI 용량</th><th>연속병합 · 저/표준용량</th><th>연속병합 · POI 용량</th></tr>
+        <tr><td style="font-weight:600">패치 (경피, μg/24h)</td><td>25–50</td><td>75–100</td><td>25–50</td><td>75–100</td></tr>
+        <tr><td style="font-weight:600">젤 사쉐(sachet,1회용) (경피, mg)</td><td>0.5–1.0</td><td>2.0–3.0</td><td>0.5–1.5</td><td>2.0–3.0</td></tr>
+        <tr><td style="font-weight:600">경구 (mg)</td><td>1.0–2.0</td><td>2.5–4.0</td><td>1.0–2.0</td><td>2.0–4.0</td></tr>
+        <tr><td style="font-weight:600">미분화 프로게스테론(경구/질, mg)</td><td>100–200</td><td>≥200 (예 300–400)</td><td>100</td><td>≥200</td></tr>
+        <tr><td style="font-weight:600">디드로게스테론 (경구, mg)</td><td>10</td><td>20</td><td>5.0</td><td>10</td></tr>
+        <tr><td style="font-weight:600">MPA (경구, mg)</td><td>5.0*–10</td><td>10–20</td><td>2.5</td><td>5.0</td></tr>
+        <tr><td style="font-weight:600">노르에티스테론아세테이트(경구, mg)</td><td>2.5–5.0</td><td>2.5–10</td><td>1.25–2.5**</td><td>2.5–5.0</td></tr>
+      </table>
+      </div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">POI에서는 대개 더 높은 용량의 에스트라디올이 필요하나, 내약성 평가 또는 부작용 발생 시 초기에는 낮은 용량을 사용할 수 있다.</div>
+      <div class="alert alert-info" style="margin-top:8px"><span>🔗</span><div>ESHRE 2024 POI 가이드라인: <a class="source-link" href="https://www.eshre.eu/Guidelines-and-Legal/Guidelines/Premature-ovarian-insufficiency" target="_blank">eshre.eu — Premature ovarian insufficiency ↗</a></div></div>
+
+    </div>
+  </div>
+</div><!-- /tab-poi -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: CAM ═══════════════ -->
+<div id="tab-cam" class="panel">
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧘</span> 23. 비약물적 중재</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">인지행동치료(CBT)는 폐경 여성 및 유방암 생존자 모두에서 불편한 VMS 완화에 효과적인 비호르몬 치료로 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">CBT는 기분·수면·삶의 질 개선에도 효과적임을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">CBT는 다양한 중재 방식으로 효과적이어서, 대면 치료가 어려운 여성에게 저비용의 다양한 옵션을 제공하여 의료비 절감에 도움이 된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">임상 최면은 심신 상호작용을 강화함을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">임상 최면은 폐경 VMS의 빈도·중증도 감소에 효과적인 치료로 권고된다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">체중 증가·중심비만과 혈관운동증상 유병률 간 연관성이 연구에서 확인되었음을 인지해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">정상체중 달성은 바람직한 공중보건 결과이며, 일부 여성에서 체중감량이 VMS 완화에 권고될 수 있다는 제한적 근거가 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">건강한 식이는 좋은 건강 결과와 질병예방에 중요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">임상시험 자료는 식이 조절이 VMS 완화에 도움이 된다는 것을 확인하지 못한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">근거 부족으로 페이스드 호흡(paced respiration)은 VMS 완화에 권고되지 않는다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌿</span> 24. 보완요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">의료진은 보완요법과 통상요법의 동시 사용 여부, 폐경 관리에 대한 환자 선호를 문진해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">보완요법에 대한 규제는 국가마다 다르고 허위정보가 흔하므로, 상업적 이해관계가 없는 신뢰할 수 있는 과학적 정보를 항상 찾아야 함을 여성에게 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">보완요법 논의 시 개인의 가치관·선호를 고려한 존중받는 환자중심 공동의사결정에 참여해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">보완요법을 선택하는 경우 우선 통상 치료의 보조수단으로 사용할 것을 제안한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">전통의학 이용이 개인의 문화적 배경의 중요하고 잘 받아들여지는 일부일 수 있음을 인지하고 보완요법 논의 시 이를 고려해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">VMS에 대해 전침(electro-acupuncture)을 고려할 수 있으나 수기침(manual acupuncture)을 권고할 근거는 불충분하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경 증상, 불안·우울, 삶의 질, 수면에 대해 침술을 권고할 근거는 불충분하다. 다만 일부 연구는 폐경 증상·심리 증상에 효과를 보이며 침술은 안전할 가능성이 높다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">전반적 수면의 질에 대해 침술+중국 한약(CHM) 병용을 권고할 근거는 불충분하나, 폐경이행기 불면증 여성에서는 병용을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">중국 한약(CHM)은 폐경 증상, 수면의 질, 혈압 개선에 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">단기(최대 1년) CHM 사용은 안전한 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">혈관운동·폐경 증상 관리에 블랙코호시를 고려할 수 있으나 심리 증상 관리에는 고려하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">이소프로판올 블랙코호시 추출물의 단기(3–6개월) 사용은 안전한 것으로 보인다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">폐경 후 골다공증에서 골절위험 감소를 위해 칼슘 1200mg·비타민D 800IU 일일 보충을 고려할 수 있다. 다만 골다공증·결핍이 없는 여성의 골절예방 목적 일상적 칼슘·비타민D 보충은 권고되지 않는다. 일부 장기연구에서 보고된 심혈관 위험 증가 가능성을 다른 적응증으로 권고 시 논의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">안면홍조·폐경 증상 관리에 대두 유래 이소플라본 사용을 고려할 수 있으나, 레드클로버의 안면홍조 빈도 감소 효과를 권고할 근거는 불충분하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">식이로서의 콩류 섭취는 유해할 가능성이 낮으나, 유방암 가족력 또는 에스트로겐수용체 음성 유방암 과거력이 있는 경우 대두 이소플라본 보충제 사용에 주의해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경 여성의 요추 골밀도 개선에 프로바이오틱스를 고려할 수 있다. 골감소증 여성에서 골다공증 여성보다 효과가 클 수 있으며 12개월 이상 사용 시 더 뚜렷하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경 후 골다공증에서 골밀도 개선을 위해 태극권·기공 등 중국 전통운동을 고려할 수 있다. 태극권의 근거가 더 강하나, 걷기·줄넘기 등 다른 중강도 운동이나 칼슘·비타민D 보조요법 대비 우월하지는 않으며 골밀도 차이는 작을 수 있다. 골 건강에 더 큰 효과를 위해서는 6개월 이상 시행해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경이행기·폐경 후 우울 증상 관리를 위해 태극권·팔단금 등 중국 전통운동을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">요가는 폐경 증상 관리에 제공될 수 있으며, 수면·기분 증상, 일부 심대사 건강(BMI, 이완기혈압, 일부 지질지표) 개선 등 다른 이득도 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">폐경이행기·폐경 후 스트레스·불안·우울·수면장애 관리에 마음챙김기반중재(MBI)를 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">VMS, 폐경 증상, 삶의 질, 수면의 질·기분 개선을 위해 마사지·터치요법을 고려할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-gpp" data-tip="Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반">GPP</span></div>
+          <div class="rec-text">다수의 허브·영양제를 포함한 기타 중재의 근거 등급은 매우 낮다. 전반적으로 이러한 중재의 사용을 권고할 근거는 불충분하다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚗️</span> 25. 조제(compounded) "생동일성" 또는 "천연" 호르몬</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">품질관리 미비, 엄격한 규제감독 부재, 안전성·순도·유효성에 대한 과학적 근거 부재 등의 우려로 조제 생동일성호르몬요법(cBHT) 처방은 권고되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">혈청 또는 타액 호르몬 수치를 이용해 cBHT 적정 용량을 처방하는 것은 주요 폐경학회들이 권고하지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">cBHT는 표준화되어 있지 않으며 MHT와 같은 엄격한 규제 절차를 거치지 않음을 여성에게 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">cBHT와 달리 MHT는 엄격히 규제되며 관련 첨부문서·안전성 경고와 함께 유통됨을 여성에게 안내해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">cBHT를 요청하는 여성에게는 안전성 문제를 안내하고, 강도·순도·품질이 엄격히 검증된 MHT 사용 또는 전환을 권장해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-a" data-tip="근거의 질: 높음 (⨁⨁⨁⨁) · 권고 강도 A (강한 권고)">A</span></div>
+          <div class="rec-text">MHT는 다양한 용량·투여 방법으로 제공되어 치료의 개별화를 용이하게 하며, 이를 통해 의료진이 개인 맞춤 MHT 요법을 조정할 수 있음을 여성에게 안내해야 한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 26. 새로운 통찰·치료·기술</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">디지털 헬스 솔루션은 폐경 증상 여성의 진료 접근성을 개선할 잠재력이 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-b" data-tip="근거의 질: 중등도 (⨁⨁⨁◯) · 권고 강도 B">B</span></div>
+          <div class="rec-text">머신러닝·인공지능(AI)은 POI의 원인이 되는 유전·대사 경로 발견 속도를 높였으며, 향후 진단·예후 키트 및 새로운 중재 개발로 이어질 잠재력이 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">마이크로바이옴 변화가 생활습관·식이·활동 변화와 관련된 폐경 증상 감소를 매개할 수 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-d" data-tip="근거의 질: 매우 낮음 (⨁◯◯◯) · 권고 강도 D (매우 약한 권고)">D</span></div>
+          <div class="rec-text">개발 중인 폐경 증상에 대한 새로운 중재로는 에스테트롤과 같은 약물요법 및 새로운 기기 기반 냉각 기술 등이 있다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-c" data-tip="근거의 질: 낮음 (⨁⨁◯◯) · 권고 강도 C (약한 권고)">C</span></div>
+          <div class="rec-text">인구집단에 적합한 새로운 폐경 척도의 개발과 폐경 증상 아형 세분화는 개별화된 진료를 가능하게 해 더 나은 결과로 이어질 수 있다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div><!-- /tab-cam -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: ISSUES ═══════════════ -->
+<div id="tab-issues" class="panel">
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📰</span> 27. 미디어의 영향</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>이 주제는 형식적 근거등급 부여가 어려워 대부분 핵심 메시지(KM)로 제시된다.</div></div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">과학이 어떻게 작동하는지, 가이드라인이 어떻게 만들어지는지에 대해 여성과 미디어 종사자 모두의 폭넓은 이해가 필요하다. 다만 미디어 활용에 대한 권고는 쉽지 않고 명확한 근거로 뒷받침되지 않는다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">의학용어, 데이터 중심 연구, 비협조적 취재원, 이해상충, 연구논문 속 인간적 흥미 요소의 부재 등으로 과학보도는 쉽지 않다. 훈련된 전문 기자 감소로 문제가 더 커지고 있어, 임상논문·가이드라인·공식발표 속 권위 있는 목소리를 대중이 이해할 수 있는 명확한 언어로 전달하는 것은 미디어만이 아니라 모두의 책임이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">The Lancet의 최근 폐경 시리즈는 "공정한 정보"를 촉구했으며, 이는 정보 제공자뿐 아니라 수용자에게도 요구된다. 편향은 상업적이거나 이념적일 수 있으므로, 독자가 정보의 출처를 파악하고 그 가치·독립성을 스스로 판단할 수 있는 것이 중요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">전문가·기관은 명확하고 일관된 메시지를 전달하기 위해 소셜미디어 활용을 장려받아야 한다. 문서든 발표든 메시지는 권위와 확신을 담아 독자에게 신뢰할 수 있는 준거점을 제공해야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">보도자료는 여전히 의학 뉴스의 주요 출처이며, 공중보건에 관심 있는 폐경 관련 발전사항을 다루는 기관은 보도자료 활용을 확대해야 한다. EurekAlert 등 배포 경로를 통해 전세계 공인 과학기자에게 명확하고 정확한 메시지를 직접 전달할 수 있다.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>📉</span><div>1991~2002년 WHI 유방암 위험 경고 보도자료, 2003년 Million Women Study 보도 등 언론보도가 MHT 처방률에 미친 역사적 영향은 이 주제의 핵심 사례로 다뤄진다.</div></div>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 28. 제약산업의 역할</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">폐경 관리를 위한 새로운 제약 물질에 대한 필요성은 중대하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">제약산업은 이러한 물질의 개발·제조·유통을 담당한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">제약산업은 산업계·학계 연구자 등이 수행하는 생의학 연구에 상당한 투자를 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">제약산업은 이러한 물질과 관련된 교육에서도 중요한 역할을 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">제약산업과의 모든 교육활동 관련 협력은 관련된 모든 당사자가 투명하게 공개해야 한다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📝</span> 29. 출판 윤리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">출판윤리는 과학문헌의 준비·출판·독해에 관여하는 모든 사람의 관심사이다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">과학연구·원고 작성에서의 AI 사용은 발전 중인 영역이다. 다만 원고 및 표지서한에 사용 여부를 공개해야 하며, 인간 저자가 전달되는 정보의 정확성에 대한 책임을 져야 한다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">표절 및 중복출판을 피하기 위한 주의가 필요하다.</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="grade grade-km" data-tip="Key Message — 권고 강도 없이 제시되는 근거 기반 정보">KM</span></div>
+          <div class="rec-text">연구 진실성은 과학적 과정에 필수적이다. 공개와 투명성은 연구 진실성의 중요한 부분이다.</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 방법론에 대한 영향 — 역학과 MHT 인식</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      
+      <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>WHI(Women's Health Initiative) 등 대규모 관찰·중재 연구의 방법론적 한계(평균 연령 63세로 시작 연령대 대표성 부족, 초기 분석의 연령 하위군 미세분 부족 등)가 이후 20여 년간 MHT에 대한 대중·의료진의 인식에 어떻게 영향을 미쳤는지가 이 섹션의 핵심 주제이다. "적기 가설(timing hypothesis)"의 재조명이 최근 재평가의 중심이다.</div></div>
+
+    </div>
+  </div>
+</div><!-- /tab-issues -->
+
+<!-- ═══════════════ TAB PLACEHOLDER: SUMMARY ═══════════════ -->
+<div id="tab-summary" class="panel">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">30</div><div class="stat-lbl">전체 섹션</div></div>
+    <div class="stat-box"><div class="stat-val">342</div><div class="stat-lbl">권고 (근거기반 285 + GPP 57)</div></div>
+    <div class="stat-box"><div class="stat-val">40</div><div class="stat-lbl">핵심 메시지</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 섹션 구성 지도</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>#</th><th>섹션명</th><th>탭 위치</th></tr>
+        <tr><td>1</td><td>중년기 신체변화(MBC)</td><td>🍎 생활습관·대사</td></tr>
+        <tr><td>2</td><td>폐경 진단 (STRAW+10)</td><td>🏠 개요</td></tr>
+        <tr><td>3</td><td>생활습관·식이·운동</td><td>🍎 생활습관·대사</td></tr>
+        <tr><td>4a/4b</td><td>VMS: MHT / 비호르몬요법</td><td>🔥 혈관운동증상</td></tr>
+        <tr><td>5</td><td>GSM 및 성기능</td><td>🌸 비뇨생식기·성기능</td></tr>
+        <tr><td>6/7/8</td><td>골다공증 / 근감소증 / 피부·연골</td><td>🦴 근골격계</td></tr>
+        <tr><td>9/10/11</td><td>심대사 / VTE / 중추신경계</td><td>❤️ 심혈관·혈전·신경계</td></tr>
+        <tr><td>12–18</td><td>유방·자궁내막·난소·폐·대장·자궁경부·상부위장관암</td><td>🎗️ 암</td></tr>
+        <tr><td>19/20/21</td><td>삶의 질 / 안드로겐요법 / 피임</td><td>🧠 삶의질·특수치료</td></tr>
+        <tr><td>22</td><td>조기난소부전(POI)/조기폐경</td><td>👧 조기난소부전</td></tr>
+        <tr><td>23–26</td><td>비약물중재/보완요법/조제호르몬/신기술</td><td>🌿 보완대체·신기술</td></tr>
+        <tr><td>27–29</td><td>미디어/제약산업/출판윤리</td><td>📰 쟁점·방법론</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 핵심 실천 과제 (Key Action Points)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>대상</th><th>실천 과제</th></tr>
+        <tr><td style="font-weight:600">여성</td><td>근거기반 정보 접근성 향상을 통한 건강 문해력·자기관리 역량 강화</td></tr>
+        <tr><td style="font-weight:600">정부·기관</td><td>여성 건강 연구·임상관리 지원 정책 발전 장려</td></tr>
+        <tr><td style="font-weight:600">의료진</td><td>근거기반 폐경 관리를 위한 교육·훈련 지속 확대</td></tr>
+        <tr><td style="font-weight:600">미디어</td><td>비선정적·근거기반 정보 전달에 건설적으로 참여</td></tr>
+        <tr><td style="font-weight:600">제약산업</td><td>부작용 최소화·이익 극대화 치료제 개발, 중저소득국 의약품 공급 개선</td></tr>
+        <tr><td style="font-weight:600">MHT 및 대체요법</td><td>작용·위험 프로파일 명확화 및 개인 맞춤 치료를 위한 다양한 옵션 제공</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 약어 전체 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-summary -->
+
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+// ─── TABS ───
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) {
+      body.classList.add('collapsed');
+    }
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  const span = hdr.querySelector('span:last-child');
+  span.textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['MHT','Menopause Hormone Therapy (폐경호르몬요법) — 에스트로겐·프로게스토겐·병합요법을 포괄하는 용어'],
+  ['HT','Hormone Therapy (호르몬요법)'],
+  ['HRT','Hormone Replacement Therapy (호르몬대체요법)'],
+  ['ET','Estrogen Therapy (에스트로겐 단독요법)'],
+  ['EPT','Estrogen Progestogen Therapy (에스트로겐-프로게스토겐 병합요법)'],
+  ['cBHT','Compounded Bioidentical Hormone Therapy (조제 생동일성호르몬요법) — 규제·근거 부족으로 비권고'],
+  ['CEE','Conjugated Equine Estrogen (결합형 마 유래 에스트로겐)'],
+  ['MPA','Medroxyprogesterone Acetate (메드록시프로게스테론아세테이트)'],
+  ['NETA','Norethisterone Acetate (노르에티스테론아세테이트)'],
+  ['E2','Estradiol (에스트라디올)'],
+  ['E4','Estetrol (에스테트롤) — 태아 간 유래 천연 에스트로겐'],
+  ['DHEA','Dehydroepiandrosterone (디하이드로에피안드로스테론)'],
+  ['DHEAS','Dehydroepiandrosterone Sulfate (황산디하이드로에피안드로스테론)'],
+  ['LNG IUD','Levonorgestrel Intrauterine Device (레보노르게스트렐 자궁내장치) — 52mg 제형이 자궁내막보호 용도로 사용'],
+  ['SERM','Selective Estrogen Receptor Modulator (선택적 에스트로겐수용체조절제) — 예: 랄록시펜, 바제독시펜'],
+  ['STEAR','Selective Tissue Estrogenic Activity Regulator (선택적 조직 에스트로겐활성 조절제) — 티볼론'],
+  ['TSEC','Tissue Selective Estrogen Complex (조직선택적 에스트로겐 복합제) — CEE+바제독시펜'],
+  ['DMPA','Depot Medroxyprogesterone Acetate (데포메드록시프로게스테론아세테이트) — 골밀도 감소 위험 있는 주사형 피임제'],
+  ['COC','Combined Oral Contraceptive (병합경구피임제)'],
+  ['CHC','Combined Hormonal Contraception (병합호르몬피임법)'],
+  ['POP','Progestogen Only Pills (프로게스토겐단독제)'],
+  ['NOMAC','Nomegestrol Acetate (노메게스트롤아세테이트)'],
+  ['GnRH(a)','Gonadotropin Releasing Hormone (Analogue) (성선자극호르몬방출호르몬 유사체)'],
+  ['VMS','Vasomotor Symptoms (혈관운동증상) — 안면홍조·야간발한 등'],
+  ['GSM','Genitourinary Syndrome of Menopause (폐경비뇨생식기증후군)'],
+  ['VVA','Vulvovaginal Atrophy (외음질위축)'],
+  ['HSDD','Hypoactive Sexual Desire Disorder (성욕저하장애)'],
+  ['OAB','Overactive Bladder (과민성방광)'],
+  ['rUTI','Recurrent Urinary Tract Infection (재발성 요로감염)'],
+  ['PFMT','Pelvic Floor Muscle Training (골반저근훈련)'],
+  ['POI','Premature Ovarian Insufficiency (조기난소부전) — 40세 미만 난소기능 소실'],
+  ['EM','Early Menopause (조기폐경) — 40~45세 미만 폐경'],
+  ['FMP','Final Menstrual Period (최종월경일)'],
+  ['STRAW','Stages of Reproductive Aging Workshop (생식노화단계워크숍) — 폐경 병기분류 기준'],
+  ['FSH','Follicle-stimulating Hormone (난포자극호르몬)'],
+  ['AMH','Anti-Müllerian Hormone (항뮐러관호르몬)'],
+  ['BMD','Bone Mineral Density (골밀도)'],
+  ['DXA','Dual Energy X-Ray Absorptiometry (이중에너지 X선 흡수계측법) — 골밀도 표준 검사'],
+  ['FRAX','Fracture Risk Assessment Tool (골절위험평가도구)'],
+  ['MOF','Major Osteoporotic Fractures (주요 골다공증성 골절)'],
+  ['TBS','Trabecular Bone Score (골소주점수)'],
+  ['ONJ','Osteonecrosis of the Jaw (턱뼈괴사) — 비스포스포네이트 드문 합병증'],
+  ['AFF','Atypical Femoral Fracture (비정형 대퇴골절)'],
+  ['BP','Bisphosphonates (비스포스포네이트)'],
+  ['NOGG','National Osteoporosis Guidelines Group (영국 국가골다공증가이드라인그룹)'],
+  ['EWGSOP2','European Working Group on Sarcopenia in Older People (근감소증 진단기준 제정 학회)'],
+  ['CBT','Cognitive Behavioral Therapy (인지행동치료)'],
+  ['CBT-I','Cognitive Behavioral Therapy for Insomnia (불면증 인지행동치료)'],
+  ['SSRI','Selective Serotonin Reuptake Inhibitors (선택적세로토닌재흡수억제제)'],
+  ['SNRI','Serotonin-Norepinephrine Reuptake Inhibitor (세로토닌-노르에피네프린재흡수억제제)'],
+  ['NK1 / NK3','Neurokinin 1 / 3 receptor (신경키닌 1/3 수용체) — 페졸리네탄트·엘린자네탄트의 표적'],
+  ['KNDy','Kisspeptin, Neurokinin B, and Dynorphin Neurons — 시상하부 체온조절 관련 신경세포군'],
+  ['CHD','Coronary Heart Disease (관상동맥질환)'],
+  ['CVD','Cardiovascular Disease (심혈관질환)'],
+  ['VTE','Venous Thromboembolism (정맥혈전색전증)'],
+  ['DVT','Deep Vein Thrombosis (심부정맥혈전증)'],
+  ['PE','Pulmonary Embolism (폐색전증)'],
+  ['CVA','Cardiovascular Accident (뇌졸중)'],
+  ['AD','Alzheimer’s Disease (알츠하이머병)'],
+  ['PD','Parkinson’s Disease (파킨슨병)'],
+  ['WHI','Women’s Health Initiative (미국 대규모 여성건강 연구) — MHT 인식에 큰 영향을 준 연구'],
+  ['WHIMS','Women’s Health Initiative Memory Study (WHI 인지기능 하위연구)'],
+  ['KEEPS','Kronos Early Estrogen Prevention Study'],
+  ['ELITE','The Early versus Late Intervention Trial with Estradiol — "적기 가설" 검증 연구'],
+  ['BRCA','BReast CAncer gene (유방암 유전자, BRCA1/2)'],
+  ['HER2+','Human Epidermal Growth Factor Receptor 2 양성 (유방암 아형)'],
+  ['SLE','Systemic Lupus Erythematosus (전신홍반루푸스)'],
+  ['RA','Rheumatoid Arthritis (류마티스관절염)'],
+  ['HPV','Human Papillomavirus (인유두종바이러스)'],
+  ['HCC','Hepatocellular Carcinoma (간세포암)'],
+  ['CRC','Colorectal Cancer (대장암)'],
+  ['OAC','Oesophageal Adenocarcinoma (식도선암)'],
+  ['NSCLC','Non-Small Cell Lung Cancer (비소세포폐암)'],
+  ['MENQOL','Menopause-specific Quality of Life questionnaire (폐경특이 삶의질 설문)'],
+  ['MRS','Menopause Rating Scale (폐경평가척도)'],
+  ['UQOL','Utian Quality of Life Scale (Utian 삶의질 척도)'],
+  ['ESHRE','European Society of Human Reproduction and Embryology (유럽인간생식배아학회)'],
+  ['IMS','International Menopause Society (국제폐경학회)'],
+  ['EMAS','European Menopause and Andropause Society (유럽폐경남성갱년기학회)'],
+  ['TMS','The Menopause Society (구 NAMS, 북미폐경학회)'],
+  ['IOF','International Osteoporosis Foundation (국제골다공증재단)'],
+  ['ESCEO','European Society for Clinical and Economic Aspects of Osteoporosis'],
+  ['AACE','American Association of Clinical Endocrinologists (미국임상내분비학회)'],
+  ['RCOG','Royal College of Obstetricians and Gynaecologists (영국왕립산부인과학회)'],
+  ['GRADE','Grades of Recommendation, Assessment, Development and Evaluation — 근거등급 평가체계'],
+  ['AGREE II','Appraisal of Guidelines for Research & Evaluation II — 가이드라인 개발과정 평가도구'],
+  ['GPP','Good Practice Point — 형식적 근거는 부족하나 전문가 합의·경험에 기반한 권고'],
+  ['KM','Key Message — 권고 강도 없이 근거기반 정보를 제시하는 서술'],
+  ['PICO','Population, Intervention, Comparison, Outcome — 임상질문 설정 틀'],
+  ['RCT','Randomized Controlled Trials (무작위대조시험)'],
+  ['HR','Hazard Ratio (위험비)'],
+  ['OR','Odds Ratio (교차비)'],
+  ['RR','Risk Ratio (상대위험도)'],
+  ['CI','Confidence Interval (신뢰구간)'],
+  ['BMI','Body Mass Index (체질량지수)'],
+  ['DASH','Dietary Approaches to Stop Hypertension (고혈압예방식이)'],
+  ['MedDiet','Mediterranean Diet (지중해식 식단)'],
+  ['CAM','Complementary and Alternative Medicine (보완대체의학)'],
+  ['CHM','Chinese Herbal Medicine (중국 한약)'],
+  ['MBI','Mindfulness-Based Interventions (마음챙김기반중재)'],
+  ['AI','Artificial Intelligence (인공지능) / Aromatase Inhibitors (아로마타제억제제) — 문맥에 따라 구분'],
+  ['ML','Machine Learning (머신러닝)'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
