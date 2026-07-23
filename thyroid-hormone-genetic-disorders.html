@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2024 ETA 가이드라인 — 갑상선호르몬 수송·대사·작용 유전질환의 진단과 관리</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --text: #1f2328;
+    --text2: #57606a;
+    --brand: #0e7490;   /* cyan-teal — thyroid hormone transport */
+    --brand2: #155e75;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--brand); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 17px; font-weight: 700; color: var(--text); text-align: center; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; color: var(--brand); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  .g { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .g-strong { background: #d1fae5; color: #065f46; border: 1px solid #059669; }
+  .g-weak   { background: #fef3c7; color: #78350f; border: 1px solid #d97706; }
+  .g-hi     { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .g-mod    { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .g-lo     { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .g-vlo    { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .g-ungr   { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+
+  .g::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .g::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .g:hover::after, .g:hover::before { display: block; }
+
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; }
+  .rec-num { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--brand); }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-teal    { background: #ecfeff; border-left: 3px solid var(--brand);   color: var(--brand2); }
+
+  .t { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .t th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .t td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .t tr:last-child td { border-bottom: none; }
+  .t tr:hover td { background: rgba(0,0,0,0.02); }
+  .t .hl td { background: #ecfeff; }
+
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--brand); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .val-badge { display: inline-block; background: #ecfeff; color: var(--brand2); border: 1px solid var(--brand); border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">ETA 2024 Guidelines</span>
+      <h1>갑상선호르몬 수송·대사·작용 유전질환의 진단과 관리</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1530/ETJ-24-0125" class="source-link" target="_blank">European Thyroid Journal (2024) 13 e240125 ↗</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))"> · Persani L, Rodien P, Moran C, Visser WE, Groeneweg S, et al.</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">RTHβ · RTHα · MCT8 결핍 · 셀레노단백 결핍 · DIO1 결핍 — CC BY 4.0 원문 기반 참고용 요약 도구</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요·감별진단</div>
+    <div class="tab" onclick="showTab('rthb',this)">🅱️ RTHβ</div>
+    <div class="tab" onclick="showTab('rtha',this)">🅰️ RTHα</div>
+    <div class="tab" onclick="showTab('mct8',this)">🚚 MCT8 결핍</div>
+    <div class="tab" onclick="showTab('metab',this)">🧬 대사장애</div>
+    <div class="tab" onclick="showTab('recs',this)">📋 권고 전체</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════ OVERVIEW ═══════════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">5개 질환</div><div class="stat-lbl">RTHβ·RTHα·MCT8결핍·셀레노단백결핍·DIO1결핍</div></div>
+    <div class="stat-box"><div class="stat-val">41례</div><div class="stat-lbl">RTHα 전세계 누적 보고 증례</div></div>
+    <div class="stat-box"><div class="stat-val">3가계</div><div class="stat-lbl">DIO1 병원성 변이 보고 가계 수</div></div>
+    <div class="stat-box"><div class="stat-val">Ø~ØØØØ</div><div class="stat-lbl">GRADE 근거수준 4단계</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 서론 — 갑상선호르몬 감수성 장애의 범위</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 막 수송체는 일부 조직에서 갑상선호르몬(T4·T3)의 세포 내 유입을 제한하는 속도결정 단계</li>
+        <li>• 셀레노시스테인 함유 탈요오드효소(D1, D2)가 T4를 생물활성형 T3로 전환</li>
+        <li>• 갑상선호르몬은 주로 핵수용체(<strong>TRα, TRβ</strong>)를 통한 표적유전자 발현 조절로 작용</li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:8px">
+        <span>📌</span>
+        <div>제12차 국제 워크숍 이후 "갑상선호르몬 감수성 저하" 개념이 <strong>막 수송 결함·세포 내 대사 저하·핵수용체 작용 저항</strong>까지 포괄하도록 확장됨. 본 가이드라인은 RTHβ, RTHα, MCT8 결핍, 셀레노단백 결핍, 요오드티로닌 탈요오드효소 1(DIO1) 결핍의 진단·관리를 다룸.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 방법론 및 근거등급(GRADE)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">ETA 집행위원회가 위원장(K Chatterjee) 주도로 질환별 1차·2차 검토자를 배정, MEDLINE(PubMed) 체계적 문헌검색 기반으로 초안 작성 → 상호검토 → 전체 태스크포스 합의</div></li>
+        <li class="rec-item"><div class="rec-text">권고 강도: <strong>강함(S)</strong> = 대다수 환자에게 적용 가능한 권고/모범 진료, <strong>약함(W)</strong> = 임상의 재량에 따른 제안</div></li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <table class="t">
+          <tr><th>근거등급</th><th>기호</th><th>내용</th></tr>
+          <tr><td>Level 1 (높음)</td><td><span class="g g-hi">ØØØØ</span></td><td>RCT/메타분석</td></tr>
+          <tr><td>Level 2 (중등도)</td><td><span class="g g-mod">ØØØO</span></td><td>RCT에 못미치는 중재/대규모 관찰연구</td></tr>
+          <tr><td>Level 3 (낮음)</td><td><span class="g g-lo">ØØOO</span></td><td>환자-대조군 연구, 증례군</td></tr>
+          <tr><td>Level 4 (매우낮음)</td><td><span class="g g-vlo">ØOOO</span></td><td>증례보고, 전문가 의견</td></tr>
+        </table>
+        <div class="alert alert-info" style="margin:0">
+          <span>ℹ️</span>
+          <div>Box 1–4에 핵심 권고 요약 수록: Box1(감별진단), Box2(RTHβ·RTHα), Box3(MCT8결핍), Box4(대사장애). 본 도구의 <strong>📋 권고 전체</strong> 탭에서 통합 확인 가능.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔀</span> 감별진단 알고리즘 — 고갑상선호르몬혈증 + 비억제 TSH</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>(유리)T4 및/또는 (유리)T3가 정상범위 상한을 초과하면서 TSH가 억제되지 않는 소견은 <strong>가장 해결이 어려운 불일치성 갑상선기능검사</strong> 패턴 중 하나 — 불필요한 검사·치료를 피하면서도 희귀 유전/후천성 질환을 적시에 진단하는 단계적 접근이 필요.</div>
+      </div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin:10px 0 6px">3단계 접근법 (Figure 1)</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-num">1</div><div class="rec-text"><strong>임상 맥락 검토</strong>: 갑상선 상태(저하/정상/항진), 동반질환(비갑상선질환·급성 정신과질환), 약물(아미오다론·비오틴·클로랄하이드레이트·푸로세미드·헤파린·티록신) 확인</div></li>
+        <li class="rec-item"><div class="rec-num">2</div><div class="rec-text"><strong>검사 간섭 조사</strong>: TSH 간섭(macro-TSH, 이호성/항시약 항체), T4/T3 간섭(항요오드티로닌 항체, 비오틴, 헤파린/푸로세미드에 의한 치환, 결합단백 유전변이) — 방법 비교로 불일치 확인, 필요 시 희석검사·PEG 침전·겔여과크로마토그래피(TSH), 평형투석·한외여과(T4/T3) 추가</div></li>
+        <li class="rec-item"><div class="rec-num">3</div><div class="rec-text"><strong>특정 질환 고려</strong>: 상승 유리T4 단독(비갑상선질환, 아미오다론/티록신, SECISBP2·TRU-TCA1-1·DIO1 유전자 원인) / 상승 유리T3+비정상 T4:T3비(요오드결핍, RTHα·MCT8·이형성 선천성갑상선기능저하증, 드물게 갑상선종양) / T4·T3 모두 상승(<strong>RTHβ</strong> 또는 <strong>갑상선자극호르몬분비선종(TSHoma)</strong>)</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> RTHβ vs 갑상선자극호르몬분비선종(TSHoma) 감별</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="t">
+        <tr><th>항목</th><th>RTHβ</th><th>TSHoma</th></tr>
+        <tr><td>가족력</td><td>~90%에서 이환 가족 존재</td><td>없음</td></tr>
+        <tr><td><em>THRB</em> 시퀀싱</td><td>~90%에서 변이 확인</td><td>변이 없음</td></tr>
+        <tr><td>SHBG / ICTP</td><td>정상</td><td>상승(간혹 정상)</td></tr>
+        <tr><td>알파소단위 / (알파소단위:TSH 몰비)</td><td>정상</td><td>상승(또는 정상)</td></tr>
+        <tr><td>TRH 자극에 대한 TSH 반응</td><td>보존/과장</td><td>없음/둔화</td></tr>
+        <tr><td>L-T3 억제검사</td><td>(거의) 완전 억제</td><td>억제 없음/제한적</td></tr>
+        <tr><td>데포 소마토스타틴수용체리간드(SRL) 시험</td><td>반응 없음</td><td>≥80%에서 T4·T3 정상화</td></tr>
+        <tr><td>뇌하수체 MRI(±분자 PET 영상)</td><td>선종 없음(우연종 ~10%)</td><td>선종(간혹 잠복)</td></tr>
+      </table>
+      <div class="alert alert-success" style="margin-top:8px">
+        <span>✅</span>
+        <div><strong>Box 1 권고</strong>: 동적 내분비검사(TRH 자극·L-T3 억제), 뇌하수체 영상(MRI, PET), 데포 SRL 시험 병용이 RTHβ와 TSHoma 감별에 도움 <span class="g g-strong">강함</span> <span class="g g-lo">ØØOO</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> Table 1 — 5개 질환 생화학적 특징 비교</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="t">
+        <tr><th>항목</th><th>RTHβ</th><th>RTHα</th><th>MCT8 결핍</th><th>SP 결핍</th><th>DIO1 결핍</th></tr>
+        <tr><td>유전자</td><td><em>THRB</em></td><td><em>THRA</em></td><td><em>SLC16A2</em></td><td><em>SECISBP2</em>/<em>TRU-TCA1-1</em></td><td><em>DIO1</em></td></tr>
+        <tr class="hl"><td>유리 T4</td><td>높음</td><td>낮음-정상 또는 낮음</td><td>낮음-정상 또는 낮음</td><td>높음</td><td>정상 또는 약간 높음</td></tr>
+        <tr class="hl"><td>유리 T3</td><td>높음</td><td>정상-높음 또는 높음</td><td>대개 높음/정상-높음</td><td>낮음 또는 정상</td><td>정상</td></tr>
+        <tr><td>역T3(rT3)</td><td>높음</td><td>정상 또는 낮음</td><td>낮음</td><td>높음</td><td>높음</td></tr>
+        <tr><td>TSH</td><td>정상 또는 높음</td><td>정상(또는 약간 상승)</td><td>정상(또는 약간 상승)</td><td>정상</td><td>높음</td></tr>
+        <tr><td>SHBG</td><td>정상</td><td>정상 또는 높음</td><td>높음</td><td>높음</td><td>—</td></tr>
+      </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════════════ RTHβ ═══════════════════════ -->
+<div id="tab-rthb" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div>
+          <div class="rec-text">진성 상승 유리(또는 총) T4 + 상승 유리(또는 총) T3 + <strong>비억제 TSH</strong>의 불일치 패턴에서 RTHβ 고려 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div>
+          <div class="rec-text">갑상선기능저하증 치료 중 TSH 정상화 실패가 <strong>고FT4를 동반</strong>할 때만 RTHβ 의심 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div>
+          <div class="rec-text">RTHβ 의심 시 <strong>1촌 친족의 갑상선기능검사</strong> 측정 권고 — 이상 소견 확인 시 진단 가능성 강화</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div>
+          <div class="rec-text">진성 상승 T4·T3 + 비억제 TSH 소견에서 <strong><em>THRB</em> 시퀀싱</strong>으로 진단 확진 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div>
+          <div class="rec-text">차세대 시퀀싱으로 <em>THRB</em> 의미불명 변이(VUS) 확인 시, 이환 가족 내 <strong>비정상 갑상선기능검사와의 분리(segregation)</strong> 확인으로 병원성 판정 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div>
+          <div class="rec-text">분리 확인이 불가한 산발례 등에서는 <strong>생체 내 T3 억제검사</strong> 및 TRβ 변이체의 시험관내 기능검사(민감도는 낮음) 병행 제안</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div>
+          <div class="rec-text">색인 환자 확진 후 <strong>1촌 친족의 생화학적·유전학적 검사</strong> 권고</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div>
+          <div class="rec-text">통상 시퀀싱에서 <em>THRB</em> 변이가 확인되지 않으나 자손에게 이상 갑상선기능이 전달되는 경우, <strong>체세포 모자이시즘</strong> 배제를 위해 혈액 외 조직의 차세대 시퀀싱 권고</div>
+        </li>
+      </ul>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>병태생리 및 임상 배경</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          핵심 특징은 진성 상승 (총·유리) T4·T3 + 비억제 TSH(OMIM 188570 전신형·145650 뇌하수체형). 이형접합 <em>THRB</em> 병원성 변이가 통상적 Sanger 시퀀싱으로 대부분 확인되나, 임상·생화학적으로 부합하는 환자의 <strong>약 10%는 THRB 결함이 확인되지 않음</strong> — 모든 조직에서 발현되지 않는 체세포 모자이시즘이 그 일부를 설명하며, 고심도 차세대 시퀀싱으로 진단 가능. 상염색체 우성 유전에 부합하게, 돌연변이 TRβ가 정상 수용체 기능을 <strong>우성음성 방식</strong>으로 저해 — 대개 호르몬 결합친화도 저하가 원인이나, 일부는 보조억제인자 해리 장애나 보조활성인자 募集 장애를 보임. 자가면역/선천성 갑상선기능저하증 치료 시 초생리적 용량으로도 TSH 정상화가 안 되면 RTHβ 동반을 의심; Graves병/갑상선염/아미오다론 유발 갑상선기능항진증 치료 후 TSH가 정상 순환호르몬 대비 과도하게 상승하면 RTHβ가 가려져 있었을 가능성.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상 특징 및 조사 항목 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="t">
+        <tr><th>계통</th><th>임상 특징</th><th>주요 조사(굵게)</th></tr>
+        <tr><td><strong>갑상선</strong></td><td>갑상선종, 결절, 갑상선암(주로 유두미세암), 갑상선자가면역</td><td><strong>갑상선 초음파</strong>; 방사선학적 불명확/의심 결절의 FNA 세포검사; 갑상선자가항체</td></tr>
+        <tr><td><strong>대사</strong></td><td>이상지질혈증, MASLD(지방간), 인슐린저항성, 저체중/성장부진</td><td>TSH·유리T4·유리T3(rT3, TBG); 안정시 에너지소비량; 근육 크레아틴키나아제, SHBG, ACE; <strong>공복 지질프로파일</strong>; fibroscan; <strong>공복혈당</strong>, HbA1c, 인슐린</td></tr>
+        <tr><td><strong>골격</strong></td><td>성장지연, 골감소증/골다공증, 반점상 골단(이대립유전자 증례)</td><td>골반·장골·척추 방사선(척추골절); <strong>DXA</strong>(고관절·척추); <strong>칼슘</strong>, <strong>25OH-비타민D</strong>, PTH; 골전환지표(정상인 경우가 많음)</td></tr>
+        <tr><td><strong>청각·시각</strong></td><td>반복 이비인후과 감염, 청력저하, 색각이상</td><td>청력검사, AABR; Farnsworth-Munsell 100 Hue 검사; 명·암순응 망막전위도(ERG)</td></tr>
+        <tr><td><strong>신경·인지</strong></td><td>말초 떨림, ADHD, 정서장애(불안·불면), 학습장애/기억력저하, 지적장애(동형접합에서 심함)</td><td><strong>ADHD 신경심리검사</strong>(Rating Scale-IV, Conners); Wechsler IQ</td></tr>
+        <tr><td>외형</td><td>갑상선종 외 특이 안모·체형 없음</td><td>—</td></tr>
+        <tr><td><strong>임신</strong></td><td>초기 유산율 증가; 비이환아 저체중/부당경량아(LBW/SGA)</td><td><strong>태아 성장·발달 전문 초음파 추적</strong>(Graves병과 유사); 모체 갑상선호르몬 모니터링</td></tr>
+        <tr><td><strong>심혈관</strong></td><td>빈맥, 심방세동, 심부전</td><td><strong>안정시 심전도</strong>; <strong>심장 텔레메트리</strong>; 심초음파(갑상선항진성 수축력 지표); BNP/NT-proBNP</td></tr>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 임상 표현형 상세</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">갑상선 / 심혈관</div>
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• 갑상선종은 순환 TSH의 생물활성 증가로 흔히 동반, 드물게 갑상선암(주로 유두미세암) 보고 — 갑상선 절제 후 불완전 TSH 억제에도 예후 양호</li>
+            <li>• 갑상선자가면역 위험 증가</li>
+            <li>• TRα 발현 심근에 대한 고호르몬 작용으로 빈맥/빈맥부정맥·심방세동·심부전 — <strong>심방세동, 심근경색, 심부전 위험 및 조기 사망률 유의하게 증가</strong></li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">대사 / 신경·생식</div>
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• TRβ발현 간에서의 호르몬저항이 정상 SHBG, 혼합형 이상지질혈증(콜레스테롤·중성지방 상승), MASLD 매개 — 근육·간 인슐린저항의 역할은 불명확</li>
+            <li>• 신경인지: 불안·수면장애, ADHD, 경도 지적장애(낮은 비언어성 지능), 언어장애, 학업성취 저하; 동형접합에서 중증 지적장애</li>
+            <li>• 청력손실은 전음성(잦은 소아기 중이염) + 와우기능장애 복합; 이형접합에서 색각이상, 드문 동형접합에서 뚜렷한 색각이상, THRB 스플라이스 변이에서 황반이영양증</li>
+            <li>• 모체 RTHβ에서 유산율 증가; 비이환 신생아는 SGA·저체중·억제된 TSH</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩹</span> 관리(Management)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div><div class="rec-text">결절 분류(TIRADS 등) 전문가에 의한 갑상선/갑상선종 초음파 평가를 진단 시 및 이후 주기적으로 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">모든 갑상선 결절은 표준 진료에 따라 관리 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">진단 시 및 갑상선 상태·증상 변화 시 <strong>항갑상선항체(Anti-TPO/TRAb)</strong> 평가 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">소아기에는 소아내분비 전문의의 성장·발달 세심한 평가 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">이비인후과 감염의 신속한 치료로 합병증 예방 제안; 진단 시 청력검사(audiometry) 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">소아 RTHβ 진단 시 <strong>ADHD 및 학습장애 유발 인지결손</strong>에 대한 신경심리·심리측정 평가 제안; 학습지원 고려 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">성인 환자에서 골밀도·칼슘항상성 지표(혈청칼슘, PTH, 25OH-비타민D) 초기평가·추적 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text"><strong>30세 이상 전 환자(증상 있으면 더 이른 연령도)</strong>에서 심혈관위험 평가(혈압·심전도·심초음파, 증상 시 심장텔레메트리·NT-proBNP) 및 지속 감시 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">진단 시 및 주기적으로 <strong>대사평가</strong>(공복지질·혈당·HbA1c) 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">MASLD 위험(예: fibroscan) 모니터링 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">유산·SGA·LBW 위험 증가로, 임신을 계획하는 모든 RTHβ 여성에서 <strong>다학제(내분비-산과) 팀 관리</strong> 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">임신 중 태아 지표(성장·심박수) 면밀 관찰 권고, 태아 빈맥·성장제한 시 항갑상선제 고려</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">모체 FT4가 정상상한 150% 초과 시 항갑상선제 치료 고려 제안 — 사전 태아 유전진단으로 비이환 태아 확인 선행 가능, 이상적으로 임상시험 맥락에서 시행</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 치료(Treatment)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">중대한 동반질환이 없다면 <strong>항갑상선제·갑상선 절제(수술/방사성요오드) 회피</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">갑상선 절제는 중증·조절불능·생명위협 갑상선기능항진증(예: 이형접합 RTHβ+Graves병/독성결절, 동형접합 RTHβ+갑상선중독성 심근병증) 또는 압박증상·악성 동반 대형 갑상선종에 <strong>한정</strong>. 절제 후 L-T4로 원래 수준 회복 목표</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">동반질환(갑상선자가면역, 빈맥부정맥, 저골밀도, 이상지질혈증) 주기적 감시 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">갑상선중독 증상·징후 조절에 <strong>베타차단제 단독</strong>, 드물게 <strong>TRIAC</strong> 병용 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">TRIAC 치료 결정은 <strong>사용 경험이 있는 전문센터와 상의 후에만</strong> 진행 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">TRIAC은 <strong>1일 2–3회 투여</strong>; 증상·징후 및 유리T4 저하를 지표로 용량 적정(면역측정법과는 교차반응하나 LC-MS/MS T3 측정과는 무관)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">이형접합 RTHβ의 빈맥·심방세동·상심실성 빈맥부정맥, 동형접합의 심장 갑상선항진증에 <strong>심장선택적 베타차단제</strong> 고려 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">RTHβ 심방세동 관리는 <strong>전문 심장내과 자문</strong> 권고 — 화학적(아미오다론·플레카이니드)·전기적 심율동전환이나 절제술이 성공적이지 않을 수 있음</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">일상생활을 저해하는 ADHD는 신경정신과 전문의의 공식 진단 후 표준중재 또는 TRIAC(국가별 미승인이나 개별 사용 가능) 결정 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">동반 갑상선기능저하증(자가면역/선천성) 치료 시, TSH 상승+정상 유리TH는 <strong>과소 보충</strong>을 의미 — 가족 내 RTHβ 단독 보유자와 유사한 FT4 목표 또는 고정상 TSH+고TH 유지, 심장기능 모니터링으로 과잉치료 방지</div></li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="alert alert-teal" style="margin:0">
+          <span>💊</span>
+          <div><strong>TRIAC 용량</strong>: 1.4–2.8 mg을 1일 2–3회 분할 투여 시 가장 효과적(반감기에 부합); ADHD 증상 완화 효과. 항갑상선제+TRIAC 병용으로 TSH 상승·갑상선종 유발 없이 갑상선중독성 심근병증 조절 가능. 미승인 약이나 제조사 관리형 접근프로그램이나 약국 조제로 개별 처방 가능.</div>
+        </div>
+        <div class="alert alert-info" style="margin:0">
+          <span>ℹ️</span>
+          <div>격일 T3 투여로 큰 갑상선종 부피 감소 보고 1례. Liothyronine(L-T3)은 ADHD 증상 개선(methylphenidate는 무효). 만성 L-T4 과소보충은 뇌하수체 갑상선자극세포 과형성 위험.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❓</span> 불확실 영역</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• RTHβ 임신에서 산전진단 또는 모체 TH농도 조절을 위한 항갑상선제 치료의 타당성</li>
+        <li>• 신생아기 진단 및 조기 중재가 RTHβ의 신경학적·행동적 표현형을 개선할 수 있는지</li>
+        <li>• 지질강하요법 또는 TRIAC(단독/병용)이 심혈관 부작용 예후를 바꿀 수 있는지</li>
+        <li>• 저골밀도가 골절위험을 높이는지; 항흡수제 등이 골소실을 예방/골절위험에 영향을 주는지</li>
+        <li>• ADHD·기타 신경심리 표현형에 대한 TRIAC·liothyronine 등 치료의 추가 평가 필요</li>
+        <li>• 호르몬결합영역 내 알려진 변이 클러스터 밖의 <em>THRB</em> 이형(또는 동형)접합 변이로도 질환이 발생할 수 있는지</li>
+        <li>• TRβ 생식세포·체세포 모자이시즘 변이가 없는 의심 RTHβ에서 전장유전체 시퀀싱을 고려해야 하는지(비암호화 영역 이상 또는 무관 유전자 결함 탐색)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /rthb -->
+
+<!-- ═══════════════════════ RTHα ═══════════════════════ -->
+<div id="tab-rtha" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 임상 특징 및 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>RTHα(OMIM 614450: 선천성 무갑상선종성 갑상선기능저하증 6)는 <strong>희귀질환</strong>으로 현재까지 <strong>전세계 41례</strong> 보고. 표현형은 매우 다양하나 다수 환자에서 유사 임상특징 공유(Table 3). 표현형 스펙트럼이 계속 변화 중이라 확정적 시퀀싱 기준 제시는 어려우나, 의사결정을 돕기 위한 기준을 제안함. <strong>확진은 <em>THRA</em> 병원성 변이 확인</strong>으로 이루어짐(단, 일부 임상적 RTHα 사례는 THRA 변이가 확인되지 않음).</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">RTHα 고려 시 <strong>두위·신장·좌고·좌골하 다리길이 측정</strong> 포함 전체 임상평가 및 연령별 정상범위와의 비교 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">의심 시 전혈구검사, T4·T3·TSH·역T3, 크레아틴키나아제, 골격·치아 방사선 등 추가검사 제안</div></li>
+      </ul>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin:10px 0 6px"><em>THRA</em> 시퀀싱 기준</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text"><strong>주요기준 3개 이상</strong>: 대두증, 저신장, 변비, 전형적 생화학소견(TSH 정상/약간상승 + 낮음/낮은정상 T4 + 상승/높은정상 T3, 가능 시 낮은 역T3), 발달지연(다른 원인으로 설명 안 될 시) — <strong>시퀀싱 권고</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">주요기준 2개 — 시퀀싱 <strong>고려 제안</strong> / 주요기준 1개 + 부기준(원인불명 빈혈, 갑상선저하 임상양상, 신경인지 특징(운동실행증), 골격이형성) 2개 이상 — 고려 제안 / 부기준 3개 이상 — 고려 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">기준 미충족이어도 <strong>임상적 의심이 지속되면</strong> 시퀀싱 시행 제안</div></li>
+      </ul>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>VUS 판정 방법 및 예측알고리즘 관련 권고</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• <span class="g g-weak">약함</span> <span class="g g-hi">ØØOO</span> VUS 병원성 판정: ① 가계 내 유전자형-표현형 분리 ② 환자 변이와 상동한 RTHβ 유발 <em>THRB</em> 변이 존재 여부 ③ TRα 단백구조 모델링 ④ 수용체 기능 분석 — 임상유전학 서비스/국제 전문기관과의 협진 필요</li>
+            <li>• <span class="g g-strong">강함</span> <span class="g g-lo">ØØOO</span> PolyPhen·SIFT·REVEL·CADD 등 <strong>예측 알고리즘 단독 사용은 권고하지 않음</strong></li>
+            <li>• <span class="g g-strong">강함</span> <span class="g g-lo">ØØOO</span> 표현형 스펙트럼이 완전히 정의되지 않았으므로, <em>THRA</em> 병원성 변이가 없는 개인에서 <strong>확정 진단을 내리지 않을 것</strong>을 권고</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상 표현형 및 조사 항목 (Table 3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="t">
+        <tr><th>계통</th><th>임상 특징</th><th>주요 조사(굵게)</th></tr>
+        <tr><td>외형</td><td>편평한 콧등, 넓은 얼굴, 두꺼운 입술, 대설증, 거친 얼굴, 피부꼬리·점</td><td>사진기록</td></tr>
+        <tr><td>신경·인지</td><td>발달이정표 지연, 느린 언어·동작개시, 실조성 보행, 길항운동반복장애, 운동실행증</td><td>MRI(피질·소뇌 위축); Wechsler IQ(지각추론·처리속도·시각운동통합 저하)</td></tr>
+        <tr><td><strong>골격</strong></td><td>성장지연, 저신장(흔히 불균형), 대두증, 치아맹출 지연</td><td><strong>성장곡선</strong>(총신장 감소, 좌고 정상, 좌골하 다리길이 감소); <strong>두위</strong>; 두개골(비후된 두개관, 천문유합 지연, 시상봉합 뒤틀림-wormian bone); 골반·장골; 대퇴골단이형성, 피질비후; 척추(편평추체); 치아·손목(골연령 지연)</td></tr>
+        <tr><td>위장관</td><td>변비</td><td>복부방사선(장루프 확장, 분변매복); 대장통과시간; 대장내압검사(연동운동 저하)</td></tr>
+        <tr><td>심혈관</td><td>서맥(경도), 연령/성별 대비 낮은 혈압, 심낭삼출</td><td>심장텔레메트리(평균 수면 심박수); 심초음파(높은 전구출기, 낮은 심박출계수, 낮은 E/A비, 낮은 좌심실박출률); 심낭삼출; 자율신경긴장도 스펙트럼분석</td></tr>
+        <tr><td>대사</td><td>낮은 대사율, 경계성 갑상선기능검사(정상일 수도 있음)</td><td>근육 크레아틴키나아제(대개 상승); SHBG(대개 상승); TSH(정상범위 또는 경계성 상승); 유리T4/유리T3 비(대개 낮음); 역T3(대개 낮음); 혈청 IGF-1(낮을 수 있음); DXA(체성분); 간접열량계(안정시 에너지소비)</td></tr>
+        <tr><td>혈액</td><td>경도 빈혈</td><td>전혈구검사(적혈구량·헤마토크릿 낮을 수 있음); 철분·B12·엽산·용혈지표·EPO는 대개 정상</td></tr>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 관리 및 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">진단 후 <strong>모든 환자에서 레보티록신(L-T4) 시험적 치료</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">부작용·내약성 우려가 없다면 <strong>장기 지속</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">모든 환자는 평생 내분비 전문의 관리 하에 있을 것을 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">신경과·신경심리·소화기내과·혈액과·치과·물리치료·언어치료·작업치료 등 필요시 타과 의뢰 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">성장호르몬 분비 저하 또는 낮은 기저 IGF-1을 보이는 소아에서 L-T4 치료 후 GH 상태 재평가 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">L-T4 용량(통상 보충용량보다 높아야 함) 및 목표치 관련 근거 <strong>불충분</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">현재로선 liothyronine 사용에 대한 찬반 근거 <strong>불충분</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">임신 중 관리 근거 불충분하나 <strong>L-T4는 지속</strong> 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">임신 중 <strong>liothyronine 사용은 반대</strong> 권고</div></li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>ℹ️</span>
+        <div>L-T4는 최대 3.8 mcg/kg/day까지 사용된 보고 있음. 변비·성장에는 효과적이나 심장·인지 반응은 혼재된 결과. TSH 억제·TH 상승 용량이 <strong>TRα발현 조직의 저항 극복</strong>에 필요할 수 있으나 TRβ발현 조직의 갑상선중독 가능성 상존 — 반응은 수용체 결함 중증도·투여시기·용량·달성된 TH농도에 좌우.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❓</span> 불확실 영역</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• RTHα 진단 및 L-T4 반응 평가를 위한 최적 바이오마커 미정립</li>
+        <li>• 소아기(선형성장·신경발달 결과)와 성인기(저하증 증상) 간 적정 치료목표 차이 여부 불확실</li>
+        <li>• 초생리적 용량의 L-T4가 조직 갑상선중독·불량한 예후와 연관되는지 불명</li>
+        <li>• 임신 전·중 모체 RTHα 관리에 대한 정보 부재</li>
+        <li>• 출생 시 진단 및 L-T4 개시가 신경발달 예후 악화를 예방할 수 있는지 불명</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /rtha -->
+
+<!-- ═══════════════════════ MCT8 ═══════════════════════ -->
+<div id="tab-mct8" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 임상 특징 및 진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚻</span>
+        <div>MCT8 결핍(Allan–Herndon–Dudley 증후군, OMIM 300523)은 <strong>X-연관 질환</strong>으로 뇌의 세포성 갑상선기능저하증에 의한 다양한 신경발달지연 + 혈청 T3 상승에 의한 만성 말초조직 갑상선중독증이 특징(Table 4).</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">특정 유전자 패널(전반적 발달지연·근긴장저하·痙縮·경련) 포함 <em>SLC16A2</em> 표적/엑솜 시퀀싱으로 확인</div></li>
+        <li class="rec-item"><div class="rec-text">확진에는 <strong>알려진 병원성 변이</strong> 또는 형질전환/환자유래세포에서의 신뢰성 있는 기능검증 필요</div></li>
+      </ul>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin:10px 0 6px"><em>SLC16A2</em> 시퀀싱 기준</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text"><strong>모든 남성 환자</strong>에서 전형적 생화학소견(정상/약간상승 TSH, 낮음/낮은정상 T4, 상승 T3, 낮은 역T3, T3/T4 또는 T3/rT3비 상승) + 전반적 발달지연·MRI 저수초화·운동장애(근긴장이상·서동증)·원시반사 지속·양성 가족력 중 하나 동반 시 <strong>시퀀싱 권고</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">전형적 갑상선기능검사 + 경미한 발달지연/행동이상만 있는 경우 <strong>고려 제안</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">가족력 양성 + 남아 태아 위험 시 <strong>산전 검사(융모막융모생검/양수천자)</strong> 고려 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">VUS 확인 시 ① 가계 내 분리 ② 형질전환/환자유래세포 기능검증 ③ 구조모델링으로 병원성 판정; 예측알고리즘 단독사용은 <span class="g g-strong">강함</span> 권고하지 않음</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상 표현형 (Table 4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="t">
+        <tr><th>계통</th><th>임상 특징</th><th>주요 조사(굵게)</th></tr>
+        <tr><td>외형</td><td>근병성 얼굴, 이영양성 체형</td><td>사진기록</td></tr>
+        <tr><td><strong>신경·인지</strong></td><td>중증 인지·운동발달지연, 중심성 근긴장저하(불량한 두부조절), 근긴장이상, (후기)痙縮, 원시반사 지속, 경련</td><td><strong>신경심리검사</strong>(Bayley 영유아발달척도, 대운동기능척도); MRI(저수초화 가능); EEG</td></tr>
+        <tr><td>내분비</td><td>갑상선중독 소견(발한증가, 빈맥, 저체중)</td><td>TSH, (유리)T4·T3, 역T3, 유리T4/T3비(대개 낮음); SHBG(정상/↑), CK(정상/↓), 크레아티닌(정상/↓), 총콜레스테롤(정상/↓), ALT(정상/↑)</td></tr>
+        <tr><td>골격</td><td>척추측만, 고관절아탈구, 골다공증</td><td>척추·고관절 방사선; DEXA</td></tr>
+        <tr><td>심혈관</td><td>빈맥, 전도이상, 수축기 고혈압</td><td><strong>심전도</strong>; 심장텔레메트리; 혈압</td></tr>
+        <tr><td>전신</td><td>저체중, 위식도역류, 수유곤란, 변비</td><td><strong>영양사 영양평가</strong>; <strong>영유아·소아 3개월마다 체중측정</strong></td></tr>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 관리 및 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div><span class="g g-strong">강함</span> <span class="g g-lo">ØØOO</span> 출생 후 <strong>레보티록신 단독치료는 권고하지 않음</strong>(신경발달 개선 없이 말초 갑상선중독을 오히려 악화시킬 수 있음).</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div><div class="rec-text"><strong>TRIAC</strong> 치료 권고; 또는 <span class="g g-weak">약함</span> <span class="g g-lo">ØØOO</span> <strong>DITPA</strong> 치료</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-hi">ØØØØ</span></div><div class="rec-text">약물유해반응이 제한하지 않는 한, 혈청 T3를 <strong>1.4–2.5 nmol/L</strong> 목표범위로 적정(말초 갑상선중독 완화) 권고. 고용량 TRIAC은 T3를 연령별 참고범위 하한 이하까지 낮출 수 있어 신경발달에 도움 될 가능성(<span class="g g-weak">약함</span> <span class="g g-vlo">ØOOO</span>)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">부작용·내약성 우려가 없는 한 <strong>TRIAC(또는 DITPA) 장기치료</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">갑상선호르몬 유사체를 구할 수 없다면 <strong>L-T4 + PTU 병용</strong> 고려 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">PTU의 드물지만 중대한 간독성 위험과 갑상선호르몬 유사체의 미지의 장기효과 — 특히 기저 간기능이 저하된 환자에서 위험-이익을 신중히 고려할 것을 인지</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">모든 환자는 (소아)내분비 전문의 및 (소아)신경과 전문의 관리 하에 둘 것 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">내분비·신경과·심장내과·영양사·작업/언어/물리치료사·재활의학·정형외과·주간보호센터를 포함한 <strong>다학제팀</strong> 논의 및 사례관리자 감독이 유익</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">연령에 맞는 체중유지를 위한 식이섭취 면밀 평가, 영양실조 예방 위한 경피적 경관영양(장루) 조기 도입 및 영양사 개입 제안</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">근긴장이상/과긴장(경련완화제), 침흘림(항콜린제), 진성 뇌전증(발작성 운동장애와 신중히 감별) 등 신경증상에 대한 경험적 대증치료 제안; 구축·측만·고관절아탈구 예방 위해 재활의학과/정형외과/물리치료 의뢰</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">위식도역류/위마비, 변비 등 흔한 위장관 문제를 표준진료에 따라 치료 제안</div></li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:6px">
+        <span>💊</span>
+        <div><strong>TRIAC 용량</strong> 6.4–84.3 mcg/kg/day 범위에서 체중증가, 안정시심박수·조기심방수축·수축기혈압 등 심혈관 지표, SHBG 등 말초 갑상선상태 지표 개선 효과. Emcitate® 제형이 여러 국가에서 사용 가능하며, 그 외 국가는 약국 조제 갈레닉 제형 이용 가능. <strong>신경인지 반응은 아직 불명</strong>(NCT02396459 연구 진행 중).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❓</span> 불확실 영역 및 과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 조기 진단이 조기 중재(갑상선호르몬 유사체)를 가능케 함 — 그러나 현재 신생아선별검사에 포함되어 있지 않음</li>
+        <li>• 초기 증상이 비특이적이고, 임상의 인지도가 낮음</li>
+        <li>• 대부분의 T3 면역측정법이 TRIAC과 교차반응 — 치료 중 정확한 T3 측정에는 LC-MS/MS 필요</li>
+        <li>• TRIAC 등 치료의 신경인지 예후에 대한 효과와 최적 용량(특히 조기 개시 시)은 규명 중</li>
+        <li>• TRIAC 치료로 (유리)T4를 추가로 낮추는 것의 잠재적 부작용</li>
+        <li>• (신규) 변이의 병원성을 판정할 도구 접근성 제한; 편향 X-비활성화를 동반한 (드문) 여성 MCT8 결핍 증례 확인</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /mct8 -->
+
+<!-- ═══════════════════════ METAB (Selenoprotein + DIO1) ═══════════════════════ -->
+<div id="tab-metab" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 셀레노단백 결핍 — 배경</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 필수미량원소 셀레늄은 아미노산 <strong>셀레노시스테인(Sec)</strong>으로서 25종의 인체 셀레노단백(요오드티로닌 탈요오드효소 포함)에 편입</li>
+        <li>• Sec 합성에 필요한 인자(<em>SECISBP2</em>, <em>TRU-TCA1-1</em>)의 동형/복합이형접합 변이가 <strong>다계통 질환</strong>(OMIM 609698/620198) 유발 — 비정상 갑상선기능 + 낮은 혈장 셀레늄이 특징</li>
+        <li>• 다양한 표현형은 조직특이 셀레노단백 결핍 또는 항산화 셀레노효소 소실에 따른 산화손상에 기인</li>
+        <li>• 동일 생합성경로의 다른 인자(SEPSECS) 결함은 진행성 소두증(피질·소뇌 위축) 유발하나 순환 T4·셀레늄은 정상</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 임상 특징 (Table 5) 및 진단·관리·치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto;margin-bottom:8px">
+      <table class="t">
+        <tr><th>계통</th><th>임상 특징</th><th>주요 조사(굵게)</th></tr>
+        <tr><td>생화학</td><td>비정상 갑상선기능; 순환 셀레노단백 저하</td><td><strong>TSH, 상승 유리T4, 정상/낮은 유리T3, 높은 역T3</strong>; 유리T4/T3비 상승; <strong>낮은 혈장 셀레늄</strong>; 혈장 글루타치온과산화효소3형, 혈청 셀레노단백P</td></tr>
+        <tr><td>대사</td><td>체지방량 증가, 전신 인슐린감수성 증가</td><td>DXA, 전신 MRI; 공복혈당·인슐린·지질; 간 지질(MRS)</td></tr>
+        <tr><td>근골격</td><td>성장지연, 축·사지 근이영양증, 저환기</td><td>Auxology; T1강조 MRI(넙다리빗근·모음근·척추주위근 지방침윤); 폐활량; 근생검(1형 섬유우세, 무질서한 근절-'미니코어')</td></tr>
+        <tr><td>청각</td><td>청력손실</td><td>청력검사; 이음향방사 이상; 뇌간청각유발반응은 정상</td></tr>
+        <tr><td>심혈관</td><td>흉부대동맥류</td><td>연속 심초음파; MR 대동맥조영</td></tr>
+        <tr><td>생식</td><td>남성 불임</td><td>정액검사</td></tr>
+        <tr><td>피부</td><td>광과민성, 레이노병</td><td>자외선A 조사 첩포검사</td></tr>
+      </table>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>진단</strong>: 상승 혈청 FT4·정상/낮은 FT3·상승 역T3 + 낮은 혈장 셀레늄 측정 권고. 유전진단은 <em>SECISBP2</em> 차세대(전체엑솜/게놈) 시퀀싱으로 intronic 변이까지 확인; 명백한 단일대립유전자 결함 시 SECISBP2 cDNA 분석으로 은닉 intronic 변이에 의한 splicing 이상 확인; 환자유래세포에서 셀레노단백 발현/기능 저하 확인도 유용</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>관리</strong>: 소아기 성장지연·발달지연 모니터링; 근이영양증 진행 확인 위한 주기적 MRI(선택례 근생검), 폐활량·수면다원검사(야간저환기); 진행성 감각신경성 청력손실·흉부대동맥류 확장 감시; 피부광과민성·남성불임 모니터링</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>치료</strong>: 저FT3에 <strong>liothyronine</strong> 치료 권고; <strong>셀레늄 보충은 권고하지 않음</strong>(순환 셀레노단백 결핍이나 T4→T3 전환장애를 교정하지 못함); 항산화제(예: 알파토코페롤)로 산화스트레스에 의한 조직손상 예방 고려 가능</div></li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:6px">
+        <span>ℹ️</span>
+        <div>Liothyronine은 단독 또는 성장호르몬과 병용 시 선형성장 개선. 경구 셀레늄 보충은 혈장 셀레늄 농도는 회복시키나 순환 셀레노단백 결핍이나 T4→T3 전환장애는 교정하지 못함. 항산화(비타민E 등) 치료는 대사표현형에 악영향 없이 산화손상으로부터 세포를 보호.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:0">
+        <span>❓</span>
+        <div><strong>불확실 영역</strong>: 대부분 소아·젊은 성인에서만 확인되어, 항산화방어 저하에 따른 만성 산화조직손상이 이후 연령에서 신경퇴행·조기노화·종양 등 합병증을 유발하는지 불명. TRU-TCA1-1 변이 환자에서 셀레늄 보충이 결핍을 교정할 수 있는지, 장기 항산화요법이 다계통 합병증을 개선/예방할 수 있는지도 미정.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 요오드티로닌 탈요오드효소 1(DIO1) 결핍</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 세 가지 탈요오드효소(D1/D2/D3) 결핍 마우스 모델 개발 이후 DIO 유전자 변이 탐색이 활발해짐; 2021년까지 탈요오드효소 관련 유일한 유전질환은 SECISBP2/TRU-TCA1-1 매개 셀레노단백 합성 결함이었음</li>
+        <li>• <strong>병원성 <em>DIO1</em> 변이는 현재까지 3가계만 보고</strong>(OMIM 619855) — 모두 이형접합으로, 이형접합 Dio1KO 마우스와 유사하게 <strong>반수체 기능부전(haploinsufficiency)</strong> 유발; 상승 역T3, 높은 rT3/T3비, (한 가계에서) 총콜레스테롤 상승 등의 이상 소견</li>
+        <li>• D1(DIO1 유전자산물)은 T4의 외측 고리를, 정도는 덜하지만 내측 고리를 탈요오드화하여 각각 T3와 역T3(rT3)를 생성</li>
+      </ul>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin:8px 0 6px">진단</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">비갑상선질환이 없는 상태에서 <strong>상승 혈청 rT3 및 상승 rT3:T3비</strong>를 먼저 확인 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">우성 유전 양상이므로 <strong>부모를 포함한 다른 가족 구성원 검사</strong>가 매우 유용</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">SECISBP2 변이 등 동일한 갑상선호르몬 이상을 보일 수 있는 다른 질환처럼, <strong><em>DIO1</em> 유전자 변이 입증이 핵심</strong></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">신규 <em>DIO1</em> 변이는 <strong>기능적 이상 입증</strong>이 필요</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-weak">약함</span><span class="g g-vlo">ØOOO</span></div><div class="rec-text">그 외 보고된 임상·생화학적 징후는 없으나, D1 기능소실이 다른 갑상선 결함과 동반된 갑상선기능검사를 변화시킬 수 있음</div></li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:6px">
+        <span>❓</span>
+        <div><strong>관리</strong>: <em>DIO1</em> 변이 보유자에서 특정 치료·중재가 필요한지는 <strong>미정립</strong>. <strong>불확실 영역</strong>: D1 반수체기능부전이 다른 선천성 갑상선 결함과 공존할 경우, 특히 발달기 조직 내 T3 생체이용률 확보를 위한 티록신 보충요법 조정이 필요할 수 있음.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /metab -->
+
+<!-- ═══════════════════════ RECS ═══════════════════════ -->
+<div id="tab-recs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 근거수준·권고강도 범례</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">권고 강도</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="g g-strong">강함(S)</span><span class="g g-weak">약함(W)</span>
+          </div>
+          <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">강함(S) = 대다수 환자에 적용 가능한 권고·모범진료 / 약함(W) = 임상의 재량에 따른 제안</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">근거 수준(GRADE)</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="g g-hi">ØØØØ 높음</span><span class="g g-mod">ØØØO 중등도</span><span class="g g-lo">ØØOO 낮음</span><span class="g g-vlo">ØOOO 매우낮음</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> Box 1 — 감별진단 핵심 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">상승 TH+비억제 TSH 평가 시 약물·동반질환의 혼란효과 신중히 고려</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-mod">ØØØO</span></div><div class="rec-text">희귀 유전/후천성 질환 선별 전 검사 간섭(assay interference) 배제</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="g g-strong">강함</span><span class="g g-lo">ØØOO</span></div><div class="rec-text">동적 내분비검사·뇌하수체 영상·데포 SRL 시험이 RTHβ-TSHoma 감별에 도움</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> Box 2 — RTHβ·RTHα 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>RTHβ 진단</strong>: 상승 T4·T3+비억제 TSH 시 의심 → <em>THRB</em> 시퀀싱 확진, VUS는 가계분리/T3억제검사로 검증, 체세포 모자이시즘 배제 위해 혈액 외 조직 NGS 고려</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>RTHβ 관리</strong>: 갑상선초음파·항체·골밀도·심혈관·대사평가 정기 시행, 소아 ADHD 신경심리검사, 임신 시 다학제관리</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>RTHβ 치료</strong>: 유의 동반질환 없으면 항갑상선제·갑상선절제 회피; 증상 시 베타차단제 ± TRIAC(전문센터 상의 후)</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>RTHα 진단</strong>: 두위·신장·좌골하다리길이 등 전체평가 + 주요/부기준 조합으로 <em>THRA</em> 시퀀싱 결정; 병원성 변이 없이는 확정진단 금지</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>RTHα 관리·치료</strong>: 모든 환자에서 L-T4 시험치료 및 평생 내분비 추적; 임신 중 liothyronine은 사용하지 않음</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> Box 3 — MCT8 결핍 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>진단</strong>: 전형적 생화학소견+신경발달지연 남아에서 <em>SLC16A2</em> 시퀀싱; VUS는 가계분리/기능검증/구조모델링으로 판정</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>치료</strong>: L-T4 단독요법은 비권고; <strong>TRIAC(또는 DITPA)</strong>으로 혈청T3를 1.4–2.5 nmol/L로 적정; 유사체 구득 불가 시 L-T4+PTU 병용 고려</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>관리</strong>: (소아)내분비·신경과 평생 관리, 다학제팀 사례관리, 영양평가·경관영양, 신경/위장관 대증치료</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> Box 4 — 대사장애(셀레노단백/DIO1) 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>셀레노단백 결핍</strong>: 상승FT4·정상/낮은FT3·상승rT3+낮은셀레늄으로 진단; <em>SECISBP2</em> NGS(cDNA 분석 포함); 저FT3에 liothyronine, 셀레늄 보충은 비권고, 항산화제 고려 가능</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>DIO1 결핍</strong>: 상승 rT3·rT3:T3비로 진단, 가족검사가 유용, <em>DIO1</em> 변이 입증이 핵심; 특정 치료·중재 필요성은 미정립</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /recs -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.querySelector('.osa-arrow').textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+const abbrs = [
+  ['RTHβ','Resistance to Thyroid Hormone beta — THRB 유전자 변이에 의한 갑상선호르몬 β수용체 저항. 상승 T4·T3 + 비억제 TSH가 특징.'],
+  ['RTHα','Resistance to Thyroid Hormone alpha — THRA 유전자 변이에 의한 α수용체 저항. 저신장·변비·서맥 등 말초조직 저항 표현형.'],
+  ['MCT8','Monocarboxylate Transporter 8 (SLC16A2) — 갑상선호르몬 세포막 수송체. 결핍 시 Allan–Herndon–Dudley 증후군(중증 신경발달지연+말초갑상선중독).'],
+  ['THRB / THRA','갑상선호르몬수용체 β/α형을 암호화하는 유전자.'],
+  ['SLC16A2','MCT8 단백을 암호화하는 X염색체 유전자.'],
+  ['SECISBP2','Selenocysteine Insertion Sequence Binding Protein 2 — 셀레노단백 합성에 필요한 유전자. 결핍 시 다계통 셀레노단백결핍질환.'],
+  ['TRU-TCA1-1','tRNA Selenocysteine (anticodon TCA) 1-1 — 셀레노시스테인 tRNA 유전자. 변이 시 셀레노단백결핍 유발.'],
+  ['DIO1 / D1','Iodothyronine Deiodinase type 1 — T4를 T3·rT3로 전환하는 탈요오드효소 1형 및 그 유전자.'],
+  ['TSHoma','TSH-secreting pituitary adenoma (갑상선자극호르몬분비 뇌하수체선종) — RTHβ와의 주요 감별질환.'],
+  ['SITSH','Syndrome of Inappropriate Secretion of TSH — 고TH에도 TSH가 억제되지 않는 상태.'],
+  ['TRIAC','Triiodothyroacetic acid — 중추 갑상선유사작용제. RTHβ·MCT8결핍의 갑상선중독 조절에 사용.'],
+  ['DITPA','Diiodothyropropionic acid — MCT8 결핍에 사용되는 T3 유사체.'],
+  ['SHBG','Sex Hormone-Binding Globulin — 간의 갑상선호르몬 반응성을 반영하는 지표.'],
+  ['MASLD','Metabolic dysfunction-Associated Steatotic Liver Disease (대사기능이상 관련 지방간질환).'],
+  ['VUS','Variant of Uncertain Significance — 의미불명 변이.'],
+  ['GRADE','Grading of Recommendations, Assessment, Development, and Evaluations — 권고 강도·근거 수준 평가 방법론.'],
+  ['ADHD','Attention-Deficit/Hyperactivity Disorder (주의력결핍 과잉행동장애).'],
+  ['SGA / LBW','Small for Gestational Age / Low Birth Weight — 부당경량아 / 저체중출생.'],
+  ['DXA','Dual-energy X-ray Absorptiometry — 골밀도 측정법.'],
+  ['ERG','Electroretinogram — 망막전위도 검사.'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>

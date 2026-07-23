@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>갑상선호르몬 베타 저항 증후군(RTHβ) 치료 가이드라인 — 2023 일본갑상선학회 컨센서스</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --text: #1f2328;
+    --text2: #57606a;
+    --brand: #6d28d9;   /* violet — thyroid hormone receptor */
+    --brand2: #4c1d95;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    font-size: calc(13px * var(--fscale, 1)); line-height: 1.5; min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px; display: flex; flex-direction: column;
+    align-items: center; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge { background: var(--brand); color: #fff; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 18px; font-weight: 700; color: var(--text); text-align: center; }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* TABS */
+  .tab-bar { display: flex; justify-content: center; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab { padding: 8px 14px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  /* MAIN */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* CARD */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header { background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* STAT */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; }
+  .stat-val { font-size: calc(19px * var(--fscale, 1)); font-weight: 700; color: var(--brand); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.4; }
+
+  /* GRADE */
+  .g { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .g-strong { background: #d1fae5; color: #065f46; border: 1px solid #059669; }
+  .g-weak   { background: #fef3c7; color: #78350f; border: 1px solid #d97706; }
+  .g-hi     { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .g-mod    { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .g-lo     { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .g-vlo    { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .g-ungr   { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+  .g-cons   { background: #eef2ff; color: #3730a3; border: 1px solid #6366f1; }
+
+  /* TOOLTIP */
+  .g::after { content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+  .g::before { content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none; }
+  .g:hover::after, .g:hover::before { display: block; }
+
+  /* REC LIST */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; }
+  .rec-num { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--brand); }
+
+  /* ALERT */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow);  color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);   color: #116329; }
+  .alert-teal    { background: #f5f3ff; border-left: 3px solid var(--brand);   color: var(--brand2); }
+
+  /* TABLE */
+  .t { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .t th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; border-bottom: 1px solid var(--border); }
+  .t td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .t tr:last-child td { border-bottom: none; }
+  .t tr:hover td { background: rgba(0,0,0,0.02); }
+  .t .hl td { background: #f5f3ff; }
+
+  /* ACCORDION */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-arrow { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); flex-shrink: 0; }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  /* ABBR */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--brand); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .val-badge { display: inline-block; background: #f5f3ff; color: var(--brand2); border: 1px solid var(--brand); border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; padding: 1px 6px; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+      <span class="logo-badge">JTA 2023 Consensus</span>
+      <h1>갑상선호르몬 베타 저항 증후군(RTHβ) 치료 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.6">
+      <a href="https://doi.org/10.1016/j.thscie.2025.100025" class="source-link" target="_blank">Thyroid Science 2 (2025) 100025 ↗</a>
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))"> · Ishii S, et al. Japan Thyroid Association Taskforce Committee</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">일본어 원저(Nankodo, 2023)의 영문 번역판을 바탕으로 한 참고용 요약 도구</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요·병태생리</div>
+    <div class="tab" onclick="showTab('fcq',this)">⚡ 임상질문(FCQ)</div>
+    <div class="tab" onclick="showTab('bcq',this)">📝 배경질문(BCQ)</div>
+    <div class="tab" onclick="showTab('drugs',this)">💊 비급여 약물</div>
+    <div class="tab" onclick="showTab('recs',this)">📋 권고 전체</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--brand)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════ OVERVIEW ═══════════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">1/40,000</div><div class="stat-lbl">추정 출생 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">103례</div><div class="stat-lbl">2021년까지 일본 내 보고된 누적 증례 (인구 1.2억)</div></div>
+    <div class="stat-box"><div class="stat-val">37–65%</div><div class="stat-lbl">빈맥 빈도 (성인 37%·소아 65%)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">48–73%</div><div class="stat-lbl">ADHD 동반률</div></div>
+  </div>
+
+  <!-- 정의·병태생리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 정의 및 병태생리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div><strong>RTHβ</strong>는 표적 조직의 갑상선호르몬에 대한 반응성이 저하되는 가족성 증후군으로, 대부분 <strong>THRB 유전자</strong>(갑상선호르몬수용체 β형, TRβ)의 돌연변이에 의해 발생. THRB 돌연변이가 확인되지 않는 경우는 <strong>nonTR-RTHβ</strong>로 분류하며 병인은 아직 불명.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">유전 및 기전</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 상염색체 우성 유전 — 돌연변이 TRβ가 야생형 TRβ·TRα 기능을 저해하는 <strong>우성음성효과(dominant-negative)</strong></li>
+            <li>• TRβ는 시상하부-뇌하수체-갑상선 축의 음성 되먹임을 담당 → 되먹임 회로 붕괴</li>
+            <li>• 결과적으로 혈청 갑상선호르몬 상승 + TSH 억제 없음 = <strong>SITSH</strong>(부적절 TSH 분비 증후군)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">조직별 이질적 반응</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• <strong>TRα 우세 장기</strong>(심장·뇌): 갑상선중독증 증상 뚜렷 — 심장·정신과 증상 흔함</li>
+            <li>• 우성음성효과가 강한 경우 오히려 <strong>갑상선기능저하증</strong> 양상 가능</li>
+            <li>• 다수는 무증상(고호르몬으로 저반응성이 보상됨), 일부는 빈맥·ADHD 등 중증 증상으로 치료 필요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임상적 함의 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 진단상 주의점 및 임상적 함의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>혈중 갑상선호르몬 상승으로 인해 <strong>Graves병으로 오진</strong>되어 불필요한 치료(항갑상선제·수술·방사성요오드)를 받는 경우가 다수 보고됨.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="alert alert-warn" style="margin:0">
+          <span>📌</span>
+          <div>추정 유병률 대비 실제 보고 증례 수가 현저히 적어(일본 103례/1.2억 인구), <strong>다수 환자가 미진단 상태</strong>로 추정됨.</div>
+        </div>
+        <div class="alert alert-info" style="margin:0">
+          <span>ℹ️</span>
+          <div>임신 시 <strong>유산율 증가</strong> 및 야생형 태아의 <strong>저체중출산</strong> 위험. 갑상선자극호르몬 자극에 의한 여포세포 증식으로 <strong>갑상선종</strong>이 흔함.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 방법론 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 컨센서스 작성 방법론</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>GRADE 접근법</strong> 기반 체계적 문헌고찰 (PubMed, Cochrane, 일본의학초록학회 DB, 1967–2018년 문헌 + 일부 수기 추가)</div></li>
+        <li class="rec-item"><div class="rec-text">전경임상질문(<strong>FCQ</strong>) 4개, 배경임상질문(<strong>BCQ</strong>) 5개, 일본 내 건강보험 비급여 약물 4개 항목(Column) 구성</div></li>
+        <li class="rec-item"><div class="rec-text">유전자 검사로 RTHβ 진단이 확정되지 않은 문헌은 근거에서 제외. FCQ는 위원 투표로 합의도(consensus) 90% 이상 시 채택</div></li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:6px">
+        <span>📌</span>
+        <div>전반적으로 <strong>고품질 근거가 부족</strong>하며 대부분 증례보고 수준 — 개별 환자·시설 상황에 따라 유연하게 적용할 것을 권고.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ═══════════════════════ FCQ ═══════════════════════ -->
+<div id="tab-fcq" class="panel">
+
+  <!-- FCQ1 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❤️</span> FCQ1. 빈맥에 베타차단제를 권고하는가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-badges" style="margin-bottom:8px">
+        <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+        <span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span>
+        <span class="g g-cons" data-tip="위원 합의도">합의도 100%</span>
+      </div>
+      <div class="alert alert-success">
+        <span>✅</span>
+        <div>고품질 근거는 없으나(증례보고 수준), 빈맥·심계항진·심방세동에 대한 효과가 다수 보고됨. RTHβ에서 빈맥 빈도가 높고 연령에 따라 심방세동 유병률이 증가하므로 <strong>베타차단제를 1차 약물로 권고</strong>.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:6px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">역학</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+            <li>• 빈맥: 성인 약 40%, 소아 약 60%</li>
+            <li>• 심방세동: 평균연령 40세 이하 군에서 약 6–7%, 고령일수록 증가</li>
+            <li>• 일부 문헌은 β1 선택적 약물인 <strong>atenolol</strong> 선호 언급(근거는 제한적)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">프랑스 코호트 (220가계, 성인 260명·소아 60명)</div>
+          <table class="t">
+            <tr><th>항목</th><th>성인</th><th>소아</th></tr>
+            <tr><td>빈맥</td><td>37.1%</td><td>65.5%</td></tr>
+            <tr><td>심계항진</td><td>31.9%</td><td>8.7%</td></tr>
+            <tr><td>심방세동</td><td>20%</td><td>—</td></tr>
+            <tr class="hl"><td>베타차단제 사용</td><td>66%</td><td>50%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:8px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>참고문헌 요약 상세</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          104명 표현형 연구(THRB 돌연변이 64례 포함)에서 16%가 심장 합병증, 6%가 심방세동을 동반. 다른 54명 연구(4–64세)에서는 26% 빈맥, 7% 심방세동(갑상선기능항진증보다는 낮은 빈도)이 보고됨. 여러 증례에서 심방세동에 대한 베타차단제 효과가 확인되었고, bisoprolol fumarate로 3년간 무증상 유지된 사례 존재.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FCQ2 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> FCQ2. 항갑상선제를 권고하는가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-badges" style="margin-bottom:8px">
+        <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+        <span class="g g-lo" data-tip="낮은 근거">낮은 근거</span>
+        <span class="g g-cons" data-tip="위원 합의도">합의도 92%</span>
+      </div>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div><strong>답 1</strong>: Graves병이 동반된 경우를 제외하고는 항갑상선제 <strong>사용하지 않을 것</strong>을 권고.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:0">
+        <span>📌</span>
+        <div><strong>답 2</strong>(근거: 매우 낮음, 합의도 92%): 일부 소아 환자에서 갑상선중독 증상 완화 및 성장 장애 예방에 효과적이었으나, <strong>장기 투여는 권고하지 않음</strong>.</div>
+      </div>
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin:8px 0 6px">근거 (THRB 돌연변이 확인 + Graves 동반 없음, 23례/21문헌)</div>
+      <div class="grid2" style="gap:8px">
+        <table class="t">
+          <tr><th>성인 (13례)</th><th>결과</th></tr>
+          <tr><td>효과 있음</td><td>1례</td></tr>
+          <tr><td>유해</td><td>2례</td></tr>
+          <tr><td>효과 없음</td><td>5례</td></tr>
+          <tr><td>불필요</td><td>5례</td></tr>
+        </table>
+        <table class="t">
+          <tr><th>소아 (10례, 신생아 3례 포함)</th><th>결과</th></tr>
+          <tr><td>효과 있음</td><td>5례(신생아 2)</td></tr>
+          <tr><td>불필요</td><td>3례(신생아 1)</td></tr>
+          <tr><td>유해</td><td>2례</td></tr>
+        </table>
+      </div>
+      <div class="osa-acc" style="margin-top:8px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>대표 증례 요약</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• <strong>유해 사례</strong>: MMI 투여 후 갑상선종 악화 → 중단 후 축소(R243W); L-T4+MMI 10개월 투여 후 18개월에 성장장애, 3세에 지능저하 → 9세에 갑상선전절제(기관압박 예방)</li>
+            <li>• <strong>효과 사례(소아)</strong>: MMI를 F-T4 상한 목표로 투여하여 성장곡선·심박수·과민성 등 임상증상 개선(11–3세, 15–26개월 투여)</li>
+            <li>• <strong>신생아</strong>: PTU(10 mg/kg/day, 27일) 또는 MMI+무기요오드(28일) 단기 투여로 성장장애·과민성·빈맥 개선</li>
+            <li>• Chiesa 등(5가계 6례)에서 TRIAC·bromocriptine·MMI·methylphenidate·베타차단제 병행 — MMI는 갑상선종 악화 사례 포함</li>
+          </ul>
+          <div style="margin-top:6px">결론: 빈맥·갑상선종에 대한 <strong>무분별한 항갑상선제 사용은 권고하지 않음</strong>. 단, 갑상선중독 증상 완화나 성장장애 예방 목적의 <strong>일시적 투여</strong>는 일부 소아에서 효과적일 수 있음.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FCQ3 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> FCQ3. 갑상선절제술을 권고하는가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-badges" style="margin-bottom:8px">
+        <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+        <span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span>
+        <span class="g g-cons" data-tip="위원 합의도">합의도 92%</span>
+      </div>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>근거가 없으므로 <strong>현저한 갑상선종이나 종양 동반이 아닌 한 시행하지 않을 것</strong>을 권고. 수술 자체의 중대한 합병증 보고는 없으나, <strong>수술 후 갑상선호르몬 보충 용량 조절이 쉽지 않음</strong>.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:6px">
+        <div class="alert alert-info" style="margin:0">
+          <span>ℹ️</span>
+          <div>수술 사유는 대부분 성인기 양성·악성 갑상선 종양 동반(증례보고 1–2례 단위). 4세 미만 미만성 갑상선종으로 수술한 사례 1건.</div>
+        </div>
+        <div class="alert alert-warn" style="margin:0">
+          <span>📌</span>
+          <div>수술 전 TSH 수준 유지를 위해 <strong>L-T4 150–600 μg/일</strong> 필요(비RTHβ 대비 고용량), <strong>L-T3 30 μg/일–200 μg/격일</strong> 병용이 필요한 경우도 있음.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FCQ4 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>☢️</span> FCQ4. 방사성요오드 치료를 권고하는가?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="rec-badges" style="margin-bottom:8px">
+        <span class="g g-weak" data-tip="약한 권고">약한 권고</span>
+        <span class="g g-vlo" data-tip="매우 낮은 근거">매우 낮은 근거</span>
+        <span class="g g-cons" data-tip="위원 합의도">합의도 92%</span>
+      </div>
+      <div class="alert alert-danger">
+        <span>🚫</span>
+        <div>효과를 입증한 보고는 없으며 오히려 <strong>뇌하수체 비대</strong>를 초래한 증례들이 있어, <strong>시행하지 않을 것</strong>을 권고.</div>
+      </div>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>근거 상세 — 뇌하수체 비대 증례</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• RTHβ 미진단 상태로 방사성요오드 치료받은 1가계 5례 — 갑상선기능저하증만 초래, 불필요한 치료로 결론</li>
+            <li>• Gurnell 등: 미진단 RTHβ 환자에서 방사성요오드 치료 40주 후 뇌하수체 비대 관찰 → 고용량 갑상선호르몬으로 TSH를 기저 수준까지 억제하자 호전(가역적 과형성 시사)</li>
+            <li>• Marazuela 등: 20년간 방사성요오드+호르몬보충 치료받은 미진단 RTHβ에서 뇌하수체 비대. 소마토스타틴 수용체 신티그라피로도 종양과 감별 어려움 확인</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /fcq -->
+
+<!-- ═══════════════════════ BCQ ═══════════════════════ -->
+<div id="tab-bcq" class="panel">
+
+  <!-- BCQ1 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> BCQ1. 임신한 RTHβ 환자의 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• RTHβ 산모의 <strong>유산율이 높음</strong></li>
+        <li>• RTHβ 산모의 야생형 태아는 체중이 낮고 혈청 TSH가 측정 불가 수준으로 억제됨(모체 T4의 태반 통과에 의한 갑상선중독)</li>
+        <li>• 태아가 RTHβ인 경우 <strong>산모 치료 불필요</strong>; 야생형 태아인 경우 산모 <strong>F-T4가 정상 상한치의 150%를 넘지 않도록</strong> 주의 관리</li>
+      </ul>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div class="alert alert-teal" style="margin:0">
+          <span>📌</span>
+          <div>Azores 자연경과 연구(R243Q 변이 한정): RTHβ 산모 유산율이 RTHβ 부친/RTHβ 환자 대비 부모보다 유의하게 높음. 야생형 자녀는 RTHβ 자녀보다 체중이 낮고 TSH 측정 불가.</div>
+        </div>
+        <div class="alert alert-info" style="margin:0">
+          <span>ℹ️</span>
+          <div>비교연구(13례, 다양한 변이): 산모 F-T4를 정상 상한치의 <strong>120%</strong>로 조절 시 야생형·RTHβ 아기 간 출생체중·Apgar·TSH 차이 없음.</div>
+        </div>
+      </div>
+      <div class="osa-acc" style="margin-top:8px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>증례 다수 요약</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          치료 없이도 야생형·RTHβ 아기 모두 정상 갑상선기능을 보인 사례(R243W, R243Q)가 있는 반면, 저체중·빈맥·불안정(M310L)을 보인 사례, 출생 후 일시적 PTU가 필요했던 사례(M313T)도 존재. RTHβ 산모에서 PTU·D-T4·TRIAC·L-T4·L-T3 등 다양한 약물이 사용된 증례에서 장기 발달은 대체로 정상. 태아 유전형 검사(양수천자 17례, 융모막융모생검 1례)를 시행한 보고가 1건 있으나, 검사 권장 여부는 위험 대비 향후 연구 과제.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BCQ2 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> BCQ2. ADHD 동반 시 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>📌</span>
+        <div>RTHβ에 특화된 일반 ADHD 치료제 사용 보고는 없으나, <strong>완화 목적의 시도는 해볼 가치가 있음</strong>. 단, 동물실험에서 methylphenidate는 RTHβ 모델 마우스의 행동이상에 효과 없었음.</div>
+      </div>
+      <div class="alert alert-success" style="margin-top:0">
+        <span>✅</span>
+        <div>소규모 RCT에서 <strong>L-T3</strong>가 RTHβ 동반 ADHD에 효과적으로 확인됨. L-T4·TRIAC·D-T4 사용 증례도 보고됨.</div>
+      </div>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin:6px 0">일반 소아 ADHD 유병률 6–11% 대비 RTHβ 동반율 48–73%로 높으나, 반대로 전체 ADHD 환자 중 RTHβ가 차지하는 비율은 매우 낮음.</div>
+      <div class="grid2" style="gap:8px;margin-top:6px">
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)"><span>L-T3 소규모 RCT</span><span class="osa-arrow">▾ 펼치기</span></div>
+          <div class="osa-body">Weiss 등의 전향적 이중맹검 교차연구(RTHβ+ADHD 8례 vs 정상갑상선기능 9례): Connors 과잉행동지수가 RTHβ군 8례 중 5례에서 개선(3례 불변), 대조군은 9례 중 1례만 개선. 8세 중증 RTHβ 여아에서 격일 고용량 L-T3로 불면·과잉행동 개선 사례도 보고.</div>
+        </div>
+        <div class="osa-acc">
+          <div class="osa-hdr" onclick="toggleOsa(this)"><span>L-T4 / TRIAC / D-T4 증례</span><span class="osa-arrow">▾ 펼치기</span></div>
+          <div class="osa-body">고용량 L-T4로 5세 nonTR-RTHβ 남아의 과잉행동 뚜렷 개선. TRIAC 16개월 투여로 16개월 남아의 주의력 개선; 8세 남아 3년 투여로 ADHD Rating Scale 21→9 개선. D-T4로 15개월 nonTR-RTH 남아의 과잉행동·성장장애 개선. 단, 일부 증례(9세·10세 여아)에서는 methylphenidate가 무효했고 심장 부작용 우려로 사용 자제.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BCQ3 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> BCQ3. Graves병 동반 시 치료 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 목표는 "정상" 갑상선기능 유지이나, RTHβ의 SITSH 특성상 정상 기준 설정이 어려움</li>
+        <li>• Graves병 발병 <strong>이전 갑상선기능이 확인되는 경우</strong> → 이를 목표치로 설정</li>
+        <li>• 발병 전 수치를 모르는 경우 → <strong>정상~경도 상승 TSH</strong>를 목표로 하는 증례들이 보고됨</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>방사성요오드 치료나 갑상선전절제술은 권고되지 않음. 발병 전 기능을 모르는 경우 L-T4로 미세조정하기가 특히 어려움. TSH가 정상 하한까지 낮아지면 갑상선중독 증상이 나타나는 경향.</div>
+      </div>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:6px">근거: RTHβ+Graves병 확진 8례 중 발병 전 수치 확인 가능은 2례뿐(항갑상선제 1례, 방사성요오드 1례 — 후자는 부적절한 L-T4 용량으로 갑상선기능저하증 초래).</div>
+    </div>
+  </div>
+
+  <!-- BCQ4 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> BCQ4. 타 원인 갑상선기능저하증 동반 시 치료 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">근거(모두 증례보고 수준)에 따른 3가지 목표 설정 방식</div>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-num">①</div><div class="rec-text">타 원인 갑상선기능저하증 <strong>발병 전 검사치</strong>를 목표로 설정</div></li>
+        <li class="rec-item"><div class="rec-num">②</div><div class="rec-text">명확한 저하증 증상이 있으면 <strong>증상 개선</strong> 자체를 목표로 설정</div></li>
+        <li class="rec-item"><div class="rec-num">③</div><div class="rec-text">동일 가계 내 <strong>다른 환자의 검사치</strong>를 목표로 활용(단 동일 변이라도 증상이 일치하지 않아 타당성은 불명확)</div></li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:6px">
+        <span>📌</span>
+        <div>다수 보고에서 비RTHβ 저하증 대비 <strong>훨씬 고용량의 L-T4</strong>가 필요(예: 갑상선전절제 후 500 μg/일 이상, 300–400 μg/일 등).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BCQ5 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> BCQ5. 분화갑상선암 수술 후 TSH 억제요법 목표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>📌</span>
+        <div>분화갑상선암으로 갑상선전절제술을 받은 RTHβ 증례는 문헌상 <strong>11가계 12례</strong>에 불과 — 근거 매우 부족.</div>
+      </div>
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 목표는 비RTHβ 증례와 동일해야 하나, <strong>절반 이상에서 수술 전 TSH 수준까지도 억제가 어려웠음</strong></li>
+        <li>• 정상 하한까지 억제된 경우는 2례뿐 — 1례는 L-T4 단독, 1례는 L-T4+TRIAC 병용 필요</li>
+      </ul>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>대표 증례 상세</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <ul style="list-style:none;padding:0;line-height:1.9">
+            <li>• L-T4 350 μg/일 단독으로 TSH 0.45 μU/mL까지 억제, 증상 없음</li>
+            <li>• L-T4 200 μg/일 + TRIAC 1.4 mg/일로 TSH 24.8→0.423 μU/mL — TRIAC 증량 시 신경과민·조증 양상으로 제한</li>
+            <li>• Bromocriptine 병용 사례는 부작용으로 조기 중단, 이후 TSH 상한 초과</li>
+            <li>• L-T3 격일 투여(250 μg, L-T4 병용 없이)로 갑상선종 축소 및 TSH 억제에 성공한 사례도 별도 보고</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /bcq -->
+
+<!-- ═══════════════════════ DRUGS (Columns) ═══════════════════════ -->
+<div id="tab-drugs" class="panel">
+
+  <div class="alert alert-info">
+    <span>ℹ️</span>
+    <div>아래 4개 약물은 일본에서 RTHβ 및 관련 증상에 대해 <strong>건강보험 급여가 인정되지 않아</strong> 임상질문(FCQ)이 아닌 별도 칼럼(Column)으로 다룸.</div>
+  </div>
+
+  <!-- TRIAC -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> Column 1. TRIAC (3,3′,5-triiodothyroacetic acid)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 일부 보고에서 F-T4·TSH 감소 효과(통계적 유의성은 일관되지 않음)</li>
+        <li>• 효과는 <strong>변이 코돈·아미노산 치환 위치에 따라 상이</strong> — hinge 영역 변이(V264D, R243Q 등)에서는 효과가 제한적일 수 있음</li>
+        <li>• 뚜렷한 이상반응 보고는 없으나, 프랑스 외 국가(일본 포함)에서 <strong>지속적 입수가 어려움</strong>(2020년 프랑스 내 수요 저조·오남용 우려로 판매 중단)</li>
+        <li>• 반감기가 짧아(6–7시간) <strong>1일 2회 투여</strong>가 필요할 수 있으며, T3 측정과 교차반응 가능</li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:8px">
+        <span>📌</span>
+        <div>주 대상은 <strong>뇌하수체형 RTHβ(PRTHβ)</strong>. 34례 중 약 90%에서 SITSH 개선 보고(THRB 변이 확인 16례 중 대부분 유효). 일본 내 PRTHβ 3례(일본어 문헌)에서도 SITSH 개선.</div>
+      </div>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>주요 소아 증례 — ADHD 병용 효과</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">P453T 변이 소아(이탈리아·일본 각 1례)에서 TRIAC으로 SITSH 및 ADHD 모두 개선, 베타차단제 중단 가능했으나 성장·골연령에는 효과 미미. 5가계 6례 소아 코호트에서 TRIAC 효과는 2례에서만 확인. R243Q 동형접합 1례는 carbimazole 병용 시 개선. 갑상선암 동반 R243W 1례에서는 L-T4+TRIAC 병용으로 TSH 억제.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bromocriptine -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> Column 2. Bromocriptine</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>📌</span>
+        <div>일본 내 건강보험 비급여이며 <strong>근거 부족</strong>. 뇌하수체 TSH 분비를 억제하여 F-T4·F-T3 저하 유도 — TSH분비선종(TSHoma)에는 효과적이나 RTHβ 적용 근거는 제한적.</div>
+      </div>
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 22례 중 호르몬 데이터 있는 11례 평가 — 효과 4례, 부분 반응 6례, 무효 1례</li>
+        <li>• "효과" 판정 중 4개월 이상 투여는 2례에 불과, 대부분 오래된 보고로 THRB 유전자 분석은 1례만 시행</li>
+        <li>• Cabergoline(부작용 적음)은 1례 보고되었으나 병용요법이라 단독 효과 판단은 어려움</li>
+      </ul>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>주요 증례</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">4개월 경구 bromocriptine 적정 투여로 PRTH 환자의 호르몬·자각증상 개선(H435Q). 5 mg/일 약 4개월로 호르몬·증상 개선 보고(다른 PRTH 증례). F-T4·T3·TSH 정상화 및 심박수 감소(2주–1년 미만 투여). 반면 무효했던 증례도 1건 보고(이후 TRIAC으로 효과 확인).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Somatostatin analogs -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> Column 3. 소마토스타틴 유사체 (Octreotide 등)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• Octreotide acetate가 주로 연구됨 — <strong>단기 효과는 있으나 장기적으로는 "이스케이프 현상"</strong>으로 효과 소실</li>
+        <li>• 일본 내 장기 효과 증례 1건 있으나 <strong>유전자 검사로 확진되지 않아</strong> 결론 제한적</li>
+        <li>• 다른 소마토스타틴 유사체(lanreotide, pasireotide 등)에 대한 연구는 향후 과제</li>
+      </ul>
+      <div class="osa-acc" style="margin-top:6px">
+        <div class="osa-hdr" onclick="toggleOsa(this)"><span>대조연구 상세 — RTHβ vs TSHoma</span><span class="osa-arrow">▾ 펼치기</span></div>
+        <div class="osa-body">
+          <table class="t">
+            <tr><th>연구</th><th>RTHβ 4례</th><th>TSHoma 8례(대조)</th></tr>
+            <tr><td>2개월 근주 후 F-T4</td><td>변화 없음(p=0.99)</td><td>37.9→21.9 pmol/L (p=0.02)</td></tr>
+            <tr><td>F-T3</td><td>변화 없음(p=0.82)</td><td>14.8→7.4 pmol/L (p=0.005)</td></tr>
+            <tr><td>TSH</td><td>변화 없음(p=0.5)</td><td>유의한 차이 없음(p=0.5)</td></tr>
+          </table>
+          <div style="margin-top:6px">1989년 대조연구(단기 5일 투여)에서는 신생물성·비신생물성 SITSH 모두 TSH 반응을 보였으나, 4–6주 지속투여 시 비신생물성(RTHβ 포함) 증례에서는 <strong>효과 소실(escape)</strong>이 나타남. 일본 증례(51세 여성, MMI 병용)에서는 초기 TSH 감소 후 MMI 중단 시 재상승, MMI 재개+octreotide 병용으로 갑상선종 축소.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D-T4 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> Column 4. D-thyroxine (D-T4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>📌</span>
+        <div>L-T4의 광학이성질체. RCT 없이 <strong>산발적 증례보고 수준</strong>의 근거만 존재.</div>
+      </div>
+      <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 9세 PRTH 아동(R243Q): D-T4 1.5년 후 TRIAC 5.5년으로 전환 — TRIAC이 TSH·호르몬 억제에 더 강력했으나 <strong>둘 다 갑상선종 크기는 줄이지 못함</strong>. 증상은 연령에 따라 자연 호전.</li>
+        <li>• 3세 동형접합 변이(Δ337T) 아동: D-T4 6 mg/일로 TSH는 억제되었으나 <strong>임상적 효과는 없음</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /drugs -->
+
+<!-- ═══════════════════════ RECS (전체 요약) ═══════════════════════ -->
+<div id="tab-recs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 전경임상질문(FCQ) 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak">약한</span><span class="g g-vlo">매우낮음</span></div>
+          <div class="rec-text"><strong>FCQ1</strong>: 빈맥에 베타차단제 <strong>권고함</strong> (합의도 100%)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak">약한</span><span class="g g-lo">낮음</span></div>
+          <div class="rec-text"><strong>FCQ2</strong>: 항갑상선제는 Graves병 동반이 아니면 <strong>권고하지 않음</strong>(장기투여 금지, 일부 소아 단기 사용은 가능) (합의도 92%)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak">약한</span><span class="g g-vlo">매우낮음</span></div>
+          <div class="rec-text"><strong>FCQ3</strong>: 갑상선절제술은 현저한 갑상선종·종양 동반이 아니면 <strong>권고하지 않음</strong> (합의도 92%)</div>
+        </li>
+        <li class="rec-item">
+          <div class="rec-badges"><span class="g g-weak">약한</span><span class="g g-vlo">매우낮음</span></div>
+          <div class="rec-text"><strong>FCQ4</strong>: 방사성요오드 치료는 <strong>권고하지 않음</strong>(뇌하수체 비대 위험) (합의도 92%)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 배경임상질문(BCQ) 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>BCQ1 임신</strong>: 태아가 RTHβ면 치료 불필요, 야생형이면 산모 F-T4를 정상상한 150% 이내로 관리</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>BCQ2 ADHD</strong>: L-T3가 소규모 RCT에서 효과 확인, L-T4·TRIAC·D-T4 증례 보고 존재</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>BCQ3 Graves 동반</strong>: 발병 전 수치를 목표로, 모르면 정상~경도상승 TSH 목표</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>BCQ4 타 원인 저하증</strong>: 발병 전 수치/증상 개선/가계 내 타 환자 수치 중 하나를 목표로, 고용량 L-T4 필요</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>BCQ5 암 수술 후 TSH 억제</strong>: 비RTHβ와 동일 목표이나 실제로는 절반 이상에서 수술 전 수준까지도 억제 어려움</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 근거수준·권고강도 범례</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">권고 강도</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="g g-strong">강한 권고</span><span class="g g-weak">약한 권고</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--brand);margin-bottom:6px">근거 수준</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="g g-hi">높음</span><span class="g g-mod">중등도</span><span class="g g-lo">낮음</span><span class="g g-vlo">매우낮음</span><span class="g g-ungr">등급외</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: calc(11px * var(--fscale, 1));color:var(--text2);margin-top:8px">본 컨센서스의 4개 FCQ는 모두 <strong>약한 권고 · 낮음 또는 매우 낮은 근거수준</strong>으로 채택됨 — RTHβ 치료 전반에 걸쳐 고품질 근거가 부족함을 시사.</div>
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /recs -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    if (!hdr.classList.contains('open')) hdr.nextElementSibling.classList.add('collapsed');
+  });
+});
+
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  hdr.querySelector('.osa-arrow').textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+const abbrs = [
+  ['RTHβ','Resistance to Thyroid Hormone beta (갑상선호르몬 베타 저항 증후군) — THRB 유전자 돌연변이로 인한 표적조직의 갑상선호르몬 저반응성 가족성 증후군.'],
+  ['nonTR-RTHβ','THRB 유전자 돌연변이가 확인되지 않는 RTHβ 유사 증례 — 병인 불명.'],
+  ['THRB','갑상선호르몬수용체 β형(TRβ)을 암호화하는 유전자. RTHβ의 주요 원인 유전자.'],
+  ['TRβ / TRα','Thyroid hormone Receptor β/α — 갑상선호르몬 수용체의 두 아형. TRα는 심장·뇌에, TRβ2는 시상하부·뇌하수체에 주로 발현.'],
+  ['SITSH','Syndrome of Inappropriate Secretion of TSH (부적절 TSH 분비 증후군) — 고갑상선호르몬에도 TSH가 억제되지 않는 RTHβ의 특징적 소견.'],
+  ['PRTHβ / GRTHβ','Pituitary(뇌하수체형)/Generalized(전신형) RTHβ — 임상 표현형에 따른 분류. 명확한 검사실적 감별 기준은 없음.'],
+  ['ADHD','Attention-Deficit/Hyperactivity Disorder (주의력결핍 과잉행동장애) — RTHβ에서 동반율이 높은 신경행동학적 질환.'],
+  ['TRIAC','3,3′,5-Triiodothyroacetic acid — T3의 대사산물로 TRβ에 대한 친화도가 높아 SITSH·ADHD 완화 목적의 비급여 치료제.'],
+  ['D-T4','Dextrothyroxine — L-T4의 광학이성질체. TSH 억제 목적의 비급여 약제, 임상적 효과는 제한적.'],
+  ['L-T4 / L-T3','Levothyroxine / Liothyronine — 갑상선호르몬 보충제. RTHβ에서는 비RTHβ 대비 고용량이 필요한 경우가 많음.'],
+  ['MMI / PTU','Methimazole / Propylthiouracil — 항갑상선제. RTHβ에서는 오진에 의한 남용 위험이 있어 신중한 사용 필요.'],
+  ['TSHoma','TSH-secreting pituitary adenoma (갑상선자극호르몬분비 뇌하수체선종) — RTHβ와의 감별이 필요한 질환.'],
+  ['GRADE','Grading of Recommendations, Assessment, Development, and Evaluations — 권고 강도·근거 수준을 체계적으로 평가하는 방법론.'],
+  ['FCQ / BCQ','Foreground/Background Clinical Question — 본 컨센서스의 전경(투표 대상)/배경(서술형) 임상질문 구분.'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mg = document.getElementById('abbr-main-grid');
+  if (mg) mg.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
