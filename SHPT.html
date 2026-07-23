@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KDIGO CKD-MBD 진료지침 (2017 Update)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+    --main: #2b5c8a;
+    --main-light: #e8f0f8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--main);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--main); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; font-weight: 600;}
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: flex-start; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--main); border-bottom-color: var(--main); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600;
+    color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform: none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width:110px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--main); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-1 { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-2 { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-ng { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+  .grade-star { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+
+  .grade::after {
+    content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5;
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; max-width:52px;}
+  .rec-num { font-size: calc(10px * var(--fscale,1)); color: var(--text2); font-weight:700; margin-top:1px; flex-shrink:0; min-width:32px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--main); }
+  .rec-sub { list-style:none; margin:6px 0 0 0; padding-left:14px; border-left:2px solid var(--border); }
+  .rec-sub .rec-item { padding: 6px 0; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: var(--main-light); border-left: 3px solid var(--main); color: #17395c; }
+
+  .ppgl-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ppgl-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .ppgl-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ppgl-table tr:last-child td { border-bottom: none; }
+  .ppgl-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ppgl-table .section-row td { background: var(--surface2); color: var(--main); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  .cmp-grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin: 6px 0 10px; }
+  @media (max-width: 700px) { .cmp-grid { grid-template-columns: 1fr; } }
+  .cmp-box { border-radius: 6px; padding: 8px 10px; font-size: calc(11px * var(--fscale,1)); line-height:1.55; }
+  .cmp-old { background: var(--surface2); border: 1px solid var(--border); }
+  .cmp-new { background: #fdf1e8; border: 1px solid #f3c99f; }
+  .cmp-lbl { font-weight:700; font-size: calc(10px * var(--fscale,1)); text-transform:uppercase; letter-spacing:.3px; margin-bottom:4px; display:block; }
+  .cmp-old .cmp-lbl { color: var(--text2); }
+  .cmp-new .cmp-lbl { color: var(--orange); }
+  .cmp-rationale { font-size: calc(11px * var(--fscale,1)); color: var(--text2); background: var(--surface2); border-radius:6px; padding:6px 10px; margin-bottom:10px; border-left:3px solid var(--main); }
+
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--main); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .sub-title { font-weight:700; font-size: calc(13px * var(--fscale,1)); color: var(--main); margin: 10px 0 4px; padding-top:6px; border-top:1px dashed var(--border);}
+  .sub-title:first-child{border-top:none; padding-top:0; margin-top:0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">KDIGO 2017</span>
+      <h1>CKD-MBD 진료지침 요약</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.1016/j.kisu.2017.04.001" class="source-link" target="_blank">Kidney Int Suppl 2017;7:1–59 ↗</a>
+      <span class="meta"> · KDIGO Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD)</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 KDIGO 공식 승인 자료가 아니며, Vifor Fresenius Quick Reference Guide 및 원문 요약을 재구성한 진료 참고용입니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단 (Ch.3)</div>
+    <div class="tab" onclick="showTab('phos')">🧪 인·칼슘 치료 (Ch.4.1)</div>
+    <div class="tab" onclick="showTab('pthbone')">🦴 PTH·골 치료 (Ch.4.2–4.3)</div>
+    <div class="tab" onclick="showTab('special')">🫘 이식·소아 (Ch.5)</div>
+    <div class="tab" onclick="showTab('summary')">📚 요약·약어</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:110px;min-width:110px;max-width:110px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--main)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ===================== TAB: OVERVIEW ===================== -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">56%</div><div class="stat-lbl">CKD G3–G5 SHPT 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">G3a–G5D</div><div class="stat-lbl">적용 범위</div></div>
+    <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">챕터 (진단·치료·이식·소아)</div></div>
+    <div class="stat-box"><div class="stat-val">2017</div><div class="stat-lbl">개정판 (2009판 갱신)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> CKD-MBD란 무엇인가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>CKD-진행에 따라 인(PO)·칼슘(Ca)·PTH·FGF-23·비타민D 대사의 상호연관된 이상이 발생하며, 이는 <strong>혈관석회화 → 심혈관질환</strong>, <strong>골질환 → 골절</strong>, <strong>부갑상선 과형성 → 치료저항성·부갑상선절제술</strong>로 이어진다. 한 이상의 치료가 다른 이상에 영향을 줄 수 있으므로, <strong>인·칼슘·PTH 수치는 항상 함께 평가</strong>해야 한다는 것이 2017년 개정의 핵심 원칙이다.</div>
+      </div>
+      <div class="sub-title">SHPT(속발성부갑상선기능항진증)의 병태생리</div>
+      <div class="rec-text" style="line-height:1.7">CKD 진행 시 FGF-23이 보상적으로 상승하며 1-α hydroxylase를 억제 → 1,25(OH)₂D(calcitriol) 생성 감소 및 25(OH)D 부족 → 장관 칼슘흡수 저하 → PTH 분비 자극. 동시에 신 인 배설능 저하로 고인혈증이 발생하여 PTH 분비를 추가로 자극한다. 지속적인 부갑상선 자극은 부갑상선 과형성을 유발하고, 상승된 PTH는 골합병증·혈관석회화와 연관되어 이환율·사망률 증가로 이어진다.</div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>ℹ️</span>
+        <div>CKD Stage 3–5 환자에서 SHPT 유병률은 전체 56%이며, 신기능 저하가 진행할수록 40–82%까지 증가한다. CKD G3a–G5 비투석 환자의 최적 PTH 수치는 알려져 있지 않으며, 신기능 저하에 따른 <strong>경도의 PTH 상승은 적절한 적응반응</strong>일 수 있다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> GFR 카테고리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>GFR 카테고리</th><th>GFR (mL/min/1.73m²)</th><th>용어</th></tr>
+        <tr><td>G1</td><td>≥90</td><td>정상 또는 높음</td></tr>
+        <tr><td>G2</td><td>60–89</td><td>경도 감소*</td></tr>
+        <tr><td>G3a</td><td>45–59</td><td>경도~중등도 감소</td></tr>
+        <tr><td>G3b</td><td>30–44</td><td>중등도~중증 감소</td></tr>
+        <tr><td>G4</td><td>15–29</td><td>중증 감소</td></tr>
+        <tr><td>G5</td><td>&lt;15</td><td>신부전</td></tr>
+      </table>
+      <div class="rec-text" style="margin-top:6px">*젊은 성인 기준 대비. G5D = 투석 중인 G5. GnT(예: G3aT) = 신이식 후 상태를 의미.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🆕</span> 2017년 개정판 핵심 변경사항</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">BMD(골밀도) 검사가 골절위험에 영향을 준다면 CKD-MBD 및/또는 골다공증 위험인자가 있는 환자에서 <strong>시행하도록 변경</strong>(2009년: 정례적 시행 반대)</div></li>
+        <li class="rec-item"><div class="rec-text">인·칼슘·PTH의 <strong>단일수치가 아닌 추세(trend)</strong>를 함께 고려하여 치료 결정</div></li>
+        <li class="rec-item"><div class="rec-text">인 저하 치료(식이·결합제·투석)는 <strong>진행성·지속성 고인혈증</strong>에 근거해야 하며, 정상범위로 낮추는 것을 목표로 함</div></li>
+        <li class="rec-item"><div class="rec-text">성인에서 고칼슘혈증 회피 — 높은 칼슘농도가 사망률·심혈관사건 증가와 연관된다는 새로운 근거</div></li>
+        <li class="rec-item"><div class="rec-text">모든 CKD 중증도에서 <strong>칼슘 기반 인결합제 용량 제한</strong> — 외인성 칼슘 과다노출이 유해할 수 있다는 근거</div></li>
+        <li class="rec-item"><div class="rec-text">식이 인 제한 시 <strong>인의 급원(동물성·식물성·첨가물)</strong>을 고려하되 단백질 섭취를 저해하지 않아야 함</div></li>
+        <li class="rec-item"><div class="rec-text">CKD G3a–G5 비투석 환자에서 <strong>calcitriol·비타민D 유사체의 정례적 사용은 더 이상 권고되지 않음</strong> — 심혈관 임상결과 개선은 입증되지 않았고 고칼슘혈증 위험은 증가</div></li>
+        <li class="rec-item"><div class="rec-text">CKD-MBD 및 낮은 BMD·취약골절이 있는 G3a–G5D 환자에서 생화학적 이상의 정도·가역성과 CKD 진행을 고려하여 치료를 결정하고, <strong>골생검을 고려</strong></div></li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+<!-- ===================== TAB: DIAGNOSIS ===================== -->
+<div id="tab-diagnosis" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧪</span> 3.1 생화학적 이상의 진단</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">CKD G3a–G5D 환자에서:</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">3.1.1</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1C</span></div><div class="rec-text">CKD G3a부터 혈청 칼슘·인·PTH·알칼리인산분해효소 활성도의 <strong>모니터링을 권고</strong>한다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.1.2</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">모니터링 빈도는 이상의 유무·정도, CKD 진행속도에 근거하는 것이 합리적이다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.1.3</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">25(OH)D는 측정할 수 있으며, 재검사 여부는 기저치·치료적 개입에 따라 결정한다. 비타민D 결핍·부족은 일반인구 권고 전략에 따라 교정할 것을 제안한다(2C).</div></li>
+      <li class="rec-item"><div class="rec-num">3.1.4</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1C</span></div><div class="rec-text">치료 결정은 <strong>단일 검사치가 아닌 추세</strong>에 근거해야 하며, 모든 CKD-MBD 평가를 종합적으로 고려할 것을 권고한다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.1.5</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2D</span></div><div class="rec-text">Ca×PO 곱(calcium-phosphate product)이라는 수학적 구성보다, <strong>칼슘·인의 개별 수치를 함께 평가</strong>하여 임상에 활용할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.1.6</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1B</span></div><div class="rec-text">임상검사실은 실제 사용 중인 검사법을 임상의에게 알리고, 검체(혈장/혈청) 및 검사법 변경 시 이를 보고하여 생화학 자료 해석에 참고하도록 권고한다.</div></li>
+    </ul>
+
+    <div class="sub-title">CKD G3a–G5D 모니터링 빈도</div>
+    <table class="ppgl-table">
+      <tr><th>단계</th><th>Ca·인</th><th>PTH</th><th>알칼리인산분해효소</th></tr>
+      <tr><td>G3a–G3b</td><td>6–12개월마다</td><td>기저치·CKD 진행에 근거</td><td>기저치 확인</td></tr>
+      <tr><td>G4</td><td>3–6개월마다</td><td>6–12개월마다</td><td>12개월마다*</td></tr>
+      <tr><td>G5(G5D 포함)</td><td>1–3개월마다</td><td>3–6개월마다</td><td>12개월마다*</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">*PTH 상승 시 더 자주 측정 가능. FGF-23의 임상적 정례 측정은 권고되지 않음. 25(OH)D는 기저치·치료 반응에 따라 재검사.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🦴</span> 3.2 골의 진단</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">CKD G3a–G5D 환자에서:</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">3.2.1★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">CKD-MBD 소견 및/또는 골다공증 위험인자가 있고, 결과가 치료 결정에 영향을 준다면 골절위험 평가를 위한 <strong>골밀도(BMD) 검사</strong>를 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.2.2★</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">신성골이영양증 유형에 대한 지식이 치료 결정에 영향을 준다면 <strong>골생검</strong> 시행이 합리적이다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.2.3</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">혈청 PTH 또는 골특이 알칼리인산분해효소 측정은 현저히 높거나 낮은 값이 기저 골전환율을 예측하므로 골질환 평가에 사용할 수 있다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.2.4</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">콜라겐 합성·분해의 골유래 전환지표를 <strong>정례적으로 측정하지 않을 것</strong>을 제안한다.</div></li>
+    </ul>
+
+    <div class="sub-title">2017 개정 근거 (★ 표시 권고)</div>
+    <div class="cmp-grid">
+      <div class="cmp-box cmp-old"><span class="cmp-lbl">2009년판 (3.2.2)</span>BMD 검사는 정례적으로 시행하지 않는다.</div>
+      <div class="cmp-box cmp-new"><span class="cmp-lbl">2017년판 (3.2.1)</span>CKD-MBD 및/또는 골다공증 위험인자가 있고 결과가 치료 결정에 영향을 준다면 BMD 검사를 시행한다.</div>
+    </div>
+    <div class="cmp-rationale">다수의 새로운 전향적 연구에서 낮은 DXA BMD가 CKD G3a–G5D 환자의 골절 발생을 예측함이 확인되었다. DXA 결과가 골생검 시행 여부에 영향을 줄 수 있어 두 권고의 순서가 변경되었다.</div>
+    <div class="cmp-grid">
+      <div class="cmp-box cmp-old"><span class="cmp-lbl">2009년판 (3.2.1)</span>비스포스포네이트 치료 전 골생검을 시행한다.</div>
+      <div class="cmp-box cmp-new"><span class="cmp-lbl">2017년판 (3.2.2)</span>신성골이영양증 유형에 대한 지식이 치료 결정에 영향을 준다면 골생검이 합리적이다.</div>
+    </div>
+    <div class="cmp-rationale">CKD·낮은 BMD·고골절위험 환자에서 골다공증 약제 사용 경험이 축적되었다. 골생검을 시행할 수 없다는 이유로 고골절위험군에서 항흡수제 치료를 보류하는 것이 정당화되지 않을 수 있다.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>❤️</span> 3.3 혈관석회화의 진단</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">CKD G3a–G5D 환자에서:</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">3.3.1</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">CT 기반 영상의 합리적 대안으로, 측면 복부 방사선촬영으로 혈관석회화 유무를, 심초음파로 판막석회화 유무를 확인할 수 있다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.3.2</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2A</span> <span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">기존에 확인된 혈관·판막 석회화가 있는 환자는 <strong>심혈관 위험이 가장 높은 군</strong>으로 간주할 것을 제안한다(2A). 이 정보를 CKD-MBD 관리에 활용하는 것이 합리적이다(Not Graded).</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-diagnosis -->
+
+<!-- ===================== TAB: PHOSPHATE/CALCIUM TREATMENT ===================== -->
+<div id="tab-phos" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧪</span> 4.1 혈청 인·칼슘 치료 (CKD G3a–G5D)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">4.1.1★</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">CKD-MBD 치료는 <strong>인·칼슘·PTH의 연속적(serial) 평가를 함께 고려</strong>하여 이루어져야 한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.2★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">상승한 인 수치를 <strong>정상범위 쪽으로 낮출 것</strong>을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.3</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">성인 환자에서 <strong>고칼슘혈증을 피할 것</strong>을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.4</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">투석액 칼슘농도를 1.25–1.50 mmol/L(2.5–3.0 mEq/L)로 사용할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.5★</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">인 저하 치료 결정은 <strong>진행성 또는 지속성으로 상승한 혈청 인</strong>에 근거해야 한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.6</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">인 저하 치료를 받는 성인 환자에서 <strong>칼슘 기반 인결합제의 용량을 제한</strong>할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.7</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1C</span></div><div class="rec-text">알루미늄 함유 인결합제의 장기 사용을 피하고, 투석 환자에서는 투석액 알루미늄 오염을 피하여 알루미늄중독을 예방할 것을 권고한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.8</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2D</span></div><div class="rec-text">고인혈증 치료로 식이 인 섭취 제한을 단독 또는 병용할 것을 제안한다. 식이권고 시 인의 급원(동물성·식물성·첨가물)을 고려하는 것이 합리적이다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.9</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">투석 환자에서 지속적 고인혈증 치료로 투석을 통한 인 제거를 늘릴 것을 제안한다.</div></li>
+    </ul>
+
+    <div class="sub-title">주요 개정 근거</div>
+    <div class="cmp-grid">
+      <div class="cmp-box cmp-old"><span class="cmp-lbl">2009 (4.1.1)</span>G3a–G5 환자에서 혈청 인을 정상범위로 유지한다.</div>
+      <div class="cmp-box cmp-new"><span class="cmp-lbl">2017 (4.1.2)</span>상승한 인을 정상범위 쪽으로 낮춘다(2C).</div>
+    </div>
+    <div class="cmp-rationale">G3a–G4 환자에서 인을 정상범위로 유지하는 것이 이득이 된다는 근거가 부족하며 일부 안전성 우려가 있다. 치료는 <strong>명백한 고인혈증</strong>을 목표로 해야 한다.</div>
+    <div class="cmp-grid">
+      <div class="cmp-box cmp-old"><span class="cmp-lbl">2009 (4.1.5)</span>지속적/재발성 고칼슘혈증, 동맥석회화·무형성골질환, PTH 지속적 저하 시 칼슘기반 결합제 용량을 제한한다(1B/2C).</div>
+      <div class="cmp-box cmp-new"><span class="cmp-lbl">2017 (4.1.6)</span>인 저하 치료를 받는 모든 성인에서 칼슘기반 인결합제 용량을 제한한다(2B).</div>
+    </div>
+    <div class="cmp-rationale">3건의 RCT에서 CKD 중증도와 무관하게 고인혈증 환자의 칼슘기반 결합제 사용 제한을 지지하는 새로운 근거가 제시되었다.</div>
+
+    <div class="alert alert-danger" style="margin-top:8px">
+      <span>⚠️</span>
+      <div><strong>근거 자료(Di Iorio B et al. 2013, N=466 투석환자):</strong> 칼슘염(Ca salts) 인결합제군은 세벨라머(sevelamer)군 대비 부정맥에 의한 심혈관 사망, 전체 심혈관 사망, 전체 사망률이 <strong>모두 유의하게 높았다</strong>(각 log-rank P&lt;0.001, 교란변수 보정 후에도 유의).</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-phos -->
+
+<!-- ===================== TAB: PTH & BONE TREATMENT ===================== -->
+<div id="tab-pthbone" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🦋</span> 4.2 비정상 PTH 수치의 치료</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">CKD G3a–G5 비투석 환자</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">4.2.1★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">최적 PTH 수치는 알려져 있지 않다. 그러나 intact PTH가 <strong>진행성으로 상승하거나 검사 정상상한(ULN)을 지속적으로 초과</strong>하는 환자는 고인혈증·저칼슘혈증·과다 인섭취·비타민D 결핍 등 <strong>교정 가능한 요인</strong>에 대해 평가할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.2.2★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">성인 환자에서 calcitriol·비타민D 유사체를 <strong>정례적으로 사용하지 않을 것</strong>을 제안한다. 중증·진행성 부갑상선기능항진증이 있는 G4–G5 환자에 한해 사용을 유보하는 것이 합리적이다(Not Graded).</div></li>
+    </ul>
+    <div class="sub-title">투석 환자</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">4.2.3</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">intact PTH를 검사 정상상한의 <strong>약 2–9배</strong> 범위로 유지할 것을 제안한다. 이 범위 내에서도 현저한 변화가 있으면 치료 개시·변경을 고려한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.2.4★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">PTH 저하 치료가 필요한 경우, <strong>칼시모방제, calcitriol 또는 비타민D 유사체, 혹은 칼시모방제와 calcitriol/비타민D 유사체 병용</strong>을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.2.5</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">약물치료에 반응하지 않는 중증 부갑상선기능항진증 환자에서 부갑상선절제술을 제안한다.</div></li>
+    </ul>
+
+    <div class="sub-title">개정 근거</div>
+    <div class="cmp-rationale"><strong>4.2.1:</strong> 신기능 저하에 따른 경도의 PTH 상승은 적절한 적응반응일 수 있다는 인식에 따라, '정상상한 초과' 단독이 아닌 '진행성 상승 또는 지속적 초과'로 문구를 개정하여 단일 수치가 아닌 추세에 근거한 치료를 강조했다.</div>
+    <div class="cmp-rationale"><strong>4.2.2:</strong> 최근 비타민D 유사체 RCT에서 임상적으로 유의미한 결과 개선은 입증되지 않았으나 고칼슘혈증 위험 증가는 확인되어, 정례적 사용에서 중증·진행성 환자 한정 사용으로 축소되었다.</div>
+    <div class="cmp-rationale"><strong>4.2.4(투석):</strong> EVOLVE 연구는 일차 종료점을 충족하지 못했으나, 사후분석에서 칼시모방제의 잠재적 이득 가능성이 제기되어 작업그룹은 특정 약제를 우선하지 않고 칼시모방제·calcitriol·비타민D 유사체 모두를 1차 선택지로 인정했다.</div>
+
+    <div class="alert alert-warn" style="margin-top:8px">
+      <span>📊</span>
+      <div><strong>근거 자료(Li X-H et al. 2015, 비투석 CKD 메타분석):</strong> 활성 비타민D 치료는 좌심실 질량지수·수축기능을 개선하지 못했으나, 고칼슘혈증 위험은 <strong>대조군 대비 약 7.85배(95% CI 2.92–21.10)</strong> 증가시켰다. Paricalcitol 1µg·2µg 모두 고칼슘혈증 위험이 유의하게 높았다.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💊</span> 4.3 비스포스포네이트·기타 골다공증 약제·성장호르몬</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">4.3.1</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1A</span></div><div class="rec-text">CKD G1–G2이면서 WHO 기준 골다공증 및/또는 고골절위험군에서는 일반인구와 <strong>동일하게 관리</strong>할 것을 권고한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.3.2</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2B</span></div><div class="rec-text">CKD G3a–G3b이면서 PTH가 정상범위이고 골다공증/고골절위험군인 경우, 일반인구와 동일하게 치료할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.3.3★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2D</span></div><div class="rec-text">CKD-MBD의 생화학적 이상과 낮은 BMD 및/또는 취약골절이 있는 G3a–G5D 환자에서는, 생화학적 이상의 <strong>정도·가역성 및 CKD 진행</strong>을 고려하여 치료를 결정하고 <strong>골생검을 고려</strong>할 것을 제안한다.</div></li>
+    </ul>
+    <div class="cmp-rationale">권고 3.2.2가 항흡수제 등 골다공증 치료 전 골생검 적응증을 다루게 되면서, 2009년 권고 4.3.4는 삭제되었고 2017년 4.3.3의 적용범위는 G3a–G3b에서 <strong>G3a–G5D로 확대</strong>되었다.</div>
+  </div>
+</div>
+
+</div><!-- /tab-pthbone -->
+
+<!-- ===================== TAB: TRANSPLANT & PEDIATRIC ===================== -->
+<div id="tab-special" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🫘</span> Chapter 5. 신이식 골질환</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">이식 직후 시기</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">5.1</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1B</span></div><div class="rec-text">안정될 때까지 <strong>최소 매주</strong> 혈청 칼슘·인을 측정할 것을 권고한다.</div></li>
+    </ul>
+    <div class="sub-title">이식 직후 시기 이후</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">5.2</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">이상의 유무·정도 및 CKD 진행속도에 근거하여 모니터링 빈도를 정하는 것이 합리적이다.</div></li>
+      <li class="rec-item"><div class="rec-num">5.3</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">25(OH)D는 측정 가능하며 재검사는 기저치·개입 여부에 따라 결정한다.</div></li>
+      <li class="rec-item"><div class="rec-num">5.4</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">비타민D 결핍·부족은 일반인구 전략에 따라 교정할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">5.5★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">골다공증 위험인자가 있는 G1T–G5T에서, 결과가 치료에 영향을 준다면 골절위험 평가를 위한 <strong>BMD 검사</strong>를 제안한다.</div></li>
+    </ul>
+    <div class="sub-title">치료 — 이식 후 12개월 이내, eGFR &gt;~30, 낮은 BMD</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">5.6★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2D</span></div><div class="rec-text"><strong>비타민D, calcitriol/alfacalcidol, 및/또는 항흡수제</strong> 치료를 고려할 것을 제안한다. 치료 선택은 칼슘·인·PTH·알칼리인산분해효소·25(OH)D 이상 유무(CKD-MBD 소견)에 영향을 받아야 하며(2C), 골생검 고려가 합리적이다(Not Graded). <strong>이식 12개월 이후의 치료를 안내할 자료는 부족</strong>하다.</div></li>
+      <li class="rec-item"><div class="rec-num">5.7</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">CKD G4T–G5T 환자는 Chapter 4.1·4.2에 기술된 <strong>비투석 G4–G5와 동일하게</strong> 관리할 것을 제안한다.</div></li>
+    </ul>
+
+    <div class="sub-title">신이식 모니터링 빈도 (G1T–G5T)</div>
+    <table class="ppgl-table">
+      <tr><th>단계</th><th>Ca·인</th><th>PTH</th><th>알칼리인산분해효소</th></tr>
+      <tr><td>G1T–G3bT</td><td>6–12개월마다</td><td>1회, 이후 CKD 진행에 근거</td><td>12개월마다*(G3aT부터)</td></tr>
+      <tr><td>G4T</td><td>3–6개월마다</td><td>6–12개월마다</td><td>12개월마다*</td></tr>
+      <tr><td>G5T</td><td>1–3개월마다</td><td>3–6개월마다</td><td>12개월마다*</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">*PTH 상승 시 더 자주. G1T–G5T 전 구간: 25(OH)D는 기저치·치료 개입에 따라 측정.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>👶</span> 소아 CKD-MBD</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">진단</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">3.1.1</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2D</span></div><div class="rec-text">소아에서 CKD G2부터 혈청 칼슘·인·PTH·알칼리인산분해효소 활성도의 모니터링을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">3.2.5</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1B</span></div><div class="rec-text">CKD G2–G5D 영아는 <strong>최소 분기별</strong> 신장을, 소아는 <strong>최소 연 1회</strong> 선형 성장을 평가할 것을 권고한다.</div></li>
+    </ul>
+    <div class="sub-title">치료</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-num">4.1.3★</div><div class="rec-badges"><span class="grade grade-2" data-tip="조건부 권고">2C</span></div><div class="rec-text">CKD G3a–G5D 소아에서 혈청 칼슘을 <strong>연령별 정상범위</strong>로 유지할 것을 제안한다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.1.6★</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">인 저하 치료 선택을 혈청 칼슘 수치에 근거하는 것이 합리적이다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.2.2★</div><div class="rec-badges"><span class="grade grade-ng" data-tip="Not Graded">NG</span></div><div class="rec-text">소아에서 calcitriol·비타민D 유사체는 연령별 정상 혈청 칼슘 유지를 위해 고려될 수 있다.</div></li>
+      <li class="rec-item"><div class="rec-num">4.3.4</div><div class="rec-badges"><span class="grade grade-1" data-tip="강력 권고">1A</span></div><div class="rec-text">CKD G2–G5D 소아·청소년에서 신장결손이 있고 추가 성장이 필요한 경우, <strong>영양불량 및 CKD-MBD 생화학적 이상을 먼저 교정한 후</strong> 재조합 인성장호르몬 치료를 권고한다.</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-special -->
+
+<!-- ===================== TAB: SUMMARY ===================== -->
+<div id="tab-summary" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏷️</span> 권고 등급 체계</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>표기</th><th>의미</th></tr>
+        <tr><td><span class="grade grade-1" data-tip="강력 권고">1</span></td><td><strong>강력 권고 (we recommend)</strong> — 대다수 환자에게 이익이 위해보다 크다는 확신</td></tr>
+        <tr><td><span class="grade grade-2" data-tip="조건부 권고">2</span></td><td><strong>조건부 권고 (we suggest)</strong> — 환자 상황·가치관·선호에 대한 신중한 고려 필요</td></tr>
+        <tr><td>A / B / C / D</td><td>근거의 질: A=높음, B=중등도, C=낮음, D=매우 낮음</td></tr>
+        <tr><td><span class="grade grade-ng" data-tip="Not Graded">Not Graded</span></td><td>체계적 근거평가 없이 작업그룹의 합의로 제시된 서술 (신중한 임상 원칙)</td></tr>
+        <tr><td>★</td><td>2017년 개정에서 <strong>신설 또는 변경</strong>된 권고 (KDIGO 원문 굵은 글씨·별표 표기)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 권고 전체 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="ppgl-table">
+        <tr><th>번호</th><th>권고 요지</th><th>등급</th></tr>
+        <tr><td>3.1.1</td><td>G3a부터 Ca·인·PTH·ALP 모니터링</td><td><span class="grade grade-1">1C</span></td></tr>
+        <tr><td>3.1.3</td><td>25(OH)D 측정, 결핍 시 일반인구 전략으로 교정</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>3.1.4</td><td>단일수치 아닌 추세 기반 치료결정</td><td><span class="grade grade-1">1C</span></td></tr>
+        <tr><td>3.1.5</td><td>Ca×PO 곱 대신 개별 수치 함께 평가</td><td><span class="grade grade-2">2D</span></td></tr>
+        <tr><td>3.2.1★</td><td>BMD 검사(치료결정에 영향 시)</td><td><span class="grade grade-2">2B</span></td></tr>
+        <tr><td>3.2.2★</td><td>골생검(신성골이영양증 유형이 치료결정에 영향 시)</td><td><span class="grade grade-ng">NG</span></td></tr>
+        <tr><td>3.3.2</td><td>혈관/판막석회화 = 최고위험군</td><td><span class="grade grade-2">2A</span></td></tr>
+        <tr><td>4.1.1★</td><td>인·칼슘·PTH 연속평가 기반 치료</td><td><span class="grade grade-ng">NG</span></td></tr>
+        <tr><td>4.1.2★</td><td>상승한 인을 정상범위로 저하</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>4.1.3</td><td>성인 고칼슘혈증 회피</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>4.1.5★</td><td>진행성/지속성 고인혈증 기반 치료결정</td><td><span class="grade grade-ng">NG</span></td></tr>
+        <tr><td>4.1.6</td><td>칼슘기반 인결합제 용량 제한(전체 성인)</td><td><span class="grade grade-2">2B</span></td></tr>
+        <tr><td>4.1.7</td><td>알루미늄 함유 결합제 장기사용 회피</td><td><span class="grade grade-1">1C</span></td></tr>
+        <tr><td>4.1.8</td><td>식이 인 제한, 인 급원 고려</td><td><span class="grade grade-2">2D</span></td></tr>
+        <tr><td>4.2.1★</td><td>진행성/지속적 PTH 상승 시 교정가능요인 평가</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>4.2.2★</td><td>비투석 성인 calcitriol/비타민D유사체 정례사용 반대</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>4.2.3</td><td>투석환자 PTH 목표: ULN의 2–9배</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>4.2.4★</td><td>칼시모방제·calcitriol·비타민D유사체(단독/병용)</td><td><span class="grade grade-2">2B</span></td></tr>
+        <tr><td>4.2.5</td><td>약물 무반응 중증 SHPT → 부갑상선절제술</td><td><span class="grade grade-2">2B</span></td></tr>
+        <tr><td>4.3.1</td><td>G1–G2 골다공증: 일반인구와 동일 관리</td><td><span class="grade grade-1">1A</span></td></tr>
+        <tr><td>4.3.3★</td><td>G3a–G5D 이상+낮은 BMD/골절: 정도·가역성 고려, 골생검 고려</td><td><span class="grade grade-2">2D</span></td></tr>
+        <tr><td>5.1</td><td>이식 직후 최소 매주 Ca·인 측정</td><td><span class="grade grade-1">1B</span></td></tr>
+        <tr><td>5.5★</td><td>이식환자 위험인자 시 BMD 검사</td><td><span class="grade grade-2">2C</span></td></tr>
+        <tr><td>5.6★</td><td>이식 12개월 내 저BMD: 비타민D/calcitriol/항흡수제 고려</td><td><span class="grade grade-2">2D</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-summary -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) { body.classList.add('collapsed'); }
+  });
+});
+
+const abbrs = [
+  ['Ca','Calcium (칼슘)'],
+  ['sCa','Serum Calcium (혈청칼슘)'],
+  ['PO','Phosphate (인)'],
+  ['sPO','Serum Phosphate (혈청인)'],
+  ['PTH','Parathyroid Hormone (부갑상선호르몬)'],
+  ['SHPT','Secondary Hyperparathyroidism (속발성부갑상선기능항진증)'],
+  ['FGF-23','Fibroblast Growth Factor-23 (섬유아세포성장인자-23)'],
+  ['25(OH)D','25-hydroxyvitamin D (25-하이드록시비타민D)'],
+  ['1,25(OH)₂D','1,25-dihydroxyvitamin D, calcitriol (1,25-디하이드록시비타민D)'],
+  ['CKD','Chronic Kidney Disease (만성신장병)'],
+  ['CKD-MBD','CKD-Mineral and Bone Disorder (만성신장병-미네랄骨대사이상)'],
+  ['GFR','Glomerular Filtration Rate (사구체여과율)'],
+  ['G1–G5','GFR 카테고리 (G1: ≥90 ~ G5: <15 mL/min/1.73m²)'],
+  ['G5D','투석 중인 G5 (Dialysis)'],
+  ['GnT','신이식 후 상태 (Transplant), 예: G3aT'],
+  ['BMD','Bone Mineral Density (골밀도)'],
+  ['DXA','Dual-energy X-ray Absorptiometry (이중에너지 X선 흡수계측법)'],
+  ['WHO','World Health Organization (세계보건기구)'],
+  ['RCT','Randomized Controlled Trial (무작위대조시험)'],
+  ['CV','Cardiovascular (심혈관)'],
+  ['RR','Relative Risk (상대위험도)'],
+  ['CI','Confidence Interval (신뢰구간)'],
+  ['ULN','Upper Limit of Normal (검사 정상상한)'],
+  ['KDIGO','Kidney Disease: Improving Global Outcomes'],
+  ['Not Graded','체계적 근거평가 없이 작업그룹 합의로 제시된 서술'],
+];
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+buildAbbr();
+</script>
+</body>
+</html>
