@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTCOE 쿠싱병 약물치료 실태조사 (2025)</title>
+<style>
+  :root {
+    --bg:#f6f8fa;--surface:#fff;--surface2:#f0f2f5;--border:#d0d7de;
+    --accent:#0969da;--accent2:#0550ae;--green:#1a7f37;--yellow:#9a6700;
+    --red:#cf222e;--orange:#5a3ea0;--text:#1f2328;--text2:#57606a;
+    --teal:#0a7c8a;--purple:#5a3ea0;--fscale:1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size: calc(13px * var(--fscale, 1));line-height:1.5;}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;position:sticky;top:0;z-index:100;}
+  .header-inner{width:100%;max-width:960px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .logo-badge{background:var(--orange);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+  .tab-bar{display:flex;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .font-zoom-btn{display:flex;align-items:center;gap:3px;flex-shrink:0;margin:4px 4px 4px 6px;padding:5px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--accent2);font-size:calc(11px * var(--fscale, 1));font-weight:700;cursor:pointer;user-select:none;white-space:nowrap;transition:background .15s;}
+  .font-zoom-btn:hover{background:var(--border);}
+  .font-zoom-btn .fz-icon{font-size:calc(12px * var(--fscale, 1));}
+  .tab-bar-inner{width:100%;max-width:960px;display:flex;align-items:center;gap:2px;padding:0 4px;}
+  .tab{padding:7px 11px;font-size: calc(11.5px * var(--fscale, 1));color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;user-select:none;flex-shrink:0;}
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--orange);border-bottom-color:var(--orange);}
+  .tab-abbr-wrap{display:flex;align-items:center;padding:4px 4px;margin-left:4px;flex-shrink:0;position:relative;}
+  .main{padding:12px 16px;max-width:960px;margin:0 auto;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:10px;}
+  .card-header{background:var(--surface2);padding:8px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+  .card-header .toggle{font-size: calc(13px * var(--fscale, 1));transition:transform .2s;}
+  .card-header.open .toggle{transform:rotate(180deg);}
+  .card-body{padding:10px 12px;}
+  .card-body.collapsed{display:none;}
+  .stat-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .stat-box{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 14px;flex:1;min-width:90px;text-align:center;}
+  .stat-box.clickable{cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+  .stat-box.clickable:hover{border-color:var(--orange);box-shadow:0 2px 8px rgba(90,62,160,.15);}
+  .stat-val{font-size: calc(18px * var(--fscale, 1));font-weight:700;color:var(--orange);}
+  .stat-lbl{font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:2px;}
+  .stat-hint{font-size: calc(9px * var(--fscale, 1));color:var(--orange);margin-top:4px;opacity:.7;}
+  /* Modal */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--surface);border-radius:12px;padding:20px;max-width:640px;width:92%;max-height:84vh;overflow-y:auto;box-shadow:0 16px 48px rgba(0,0,0,.22);position:relative;}
+  .modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size: calc(18px * var(--fscale, 1));cursor:pointer;color:var(--text2);line-height:1;}
+  .modal-title{font-size: calc(15px * var(--fscale, 1));font-weight:700;color:var(--text);margin-bottom:12px;padding-right:20px;line-height:1.4;}
+  .modal-section{margin-bottom:12px;}
+  .modal-section-title{font-size: calc(11px * var(--fscale, 1));font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:4px;}
+  .modal-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1));}
+  .modal-table th{background:var(--surface2);color:var(--text2);padding:4px 8px;font-size: calc(10.5px * var(--fscale, 1));font-weight:600;text-align:left;border-bottom:1px solid var(--border);}
+  .modal-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .modal-table tr:last-child td{border-bottom:none;}
+  .rec-list{list-style:none;}
+  .rec-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start;}
+  .rec-item:last-child{border-bottom:none;}
+  .rec-text{font-size: calc(12px * var(--fscale, 1));color:var(--text);line-height:1.65;}
+  .rec-text strong{color:#1f2328;}
+  .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:10px;font-size: calc(10px * var(--fscale, 1));font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+  .badge-strong{background:#dafbe1;color:#116329;border:1px solid #1a7f37;}
+  .badge-cond{background:#fff8c5;color:#7a4b00;border:1px solid #d4a017;}
+  .badge-high{background:#dafbe1;color:#116329;border:1px solid #1a7f37;}
+  .badge-mod{background:#ddf4ff;color:var(--accent2);border:1px solid var(--accent2);}
+  .badge-low{background:#fff8c5;color:#7a4b00;border:1px solid #d4a017;}
+  .badge-vlow{background:#ffebe9;color:#82071e;border:1px solid var(--red);}
+  .badge-no{background:#f3e5f5;color:#5a3ea0;border:1px solid #5a3ea0;}
+  .alert{padding:8px 12px;border-radius:6px;font-size: calc(12px * var(--fscale, 1));margin:8px 0;display:flex;gap:8px;align-items:flex-start;}
+  .alert-info{background:#ddf4ff;border-left:3px solid var(--accent2);color:#0550ae;}
+  .alert-warn{background:#fff8c5;border-left:3px solid #d4a017;color:#7a4b00;}
+  .alert-danger{background:#ffebe9;border-left:3px solid var(--red);color:#82071e;}
+  .alert-success{background:#dafbe1;border-left:3px solid var(--green);color:#116329;}
+  .alert-teal{background:#e0f5f5;border-left:3px solid var(--teal);color:#075050;}
+  .alert-orange{background:#f3e5f5;border-left:3px solid var(--orange);color:#4a2f80;}
+  .alert-purple{background:#f3e5f5;border-left:3px solid var(--purple);color:#5a3ea0;}
+  .tc-table{width:100%;border-collapse:collapse;font-size: calc(11.5px * var(--fscale, 1));}
+  .tc-table th{background:var(--surface2);color:var(--text2);padding:5px 8px;font-size: calc(10.5px * var(--fscale, 1));text-transform:uppercase;letter-spacing:.3px;font-weight:600;text-align:left;border-bottom:1px solid var(--border);}
+  .tc-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .tc-table tr:last-child td{border-bottom:none;}
+  .tc-table tr:hover td{background:rgba(0,0,0,.02);}
+  .acc{border:1px solid var(--border);border-radius:6px;margin-bottom:6px;overflow:hidden;}
+  .acc-hdr{background:var(--surface2);padding:7px 12px;font-size: calc(12px * var(--fscale, 1));font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .acc-hdr:hover{background:#e8eaec;}
+  .acc-body{display:none;padding:10px 12px;font-size: calc(12px * var(--fscale, 1));line-height:1.65;}
+  .flow-box{border:1px solid var(--border);border-radius:6px;background:var(--surface);padding:8px 12px;margin-bottom:6px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  .flow-arrow{text-align:center;color:var(--text2);font-size: calc(14px * var(--fscale, 1));margin:2px 0;}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size: calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0;margin-right:6px;}
+  ul.dot{padding-left:18px;}
+  ul.dot li{margin-bottom:3px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  ol.num{padding-left:18px;}
+  ol.num li{margin-bottom:4px;font-size: calc(12px * var(--fscale, 1));line-height:1.6;}
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#c8d0d9;border-radius:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="logo-badge">Pituitary 2025</span>
+      <h1 style="font-size:17px;font-weight:700;color:var(--text)">PTCOE 쿠싱병 약물치료 실태조사</h1>
+    </div>
+    <div style="text-align:center;line-height:1.5">
+      <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">Medical management pathways for Cushing's disease in Pituitary Tumors Centers of Excellence (PTCOEs)</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2)">Giustina A, Uygur MM, Frara S, et al. · Pituitary 2025;28:23 · doi: 10.1007/s11102-024-01485-x</span>
+    </div>
+    <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic;">국제 우수뇌하수체센터(PTCOE) 9곳의 실제 임상 데이터 기반 감사(audit) 연구 — Pituitary Society 비공식 참고 정리본</div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('drugs')">💊 약물별 상세</div>
+    <div class="tab" onclick="showTab('rates')">📊 사용률·조절률</div>
+    <div class="tab" onclick="showTab('discussion')">🔍 고찰·한계</div>
+    <div class="tab" onclick="showTab('refs')">📁 주요 참고문헌</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ OVERVIEW ═══ -->
+<div id="tab-overview" class="panel active">
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">9개</div><div class="stat-lbl">참여 국제 PTCOE 센터</div></div>
+    <div class="stat-box"><div class="stat-val">117명</div><div class="stat-lbl">센터당 중앙값 활성 CD 환자 수 (35–279)</div></div>
+    <div class="stat-box"><div class="stat-val">13.3%</div><div class="stat-lbl">약물치료 받는 환자 비율 (4.8–82.9)</div></div>
+    <div class="stat-box clickable" onclick="openModal('controlModal')"><div class="stat-val">75%</div><div class="stat-lbl">약물치료 전체 생화학적 조절률 (10–100)</div><div class="stat-hint">▸ 클릭하여 상세 보기</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📋 연구 배경 및 목적</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-box" style="border-left:3px solid var(--orange)">
+        <strong>① 문제의식</strong><br>
+        <span style="color:var(--text2);font-size: calc(11px * var(--fscale, 1))">2021년 Pituitary Society 쿠싱병(CD) 진단·관리 컨센서스 지침 개정판이 약물치료 적응증을 포함했으나, 실제 임상 적용에 대한 근거는 제한적</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--accent2)">
+        <strong>② 연구 목적</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">PTCOE(우수뇌하수체센터) 기준 검증을 위한 감사를 통해 현재의 약물치료 접근법을 평가하고, CD 약물치료의 초기 표준을 제시</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--green)">
+        <strong>③ 방법</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">전문가 평가위원회가 선정한 9개 국제 PTCOE의 2018–2020년 활동 데이터를 기반으로 약물치료 중인 환자와 생화학적 조절률 평가 (8/9개 센터가 상세 자료 제공)</span>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box" style="border-left:3px solid var(--purple)">
+        <strong>④ 핵심 결론</strong><br>
+        <span style="font-size: calc(11.5px * var(--fscale, 1))">부신 스테로이드 합성 억제제가 가장 흔히 쓰이는 1차 옵션. 병용요법을 포함해도 환자의 최대 25%는 질환 조절 실패 — 더 효과적인 병용 전략 또는 신규 치료 옵션 필요성 강조</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <span>🧭 CD 표준 치료 경로 (배경)</span><span class="toggle">▾</span>
+      </div>
+      <div class="card-body">
+        <ul class="rec-list">
+          <li class="rec-item"><span class="badge badge-strong">1차</span><span class="rec-text">ACTH 분비 선종의 <strong>선택적 경접형골동 수술 절제</strong> — 미세선종 관해율 최대 83%, 대선종 68% (PTCOE 기준)</span></li>
+          <li class="rec-item"><span class="badge badge-cond">대안</span><span class="rec-text">영상에서 보이지 않는 미세선종 등 수술이 어려운 경우 <strong>약물치료</strong>가 대안 옵션</span></li>
+          <li class="rec-item"><span class="badge badge-mod">목표</span><span class="rec-text">질환 관해 및 장기 조절 달성, 가능하면 <strong>범뇌하수체기능저하증 없이</strong></span></li>
+          <li class="rec-item"><span class="badge badge-no">권고</span><span class="rec-text">현행 지침은 CD 환자가 가능한 한 <strong>전문 PTCOE에서 추적관찰</strong>될 것을 권고</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-header open" onclick="toggleCard(this)">
+          <span>💊 약물치료 3대 분류</span><span class="toggle">▾</span>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-info"><span>🧪</span><span><strong>부신 스테로이드 합성 억제제</strong> — 케토코나졸, 메티라폰, 오실로드로스타트(이스투리사), 미토탄, 에토미데이트. 코르티솔 합성 단계 차단</span></div>
+          <div class="alert alert-teal"><span>🎯</span><span><strong>뇌하수체 표적제</strong> — 카베르골린, 파시레오타이드. ACTH 분비 억제</span></div>
+          <div class="alert alert-purple"><span>🚫</span><span><strong>당질코르티코이드 수용체 길항제</strong> — 미페프리스톤. 코르티솔 작용 자체를 차단</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header open" onclick="toggleCard(this)">
+          <span>🔑 핵심 개념</span><span class="toggle">▾</span>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-orange"><span>ℹ️</span><span>지침은 <strong>부신 스테로이드 합성 억제제를 1차 옵션</strong>으로 제안 — 오랜 사용 경험과 빠른 작용 때문</span></div>
+          <div class="alert alert-danger"><span>⚠️</span><span>병용요법 사용에도 불구하고 PTCOE에서조차 <strong>최대 25%가 질환 조절 실패</strong></span></div>
+          <div class="alert alert-warn"><span>🦠</span><span>본 연구는 <strong>COVID-19 팬데믹 기간</strong>(2018–2020)과 겹쳐, 특히 오실로드로스타트처럼 당시 막 승인된 신약의 실제 사용률이 과소평가되었을 가능성</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DRUGS ═══ -->
+<div id="tab-drugs" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧪 케토코나졸 (Ketoconazole)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>순위</td><td><strong>가장 흔히 사용</strong> — 전체 약물치료 환자의 26.5% (범위 5–66.7%), 8개 센터 모두 사용 보고 (환자 1–30명)</td></tr>
+        <tr><td>기전</td><td>다중 스테로이드 생합성 경로 차단</td></tr>
+        <tr><td>본 연구 조절률</td><td>76% (범위 20–100%), 7개 센터 자료</td></tr>
+        <tr><td>문헌 상 조절률</td><td>요유리코르티솔(UFC) 정상화 64.7%</td></tr>
+        <tr><td>저자 해석</td><td>전문 내분비 클리닉에서의 효과적인 용량 적정(dose escalation)이 기존 문헌보다 높은 조절률에 기여했을 가능성</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧪 메티라폰 (Metyrapone)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>순위</td><td>두 번째로 흔히 사용 — 전체 17.2% (범위 0–50%); 사용 보고 6개 센터에서는 29.5% (5.7–50%)</td></tr>
+        <tr><td>기전</td><td>11β-hydroxylase 억제제</td></tr>
+        <tr><td>본 연구 조절률</td><td>60% (범위 10–80%), 5개 센터</td></tr>
+        <tr><td>문헌 상 조절률</td><td>45.4–100% (중앙값 75.5%); 초기 반응자의 18.7%에서 이차 실패(escape) 보고</td></tr>
+        <tr><td>초기 전향 연구</td><td>관해 47%, 임상 증상 동반 개선</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🧪 오실로드로스타트 (Osilodrostat / 이스투리사)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>순위</td><td>전체 1.7% (범위 0–25%); 사용 가능했던 4개 센터에서는 18.5% (3.4–25%), 환자 0–17명</td></tr>
+        <tr><td>기전</td><td>11β-hydroxylase + aldosterone synthase 억제 — 메티라폰·케토코나졸보다 <strong>높은 효력, 긴 반감기</strong></td></tr>
+        <tr><td>본 연구 조절률</td><td>65% (범위 33–100%), 4개 센터</td></tr>
+        <tr><td>LINC 3 (Phase III)</td><td>12주 시점 용량 증량 없이 53% 조절; 24주 시점 용량 증량 포함 66.8% 조절</td></tr>
+        <tr><td>후속 Phase III 연구</td><td>이중맹검 기간(최대 20mg BID) 12주 완전반응 77.1%; 개방표지 기간(최대 30mg) 36주 80.8%</td></tr>
+        <tr><td>장기 연구</td><td>완전반응률 50–88%</td></tr>
+      </table>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>🦠</span><span>저자들은 본 연구 기간이 COVID-19 팬데믹과 겹쳤고, 오실로드로스타트가 자료 수집 종료 시점에야 승인·보급되기 시작했다는 점, 팬데믹 중 부신기능저하증 회피 목적의 <strong>보수적 저용량 선호</strong> 경향이 낮은 사용률·조절률에 영향을 주었을 가능성을 언급하며, 향후 사용 증가를 예상함.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🎯 파시레오타이드 (Pasireotide)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>순위</td><td>전체 9.3% (범위 0–51.7%); 사용 보고 6개 센터에서는 18.8% (4.5–51.7%)</td></tr>
+        <tr><td>기전</td><td>다중표적 소마토스타틴 수용체 리간드, SSTR5 친화도가 SSTR1·2·3보다 높음</td></tr>
+        <tr><td>승인 적응증</td><td>수술로 관해 달성 실패한 CD (온라벨)</td></tr>
+        <tr><td>본 연구 조절률</td><td>80% (범위 50–100%), 5개 센터 — 두 센터 50%, 나머지 두 센터(각 1명) 100%</td></tr>
+        <tr><td>12개월 Phase III</td><td>조절 13%(600µg군), 25%(900µg군); 확장연구 12개월 50%, 24개월 34.5%</td></tr>
+        <tr><td>실제임상 자료</td><td>다기관 연구에서 경도–중등도 고코르티솔혈증 환자 UFC 정상화 61.3%; 월 1회 장기지속형은 7개월째 ~40%, 24개월째 46.9%</td></tr>
+        <tr><td>주요 이상반응</td><td>다른 SSTR 리간드와 유사하나 <strong>고혈당 빈도 높음</strong> — GLP-1 기반 약제 선호 관리</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🎯 카베르골린 (Cabergoline)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>순위</td><td>전체 2.8% (범위 0–33.3%); 4개 센터만 사용, 약물치료 환자의 약 10%</td></tr>
+        <tr><td>기전</td><td>도파민 D2 수용체 고친화성 효현제</td></tr>
+        <tr><td>사용 지위</td><td><strong>오프라벨</strong> 사용</td></tr>
+        <tr><td>본 연구 조절률</td><td>중앙값 90% (3개 센터, 표본 수 적어 해석 제한) — 한 센터 40%(5명), 다른 센터 100%(1명)</td></tr>
+        <tr><td>문헌 상 조절률</td><td>코르티솔 정상화 25–40%; 반응자의 28%가 반응 소실·불내약성으로 중단</td></tr>
+        <tr><td>제한 요인</td><td>이차 실패(escape) 발생, 조절까지 긴 대기 시간, 오프라벨 지위</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🚫 미페프리스톤 (Mifepristone)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>사용 현황</td><td>단 1개 미국 센터에서 1명 환자만 사용 (해당 센터 약물치료 환자의 1.1%)</td></tr>
+        <tr><td>기전</td><td>당질코르티코이드 수용체(GR) 길항제 — 코르티솔 합성이 아닌 <strong>작용 차단</strong></td></tr>
+        <tr><td>승인 지위</td><td>미국 FDA만 쿠싱증후군 이차 고혈당 치료로 승인 — 미국 외 온라벨 아님</td></tr>
+        <tr><td>사용 제한 이유</td><td><strong>코르티솔 수치로 치료 반응이나 부신기능저하증 여부를 평가할 수 없어</strong> 밀착 임상 모니터링이 필요한 점</td></tr>
+        <tr><td>본 연구 결과</td><td>사용된 1명에서 증상 조절률 100% 보고</td></tr>
+        <tr><td>문헌 상 이점</td><td>혈당대사 개선 60%, 혈압 개선 38% 보고</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span>⚗️ 미토탄 (Mitotane) — 미보고</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-danger"><span>🚫</span><span>참여 9개 PTCOE 중 <strong>어느 센터도 미토탄 사용 자료를 제공하지 않음</strong> — 부작용 프로파일과 코르티솔 급속 불활성화로 인한 고용량 당질코르티코이드 보충 필요성 때문으로 추정됨. 중증 ACTH 의존성 쿠싱증후군에서 다른 스테로이드 합성 억제제와의 병용요법(미토탄+메티라폰+케토코나졸)이 구제 부신절제술의 대안으로 보고된 문헌은 존재.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RATES ═══ -->
+<div id="tab-rates" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📊 약물별 사용률 (전체 센터 대비, 중앙값)</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>약물</th><th>전체 대비 사용률 (범위)</th><th>사용 보고 센터 수</th><th>사용 센터 내 사용률</th></tr>
+        <tr><td><strong>케토코나졸</strong></td><td>26.5% (5–66.7)</td><td>8</td><td>—</td></tr>
+        <tr><td><strong>메티라폰</strong></td><td>17.2% (0–50)</td><td>6</td><td>29.5% (5.7–50)</td></tr>
+        <tr><td><strong>파시레오타이드</strong></td><td>9.3% (0–51.7)</td><td>6</td><td>18.8% (4.5–51.7)</td></tr>
+        <tr><td><strong>카베르골린</strong></td><td>2.8% (0–33.3)</td><td>4</td><td>9.2% (5.7–33.3)</td></tr>
+        <tr><td><strong>오실로드로스타트</strong></td><td>1.7% (0–25)</td><td>4</td><td>18.5% (3.4–25)</td></tr>
+        <tr><td><strong>병용요법</strong></td><td>13.6% (0–45.5)</td><td>5</td><td>25% (10–45.5)</td></tr>
+        <tr><td><strong>미페프리스톤</strong></td><td>1.1% (단일 센터)</td><td>1</td><td>—</td></tr>
+        <tr><td><strong>미토탄</strong></td><td>자료 없음</td><td>0</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📊 약물별 생화학적 조절률</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>약물/전략</th><th>조절률 (범위)</th><th>보고 센터 수</th></tr>
+        <tr><td><strong>전체 (모든 약물치료)</strong></td><td>75% (10–100)</td><td>—</td></tr>
+        <tr><td>카베르골린</td><td>90% (40–100)</td><td>3 (표본 소수)</td></tr>
+        <tr><td>파시레오타이드</td><td>80% (50–100)</td><td>5</td></tr>
+        <tr><td>케토코나졸</td><td>76% (20–100)</td><td>7</td></tr>
+        <tr><td>병용요법</td><td>73.8% (50–100)</td><td>4</td></tr>
+        <tr><td>오실로드로스타트</td><td>65% (33–100)</td><td>4</td></tr>
+        <tr><td>메티라폰</td><td>60% (10–80)</td><td>5</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>💡</span><span>카베르골린·오실로드로스타트는 표본 수가 적어(각 4개 센터 이하) 해석에 제한이 있다는 점을 저자들이 명시함.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔗 병용요법 상세</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><span class="badge badge-mod">현황</span><span class="rec-text">전체 약물치료 환자의 13.6%가 병용요법; 보고 5개 센터 내에서는 최대 25%</span></li>
+        <li class="rec-item"><span class="badge badge-low">단일요법 한계</span><span class="rec-text">단일 약물치료 환자의 약 25%는 생화학적 조절 실패</span></li>
+        <li class="rec-item"><span class="badge badge-strong">문헌 상 잠재력</span><span class="rec-text">적정 용량 사용 시 병용요법으로 최대 90% 조절률 보고 (선행 연구)</span></li>
+        <li class="rec-item"><span class="badge badge-cond">추정 조합</span><span class="rec-text">부신 스테로이드 합성 억제제 사용 빈도가 높은 점을 고려하면, 케토코나졸/메티라폰 + 카베르골린 조합이 가능성 높음 (단, 본 조사에서 구체적 조합 자료는 수집되지 않음)</span></li>
+        <li class="rec-item"><span class="badge badge-no">시너지 근거</span><span class="rec-text">SSTR–D2 수용체 시너지가 특히 기저 중등도 고코르티솔혈증 환자에서 치료 효능을 높인다는 최근 보고</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DISCUSSION ═══ -->
+<div id="tab-discussion" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>🔍 저자 고찰 핵심 포인트</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>부신 스테로이드 합성 억제제가 여전히 1차 선택인 이유</span><span>▾</span></div>
+        <div class="acc-body">오랜 임상 경험, 빠른 작용 발현이 주된 근거로 제시됨. 케토코나졸·메티라폰의 본 연구 조절률이 기존 문헌보다 높게 나타난 것은 전문 내분비 클리닉에서의 효과적 용량 적정 능력과 관련 있을 가능성.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>뇌하수체 표적제(파시레오타이드·카베르골린)의 제한적 사용 이유</span><span>▾</span></div>
+        <div class="acc-body">이론상 이상적 옵션이나 실제로는 전체 약물치료 환자의 약 10%에 불과. 부신 표적 약물의 더 빠른 작용, 미세선종에서 종양 부피 감소 필요성이 낮은 점, 카베르골린의 경우 효과 확인까지 긴 추적 기간이 필요한 점이 원인으로 언급됨. 파시레오타이드는 팬데믹 기간 중 고혈당 관리 부담과 주사 요법 유지의 어려움이 제한 요인으로 추정됨.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>PTCOE에서도 존재하는 '치료 관성(therapeutic inertia)'</span><span>▾</span></div>
+        <div class="acc-body">말단비대증 연구에서도 유사하게 나타난 현상으로, 우수센터에서조차 모든 약물치료 환자에서 생화학적 조절을 달성하지 못함. 컨센서스 지침 및 신약 옵션에 부합하는 환자 맞춤형 접근의 필요성을 강조.</div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>병용요법 프로토콜의 미비</span><span>▾</span></div>
+        <div class="acc-body">병용요법 성장에 대한 지식이 늘고 있으나, 언제·어떻게·누구에게 시작할지에 대한 일관된 프로토콜 확립이 시급한 과제로 제시됨. 치료 결정에는 부작용 프로파일, 동반질환, 병용약물, 비용, 가용성, 환자 선호도가 복합적으로 영향.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>⚠️ 연구의 한계</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="dot">
+        <li>환자 특성, 포괄적 임상 병력, 치료 적응증에 대한 상세 정보 부재</li>
+        <li>병용요법의 구체적 조합·투여방식에 대한 정보 미수집</li>
+        <li>약물 용량, 이상반응에 대한 상세 정보 부재</li>
+        <li>카베르골린·오실로드로스타트는 약물치료 환자 수가 상대적으로 적어 통계적 검정력 제한</li>
+        <li>연구 기간이 COVID-19 팬데믹과 겹쳐 특히 신약(오실로드로스타트)의 실사용 데이터가 과소평가되었을 가능성</li>
+      </ul>
+      <div class="alert alert-teal" style="margin-top:8px"><span>💡</span><span><strong>저자 결론:</strong> 이 연구는 향후 이 희귀질환에 대한 가이드라인 수립을 위한 PTCOE 협력의 첫걸음으로 자리매김할 수 있음을 제시함.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REFERENCES ═══ -->
+<div id="tab-refs" class="panel">
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <span>📁 핵심 인용 문헌</span><span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="tc-table">
+        <tr><th>주제</th><th>문헌</th></tr>
+        <tr><td>2021 CD 컨센서스 지침 개정</td><td>Fleseriu M, Auchus R, Bancos I, et al. Consensus on diagnosis and management of Cushing's disease: a guideline update. <i>Lancet Diabetes Endocrinol</i> 2021;9(12):847–875</td></tr>
+        <tr><td>PTCOE 정의 기준</td><td>Casanueva FF, et al. Criteria for the definition of Pituitary Tumor Centers of Excellence (PTCOE): a Pituitary Society statement. <i>Pituitary</i> 2017;20(5):489–498</td></tr>
+        <tr><td>PTCOE 파일럿 감사 (본 연구의 모체)</td><td>Giustina A, Uygur MM, Frara S, et al. Pilot study to define criteria for PTCOE: results of an audit of leading international centers. <i>Pituitary</i> 2023;26(5):583–596</td></tr>
+        <tr><td>LINC 3 (오실로드로스타트 Phase III)</td><td>Pivonello R, Fleseriu M, Newell-Price J, et al. Efficacy and safety of osilodrostat in patients with Cushing's disease (LINC 3). <i>Lancet Diabetes Endocrinol</i> 2020;8(9):748–761</td></tr>
+        <tr><td>오실로드로스타트 후속 무작위시험</td><td>Gadelha M, Bex M, Feelders RA, et al. Randomized Trial of Osilodrostat for the treatment of Cushing Disease. <i>J Clin Endocrinol Metab</i> 2022;107(7):e2882–e95</td></tr>
+        <tr><td>LINC 2 (장기 연장연구)</td><td>Fleseriu M, Biller BMK, Bertherat J, et al. Long-term efficacy and safety of osilodrostat in Cushing's disease: final results from LINC 2. <i>Pituitary</i> 2022;25(6):959–970</td></tr>
+        <tr><td>파시레오타이드 12개월 Phase III</td><td>Colao A, Petersenn S, Newell-Price J, et al. A 12-month phase 3 study of pasireotide in Cushing's disease. <i>N Engl J Med</i> 2012;366(10):914–924</td></tr>
+        <tr><td>파시레오타이드+카베르골린 병용 장기추적</td><td>Feelders RA, Fleseriu M, Kadioglu P, et al. Long-term efficacy and safety of subcutaneous pasireotide alone or in combination with cabergoline. <i>Front Endocrinol</i> 2023;14:1165681</td></tr>
+        <tr><td>미페프리스톤 원저</td><td>Fleseriu M, Biller BM, Findling JW, et al. Mifepristone, a glucocorticoid receptor antagonist, produces clinical and metabolic benefits. <i>J Clin Endocrinol Metab</i> 2012;97(6):2039–2049</td></tr>
+        <tr><td>미토탄 병용요법(구제 요법)</td><td>Kamenický P, Droumaguet C, Salenave S, et al. Mitotane, metyrapone, and ketoconazole combination therapy as an alternative to rescue adrenalectomy. <i>J Clin Endocrinol Metab</i> 2011;96(9):2796–2804</td></tr>
+        <tr><td>스테로이드 합성 억제제 실용 가이드</td><td>Varlamov EV, Han AJ, Fleseriu M. Updates in adrenal steroidogenesis inhibitors for Cushing's syndrome. <i>Best Pract Res Clin Endocrinol Metab</i> 2021;35(1):101490</td></tr>
+        <tr><td>2015 Endocrine Society 치료 지침</td><td>Nieman LK, Biller BM, Findling JW, et al. Treatment of Cushing's syndrome: an Endocrine Society Clinical Practice Guideline. <i>J Clin Endocrinol Metab</i> 2015;100(8):2807–2831</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="alert alert-info"><span>🔗</span><span>원문 전체 및 저자 소속 정보: <strong>doi.org/10.1007/s11102-024-01485-x</strong> (Open Access, CC BY-NC-ND 4.0)</span></div>
+</div>
+
+</div>
+
+<!-- ═══ MODAL: CONTROL RATE ═══ -->
+<div id="controlModal" class="modal-overlay" onclick="closeModalOutside(event,'controlModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('controlModal')">✕</button>
+    <div class="modal-title">📊 약물치료 생화학적 조절률 상세</div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">전체 및 약물별 조절률</div>
+      <table class="modal-table">
+        <tr><th>구분</th><th>조절률 (범위)</th><th>보고 센터</th></tr>
+        <tr><td><strong>전체 약물치료</strong></td><td>75% (10–100)</td><td>전체</td></tr>
+        <tr><td>카베르골린</td><td>90% (40–100)</td><td>3개 (소표본)</td></tr>
+        <tr><td>파시레오타이드</td><td>80% (50–100)</td><td>5개</td></tr>
+        <tr><td>케토코나졸</td><td>76% (20–100)</td><td>7개</td></tr>
+        <tr><td>병용요법</td><td>73.8% (50–100)</td><td>4개</td></tr>
+        <tr><td>오실로드로스타트</td><td>65% (33–100)</td><td>4개</td></tr>
+        <tr><td>메티라폰</td><td>60% (10–80)</td><td>5개</td></tr>
+        <tr><td>미페프리스톤</td><td>100% (환자 1명)</td><td>1개</td></tr>
+      </table>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">해석 시 주의점</div>
+      <ul class="dot">
+        <li>범위(range)가 넓다는 것은 센터 간 환자 중증도·용량 적정 방식의 차이를 반영할 수 있음</li>
+        <li>카베르골린·오실로드로스타트는 보고 센터 수와 환자 수 모두 적어 <strong>통계적으로 제한적인 해석</strong>이 필요</li>
+        <li>본 조사는 GRADE 방식의 권고 지침이 아니라 <strong>실제임상 감사(real-world audit)</strong> 결과임 — 근거 수준 등급이 부여되지 않음</li>
+      </ul>
+    </div>
+
+    <div class="alert alert-teal" style="margin-top:4px">
+      <span>💡</span><span><strong>임상 요점:</strong> 전체 조절률 75%는 우수센터 기준에서도 <strong>25%의 환자가 단일요법으로 조절되지 않음</strong>을 의미하며, 이는 병용요법 프로토콜 표준화 및 신규 기전 약물 개발의 필요성을 뒷받침하는 핵심 근거로 제시됨.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab[onclick="showTab('${name}')"]`).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+}
+function toggleCard(el){
+  el.classList.toggle('open');
+  const body = el.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+function toggleAcc(el){
+  const body = el.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeModalOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
+
+let fzLevels=[100,125,150];
+let fzIdx=0;
+function cycleFontZoom(){
+  fzIdx=(fzIdx+1)%fzLevels.length;
+  const val=fzLevels[fzIdx];
+  document.documentElement.style.setProperty('--fscale', val/100);
+  document.getElementById('font-zoom-label').textContent=val+'%';
+}
+</script>
+</body>
+</html>
