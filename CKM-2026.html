@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 AHA/ACC/ADA/ASN CKM 증후군 진료지침</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --purple: #57606a;
+    --text: #1f2328;
+    --text2: #57606a;
+    --cor1: #1a7f37;
+    --cor2a: #0550ae;
+    --cor2b: #57606a;
+    --cor3: #cf222e;
+    --loe-a: #9a6700;
+    --loe-b: #1a7f37;
+    --loe-c: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: calc(14px * var(--fscale, 1)); font-weight: 600; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab {
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 900px) { .grid3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .icon { font-size: calc(14px * var(--fscale, 1)); }
+  .card-header .toggle { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-s0 { background: #dafbe1; color: var(--green); }
+  .badge-s1 { background: #fff8c5; color: var(--yellow); }
+  .badge-s2 { background: #ffe9c7; color: var(--orange); }
+  .badge-s3 { background: #ffd8d3; color: var(--red); }
+  .badge-s4 { background: #ffc1c1; color: #82071e; }
+  .cor { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .cor1 { background: #dafbe1; color: var(--cor1); border: 1px solid var(--cor1); }
+  .cor2a { background: #ddf4ff; color: var(--cor2a); border: 1px solid var(--cor2a); }
+  .cor2b { background: #f6f8fa; color: var(--cor2b); border: 1px solid var(--cor2b); }
+  .cor3 { background: #ffebe9; color: var(--cor3); border: 1px solid var(--cor3); }
+  .loe { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin-left: 3px; white-space: nowrap; position: relative; cursor: help; }
+  .loeA { background: #fff8c5; color: var(--loe-a); border: 1px solid var(--loe-a); }
+  .loeB { background: #dafbe1; color: var(--loe-b); border: 1px solid var(--loe-b); }
+  .loeC { background: #f6f8fa; color: var(--loe-c); border: 1px solid var(--loe-c); }
+  .cor::after, .loe::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .cor::before, .loe::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .cor:hover::after, .cor:hover::before,
+  .loe:hover::after, .loe:hover::before { display: block; }
+  .rec-list { list-style: none; }
+  .rec-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+  .rec-no { color: var(--text2); font-weight: 700; margin-right: 3px; }
+  .alert {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: calc(12px * var(--fscale, 1));
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; }
+  .flow-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; text-align: center; font-size: calc(12px * var(--fscale, 1)); width: 92%; max-width: 500px; }
+  .flow-node.start { background: #ddf4ff; border-color: var(--accent); color: var(--accent2); font-weight: 600; }
+  .flow-node.decision { background: #fff8c5; border-color: var(--yellow); color: #7d4e00; border-radius: 4px; }
+  .flow-node.action { background: #dafbe1; border-color: var(--green); color: var(--green); }
+  .flow-node.warn { background: #fff1e5; border-color: var(--orange); color: var(--orange); }
+  .flow-arrow { font-size: calc(16px * var(--fscale, 1)); color: var(--text2); }
+  .flow-row { display: flex; gap: 10px; width: 92%; max-width: 500px; }
+  .flow-row .flow-node { width: 100%; }
+  .flow-label { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); }
+  .drug-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .drug-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; }
+  .drug-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .drug-table tr:last-child td { border-bottom: none; }
+  .drug-table tr:hover td { background: rgba(0,0,0,0.03); }
+  .drug-class { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .drug-first { color: var(--green); font-weight: 600; font-size: calc(10px * var(--fscale, 1)); }
+  .drug-alt { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .dose { font-family: 'Courier New', monospace; font-size: calc(10px * var(--fscale, 1)); color: var(--yellow); }
+  .cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .cm-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px; cursor: pointer; transition: border-color .15s; }
+  .cm-card:hover { border-color: var(--accent); }
+  .cm-card.active { border-color: var(--accent2); background: #ddf4ff; }
+  .cm-title { font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .cm-goal { font-size: calc(11px * var(--fscale, 1)); color: var(--green); }
+  .cm-drug { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 3px; }
+  .cm-detail { background: var(--surface2); border: 1px solid var(--accent); border-radius: 6px; padding: 12px; margin-top: 8px; }
+  .cm-detail h4 { font-size: calc(13px * var(--fscale, 1)); font-weight: 600; margin-bottom: 8px; color: var(--accent2); }
+  .sh-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .sh-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; }
+  .sh-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .sh-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .sh-table tr:last-child td { border-bottom: none; }
+  .abbr-search { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--text); font-size: calc(12px * var(--fscale, 1)); width: 100%; margin-bottom: 10px; outline: none; }
+  .abbr-search:focus { border-color: var(--accent); }
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+  .new-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .new-table th { background: var(--surface2); color: var(--text2); padding: 7px 10px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
+  .new-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .new-table td:first-child { white-space: nowrap; width: 1%; font-weight: 600; }
+  .new-table tr:last-child td { border-bottom: none; }
+  .new-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .new-badge { display: inline-block; background: #dafbe1; color: var(--green); border: 1px solid var(--green); border-radius: 3px; padding: 1px 5px; font-size: calc(9px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .revised-badge { display: inline-block; background: #ddf4ff; color: var(--accent2); border: 1px solid var(--accent2); border-radius: 3px; padding: 1px 5px; font-size: calc(9px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .sp-section { margin-bottom: 8px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid var(--accent); padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; margin-bottom: 1px; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .sp-body.open { max-height: 4000px; padding: 8px 0; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  @media print {
+    body { background: #fff; color: #000; }
+    .tab-bar, header { display: none; }
+    .panel { display: block !important; }
+  }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-new { background: #dafbe1; color: var(--green); }
+  .pill-revised { background: #ddf4ff; color: var(--accent2); }
+  .highlight { color: var(--yellow); font-weight: 600; }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: var(--accent2); }
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr span { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  h5.subhead { font-size: calc(12px * var(--fscale,1)); font-weight: 700; color: var(--accent2); margin: 10px 0 6px; }
+  .src-note { font-size: calc(10px * var(--fscale,1)); color: var(--text2); margin-top: 4px; }
+  .stage-strip { display:flex; gap:4px; margin:8px 0; flex-wrap:wrap; }
+  .stage-strip .sitem { flex:1; min-width:90px; text-align:center; padding:8px 4px; border-radius:6px; font-size:calc(11px * var(--fscale,1)); font-weight:700; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">2026</span>
+      <h1 style="font-size:19px;font-weight:700;color:var(--text)">AHA/ACC/ADA/ASN 심혈관-신장-대사(CKM) 증후군 진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <span class="source-link">JACC 2026;87(22S):e1889-e2007 · 2026년 6월 발간</span>
+      <span class="meta"> · 2013년 AHA/ACC/TOS 비만 진료지침을 대체</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 학회의 공식 자료가 아니며, 임상 참고용으로만 제작되었습니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+  <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+  <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+  <div class="tab" onclick="showTab('staging')">🧬 병기분류</div>
+  <div class="tab" onclick="showTab('risk')">📊 위험평가</div>
+  <div class="tab" onclick="showTab('obesity')">⚖️ 1단계·비만</div>
+  <div class="tab" onclick="showTab('metabolic')">💊 2-3단계·대사/신장</div>
+  <div class="tab" onclick="showTab('cvd')">🫀 3-4단계·심혈관</div>
+  <div class="tab" onclick="showTab('special')">🔬 특수상황</div>
+  <div class="tab" onclick="showTab('monitor')">📋 모니터링</div>
+  <div class="tab" onclick="showTab('newupdates')">🆕 핵심메시지</div>
+  <div class="tab-abbr-wrap">
+    <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+      <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+      <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+        style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;min-width:130px;max-width:130px;outline:none;box-sizing:border-box;"
+        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+    </div>
+    <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:500px;max-height:380px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+      <div class="abbr-grid" id="abbr-grid" style="grid-template-columns:1fr"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════ OVERVIEW ═══════════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">0-4</div><div class="stat-lbl">CKM 증후군 병기 (Stage 0~4)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">≥20%</div><div class="stat-lbl">10년 PREVENT-CVD 위험 → Stage 3 기준</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">≥7.5%</div><div class="stat-lbl">10년 PREVENT-CVD 위험 → 약물치료 우선순위 결정 기준</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">119p</div><div class="stat-lbl">2026 신규 통합 지침 (2013 비만지침 대체)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔑</span> CKM 증후군이란?</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom:8px">CKM(cardiovascular-kidney-metabolic) 증후군은 대사위험인자(비만·당뇨병 등), 만성콩팥병(CKD), 심혈관계 사이의 병태생리학적 상호작용으로 인해 다장기 기능장애와 높은 심혈관 이환율을 초래하는 <strong>전신성 증후군</strong>이다. CKM 증후군에는 대사위험인자·CKD로 인해 심혈관질환(CVD) 위험이 있는 개인과, 대사이상과 연관되어 이미 CKD 또는 CVD가 발생한 개인이 모두 포함된다.</p>
+      <p style="margin-bottom:8px">이번 지침은 <strong>2013년 AHA/ACC/TOS 비만 진료지침을 폐지·대체</strong>하며, 비만·대사이상·신장질환·심혈관질환의 상호연관성을 하나의 병기(stage) 체계로 통합한 최초의 AHA/ACC 통합지침이다. 18세 이상 성인을 대상으로 하며, 혈압·이상지질혈증·관상동맥질환·심부전·말초동맥질환의 일반적 관리는 각 개별지침을 따른다.</p>
+      <div class="alert alert-info"><span>ℹ️</span><div>CKM 병기 분류는 <strong>청소년(&lt;18세)</strong>에도 적용되며, 소아 특이적 진단기준(체질량지수 백분위수 등)을 사용한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧭</span> CKM 병기 한눈에 보기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-strip">
+        <div class="sitem badge-s0">Stage 0<br>위험인자 없음</div>
+        <div class="sitem badge-s1">Stage 1<br>과잉/기능이상 지방</div>
+        <div class="sitem badge-s2">Stage 2<br>대사위험인자·CKD</div>
+        <div class="sitem badge-s3">Stage 3<br>무증상 CVD</div>
+        <div class="sitem badge-s4">Stage 4<br>임상적 CVD</div>
+      </div>
+      <table class="new-table" style="margin-top:6px">
+        <tr><th>병기</th><th>정의</th></tr>
+        <tr><td class="badge badge-s0">0</td><td>정상 BMI·허리둘레, 정상혈당, 정상혈압, 정상지질, CKD 및 무증상/임상적 CVD 없음</td></tr>
+        <tr><td class="badge badge-s1">1</td><td>과체중/비만, 복부비만, 또는 기능이상 지방조직(공복혈당 100-125 또는 HbA1c 5.7-6.4%) — 다른 대사위험인자·CKD 없이</td></tr>
+        <tr><td class="badge badge-s2">2</td><td>고혈압·고중성지방혈증·대사증후군·제2형당뇨병 등 대사위험인자, 그리고/또는 중등도-고위험 CKD</td></tr>
+        <tr><td class="badge badge-s3">3</td><td>무증상 관상동맥 죽상경화(CAC≥100) 또는 무증상 심부전(pre-HF), 혹은 매우 고위험 CKD·10년 PREVENT-CVD≥20% (위험동등물)</td></tr>
+        <tr><td class="badge badge-s4">4</td><td>임상적 CVD(관상동맥질환·심부전·뇌졸중·말초동맥질환·심방세동) 동반 — 4a: 신부전 없음, 4b: 신부전 동반(eGFR&lt;15 또는 신대체요법 필요)</td></tr>
+      </table>
+      <div class="src-note">건강한 생활습관과 체중관리가 병기 진행을 막는 핵심 요인이며, 조기 개입 시 병기 역행(regression)도 가능하다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📌</span> Top 10 핵심 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text"><strong>1. CKM 병기분류</strong> — 모든 성인·청소년에서 CKM 병기분류를 시행하여 병기진행 예방, 절대위험도에 따른 맞춤치료, 병기 역행을 도모한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>2. PREVENT 방정식으로 정량적 위험평가</strong> — 10·30년 ASCVD·심부전·총CVD 위험을 추정하여 병기분류와 치료강도를 결정한다(Stage 3 기준: 10년 PREVENT-CVD≥20%; 치료우선순위 기준: ≥7.5%).</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>3. CKM 위험인자 정기평가</strong> — 모든 성인에서 대사위험인자·신기능을 정기적으로 평가하고, 일부 집단에서 pre-HF·MASLD·수면무호흡을 추가 평가한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>4. 사회적 건강결정요인(SDOH) 평가</strong> — CKM 발생과 밀접한 SDOH를 정기평가하고 확인 시 적극 대응한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>5. 다학제 진료 및 CKM 코디네이터</strong> — 당뇨병·CKD·CVD가 중복된 환자는 다학제팀과 CKM 코디네이터를 통한 환자중심 진료가 권고된다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>6. 과체중·비만 평가 및 치료</strong> — BMI와 허리둘레로 평가하고, 생활습관중재를 우선으로 비만약물치료·대사대사수술을 단계적으로 고려한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>7. 당뇨병에서 심장보호 항고혈당제 활용</strong> — CVD 동반/고위험 제2형당뇨병에서 SGLT2억제제 및/또는 GLP-1기반치료를 적극 사용한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>8. CKD 평가 및 신장보호제 활용</strong> — eGFR과 UACR을 함께 평가하고, CKD+당뇨병 또는 알부민뇨 동반 시 RASi·SGLT2i를 1차치료로 사용한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>9. ASCVD 동반 환자의 CKM 위험인자 관리</strong> — 비만·당뇨병·CKD 치료를 ASCVD 이차예방과 통합하여 관리한다.</div></li>
+        <li class="rec-item"><div class="rec-text"><strong>10. 심부전 동반 환자의 CKM 위험인자 관리</strong> — HFrEF에서는 RASi/ARNI+SGLT2i 4제요법을, HFmrEF/HFpEF에서는 SGLT2i를 1차 GDMT로 하며 비만·CKD 동반시 GLP-1기반치료·피네레논을 추가한다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧩</span> 중복 CKM 조건별 치료 원칙 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>중복 조건</th><th>핵심 관리방침</th></tr>
+        <tr><td>비만 + 당뇨병</td><td>≥2급 비만에서 GLP-1기반치료를 T2D 관리 및 CVD위험 감소의 우선순위로 고려</td></tr>
+        <tr><td>당뇨병 + 알부민뇨 CKD</td><td>RASi·SGLT2i 1차; 1차치료에도 알부민뇨 지속시 GLP-1RA 및/또는 피네레논 추가</td></tr>
+        <tr><td>비만 + 알부민뇨 CKD</td><td>의도적 체중감량이 알부민뇨를 감소시킴</td></tr>
+        <tr><td>MASLD 동반</td><td>체중감량 권고; 섬유화 동반 MASLD에서 GLP-1RA 권고</td></tr>
+        <tr><td>무증상 관상동맥죽상경화</td><td>예방치료(스타틴·GLP-1기반·강력한 혈압조절)의 절대적 이득이 더 큼</td></tr>
+        <tr><td>Pre-HF</td><td>당뇨병에서 SGLT2i를 심부전 예방의 1차 항고혈당제로 우선</td></tr>
+        <tr><td>ASCVD</td><td>비만시 GLP-1기반치료로 MACE/심혈관사망 감소; 당뇨병시 SGLT2i·GLP-1기반치료로 MACE 감소; CKD시 SGLT2i로 MACE·신기능소실 감소</td></tr>
+        <tr><td>HFpEF/HFmrEF</td><td>비만시 GLP-1기반치료로 심부전사건 감소; 당뇨병·CKD에서 SGLT2i를 1차 심장보호 항고혈당제로</td></tr>
+        <tr><td>HFrEF</td><td>당뇨병·CKD에서 SGLT2i·ARNI/RASi로 심부전사건·신기능소실 감소; 비만에서 GLP-1기반치료의 위험/이득은 불명확(ASCVD 없는 경우 특히)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ STAGING ═══════════════════════ -->
+<div id="tab-staging" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧬</span> CKM 병기 진단기준 (성인)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="new-table">
+        <tr><th>병기</th><th>진단기준</th></tr>
+        <tr><td class="badge badge-s0">Stage 0<br>위험인자 없음</td><td>정상 BMI·허리둘레, 정상혈당, 정상혈압, 정상지질프로파일, CKD 및 무증상/임상적 CVD 없음</td></tr>
+        <tr><td class="badge badge-s1">Stage 1<br>과잉·기능이상 지방</td><td>과체중/비만·복부비만 또는 기능이상 지방조직(다른 대사위험인자·CKD 없이):
+          <ul style="margin:4px 0 0 16px">
+            <li>BMI≥25kg/m² (아시아계 ≥23), 허리둘레 여성≥88/남성≥102cm (아시아계 여성≥80/남성≥90), 또는</li>
+            <li>공복혈당 100-125mg/dL 또는 HbA1c 5.7-6.4%</li>
+          </ul></td></tr>
+        <tr><td class="badge badge-s2">Stage 2<br>대사위험인자·CKD</td><td>대사위험인자, 중등도-고위험 CKD, 또는 둘 다:
+          <ul style="margin:4px 0 0 16px">
+            <li>고혈압(SBP≥130 또는 DBP≥80 또는 항고혈압제 복용)</li>
+            <li>고중성지방혈증(≥150mg/dL)</li>
+            <li>대사증후군(AHA/NHLBI 기준)</li>
+            <li>제2형당뇨병(공복혈당≥126 또는 HbA1c≥6.5%)</li>
+            <li>및/또는 KDIGO 중등도-고위험 CKD</li>
+          </ul></td></tr>
+        <tr><td class="badge badge-s3">Stage 3<br>무증상 CVD</td><td>무증상 CVD(무증상 관상동맥죽상경화 또는 pre-HF) 또는 그 위험동등물:
+          <ul style="margin:4px 0 0 16px">
+            <li>무증상 관상동맥죽상경화: CAC Agatston 점수≥100(우연발견 중등도-중증 CAC, 관상동맥조영/CT에서 확인된 죽상경화, 또는 증상없는 낮은 발목상완지수도 해당)</li>
+            <li>Pre-HF: 심장바이오마커 상승(NT-proBNP≥125pg/mL, hs-cTnT≥14ng/L 여성·≥22ng/L 남성, hs-cTnI≥10ng/L 여성·≥12ng/L 남성) 또는 심초음파 이상소견</li>
+            <li>위험동등물: 매우고위험 CKD(KDIGO G4-G5 또는 매우고위험군), 또는 10년 PREVENT-CVD≥20%</li>
+          </ul></td></tr>
+        <tr><td class="badge badge-s4">Stage 4<br>임상적 CVD</td><td>임상적 CVD(관상동맥질환·심부전·뇌졸중·말초동맥질환·심방세동)가 과잉/기능이상 지방, 기타 CKM위험인자, 또는 CKD와 동반:
+          <ul style="margin:4px 0 0 16px">
+            <li><strong>4a</strong>: 신부전 없음</li>
+            <li><strong>4b</strong>: 신부전 동반(eGFR&lt;15mL/min/1.73m² 또는 만성신대체요법 필요)</li>
+          </ul></td></tr>
+      </table>
+      <div class="src-note">대사증후군(MetS) = 다음 중 3개 이상: 허리둘레 여성≥88/남성≥102cm(아시아계 80/90), HDL-C&lt;40(남)/&lt;50(여)mg/dL, 중성지방≥150mg/dL, 혈압≥130/80 또는 약물치료, 공복혈당≥100mg/dL. KDIGO 중등도-고위험: G1-G2+A2-A3, G3a+A1-A2, G3b+A1; 매우고위험: G3a+A3, G3b+A2-A3, G4-G5.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">👶</span> 청소년(&lt;18세) CKM 위험인자 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>항목</th><th>기준</th></tr>
+        <tr><td>과체중/비만</td><td>과체중: BMI 85-95백분위수; 비만: ≥95백분위수; 중증비만: ≥120%; 2급비만: 120-140% 또는 BMI 35-40 중 낮은값; 3급비만: ≥140% 또는 BMI≥40 중 낮은값</td></tr>
+        <tr><td>혈압(13세 미만)</td><td>백분위수 기반 분류 사용(정상 &lt;90백분위수 등)</td></tr>
+        <tr><td>혈압(13세 이상)</td><td>정상 &lt;120/&lt;80; 상승 120-129/&lt;80; 1기고혈압 130-139/89; 2기고혈압 ≥140/90 (성인기준 준용)</td></tr>
+        <tr><td>이상지질혈증</td><td>총콜레스테롤≥200, HDL-C&lt;40, LDL-C≥130, 중성지방(0-9세 ≥100, 10-19세 ≥130), Non-HDL-C≥145mg/dL</td></tr>
+        <tr><td>혈당이상</td><td>공복혈당 100-125(전당뇨) 또는 ≥126(당뇨); HbA1c 5.7-6.4%(전당뇨) 또는 ≥6.5%(당뇨)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🫘</span> KDIGO CKD 위험분류(히트맵) 개념</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:8px">CKD 위험은 <strong>eGFR 범주(G1-G5)</strong>와 <strong>알부민뇨 범주(A1: &lt;30, A2: 30-300, A3: ≥300mg/g)</strong>의 조합으로 평가하며(KDIGO 히트맵), 후기 CKM 병기일수록 CKD 위험도가 높아진다. "치료(Treat)"는 CKD 진행·심혈관위험에 대한 적절한 관리 개시를, "의뢰(Refer)"는 신장내과 협진을 의미한다.</p>
+      <div class="alert alert-info"><span>ℹ️</span><div>CKD의 대다수는 당뇨병·고혈압 등 대사위험인자에서 기인하지만, 다른 원인의 CKD에서도 ACEi/ARB·SGLT2i가 신장·심혈관 이득을 보이므로 CKM 병기체계는 거의 모든 CKD 환자에 적용 가능하다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📈</span> 병기별 종적 평가 주기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>병기</th><th>BMI·허리둘레·혈압</th><th>지질·혈당·신기능(eGFR)</th><th>UACR</th></tr>
+        <tr><td class="badge badge-s0">Stage 0</td><td>매년</td><td>최소 5년마다</td><td>-</td></tr>
+        <tr><td class="badge badge-s1">Stage 1</td><td>매년</td><td>2-3년마다</td><td>-</td></tr>
+        <tr><td class="badge badge-s2">Stage 2 이상</td><td>매년</td><td>매년</td><td>매년(eGFR과 함께)</td></tr>
+      </table>
+      <div class="src-note">진행된 CKD에서는 KDIGO 지침에 따라 3-6개월마다 더 빈번한 평가를 고려할 수 있다.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ RISK ASSESSMENT ═══════════════════════ -->
+<div id="tab-risk" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧮</span> PREVENT 방정식을 이용한 정량적 위험평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1" data-tip="강력히 권고 (Benefit>>>Risk)">I</span><span class="loe loeB" data-tip="중등도질 근거, 비무작위연구 포함">B-NR</span></div><div class="rec-text">CVD 없는 30-79세 성인에서 <strong>PREVENT 방정식으로 10년 CVD위험(ASCVD·심부전 포함)</strong>을 산출하여 CKM 관련 위험을 정량화하고 예방전략에 활용할 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a" data-tip="유용함 (Benefit>>Risk)">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">CVD 없는 30-59세 성인에서 <strong>30년 CVD위험</strong> 산출이 CKM 관련 위험 정량화와 예방전략 수립에 유용할 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">CVD 없는 30-79세 성인에서 <strong>CKM 위험강화인자(risk enhancer)</strong>를 활용하여 예방전략 강화 여부를 결정하는 것이 합리적이다.</div></li>
+      </ul>
+      <div class="alert alert-info"><span>ℹ️</span><div>PREVENT 방정식은 전통적 위험인자에 <strong>BMI·eGFR</strong>을 새로 포함하며, 추가모델에서 UACR·HbA1c·사회적 결핍지수(social deprivation index)를 반영한다. 미국 성인 330만명 이상 외부검증 코호트에서 우수한 판별력(C-statistic 여성 0.79/남성 0.76)을 보였다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📐</span> PREVENT 방정식별 활용기준 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="new-table">
+        <tr><th>방정식</th><th>대상 결과</th><th>주요 활용 임계값</th></tr>
+        <tr><td>PREVENT-CVD</td><td>ASCVD+심부전 복합</td><td>≥20%: Stage 3 정의(무증상CVD 위험동등물)<br>≥7.5%: GLP-1기반/SGLT2i 치료 개시 권고; 1기고혈압 적극강압 개시 근거</td></tr>
+        <tr><td>PREVENT-ASCVD</td><td>치명적 관상동맥질환, 비치명적 MI, 뇌졸중</td><td>3-10%: 무증상 죽상경화 평가(CAC) 고려<br>≥5%: 지질강하치료 개시 권고<br>3-4.9%: 위험강화인자·CAC로 개별화하여 고려<br>30년≥10%: 지질강하치료 고려</td></tr>
+        <tr><td>PREVENT-HF</td><td>심부전(HFrEF/HFmrEF/HFpEF 포함)</td><td>≥5%: 심장바이오마커로 pre-HF 평가 및 진료조정 권고</td></tr>
+      </table>
+      <div class="src-note">30년 위험은 특히 젊은 성인(75백분위수 이상)에서 장기위험 재분류와 생활습관상담 순응도 향상에 도움이 될 수 있다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">➕</span> CKM 병기진행 위험강화인자(Risk Enhancers)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>범주</th><th>인자</th></tr>
+        <tr><td>개인 병력</td><td>만성 염증/자가면역질환(류마티스관절염, SLE, HIV/AIDS); 수면장애(수면무호흡); 불량한 정신건강(우울·불안); 성별특이 위험인자(조기폐경&lt;40세, 임신합병증, 다낭성난소증후군, 발기부전)</td></tr>
+        <tr><td>SDOH</td><td>낮은 사회경제적 지위, 개인·지역기반 SDOH 부담 증가</td></tr>
+        <tr><td>염증</td><td>고감도 CRP 상승(측정시 ≥2.0mg/L)</td></tr>
+        <tr><td>가족력</td><td>당뇨병, 신부전</td></tr>
+        <tr><td>인구학적</td><td>고위험군으로 알려진 인종/민족(남아시아·아메리카원주민·태평양섬주민 등)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩺</span> 종적 진단평가 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">CKM 병기와 무관하게 모든 성인에서 BMI·허리둘레를 <strong>최소 매년</strong> 평가하여 병기진행 위험을 파악한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Stage 0 성인은 지질·혈당·신기능(eGFR)을 <strong>최소 5년마다</strong>, 혈압은 매년 평가한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Stage 1 성인은 지질·혈당·신기능을 <strong>2-3년마다</strong>, 혈압은 매년 평가한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Stage 2 이상 성인은 지질·혈당·혈압을 <strong>매년</strong> 평가한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Stage 2 이상 성인은 <strong>eGFR과 UACR을 함께 매년</strong> 평가하여 CKD 관련 위험을 파악하고 관리를 안내한다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🏘️</span> 사회적 건강결정요인(SDOH) 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">CKM 위험이 있거나 CKM 증후군이 있는 성인에서 <strong>검증된 도구로 SDOH를 정기 선별</strong>하여 환자중심 진료에 반영할 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">청소년(&lt;18세)에서는 <strong>보호자 SDOH</strong>를 검증된 도구로 선별할 것을 권고한다.</div></li>
+      </ul>
+      <div class="src-note">핵심 평가영역: 재정적 어려움, 식품불안정, 주거불안정, 폭력노출·안전, 교통장벽, 공공요금부담 등. Medicare/Medicaid는 외래 6개월·입원 매년 SDOH 평가에 대해 수가를 인정한다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">👥</span> 다학제 진료 및 CKM 코디네이터</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB" data-tip="무작위 대조군연구 근거">B-R</span></div><div class="rec-text">당뇨병·CKD·CVD 중 <strong>2개 이상 중복된 Stage 2-4</strong> 성인은 CKM 코디네이터를 둔 다학제팀 진료를 통해 생활습관중재 및 GDMT 최적화를 도모할 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC" data-tip="전문가 합의 의견">C-EO</span></div><div class="rec-text">모든 CKM 증후군 성인에서 <strong>불리한 SDOH의 임상적 영향 완화</strong>를 우선순위로 두어 전인적 진료를 최적화한다.</div></li>
+      </ul>
+      <div class="src-note">가치기반(value-based) 모델: CKM코디네이터+다학제 대표자가 프로토콜 수립. 물량기반(volume-based) 모델: 고위험군(고위험 당뇨병[HbA1c≥9% 또는 미세혈관합병증], 매우고위험 CKD, 임상적 CVD 중 2개 이상 중복)을 전문과 의뢰 및 코디네이터의 진료조정 지원으로 관리.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ OBESITY / STAGE1 ═══════════════════════ -->
+<div id="tab-obesity" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧭</span> 비만관리 전반적 접근</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">과체중/비만 성인에서 <strong>생활습관중재를 1차 전략</strong>으로 기저체중의 5-10% 이상 감량을 목표로 한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">체중감량 상담 시 <strong>비판단적(nonjudgmental) 접근</strong>이 효과를 높이므로 권고된다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">비만 성인에서 <strong>다학제 통합 체중관리팀</strong>이 환자중심 체중감량에 효과적일 수 있다.</div></li>
+      </ul>
+      <div class="alert alert-warn"><span>⚠️</span><div>체중 낙인(weight stigma)은 임상성과 악화와 연관되며, 비판단적 상담을 받은 환자가 10% 이상 체중감량에 성공할 가능성이 더 높다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🏃</span> 집중 생활습관중재</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">최소 <strong>매년 5-10% 체중감량의 이점</strong>에 대해 상담을 제공한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">대면/비대면 <strong>다요소 행동중재</strong> 프로그램 의뢰가 체중감량에 유익하다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-R</span></div><div class="rec-text">참여 장벽이 큰 경우 <strong>자가주도형 디지털 헬스 솔루션</strong>이 유익할 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">중등도 열량제한(500-750kcal/일 결핍)과 규칙적 신체활동(≥150분/주)을 포함한 생활습관중재를 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">체중감량에 성공한 환자는 <strong>신체활동 증가를 강조하는 장기 체중유지 프로그램</strong>을 지속한다.</div></li>
+      </ul>
+      <div class="src-note">권장 구성: 500-750kcal/일 열량결핍, 주당 150분 이상 중등도-격렬한 유산소활동, 14개월 이상 행동치료(자가모니터링 포함). DASH·지중해식·페스카테리안·채식 식단이 심대사 이득이 크며, 케토제닉 식단은 체중감량은 있으나 심한 고콜레스테롤혈증 위험이 있다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💊</span> Stage 1 비만약물치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeA">A</span></div><div class="rec-text">Stage 1(BMI≥27, 다른 대사위험인자·CKD·CVD 없음)에서 구조화된 생활습관중재에 <strong>GLP-1기반치료 추가</strong>가 체중감량·혈당·CKM위험 개선에 유익할 수 있다. <span class="pill pill-revised">비용효과: 낮음(2025 미국가격 기준 비용효과적이지 않음)</span></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b" data-tip="이득이 위험/비용과 비슷할 수 있음">IIb</span><span class="loe loeA">A</span></div><div class="rec-text">Stage 1에서 <strong>비-GLP-1 계열 비만약물치료</strong>도 체중감량에 합리적으로 사용될 수 있다.</div></li>
+      </ul>
+      <h5 class="subhead">허가 비만약물치료 비교표</h5>
+      <div style="overflow-x:auto">
+      <table class="drug-table">
+        <tr><th>약제</th><th>위약대비 체중감량(평균)</th><th>최대 체중감량</th><th>주요 대사지표 개선</th><th>흔한 부작용</th><th>주의사항</th></tr>
+        <tr><td class="drug-class">티르제파타이드 15mg</td><td>15%</td><td>21%</td><td>SBP 6.5·DBP 3mmHg↓; A1c 0.4%↓; TG 19%↓</td><td>오심·설사·변비</td><td>2형 다발내분비종양·췌장염 병력시 회피</td></tr>
+        <tr><td class="drug-class">세마글루타이드 2.4mg</td><td>12%</td><td>15%</td><td>SBP 4.5·DBP 2mmHg↓; A1c 0.3%↓; TG 16%↓</td><td>오심·설사·구토·변비</td><td>2형 다발내분비종양·췌장염 병력시 회피</td></tr>
+        <tr><td class="drug-class">리라글루타이드 3mg</td><td>5%</td><td>8%</td><td>SBP 3mmHg↓; A1c 0.3%↓; TG 8mg/dL↓</td><td>심박수 증가, 오심·설사·변비</td><td>2형 다발내분비종양·췌장염 병력시 회피</td></tr>
+        <tr><td class="drug-class">펜터민/토피라메이트</td><td>8%</td><td>13%</td><td>SBP 3·DBP 1mmHg↓; TG 20mg/dL↓</td><td>심박수 증가, 어지러움, 구갈, 변비</td><td>GFR&lt;50 용량제한; CAD 회피; 급작스런 중단시 발작위험</td></tr>
+        <tr><td class="drug-class">날트렉손/부프로피온</td><td>4%</td><td>8%</td><td>SBP+2mmHg; A1c 1%↓(T2D)</td><td>두통·오심·변비</td><td>GFR&lt;50 용량제한, 고혈압·CAD·발작위험군 회피</td></tr>
+        <tr><td class="drug-class">오르리스타트</td><td>3%</td><td>10%</td><td>SBP 2.5mmHg↓</td><td>지방변·변실금·잦은 배변</td><td>지용성비타민 보충 권장</td></tr>
+        <tr><td class="drug-class">펜터민</td><td>3-5%</td><td>10%</td><td>SBP 1.3mmHg↓; 심박수 5bpm↑; TG 10%↓</td><td>구갈·불면·두통·불안·초조</td><td>조절안된 고혈압·CVD·물질사용장애·녹내장 회피</td></tr>
+      </table>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px"><span>⚠️</span><div><strong>CVD 동반환자</strong>에서는 날트렉손/부프로피온 및 펜터민계열 사용시 혈압·심박수 상승으로 <strong>잠재적 유해</strong>(Class 3: Harm) — 사용을 피한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔪</span> 체중감량 수술(대사대사수술, MBS)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:8px">생활습관중재·약물치료로 충분한 체중감량이 어려운 경우 <strong>MBS(Roux-en-Y 위우회술, 복강경 소매위절제술 등)</strong>가 가장 강력한 체중감량 수단이며, 최대 30-35% 체중감량과 다수 CKM위험인자 개선을 가져온다. 다학제팀(비만의학·수술·영양·정신건강 포함)의 관여가 수술 전후 관리 최적화에 권장된다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤰</span> 임신성 당뇨병 후 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p>임신성 당뇨병(GDM) 병력자는 향후 제2형당뇨병 위험이 높아 산후 전당뇨병 선별검사를 강화해야 한다. 산후 체중관리·정기 혈당평가가 CKM 병기진행 예방에 중요하다.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ METABOLIC / STAGE2-3 ═══════════════════════ -->
+<div id="tab-metabolic" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩸</span> 제2형당뇨병(T2D) 관리 — Stage 2-3</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">생활습관중재(행동수정·건강한 식단·신체활동)에 <strong>필요시 약물·수술적 치료를 보조</strong>하여 건강체중 유지 및 혈당조절 개선을 도모한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">고혈압·이상지질혈증·알부민뇨를 표적으로 한 <strong>강화된 다인자 중재</strong>가 CVD·사망·신장합병증 위험을 감소시킨다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">CVD위험 증가(10년 PREVENT-CVD≥7.5%)시 치료계획에 <strong>SGLT2억제제 또는 GLP-1기반치료</strong>를 포함하여 심혈관사건·사망을 감소시킨다. <span class="pill pill-new">SGLT2i 비용효과적(중등도 근거)</span> <span class="pill pill-revised">GLP-1기반 비용효과 낮음(중등도 근거)</span></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeA">A</span></div><div class="rec-text">A1C가 개별목표보다 0.5-1% 높은 CVD고위험군에서 <strong>메트포르민을 병용</strong>하여 혈당목표 달성을 도울 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B-NR</span></div><div class="rec-text">CVD위험 증가 또는 다중 CKM위험인자 동반시 <strong>GLP-1기반치료+SGLT2i 병용</strong>이 단독요법 이상의 심혈관사건 감소에 고려될 수 있다.</div></li>
+      </ul>
+      <div class="alert alert-info"><span>ℹ️</span><div>목표: HbA1c &lt;7.0%(비임신, 저혈당위험 낮은 경우), 혈압 &lt;130/80mmHg. 기대여명 제한시 &lt;8.0% 등 완화된 목표 고려. <strong>SGLT2i는 심부전입원에, GLP-1기반치료는 죽상경화성 사건 감소에 더 큰 영향</strong> — CKD·pre-HF 동반시 SGLT2i 우선, 2급이상 비만·중증고혈당(HbA1c≥9%)·MASLD 동반시 GLP-1기반치료 우선 고려.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💉</span> SGLT2억제제·GLP-1기반치료 부작용 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <h5 class="subhead">SGLT2억제제 주요 부작용</h5>
+      <table class="new-table" style="margin-bottom:10px">
+        <tr><th>부작용</th><th>예방·대응</th></tr>
+        <tr><td>당뇨병성 케톤산증(DKA)</td><td>인슐린결핍 환자에서 드묾; 의심시 즉시 평가·치료; 케토제닉식이·중증질환·장기금식 시 위험↑; 수술 3-4일 전 중단</td></tr>
+        <tr><td>생식기 진균감염</td><td>위생관리, 고위험군에서 신중 사용</td></tr>
+        <tr><td>푸르니에 괴사(회음부 괴사근막염)</td><td>드묾; 의심시 즉시 치료</td></tr>
+        <tr><td>혈관내 체액량 감소</td><td>체액상태·혈압 주의, 병용 이뇨제 감량 고려</td></tr>
+      </table>
+      <h5 class="subhead">GLP-1기반치료 주요 부작용</h5>
+      <table class="new-table">
+        <tr><th>부작용</th><th>예방·대응</th></tr>
+        <tr><td>위장관 부작용</td><td>식이조절 상담, 서서히 용량증량; 위마비 환자는 비권장</td></tr>
+        <tr><td>췌장염</td><td>인과성 불명확이나 위험군에서 시작 회피, 의심시 중단</td></tr>
+        <tr><td>급성 담낭질환</td><td>담석·담낭염 의심시 평가</td></tr>
+        <tr><td>경구약물 흡수 영향</td><td>경구피임약 사용자는 용량증량시 4주간 비경구 피임법 병용 권고</td></tr>
+        <tr><td>당뇨망막병증 악화</td><td>고위험군(장기 당뇨병) 면밀한 안과 모니터링</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>위장관 부작용 관리: 소량씩 자주 식사, 고지방·자극적 음식 회피, 식후 격렬한 활동 피하기, 서서히 증량, 필요시 진토제·프로바이오틱스 고려, 개선없으면 다른 GLP-1계열로 전환(둘라글루타이드가 상대적으로 내약성 좋음).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩹</span> 고중성지방혈증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:8px">고중성지방혈증은 ASCVD의 위험강화인자이며, CKD 발생·eGFR 감소가속과도 연관된다. 이차원인(불량한 생활습관, 갑상선기능저하, 조절안된 고혈당, 중증알부민뇨, 약물) 확인 및 교정이 우선이다.</p>
+      <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+        <li>• 경계-중등도 이상 위험군: 생활습관중재 + 스타틴치료가 1차</li>
+        <li>• 최대내약용량 스타틴에도 지속되는 고중성지방혈증 + 추가 CV위험인자: <strong>이코사펜트에틸</strong> 고려</li>
+        <li>• 중증 고중성지방혈증(≥500mg/dL): 매우 낮은 지방식이, 정제탄수화물·알코올 회피, 영양사 의뢰, 피브레이트 또는 처방용 오메가-3 지방산 추가하여 급성췌장염 예방</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩺</span> 고혈압</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:8px">고혈압은 CKM 병기진행과 신기능 악화·CVD 발생을 매개하는 핵심 인자이다. 나트륨 제한·체중감량·신체활동·DASH/지중해식 식단이 혈압강하에 효과적이다.</p>
+      <div class="alert alert-info"><span>ℹ️</span><div>혈압≥140/90mmHg, 또는 혈압≥130/80mmHg + 임상적 CVD·뇌졸중병력·당뇨병·CKD·10년 PREVENT-CVD≥7.5% 인 경우 생활습관중재+약물치료 병행이 권고된다. <strong>전체 치료목표는 &lt;130/80mmHg</strong>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🫘</span> 만성콩팥병(CKD) 관리 — Stage 2-3</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:10px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">CKD+T2D, 또는 T2D없이 UACR≥30mg/g인 CKD, eGFR≥30에서 <strong>RASi(ACEi 또는 ARB)를 최대내약용량</strong>으로 사용하여 신기능소실·CVD위험을 감소시킬 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">CKD+T2D, 또는 T2D없이 UACR≥200mg/g인 CKD, eGFR≥20에서 <strong>SGLT2억제제</strong>를 사용하여 신기능소실·심부전입원·CVD사망 위험을 감소시킬 것을 권고한다. <span class="pill pill-new">비용효과적(고도근거)</span></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-R</span></div><div class="rec-text">T2D없이 UACR 30-199mg/g인 CKD에서 <strong>SGLT2억제제</strong>를 고려할 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">CKD+T2D+UACR≥30mg/g, ACEi/ARB와 SGLT2i 사용중에도 eGFR≥25인 경우 <strong>비스테로이드성 미네랄코르티코이드수용체길항제(nsMRA, 피네레논)</strong> 추가를 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">CKD+T2D+UACR≥100mg/g, ACEi/ARB와 SGLT2i 사용중에도 알부민뇨 지속시 <strong>GLP-1기반치료</strong> 추가를 권고하여 신기능소실·신부전·CVD위험을 낮춘다.</div></li>
+      </ul>
+      <h5 class="subhead">신장·심장보호제 선택 흐름 (T2D 동반 CKD)</h5>
+      <div class="flow">
+        <div class="flow-node start">CKD + T2D 확인 (eGFR, UACR 평가)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node action">1차: RASi(ACEi/ARB) + SGLT2i (모든 환자)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node decision">알부민뇨 지속(UACR≥30mg/g)?</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node action">nsMRA(피네레논) 추가 — UACR≥30mg/g, eGFR≥25</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node action">GLP-1기반치료(세마글루타이드) 추가 — UACR≥100mg/g 지속시</div>
+      </div>
+      <h5 class="subhead">신장·심장보호제 선택 흐름 (T2D 없는 CKD, UACR 기준)</h5>
+      <div class="flow">
+        <div class="flow-node start">UACR≥30mg/g인 CKD (T2D 없음)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node action">RASi 모든 환자에 권고</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node decision">UACR≥200mg/g → SGLT2i 강한 근거 / UACR 30-199 → SGLT2i 중등도 근거로 고려</div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>약제별 신장기능 개시 임계값: <strong>RASi eGFR≥30</strong>, <strong>SGLT2i eGFR≥20</strong>, <strong>피네레논 eGFR≥25</strong>. 이미 치료중인 환자는 개시임계값 이하로 eGFR이 낮아져도 안전하게 지속 가능하면 <strong>계속 유지</strong>하는 것이 합리적이다(IIa, B-R).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧫</span> 진행된 CKD(G4-G5) 및 투석환자</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p>CKD G4-G5는 KDIGO 히트맵상 매우 고위험군으로, 이 집단에 특화된 CKM 치료근거는 제한적이나 대부분 하위군분석에서 안전성이 확인되었다. 신장·심장보호제를 사용 중인 환자에서 eGFR이 약제별 개시임계값 이하로 떨어져도 <strong>안전하게 내약되는 한 계속 사용</strong>하는 것이 합리적이다(IIa, B-R). 투석환자는 심혈관 사망률이 높고 특유의 CVD 표현형(체액과다·혈관석회화)을 보이며, 스타틴 임상시험의 음성결과에 이러한 병태생리가 영향을 미쳤을 수 있다.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ CVD / STAGE3-4 ═══════════════════════ -->
+<div id="tab-cvd" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔬</span> Stage 3 — 무증상 죽상경화(CAC)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">임상적으로 유의한 CAC(<strong>Agatston 점수&gt;100</strong> 또는 정성평가상 중등도-중증)가 있는 Stage 3 성인에서 <strong>CKM 예방치료의 개시 또는 강화</strong>가 심혈관사건 감소에 유익할 수 있다.</div></li>
+      </ul>
+      <div class="alert alert-info"><span>ℹ️</span><div>CAC≥1000점은 CAC 400-999점보다 CVD·전체사망 위험이 더 높다(로그함수적 위험증가, 명확한 정체구간 없음). CAC&gt;100은 스타틴·GLP-1기반치료·강력한 혈압조절·이코사펜트에틸 등 예방치료의 <strong>낮은 치료필요수(NNT)</strong>를 식별한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🫀</span> Stage 3 — Pre-HF(무증상 심부전)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">Pre-HF 성인에서 <strong>집중 생활습관중재 및 위험인자 관리</strong>가 CKM건강 개선 및 임상적 심부전 진행 예방에 권고된다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Pre-HF+T2D 또는 CKD에서 <strong>SGLT2억제제를 심부전예방 1차치료</strong>로 사용할 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Pre-HF+당뇨병+CKD+UACR≥100mg/g에서 SGLT2i에 <strong>GLP-1기반치료 추가</strong>가 심부전예방에 합리적이다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">Pre-HF+당뇨병+CKD+UACR≥30mg/g에서 SGLT2i에 <strong>nsMRA 추가</strong>가 심부전예방에 합리적이다.</div></li>
+      </ul>
+      <h5 class="subhead">Pre-HF 정의(심초음파·바이오마커 임계값)</h5>
+      <table class="new-table">
+        <tr><th>구조적 심질환</th><td>좌심방용적지수≥29mL/m², 좌심실질량지수&gt;116(남)/95(여)g/m², 상대벽두께&gt;0.42, 좌심실벽두께≥12mm, LVEF&lt;50%, 전반적종축변형률&lt;16%, 중격 e'&lt;7cm/s, 삼첨판역류속도&gt;2.8m/s</td></tr>
+        <tr><th>충만압 상승(비침습영상)</th><td>추정폐동맥수축기압&gt;35mmHg, 평균 E/e'≥15</td></tr>
+        <tr><th>심장바이오마커</th><td>BNP≥35pg/mL 또는 NT-proBNP≥125pg/mL</td></tr>
+      </table>
+      <div class="src-note">평가는 PREVENT-HF 위험≥5%인 경우 고려한다. 바이오마커와 심초음파 이상이 함께 있는 경우 심부전 위험이 가장 높다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🎯</span> Stage 4 — ASCVD 동반 CKM 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="cm-grid">
+        <div class="cm-card" onclick="showCM('obesityascvd','cm-detail')"><div class="cm-title">⚖️ 비만+ASCVD</div><div class="cm-goal">GLP-1기반치료 우선고려</div><div class="cm-drug">체중 무관하게 MACE 감소(SELECT 연구)</div></div>
+        <div class="cm-card" onclick="showCM('t2dascvd','cm-detail')"><div class="cm-title">🩸 당뇨병+ASCVD</div><div class="cm-goal">SGLT2i 또는 GLP-1기반치료</div><div class="cm-drug">병용시 이득 상승 가능</div></div>
+        <div class="cm-card" onclick="showCM('ckdascvd','cm-detail')"><div class="cm-title">🫘 CKD+ASCVD</div><div class="cm-goal">RASi+SGLT2i 1차</div><div class="cm-drug">Stage2-3 CKD 관리원칙 준용</div></div>
+      </div>
+      <div id="cm-detail" class="cm-detail" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🫀</span> Stage 4 — 심부전(HF) 동반 CKM 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="cm-grid">
+        <div class="cm-card" onclick="showCM('obesityhf','cm-detail2')"><div class="cm-title">⚖️ 비만+HFpEF</div><div class="cm-goal">GLP-1기반치료</div><div class="cm-drug">기능능력·증상 개선, 심부전악화 예방</div></div>
+        <div class="cm-card" onclick="showCM('t2dhf','cm-detail2')"><div class="cm-title">🩸 당뇨병+HF</div><div class="cm-goal">SGLT2i 1차 심장보호 항고혈당제</div><div class="cm-drug">HFrEF/HFmrEF/HFpEF 공통</div></div>
+        <div class="cm-card" onclick="showCM('ckdhf','cm-detail2')"><div class="cm-title">🫘 CKD+HF</div><div class="cm-goal">SGLT2i+ARNI/RASi(HFrEF)</div><div class="cm-drug">고칼륨혈증시 신규 경구 칼륨결합제 고려</div></div>
+      </div>
+      <div id="cm-detail2" class="cm-detail" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💓</span> 심방세동(AF)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:8px">과잉/기능이상 지방조직은 심방세동 발생위험을 높이며, 심방세동은 다시 뇌졸중·심근경색·심부전·CKD·말초동맥질환 위험을 높인다. Stage 1-3에서 생활습관중재·체중관리·혈당혈압조절·금연·절주·수면무호흡 치료가 AF 예방에 도움이 된다.</p>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-R</span></div><div class="rec-text">AF+BMI≥40, 이전 대사대사수술 없는 경우 <strong>직접경구항응고제(DOAC, 아픽사반·리바록사반)</strong>가 혈전예방의 선택지이다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ SPECIAL TOPICS ═══════════════════════ -->
+<div id="tab-special" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩸</span> LDL-C 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+        <li>• Stage 1-2 + T2D 또는 CKD(≥40세, PREVENT-ASCVD 5-9.9%): 스타틴 등 LDL-C강하치료 사용</li>
+        <li>• 경계위험(PREVENT-ASCVD 3-4.9%): 위험강화인자를 고려한 개별화된 논의 후 결정</li>
+        <li>• Stage 3(무증상 관상동맥죽상경화): CAC 100-999 → LDL-C &lt;70mg/dL 목표; <strong>CAC≥1000 → &lt;55mg/dL 목표</strong></li>
+        <li>• Stage 4(기존 ASCVD, 특히 당뇨병·CKD 동반): 매우고위험군으로 <strong>&lt;55mg/dL</strong> 목표 — 고강도스타틴+에제티미브, 필요시 PCSK9억제제·인클리시란·벰페도산 추가</li>
+        <li>• 고중성지방혈증 동반시 <strong>non-HDL-C 또는 아포지단백B</strong>가 LDL-C보다 신뢰도 높은 죽상형성입자 지표</li>
+      </ul>
+      <div class="src-note">세부 권고는 2026 ACC/AHA 이상지질혈증 진료지침을 참조한다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🫁</span> MASLD(대사이상관련 지방간질환)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">당뇨병 또는 대사위험인자 2개 이상 동반 성인에서 <strong>FIB-4 지수를 1-2년마다</strong> 계산하여 간섬유화 위험을 평가할 것을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">MASLD 성인에서 <strong>생활습관중재(운동·식이)를 통한 체중감량</strong>, 필요시 비만약물치료·MBS 보조를 권고하여 MASLD 중증도·진행위험을 낮춘다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">MASLD+T2D 또는 MASH+유의한 간섬유화 근거가 있는 경우 <strong>GLP-1기반치료</strong>가 조직학적 개선을 위해 권고된다.</div></li>
+      </ul>
+      <h5 class="subhead">FIB-4 기반 위험분류 및 후속조치</h5>
+      <table class="new-table">
+        <tr><th>연령</th><th>FIB-4</th><th>후속조치</th></tr>
+        <tr><td>&lt;35세</td><td>해당없음</td><td>-</td></tr>
+        <tr><td rowspan="3">35-64세</td><td>&lt;1.3</td><td>정기 모니터링</td></tr>
+        <tr><td>1.3-2.67</td><td>진동조절일과성탄성초음파(VCTE) 또는 ELF 검사 의뢰</td></tr>
+        <tr><td>&gt;2.67</td><td>간담도내과 의뢰</td></tr>
+        <tr><td rowspan="3">65세 이상</td><td>&lt;2.0</td><td>정기 모니터링</td></tr>
+        <tr><td>2.0-2.67</td><td>VCTE 또는 ELF 검사 의뢰</td></tr>
+        <tr><td>&gt;2.67</td><td>간담도내과 의뢰</td></tr>
+      </table>
+      <div class="src-note">이차평가(VCTE&lt;8 또는 ELF&lt;7.7: 저위험 → 1-3년마다 FIB-4 재평가; 중등도-고위험시 간담도내과 의뢰). 레스메티롬(갑상선호르몬수용체베타 작용제)은 MASH+2-3기 섬유화의 간조직 개선에 승인된 약제이다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩹</span> 정맥혈전색전증(VTE)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <p style="margin-bottom:6px">CKM 증후군은 혈전형성경향 증가와 연관되며, CKM 구성요소 개수가 많을수록 VTE 재발위험이 단계적으로 증가한다. 복부비만은 가장 강력한 VTE 위험인자 중 하나이다.</p>
+      <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+        <li>• BMI≥30: DOAC 병용이 VKA대비 뇌졸중/전신색전증/심근경색/전체사망 20%↓, 주요출혈 44%↓ (VTE예방효과는 유사)</li>
+        <li>• 3급비만: DOAC이 VKA보다 효과적·안전 (특히 아픽사반·리바록사반)</li>
+        <li>• CKD G3(eGFR 30-59): DOAC이 VKA 대비 재발VTE·주요출혈에서 비열등</li>
+        <li>• 투석환자: 아픽사반이 와파린 대비 주요출혈 낮고 사망률 유사</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">😴</span> 폐쇄성 수면무호흡(OSA)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeC" data-tip="제한적 자료, 전문가 의견">C-LD</span></div><div class="rec-text">비만 동반 CKM 성인에서 <strong>매년 수면무호흡 증상 선별</strong>(검증된 도구 활용)이 합리적이다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">OSA 확진시 <strong>체중관리중재+CPAP 등</strong>을 포함한 치료전략으로 증상 개선 및 CKM병기진행 위험 감소를 도모할 것을 권고한다.</div></li>
+      </ul>
+      <div class="src-note">15% 이상 체중감량은 무호흡-저호흡지수(AHI)를 유의하게 개선한다(SURMOUNT-OSA 연구: 티르제파타이드로 AHI 평균 20-24회/시간 감소). CPAP은 혈압조절에 도움되나 CVD사건 감소는 입증되지 않았다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤰</span> 임신과 CKM 건강</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <h5 class="subhead">임신 전 관리</h5>
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">임신 계획 시 체중·신기능·혈당·혈압을 최적화하여 <strong>부정적 임신결과(APO) 위험을 줄인다</strong>.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">당뇨병이 있는 경우 임신 전 <strong>HbA1c &lt;6.5%</strong> 목표로 혈당을 최적화한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C-LD</span></div><div class="rec-text">Stage 2-4 CKM 성인은 <strong>다학제 진료팀</strong>의 임신 전 관리를 받는다.</div></li>
+      </ul>
+      <h5 class="subhead">산후 관리</h5>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">APO를 경험한 경우 산후 1년 이내 <strong>혈압·지질·혈당·CKD·BMI·허리둘레</strong> 선별검사와 생활습관 상담을 받는다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">APO 경험자는 <strong>산후에서 장기 1차진료로의 전환</strong>을 통해 CKM 위험인자 모니터링을 지속한다.</div></li>
+      </ul>
+      <div class="src-note">APO(부정적 임신결과)에는 임신성당뇨병, 임신성고혈압질환, 부당경량아, 저체중출생, 태반조기박리, 조산이 포함되며, 이후 고혈압·당뇨병·이상지질혈증·CVD(심부전·관상동맥질환·말초동맥질환·혈관성치매 포함) 위험을 높인다.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ MONITORING ═══════════════════════ -->
+<div id="tab-monitor" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📋</span> 치료 개시 후 모니터링 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-NR</span></div><div class="rec-text">체중감량 목적 GLP-1기반치료 개시 후 <strong>3-6개월 내 반응성 재평가</strong>, 5% 미만 체중감량시 용량증량·약제전환·전문의뢰를 고려한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">Stage 2-4+T2D에서 심장보호 항고혈당제 개시 후 <strong>3-6개월마다 A1C 등으로 혈당상태 평가</strong>, 목표 미달성시 더 자주 평가한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-R</span></div><div class="rec-text">Stage 2-4+알부민뇨(UACR≥30mg/g)에서 신장보호치료 개시 후 <strong>3-6개월 후 알부민뇨 재평가</strong>가 잔존위험 파악에 합리적이다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-R</span></div><div class="rec-text">RAAS계 약물(RASi·MRA) 개시 시 <strong>2-4주 후 eGFR·칼륨 재검</strong>이 내약성·안전성 평가에 합리적이다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧪</span> CVD 고위험 T2D 환자의 혈당목표 달성 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>잔존 고혈당 정도</th><th>대응</th></tr>
+        <tr><td>HbA1c 7-8.5% (경도-중등도)</td><td>SGLT2i 또는 GLP-1기반치료에 <strong>메트포르민</strong> 추가로 혈당목표 달성</td></tr>
+        <tr><td>HbA1c &gt;8.5% (중증)</td><td>이미 SGLT2i 사용중이면 <strong>세마글루타이드 또는 티르제파타이드</strong> 추가; HbA1c&gt;10% 또는 혈당≥300mg/dL 등 증상성 고혈당시 <strong>내분비내과 의뢰</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">⚙️</span> RAAS계 약물 개시 후 검사 이상 대응</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+        <li>• RASi·MRA 개시 후 eGFR 30% 이내 감소는 예상되는 정상 범위 — 수용 가능</li>
+        <li>• eGFR &gt;30% 감소시 체액감소·NSAID사용 등 다른 원인 평가 및 용량조절 고려</li>
+        <li>• 혈청칼륨 ≤5.5mEq/L은 경도 상승으로 대개 허용, &gt;5.5mEq/L시 티아지드/고리작용이뇨제, 식이칼륨결합제, 용량감량 등 고려</li>
+        <li>• SGLT2i로 인한 eGFR 최대 30% 감소는 불량한 예후와 연관 없음(정상 반응)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🤢</span> GLP-1기반치료 위장관 부작용 관리표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <table class="new-table">
+        <tr><th>전략</th><th>내용</th></tr>
+        <tr><td>생활습관 변경</td><td>소량씩 자주 식사, 천천히 식사, 고지방·자극적 음식·음주 제한; 식후 격렬한 활동 피하고 가벼운 활동(걷기) 선택; 식후 2-3시간 대기 후 눕기</td></tr>
+        <tr><td>약물 보조</td><td>일시적 진토제/장운동촉진제, 프로바이오틱스·지사제 고려</td></tr>
+        <tr><td>용량 증량 조절</td><td>증량속도를 늦추고 2-4주 더 유지, 필요시 이전 용량으로 되돌린 후 서서히 증량</td></tr>
+        <tr><td>약제 전환</td><td>다른 GLP-1기반치료로 전환 고려(예: 둘라글루타이드가 세마글루타이드/티르제파타이드보다 내약성 좋을 수 있으나 효과는 다소 낮을 수 있음)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ NEW UPDATES ═══════════════════════ -->
+<div id="tab-newupdates" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🆕</span> 2026년 지침의 의의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom:8px">본 지침은 <strong>2013년 AHA/ACC/TOS 비만 진료지침을 폐지·대체</strong>하며, 비만·대사이상·CKD·CVD를 하나의 연속적 병기(CKM Stage 0-4) 체계로 통합한 최초의 AHA/ACC/ADA/ASN 공동지침이다. 기존에는 각 질환(비만, 당뇨병, 고혈압, 이상지질혈증, CKD, 심부전)이 개별 지침으로 다뤄졌으나, 이번 지침은 이들 간의 <strong>병태생리학적 상호연관성</strong>을 명시적으로 반영한다.</p>
+      <table class="new-table">
+        <tr><th>구분</th><th>내용</th></tr>
+        <tr><td><span class="new-badge">신규</span></td><td>CKM 병기(0-4) 체계 도입 — 위험인자 개수·중증도에 따른 단계적 분류</td></tr>
+        <tr><td><span class="new-badge">신규</span></td><td>PREVENT 방정식을 이용한 10·30년 CVD(ASCVD+심부전) 위험 정량화</td></tr>
+        <tr><td><span class="new-badge">신규</span></td><td>CKM 코디네이터를 둔 다학제 진료모델(가치기반/물량기반) 제시</td></tr>
+        <tr><td><span class="new-badge">신규</span></td><td>MASLD FIB-4 기반 정기 선별검사 권고</td></tr>
+        <tr><td><span class="revised-badge">개정</span></td><td>GLP-1기반치료(세마글루타이드·티르제파타이드)가 비만·당뇨병·CKD·심부전 전반에 걸쳐 광범위하게 통합</td></tr>
+        <tr><td><span class="revised-badge">개정</span></td><td>SGLT2억제제·nsMRA(피네레논)를 포함한 CKD 4제 신장보호요법 체계화</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📌</span> Top 10 Take-Home Messages (원문 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">1</span>CKM 병기분류(Staging)</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">청소년·성인 모두에서 CKM 병기분류(Stage 0-4)를 시행하여 병기진행을 예방하고, 절대위험도에 따라 치료를 맞춤화하며, 생애주기 전반에 걸쳐 심혈관사건·신기능소실을 줄이고, 생활습관 개선과 체중감량을 통한 <strong>병기 역행(regression)</strong>을 도모한다.</p>
+          <p style="margin-bottom:6px">병기체계는 과잉/기능이상 지방조직(Stage 1) → 대사위험인자·CKD(Stage 2) → 무증상 CVD 또는 그 위험동등물(Stage 3) → 임상적 CVD(Stage 4)로 이어지는 CKM 증후군의 전형적 병태생리학적 진행경로를 반영한다. 건강한 생활습관과 체중관리가 병기진행을 막는 주요 억제요인이다.</p>
+          <p>CVD는 CKM 증후군에서 발생률·사망률 부담이 가장 큰 임상결과이므로 주된 초점이지만, KDIGO 위험분류상 병기가 진행할수록 CKD 위험도 함께 높아지므로 CKD 역시 핵심 관리대상이다. 성인 CKM 병기 진단기준은 [🧬 병기분류] 탭의 상세표를 참조한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">2</span>PREVENT 방정식으로 위험 정량화</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">CVD위험이 있는 개인(CKM Stage 0-3)은 <strong>PREVENT(Predicting Risk of Cardiovascular Disease EVENTs)</strong> 방정식으로 10·30년 ASCVD·심부전·총CVD 위험을 산출해야 한다. PREVENT 추정치는 CKM 병기분류에 반영되며, <strong>10년 위험≥20%는 Stage 3의 기준</strong> 중 하나이고, <strong>≥7.5%는 약물치료 우선순위 결정</strong>(SGLT2i·GLP-1기반치료 개시, 1기고혈압 적극강압 등)에 활용된다.</p>
+          <p style="margin-bottom:6px">PREVENT는 기존 위험예측모델과 달리 전통적 위험인자에 <strong>BMI·eGFR</strong>을 기본모델에 새로 포함하며, 추가모델에서 <strong>UACR·HbA1c·사회적결핍지수(SDI)</strong>까지 반영하여 CKM 증후군의 다면적 위험을 더 정교하게 포착한다. 미국 성인 330만명 이상의 외부검증 코호트에서 여성 C-statistic 0.79, 남성 0.76의 우수한 판별력을 보였다.</p>
+          <p>30-79세 성인에서는 10년 위험 산출이 권고(I,B-NR)되며, 30-59세 젊은 성인에서는 30년 위험산출이 장기적 위험소통과 생활습관상담 순응도 향상에 유용할 수 있다(IIa,B-NR). 방정식별 세부 활용기준은 [📊 위험평가] 탭을 참조한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">3</span>CKM 위험인자 정기평가</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">모든 성인에서 BMI·허리둘레·혈압을 <strong>최소 매년</strong>, 지질·혈당·신기능(eGFR)을 병기에 따라 Stage 0은 5년마다·Stage 1은 2-3년마다·Stage 2 이상은 매년(UACR 포함) 평가하는 <strong>정기적 대사·신기능 평가</strong>가 권고된다.</p>
+          <p style="margin-bottom:6px">일부 집단에서는 다음과 같은 <strong>선택적 추가평가</strong>가 권고된다: ① 10년 PREVENT-HF 위험≥5%인 경우 심장바이오마커(BNP/NT-proBNP, hs-cTn)로 pre-HF 평가, ② 당뇨병 또는 대사위험인자 2개 이상 동반시 FIB-4 지수로 MASLD 관련 간섬유화 위험 1-2년마다 평가, ③ 비만 동반 CKM 성인에서 매년 수면무호흡 증상 선별.</p>
+          <p>조기 발견과 근거기반치료의 적시 개시가 CKD·MASLD 등에서 임상결과 개선과 연관되므로, 진단이 지연되기 쉬운 이들 질환에 대한 체계적 평가가 강조된다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">4</span>사회적 건강결정요인(SDOH) 평가·대응</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">CKM 발생·합병증과 밀접히 연관된 사회적 건강결정요인(SDOH)에 대한 정기평가가 권고되며, 확인된 불리한 SDOH를 해결하는 것은 전인적 CKM 진료의 핵심 요소이다. 성인에서는 검증된 도구로, 청소년(&lt;18세)에서는 <strong>보호자 SDOH</strong>를 검증된 도구로 선별한다.</p>
+          <p style="margin-bottom:6px">핵심 평가영역은 재정적 어려움, 식품불안정, 주거불안정, 폭력노출·안전, 교통장벽, 공공요금부담 등이며, 추가로 가족·사회적 지지, 건강행태, 건강문해력, 정신건강도 평가할 수 있다. 다층적(개인·지역기반) SDOH는 생물학적 경로에 직접 영향을 미쳐 심대사위험을 매개한다.</p>
+          <p>Medicare/Medicaid는 외래 6개월·입원 매년 SDOH 평가에 대해 수가를 인정하고 있으나, 실제 매 진료 시 평가하는 것이 CKM 예방·관리에 더 유익할 수 있다. 확인된 불리한 SDOH는 지역사회 자원과 연계하여 대응해야 한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">5</span>CKM 코디네이터를 둔 다학제 진료</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">T2D·CKD·CVD 중 <strong>2개 이상 중복된 Stage 2-4</strong> 환자에서 CKM 코디네이터를 둔 다학제 진료모델 활용이 권고(I,B-R)되며, 코디네이터가 다학제팀 노력을 조율하고 근거기반 진료·GDMT 이행을 촉진하며 환자와 임상의를 지원할 필요성이 강조된다.</p>
+          <p style="margin-bottom:6px">AHA Presidential Advisory는 2가지 진료모델을 제시한다: <strong>가치기반(value-based) 모델</strong>은 코디네이터+다학제 대표자가 프로토콜을 수립하여 T2D·CKD·CVD 중복환자를 관리하고, <strong>물량기반(volume-based) 모델</strong>은 고위험 T2D(HbA1c≥9% 또는 미세혈관합병증)·매우고위험 CKD·임상적 CVD 중 2개 이상이 중복된 최고위험군을 전문과 의뢰와 코디네이터의 진료조정 지원으로 관리한다. 두 모델 모두 대면·비대면 방식으로 운영될 수 있다.</p>
+          <p>불리한 SDOH가 확인된 환자는 지역보건 자원 연계를 통한 사회적 지지 제공이 필요하며, 이는 CKM 코디네이터의 추가 역할 중 하나이다(약물관리 종합, 생활습관중재 촉진, 진료조정 포함).</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">6</span>과체중·비만 평가 및 치료</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">BMI(≥25kg/m², 아시아계≥23)와 허리둘레(여성≥88/남성≥102cm, 아시아계 여성≥80/남성≥90cm) 모두로 과체중/비만·복부비만을 평가하고, <strong>생활습관중재를 1차전략</strong>으로 필요시 비만약물치료·대사대사수술을 단계적으로 병행하여 병기진행을 예방하고 병기 역행을 도모한다.</p>
+          <p style="margin-bottom:6px">비만은 사회·행동·생물학적 요인이 복합적으로 작용하는 만성질환으로, 체중감량 후에도 식욕·대사 보상기전으로 인한 <strong>체중재증가</strong>가 흔하다. 따라서 장기적·지속적인 환자관여와 지지가 필요하며, 체중낙인을 배제한 비판단적 상담이 5-10% 이상 체중감량 성공률을 높인다.</p>
+          <p>미국 성인의 70% 이상이 과체중/비만에 해당하는 만큼, 생활습관중재(500-750kcal/일 열량결핍, 주 150분 이상 신체활동)를 기본으로 하되, GLP-1기반치료 등 비만약물치료와 대사대사수술(MBS)이 갈수록 효과적인 보조수단으로 자리잡고 있다. 자세한 약제비교와 흐름은 [⚖️ 1단계·비만] 탭을 참조한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">7</span>당뇨병에서 심장보호 항고혈당치료 활용</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">CVD 동반 또는 CVD위험 증가(10년 PREVENT-CVD≥7.5%) T2D에서 생활습관중재·체중관리·위험인자조절에 더해 <strong>SGLT2억제제 및/또는 GLP-1기반치료</strong>를 이용한 심장보호 GDMT 사용이 권고되며(I,A), 약제선택은 CKD·ASCVD·HF·비만·중증고혈당·MASLD 등 동반질환에 따라 결정한다.</p>
+          <p style="margin-bottom:6px">두 계열은 기전이 달라 이득의 양상도 다르다: <strong>SGLT2i는 주로 심부전입원 감소</strong>에, <strong>GLP-1기반치료는 죽상경화성 사건(MI·뇌졸중) 감소</strong>에 더 큰 영향을 보인다. 두 계열 모두 신장기능 보호효과가 있으며, GLP-1기반치료는 추가로 체중감량·혈당조절 효과가 크다.</p>
+          <p>CKD·pre-HF 동반시 SGLT2i를 우선 고려하고, 2급 이상 비만·중증고혈당(HbA1c≥9%)·MASLD 동반시 GLP-1기반치료를 우선 고려한다. CVD고위험군에서 다중 CKM위험인자 동반시 두 계열의 <strong>병용요법</strong>도 고려할 수 있다(IIb,B-NR).</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">8</span>CKD 평가 및 신장보호제 활용</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px"><strong>eGFR과 UACR을 함께</strong> 평가하여 CKD를 특성화하고(CKD는 eGFR&lt;60 또는 UACR≥30mg/g로 정의) 신장보호제 사용을 안내한다. CKD+T2D 또는 CKD+알부민뇨(UACR≥30mg/g)는 <strong>RASi·SGLT2i를 1차치료</strong>로 사용해야 하며, T2D+알부민뇨가 1차치료에도 지속되면 <strong>nsMRA(피네레논) 또는 GLP-1기반치료</strong>를 추가하여 추가적 신장·심혈관 보호를 도모한다.</p>
+          <p style="margin-bottom:6px">CKD의 대다수는 당뇨병·고혈압 등 대사위험인자에서 기인하지만, 대다수 환자가 자신의 CKD 진단을 인지하지 못하는 경우가 많아 체계적 선별검사가 중요하다. 약제별 신장기능 개시임계값은 <strong>RASi eGFR≥30, SGLT2i eGFR≥20, 피네레논 eGFR≥25</strong>이며, 이미 치료 중인 환자는 이 임계값 이하로 eGFR이 낮아져도 안전하게 내약되는 한 계속 사용하는 것이 합리적이다.</p>
+          <p>알부민뇨 정도에 따라 약제 우선순위가 세분화된다: UACR≥30mg/g은 RASi·SGLT2i·(T2D시)피네레논의 기준, UACR≥100mg/g(T2D)은 GLP-1기반치료 추가의 기준이다. 상세 흐름도는 [💊 2-3단계·대사/신장] 탭을 참조한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">9</span>ASCVD 환자의 CKM 위험인자 관리</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">ASCVD(Stage 4의 한 표현형) 관리 시 비만치료(생활습관·약물·필요시 대사대사수술), T2D의 심장보호 항고혈당제 사용, CKD의 신장보호제 사용 등 <strong>CKM 동반질환 관리를 함께 강조</strong>하여 심혈관사건·신기능소실 위험을 낮춘다.</p>
+          <p style="margin-bottom:6px">기본 GDMT로 고강도 또는 최대내약용량 스타틴·항혈소판제를 사용하며, 목표혈압 &lt;130/80mmHg(당뇨병·CKD 동반시 ACEi/ARB 우선)를 추구한다. 비만+ASCVD(BMI≥27)에서는 입증된 심혈관이득의 GLP-1기반치료가 체중과 무관하게 MACE를 감소시키며(SELECT 연구), 날트렉손/부프로피온·펜터민계열은 혈압·심박수 상승 위험으로 회피한다.</p>
+          <p>T2D+ASCVD에서는 SGLT2i·GLP-1기반치료 모두 MACE·심혈관사망을 감소시키며, CKD+ASCVD에서는 Stage 2-3 CKD 관리원칙(RASi+SGLT2i 1차, 필요시 nsMRA/GLP-1RA 추가)이 그대로 적용된다. 세부내용은 [🫀 3-4단계·심혈관] 탭의 클릭형 상세카드를 참조한다.</p>
+        </div>
+      </div>
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">10</span>HF 환자의 CKM 위험인자 관리</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px"><strong>HFrEF</strong>에서는 ARNI(또는 ACEi/ARB)·베타차단제·스테로이드성 MRA·SGLT2i로 구성된 <strong>4제 GDMT</strong>의 심혈관·신장 이득을 강조하며, ARNI는 eGFR&gt;30인 경우 다른 RASi보다 심혈관사망+심부전입원 복합위험 감소가 더 커 선호되는 1차 약제이다.</p>
+          <p style="margin-bottom:6px"><strong>HFmrEF/HFpEF</strong>에서는 <strong>SGLT2i를 1차 GDMT</strong>로 사용하고(울혈 동반시 이뇨제 병용), 비만 또는 기타 CKM위험인자 동반시 GLP-1기반치료를 추가하여 심부전사건·증상·기능능력을 개선한다. 베타차단제는 HFpEF에서 별도 적응증(AF, 증상성 관상동맥질환 등) 없이는 권고되지 않는다.</p>
+          <p>T2D+CKD가 동반된 HF에서는 <strong>피네레논(nsMRA)</strong> 추가를 고려하며(FINEARTS-HF 연구), CKD+HFrEF에서 eGFR&gt;30인 경우 고칼륨혈증 관리를 위해 신규 경구 칼륨결합제 사용을 고려하여 RAASi 지속사용을 도울 수 있다. 세부내용은 [🫀 3-4단계·심혈관] 탭을 참조한다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleOsaAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const spans = hdr.querySelectorAll('span');
+  const icon = spans[spans.length - 1];
+  const open = getComputedStyle(body).display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  icon.textContent = open ? '▸' : '▾';
+}
+
+const cmData = {
+obesityascvd: {
+  title: '비만 + ASCVD (Stage 4)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>SELECT 연구: BMI≥27 + ASCVD(당뇨병 없음) 환자에서 세마글루타이드가 MACE를 <strong>20%</strong> 감소시켰으며, 이 이득은 체중감량 정도와 무관하게 나타났다.</div></div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">집중 다요소 행동생활습관중재로 체중감량 및 CKM위험인자 개선을 도모</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B-R</span></div><div class="rec-text">BMI≥27에서 <strong>입증된 심혈관이득의 GLP-1기반치료</strong> 사용 <span class="pill pill-new">비용효과적(중등도근거)</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B-NR</span></div><div class="rec-text">BMI≥30에서 생활습관·약물치료로 목표 미달성시 <strong>대사대사수술(MBS)</strong> 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor3" data-tip="유해 가능성">Harm</span><span class="loe loeB">B-R</span></div><div class="rec-text">BMI≥27+ASCVD에서 <strong>날트렉손/부프로피온, 펜터민계열</strong>은 혈압·심박수 상승으로 잠재적 유해</div></li>
+  </ul>`
+},
+t2dascvd: {
+  title: '당뇨병 + ASCVD (Stage 4)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>SGLT2i는 주로 <strong>심부전 관련 사건</strong>을, GLP-1기반치료는 <strong>죽상경화성 사건(MI·뇌졸중)</strong> 감소에 더 큰 영향을 보인다.</div></div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">심장건강 식단·신체활동 중심 맞춤 생활습관중재로 혈당·체중·기타 위험인자 개선</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><strong>SGLT2i 또는 GLP-1기반치료</strong> 사용으로 심혈관사건·사망 감소 <span class="pill pill-new">SGLT2i 비용효과적(중등도근거)</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeC">C-LD</span></div><div class="rec-text"><strong>SGLT2i+GLP-1기반치료 병용</strong>이 심혈관성과 개선에 유익할 수 있음</div></li>
+  </ul>`
+},
+ckdascvd: {
+  title: 'CKD + ASCVD (Stage 4)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>CKD는 재발성 ASCVD의 고위험군이며, 반대로 ASCVD 사건 또한 이후 신부전 위험을 높이는 <strong>양방향 관계</strong>이다.</div></div>
+  <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+    <li>• Stage 2-3 CKD 관리원칙(RASi+SGLT2i 1차, nsMRA/GLP-1RA 추가)이 동일하게 적용됨</li>
+    <li>• CKD 동반시 관상동맥조영/중재술과 관련된 급성신손상·출혈 위험 증가로 신중한 시술결정 필요</li>
+    <li>• 안정형 관상동맥질환+CKD의 재관류술은 2021 ACC/AHA/SCAI 관상동맥재관류술 지침 참조</li>
+  </ul>`
+},
+obesityhf: {
+  title: '비만 + HF (Stage 4)',
+  content: `
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">비만+증상성 HFpEF에서 <strong>입증된 심혈관이득의 GLP-1기반치료</strong>로 CKM위험프로파일·기능능력·심부전증상 개선 및 악화예방 <span class="pill pill-revised">비용효과 불명확(근거불충분)</span></div></li>
+  </ul>`
+},
+t2dhf: {
+  title: '당뇨병 + HF (Stage 4)',
+  content: `
+  <ul style="list-style:none;padding:0;line-height:1.9;font-size:calc(12px * var(--fscale,1))">
+    <li>• <strong>SGLT2i는 HFrEF·HFmrEF·HFpEF 전반에서 1차 심장보호 항고혈당제</strong>로 사용</li>
+    <li>• HFrEF에서는 SGLT2i를 ARNI/ACEi·베타차단제·MRA와 함께 4제 GDMT로 병용</li>
+    <li>• 비만·기타 CKM위험인자 동반시 GLP-1기반치료 추가 고려</li>
+    <li>• T2D+CKD 동반시 nsMRA(피네레논) 추가 고려</li>
+  </ul>`
+},
+ckdhf: {
+  title: 'CKD + HF (Stage 4)',
+  content: `
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B-R</span></div><div class="rec-text">CKD+HFrEF, eGFR&gt;30인 경우 <strong>신규 경구 칼륨결합제</strong>(파티로머 등)가 고칼륨혈증 위험을 줄이고 RAASi 사용을 가능케 하는데 합리적일 수 있음</div></li>
+  </ul>
+  <div class="src-note">ARNI는 eGFR&gt;30인 HFrEF에서 다른 RASi 대비 심혈관사망·심부전입원 복합위험 감소가 더 크며 선호되는 1차 약제이다. SGLT2i는 eGFR&gt;20인 HFrEF·HFmrEF/HFpEF에서 신기능저하 속도 완화 및 심혈관사망·심부전입원 감소를 보인다.</div>`
+},
+};
+
+function showCM(key, targetId) {
+  const target = document.getElementById(targetId);
+  const data = cmData[key];
+  if (!data || !target) return;
+  target.style.display = 'block';
+  target.innerHTML = `<h4>${data.title}</h4>${data.content}`;
+  target.closest('.card-body').querySelectorAll('.cm-card').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  target.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+const abbrs = [
+  ['CKM','Cardiovascular-Kidney-Metabolic (심혈관-신장-대사) 증후군'],
+  ['CVD','Cardiovascular Disease (심혈관질환)'],
+  ['ASCVD','Atherosclerotic Cardiovascular Disease (죽상경화성 심혈관질환)'],
+  ['CKD','Chronic Kidney Disease (만성콩팥병)'],
+  ['CCD','Chronic Coronary Disease (만성관상동맥질환)'],
+  ['T2D','Type 2 Diabetes (제2형당뇨병)'],
+  ['GDM','Gestational Diabetes Mellitus (임신성당뇨병)'],
+  ['HF','Heart Failure (심부전)'],
+  ['HFrEF','Heart Failure with reduced Ejection Fraction (박출률감소심부전)'],
+  ['HFmrEF','Heart Failure with mildly reduced Ejection Fraction (박출률경도감소심부전)'],
+  ['HFpEF','Heart Failure with preserved Ejection Fraction (박출률보존심부전)'],
+  ['Pre-HF','무증상 심부전(Stage B) — 구조적 심질환 또는 바이오마커 상승, 증상 없음'],
+  ['AF','Atrial Fibrillation (심방세동)'],
+  ['PAD','Peripheral Artery Disease (말초동맥질환)'],
+  ['MASLD','Metabolic dysfunction-Associated Steatotic Liver Disease (대사이상관련 지방간질환)'],
+  ['MASH','Metabolic dysfunction-Associated Steatohepatitis (대사이상관련 지방간염) — 이전 NASH'],
+  ['OSA','Obstructive Sleep Apnea (폐쇄성 수면무호흡증)'],
+  ['VTE','Venous Thromboembolism (정맥혈전색전증)'],
+  ['APO','Adverse Pregnancy Outcome (부정적 임신결과)'],
+  ['SDOH','Social Determinants of Health (사회적 건강결정요인)'],
+  ['GDMT','Guideline-Directed Medical Therapy (지침기반 표준치료)'],
+  ['BMI','Body Mass Index (체질량지수)'],
+  ['UACR','Urine Albumin-to-Creatinine Ratio (요알부민/크레아티닌비) — 30-300 알부민뇨, ≥300 현성알부민뇨'],
+  ['eGFR','estimated Glomerular Filtration Rate (추정 사구체여과율)'],
+  ['KDIGO','Kidney Disease: Improving Global Outcomes — 국제 CKD 진료지침 단체'],
+  ['CAC','Coronary Artery Calcium (관상동맥 칼슘점수)'],
+  ['PREVENT','Predicting Risk of Cardiovascular Disease Events — AHA 2023 CVD위험예측모델(10·30년, ASCVD+HF)'],
+  ['MACE','Major Adverse Cardiovascular Event (주요 심혈관계 사건)'],
+  ['HbA1c','당화혈색소 — 목표 &lt;7.0%(일반), &lt;6.5%(임신계획)'],
+  ['GLP-1','Glucagon-Like Peptide-1 (글루카곤유사펩타이드-1)'],
+  ['GLP-1RA','GLP-1 Receptor Agonist (GLP-1 수용체작용제) — 세마글루타이드·리라글루타이드 등'],
+  ['GIP','Glucose-dependent Insulinotropic Polypeptide — 티르제파타이드의 이중작용 표적'],
+  ['SGLT2i','Sodium-Glucose Cotransporter-2 inhibitor (SGLT2억제제) — 다파글리플로진·엠파글리플로진 등'],
+  ['RASi','Renin-Angiotensin System inhibitor (레닌-안지오텐신계 억제제) — ACEi/ARB'],
+  ['ACEi','Angiotensin Converting Enzyme inhibitor (안지오텐신전환효소억제제)'],
+  ['ARB','Angiotensin Receptor Blocker (안지오텐신수용체차단제)'],
+  ['ARNI','Angiotensin Receptor-Neprilysin Inhibitor (사쿠비트릴/발사르탄) — HFrEF 1차 선호'],
+  ['MRA / nsMRA','Mineralocorticoid Receptor Antagonist / 비스테로이드성 MRA(피네레논)'],
+  ['DOAC','Direct Oral Anticoagulant (직접경구항응고제) — 아픽사반·리바록사반 등'],
+  ['VKA','Vitamin K Antagonist (비타민K길항제) — 와파린'],
+  ['FIB-4','간섬유화 지수 = (연령×AST)/(혈소판수×√ALT)'],
+  ['VCTE','Vibration-Controlled Transient Elastography (진동조절일과성탄성초음파)'],
+  ['ELF','Enhanced Liver Fibrosis Score (향상된 간섬유화 점수)'],
+  ['MBS','Metabolic and Bariatric Surgery (대사대사수술)'],
+  ['RYGB','Roux-en-Y Gastric Bypass (루와이 위우회술)'],
+  ['LSG','Laparoscopic Sleeve Gastrectomy (복강경 소매위절제술)'],
+  ['COR','Class of Recommendation (권고등급)'],
+  ['LOE','Level of Evidence (근거수준)'],
+  ['ICER','Incremental Cost-Effectiveness Ratio (점증적 비용효과비)'],
+  ['QALY','Quality-Adjusted Life-Year (질보정생존년)'],
+];
+
+function buildAbbr() {
+  const grid = document.getElementById('abbr-grid');
+  const sorted = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  grid.innerHTML = sorted.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+       <span class="abbr-term">${a[0]}</span>
+       <span class="abbr-def">${a[1]}</span>
+     </div>`
+  ).join('');
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 500;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('.abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) {
+    drop.style.display = 'none';
+  }
+});
+document.getElementById('abbr-input').addEventListener('focus', () => {
+  const v = document.getElementById('abbr-input').value.trim();
+  if (v) { positionDropdown(); document.getElementById('abbr-dropdown').style.display = 'block'; }
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
