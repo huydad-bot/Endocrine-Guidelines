@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 대한고혈압학회 고혈압 진료지침</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --purple: #57606a;
+    --text: #1f2328;
+    --text2: #57606a;
+    --cor1: #1a7f37;
+    --cor2a: #0550ae;
+    --cor2b: #57606a;
+    --cor3: #cf222e;
+    --loe-a: #9a6700;
+    --loe-b: #1a7f37;
+    --loe-c: #57606a;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 940px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tab-bar-inner { width: 100%; max-width: 940px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: calc(14px * var(--fscale, 1)); font-weight: 600; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+  /* ── MAIN LAYOUT ── */
+  .main { padding: 12px 16px; max-width: 940px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 900px) { .grid3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1));
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .icon { font-size: calc(14px * var(--fscale, 1)); }
+  .card-header .toggle { color: var(--text2); font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── BP CLASSIFICATION TABLE ── */
+  .bp-table { width: 100%; border-collapse: collapse; font-size: calc(12px * var(--fscale, 1)); }
+  .bp-table th {
+    background: var(--surface2);
+    color: var(--text2);
+    font-weight: 600;
+    padding: 7px 10px;
+    text-align: left;
+    font-size: calc(11px * var(--fscale, 1));
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .bp-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  .bp-table tr:last-child td { border-bottom: none; }
+  .bp-table tr:hover td { background: var(--surface2); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-normal { background: #dafbe1; color: var(--green); }
+  .badge-elevated { background: #fff8c5; color: var(--yellow); }
+  .badge-s1 { background: #ddf4ff; color: var(--accent2); }
+  .badge-s2 { background: #ffebe9; color: var(--red); }
+  .badge-pre { background: #f1e6ff; color: #6639b6; }
+
+  /* ── COR/LOE BADGES (권고등급/근거수준) ── */
+  .cor { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .cor1 { background: #dafbe1; color: var(--cor1); border: 1px solid var(--cor1); }
+  .cor2a { background: #ddf4ff; color: var(--cor2a); border: 1px solid var(--cor2a); }
+  .cor2b { background: #f6f8fa; color: var(--cor2b); border: 1px solid var(--cor2b); }
+  .cor3 { background: #ffebe9; color: var(--cor3); border: 1px solid var(--cor3); }
+  .loe { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin-left: 3px; white-space: nowrap; position: relative; cursor: help; }
+  .loeA { background: #fff8c5; color: var(--loe-a); border: 1px solid var(--loe-a); }
+  .loeB { background: #dafbe1; color: var(--loe-b); border: 1px solid var(--loe-b); }
+  .loeC { background: #f6f8fa; color: var(--loe-c); border: 1px solid var(--loe-c); }
+
+  /* ── TOOLTIP ── */
+  .cor::after, .loe::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: calc(11px * var(--fscale, 1));
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .cor::before, .loe::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .cor:hover::after, .cor:hover::before,
+  .loe:hover::after, .loe:hover::before { display: block; }
+
+  /* ── RECOMMENDATION ROW ── */
+  .rec-list { list-style: none; }
+  .rec-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--accent2); }
+  .rec-no { color: var(--text2); font-weight: 700; margin-right: 3px; }
+
+  /* ── ALERT/NOTE ── */
+  .alert {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: calc(12px * var(--fscale, 1));
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+
+  /* ── FLOWCHART CONTAINER ── */
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0; }
+  .flow-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; text-align: center; font-size: calc(12px * var(--fscale, 1)); width: 92%; max-width: 460px; }
+  .flow-node.start { background: #ddf4ff; border-color: var(--accent); color: var(--accent2); font-weight: 600; }
+  .flow-node.decision { background: #fff8c5; border-color: var(--yellow); color: #7d4e00; border-radius: 4px; }
+  .flow-node.action { background: #dafbe1; border-color: var(--green); color: var(--green); }
+  .flow-node.warn { background: #fff1e5; border-color: var(--orange); color: var(--orange); }
+  .flow-arrow { font-size: calc(16px * var(--fscale, 1)); color: var(--text2); }
+  .flow-row { display: flex; gap: 10px; width: 92%; max-width: 460px; }
+  .flow-row .flow-node { width: 100%; }
+  .flow-label { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); }
+
+  /* ── DRUG TABLE ── */
+  .drug-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .drug-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; }
+  .drug-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .drug-table tr:last-child td { border-bottom: none; }
+  .drug-table tr:hover td { background: rgba(0,0,0,0.03); }
+  .drug-class { background: var(--surface2); color: var(--accent2); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+  .drug-first { color: var(--green); font-weight: 600; font-size: calc(10px * var(--fscale, 1)); }
+  .drug-alt { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .dose { font-family: 'Courier New', monospace; font-size: calc(10px * var(--fscale, 1)); color: var(--yellow); }
+
+  /* ── COMORBIDITY GRID ── */
+  .cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .cm-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px; cursor: pointer; transition: border-color .15s; }
+  .cm-card:hover { border-color: var(--accent); }
+  .cm-card.active { border-color: var(--accent2); background: #ddf4ff; }
+  .cm-title { font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .cm-goal { font-size: calc(11px * var(--fscale, 1)); color: var(--green); }
+  .cm-drug { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 3px; }
+  .cm-detail { background: var(--surface2); border: 1px solid var(--accent); border-radius: 6px; padding: 12px; margin-top: 8px; }
+  .cm-detail h4 { font-size: calc(13px * var(--fscale, 1)); font-weight: 600; margin-bottom: 8px; color: var(--accent2); }
+
+  /* ── SECONDARY HTN TABLE ── */
+  .sh-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .sh-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; }
+  .sh-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .sh-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .sh-table tr:last-child td { border-bottom: none; }
+
+  /* ── ABBREVIATION INDEX ── */
+  .abbr-search { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--text); font-size: calc(12px * var(--fscale, 1)); width: 100%; margin-bottom: 10px; outline: none; }
+  .abbr-search:focus { border-color: var(--accent); }
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--accent2); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  /* ── WHAT IS NEW ── */
+  .new-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .new-table th { background: var(--surface2); color: var(--text2); padding: 7px 10px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; }
+  .new-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .new-table td:first-child { white-space: nowrap; width: 1%; font-weight: 600; }
+  .new-table tr:last-child td { border-bottom: none; }
+  .new-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .new-badge { display: inline-block; background: #dafbe1; color: var(--green); border: 1px solid var(--green); border-radius: 3px; padding: 1px 5px; font-size: calc(9px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .revised-badge { display: inline-block; background: #ddf4ff; color: var(--accent2); border: 1px solid var(--accent2); border-radius: 3px; padding: 1px 5px; font-size: calc(9px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+
+  /* ── SPECIAL POPULATIONS (아코디언) ── */
+  .sp-section { margin-bottom: 8px; }
+  .sp-title { background: var(--surface2); border-left: 3px solid var(--accent); padding: 7px 10px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; border-radius: 0 4px 4px 0; margin-bottom: 1px; }
+  .sp-body { padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; }
+  .sp-body.open { max-height: 3000px; padding: 8px 0; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  /* ── STAT BOXES ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--accent2); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .tab-bar, header { display: none; }
+    .panel { display: block !important; }
+  }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
+  .pill-new { background: #dafbe1; color: var(--green); }
+  .pill-revised { background: #ddf4ff; color: var(--accent2); }
+  .highlight { color: var(--yellow); font-weight: 600; }
+  .danger-text { color: var(--red); }
+  .success-text { color: var(--green); }
+  .info-text { color: var(--accent2); }
+
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr span { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  h5.subhead { font-size: calc(12px * var(--fscale,1)); font-weight: 700; color: var(--accent2); margin: 10px 0 6px; }
+  .src-note { font-size: calc(10px * var(--fscale,1)); color: var(--text2); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">2026</span>
+      <h1 style="font-size:19px;font-weight:700;color:var(--text)">대한고혈압학회 제6판 고혈압 진료지침</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <span class="source-link">The Korean Society of Hypertension · 2026년 발간</span>
+      <span class="meta"> · 131개 PICO 기반 56개 권고안</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 대한고혈압학회의 공식 자료가 아니며, 임상 참고용으로만 제작되었습니다</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+  <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+  <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+  <div class="tab" onclick="showTab('diagnosis')">🩺 진단·평가</div>
+  <div class="tab" onclick="showTab('treatment')">💊 치료전략</div>
+  <div class="tab" onclick="showTab('drugs')">🧪 약제표</div>
+  <div class="tab" onclick="showTab('comorbidity')">🫀 동반질환</div>
+  <div class="tab" onclick="showTab('special')">🤰 특수상황</div>
+  <div class="tab" onclick="showTab('newupdates')">🆕 신구대비</div>
+  <div class="tab-abbr-wrap">
+    <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+      <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+      <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+        style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;min-width:130px;max-width:130px;outline:none;box-sizing:border-box;"
+        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+    </div>
+    <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:500px;max-height:380px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+      <div class="abbr-grid" id="abbr-grid" style="grid-template-columns:1fr"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════ OVERVIEW ═══════════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">34%</div><div class="stat-lbl">국내 30세 이상 고혈압 유병률 (2023, 연령표준화)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--accent2)">&lt;140/90</div><div class="stat-lbl">저·중위험군 목표혈압 (mmHg)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--green)">&lt;130/80</div><div class="stat-lbl">고위험군·심혈관질환·당뇨병·CKD·뇌졸중 목표혈압</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">56</div><div class="stat-lbl">권고안 (131개 PICO 기반)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔑</span> 2026년 개정판 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">1</span>혈압 분류에 이완기단독고혈압 신설</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">본 지침은 특정 역치 이상의 혈압을 '고혈압'으로 정의하되, 그보다 낮은 구간도 역학적 위험도에 기반해 세분화하여 예방에 활용한다. 종전에는 이완기혈압만 상승한 경우를 별도로 명명하지 않았으나, 2026년판은 SBP&lt;140이면서 DBP≥90인 경우를 <strong>이완기단독고혈압(isolated diastolic hypertension)</strong>으로 신설 분류하여, 기존의 수축기단독고혈압(SBP≥140·DBP&lt;90)과 대칭적인 개념 체계를 갖추었다.</p>
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1));margin-bottom:8px">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">지침</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">고혈압 진단기준</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">비고</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>KSH 2026</strong></td><td style="padding:5px 8px">SBP≥140 또는 DBP≥90</td><td style="padding:5px 8px">2023년판과 동일 유지</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">ESH 2023 / ESC 2024 / JSH 2025</td><td style="padding:5px 8px">SBP≥140 또는 DBP≥90</td><td style="padding:5px 8px">KSH와 동일한 진단 역치</td></tr>
+            <tr><td style="padding:5px 8px">AHA/ACC 2025</td><td style="padding:5px 8px">SBP≥130 또는 DBP≥80</td><td style="padding:5px 8px">2017년판부터 유지된 낮은 역치</td></tr>
+          </table>
+          <p style="margin-bottom:6px">고혈압 미만 구간의 세분화는 지침마다 차이가 크다 — ESH는 Optimal/Normal/High-normal 3단계, ESC는 Non-elevated/Elevated 2단계(DBP≥70이면 Elevated), JSH는 SBP 3단계·DBP 2단계로 구분한다. KSH 2026은 <strong>정상혈압(&lt;120/80)·주의혈압(120-129/&lt;80)·고혈압전단계(130-139 또는 80-89)</strong>의 3단계 체계를 유지하며, SBP·DBP 분류가 서로 다르면 더 높은 단계를 적용한다.</p>
+          <div class="alert alert-info"><span>ℹ️</span><div>이완기단독고혈압은 특히 젊은 성인에서 상대적으로 흔하며, 젊은 연령 고혈압의 표적장기손상 조기평가 및 이차성 고혈압 선별 강화 흐름과도 맞닿아 있다(항목 9 참조).</div></div>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">2</span>목표혈압 대폭 하향 조정</span><span>▸</span></div>
+        <div class="osa-body">
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1));margin-bottom:8px">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">동반질환</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">2022년</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">2026년</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">당뇨병</td><td style="padding:5px 8px">위험인자 유무에 따라 140/90 또는 130/80</td><td style="padding:5px 8px"><strong>전체 당뇨병환자 &lt;130/80</strong> (I,A)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">뇌졸중 병력</td><td style="padding:5px 8px">SBP&lt;140 (I,B)</td><td style="padding:5px 8px"><strong>SBP&lt;130</strong> (I,A, 등급·목표 모두 상향)</td></tr>
+            <tr><td style="padding:5px 8px">만성콩팥병</td><td style="padding:5px 8px">140/90; 알부민뇨 동반시 130/80 고려</td><td style="padding:5px 8px"><strong>견딜 수 있다면 &lt;130/80</strong>; 표준측정법 시 SBP&lt;120 고려(IIa,B)</td></tr>
+          </table>
+          <p style="margin-bottom:6px"><strong>당뇨병</strong>: ACCORD-BP·STEP·ESPRIT 연구에서 적극적 혈압조절군의 심혈관 사건이 유의하게 감소했고, 2024년 발표된 BPROAD 연구(50세 이상 고위험 당뇨병, SBP&lt;120 vs &lt;140 목표)에서도 적극치료군의 심혈관질환 발생 위험이 21% 감소하여, 위험인자 유무와 무관하게 목표혈압을 130/80 미만으로 일괄 하향하였다.</p>
+          <p style="margin-bottom:6px"><strong>뇌졸중</strong>: 과거에는 SPS3·PODCAST 등 개별 RCT에서 SBP&lt;130 목표의 명확한 이득이 입증되지 않았으나, RESPECT 연구(적극조절군 평균 126.7/77.4 vs 통상군 133.2/77.7)에서 재발위험 감소의 통계적 경향이 처음 관찰되었고, 이를 기존 SPS3·PAST-BP·PODCAST와 함께 메타분석한 결과 재발이 유의하게 감소(RR 0.78)하여 권고등급이 I·A로 상향되었다. 단, 두개내뇌혈관협착 동반 뇌경색은 여전히 &lt;140/90을 권고한다.</p>
+          <p>만성콩팥병은 SPRINT 연구(비당뇨 CKD 대상 SBP&lt;120 목표군에서 총사망률·주요 심혈관사건 감소)를 근거로, 표준화된 측정법을 사용할 수 있는 환자에서는 SBP&lt;120까지 낮추는 것을 고려할 수 있도록 하였다. 다만 실제 진료에서는 연령·노쇠·기립성저혈압·낙상위험·기대여명을 종합적으로 고려해 개별화해야 한다.</p>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">3</span>신규 약제 4계열 항고혈압제로 편입</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">기존 4대 1차 약제(ACEi/ARB·베타차단제·CCB·티아지드계 이뇨제) 체계에 더해, 2026년판은 아래 4개 계열을 새로운 항고혈압 치료 옵션으로 편입하였다.</p>
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">계열</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">핵심 근거·용도</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>ARNI</strong><br>(사쿠비트릴/발사르탄)</td><td style="padding:5px 8px">심부전 동반 고혈압에서 ACEi/ARB보다 우선 권고(I,A); 염분감수성 높은 아시아인에서 ARB 대비 활동혈압 유의 강하(IIa,B); 난치성고혈압에서 ACEi/ARB를 ARNI로 교체 고려(IIb,B)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>SGLT2 억제제</strong><br>(다파글리플로진·엠파글리플로진)</td><td style="padding:5px 8px">심부전 동반 고혈압에서 이차예방 목적 권고(I,A); 당뇨병 동반 시 SBP 약 4.5, DBP 약 2.1mmHg 추가 강하; CKD 신장보호효과 약 40%↓(CREDENCE·DAPA-CKD·EMPA-KIDNEY)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>비스테로이드성 MRA</strong><br>(피네레논·에사세레논)</td><td style="padding:5px 8px">스테로이드성 MRA(스피로놀락톤) 대비 고칼륨혈증·성호르몬 부작용 적음; 혈압강하 효과 자체는 제한적(SBP 약 −2.7mmHg)이나 당뇨병+CKD+알부민뇨(eGFR≥25) 환자에서 신·심혈관 보호효과로 사용 권고(I,A)</td></tr>
+            <tr><td style="padding:5px 8px"><strong>알도스테론합성효소억제제</strong><br>(박스드로스타트·로룬드로스타트)</td><td style="padding:5px 8px">CYP11B2 선택적 억제로 알도스테론 생성 차단; 2제 이상 미조절 환자에서 위약 대비 SBP 7-8mmHg 추가강하 확인, 다만 고칼륨혈증 발생률 다소 높고 장기 안전성 근거 축적 중 — 난치성고혈압에서 제한적으로 고려(IIb,B), 국내 미도입</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">4</span>일차성 알도스테론증 선별검사 대폭 확대</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">일차성 알도스테론증(PA)은 중증고혈압(≥180/110)환자의 최대 12%에 이를 정도로 드물지 않지만, 실제 임상에서 선별검사가 시행되는 비율은 2~4%에 불과하다. 2022년판까지는 "원인불명의 저칼륨혈증 또는 부신우연종이 있는 경우"에만 좁게 평가하도록 하였으나, 자발적 저칼륨혈증은 PA 환자의 20~50%에서만 관찰되어 이 기준만으로는 상당수를 놓칠 수 있다는 점이 지적되어 왔다.</p>
+          <p style="margin-bottom:6px">이에 2026년판은 아래 6개 적응증 중 <strong>하나라도 해당하면</strong> 선별검사 시행을 신규 권고등급(I,C)으로 명시하였다:</p>
+          <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9;margin-bottom:8px">
+            <li>① 난치성(또는 저항성) 고혈압 &nbsp;② 부신우연종 &nbsp;③ 조기발병 고혈압 &nbsp;④ 저칼륨혈증 &nbsp;⑤ 폐쇄성 수면무호흡증 &nbsp;⑥ 40세 미만의 뇌졸중 가족력 또는 PA 가족력</li>
+          </ul>
+          <p style="margin-bottom:6px">선별검사는 혈장 알도스테론농도·혈장 레닌활성·알도스테론/레닌활성 비율(ARR)로 시행하며(I,C), 특히 <strong>검사 시행 전 미네랄코티코이드수용체길항제(MRA)를 제외한 대부분의 항고혈압제를 중단하지 않고 그대로 지속</strong>하도록 권고한 점이 실질적으로 가장 큰 변화이다(I,C, 신규 권고등급) — 종전 관행처럼 약제를 세척(washout)하지 않아도 되어 검사 접근성이 크게 개선된다.</p>
+          <p>선별검사 결과가 애매한 경우 경구염분부하검사·생리식염수주입검사·캅토프릴억제검사·플루드로코르티손억제검사 중 하나로 확진하며, 확진 후에는 부신CT와 필요 시 부신정맥채혈로 편측성/양측성을 감별하는 진단 알고리즘이 신규로 제시되었다(그림12).</p>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">5</span>난치성(혹은 저항성)고혈압 개념 확장</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">종전에는 이뇨제 포함 3제 이상 적정용량 치료에도 목표혈압에 도달하지 못하는 <strong>저항성 고혈압(resistant hypertension)</strong>과, 5제 이상에도 조절되지 않는 <strong>불응성 고혈압(refractory hypertension)</strong>을 별도로 다루었다. 2026년판은 이 둘을 포괄하여 "일반적인 항고혈압 약물치료에도 혈압이 충분히 조절되지 않아 지속적인 치료적 개입이 필요한 상태"를 <strong>"난치성 고혈압"</strong>으로 통칭하는 개념으로 확장하였다. 국내 유병률은 1차의료기관 7.9%, 3차의료기관 10.1%로 보고된다.</p>
+          <p style="margin-bottom:6px">진단은 ① 치료지속성 확인 → ② 가정/활동혈압으로 백의효과 배제(가성 난치성고혈압 배제) → ③ 혈압상승 유발약물(NSAIDs·경구피임약·감초 등) 중단 → ④ 이차성 고혈압 선별 → ⑤ 수면무호흡증 확인 순으로 진행하는 알고리즘이 신규 제시되었다(그림18).</p>
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">단계</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">권고 옵션</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">4차 약제</td><td style="padding:5px 8px"><strong>스피로놀락톤</strong> 추가(IIa,B, PATHWAY-2 근거) — 여성형유방 등으로 사용 어려우면 <strong>아밀로라이드</strong>로 대체(IIa,B, 비열등성 확인)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">추가 강압</td><td style="padding:5px 8px">ACEi/ARB를 <strong>ARNI로 변경</strong> 고려(IIb,B) — 기존 ARB 대비 추가 SBP 강하 및 동맥경직도 개선 근거</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">신약제</td><td style="padding:5px 8px"><strong>알도스테론합성효소억제제</strong> 추가 고려(IIb,B)</td></tr>
+            <tr><td style="padding:5px 8px">시술</td><td style="padding:5px 8px"><strong>콩팥교감신경차단술</strong>(renal sympathetic denervation) 고려(IIb,B, 신규 권고등급) — 과거 근거 부족으로 권장이 어려웠으나, 최신 고주파·초음파 카테터 연구에서 약물복용 여부와 무관한 혈압강하 효과가 확인되어 진성 난치성고혈압에서 옵션으로 격상</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">6</span>생활요법 강화</span><span>▸</span></div>
+        <div class="osa-body">
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1));margin-bottom:8px">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">항목</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">2022년</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">2026년</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">소금 섭취</td><td style="padding:5px 8px">6g/일 제한</td><td style="padding:5px 8px"><strong>5g/일(나트륨 2,000mg)</strong> 이하 (SBP/DBP −5.1/−2.7mmHg)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">운동</td><td style="padding:5px 8px">주 5-7회, 회당 30분 이상</td><td style="padding:5px 8px"><strong>중강도 150분 또는 고강도 75분/주</strong> 유산소 + 주2-3회 저항운동 병행(국제 기준 정렬)</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">금연</td><td style="padding:5px 8px">일반 금연 권고</td><td style="padding:5px 8px"><strong>전자담배 흡연자도 금연</strong> 권고(I,B) — 전자담배도 혈압·맥박 상승 및 심뇌혈관질환 위험 증가와 연관</td></tr>
+            <tr><td style="padding:5px 8px">마음 요법</td><td style="padding:5px 8px">(없음)</td><td style="padding:5px 8px"><strong>호흡훈련·마음챙김훈련·명상</strong> 신규 도입, 스트레스 완화 목적 고려(IIa,B)</td></tr>
+          </table>
+          <p style="margin-bottom:6px">체중 감량은 "BMI 25까지 감량"이라는 수치 목표 대신 "과체중·비만인 경우 체중감량을 통해 혈압을 낮출 것"으로 표현을 일반화하였다(I,A). 절주는 하루 2잔 미만(에탄올 기준 남 20-30g·여 10-20g 미만)을 유지, 건강한 식사요법은 DASH·지중해식 등 채소·과일·생선·저지방유제품 위주 식단으로 SBP 최대 11.4mmHg 감소 효과가 제시되었다.</p>
+          <div class="alert alert-info"><span>ℹ️</span><div>생활요법 전체를 병행 시행하면 단일 요법 대비 혈압강하·심뇌혈관질환 예방 효과가 더 커지며, 바람직한 생활습관 실천은 항고혈압제 1제에 준하는 강압효과를 보인다.</div></div>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">7</span>커프리스(무커프) 혈압계 임상 활용 첫 반영</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">커프형 혈압계는 커프 가압으로 인한 불편감이 있어, 최근에는 맥파전도시간(PTT)·광혈류측정센서(PPG) 기반 맥파속도·맥파형태분석 등을 이용해 커프 없이 혈압을 추정하는 <strong>커프리스(무커프) 혈압계</strong>가 개발되어 스마트워치·반지형 기기 등으로 상용화되고 있다.</p>
+          <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9;margin-bottom:8px">
+            <li>• 권고: <strong>진료실 밖 혈압 측정 시 활용을 고려할 수 있다</strong>(IIb, B) — 2026년판에서 처음으로 임상적 권고등급이 부여된 항목</li>
+            <li>• 일부 기기는 미국 FDA·유럽 CE 의료기기 승인을 받았으며, 주간 활동혈압 측정값과 유사한 정확도를 보고한 연구도 있음</li>
+            <li>• <strong>반지형 혈압계</strong>는 청진법 진료실혈압과 양호한 상관성을 보이고 활동혈압과도 유사한 정확도를 나타내어, 국내에서는 24시간 활동혈압 측정 용도로 <strong>건강보험이 적용</strong>됨</li>
+            <li>• 기기별 정확도 편차가 크고 국제적으로 통일된 검증 기준이 아직 없어, 정적·동적 상태를 모두 포함하는 표준 검증 프로토콜의 확립이 향후 과제로 남아 있음</li>
+          </ul>
+          <p>커프리스 혈압계는 커프 가압 불편감이 없고 일상생활·수면 중에도 연속측정이 가능해 혈압변동성에 대한 정밀한 정보를 제공할 잠재력이 있으며, 자가측정의 용이성을 통해 고혈압 인지율·치료율 향상에 기여할 것으로 기대되나, 이를 뒷받침할 과학적 근거는 아직 충분하지 않다.</p>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">8</span>단일제형복합제 용량기반 분류 신설</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">고혈압환자의 3분의 2 이상은 단일 약제로 혈압이 충분히 조절되지 않아 병용요법이 필요하다. 두 가지 이상의 성분을 한 정제에 담은 <strong>단일제형복합제(SPC)</strong>는 개별 약제 병용 대비 치료지속성을 유의하게 향상시키고(odds ratio 1.21), 추가 혈압강하(SBP −3.99·DBP −1.54mmHg) 및 비용절감 효과가 보고되어 왔다. 2026년판은 이를 구성 성분의 용량 수준에 따라 4단계로 새롭게 분류하였다(표17):</p>
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1));margin-bottom:8px">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">분류</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">정의</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">초저용량</td><td style="padding:5px 8px">구성 성분의 절반 이상이 통상 시작용량의 1/3 이하</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">저용량</td><td style="padding:5px 8px">구성 성분의 절반 이상이 통상 시작용량의 1/2</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">표준용량</td><td style="padding:5px 8px">구성 성분의 절반 이상이 통상 시작용량</td></tr>
+            <tr><td style="padding:5px 8px">고용량</td><td style="padding:5px 8px">구성 성분의 절반 이상이 통상 시작용량의 2배~최대용량</td></tr>
+          </table>
+          <p style="margin-bottom:6px">최근에는 초저용량 3제·4제 단일제형복합제가 개발되고 있으며, 표준용량 단일제보다 혈압강하 효과가 우수하면서도 부작용 빈도는 증가하지 않는 것으로 나타나 향후 활용 가능성이 주목된다.</p>
+          <p>아울러 임상 현장에서의 실질적 활용도를 높이기 위해 <strong>항고혈압제 계열별 초기시작용량과 유지/최대용량 표(부록2)</strong>가 신설되었다 — 이뇨제·ACEi·ARB·CCB 등 주요 약제의 시작·유지 용량이 한 표로 정리되어, 약제 선택 및 병용요법 설계 시 즉시 참고할 수 있다(약제표 탭 참조).</p>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">9</span>비만·젊은 연령·환자중심진료 강화</span><span>▸</span></div>
+        <div class="osa-body">
+          <h5 class="subhead" style="margin-top:0">⚖️ 비만 동반 고혈압</h5>
+          <p style="margin-bottom:6px">비만 동반 고혈압환자는 더 많은 항고혈압제가 필요하고 난치성고혈압 위험이 높다. 과체중·비만 환자의 체중감량은 혈압강하·심혈관예방 목적으로 권고되며(I,A), 당뇨병을 동반한 비만 환자에서는 체중과 혈압을 동시에 낮출 수 있는 <strong>GLP-1수용체작용제·SGLT2억제제·GIP/GLP-1 이중작용제(터제파타이드)</strong> 등 혈당강하제 사용을 고려한다(IIa,B). 다만 혈압조절만을 목적으로 한 단독 치료로는 권고하지 않는다.</p>
+          <h5 class="subhead">🧑 젊은 연령 고혈압</h5>
+          <p style="margin-bottom:6px">2022년 기준 20-39세 국내 고혈압 유병자는 약 89만명이나 인지율 36%·치료율 35%·조절율 33%로 다른 연령대보다 현저히 낮고, 약 59%는 의료서비스를 이용하지 않는다. 국내 450만명 이상 코호트에서 젊은 고혈압군은 정상혈압군 대비 주요 심혈관사건 위험이 2배 이상 높았으나, 항고혈압제 사용 시 위험이 약 70% 감소하였다. 이에 따라:</p>
+          <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9;margin-bottom:8px">
+            <li>• <strong>이차성 고혈압 원인에 대한 선별검사</strong> 시행 권고(I,B) — 젊은 연령 이차성고혈압 유병률 14-33%</li>
+            <li>• 표적장기손상 평가를 통한 고위험군 조기 선별 및 필요 시 신속한 약물치료 시작 고려(IIa,B)</li>
+          </ul>
+          <h5 class="subhead">🤝 환자중심진료 및 다학제 관리</h5>
+          <p>가정혈압 자가측정을 통한 관리(I,B), 환자 이해수준에 맞춘 위험도·치료이점 설명(IIa,B)과 더불어, 의사·간호사·약사·영양사 등이 함께하는 <strong>다학제 팀 기반 접근</strong>이 Class I(I,A)로 신규 권고되었다 — 단독 진료 대비 SBP·DBP를 더 효과적으로 낮추고 치료지속성을 향상시키는 것으로 보고되며, ESC 2024·AHA/ACC 2025도 동일하게 Class I로 인정하고 있다.</p>
+        </div>
+      </div>
+
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsaAcc(this)"><span style="display:flex;align-items:center;gap:8px;color:var(--text)"><span style="background:var(--accent);color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:calc(10px * var(--fscale, 1));font-weight:700;flex-shrink:0">10</span>고혈압성 응급·급성 중증 고혈압 체계 정비</span><span>▸</span></div>
+        <div class="osa-body">
+          <p style="margin-bottom:6px">과거 급성 장기손상이 없는 중증 고혈압을 지칭하던 <strong>"고혈압성 긴급(hypertensive urgency)"</strong>이라는 용어는 개념적 모호성이 지속적으로 지적되어 왔다. 2026년판은 이를 폐기하고, 두 개념을 명확히 구분·재정의하였다:</p>
+          <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1));margin-bottom:8px">
+            <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">구분</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">정의</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">치료</th></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>고혈압성 응급</strong></td><td style="padding:5px 8px">BP≥180/110 + 뇌·심장·신장·대동맥 등 표적장기의 <strong>급성 손상 동반</strong></td><td style="padding:5px 8px">입원·집중감시 하 정주 항고혈압제 사용(I,C)</td></tr>
+            <tr><td style="padding:5px 8px"><strong>급성 중증 고혈압</strong></td><td style="padding:5px 8px">BP≥180/110로 급격히 상승했으나 <strong>급성 장기손상은 확인되지 않음</strong></td><td style="padding:5px 8px">즉각적 정주 항고혈압제 사용은 <strong>권고하지 않음</strong>(III,C) — 경구약 조정·재개 우선, 외래 추적</td></tr>
+          </table>
+          <p style="margin-bottom:6px">만성 고혈압환자는 뇌·신장 등 주요 장기의 관류 자율조절 곡선이 이미 상향 이동되어 있어, 혈압을 급격히 정상화하면 오히려 상대적 저관류로 장기손상이 악화될 수 있다. 따라서 치료 목표는 혈압의 즉각적 정상화가 아니라, <strong>장기손상 진행을 예방하면서 안전한 범위 내에서 단계적으로 조절</strong>하는 것이다 — 일반적으로 정주 항고혈압제로 초기 1시간 이내 평균동맥압을 약 20~25% 감소시키고, 이후 수시간~수일에 걸쳐 점진적으로 조절한다.</p>
+          <p><strong>예외: 급성 대동맥박리</strong>가 동반된 고혈압성 응급은 정주 베타차단제를 우선 투여하여 대동맥벽 스트레스를 감소시키고 심박수를 60-80/분으로 조절하면서, 장기관류를 유지하는 범위 내에서 <strong>SBP&lt;120mmHg로 신속히 조절</strong>할 것을 권고한다(I,C) — 다른 응급 상황과 달리 즉각적·적극적 강하가 필요한 유일한 예외 상황이다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">📊</span> 표1. 혈압의 분류</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="bp-table">
+          <tr><th>분류</th><th>수축기혈압</th><th></th><th>이완기혈압</th></tr>
+          <tr><td><span class="badge badge-normal">정상혈압*</span></td><td>&lt;120</td><td style="color:var(--text2)">그리고</td><td>&lt;80</td></tr>
+          <tr><td><span class="badge badge-elevated">주의혈압</span></td><td>120–129</td><td style="color:var(--text2)">그리고</td><td>&lt;80</td></tr>
+          <tr><td><span class="badge badge-pre">고혈압 전단계</span></td><td>130–139</td><td style="color:var(--text2)">또는</td><td>80–89</td></tr>
+          <tr><td><span class="badge badge-s1">1기 고혈압</span></td><td>140–159</td><td style="color:var(--text2)">또는</td><td>90–99</td></tr>
+          <tr><td><span class="badge badge-s2">2기 고혈압</span></td><td>≥160</td><td style="color:var(--text2)">또는</td><td>≥100</td></tr>
+          <tr><td>수축기단독고혈압</td><td>≥140</td><td style="color:var(--text2)">그리고</td><td>&lt;90</td></tr>
+          <tr><td>이완기단독고혈압 <span class="pill pill-new">신규</span></td><td>&lt;140</td><td style="color:var(--text2)">그리고</td><td>≥90</td></tr>
+        </table>
+        <p class="src-note">*심뇌혈관질환 발생 위험이 가장 낮은 최적 혈압. ≥2회 내원 측정 기준, 임신부 제외. SBP·DBP가 다른 단계면 높은 단계로 분류.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🌍</span> 주요 지침 간 혈압 분류 비교</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+          <tr><th>지침</th><th>고혈압 진단기준</th></tr>
+          <tr><td><strong>KSH 2026</strong></td><td>SBP≥140 또는 DBP≥90</td></tr>
+          <tr><td>ESH 2023 / ESC 2024</td><td>SBP≥140 또는 DBP≥90 (동일)</td></tr>
+          <tr><td>JSH 2025 (일본)</td><td>SBP≥140 또는 DBP≥90 (동일)</td></tr>
+          <tr><td>AHA/ACC 2025 (미국)</td><td>SBP≥130 또는 DBP≥80</td></tr>
+        </table>
+        <p class="src-note">고혈압 미만 구간(정상~전단계)의 세부 명칭·단계 구분은 지침마다 상이하므로 해석 시 주의가 필요하다(그림1).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📈</span> 국내 고혈압 역학 및 관리 지표</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="new-table">
+        <tr><th>지표 (20세 이상)</th><th>1998</th><th>2010</th><th>2020</th><th>2023</th></tr>
+        <tr><td>고혈압 인지율</td><td>24.9%</td><td>69.1%</td><td>69.5%</td><td>78.6%</td></tr>
+        <tr><td>고혈압 치료율</td><td>24.5%</td><td>63.3%</td><td>64.8%</td><td>76.0%</td></tr>
+        <tr><td>조절률(유병자중)</td><td>6.8%</td><td>45.2%</td><td>47.4%</td><td>62.2%</td></tr>
+        <tr><td>조절률(치료자중)</td><td>27.7%</td><td>70.4%</td><td>72.4%</td><td>81.3%</td></tr>
+      </table>
+      <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9;margin-top:8px">
+        <li>• 2023년 국내 고혈압 유병자수: 남 670만명, 여 590만명 (65세 이상: 남 267만·여 332만명)</li>
+        <li>• 우리나라는 전 세계에서 인구집단 평균혈압이 가장 낮은 국가로 평가됨(고혈압 관리 모범 사례)</li>
+        <li>• 30~40대 젊은층 고혈압은 인지율·치료율·조절률이 고령층 대비 뚜렷이 낮아 조기 발견·치료가 중요</li>
+        <li>• 하루 평균 소금 섭취량: 8.0g (남 9.4g·여 6.6g) — WHO 권장량(5g)의 약 1.6배</li>
+        <li>• 대사증후군 유병률: 22.1%(2007-09)→24.9%(2019-21); 복부비만 24.2%→33.2%; 비만(BMI≥25) 31.1%(2013)→38.4%(2023)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📋</span> 권고 등급 및 근거 수준의 정의</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="bp-table">
+        <tr><th>권고등급</th><th>정의</th><th>표기</th></tr>
+        <tr><td><span class="cor cor1">I</span></td><td>이익이 명백함 (is recommended)</td><td>권고한다</td></tr>
+        <tr><td><span class="cor cor2a">IIa</span></td><td>이익이 손해보다 많음 (should be considered)</td><td>고려한다</td></tr>
+        <tr><td><span class="cor cor2b">IIb</span></td><td>편익 근거는 제한적이나 활용도 높음/보통 (may be considered)</td><td>고려할 수 있다</td></tr>
+        <tr><td><span class="cor cor3">III</span></td><td>이익이 없거나 손해가 명백함 (is not recommended)</td><td>권고하지 않는다</td></tr>
+      </table>
+      <table class="bp-table" style="margin-top:10px">
+        <tr><th>근거수준</th><th>정의</th></tr>
+        <tr><td><span class="loe loeA">A</span></td><td>2개 이상의 무작위대조시험 또는 무작위대조시험 메타분석</td></tr>
+        <tr><td><span class="loe loeB">B</span></td><td>1개의 무작위대조시험 또는 관찰연구·코호트 연구 메타분석</td></tr>
+        <tr><td><span class="loe loeC">C</span></td><td>제한적인 연구결과 또는 전문가 의견</td></tr>
+      </table>
+      <p class="src-note">본 지침의 권고등급·근거수준은 2025 ACC/AHA Methodology Manual을 준용하여 평가하였다. 131개 PICO를 기반으로 56개 권고안을 도출하였으며, 2022년~2025년 12월 문헌(2026년 3월까지 핵심 연구 추가 반영)을 체계적으로 검토하였다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧭</span> 심뇌혈관질환 위험도 분류 (국내 기준, 표11)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed" style="padding:6px 8px">
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>동반 위험인자</th><th>전단계(130-139/80-89)</th><th>1기(140-159/90-99)</th><th>2기(≥160/100)</th></tr>
+        <tr><td>0개</td><td>최저위험군</td><td>저위험군</td><td>중·고위험군</td></tr>
+        <tr><td>1~2개</td><td>저·중위험군</td><td>중위험군</td><td>고위험군</td></tr>
+        <tr><td>3개 이상 / 당뇨병+1개 / 무증상장기손상</td><td>중·고위험군</td><td>고위험군</td><td>고위험군</td></tr>
+        <tr><td>심혈관질환·만성콩팥병</td><td>고위험군</td><td>고위험군</td><td>고위험군</td></tr>
+      </table>
+      <p class="src-note">위험인자: 남 45세·여 55세 이상, 조기 심뇌혈관질환 가족력, 흡연, 비만/복부비만, 이상지질혈증, 당뇨병전단계, 당뇨병(위험인자 2개로 간주). 65세 이상은 위험인자 2개로 간주. 10년 심뇌혈관질환 발생률: 최저위험군&lt;5%, 저위험군 5-10%, 중위험군 10-15%, 고위험군&gt;15%.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ DIAGNOSIS ═══════════════════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📏</span> 권고 1-4. 혈압 측정</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">진료실혈압, 활동혈압, 가정혈압 측정은 <strong>검증된 커프형 혈압계</strong>의 사용을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="pill pill-new">신규</span> 커프리스(무커프) 혈압계는 진료실 밖 혈압 측정 시 활용을 고려할 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">고혈압의 진단·치료 결정·예후 평가를 위해 <strong>진료실혈압 측정</strong>을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">최초 혈압 측정 시 <strong>양측 팔</strong>을 모두 측정하고, 이후 더 높은 팔을 기준으로 진단한다 (지속적 10 mmHg 이상 차이 시 심혈관질환 위험↑, 20 mmHg 이상은 대동맥축착·상지동맥 죽상경화 의심).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">정확한 진단·예후 평가를 위해 <strong>진료실 밖 혈압(가정혈압 또는 활동혈압)</strong> 측정을 병행 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">활동혈압 측정은 고혈압 진단, 백의·가면고혈압 진단, 난치성고혈압의 진단·치료효과 판정 및 예후예측을 위해 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">가정혈압 측정은 고혈압·백의고혈압·가면고혈압·난치성고혈압의 진단, 치료효과 평가 및 예후예측을 위해 권고하며, 모든 환자에게 올바른 측정법을 교육할 것을 권고한다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🧮</span> 표7. 측정방법별 고혈압 진단기준</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+          <tr><th>측정 방법</th><th>수축기(mmHg)</th><th>이완기(mmHg)</th></tr>
+          <tr><td>진료실혈압</td><td>≥140</td><td>≥90</td></tr>
+          <tr><td>24h 활동혈압 일일평균</td><td>≥130</td><td>≥80</td></tr>
+          <tr><td>활동혈압 주간평균</td><td>≥135</td><td>≥85</td></tr>
+          <tr><td>활동혈압 야간평균</td><td>≥120</td><td>≥70</td></tr>
+          <tr><td>활동혈압 아침평균</td><td>≥135</td><td>≥85</td></tr>
+          <tr><td>가정혈압</td><td>≥135</td><td>≥85</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">⚖️</span> 활동혈압 vs 가정혈압</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• <strong>활동혈압</strong>: 24h 반복측정, 일중변동·야간고혈압·dipping 평가에 우수; 초기 진단에 우선 고려, 장기추적엔 부적합</li>
+          <li>• <strong>가정혈압</strong>: 간편·반복측정 가능, 중장기 추적관찰에 적합; 부정맥·임신부에서 정확도↓, 수면중 측정 불가</li>
+          <li>• 다만 부정맥(심방세동)·기립성저혈압·임신부는 <strong>청진법 3회 반복측정 평균</strong> 권장 (자동혈압계 정확도↓)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🌙</span> Dipping 패턴 · 혈압 변동성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed" style="padding:6px 8px">
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>패턴</th><th>정의</th><th>임상 의의</th></tr>
+        <tr><td>Dipper</td><td>야간 혈압 10~20% 감소</td><td>정상 일중변동</td></tr>
+        <tr><td>Non-dipper</td><td>야간 감소 &lt;10%</td><td>좌심실비대·심근허혈·사망률↑; 당뇨·CKD·OSA·난치성고혈압·전자간증과 연관</td></tr>
+        <tr><td>Reverse dipper</td><td>야간 혈압 오히려 상승</td><td>자율신경장애·좌심실비대·심혈관사건·사망률↑와 연관</td></tr>
+        <tr><td>Extreme dipper</td><td>야간 감소 ≥20%</td><td>허혈성뇌졸중·동맥경화 위험 증가 시사(근거 제한적)</td></tr>
+      </table>
+      <p class="src-note">기립성 저혈압: 기립 1분·3분 측정에서 SBP≥20 또는 DBP≥10 mmHg 감소 (ESC 2024 기준 준용).</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🧪</span> 권고 5. 고혈압의 기본 검사 (표9)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <ul class="rec-list">
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">기본 검사는 진단 시점 및 매년 1회 정기 시행을 권고한다.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">중증도가 높거나 치료에도 조절 불충분 시 <strong>추가 권장검사</strong> 시행을 고려한다.</div></li>
+        </ul>
+        <h5 class="subhead">기본검사</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">12유도 심전도 · 소변검사(단백뇨/혈뇨/요당) · 혈색소·적혈구용적률 · K·Na·Cr·eGFR·요산 · 공복혈당·지질 4종 · TSH · 흉부X선 · 미세알부민뇨(요 ACR)</p>
+        <h5 class="subhead">권장검사</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">75g OGTT/HbA1c · 심초음파 · 경동맥초음파(동맥경화반) · ABI · 맥파전달속도(PWV) · 안저검사(당뇨병 필수) · 24h 요단백 · 시스타틴C</p>
+        <h5 class="subhead">확대검사</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">뇌·심장·콩팥·혈관 무증상장기손상 평가 · 이차성고혈압 진단검사 · 인지기능 선별(MMSE/MoCA, 65세 이상 고려)</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🫘</span> 심뇌혈관질환 위험인자 및 무증상 장기손상 (표10)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <h5 class="subhead">위험인자</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">연령(남≥45·여≥55) · 조기 심뇌혈관질환 가족력(남&lt;55·여&lt;65) · 흡연 · 비만(BMI≥25)/복부비만(남≥90·여≥85cm) · 이상지질혈증 · 당뇨병전단계/당뇨병(위험인자 2개)</p>
+        <h5 class="subhead">무증상 장기손상</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">뇌(백질고신호강도·미세출혈·무증상뇌경색) · 심장(좌심실비대) · 콩팥(미세알부민뇨 30~300mg/g) · 혈관(경동맥PWV&gt;10m/s, 상완-발목PWV&gt;18m/s, 관상동맥칼슘점수≥400, ABI&lt;0.9) · 망막(3~4단계 망막증)</p>
+        <h5 class="subhead">임상적 심뇌혈관·콩팥질환</h5>
+        <p style="font-size:calc(12px * var(--fscale,1))">뇌졸중·TIA·혈관성치매 · 협심증·심부전·심방세동 · CKD 3기 이상(eGFR&lt;60) 또는 현성단백뇨(&gt;300mg/g) · 말초혈관질환·대동맥류·대동맥박리</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔬</span> 권고 6-7. 이차성 고혈압 선별검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">이차성 고혈압이 의심되는 증상·징후·병력이 있으면 적절한 선별검사 시행을 권고한다 (전체 고혈압환자의 <strong>10~35%</strong>가 이차성으로 추정).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text"><span class="pill pill-new">신규</span> 난치성고혈압·부신우연종·조기발병고혈압·저칼륨혈증·OSA·40세 미만 뇌졸중/PA 가족력 중 하나라도 있으면 <strong>일차성 알도스테론증 선별검사</strong>를 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">선별검사는 혈장 알도스테론농도·레닌활성·ARR(알도스테론/레닌비)로 시행을 권고하며, <strong>MRA를 제외한 항고혈압제는 중단하지 않고</strong> 지속 사용할 것을 권고한다.</div></li>
+      </ul>
+      <table class="sh-table">
+        <tr><th>원인</th><th>임상 단서</th><th>진단검사</th></tr>
+        <tr><td><strong>일차성 알도스테론증</strong><br><span style="color:var(--text2);font-size:calc(10px * var(--fscale,1))">중증고혈압의 최대 12%</span></td><td>근력저하, 조기발병고혈압, 40세미만 뇌혈관질환 가족력, 저칼륨혈증(20~50%에서만 동반)</td><td>선별: ARR / 확진: 경구염분부하·생리식염수주입·캅토프릴억제·플루드로코르티손억제검사 / 아형: 부신CT·부신정맥채혈</td></tr>
+        <tr><td><strong>신동맥협착증</strong></td><td>죽상경화형(고령·흡연·당뇨), 섬유근형성이상(젊은 여성); 복부잡음, ACEi/ARB 후 Cr 30%↑</td><td>선별: 신동맥 이중초음파·CT/MR혈관조영 / 확진: 신동맥조영술</td></tr>
+        <tr><td>콩팥실질병</td><td>요로감염/폐쇄 병력, 진통제 남용, 당뇨병 가족력</td><td>요단백, eGFR, 콩팥초음파</td></tr>
+        <tr><td>다낭콩팥병</td><td>복부종괴, 가족력</td><td>콩팥초음파</td></tr>
+        <tr><td>크롬친화세포종(갈색세포종)</td><td>발작적 고혈압·두통·발한, 신경섬유종증 피부병변</td><td>24h 소변/혈장 메타네프린·노르메타네프린, 복부CT/MRI, MIBG스캔</td></tr>
+        <tr><td>쿠싱증후군</td><td>급속 체중증가, 다모, 무월경, 중심성비만·달모양얼굴·자색선조</td><td>24h 요유리코티솔, 덱사메타손억제검사</td></tr>
+        <tr><td>수면무호흡증</td><td>비만, 심한 코골이, 무호흡, 주간졸림</td><td>수면다원검사</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ TREATMENT ═══════════════════════ -->
+<div id="tab-treatment" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🚦</span> 권고 8-11. 치료 시작 혈압</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">전단계</span>가면고혈압 진단을 위해 가정/활동혈압 측정을 고려한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">전단계</span>주의혈압·전단계 환자에서 고혈압 발생 및 심뇌혈관질환 예방을 위해 적극적인 <strong>생활요법</strong>을 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">전단계</span>심혈관질환(관상동맥·말초혈관·복부대동맥류·심부전) 동반 시 <strong>약물치료</strong>를 고려한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">전단계</span><span class="pill pill-new">신규</span> 고위험(당뇨병·CKD·장기손상)이면서 <strong>3개월 생활요법 후에도 ≥130/80</strong> 유지 시 약물치료를 고려할 수 있다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">1기</span>중위험군 이상 1기 고혈압환자는 생활요법과 함께 <strong>약물치료 병행</strong>을 권고한다 (저위험군은 우선 생활요법).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">2기</span>2기 고혈압환자는 생활요법과 <strong>동시에 약물치료</strong>를 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">노인</span>지역사회 거주 65세 이상 건강 노인, SBP≥140 시 생활요법+약물치료를 권고한다.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">노인</span>노쇠 노인 또는 80세 이상, SBP≥160 시 생활요법+약물치료를 권고한다.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🎯</span> 권고 12-18. 목표 혈압 (표13)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="bp-table">
+        <tr><th>임상 상황</th><th>SBP</th><th>DBP</th><th>등급</th></tr>
+        <tr><td>중·저위험도 고혈압</td><td>&lt;140</td><td>&lt;90</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>노인 고혈압</td><td>&lt;140</td><td>&lt;90</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>고위험도 고혈압*</td><td>&lt;130</td><td>&lt;80</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>당뇨병 <span class="pill pill-revised">하향</span></td><td>&lt;130</td><td>&lt;80</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>심혈관질환†</td><td>&lt;130</td><td>&lt;80</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>만성콩팥병‡ <span class="pill pill-revised">하향</span></td><td>&lt;130</td><td>&lt;80</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+        <tr><td>뇌졸중§ <span class="pill pill-revised">하향</span></td><td>&lt;130</td><td>&lt;80</td><td><span class="cor cor1">I</span><span class="loe loeA">A</span></td></tr>
+      </table>
+      <p class="src-note">*무증상 장기손상 또는 위험인자 3개 이상 † 관상동맥·말초혈관질환·복부대동맥류·심부전 ‡ 표준 측정법 시 SBP&lt;120 고려(IIa,B) § 두개내뇌혈관협착 동반 뇌경색은 &lt;140/90 권고</p>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>치료혈압 하한치(권고18, IIb·B)</strong>: SBP&lt;110 또는 DBP&lt;70은 사망률·관상동맥질환 위험 증가 가능 — 노인·당뇨병·재관류 미시행 다혈관질환·심비대 환자는 DBP&lt;70 미만으로 낮추지 않는 것을 고려.</div></div>
+      <div class="alert alert-info" style="margin-top:6px"><span>ℹ️</span><div>측정방식별 목표혈압 환산 (진료실 목표 140/90 기준): 가정혈압·주간활동혈압 135/85, 일일평균활동혈압 130/80. (진료실 목표 130/80 기준): 가정혈압·주간활동혈압 130/80, 일일평균활동혈압 125/75.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🥗</span> 권고 19-26. 생활요법 (표14)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="new-table">
+        <tr><th>생활요법</th><th>혈압감소(SBP/DBP)</th><th>권고사항</th></tr>
+        <tr><td>소금 섭취 제한 <span class="cor cor1" style="font-size:9px">I·A</span></td><td>−5.1/−2.7</td><td>하루 소금 &lt;5g (나트륨 &lt;2,000mg)</td></tr>
+        <tr><td>체중 감량 <span class="cor cor1" style="font-size:9px">I·A</span></td><td>−1.1/−0.9</td><td>체중 1kg 감소당; 목표 BMI&lt;25, 허리둘레 남&lt;90·여&lt;85cm</td></tr>
+        <tr><td>절주 <span class="cor cor1" style="font-size:9px">I·A</span></td><td>−3.9/−2.4</td><td>하루 2잔 미만 (남 20-30g/여 10-20g 미만 에탄올)</td></tr>
+        <tr><td>운동 <span class="cor cor1" style="font-size:9px">I·A</span></td><td>−4.9/−3.7</td><td>중강도 150분 또는 고강도 75분/주 유산소 + 주2-3회 저항운동</td></tr>
+        <tr><td>건강한 식사요법 <span class="cor cor1" style="font-size:9px">I·A</span></td><td>−11.4/−5.5</td><td>DASH·지중해식; 채소·과일·생선·저지방유제품↑, 적색육·가공육↓</td></tr>
+        <tr><td>금연 <span class="cor cor1" style="font-size:9px">I·B</span></td><td>-</td><td>전자담배 흡연자도 금연 권고 <span class="pill pill-new">신규</span></td></tr>
+        <tr><td>마음 요법 <span class="cor cor2a" style="font-size:9px">IIa·B</span></td><td>-</td><td>호흡훈련·마음챙김·명상 <span class="pill pill-new">신규</span></td></tr>
+      </table>
+      <p class="src-note">생활요법은 항고혈압제 1제 상당의 혈압강하 효과. 칼륨 보충 1.4g/일: 정상혈압 −2, 고혈압 −4~5 mmHg (CKD는 고칼륨혈증 주의). 저위험 1기 고혈압은 3개월 생활요법 우선 후 약물 병행 여부 결정.</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">💊</span> 권고 27-28. 약물치료 원칙</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <ul class="rec-list">
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">RAS억제제·베타차단제·칼슘통로차단제·이뇨제를 <strong>1차 약제</strong>로 권고한다.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">80세 이하 2기 또는 고위험 1기: 초치료로 <strong>2제 병용요법</strong>(RAS억제제+CCB+이뇨제 중 2가지) 고려.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">2제 병용 시 <strong>단일제형복합제</strong> 우선 고려.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">2제로 미조절 시 RAS억제제+CCB+이뇨제 <strong>3제 병용</strong> 고려.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">80세 이상 또는 노쇠 환자는 <strong>단일 약제로 시작</strong> 고려.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">베타차단제는 <strong>협심증·심근경색후·박출률감소심부전·심방세동</strong> 등 적응증 동반 시 초기·병용치료로 권고.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🔗</span> 병용요법 원칙</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <div class="flow">
+          <div class="flow-node start">1기(80세이상·노쇠) → 단일약</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node">용량증가 또는 다른계열 변경</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node action">2제 병용 (RAS억제제+CCB+이뇨제 중 2)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node warn">3제 병용 + 용량증가</div>
+        </div>
+        <p class="src-note" style="margin-top:6px">2기 또는 고위험 1기는 처음부터 2제 병용 시작. 용량 안정 후 단일제형복합제로 전환 권장. ACEi+ARB 병용은 단백뇨 감소 외 이득 없이 CKD 악화↑ — 지양.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩹</span> 권고 29-33. 난치성(혹은 저항성)고혈압</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <div class="alert alert-info"><span>ℹ️</span><div><strong>정의</strong>: 저항성(3제 이상+이뇨제, 목표 미달) + 불응성(5제 이상)을 포괄하는 <strong>"난치성 고혈압"</strong>으로 통칭 <span class="pill pill-revised">용어변경</span>. 국내 유병률: 1차의료 7.9%, 3차의료 10.1%.</div></div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">진단을 위해 <strong>치료지속성 확인</strong> + 가정/활동혈압 측정(백의효과 배제)을 권고.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeA">A</span></div><div class="rec-text"><strong>수면무호흡증 동반 여부</strong> 평가를 고려.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">4차 약제로 <strong>스피로놀락톤</strong> 추가를 고려 (PATHWAY-2 근거).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">스피로놀락톤 사용 어려운 경우 <strong>아밀로라이드</strong> 추가를 고려 (비열등성 확인).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text">추가 강압 필요 시 ACEi/ARB를 <strong>ARNI로 변경</strong> 고려.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text"><strong>알도스테론합성효소억제제</strong> 추가를 고려 (박스드로스타트·로룬드로스타트 개발 중).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text"><strong>콩팥교감신경차단술</strong>(renal denervation)을 고려할 수 있다 <span class="pill pill-new">신규 권고등급</span>.</div></li>
+      </ul>
+      <div class="osa-acc" style="margin-top:8px"><div class="osa-hdr" onclick="toggleOsaAcc(this)">📋 난치성고혈압 감별진단(표18) <span>▸</span></div><div class="osa-body">
+        <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9">
+          <li>• <strong>부적절 측정</strong>: 백의효과, 혈관석회화/가성고혈압, 작은 커프</li>
+          <li>• <strong>생활습관</strong>: 비만, 과다 소금섭취, 과음, 수면무호흡증</li>
+          <li>• <strong>체액과잉</strong>: 신장질환에 의한 체액과다, 부적절한 이뇨제 사용</li>
+          <li>• <strong>약제/처방</strong>: 치료지속성 부족, 부적절한 병용요법</li>
+          <li>• <strong>약물상호작용</strong>: NSAIDs, 피임약, 부신스테로이드, 한약제(감초·마황)</li>
+          <li>• <strong>이차성 고혈압</strong>: 일차성 알도스테론증, 신동맥협착증 등</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🩺</span> 권고 34-38. 병용 약물치료·모니터링·치료지속성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed" style="padding:6px 8px">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">항혈소판</span>심혈관질환이 있는 고혈압환자는 2차예방 목적 아스피린을 권고.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">항혈소판</span>심혈관질환 없는 고위험군은 1차예방 저용량 아스피린 고려.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor3">III</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">항혈소판</span>저·중위험군에서 아스피린은 권고하지 않음.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">지질</span>중등도 이상 위험군·심혈관질환 동반 시 <strong>스타틴</strong> 투여를 권고 (목표 LDL: 관상동맥질환 &lt;55, 뇌졸중/PAD/당뇨병 &lt;70, 그외 위험인자 1개↑ &lt;130 mg/dL).</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">혈당</span>저혈당 위험 없다면 HbA1c &lt;6.5% 목표로 조절 권고.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">혈당</span>심부전·알부민뇨·eGFR 감소 시 <strong>SGLT2억제제</strong> 사용 권고; 죽상경화성 심혈관질환 동반 시 <strong>GLP-1RA 또는 SGLT2억제제</strong> 권고.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text"><span class="rec-no">모니터링</span>새로 투약/조정 시 목표혈압 도달까지 <strong>2-4주 간격</strong> 추적, 전해질·콩팥기능은 연 1-2회.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">모니터링</span>목표혈압 안정 시 <strong>3-6개월 간격</strong> 추적을 고려.</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">치료지속성</span>가능하면 <strong>하루 1회 투여</strong> 권고; 단일제형복합제 사용을 고려(IIa,B).</div></li>
+      </ul>
+      <p class="src-note">고혈압 약 감량/중단: 장기간 안정적으로 조절되고 생활요법 철저 시행 시 신중히 고려 가능하나(당뇨병 환자 중단은 미세·대혈관 합병증 위험↑, ADVANCE 하위분석), 이후 최소 3개월 간격 추적관찰 필요.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ DRUGS ═══════════════════════ -->
+<div id="tab-drugs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📋</span> 표15-16. 동반질환별 추천 약제 · 적응증과 금기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>동반질환</th><th>ACEi/ARB</th><th>베타차단제</th><th>CCB</th><th>이뇨제</th><th>ARNI</th></tr>
+        <tr><td>심부전</td><td>○</td><td>○</td><td></td><td>○</td><td>○</td></tr>
+        <tr><td>좌심실비대</td><td>○</td><td></td><td>○</td><td></td><td></td></tr>
+        <tr><td>관상동맥질환</td><td>○</td><td>○</td><td>○</td><td></td><td></td></tr>
+        <tr><td>만성콩팥병</td><td>○</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>뇌졸중</td><td>○</td><td></td><td>○</td><td>○</td><td></td></tr>
+        <tr><td>노인 수축기단독고혈압</td><td>○</td><td></td><td>○</td><td>○</td><td></td></tr>
+        <tr><td>심근경색후</td><td>○</td><td>○</td><td></td><td></td><td></td></tr>
+        <tr><td>심방세동 예방</td><td>○</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>당뇨병</td><td>○</td><td>○</td><td>○</td><td>○</td><td></td></tr>
+        <tr><td>난치성(저항성)고혈압*</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td></tr>
+      </table>
+      <p class="src-note">*스피로놀락톤·아밀로라이드 권고 (4차 약제)</p>
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1));margin-top:10px">
+        <tr><th>약제</th><th>적극적 적응</th><th>주의요망</th><th>금기</th></tr>
+        <tr><td><strong>ACEi/ARB</strong></td><td>심부전, 당뇨병성신증, 만성콩팥병</td><td>양측성신동맥협착증, 고칼륨혈증</td><td>임신, 혈관부종</td></tr>
+        <tr><td><strong>베타차단제</strong></td><td>협심증, 심근경색</td><td>혈당이상↑, 말초혈관질환</td><td>천식, 심한 서맥</td></tr>
+        <tr><td><strong>칼슘통로차단제</strong></td><td>노인고혈압, 수축기단독고혈압, 협심증</td><td>심부전</td><td>서맥(non-DHP)</td></tr>
+        <tr><td><strong>이뇨제</strong></td><td>심부전, 수축기단독고혈압</td><td>혈당이상↑</td><td>통풍, 저칼륨혈증</td></tr>
+        <tr><td><strong>ARNI</strong></td><td>심부전, 염분감수성 고혈압</td><td>고칼륨혈증</td><td>임신, 혈관부종</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">💧</span> 이뇨제 (권고29)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="drug-table">
+        <tr><th>계열</th><th>대표약제</th><th>초기용량</th><th>유지/최대</th><th>비고</th></tr>
+        <tr><td class="drug-class">티아지드</td><td>Hydrochlorothiazide</td><td class="dose">12.5mg qd</td><td class="dose">12.5-50mg</td><td>고용량시 저K·요산↑·혈당↑; 소량 사용 시 부작용 적음</td></tr>
+        <tr><td class="drug-class">티아지드유사</td><td>Chlorthalidone</td><td class="dose">12.5mg qd</td><td class="dose">12.5-50mg</td><td>HCTZ보다 강압효과 우수; eGFR&lt;30에서도 사용 고려(CLICK 연구) <span class="pill pill-new">신규</span></td></tr>
+        <tr><td class="drug-class">티아지드유사</td><td>Indapamide</td><td class="dose">1.25mg qd</td><td class="dose">1.25-2.5mg</td><td>뇌졸중 예방 근거(PROGRESS)</td></tr>
+        <tr><td class="drug-class">고리작용이뇨제</td><td>Furosemide, Torsemide</td><td class="dose">-</td><td class="dose">-</td><td>울혈성심부전 또는 CKD 4-5기 동반 고혈압</td></tr>
+        <tr><td class="drug-class">MRA</td><td>Spironolactone</td><td class="dose">25mg qd</td><td class="dose">25-100mg</td><td>난치성고혈압 4차약제(eGFR≥30, 정상K); 여성형유방·성기능장애</td></tr>
+        <tr><td class="drug-class">K보존이뇨제</td><td>Amiloride</td><td class="dose">-</td><td class="dose">-</td><td>스피로놀락톤 대안, 비열등 근거 <span class="pill pill-new">신규</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🅰️</span> RAS 억제제 (ACEi/ARB) 및 ARNI</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="drug-table">
+          <tr><th>약물</th><th>초기용량</th><th>유지/최대</th></tr>
+          <tr><td>Enalapril</td><td class="dose">5mg qd</td><td class="dose">5-40mg</td></tr>
+          <tr><td>Lisinopril</td><td class="dose">10mg qd</td><td class="dose">10-40mg</td></tr>
+          <tr><td>Ramipril</td><td class="dose">2.5mg qd</td><td class="dose">2.5-10mg</td></tr>
+          <tr><td>Perindopril</td><td class="dose">4mg qd</td><td class="dose">2-8mg</td></tr>
+          <tr><td>Losartan</td><td class="dose">50mg qd</td><td class="dose">25-100mg</td></tr>
+          <tr><td>Valsartan</td><td class="dose">80mg qd</td><td class="dose">80-320mg</td></tr>
+          <tr><td>Candesartan</td><td class="dose">8mg qd</td><td class="dose">8-32mg</td></tr>
+          <tr><td>Telmisartan</td><td class="dose">40mg qd</td><td class="dose">20-80mg</td></tr>
+          <tr><td>Irbesartan</td><td class="dose">150mg qd</td><td class="dose">150-300mg</td></tr>
+          <tr><td>Fimasartan</td><td class="dose">60mg qd</td><td class="dose">30-120mg</td></tr>
+        </table>
+        <div class="alert alert-danger" style="margin-top:6px"><span>🚫</span><div>ACEi+ARB 병용 금지 (저혈압·고K혈증·신기능악화↑). 임신 절대금기.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🆕</span> ARNI (권고31, 신규 편입)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <ul class="rec-list" style="margin-bottom:8px">
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">심부전 동반 고혈압환자에서 ARNI를 ACEi/ARB보다 <strong>우선</strong> 권고.</div></li>
+          <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">사쿠비트릴/발사르탄은 <strong>염분감수성 고혈압</strong>에서 사용을 고려.</div></li>
+        </ul>
+        <p style="font-size:calc(12px * var(--fscale,1))">ARB(발사르탄)+네프릴리신억제제(사쿠비트릴) 1:1 복합제. 아시아인 염분감수성 고혈압에서 활동혈압 유의 강하. 난치성고혈압 목적 시 고용량(200-400mg) 사용. <strong>ACEi 중단 36h 후</strong> 시작(혈관부종 예방), 임신 금기.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🔵</span> 베타차단제 세대별 분류 (부록1)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+          <tr><th>1세대 (β1비선택)</th><th>2세대 (β1선택)</th><th>3세대 (혈관확장)</th></tr>
+          <tr><td>propranolol, nadolol, timolol</td><td>metoprolol, atenolol, bisoprolol</td><td>labetalol, carvedilol, nebivolol</td></tr>
+        </table>
+        <p class="src-note">1세대: 천식·COPD 사용제한. 2세대: 급성천식 제외 COPD 사용가능. 3세대: α차단/NO매개 혈관확장, 대사적 이점. 아테놀롤은 뇌졸중 예방효과 열등 — 노인 1차약 비권장.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header open" onclick="toggleCard(this)">
+        <div class="ch-title"><span class="icon">🟢</span> 칼슘통로차단제(CCB)</div>
+        <span class="toggle">▾</span>
+      </div>
+      <div class="card-body" style="padding:6px 8px">
+        <table class="drug-table">
+          <tr><th>약물</th><th>초기용량</th><th>유지/최대</th></tr>
+          <tr><td>Amlodipine</td><td class="dose">5mg qd</td><td class="dose">5-10mg</td></tr>
+          <tr><td>S-amlodipine</td><td class="dose">2.5mg qd</td><td class="dose">2.5-5mg</td></tr>
+          <tr><td>Nifedipine ER</td><td class="dose">30mg qd</td><td class="dose">30-120mg</td></tr>
+        </table>
+        <p class="src-note">장시간형 권고; 속효성은 반사성 빈맥 유발로 지양. 발목부종은 R형 이성질체 관련 — S-amlodipine 전환 또는 RAS억제제 병용 시 경감. Non-DHP(verapamil·diltiazem)는 방실차단·HFrEF 금기.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🧬</span> 기타 신규 약제 (SGLT2억제제·비스테로이드성 MRA·알도스테론합성효소억제제)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">SGLT2억제제(다파글리플로진·엠파글리플로진)는 <strong>심부전 동반 고혈압</strong>에서 이차예방 목적 사용 권고.</div></li>
+      </ul>
+      <table class="sh-table">
+        <tr><th>계열</th><th>특징</th></tr>
+        <tr><td><strong>SGLT2억제제</strong></td><td>근위세뇨관 Na-포도당 재흡수 차단; 체중 2-3kg↓, 당뇨병 동반 SBP −4.5/DBP −2.1mmHg; 단독요법보다 심부전·당뇨병 이차예방 목적</td></tr>
+        <tr><td><strong>비스테로이드성 MRA</strong><br>(피네레논, 에사세레논)</td><td>고칼륨혈증 위험 낮고 성호르몬 부작용 적음; 피네레논은 혈압강하 효과는 제한적(SBP −2.7)이나 당뇨병·CKD·심부전에서 신·심혈관 보호효과 입증(FIDELIO/FIGARO)</td></tr>
+        <tr><td><strong>알도스테론합성효소억제제</strong><br>(박스드로스타트·로룬드로스타트)</td><td>CYP11B2 선택적 억제; 위약 대비 추가 SBP −7~8mmHg (2제 이상 미조절 환자); 고칼륨혈증 발생률↑ — 장기 안전성 근거 축적 중, 국내 미도입</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">📦</span> 단일제형복합제 분류 (표17)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed" style="padding:6px 8px">
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>분류</th><th>정의</th></tr>
+        <tr><td>초저용량</td><td>구성 성분의 절반 이상이 통상 시작용량의 1/3 이하</td></tr>
+        <tr><td>저용량</td><td>구성 성분의 절반 이상이 통상 시작용량의 1/2</td></tr>
+        <tr><td>표준용량</td><td>구성 성분의 절반 이상이 통상 시작용량</td></tr>
+        <tr><td>고용량</td><td>구성 성분의 절반 이상이 통상 시작용량의 2배~최대용량</td></tr>
+      </table>
+      <p class="src-note">단일제형복합제는 개별 병용 대비 치료지속성↑(OR 1.21) 및 추가 혈압강하(SBP −3.99/DBP −1.54mmHg) 효과. 최근 초저용량 3제·4제 복합제 개발 중 — 표준용량 단일제보다 강압효과 우수, 부작용 증가 없음.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ COMORBIDITY ═══════════════════════ -->
+<div id="tab-comorbidity" class="panel">
+
+  <div class="alert alert-info"><span>ℹ️</span><div>카드를 클릭하면 상황별 목표혈압·권고 약제·근거가 펼쳐집니다.</div></div>
+  <div class="cm-grid" style="margin-top:8px">
+    <div class="cm-card" onclick="showCM('dm')"><div class="cm-title">🩸 당뇨병</div><div class="cm-goal">목표 &lt;130/80</div><div class="cm-drug">전계열 1차 가능; 알부민뇨 시 ACEi/ARB</div></div>
+    <div class="cm-card" onclick="showCM('cad')"><div class="cm-title">❤️ 관상동맥질환</div><div class="cm-goal">목표 &lt;130/80</div><div class="cm-drug">협심증: BB+CCB; 심근경색후: BB+ACEi/ARB</div></div>
+    <div class="cm-card" onclick="showCM('hf')"><div class="cm-title">🫀 심부전</div><div class="cm-goal">발생예방 &lt;130/80</div><div class="cm-drug">HFrEF: ARNI 우선, BB, MRA, SGLT2i</div></div>
+    <div class="cm-card" onclick="showCM('af')"><div class="cm-title">💓 심방세동</div><div class="cm-goal">목표 &lt;130/80</div><div class="cm-drug">ARB(재발↓), 항응고 전 SBP&lt;160</div></div>
+    <div class="cm-card" onclick="showCM('valve')"><div class="cm-title">🔺 판막질환</div><div class="cm-goal">120-129/70-79 (고위험시)</div><div class="cm-drug">AS/AR: ARB·ACEi 선호</div></div>
+    <div class="cm-card" onclick="showCM('ckd')"><div class="cm-title">🫘 만성콩팥병</div><div class="cm-goal">목표 &lt;130/80 (표준측정시 &lt;120 고려)</div><div class="cm-drug">알부민뇨: ACEi/ARB; SGLT2i 권고</div></div>
+    <div class="cm-card" onclick="showCM('ais')"><div class="cm-title">🧠 급성 허혈성뇌졸중</div><div class="cm-goal">tPA전 &lt;185/110</div><div class="cm-drug">재관류후 SBP≤180 유지(&lt;140 피함)</div></div>
+    <div class="cm-card" onclick="showCM('ich')"><div class="cm-title">🩸 급성 뇌실질내출혈</div><div class="cm-goal">SBP 150-220→강하 고려(≥140 유지)</div><div class="cm-drug">≥220: 지속 정주 항고혈압제</div></div>
+    <div class="cm-card" onclick="showCM('secstroke')"><div class="cm-title">🔁 뇌졸중 이차예방</div><div class="cm-goal">목표 SBP&lt;130 (열공경색도 동일)</div><div class="cm-drug">티아지드+ACEi/ARB, CCB 고려</div></div>
+    <div class="cm-card" onclick="showCM('aorta')"><div class="cm-title">🩹 대동맥 질환</div><div class="cm-goal">목표 &lt;130/80</div><div class="cm-drug">BB 1차; 급성박리 SBP&lt;120·HR&lt;60~80</div></div>
+    <div class="cm-card" onclick="showCM('pad')"><div class="cm-title">🦵 말초동맥질환</div><div class="cm-goal">목표 &lt;130/80</div><div class="cm-drug">ACEi/ARB 우선</div></div>
+    <div class="cm-card" onclick="showCM('obesity')"><div class="cm-title">⚖️ 비만·대사증후군</div><div class="cm-goal">체중감량으로 혈압↓</div><div class="cm-drug">ACEi/ARB·CCB 우선; GLP-1RA/SGLT2i 고려</div></div>
+  </div>
+
+<div id="cm-detail-area"></div>
+</div>
+
+<!-- ═══════════════════════ SPECIAL ═══════════════════════ -->
+<div id="tab-special" class="panel">
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🎭 백의고혈압 · 가면고혈압 (13.1절, 권고39) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">약물치료 시작 전 <strong>백의고혈압 배제</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">백의고혈압 진단을 위해 진료실 밖 혈압(활동/가정) 측정 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeC">C</span></div><div class="rec-text">백의(비조절)고혈압에서 심혈관질환 고위험 또는 장기손상 동반 시 치료를 고려할 수 있다</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">정상/전단계 혈압 + 장기손상 소견 있으면 <strong>가면고혈압</strong> 의심하여 진료실 밖 혈압 측정 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeC">C</span></div><div class="rec-text">가면(비조절)고혈압에서 심혈관질환 고위험 또는 장기손상 동반 시 치료를 고려할 수 있다</div></li>
+      </ul>
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>표현형</th><th>진료실혈압</th><th>진료실 밖 혈압</th><th>국내 빈도(대한고혈압학회 등록사업)</th></tr>
+        <tr><td>백의고혈압/백의비조절고혈압</td><td>높음</td><td>정상</td><td>14.9% / 13.5%</td></tr>
+        <tr><td>가면고혈압/가면비조절고혈압</td><td>정상</td><td>높음</td><td>17.6% / 13.0%</td></tr>
+      </table>
+      <p class="src-note">백의고혈압은 정상혈압보다 대사이상 많고 장기추적 시 사망률·장기손상 위험 증가, 지속형고혈압 이행 가능. 가면고혈압은 지속성고혈압과 유사하거나 더 불량한 예후 — 정기 추적관찰과 생활습관 개선이 필요하다.</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🌙 야간고혈압 · 아침고혈압 (13.2절) <span class="pill pill-new" style="margin-right:6px">신규 서술</span><span>▾</span></div>
+    <div class="sp-body">
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>구분</th><th>정의</th><th>빈도(국내)</th></tr>
+        <tr><td>야간고혈압</td><td>수면 중 혈압 ≥120/70 mmHg (24h 활동혈압으로 진단)</td><td>약 18-23%; 92.6%가 가면고혈압으로 중복 분류</td></tr>
+        <tr><td>아침고혈압</td><td>진료실혈압 정상(&lt;140/90)이나 아침 활동/가정혈압 ≥135/85</td><td>15.9% (남성·고령·복부비만·대사장애에서 흔함)</td></tr>
+      </table>
+      <p class="src-note">동양인에서 서구인보다 야간고혈압 흔함; 과도한 교감신경활성·염분감수성·수면무호흡증·짧은작용 항고혈압제가 원인. 치료: 작용시간 긴 항고혈압제 선호, 다만 일률적 취침전 복용은 현재 근거 불충분으로 권장하지 않음.</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">👴 노인 고혈압 (13.6절, 권고43) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">지역사회 거주 65세 이상, <strong>SBP&lt;140</strong> 조절 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text">65세 이상 심혈관질환·CKD 동반 고위험군, <strong>SBP&lt;130</strong> 고려</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeC">C</span></div><div class="rec-text">노쇠 노인·85세 이상·기대여명 3년 이내·증상성 기립성저혈압: <strong>개별화된 목표혈압</strong> 고려</div></li>
+      </ul>
+      <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 항고혈압제 시작 시 젊은 성인의 <strong>1/2 용량</strong>에서 시작, 점진적 증량</li>
+        <li>• 베타차단제는 협심증·심부전·빈맥 등 동반질환 있을 때만 선별 사용</li>
+        <li>• 기립성 저혈압 정기 확인 필요(적극적 혈압강하가 오히려 기립성저혈압 위험을 낮춘다는 보고 있음 — 감량 근거로 삼지 않음)</li>
+        <li>• 노쇠 평가도구: K-FRAIL 설문(부록3), Clinical Frailty Scale(부록4)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🧑 젊은 연령 고혈압 (13.7절, 권고44) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text"><strong>이차성 고혈압 선별검사</strong> 시행을 권고 (젊은층 이차성고혈압 유병률 14-33%)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">표적장기손상 평가로 고위험군 조기 선별, 필요시 신속한 약물치료 시작 고려</div></li>
+      </ul>
+      <p style="font-size:calc(12px * var(--fscale,1))">2022년 기준 20-39세 고혈압 유병자 약 89만명; 인지율 36%·치료율 35%·조절율 33%로 타 연령대 대비 매우 낮음. 국내 코호트(450만명 이상)에서 젊은 고혈압군은 정상혈압군 대비 주요 심혈관사건 위험 2배 이상↑, 항고혈압제 사용시 위험 약 70%↓.</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🤰 임신과 고혈압 (13.13절, 권고52) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">진단을 위해 진료실 밖 혈압(활동/가정) 측정을 고려 <span class="pill pill-new">신규 권고등급</span></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">만성/임신성 고혈압, <strong>SBP≥140 또는 DBP≥90</strong>에서 약물치료 시작·강하 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">목표혈압 <strong>&lt;140/90</strong> 유지 권고 <span class="pill pill-revised">하향</span></div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor3">III</span><span class="loe loeC">C</span></div><div class="rec-text">과도한 강하(DBP&lt;80)는 권고하지 않음 (태아혈류 감소 위험)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">전자간증 중등도 이상 고위험군, <strong>저용량 아스피린(75-150mg/일)</strong> 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">중증고혈압(SBP≥160 또는 DBP≥110) 시 즉각 입원 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">산후 목표혈압 <strong>&lt;140/90</strong> 권고</div></li>
+      </ul>
+      <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+        <tr><th>분류</th><th>정의</th></tr>
+        <tr><td>만성고혈압</td><td>임신 전 또는 20주 이전 진단</td></tr>
+        <tr><td>임신성 고혈압</td><td>임신 20주 이후 새로 발병, 단백뇨 없음</td></tr>
+        <tr><td>전자간증</td><td>임신성고혈압+단백뇨(요단백/Cr≥300mg/g) 또는 장기기능이상</td></tr>
+        <tr><td>만성고혈압에 겹친 전자간증</td><td>기존 만성고혈압에 새로 전자간증 발생</td></tr>
+      </table>
+      <div class="osa-acc" style="margin-top:8px"><div class="osa-hdr" onclick="toggleOsaAcc(this)">💊 임신부·수유부 사용 가능 약제 <span>▸</span></div><div class="osa-body">
+        <p style="font-size:calc(12px * var(--fscale,1))"><strong>임신부(1차)</strong>: 니페디핀 서방형, 암로디핀, 라베타롤(주사 이용가능/경구 제한적), 메틸도파(제한적, KOEDC 수입), 히드랄라진(제한적). <strong>ACEi/ARB/니트로프루시드/MRA/아테놀롤은 임신계획 시부터 회피</strong>.</p>
+        <p style="font-size:calc(12px * var(--fscale,1));margin-top:6px"><strong>수유부(모유이행 적음)</strong>: 니페디핀 서방형(최우선), 암로디핀, 라베타롤, 프로프라놀롤. 아테놀롤은 모유 다량이행 — 금기.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">♀️ 여성과 고혈압 (13.14절) <span>▾</span></div>
+    <div class="sp-body">
+      <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9">
+        <li>• 여성 유병률은 젊은층에서 남성보다 낮으나 폐경 후 급증 — 60세 이후 남녀 차이 없거나 여성이 더 높음</li>
+        <li>• 폐경 후 여성은 백의고혈압 빈도↑ — 진료실혈압만으로 진단 시 주의, 진료실 밖 혈압 병행 필요</li>
+        <li>• 심뇌혈관질환 예방목적 <strong>호르몬대체요법은 권고하지 않음</strong> (효과 없고 오히려 위험↑ 가능; 혈압 상승 가능하므로 초기 수개월 면밀 관찰)</li>
+        <li>• 남녀 간 치료전략·약제 효과 차이는 보고되지 않음. 경구피임약은 일부 혈압상승 가능 — 복용 초기 주의 관찰</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">😴 수면무호흡증 (13.15절, 권고53) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text">고혈압 동반 수면무호흡증, <strong>지속기도양압(CPAP)</strong> 치료를 고려할 수 있다 — 평균 2~3mmHg 혈압강하 효과 (순응도·중증도·주간졸림 여부에 따라 차이)</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🧠 인지기능장애 (13.16절, 권고54) <span>▾</span></div>
+    <div class="sp-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">인지기능저하·치매 발생위험 감소 위해 고혈압 치료를 권고 <span class="pill pill-revised">권고등급 상향(2022 IIa→2026 I)</span></div></li>
+      </ul>
+      <p style="font-size:calc(12px * var(--fscale,1))">고혈압은 허혈성 소혈관질환·백질이상의 주요 위험인자. 50대부터 조기 치료 시작 시 치매예방 효과가 60대 이후 시작보다 큰 것으로 보고됨.</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">🚨 고혈압성 응급 · 급성 중증 고혈압 (13.17절, 권고55) <span>▾</span></div>
+    <div class="sp-body">
+      <div class="alert alert-danger" style="margin-bottom:8px"><span>🚨</span><div><strong>고혈압성 응급</strong>: BP≥180/110 + 급성 장기손상 동반. <strong>급성 중증 고혈압</strong>: BP≥180/110이나 급성 장기손상 없음 — 과거 "고혈압성 긴급(urgency)" 용어 폐기 <span class="pill pill-revised">용어정비</span></div></div>
+      <ul class="rec-list" style="margin-bottom:8px">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">고혈압성 응급, 입원·집중감시 하 치료 및 임상상황에 따른 정주 항고혈압제 사용 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeC">C</span></div><div class="rec-text">대동맥박리 동반 응급, 초기 목표 <strong>SBP&lt;120mmHg</strong>로 신속 조절 권고</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeC">C</span></div><div class="rec-text">대동맥박리 제외 응급, 초기 1시간 이내 평균동맥압 <strong>약 20-25% 감소</strong> 고려 (과도한 급속강하 회피)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor3">III</span><span class="loe loeC">C</span></div><div class="rec-text">급성 장기손상 없는 급성 중증고혈압, <strong>즉각적 정주 항고혈압제 사용은 권고하지 않음</strong></div></li>
+      </ul>
+      <p class="src-note">만성 고혈압환자는 장기관류 자율조절곡선이 상향 이동되어 있어 급속강하 시 상대적 저관류 위험 — 개별 임상상황을 반영한 맞춤형 접근이 필요. 대동맥박리는 정주 베타차단제 우선 투여로 벽스트레스 감소 + 심박수 60-80/분 조절.</p>
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <div class="sp-title" onclick="toggleSP(this)">💑 발기부전 및 환자중심진료 (13.12·14장, 권고56) <span>▾</span></div>
+    <div class="sp-body">
+      <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale, 1));line-height:1.9;margin-bottom:8px">
+        <li>• 발기부전은 심뇌혈관질환 위험인자로 간주 — 대부분 미진단 상태이므로 적극적 문진 필요</li>
+        <li>• 베타차단제·이뇨제는 발기부전과 연관성 보고, CCB·ACEi는 중립적, ARB는 오히려 유익 가능성</li>
+        <li>• PDE5 억제제는 비교적 안전·효과적, 질산염 제제 병용은 금기; 알파차단제 병용 시 저혈압 주의</li>
+      </ul>
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">환자중심진료</span>환자 이해수준에 맞춘 위험도·치료이점 설명을 고려</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text"><span class="rec-no">자가측정</span>가정혈압 자가측정을 통한 관리를 권고 (진단정확도↑, 치료지속성↑)</div></li>
+        <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><span class="rec-no">다학제</span>의사·간호사·약사·영양사 등 <strong>다학제 팀 기반 접근</strong>을 권고 <span class="pill pill-new">신규(Class I)</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ NEW UPDATES ═══════════════════════ -->
+<div id="tab-newupdates" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🆕</span> 1. 신규 추가 항목</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="new-table">
+        <tr><th>항목</th><th>2026년 진료지침 신규 내용</th></tr>
+        <tr><td>혈압의 분류</td><td>이완기단독고혈압 범주 추가</td></tr>
+        <tr><td>심혈관질환 위험점수</td><td>PCE·PREVENT·SCORE2·SCORE2-OP·SCORE2-AP 등 해외 위험점수 비교 및 국내 적용 제한점 신규 기술</td></tr>
+        <tr><td>혈압측정기기</td><td>커프리스 혈압계 진료실 밖 혈압 활용 고려 (IIb,B); 검증 프로토콜 기술</td></tr>
+        <tr><td>심방세동 환자 혈압측정</td><td>청진법으로 3회 이상 반복측정 후 평균값 사용 권고</td></tr>
+        <tr><td>기립성 저혈압 측정</td><td>기립 1분·3분에 측정, SBP≥20 또는 DBP≥10 감소 시 정의</td></tr>
+        <tr><td>혈압 변동성</td><td>정의·분류·임상적 의미와 제한점 신규 기술</td></tr>
+        <tr><td>고혈압 치료 시작혈압</td><td>심혈관질환 동반 전단계 약물치료 고려(IIa,B); 고위험 전단계 3개월 생활요법 후 ≥130/80 시 고려(IIb,B)</td></tr>
+        <tr><td>생활요법(금연)</td><td>전자담배 흡연자도 금연 권고(I,B)</td></tr>
+        <tr><td>생활요법(마음 요법)</td><td>호흡훈련·마음챙김·명상으로 스트레스 감소 고려(IIa,B) — 신규 항목</td></tr>
+        <tr><td>고혈압약의 선택</td><td>ARNI·SGLT2억제제·비스테로이드성 MRA·알도스테론합성효소억제제를 항고혈압제로 추가</td></tr>
+        <tr><td>칼슘차단제</td><td>암로디핀 R형 이성질체 부종 — 타 약제 변경 또는 S형 암로디핀 단독제로 부종 감소 가능</td></tr>
+        <tr><td>ARNI</td><td>심부전 동반 시 ACEi/ARB보다 우선 권고(I,A); 염분감수성 고혈압에서 사용 고려(IIa,B)</td></tr>
+        <tr><td>단일제형복합요법</td><td>초저용량·저용량·표준·고용량 분류 신설; 초기시작/유지·최대용량 표(부록2) 삽입</td></tr>
+        <tr><td>난치성(혹은 저항성)고혈압 정의</td><td>저항성+불응성을 포괄하는 "난치성 고혈압" 용어로 통합, 치료 알고리즘 신규 제시</td></tr>
+        <tr><td>난치성고혈압 치료</td><td>아밀로라이드(IIa,B), ARNI 변경(IIb,B), 알도스테론합성효소억제제(IIb,B) 추가 고려</td></tr>
+        <tr><td>고혈압약 감량·중단</td><td>감량·중단 방법 신규 기술</td></tr>
+        <tr><td>혈당 조절</td><td>심부전·알부민뇨·eGFR감소 시 SGLT2억제제 권고(I,A); 죽상경화성심혈관질환 동반 시 GLP-1RA/SGLT2i 권고(I,A)</td></tr>
+        <tr><td>환자 모니터링</td><td>2-4주 간격 추적관찰(I,C), 전해질·콩팥기능 연1-2회(IIa,C), 안정시 3-6개월 간격(IIa,B) 신규 기술</td></tr>
+        <tr><td>야간고혈압·아침고혈압</td><td>진단기준·빈도·심혈관위험도·치료 신규 기술</td></tr>
+        <tr><td>비만과 고혈압</td><td>체중감량 권고(I,A); 당뇨병 동반 비만은 체중+혈압 동시 감소 혈당강하제 고려(IIa,B)</td></tr>
+        <tr><td>노인 고혈압</td><td>고위험 65세 이상 SBP&lt;130 고려(IIb,B); 노쇠·85세 이상 개별화 목표 고려(IIb,C); 노쇠평가도구(부록3/4) 신규</td></tr>
+        <tr><td>젊은 연령 고혈압</td><td>이차성 고혈압 선별검사 권고(I,B); 표적장기손상 평가 통한 조기선별·신속치료 고려(IIb,B)</td></tr>
+        <tr><td>판막질환과 고혈압</td><td>신규 절 신설</td></tr>
+        <tr><td>심방세동+항응고</td><td>주요출혈 위험 감소 위해 SBP&lt;160 도달 시 항응고제 시작 고려(I,B)</td></tr>
+        <tr><td>불임치료 여성</td><td>임신 중 고혈압질환 발생위험이 높음을 신규 기술</td></tr>
+        <tr><td>임신부 가정혈압측정</td><td>혈압관리·예후개선 위해 고려(IIb,B)</td></tr>
+        <tr><td>임신부 입원치료 기준</td><td>중증고혈압(≥160/110) 즉각 입원 권고(I,C)</td></tr>
+        <tr><td>임신부 약물요법</td><td>병용보다 단일요법 증량 우선 고려(IIb,C)</td></tr>
+        <tr><td>고혈압성 응급 치료</td><td>입원·집중감시·정주 항고혈압제(I,C); 대동맥박리 SBP&lt;120 신속조절(I,C); 그 외 평균동맥압 20-25%↓(IIa,C)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span class="icon">🔄</span> 2. 변경 항목 (2022 → 2026 비교)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body" style="padding:6px 8px">
+      <table class="new-table">
+        <tr><th>항목</th><th>2022년 진료지침</th><th>2026년 진료지침</th></tr>
+        <tr><td>커프형 혈압계</td><td>청진법·진동법으로 구분</td><td>작동원리별 재분류 + 청진형자동혈압계 진료실혈압 측정법 추가</td></tr>
+        <tr><td>무증상 장기손상(콩팥)</td><td>알부민뇨, eGFR감소로 정의</td><td>미세알부민뇨(30-300mg/g)로 정의 수정</td></tr>
+        <tr><td>임상적 심뇌혈관·콩팥질환</td><td>CKD 3·4·5기로 정의</td><td>CKD 3기 이상(eGFR&lt;60) 또는 현성단백뇨(&gt;300mg/g)로 수정</td></tr>
+        <tr><td>일차성 알도스테론증</td><td>원인불명 저칼륨혈증·부신우연종 시 평가</td><td>6개 적응증 시 선별검사 권고(I,C) — 신규 권고등급; 항고혈압제 지속사용 권고(I,C); 진단알고리즘 신설(그림12)</td></tr>
+        <tr><td>신동맥협착증</td><td>연령·복부잡음·저항성고혈압 등으로 신혈관고혈압 의심 기술</td><td>죽상동맥경화형·섬유근육형성이상으로 분리하여 원인·진단·치료 기술</td></tr>
+        <tr><td>당뇨병 목표혈압</td><td>위험인자 유무에 따라 140/90 또는 130/80</td><td><strong>전체 당뇨병 환자 130/80 미만</strong>으로 일괄 하향(I,A)</td></tr>
+        <tr><td>뇌졸중 목표혈압</td><td>SBP&lt;140(I,B)</td><td>SBP&lt;130 <span class="pill pill-revised">하향</span>(I,A) <span class="pill pill-revised">등급상향</span></td></tr>
+        <tr><td>만성콩팥병 목표혈압</td><td>140/90(I,A); 알부민뇨 동반 시 130/80 고려(IIa,B)</td><td>견딜 수 있다면 130/80 미만(I,A); 표준측정법 시 SBP&lt;120 고려(IIa,B)</td></tr>
+        <tr><td>소금 섭취</td><td>6g/일 제한(I,A)</td><td>5g/일(나트륨 2,000mg) 이하로 하향(I,A)</td></tr>
+        <tr><td>체중 조절</td><td>BMI 25까지 감량(I,A)</td><td>과체중·비만 시 체중감량 권고(I,A) — 표현 일반화</td></tr>
+        <tr><td>운동</td><td>주 5-7회, 회당 30분 이상(I,A)</td><td>중강도 150분 또는 고강도 75분/주(I,A) — 국제기준 정렬</td></tr>
+        <tr><td>이뇨제</td><td>티아지드유사(chlorthalidone/indapamide) 선호(IIa,B)</td><td>HCTZ·클로르탈리돈·인다파미드 중 선택(IIa,B) — 특정제제 국한 완화</td></tr>
+        <tr><td>베타차단제</td><td>혈관확장 작용 관련 근거 없음 기술</td><td>협심증·심근경색후·HFrEF·심방세동 적응증 시 투여 권고(I,A); 2/3세대 고려; 세대별표(부록1) 신설</td></tr>
+        <tr><td>관혈적 치료(RDN)</td><td>근거 부족으로 권장 어려움</td><td>난치성고혈압 약물조절 어려운 경우 콩팥교감신경차단술 고려(IIb,B) <span class="pill pill-new">신규 권고등급</span></td></tr>
+        <tr><td>지질강하제</td><td>심혈관질환 동반 시 LDL&lt;70(I,A)</td><td>위험도·기저질환에 따라 시작시점·목표수치 결정(I,A) — 위험기반 세분화</td></tr>
+        <tr><td>치료지속성</td><td>특별한 사유 없는 한 1일 1회(I,B)</td><td>가능하면 1일 1회 투여(I,A) <span class="pill pill-revised">근거수준 상향</span></td></tr>
+        <tr><td>당뇨병+알부민뇨</td><td>ACEi/ARB 권고(I,B)</td><td>ACEi/ARB 권고(I,A) <span class="pill pill-revised">근거수준 상향</span></td></tr>
+        <tr><td>관상동맥질환</td><td>목표혈압 &lt;130/80(I,B)</td><td>목표혈압 &lt;130/80(I,A) <span class="pill pill-revised">근거수준 상향</span></td></tr>
+        <tr><td>급성기 허혈성뇌졸중(재개통후)</td><td>일반적 180/105 이하; 명확한 개별화 근거 부족(IIb,C)</td><td>재관류 성공 시 SBP&lt;140 지양, ≤180 유지 권고(I,A) <span class="pill pill-revised">등급·근거 상향</span></td></tr>
+        <tr><td>임신중 고혈압 진단</td><td>백의고혈압 배제 위해 활동혈압 시행 권고</td><td>진료실 밖 혈압(활동/가정) 측정 고려(IIa,B) <span class="pill pill-new">신규 권고등급</span></td></tr>
+        <tr><td>임신부 약물치료 시작혈압</td><td>≥160/110 중증고혈압에서 이견없이 치료</td><td>SBP≥140 또는 DBP≥90에서 시작/강하 권고</td></tr>
+        <tr><td>임신부 목표혈압</td><td>&lt;150/100</td><td>&lt;140/90 <span class="pill pill-revised">하향</span>(I,B)</td></tr>
+        <tr><td>수유중 복용약제</td><td>땀샘·모유 비배출 약제 선택</td><td>니페디핀·에날라프릴·암로디핀·라베타롤 등 모유이행 적은 약제 구체적 제시; 부록5.1/5.2 신설</td></tr>
+        <tr><td>인지기능장애</td><td>치매예방 위해 치료 고려(IIa,A)</td><td>치료를 권고(I,A) <span class="pill pill-revised">등급상향</span></td></tr>
+      </table>
+      <p class="src-note">PCE, Pooled Cohort Equations; PREVENT, Predicting Risk of Cardiovascular Disease Events; SCORE, Systematic COronary Risk Evaluation; ARNI, angiotensin receptor-neprilysin inhibitor; SGLT2, sodium glucose cotransporter 2; ACE, angiotensin converting enzyme; ARB, angiotensin-receptor blocker</p>
+    </div>
+  </div>
+
+</div>
+
+<div id="tab-abbreviations" class="panel" style="display:none!important"></div><!-- /abbreviations -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCard(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleSP(title) {
+  const body = title.nextElementSibling;
+  body.classList.toggle('open');
+  const arrow = title.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '▴' : '▾';
+}
+
+function toggleOsaAcc(hdr) {
+  const body = hdr.nextElementSibling;
+  const spans = hdr.querySelectorAll('span');
+  const icon = spans[spans.length - 1];
+  const open = getComputedStyle(body).display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  icon.textContent = open ? '▸' : '▾';
+}
+
+const cmData = {
+dm: {
+  title: '당뇨병 + 고혈압 (13.5절, 권고42)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>당뇨병 환자는 일반인 대비 고혈압 유병률 약 <strong>2배</strong>; 고혈압환자도 당뇨병 발생 위험 약 2배. 두 질환 공존 시 심혈관·뇌졸중·신장 질환 진행 위험이 크게 증가한다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">목표혈압 <strong>&lt;130/80 mmHg</strong> <span class="pill pill-revised">2022년 140/90에서 하향</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">모든 계열의 항고혈압제를 <strong>1차 치료 약제</strong>로 사용 가능</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">알부민뇨 동반 시 <strong>ACEi 또는 ARB</strong> 권고 <span class="pill pill-revised">근거수준 상향(2022 B→2026 A)</span></div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">🔬 핵심 임상시험 근거 <span>▸</span></div><div class="osa-body">
+    <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+      <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">연구</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">결과</th></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>BPROAD</strong> (2024)</td><td style="padding:5px 8px">50세 이상 고위험 당뇨병, SBP&lt;120 목표군 → 심혈관질환 발생 21%↓</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>ACCORD-BP</strong></td><td style="padding:5px 8px">SBP&lt;120 유지군에서 심혈관 사건 위험 감소 확인</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px"><strong>STEP</strong></td><td style="padding:5px 8px">SBP 110-130 조절군, 130-150군 대비 심혈관사건 26%↓</td></tr>
+      <tr><td style="padding:5px 8px"><strong>HOT 하위분석</strong></td><td style="padding:5px 8px">DBP 90→85→80으로 낮출수록 심혈관 이득 증가</td></tr>
+    </table>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">💊 약제 선택 원칙 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• ACEi·ARB·지속성 CCB·이뇨제·베타차단제 모두 사용 가능; 알부민뇨 동반 시 <strong>ACEi/ARB 우선</strong></li>
+      <li>• 베타차단제+티아지드 병용은 인슐린저항성 증가로 당뇨조절 악화 가능 — 주의</li>
+      <li>• ACEi+ARB 병용은 신기능저하 위험으로 권고하지 않음</li>
+      <li>• <strong>SGLT2억제제</strong>: 혈압강하 효과 있어 병용 항고혈압제 용량조절 필요성 주의깊게 평가</li>
+      <li>• 심부전 동반·알부민뇨·eGFR감소 시 SGLT2억제제 권고(I,A); 죽상경화성 심혈관질환 동반 시 GLP-1RA 또는 SGLT2억제제 권고(I,A)</li>
+    </ul>
+  </div></div>`
+},
+cad: {
+  title: '관상동맥질환 + 고혈압 (13.8.1절, 권고45)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>혈압 상승은 SBP 110-115·DBP 70-75 mmHg부터 관상동맥질환 위험 증가와 연관. 다만 과도한 강하 시 J-curve 우려로 협심증 증상 모니터링이 필요하다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">목표혈압 <strong>&lt;130/80 mmHg</strong> <span class="pill pill-revised">근거수준 상향</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">심근경색 동반 시 1차 약제로 <strong>베타차단제, ACEi 또는 ARB</strong> 권고</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">협심증 동반 시 <strong>베타차단제 및 칼슘통로차단제</strong>를 권고</div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">📊 이완기혈압 J-curve 주의 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• 관상동맥 혈류는 주로 이완기에 이루어지므로 DBP 과도한 저하 시 관류 저하 우려</li>
+      <li>• 좌심실비대 동반 시 심근 산소소모 증가 + 미세혈관순환장애로 허혈 악화 가능성</li>
+      <li>• 목표혈압 추구는 주저하지 말되, 치료 중 협심증 증상·징후 주의 관찰 필요</li>
+    </ul>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">💊 약제 선택 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• 최근 심근경색 환자: 특별한 금기 없는 한 베타차단제 반드시 처방 권장</li>
+      <li>• ACEi는 고위험군·관상동맥질환에서 심혈관사건 감소 RCT로 입증; ARB는 ACEi 부작용시 대체</li>
+      <li>• Non-DHP CCB(verapamil·diltiazem)는 HFrEF 동반 시 금기</li>
+    </ul>
+  </div></div>`
+},
+hf: {
+  title: '심부전 + 고혈압 (13.8.2절, 권고46)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>심부전 환자의 약 <strong>75%</strong>가 고혈압 병력 보유. 고혈압은 심부전 발생의 핵심 위험인자.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 심부전 발생예방 권고</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">심부전 발생 고위험 고혈압환자에서 <strong>&lt;130/80 mmHg</strong> 조절 권고</div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">🫀 박출률감소심부전(HFrEF) 약제 우선순위 <span>▸</span></div><div class="osa-body">
+    <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+      <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">순서</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">약제</th></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">1차</td><td style="padding:5px 8px"><strong>ARNI</strong> (ACEi·ARB보다 우선); 불가 시 ACEi/ARB</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">병용</td><td style="padding:5px 8px">베타차단제, 스피로놀락톤(MRA), SGLT2억제제</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">추가</td><td style="padding:5px 8px">혈압 미조절 시 티아지드계 이뇨제 → 이후 DHP-CCB</td></tr>
+      <tr><td style="padding:5px 8px;color:var(--red)">주의</td><td style="padding:5px 8px;color:var(--red)">Non-DHP CCB(수축력↓), 알파차단제(수분저류·악화) 사용 주의</td></tr>
+    </table>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">🚑 급성 고혈압성 심부전 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• 초기 수시간 동안 <strong>초기 혈압의 25% 이내</strong> 범위에서 정주 혈관확장제+고리작용이뇨제 병용 적극 강하</li>
+      <li>• 증상 동반 비대상성 심부전에서 철저한 혈압조절이 사망률·재입원률 감소 가능성</li>
+      <li>• 단, 120/60mmHg 이하로 과도하게 저하되면 사망률 증가와 연관 — 주의</li>
+    </ul>
+  </div></div>`
+},
+af: {
+  title: '심방세동 + 고혈압 (13.8.3절, 권고47)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>고혈압은 좌심방 확장·좌심실비대를 유발하여 심방세동 발생의 <strong>가장 흔한 위험인자</strong>이다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text"><strong>ARB</strong>는 심방세동 재발을 줄이므로 사용을 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">항응고치료 시작 시 주요 출혈위험 감소 위해 가능한 조속히 <strong>SBP&lt;160mmHg</strong>로 조절 권고</div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">💊 심박수 조절 및 약제 고려사항 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• 베타차단제로 안정심박수 &lt;110/분 유지도 &lt;80/분과 비교해 심혈관사건 예방에 불리하지 않음</li>
+      <li>• 단, 증상 있고 교감신경 활성화된 경우 안정심박수 &lt;80/분 목표</li>
+      <li>• 일반 고혈압 지침과 동일하게 목표혈압 &lt;130/80 적용</li>
+    </ul>
+  </div></div>`
+},
+valve: {
+  title: '판막질환 + 고혈압 (13.8.4절)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>중증 판막질환+심부전 동반 시 심혈관 고위험군으로 간주 — 견딜 수 있다면 목표혈압 <strong>120-129/70-79 mmHg</strong>.</div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">대동맥판 협착(AS) <span>▸</span></div><div class="osa-body">
+    <p style="font-size:calc(12px * var(--fscale,1))">환자의 3분의 2 이상에서 고혈압 동반. 대규모 RCT 근거는 부족, 소규모 연구·관찰자료에 근거. 일반 고혈압 지침에 따라 목표혈압 설정, 동반 관상동맥질환·심부전·부정맥 평가 병행. 심한 AS 동반 시 <strong>ARB</strong> 사용 고려.</p>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">대동맥판 역류(AR) <span>▸</span></div><div class="osa-body">
+    <p style="font-size:calc(12px * var(--fscale,1))">1회박출량 증가로 수축기혈압 상승 경향. 니페디핀이 수술시점 지연 보고(RCT) — CCB 또는 RAS억제제의 후부하 감소 효과 유용. BB·Non-DHP CCB는 심박수↓로 역류량↑ 우려 — 주의.</p>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">승모판 역류 <span>▸</span></div><div class="osa-body">
+    <p style="font-size:calc(12px * var(--fscale,1))">SBP 20mmHg 증가마다 승모판역류 위험 26%↑(영국 인구기반연구). 고혈압에 의한 기능적 승모판역류는 항고혈압제·심부전치료로 호전 시 판막수술 불필요.</p>
+  </div></div>`
+},
+ckd: {
+  title: '만성콩팥병(CKD) + 고혈압 (13.10절, 권고48)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>고혈압은 CKD의 주된 원인이자 대표 합병증. 적절한 혈압조절이 콩팥기능저하 진행을 늦추고 심뇌혈관 합병증을 감소시킨다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">알부민뇨 동반 CKD, <strong>ACEi 또는 ARB</strong> 사용 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">CKD 동반 고혈압환자, <strong>SGLT2억제제</strong> 사용 권고 (신장보호효과 약 40%↓, CREDENCE·DAPA-CKD·EMPA-KIDNEY)</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">티아지드유사 이뇨제 <strong>클로르탈리돈</strong>은 eGFR&lt;30에서도 혈압조절 위해 고려 <span class="pill pill-new">신규</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">당뇨병+알부민뇨+eGFR≥25인 CKD, 비스테로이드성 MRA <strong>피네레논</strong> 사용 권고 <span class="pill pill-new">신규</span></div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">🎯 목표혈압 및 단계별 약제조절(그림20) <span>▸</span></div><div class="osa-body">
+    <p style="font-size:calc(12px * var(--fscale,1));margin-bottom:6px">목표: 환자가 견딜 수 있다면 <strong>&lt;130/80mmHg</strong>; 표준화된 측정법 사용 시 SBP&lt;120 고려(IIa,B, SPRINT 근거)</p>
+    <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+      <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">단계</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">병용요법</th></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">CKD 1-3기 (eGFR≥30)</td><td style="padding:5px 8px">ACEi/ARB + CCB 또는 티아지드계 → 3제(+티아지드) → MRA/BB/알파차단제 추가</td></tr>
+      <tr><td style="padding:5px 8px">CKD 4-5기 (eGFR&lt;30)</td><td style="padding:5px 8px">ACEi/ARB + CCB 또는 고리작용이뇨제 → 3제 → 클로르탈리돈/BB/알파차단제 추가 → SGLT2i 또는 피네레논(MRA 병합금지)</td></tr>
+    </table>
+    <p class="src-note">알부민뇨 동반 시 ACEi/ARB 우선(신보호+심혈관질환 감소). ACEi+ARB 병용 금지 — 급성신부전·고칼륨혈증↑ 위험, 이득 없음.</p>
+  </div></div>`
+},
+ais: {
+  title: '급성 허혈성 뇌졸중에서의 혈압관리 (13.11.1절, 권고49)',
+  content: `
+  <div class="alert alert-warn" style="margin-bottom:8px"><span>⚠️</span><div>급성기 혈압목표는 치료방법(정맥내혈전용해/혈관내재개통 여부)에 따라 완전히 다르다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 치료별 목표혈압</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">정맥내 혈전용해치료 적합 환자, 시작 전 <strong>&lt;185/110</strong>, 치료 후 24h <strong>&lt;180/105</strong> 유지 권고</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">혈관내재개통 후 성공 재관류(TICI 2b/3): 24h 동안 <strong>SBP≤180 유지, &lt;140으로 낮추지 않음</strong> <span class="pill pill-revised">권고·근거수준 상향</span></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">신경학적 안정 환자, BP≥140/90 시 장기조절 위해 항고혈압제 시작·재개 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor3">III</span><span class="loe loeA">A</span></div><div class="rec-text">혈전용해/재개통 미시행, BP&lt;220/120: 발병 후 <strong>48-72h 내 혈압치료 효과 불확실 — 권고하지 않음</strong></div></li>
+  </ul>
+  <table class="bp-table" style="font-size:calc(11px * var(--fscale,1))">
+    <tr><th>상황</th><th>목표혈압</th></tr>
+    <tr><td>tPA 투여 전</td><td style="color:var(--yellow)">&lt;185/110</td></tr>
+    <tr><td>tPA 투여 후 24h</td><td style="color:var(--yellow)">&lt;180/105</td></tr>
+    <tr><td>혈관내재개통 재관류 성공 후 24h</td><td style="color:var(--red)"><strong>SBP≤180 유지 (&lt;140 지양)</strong></td></tr>
+    <tr><td>미시행, BP≥220/120</td><td>첫 24h 15% 이내 점진적 강하 고려(IIb,C)</td></tr>
+    <tr><td>미시행, BP&lt;220/120</td><td>48-72h 치료 권고하지 않음(III,A)</td></tr>
+    <tr><td>안정 후 장기관리</td><td style="color:var(--green)">&lt;130/90 (이차예방)</td></tr>
+  </table>
+  <p class="src-note">급성기 정주 약제: 라베타롤, 니카르디핀, 딜티아젬, 니트로글리세린, 니트로프루사이드. 재관류 후 지나친 강하는 관류저하로 기능회복 악화 — 통합분석에서 집중치료군 90일 독립생활률 45.1% vs 표준치료 55.9%로 오히려 낮음.</p>`
+},
+ich: {
+  title: '급성 뇌실질내출혈에서의 혈압관리 (13.11.2절, 권고50)',
+  content: `
+  <div class="alert alert-danger" style="margin-bottom:8px"><span>🚨</span><div>고혈압은 뇌실질내출혈(ICH)의 가장 흔한 원인. 급성기 혈압관리가 혈종확대·예후에 직접 영향.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2b">IIb</span><span class="loe loeB">B</span></div><div class="rec-text">발병 6h 이내, SBP 150-220: 혈압강하 고려하되 <strong>SBP≥140 유지</strong></div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeC">C</span></div><div class="rec-text">SBP≥220: 지속 정주 항고혈압제 + 면밀한 혈압 모니터링 고려</div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">🩺 단계별 관리 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• SBP≥200 또는 평균동맥압≥150: 5분 간격 측정하며 조절</li>
+      <li>• SBP≥180 또는 MAP≥130 + <strong>뇌압상승 소견</strong>: 뇌압감시장치로 뇌관류압 60-80mmHg 유지하며 점진적 강하 (뇌관류압 &lt;60 회피)</li>
+      <li>• SBP≥180 또는 MAP≥130, 뇌압상승 없음: 15분 간격 평가하며 치료전 혈압의 80% 또는 160/90까지 점진적 강하</li>
+      <li>• SBP&lt;140까지 낮추는 것은 현재 권고하지 않음 (일부 이득 시사되었으나 근거 불충분)</li>
+      <li>• 정주 약제: 라베타롤, 니카르디핀, 딜티아젬, 니트로글리세린, 니트로프루사이드</li>
+    </ul>
+  </div></div>`
+},
+secstroke: {
+  title: '뇌졸중의 이차 예방 (13.11.3절, 권고51)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>뇌졸중·TIA 이후 혈압조절은 재발 예방의 핵심. 발병 수일 이내 항고혈압제 재개/시작 권고.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">발병 수일 이내 <strong>항고혈압제 투여 재개/시작</strong> 권고 (재발 예방)</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text"><strong>티아지드계 이뇨제, ACEi, ARB</strong> 또는 병용요법 권고</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeC">C</span></div><div class="rec-text">칼슘통로차단제 사용을 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">열공성뇌경색 환자, 목표 <strong>SBP&lt;130</strong> 조절을 고려 (SPS3: 심혈관사건 차이는 없었으나 뇌출혈 위험 63%↓)</div></li>
+  </ul>
+  <p class="src-note">약제 선택은 두개강외 폐색성뇌혈관질환·콩팥질환·심장질환·당뇨병 등 동반질환 고려하여 개별화. 메타분석에서 ACEi+이뇨제 병용이 효과적으로 보고됨(PROGRESS: 재발뇌졸중 28%↓, ICH 50%↓).</p>`
+},
+aorta: {
+  title: '대동맥 질환 + 고혈압 (13.9.4절)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>고혈압은 대동맥류·대동맥박리의 핵심 위험인자. 대동맥질환 동반 고혈압환자의 목표혈압은 <strong>&lt;130/80mmHg</strong>.</div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">유형별 관리 <span>▸</span></div><div class="osa-body">
+    <table style="width:100%;border-collapse:collapse;font-size:calc(11px * var(--fscale,1))">
+      <tr style="background:var(--surface2)"><th style="padding:5px 8px;text-align:left;color:var(--text2);font-size:calc(10px * var(--fscale,1))">질환</th><th style="padding:5px 8px;color:var(--text2);font-size:calc(10px * var(--fscale,1))">관리 핵심</th></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">대동맥 축착</td><td style="padding:5px 8px">유년기 수술교정 원칙; 교정 후에도 수축기고혈압 진행 가능 — 장기추적 필요</td></tr>
+      <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">대동맥류</td><td style="padding:5px 8px">혈압변동성 클수록 파열위험↑; 견딜 수 있는 범위 내 최대한 낮춤; BB 우선(전단응력↓)</td></tr>
+      <tr><td style="padding:5px 8px">급성 대동맥박리</td><td style="padding:5px 8px">정주 BB로 신속히 SBP&lt;120, HR 60-80/분 조절; 혈관확장제 단독 사용 금지(반사성빈맥→벽스트레스↑)</td></tr>
+    </table>
+  </div></div>
+  <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9;margin-top:8px">
+    <li>• 이첨대동맥판(bicuspid) 동반 시 대동맥병증 위험↑ — 목표혈압 &lt;130/80 도움</li>
+    <li>• 심한 대동맥판협착 동반 시 ARB 사용 고려</li>
+  </ul>`
+},
+pad: {
+  title: '말초동맥질환(PAD) + 고혈압 (13.9.3절)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>PAD는 10년 사망률 약 40%에 이르는 중증질환 — 심뇌혈관 위험인자의 철저한 조절이 중요.</div></div>
+  <p style="font-size:calc(12px * var(--fscale,1))">최근 메타분석 및 SPRINT 근거로 <strong>목표혈압 &lt;130/80mmHg</strong>를 권고한다. 약물치료는 <strong>ACEi 또는 ARB</strong>를 기본으로 하며, 필요 시 아스피린 병용을 권장한다. 베타차단제는 과거 증상 악화 우려로 제한되었으나 직접 근거는 부족하며 협심증·빈맥 적응증 시 사용 가능하다.</p>
+  <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>PAD+고혈압은 신동맥협착 빈도가 증가하므로 평가를 고려하고, 중증 하지허혈 동반 시 혈압강하가 허혈을 악화시킬 수 있어 주의가 필요하다.</div></div>`
+},
+obesity: {
+  title: '비만·대사증후군 + 고혈압 (13.3-13.4절, 권고40-41)',
+  content: `
+  <div class="alert alert-info" style="margin-bottom:8px"><span>ℹ️</span><div>비만 동반 고혈압은 비만하지 않은 경우보다 더 많은 항고혈압제가 필요하고 난치성고혈압 위험이 높다.</div></div>
+  <div style="font-weight:700;font-size:calc(12px * var(--fscale,1));color:var(--accent2);margin-bottom:6px">📋 권고사항</div>
+  <ul class="rec-list" style="margin-bottom:8px">
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeB">B</span></div><div class="rec-text">대사증후군 동반(당뇨병 없음): 식이·체중조절·운동 등 생활요법 철저 시행 권고</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">항고혈압제로 <strong>ACEi/ARB 또는 CCB</strong>를 우선적으로 고려</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor1">I</span><span class="loe loeA">A</span></div><div class="rec-text">과체중·비만 동반 고혈압, <strong>체중 감량</strong>을 통한 혈압강하·심혈관예방 권고</div></li>
+    <li class="rec-item"><div class="rec-badges"><span class="cor cor2a">IIa</span><span class="loe loeB">B</span></div><div class="rec-text">당뇨병+비만 동반, 체중·혈압 동시 감소 가능한 <strong>혈당강하제</strong>(GLP-1RA·SGLT2i·GIP/GLP-1 이중작용제) 사용 고려</div></li>
+  </ul>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">💊 대사증후군 대상질환 정의 (5개 중 3개↑) <span>▸</span></div><div class="osa-body">
+    <p style="font-size:calc(12px * var(--fscale,1))">① 복부비만(남&gt;90, 여&gt;85cm) ② 공복혈당≥100mg/dL(당뇨병 포함) ③ 중성지방≥150 ④ HDL&lt;40(남)/&lt;50(여) ⑤ 혈압≥130/85</p>
+  </div></div>
+  <div class="osa-acc"><div class="osa-hdr" onclick="toggleOsaAcc(this)">⚖️ 체중감량 관련 근거 <span>▸</span></div><div class="osa-body">
+    <ul style="list-style:none;padding:0;font-size:calc(12px * var(--fscale,1));line-height:1.9">
+      <li>• TOHP-II: 6개월 4.5kg 이상 감량·30개월 유지 시 고혈압 발생위험 65%↓</li>
+      <li>• TONE: 비만 노인, 평균 3.5kg 감량으로 항고혈압제 필요성 약 36%↓</li>
+      <li>• GLP-1RA·GIP/GLP-1 이중작용제(터제파타이드)·비만수술은 간접적 혈압강하 효과 — 혈압조절 단독목적 치료로는 권고하지 않음</li>
+    </ul>
+  </div></div>`
+}
+};
+
+
+function showCM(key) {
+  const area = document.getElementById('cm-detail-area');
+  const card = event.currentTarget;
+  const isActive = card.classList.contains('active');
+  document.querySelectorAll('.cm-card').forEach(c => c.classList.remove('active'));
+  if (isActive) {
+    area.innerHTML = '';
+  } else {
+    card.classList.add('active');
+    const d = cmData[key];
+    area.innerHTML = `<div class="cm-detail"><h4>${d.title}</h4>${d.content}</div>`;
+    area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+const abbrs = [
+  ['BP','Blood Pressure (혈압) — 동맥벽에 가해지는 혈액의 압력'],
+  ['SBP','Systolic Blood Pressure (수축기혈압)'],
+  ['DBP','Diastolic Blood Pressure (이완기혈압)'],
+  ['ABPM','Ambulatory Blood Pressure Monitoring (활동혈압 측정) — 24시간 반복측정; 고혈압 초기진단·백의/가면고혈압 감별에 우선 고려'],
+  ['HBPM','Home Blood Pressure Monitoring (가정혈압 측정) — 장기추적·치료지속성 향상에 유용'],
+  ['AOBP','Automated Office Blood Pressure (진료실자동혈압) — 의료진 개입 없이 자동측정, 백의효과 감소'],
+  ['PWV','Pulse Wave Velocity (맥파전달속도) — 동맥경직도 지표; &gt;10m/s(경동맥-대퇴) 비정상'],
+  ['ABI','Ankle-Brachial Index (발목-위팔 혈압지수) — &lt;0.9면 말초동맥질환(PAD) 진단'],
+  ['WCH','White-Coat Hypertension (백의고혈압) — 진료실혈압↑, 진료실 밖 혈압 정상'],
+  ['MH','Masked Hypertension (가면고혈압) — 진료실혈압 정상, 진료실 밖 혈압↑'],
+  ['WUCH','White-coat Uncontrolled Hypertension (백의비조절고혈압) — 치료중 진료실혈압↑, 진료실 밖 정상'],
+  ['MUCH','Masked Uncontrolled Hypertension (가면비조절고혈압) — 치료중 진료실혈압 정상, 진료실 밖 혈압↑'],
+  ['HMOD','Hypertension-Mediated Organ Damage (고혈압으로 인한 장기손상)'],
+  ['TOD','Target Organ Damage (표적장기 손상)'],
+  ['CVD','Cardiovascular Disease (심혈관질환)'],
+  ['MACE','Major Adverse Cardiovascular Event (주요 심혈관계 사건)'],
+  ['PCE','Pooled Cohort Equations — 미국 심혈관위험도 계산식(2013)'],
+  ['PREVENT','Predicting Risk of Cardiovascular Disease Events — AHA 2023 신규 위험예측모델; 심부전 포함'],
+  ['SCORE2 / SCORE2-OP / SCORE2-AP','유럽 심혈관위험 계산식(전체/70세이상/아시아태평양 보정판)'],
+  ['CKD','Chronic Kidney Disease (만성콩팥병) — eGFR&lt;60 또는 알부민뇨≥30mg/g 3개월 이상 지속'],
+  ['eGFR','estimated Glomerular Filtration Rate (추정 사구체여과율) — CKD-EPI 공식 사용'],
+  ['uACR / ACR','Urine Albumin-to-Creatinine Ratio (요 알부민/크레아티닌 비) — 30-300 미세알부민뇨, &gt;300 현성단백뇨'],
+  ['AKI','Acute Kidney Injury (급성 신손상)'],
+  ['T2D','Type 2 Diabetes (제2형 당뇨병)'],
+  ['HbA1c','당화혈색소 — 목표 &lt;6.5%(저혈당 위험 없을 시)'],
+  ['BMI','Body Mass Index (체질량지수) — 목표 &lt;25 kg/m2'],
+  ['OSA','Obstructive Sleep Apnea (폐쇄성 수면무호흡증) — 이차성고혈압 주요 원인'],
+  ['CPAP','Continuous Positive Airway Pressure (지속기도양압) — OSA 표준치료, 평균 2-3mmHg 혈압강하'],
+  ['HDP','Hypertensive Disorders of Pregnancy (임신중 고혈압 장애)'],
+  ['PE / 전자간증','Preeclampsia — 임신 20주 후 SBP≥140/DBP≥90 + 단백뇨/장기손상'],
+  ['RAS','Renin-Angiotensin System (레닌-안지오텐신계)'],
+  ['RAASi','RAAS 억제제 — ACEi/ARB/ARNI/직접레닌억제제 총칭'],
+  ['ACE 억제제','Angiotensin Converting Enzyme inhibitor (안지오텐신전환효소억제제) — 마른기침·혈관부종 주의, 임신금기'],
+  ['ARB','Angiotensin Receptor Blocker (안지오텐신수용체차단제) — ACEi 대비 기침 적음, 임신금기'],
+  ['ARNI','Angiotensin Receptor-Neprilysin Inhibitor — 사쿠비트릴/발사르탄; 2026년 신규 편입, 심부전 1차 선호'],
+  ['CCB / DHP-CCB / Non-DHP CCB','Calcium Channel Blocker — 혈관선택적(암로디핀 등)/심장선택적(베라파밀·딜티아젬)'],
+  ['BB','Beta Blocker (베타차단제) — 협심증·심근경색후·HFrEF·심방세동 적응증'],
+  ['MRA','Mineralocorticoid Receptor Antagonist (미네랄코티코이드수용체길항제) — 스피로놀락톤·에플레레논; 난치성고혈압 4차약제'],
+  ['비스테로이드성 MRA','피네레논·에사세레논 — 고칼륨혈증 위험 낮고 성호르몬 부작용 적음'],
+  ['ASI','Aldosterone Synthase Inhibitor (알도스테론합성효소억제제) — 박스드로스타트·로룬드로스타트, 개발중'],
+  ['SGLT2 억제제','Sodium-Glucose Cotransporter-2 inhibitor — 다파글리플로진·엠파글리플로진; 심부전·CKD 이차예방'],
+  ['GLP-1 수용체작용제','Glucagon-Like Peptide-1 Receptor Agonist — 세마글루타이드 등; 체중·혈압 동시 감소'],
+  ['GIP/GLP-1 이중작용제','터제파타이드 — 비만치료, 간접적 혈압강하'],
+  ['ENaC','Epithelial Sodium Channel (상피나트륨통로) — 아밀로라이드의 작용부위'],
+  ['SPC','Single-Pill Combination (단일제형복합제) — 초저용량/저용량/표준/고용량으로 분류'],
+  ['RDN','Renal (Sympathetic) Denervation (콩팥교감신경차단술) — 난치성고혈압 옵션(IIb,B)'],
+  ['HFrEF','Heart Failure with reduced Ejection Fraction (박출률감소심부전, LVEF≤40%)'],
+  ['HFpEF','Heart Failure with preserved Ejection Fraction (박출률보존심부전, LVEF≥50%)'],
+  ['AF','Atrial Fibrillation (심방세동)'],
+  ['CAD / CCD','Coronary Artery/Chronic Coronary Disease (관상동맥질환)'],
+  ['PAD','Peripheral Artery Disease (말초동맥질환)'],
+  ['AS / AR','Aortic (valve) Stenosis / Regurgitation (대동맥판 협착/역류)'],
+  ['AIS','Acute Ischemic Stroke (급성 허혈성 뇌졸중)'],
+  ['ICH','Intracerebral Hemorrhage (뇌실질내출혈)'],
+  ['TIA','Transient Ischemic Attack (일과성 허혈발작)'],
+  ['EVT','Endovascular (Recanalization) Therapy (혈관내 재개통치료)'],
+  ['tPA','Tissue Plasminogen Activator (정맥내 혈전용해제)'],
+  ['TICI','Thrombolysis in Cerebral Infarction (재관류 등급); TICI 2b/3 = 성공적 재관류'],
+  ['MMSE / MoCA','Mini Mental State Examination / Montreal Cognitive Assessment (인지기능 선별검사)'],
+  ['PA','Primary Aldosteronism (일차성 알도스테론증) — 중증고혈압의 최대 12%'],
+  ['ARR','Aldosterone-to-Renin Ratio (알도스테론/레닌 활성 비율) — PA 선별검사'],
+  ['KOEDC','한국희귀·필수의약품센터 — 국내 미유통 임신부용 약제(메틸도파·히드랄라진 등) 수입 경로'],
+  ['K-FRAIL','한국형 노쇠 선별 설문도구 (부록3)'],
+  ['CFS','Clinical Frailty Scale (임상노쇠척도, 부록4)'],
+  ['NSAIDs','Non-Steroidal Anti-Inflammatory Drugs (비스테로이드소염제) — 난치성고혈압 원인 중 하나'],
+  ['ESH 2023 / ESC 2024','유럽고혈압학회/유럽심장학회 2023·2024년 고혈압 진료지침'],
+  ['AHA/ACC 2025','미국심장협회/미국심장학회 2025년 고혈압 진료지침 (SBP≥130/DBP≥80 진단기준)'],
+  ['JSH 2025','일본고혈압학회 2025년 고혈압 진료지침'],
+  ['KDIGO','Kidney Disease: Improving Global Outcomes — 국제 CKD 진료지침 단체'],
+  ['KSoLA','한국지질동맥경화학회 — 이상지질혈증 진료지침 근거'],
+  ['SPRINT','고위험 성인 SBP&lt;120 vs &lt;140 비교 RCT — 심혈관사건·사망 유의 감소, 2015'],
+  ['STEP','중국 60-80세 SBP 110-130 vs 130-150 비교 RCT, 2021'],
+  ['BPROAD','50세 이상 고위험 당뇨병 SBP&lt;120 vs &lt;140 비교 — 심혈관질환 21%↓, 2024'],
+  ['ESPRIT','고위험군 SBP&lt;120 vs &lt;140 비교 RCT — MACE 유의 감소, 2024'],
+  ['ACCORD-BP','당뇨병 환자 대상 SPRINT 유사설계 하위연구'],
+  ['RESPECT','뇌경색 병력자 대상 목표혈압 120/80 vs 140/90 비교, 재발위험 감소 경향'],
+  ['SPS3','열공성 뇌경색 환자 SBP&lt;130 vs 130-140 비교 — 뇌출혈 위험 63%↓, 2013'],
+  ['PROGRESS','뇌졸중 이차예방 perindopril±indapamide — 재발뇌졸중 28%↓·ICH 50%↓, 2001'],
+  ['PATHWAY-2','난치성고혈압 4차약제 비교 RCT — 스피로놀락톤 우수성 입증'],
+  ['CLICK','CKD 4기(eGFR&lt;30) 환자 클로르탈리돈 효과 RCT — SBP 10.5mmHg 감소'],
+  ['CREDENCE / DAPA-CKD / EMPA-KIDNEY','SGLT2억제제 CKD 신장보호 대규모 RCT'],
+  ['FIDELIO-DKD / FIGARO-DKD','피네레논(비스테로이드 MRA) 당뇨병성 신장질환 RCT'],
+  ['INTERACT-2 / ATACH-2','급성 뇌출혈 혈압강하 목표 비교 RCT (SBP&lt;140 vs &lt;180)'],
+];
+
+function buildAbbr() {
+  const grid = document.getElementById('abbr-grid');
+  const sorted = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  grid.innerHTML = sorted.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+       <span class="abbr-term">${a[0]}</span>
+       <span class="abbr-def">${a[1]}</span>
+     </div>`
+  ).join('');
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 500;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('.abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) {
+    drop.style.display = 'none';
+  }
+});
+document.getElementById('abbr-input').addEventListener('focus', () => {
+  const v = document.getElementById('abbr-input').value.trim();
+  if (v) { positionDropdown(); document.getElementById('abbr-dropdown').style.display = 'block'; }
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
