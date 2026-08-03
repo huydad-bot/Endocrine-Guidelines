@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>클라인펠터 증후군(KS) 진료 참고자료 — EAA Guidelines 2020</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev: #0f6e5c;      /* 소아·사춘기전 — 청록 */
+    --predict: #0550ae;  /* 사춘기·청소년 — 청 */
+    --tx: #7c3aed;       /* 성인-저성선증·불임 — 보라 */
+    --monitor: #9b1c2e;  /* 성인-동반질환·종합 — 진홍 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 7px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--monitor); color:#fff; padding:3px 7px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 560px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f1; border-left: 3px solid var(--dev);  color: #0f5549; }
+  .alert-predict { background: #ddf4ff; border-left: 3px solid var(--predict); color: #0550ae; }
+  .alert-tx      { background: #ede9fe; border-left: 3px solid var(--tx);  color: #5b21b6; }
+  .alert-monitor { background: #fce8eb; border-left: 3px solid var(--monitor); color: var(--monitor); }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev     { background: #e0f4f1; color: var(--dev); border: 1px solid var(--dev); }
+  .t-predict { background: #ddf4ff; color: var(--predict); border: 1px solid var(--predict); }
+  .t-tx      { background: #ede9fe; color: var(--tx); border: 1px solid var(--tx); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--monitor); border: 1px solid var(--monitor); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-gnrh { background: #e0f4f1; color: #0f5549; }
+  .drug-hcg  { background: #fce8eb; color: var(--monitor); }
+  .drug-fsh  { background: #ddf4ff; color: #0550ae; }
+  .drug-seq  { background: #ede9fe; color: #5b21b6; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(13px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-dev     { background: #e0f4f1; }
+  .st-predict { background: #e6f0fb; }
+  .st-tx      { background: #ede9fe; }
+  .st-monitor { background: #fde8eb; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-dev     { background: #e0f4f1; border: 1.5px solid var(--dev); color: #0f5549; }
+  .gear-predict { background: #e6f0fb; border: 1.5px solid var(--predict); color: #0550ae; }
+  .gear-tx      { background: #ede9fe; border: 1.5px solid var(--tx); color: #5b21b6; }
+  .gear-monitor { background: #fde8eb; border: 1.5px solid var(--monitor); color: var(--monitor); }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 190px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  .rec-tbl td:nth-child(1) { width: 30px; text-align:center; font-weight:700; color:var(--text2); }
+  .rec-tbl td:nth-child(3) { width: 118px; }
+  .grade-strong { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#dafbe1; color:var(--green); border:1px solid var(--green); white-space:nowrap; }
+  .grade-weak   { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#fff3cd; color:#7d4e00; border:1px solid var(--yellow); white-space:nowrap; }
+  .grade-q      { display:block; margin-top:2px; font-size:calc(10px * var(--fscale,1)); color:var(--text2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>K</span><span>S</span>
+      </div>
+      <h1>클라인펠터 증후군(KS) 진료 참고자료 (European Academy of Andrology Guidelines)</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Zitzmann M, Aksglaede L, Corona G, et al. Andrology. 2021;9:145–167. doi:10.1111/andr.12909 (European Society of Endocrinology 승인)</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 저자·학회의 공식 승인을 받지 않은 개인 참고자료다 (This tool is not officially endorsed by the authors or any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('child')">👶 소아·사춘기전</div>
+    <div class="tab" onclick="showTab('adol')">🧑 사춘기·청소년</div>
+    <div class="tab" onclick="showTab('hypo')">🧔 성인-저성선증·불임</div>
+    <div class="tab" onclick="showTab('comorbid')">⚕️ 성인-동반질환·종합</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('prevalence')"><div class="stat-val" style="color:var(--dev)">1–2/1000</div><div class="stat-lbl">남아 유병률<br>(신생아 스크리닝)</div></div>
+    <div class="stat-box" onclick="openStatModal('undiag')"><div class="stat-val" style="color:var(--predict)">50–75%</div><div class="stat-lbl">평생 미진단으로<br>추정되는 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('timing')"><div class="stat-val" style="color:var(--tx)">51%</div><div class="stat-lbl">성인기에<br>처음 진단되는 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('mortality')"><div class="stat-val" style="color:var(--monitor)">약 2–3년</div><div class="stat-lbl">일반인구 대비<br>기대수명 단축</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev">
+        <span>✅</span>
+        <div>클라인펠터 증후군(KS, 47,XXY)은 남성에서 가장 흔한 성염색체 이상으로, <strong>고환기능부전(정자형성장애·라이디히세포 기능저하)</strong>이 핵심이나 표현형은 매우 다양하며 신경인지·심리사회, 심혈관·대사, 골격계 이상 위험도 동반 증가한다. 본 문서는 EAA가 발표한 <strong>최초의 KS 국제 가이드라인(GRADE 방식, 47개 권고)</strong>을 소아기부터 성인기까지 발달단계별로 정리한 것이다.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">👶 소아·사춘기전</div>
+          잠복고환 관리·정기 신체검진·성장/골밀도 모니터링<br>
+          <small>이 시기 테스토스테론 보충은 원칙적으로 권고하지 않음</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">🧑 사춘기·청소년</div>
+          HPG축 평가·지연사춘기 시 T 보충·가임력 정보 제공<br>
+          <small>정자 발현율은 15–19세에서 성인과 유사(45%)</small>
+        </div>
+        <div class="gear-box gear-tx">
+          <div class="gear-title">🧔 성인-저성선증·불임</div>
+          저성선증 진단 시 T 보충, 불임 시 TESE/mTESE 고려<br>
+          <small>가임력 문제를 먼저 정리한 후 T 보충 시작</small>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>KS 남성은 대사증후군·심혈관질환·정맥혈전증·골다공증·특정 종양(유방암·종격동 생식세포종양·비호지킨림프종)의 위험이 증가하며, 이로 인해 <strong>사망률이 일반 남성 대비 유의하게 높다</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 생애주기별 진단·증상 흐름 (Figure 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>KS의 임상표현형은 나이에 따라 축적되며, 초기(출생·소아기)에는 특이 소견이 적어 진단이 어렵고, <strong>성인기 완전형 증후군</strong>에서 비로소 다수의 특이 소견 조합이 뚜렷해진다.</div>
+      <div class="stage-timeline" style="margin-top:8px">
+        <div class="stage-box st-dev">
+          <div class="st-num" style="color:var(--dev)">출생·소아기</div>
+          <div class="st-lbl" style="color:var(--dev)">잠복고환·왜소음경(드묾)<br>대개 임상적으로 조용함</div>
+        </div>
+        <div class="stage-box st-predict">
+          <div class="st-num" style="color:var(--predict)">사춘기</div>
+          <div class="st-lbl" style="color:var(--predict)">사춘기 시작 후 정지<br>장다리·큰키·여성형유방</div>
+        </div>
+        <div class="stage-box st-tx">
+          <div class="st-num" style="color:var(--tx)">청소년~성인 초기</div>
+          <div class="st-lbl" style="color:var(--tx)">불임·고환위축(&lt;5mL)<br>고성선자극호르몬성 저성선증</div>
+        </div>
+        <div class="stage-box st-monitor">
+          <div class="st-num" style="color:var(--monitor)">성인기 완전형</div>
+          <div class="st-lbl" style="color:var(--monitor)">골감소증·비만·대사증후군<br>정신사회 문제·종양·자가면역</div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>고정소저(小睾) 외에는 나이를 불문하고 일관되게 특이적인 단일 소견이 없으나, 성인기 여러 소견의 <strong>조합</strong>은 진단을 강하게 시사한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 병인·역학 개요</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>초과 X염색체는 50%가 감수분열 I 시기 부계 비분리, 나머지 50%는 모계 비분리(감수분열 I/II 또는 초기 접합체 후 유사분열)에서 기원 — 모계 연령 증가와 연관</li>
+        <li>고전형 47,XXY가 전체의 80–90%를 차지하며, 고차 이수성(48,XXXY 등)·모자이시즘(47,XXY/46,XY)·구조이상 X염색체가 나머지 10–20%</li>
+        <li>SHOX 유전자 용량효과(큰키의 대표적 기전)와 X 불활성화 이탈 유전자(escapee gene)가 표현형 형성에 관여</li>
+        <li>안드로겐수용체(AR) 유전자의 CAG 반복다형성이 안드로겐 감수성 및 안드로겐 의존적 표현형·테스토스테론 치료 반응과 연관됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔎</span> 낮은 진단율 — 왜 놓치는가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>진단 시기</th><th>비율</th></tr>
+          <tr><td>산전 진단</td><td class="freq-low">21%</td></tr>
+          <tr><td>소아기</td><td class="freq-low">10–12%</td></tr>
+          <tr><td>사춘기</td><td class="freq-mod">16%</td></tr>
+          <tr><td>성인기</td><td class="freq-vhigh">51%</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>대다수 남성은 <strong>불임 평가 과정에서</strong> 진단되며, 사춘기 전 임상 소견은 비특이적이라 소아기 진단은 드물다(전체의 약 10%). 신생아 전수 스크리닝이 제안되었으나 아직 표준진료로 확립되지 않았다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 유전학적 권고 (권고 1–5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>1</td><td>산전 진단은 출생 후 말초혈액 염색체 분석으로 재확인한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>2</td><td>KS 진단은 말초혈액 전통적 핵형분석을 표준으로 한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>3</td><td>환자 및/또는 부모에게 비지시적(non-directive) 유전상담을 제공한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>4</td><td>비폐쇄성 무정자증 또는 (중증) 핍정자증(총정자수&lt;10×10⁶ 또는 농도&lt;5×10⁶/mL) 남성에서 핵형분석을 시행한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>5</td><td>저테스토스테론혈증 + 고성선자극호르몬(LH·FSH) + 소고환용적(&lt;5mL)의 원발성 저성선증 남성에서 핵형분석을 시행한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>불임 남성 중 KS 유병률은 3–4%(비폐쇄성 무정자증 10–15%)로 상승한다. 성인 KS의 약 50%에서 저테스토스테론혈증이 확인되나 <strong>거의 전원에서 LH 상승</strong>이 관찰되어, 현성/잠재성 저성선증이 KS의 거의 항상 동반되는 특징이다. NIPT(비침습 산전검사)는 성염색체 이수성 선별에는 민감도·특이도 자료가 부족하여 확진검사가 아니며 세포유전학적 확인이 필요하다.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 소아·사춘기전 KS ══════════════════ -->
+<div id="tab-child" class="panel">
+
+  <div class="alert alert-dev">
+    <span>👶</span>
+    <div>소아·사춘기전 KS의 관리 핵심은 <strong>잠복고환 관리, 정기 신체검진, 성장·골·체구성 모니터링, 언어/심리사회 지지</strong>이며, 미세음경이 아닌 한 <strong>테스토스테론 보충은 권고하지 않는다</strong>.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 고환발달·HPT축 기능 (권고 6–11)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>6</td><td>양측 잠복고환 등 생후 1년까지 자발 하강이 없는 남아에서 핵형분석을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+          <tr><td>7</td><td>KS 소아의 잠복고환은 비KS 소아와 동일한 현행 치료 지침에 따라 치료한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>8</td><td>사춘기전 소아에서 고환평가 포함 신체검진을 2년마다(또는 적절히) 시행하며, 신경/정신과적 이상 의심 시 전문의 진료를 받는다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>9</td><td>산전 진단된 소아에서 치료적 의미(예: 미세음경)가 있을 경우 생후 2–3개월 내 LH·테스토스테론 측정을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>10</td><td>사춘기전 소아의 고환조직·정조줄기세포 냉동보존은 권고하지 않는다(현재 체외 정자형성법 부재).</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>11</td><td>미세음경 예외를 제외하고 소아기 테스토스테론 보충은 권고하지 않는다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>잠복고환 병력은 KS 환자의 <strong>27–37%</strong>에서 확인되며(양측성이 편측성보다 우세), 치료된 잠복고환은 이후 정자채취 성공률을 저하시키지 않는다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📏</span> 성장·골·체구성·심리 (권고 12–17)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>12</td><td>개별 성장패턴에 따라 백분위수/SDS 신장, 체비율, 골연령을 측정할 것을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+          <tr><td>13</td><td>사춘기전 소아에서 비타민D 수치 확인 및 적절한 비타민D·칼슘 보충을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>14</td><td>비타민D 결핍 시 2년마다 골밀도 평가(DXA, 3단계 보정법)를 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>15</td><td>백분위수/SDS를 이용한 체중 측정을 권고한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>16</td><td>영아·사춘기전 소년의 테스토스테론 치료는 권고하지 않는다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>17</td><td>필요 시 언어치료·학습장애 모니터링·사회훈련·심리지지를 권고한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>5–6세 이후 부모 표적 신장 대비 유의하게 큰 키로 성장속도가 가속되는 경향이 있으나, 개입(고용량 T 치료로 과성장 억제)은 부작용 우려로 현재 거의 시행되지 않음</li>
+        <li>정상 체질량지수에도 불구하고 체지방 비율이 높은 불리한 체구성이 소아기부터 관찰됨 — 원인은 저테스토스테론 단독보다 유전적(X 불활성화, AR CAG 반복) 요인이 더 관여할 가능성</li>
+        <li>언어발달지연·학습/사회심리 문제 위험이 증가하나, 지적장애가 일반적인 것은 아님</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 소아기 관리 요약표 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>항목</th><th>영아·소아기</th><th>사춘기·청소년기</th></tr>
+          <tr><td>잠복고환</td><td>현행 지침대로 치료</td><td>–</td></tr>
+          <tr><td>신체검진(고환·유방 포함)</td><td>2년마다</td><td>매년</td></tr>
+          <tr><td>인지평가·전문의 상담</td><td>언어발달·학습능력 모니터링</td><td>교육·사회훈련·심리 모니터링</td></tr>
+          <tr><td>성장·체비율·체중</td><td>SD/백분위수로 평가</td><td>SD/백분위수로 평가</td></tr>
+          <tr><td>가임력 — 정보제공</td><td>부모에게 안내</td><td>환자·부모에게 안내(선별적 정자채취·냉동보존)</td></tr>
+          <tr><td>비타민D·칼슘</td><td>전원 평가·필요 시 보충</td><td>전원 평가·필요 시 보충</td></tr>
+          <tr><td>LH·테스토스테론</td><td>미세음경 있을 때만</td><td>전원 평가</td></tr>
+          <tr><td>테스토스테론 치료</td><td>미세음경 선별례만</td><td>저성선증 확인 시</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /child -->
+
+<!-- ══════════════════ TAB 3: 사춘기·청소년 KS ══════════════════ -->
+<div id="tab-adol" class="panel">
+
+  <div class="alert alert-predict">
+    <span>🧑</span>
+    <div>사춘기는 정상 시기에 시작되나(46,XY와 시작 시점 차이 없음), 진행 중 <strong>생식세포·세르톨리세포 퇴행이 가속</strong>된다. 가임력 정보 제공과 저성선증 평가·필요시 테스토스테론 보충이 핵심이다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 정자형성·가임력 보존 (권고 18–21)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>18</td><td>청소년 환자(및 필요 시 부모)에게 가임력 문제에 대한 정보를 제공한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">Good Clinical Practice</span></td></tr>
+          <tr><td>19</td><td>사춘기 동안 및 추적관찰마다 고환초음파 평가를 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>20</td><td>충분한 설명 후 정액채취를 제안하고, 운동성 정자 확인 시 냉동보존한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+          <tr><td>21</td><td>신체·정신적 성숙도가 적합한 선별적 사례에서 TESE(표준 또는 mTESE)를 통한 고환정자채취 및 냉동보존을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+        </table>
+      </div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>연령대</th><th>TESE 정자채취 성공률</th></tr>
+          <tr><td>13–14세</td><td class="freq-low">10%</td></tr>
+          <tr><td>15–19세</td><td class="freq-mod">45% (성인 20–30세와 유사)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>LH ≤17.5 IU/L이면서 테스토스테론 ≥7.5 nmol/L인 청소년은 정자채취 성공률이 54%로 가장 높았고, 저테스토스테론(&lt;7.5 nmol/L) 군에서는 LH 수치와 무관하게 정자채취에 실패했다. 가임력 보존 결정은 부모가 아닌 <strong>환자 본인의 신체·정신적 성숙도</strong>에 근거해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> HPT축 기능·테스토스테론 보충 (권고 22–24)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>22</td><td>예상 사춘기 시작 전부터 Tanner 단계·테스토스테론·성선자극호르몬·저성선증 징후·신장/체중/허리둘레/체비율을 정기 평가한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>23</td><td>지연사춘기 및/또는 저-정상 테스토스테론+고LH(연령대비 &gt;2SD) 동반 저성선증 증상이 있으면, 가임력 문제를 먼저 정리한 후 테스토스테론을 보충한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>24</td><td>보상성 고성선자극호르몬성 저성선증(증상 없음) 청소년에서는 테스토스테론 치료를 하지 않을 것을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>보상성 고성선증(자발적 사춘기 완결 가능)은 KS의 60% 이상에서 나타나지만, 약 25%는 테스토스테론이 정상 이하로 저하되어 있다. 테스토스테론 제제는 <strong>내인성 LH 구동을 억제해 잔존 정자형성을 저해할 수 있어</strong>, 가임력 평가를 치료 전에 우선 시행해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 인지·심리 (권고 25)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>25</td><td>필요 시 언어치료 관리, 교육문제·사회훈련·심리지지를 청소년에게 권고한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>언어기억·유창성·단어인출·집행기능(계획·조직화·의사결정) 저하가 보고되나, 일반적으로 학습장애로 분류되지는 않음</li>
+        <li>의사소통 제약이 사회적응·성격발달에 영향을 미쳐 이후 사회·직업적 어려움으로 이어질 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /adol -->
+
+<!-- ══════════════════ TAB 4: 성인 KS — 저성선증·불임 ══════════════════ -->
+<div id="tab-hypo" class="panel">
+
+  <div class="alert alert-tx">
+    <span>🧔</span>
+    <div>성인 KS 대다수는 <strong>저-정상 또는 저하된 테스토스테론</strong>을 보이며, INSL3·인히빈B도 감소하고 FSH·LH는 뚜렷이 상승한다. 저성선증 치료 전 <strong>가임력 문제 확인이 원칙</strong>이다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 저성선증 진단·테스토스테론 치료 (권고 26–28)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>26</td><td>확립된 저성선증 지침에 따라 진단된 KS 저성선증 환자는, 가능하면 가임력 문제 정리 후 테스토스테론 보충을 시작한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>27</td><td>테스토스테론 보충은 일반 저성선증 지침의 모니터링 간격, 안전지표(헤마토크릿, PSA), 용량적정을 따른다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>28</td><td>테스토스테론 미투여 성인은 12개월마다 내분비 평가를 시행한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>AR 유전자 CAG 반복다형성이 테스토스테론 보충 반응에 영향을 줄 수 있다. 메타분석(관찰 21건+중재 22건)에서 미치료 KS는 대조군 대비 대사지표(공복혈당·HOMA·HDL·LDL)·체구성(BMI·허리둘레)·골밀도가 불량했고, 테스토스테론 치료는 <strong>체구성·요추 골밀도는 개선</strong>했으나 지질·혈당 개선효과는 근거가 상대적으로 약했다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 불임 관리 (권고 29–31)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>29</td><td>임신을 원하는 모든 성인 환자에서 정액분석·정자 냉동보존을 시행한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>30</td><td>무정자증이 확인되고 현재 또는 향후 임신 희망이 있는 모든 환자는 TESE(표준 또는 mTESE)를 통한 고환정자채취·냉동보존을 시행한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>31</td><td>TESE 계획 시, 성선자극호르몬 억제로 인한 잔존 정자형성 추가 저하 우려로 테스토스테론 보충 개시를 시작하지 않을 것을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+        </table>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>🔬 정자채취·보조생식 성적</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>사정액 내 운동정자 냉동보존 가능: 약 10%</li>
+              <li>무정자증 남성 중 국소적 정자형성 발견율(TESE): 약 30–60%</li>
+              <li>표준-TESE와 micro-TESE 간 정자채취율 차이 없음</li>
+              <li>보조생식(ICSI)에 의한 생아출산율: 약 16% (일반인구 대비 낮은 경향)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>👨‍👩‍👧 자녀에 대한 유전적 영향</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>현재까지 자녀는 부계의 유전 상태에 영향받지 않는 것으로 보임</li>
+              <li>산전 유전검사(PGT)의 일률적 필요성은 확립되지 않았으나 유전상담은 필수</li>
+              <li>47,XXY 정조세포가 감수분열을 완료하는지, 혹은 초과 X를 소실해 46,XY로 전환 후 감수분열을 진행하는지는 여전히 논쟁 중</li>
+              <li>고령화에 따라 잔존 정자형성 병소 발견율이 감소하는지는 미확정</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /hypo -->
+
+<!-- ══════════════════ TAB 5: 성인 KS — 동반질환·종합권고 ══════════════════ -->
+<div id="tab-comorbid" class="panel">
+
+  <div class="alert alert-monitor">
+    <span>⚕️</span>
+    <div>성인 KS는 <strong>대사·심혈관·골·정신·종양</strong> 영역에서 위험이 높아 정기적 다학제 모니터링이 필요하다. 유방·고환·정신사회 문제는 특히 자주 간과된다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❤️</span> 대사·심혈관·혈전 (권고 32–34)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>32</td><td>모든 환자에게 생활습관 교육을 시행하고, 체중·허리둘레·혈압·공복혈당·HbA1c·지질프로파일을 매년 평가·필요 시 치료한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>33</td><td>심부정맥혈전증/폐색전 위험 완화를 위해 장거리 비행이나 기타 위험 노출 전 혈전예방을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>34</td><td>최소 1회 12유도 심전도 QTc 평가를 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+        </table>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>일반인구 대비 정맥혈전색전증 위험이 <strong>3–6배</strong> 증가 — PAI-1 상승·저테스토스테론과 연관 가능성</li>
+        <li>유전자 용량효과로 QTc 단축이 보고되어 있으며, 이는 이론상 급성 심정지로 이어질 수 있는 소견</li>
+        <li>불리한 체구성·인슐린저항성이 2형당뇨병 위험을 높이며, 테스토스테론 치료로 심대사 위험이 완전히 상쇄되지는 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골질환 (권고 35–37)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>35</td><td>테스토스테론 수치와 무관하게 골절 위험이 있음을 유념하며 EAA 골건강 관리지침을 따른다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>36</td><td>첫 방문 시 요추·대퇴골 DXA와 골절위험 평가를 시행하고 이후 개별화한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+          <tr><td>37</td><td>골밀도와 무관하게 첫 방문 시 비타민D를 측정하고 필요 시 비타민D·칼슘을 보충할 것을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>KS 환자의 최대 <strong>40%</strong>에서 골감소증/골다공증이 확인되며, 골절위험은 저테스토스테론·저골밀도 외에도 비타민D 결핍·체지방/제지방비 불균형·낮은 INSL3·X 불활성화·AR 감수성 등 복합요인에 기인한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 정신·심리·성별불일치 (권고 38–39)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>38</td><td>모든 성인 환자에서 정신성적·정신과적 문제를 고려하고 필요 시 전문의 상담을 유도한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+          <tr><td>39</td><td>성별불일치 가능성에 주의하고, 확인되면 다학제팀 내 해당 전문의 진료를 받게 한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+        </table>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>조현병·양극성장애·우울·불안·자폐·ADHD 등 정신과적 질환 위험 증가</li>
+        <li>낮은 외향성·정서적 반응 저하·낮은 개방성·높은 신경증 성향의 성격 프로파일 경향</li>
+        <li>대다수는 남성으로 정체화하나, 일부 사례에서 성별불일치가 보고됨 — 여성화 호르몬 치료를 원하는 경우 정신건강 전문가와의 협진이 필수이며, 여성화 호르몬은 이미 증가된 혈전위험을 더 높일 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎗️</span> 종양 위험 (권고 40–41)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>40</td><td>첫 방문 시 여성형유방 확인을 위한 유방검진(필요 시 유방초음파)을 시행하고 이후 개별화, 지침에 따라 치료한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>41</td><td>2년마다 유방·액와 임상검진을 시행하고, 유방암 가족력 등 의심 소견 시 유방촬영/초음파를 제안한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕◯◯</span></td></tr>
+        </table>
+      </div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>종양</th><th>KS에서의 위험</th></tr>
+          <tr><td>남성 유방암</td><td class="freq-vhigh">46,XY 대비 4–30배 증가, 75세까지 누적위험 약 1%</td></tr>
+          <tr><td>종격동 생식세포종양(비정상피종)</td><td class="freq-high">15–30세에 호발, 흉부증상 또는 소아 조기사춘기로 발현 가능</td></tr>
+          <tr><td>비호지킨림프종</td><td class="freq-mod">표준화발생비(SIR) 3.02</td></tr>
+          <tr><td>백혈병</td><td class="freq-mod">SIR 3.62</td></tr>
+          <tr><td>전립선암</td><td class="freq-low">오히려 감소</td></tr>
+          <tr><td>고환 생식세포종양(정소내)</td><td class="freq-low">뚜렷한 연관성 미확인</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️</span> 기타 동반질환 (권고 42–44)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>42</td><td>시각 관련 호소가 있으면 안과 평가를 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>43</td><td>치과 상태 평가를 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+          <tr><td>44</td><td>자가면역 기능이상 가능성에 주의할 것을 제안한다.</td><td><span class="grade-weak">제안</span><span class="grade-q">⊕◯◯◯</span></td></tr>
+        </table>
+      </div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li>망막기능이상·주야간 시력저하 보고 있음</li>
+        <li>치아형성이상(taurodontism)·충치위험 증가 가능성</li>
+        <li>자가면역질환 위험 증가 경향이 있으나, 갑상선 기능은 KS에서 유의한 영향을 받지 않는 것으로 보고됨</li>
+        <li>위 소견들은 소규모 연구에 근거하여 추가 검증이 필요함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 진료체계 일반권고 (권고 45–47)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>No.</th><th>권고 내용</th><th>등급</th></tr>
+          <tr><td>45</td><td>KS 환자를 위한 다학제 진료센터·체계를 구축한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>46</td><td>소아 내분비팀에서 성인 내분비/남성과 전문의로의 전환기(transitional) 진료를 개선한다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+          <tr><td>47</td><td>학부·전공의 구조화 교육을 통해 의료진·사회의 KS에 대한 지식을 향상시킨다.</td><td><span class="grade-strong">권고</span><span class="grade-q">⊕⊕⊕◯</span></td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>다학제팀은 유전학자, 소아/소아내분비과, 심리학자, 언어치료사, 성인 내분비/남성과, 비뇨의학과, 생식내분비과, 성학전문의, 정신건강의학과를 포함할 것을 권고한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 성인기 관리 요약표 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>항목</th><th>빈도</th></tr>
+          <tr><td>신체검진(고환·유방)</td><td>최소 매년, 필요 시 유방/고환 초음파</td></tr>
+          <tr><td>인지평가·전문의 상담</td><td>선별적 사례에서, 필요 시 지지</td></tr>
+          <tr><td>대사프로파일</td><td>최소 매년, 필요 시 치료</td></tr>
+          <tr><td>테스토스테론·LH</td><td>최소 매년, 저성선증 확인 시에만 치료</td></tr>
+          <tr><td>비타민D·칼슘</td><td>첫 방문 시, 이후 개별화</td></tr>
+          <tr><td>가임력(정보·정액채취·냉동보존·고환생검)</td><td>가임력 희망 시 전원, 무정자증 시 선별적 생검</td></tr>
+          <tr><td>혈전예방</td><td>장거리 비행 등 위험노출 전</td></tr>
+          <tr><td>12유도 심전도 QTc</td><td>첫 방문 시, 이후 개별화</td></tr>
+          <tr><td>DXA(요추·대퇴골)·골절위험</td><td>첫 방문 시, 이후 개별화</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /comorbid -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const STAT_DETAILS = {
+  prevalence: {
+    title: "남아 유병률",
+    val: "1–2/1000",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>🧬</span><div>1960–70년대 신생아 전수 스크리닝 연구들에 근거한 KS 유병률은 <strong>남아 1,000명당 1–2명</strong>이다.</div></div>
+      <ul>
+        <li>고전형 47,XXY가 전체의 <strong>80–90%</strong>를 차지</li>
+        <li>고차 이수성(48,XXXY, 49,XXXXY, 48,XXYY), 모자이시즘(주로 47,XXY/46,XY), 구조이상 X염색체가 나머지 10–20%</li>
+        <li>착상전유전검사(PGT) 시행 배아 중 47,XXY 핵형 비율은 0.9%로 보고되어, 모계연령 증가와 유의한 상관을 보였음 — 47,XXY 배아의 착상률 저하 또는 조기유산율 상승을 시사</li>
+      </ul>
+    `
+  },
+  undiag: {
+    title: "평생 미진단 추정 비율",
+    val: "50–75%",
+    color: "var(--predict)",
+    html: `
+      <div class="alert alert-predict"><span>🔍</span><div>KS의 전형적 임상표현형은 실제로는 소수의 환자에서만 관찰되며, 경도 표현형 사례는 진단지연 또는 미진단으로 이어지는 경우가 많다. 이로 인해 전체 KS 남성의 <strong>50–75%가 평생 진단받지 못하는 것</strong>으로 추정된다.</div></div>
+      <ul>
+        <li>진단율 향상을 위해 신생아 전수 스크리닝(건조혈반 유전자 카피수 검출법 포함)이 제안되었으나 표준진료로 확립되지는 않음</li>
+        <li>진단된 사례의 대다수는 불임 평가 과정에서 확인되며, 사춘기전 임상소견은 비특이적이라 소아기 진단은 전체 진단의 약 10%에 불과함</li>
+        <li>조기진단·조기 개입이 동반질환 예방에 유리할 것으로 여겨지나, 조기진단이 실제 장기 성인기 예후를 개선한다는 실증적 근거는 아직 부족함</li>
+      </ul>
+    `
+  },
+  timing: {
+    title: "진단 시기 분포",
+    val: "산전 21% · 소아기 10–12% · 사춘기 16% · 성인기 51%",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>📊</span><div>KS 진단 시기는 <strong>산전 21%, 소아기 10–12%, 사춘기 16%, 성인기 51%</strong>로 분포하며, 절반 이상이 성인이 된 후에야 진단된다.</div></div>
+      <ul>
+        <li>영아는 대개 정상 남성 표현형으로 태어나며, 양측 잠복고환·미세음경이 있을 때 KS를 의심할 수 있음</li>
+        <li>소아기에는 언어·행동장애, 부모 예상 신장 대비 과도한 성장, 비정상 체비율이 의심 단서가 될 수 있음</li>
+        <li>사춘기 지연, 불량한 고환발달, 여성형유방, 과도한 키, 학습장애, 정신사회 문제가 사춘기~성인기 진단의 계기가 됨</li>
+        <li>산전 유전검사 사용 증가로 향후 진단되는 KS 환자 수는 늘어날 전망이나, 조기진단이 장기 성인기 예후를 개선한다는 근거는 아직 충분치 않음</li>
+      </ul>
+    `
+  },
+  mortality: {
+    title: "기대수명 단축",
+    val: "약 2–3년",
+    color: "var(--monitor)",
+    html: `
+      <div class="alert alert-monitor"><span>❤️</span><div>KS 남성은 일반 남성 대비 다양한 질환의 발생률 및 전체 사망률이 높아, 기대수명이 <strong>약 2–3년 단축</strong>되는 것으로 보고된다.</div></div>
+      <ul>
+        <li>사망률 증가에 기여하는 주요 영역: 심혈관질환, 대사질환(2형당뇨병·대사증후군), 정신과적 질환, 특정 종양(유방암·종격동 생식세포종양·비호지킨림프종·백혈병)</li>
+        <li>저성선증과 유전적/후성유전학적 기전(초과 X 유전자 용량효과, AR 기능)이 복합적으로 관여하는 것으로 추정되며, 저성선증만으로는 증가된 심혈관위험을 완전히 설명하지 못함</li>
+        <li>테스토스테론 보충치료가 체구성·골밀도는 개선시키나, 심혈관위험을 완전히 정상화하지는 못함</li>
+        <li>이러한 배경에서 EAA 가이드라인은 대사·심혈관·골·종양 영역의 <strong>정기적 선제 모니터링</strong>을 강하게 권고함</li>
+      </ul>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"AMH",   def:"Anti-Müllerian Hormone — 항뮐러관호르몬" },
+  { term:"AR",    def:"Androgen Receptor gene — 안드로겐수용체 유전자(CAG 반복다형성 포함)" },
+  { term:"array-CGH", def:"Array-Comparative Genomic Hybridization — 어레이 비교유전체 혼성화" },
+  { term:"BMC",   def:"Bone Mineral Content — 골무기질량" },
+  { term:"BMD",   def:"Bone Mineral Density — 골밀도" },
+  { term:"CAG",   def:"AR 유전자 내 트리뉴클레오티드 반복서열(CAG)n — 안드로겐 감수성과 역상관" },
+  { term:"DXA",   def:"Dual-energy X-ray Absorptiometry — 이중에너지 X선 흡수계측법" },
+  { term:"FSH",   def:"Follicle Stimulating Hormone — 난포자극호르몬" },
+  { term:"GCNIS", def:"Germ Cell Neoplasia In Situ — 상피내 생식세포종양" },
+  { term:"GRADE", def:"Grading of Recommendations, Assessment, Development and Evaluation — 근거·권고등급 평가체계" },
+  { term:"hCG",   def:"Human Chorionic Gonadotropin — 사람융모성선자극호르몬" },
+  { term:"HOMA",  def:"Homeostatic Model Assessment — 인슐린저항성 지표" },
+  { term:"ICSI",  def:"Intracytoplasmic Sperm Injection — 세포질내정자주입술" },
+  { term:"INSL3", def:"Insulin-Like Factor 3 — 라이디히세포 분비 펩타이드, 고환하강·정자형성 관련" },
+  { term:"KS",    def:"Klinefelter Syndrome — 클라인펠터 증후군(47,XXY)" },
+  { term:"LH",    def:"Luteinizing Hormone — 황체형성호르몬" },
+  { term:"mTESE", def:"Microdissection-TESE — 현미경하 고환정자채취술" },
+  { term:"NIPT",  def:"Non-Invasive Prenatal Testing — 비침습 산전검사" },
+  { term:"PAI-1", def:"Plasminogen Activator Inhibitor-1 — 플라스미노겐활성제억제인자-1(응고촉진물질)" },
+  { term:"PGT",   def:"Preimplantation Genetic Testing — 착상전유전검사" },
+  { term:"PSA",   def:"Prostate-Specific Antigen — 전립선특이항원" },
+  { term:"QTc",   def:"보정 QT 간격 — 심전도 심실재분극 지표" },
+  { term:"SHOX",  def:"Short stature HOmeoboX gene — 신장 관련 유전자, KS 큰키의 주요 기전" },
+  { term:"SIR",   def:"Standardized Incidence Ratio — 표준화발생비" },
+  { term:"T",     def:"Testosterone — 테스토스테론" },
+  { term:"TESE",  def:"Testicular Sperm Extraction — 고환정자채취술" },
+  { term:"TV",    def:"Testicular Volume — 고환용적" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

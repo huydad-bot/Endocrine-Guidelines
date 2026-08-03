@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>터너증후군(Turner Syndrome) 임상진료지침 2024</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --diag:   #0f6e5c;  /* 진단·유전 — 청록 */
+    --growth: #0550ae;  /* 성장·사춘기·HRT — 청 */
+    --cv:     #9b1c2e;  /* 심혈관 — 진홍 */
+    --fert:   #7c3aed;  /* 전환·가임력 — 보라 */
+    --surv:   #b45309;  /* 전신 건강감시 — 호박색 */
+    --neuro:  #4338ca;  /* 신경인지·정신건강 — 남색 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 1020px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--diag); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--cv); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); text-align:center; }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 1020px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--diag); border-bottom-color: var(--diag); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 1020px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform:none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 600px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-diag    { background: #e0f4f1; border-left: 3px solid var(--diag);  color: #0f5549; }
+  .alert-growth  { background: #ddf4ff; border-left: 3px solid var(--growth); color: #0550ae; }
+  .alert-cv      { background: #fce8eb; border-left: 3px solid var(--cv); color: var(--cv); }
+  .alert-fert    { background: #ede9fe; border-left: 3px solid var(--fert);  color: #5b21b6; }
+  .alert-surv    { background: #fff1e0; border-left: 3px solid var(--surv);  color: #7d4400; }
+  .alert-neuro   { background: #e6e5ff; border-left: 3px solid var(--neuro); color: #362f9e; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 4px; }
+  .acc-body .rgrade { color: var(--text2); font-weight: 700; font-size: calc(10.5px * var(--fscale,1)); }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-diag    { background: #e0f4f1; color: var(--diag); border: 1px solid var(--diag); }
+  .t-growth  { background: #ddf4ff; color: var(--growth); border: 1px solid var(--growth); }
+  .t-cv      { background: #fce8eb; color: var(--cv); border: 1px solid var(--cv); }
+  .t-fert    { background: #ede9fe; color: var(--fert); border: 1px solid var(--fert); }
+  .t-surv    { background: #fff1e0; color: var(--surv); border: 1px solid var(--surv); }
+  .t-neuro   { background: #e6e5ff; color: var(--neuro); border: 1px solid var(--neuro); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--cv); border: 1px solid var(--cv); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 120px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: default; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box .st-num { font-size: calc(12.5px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-diag   { background: #e0f4f1; }
+  .st-growth { background: #e6f0fb; }
+  .st-cv     { background: #fde8eb; }
+  .st-fert   { background: #ede9fe; }
+  .st-surv   { background: #fff1e0; }
+  .st-neuro  { background: #e6e5ff; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-diag   { background: #e0f4f1; border: 1.5px solid var(--diag); color: #0f5549; }
+  .gear-growth { background: #e6f0fb; border: 1.5px solid var(--growth); color: #0550ae; }
+  .gear-cv     { background: #fde8eb; border: 1.5px solid var(--cv); color: var(--cv); }
+  .gear-fert   { background: #ede9fe; border: 1.5px solid var(--fert); color: #5b21b6; }
+  .gear-surv   { background: #fff1e0; border: 1.5px solid var(--surv); color: #7d4400; }
+  .gear-neuro  { background: #e6e5ff; border: 1.5px solid var(--neuro); color: #362f9e; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr"><span>T</span><span>S</span></div>
+      <h1>터너증후군 여성 임상진료지침 (Turner Syndrome Clinical Practice Guidelines 2024)</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Gravholt CH, et al. (International Turner Syndrome Consensus Group). Eur J Endocrinol. 2024;190(6):G53–G151. doi:10.1093/ejendo/lvae050 — 2023 Aarhus International Turner Syndrome Meeting</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 학회의 공식 승인을 받지 않은 개인 참고자료이며, 실제 진료는 원문 및 최신 근거를 함께 확인할 것 (This tool is not officially endorsed by any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diag')">🧬 진단·유전</div>
+    <div class="tab" onclick="showTab('growth')">📏 성장·사춘기·HRT</div>
+    <div class="tab" onclick="showTab('cv')">❤️ 심혈관</div>
+    <div class="tab" onclick="showTab('transfert')">🔄 전환·가임력</div>
+    <div class="tab" onclick="showTab('surv')">🩺 전신 건강감시</div>
+    <div class="tab" onclick="showTab('neuro')">🧠 신경인지·정신건강</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--diag)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 0: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('prevalence')"><div class="stat-val" style="color:var(--diag)">25–50<br>/100,000</div><div class="stat-lbl">여아 유병률</div></div>
+    <div class="stat-box" onclick="openStatModal('karyotype')"><div class="stat-val" style="color:var(--diag)">40–50%</div><div class="stat-lbl">45,X 단일염색체<br>핵형 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('chd')"><div class="stat-val" style="color:var(--cv)">40–60%</div><div class="stat-lbl">선천성 심장병<br>동반율</div></div>
+    <div class="stat-box" onclick="openStatModal('dissection')"><div class="stat-val" style="color:var(--cv)">164/100,000<br>인년</div><div class="stat-lbl">대동맥 박리 발생률<br>(일반인구의 약 27배)</div></div>
+    <div class="stat-box" onclick="openStatModal('fertility')"><div class="stat-val" style="color:var(--fert)">~10%</div><div class="stat-lbl">자연임신<br>가능률</div></div>
+    <div class="stat-box" onclick="openStatModal('height')"><div class="stat-val" style="color:var(--growth)">+5~8cm</div><div class="stat-lbl">GH 치료 시<br>평균 성인신장 이득</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-diag">
+        <span>✅</span>
+        <div>터너증후군(TS)은 여성 표현형에서 X염색체 1개와 두 번째 성염색체의 완전/부분 결손이 특징인 <strong>염색체이상 질환</strong>으로, 전 생애에 걸쳐 다장기(심혈관·내분비·신장·청력·자가면역·신경인지 등)를 침범하므로 <strong>다학제 진료</strong>가 필수다. 본 2024년 개정 지침은 2017년 신시내티 지침을 확장하여 진단·성장·사춘기/HRT·심혈관·전환기의료·가임력·전신건강감시·신경인지 8개 영역을 다룬다.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-diag">
+          <div class="gear-title">🧬 진단·유전</div>
+          최소 30개 중기세포 핵형분석이 표준 1차검사<br>
+          <small>NIPT 확대로 우연 진단 증가, 산전 확진은 반드시 산후 핵형으로 재확인</small>
+        </div>
+        <div class="gear-box gear-cv">
+          <div class="gear-title">❤️ 심혈관</div>
+          대동맥 박리가 조기사망의 핵심 원인<br>
+          <small>신장으로 보정한 AHI/ASI/Z-score로 대동맥 확장을 평가해야 함</small>
+        </div>
+        <div class="gear-box gear-fert">
+          <div class="gear-title">🔄 가임력</div>
+          대부분 조기난소부전, 자연임신 약 10%<br>
+          <small>진단 즉시부터 가임력 상담·AMH 추적 시작</small>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>진단·유전(1), 성장(2), 사춘기·성호르몬치료(3), 심혈관(4), 전환기(5), 가임력(6), 전신 건강감시(7), 신경인지·정신건강(8) 총 8개 장, <strong>180여 개 권고안</strong>(GRADE 방법론 기반 4개 핵심질문 포함)으로 구성된다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 핵형별 특성 (Table 1, 카리오타입-표현형 연관)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>핵형</th><th>빈도</th><th>비고</th></tr>
+          <tr><td><span class="stage t-diag">45,X</span></td><td class="freq-vhigh">40–50%</td><td>단일염색체(monosomy X); 동반질환·사망률 가장 높음</td></tr>
+          <tr><td>45,X/46,XX</td><td class="freq-high">15–25%</td><td>모자이시즘; 표현형 경미, 자연월경·자연임신 더 흔함</td></tr>
+          <tr><td>45,X/47,XXX; 45,X/46,XX/47,XXX</td><td class="freq-mod">~3%</td><td>모자이시즘; 심혈관·외형은 경미하나 신경발달 우려는 지속</td></tr>
+          <tr><td>45,X/46,XY</td><td class="freq-high">10–12%</td><td>모호/남성 외생식기 동반 가능 — 감시지침 동일 적용, 성선모세포종 위험 평가 필요</td></tr>
+          <tr><td>45,X/46,X,r(X) (고리X)</td><td class="freq-low">드묾</td><td>XIST 기능소실 동반 시 더 중증 인지표현형</td></tr>
+          <tr><td>46,X,i(Xq); idic(Xp)</td><td class="freq-mod">~15%</td><td>등완염색체 Xq — 중등도 표현형, 대동맥축착 빈도 낮음</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>TS로 진단하지 않는 핵형: Xp22.3 원위부 결실(SHOX 단독, Léri-Weill 증후군), Xq24 원위부 결실 단독(조기난소부전으로 명명), 50세 이상에서 45,X 모자이시즘 &lt;5% (연령관련 X소실).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧭</span> 진단 지표(Table 3) — 이 소견만으로도 핵형검사를 고려한다</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <b>단독 소견만으로 검사 지표가 되는 경우</b>
+      <ul>
+        <li>태아 낭성수종(cystic hygroma) 또는 태아수종, 특히 중증인 경우</li>
+        <li>원인불명의 저신장</li>
+        <li>좌측 유출로 선천성 심장기형(이엽대동맥판 제외)</li>
+        <li>원인불명의 사춘기/초경 지연, 사춘기 진행정지 또는 속발성 무월경</li>
+        <li>불임</li>
+        <li>특징적 신체소견(하향 안검열, 내안각췌피, 저위 귀, 소악증, 좁은 구개, 짧고 넓은 목, 익상경)</li>
+      </ul>
+      <b>두 가지 이상 조합 시 지표가 되는 경우</b>
+      <ul>
+        <li>신장 기형(말굽콩팥, 무형성, 저형성) · Madelung 변형 · 신경심리/정신과적 문제 · 다발 모반 · 형성이상/과만손발톱 · 기타 선천성 심장기형(이엽대동맥판 포함) · 40세 미만 청력장애 + 저신장</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 1: 진단·유전 ══════════════════ -->
+<div id="tab-diag" class="panel">
+
+  <div class="alert alert-diag"><span>🧬</span><div>진단·유전 영역은 <strong>R1.1–R1.15</strong>로 구성되며, 정의, 산전진단(NIPT 포함), 산후진단(Y염색체 물질 선별 포함), 신생아선별검사, 유전체학 신지견을 다룬다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 정의 및 진단 (R1.1–R1.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="rgrade">R1.1 ⊕⊕⊕⊕</span> 여성 표현형 + X염색체 1개 + 두 번째 성염색체의 완전/부분 결손 + 1개 이상의 전형적 임상소견이 있으면 TS 진단을 고려한다.</li>
+        <li><span class="rgrade">R1.2 ⊕⊕○○</span> Xq24 원위부 결실만 있는 경우, 50세 이상이면서 45,X 모자이시즘 &lt;5%인 경우는 TS 진단에서 제외한다.</li>
+        <li><span class="rgrade">R1.3 ⊕⊕⊕○</span> 신규 전신 감시지침은 <strong>모든 핵형</strong>의 TS 개인에게 적용한다.</li>
+        <li><span class="rgrade">R1.4 ⊕⊕⊕○</span> 45,X/46,XY 모자이시즘(모호 또는 남성 외생식기, 양육 성별 무관)에도 감시지침을 동일 적용한다.</li>
+        <li><span class="rgrade">R1.5 ⊕⊕⊕⊕</span> TS의 전형적 징후가 있는 여아는 TS 검사를 시행한다.</li>
+        <li><span class="rgrade">R1.6 ⊕⊕⊕○</span> 1차 검사는 <strong>최소 30개 중기세포</strong>를 계수하는 핵형분석. 신속 결과가 필요한 경우(산전·신생아) array/FISH/PCR을 1차로 쓰고 핵형분석을 2차 확진검사로 시행한다.</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>30개 중기세포 계수는 95% 신뢰한계에서 약 10% 모자이시즘까지 검출 가능(2010 ACMG, 2019 유럽 세포유전체 지침 기준). Microarray는 해상도는 좋으나 저수준(&lt;10%) 모자이시즘·구조이상 검출에 제한이 있고, exome/genome 시퀀싱은 5%까지 모자이시즘·작은 Y염색체 물질 검출이 가능하다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 산전 진단 및 NIPT (R1.7–R1.13)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R1.7 ⊕⊕⊕○</span> 산전 TS 진단시 태아 심초음파 시행.</li>
+        <li><span class="rgrade">R1.8 ⊕⊕⊕⊕</span> 산전 진단은 <strong>반드시 출생 후 혈액 핵형분석</strong>으로 재확인.</li>
+        <li><span class="rgrade">R1.9 ⊕⊕⊕○</span> NIPT에 성염색체 검사가 포함될 경우 임상 타당도/성능에 대한 상담 포함.</li>
+        <li><span class="rgrade">R1.10 ⊕⊕⊕○</span> NIPT 고위험 결과시 철저한 비지시적 유전상담(informed decision-making).</li>
+        <li><span class="rgrade">R1.11 ⊕⊕⊕○</span> NIPT 고위험시 정밀 초음파 시행 및 침습적 진단검사 제공.</li>
+        <li><span class="rgrade">R1.12 ⊕⊕⊕○</span> NIPT 고위험 + 정상 초음파 + 침습검사 미시행/정상인 경우, 산모의 성염색체 이수성 핵형검사를 고려·제공한다.</li>
+        <li><span class="rgrade">R1.13 ⊕⊕⊕○</span> 자가 난자 임신을 원하는 TS는 착상전유전검사를 제공하고, 45,X/46,XX 모자이시즘으로 자연임신 시 산전 진단검사를 제공한다.</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>TS에 대한 NIPT 민감도 98.8%·특이도 99.4%이나 <strong>양성예측도(PPV)는 9–85.2%(평균 25.4%)</strong>로 매우 낮다 — 태반국한모자이시즘, 모체 자체 모자이시즘, 쌍태아 소실 등으로 인함. 비정상 초음파 동반 시 PPV는 85% 이상으로 상승한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 산후 진단 및 신생아선별검사 (R1.14–R1.15)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R1.14 ⊕⊕○○</span> 45,X 핵형 + 남성화 징후가 있는 경우 PCR 등 분자유전학적 방법으로 Y염색체 물질을 선별검사한다(모든 45,X에서 일률적 시행은 권장하지 않음). 10–12%에서 정상/구조이상 Y염색체가 검출된다.</li>
+        <li><span class="rgrade">R1.15 ⊕○○○</span> TS를 식별하는 신생아선별검사 플랫폼 도입 전, 윤리적 쟁점·표현형 다양성·방법론적 한계·유전상담 실행가능성을 충분히 고려한다.</li>
+      </ul>
+      <div class="alert alert-diag"><span>💡</span><div>진단 지연은 여전히 큰 문제로, 진단이 늦어질수록 GH 치료 시작이 늦어져 성인신장 손실이 커지고, 청력·신장·심장·자가면역질환 등 조기 스크리닝 기회를 놓친다. 소아과 의사 대상 교육 강화, AI 기반 안면인식(DeepGestalt), 전자의무기록 알고리즘 기반 미진단 환자 발굴 등이 조기진단 개선 전략으로 제안된다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 유전체학 신지견 (methylome·transcriptome·약리유전학)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>TS 조직 전반에 걸쳐 <strong>전반적 저메틸화 및 유전자 하향조절</strong>이 관찰되며, X염색체 용량 민감 유전자(ZFX, KDM6A 등)가 상염색체 유전자 네트워크를 조절하는 것으로 제시됨</li>
+        <li>SHOX만이 저신장과의 연관성이 확실히 규명된 후보유전자이며, 나머지 표현형 관련 후보유전자들은 아직 결정적 근거가 부족함</li>
+        <li>GH 수용체(GHR) exon 3 결실(d3) 다형성이 rhGH 반응 예측 유전표지자로 제안되었으나 연구 간 결과가 상충되어 임상 적용에는 추가 검증이 필요함</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /diag -->
+
+<!-- ══════════════════ TAB 2: 성장·사춘기·HRT ══════════════════ -->
+<div id="tab-growth" class="panel">
+
+  <div class="alert alert-growth"><span>📏</span><div>성장(R2.1–R2.6)과 사춘기유도·성호르몬대체요법(R3.1–R3.10)을 다룬다. TS 성장부전은 <strong>출생 전부터</strong> 시작되며, 대부분 <strong>저성선자극호르몬성이 아닌 고성선자극호르몬성 성선기능저하증</strong>으로 사춘기 유도/유지를 위한 HRT가 필요하다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 성장호르몬(GH) 치료 (R2.1–R2.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="rgrade">R2.1 ⊕⊕⊕○</span> GH는 조기(만 2세부터 가능)에 시작한다 — 성장부전 증거(성장속도 저하/감소), 저신장, 저신장 예상 시. 골단이 열려 있는 한 늦게 시작해도 가능.</li>
+        <li><span class="rgrade">R2.2 ⊕⊕⊕○</span> 골연령 ≥14세 및/또는 성장속도 &lt;2cm/년까지 지속 가능; 골단폐쇄 이후 전환기까지 지속할 생리학적 근거는 없음.</li>
+        <li><span class="rgrade">R2.3 ⊕⊕⊕○</span> 시작용량 <strong>45–50 μg/kg/day (1.3–1.5 mg/m²/day)</strong>; 반응 불충분/신장 잠재력 크게 손상된 경우 최대 <strong>68 μg/kg/day (2.0 mg/m²/day)</strong>까지 증량 고려.</li>
+        <li><span class="rgrade">R2.4 ⊕⊕⊕○</span> 최소 6개월마다 신장 측정 후 표준 및/또는 TS 특이 성장도표에 도표화하여 반응 모니터링.</li>
+        <li><span class="rgrade">R2.5 ⊕○○○</span> 최소 연 1회 IGF-1 측정; 연령·사춘기·성별에 따른 정상범위 유지가 목표이며, 지속적으로 높은 값이면 감량 고려.</li>
+        <li><span class="rgrade">R2.6 ⊕⊕○○</span> 사춘기 전 초저용량 에스트로겐 병용을 성장촉진 목적으로 일상적으로 추가하지 않는다.</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div><strong>옥산드롤론</strong>은 저신장 예후가 나쁘거나 GH 단독 반응이 불충분한 경우 병용해왔으나(성인신장 +2~4cm), <strong>2023년 미국 FDA가 시판승인을 철회</strong>하여 현 지침위원회는 더 이상 권장하지 않는다(미국 외 지역은 현지 지침에 따름).</div></div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)">GH 치료 안전성 요약 <span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>두개내압 상승, 대퇴골두골단분리증, 척추측만증 위험이 상대적으로 증가할 수 있으나 척추측만증 자체는 GH 무관하게 TS에 흔함</li>
+            <li>대규모 레지스트리에서 신생물 위험 증가 근거 없음; 다만 기존 모반의 변화는 모니터링 권고</li>
+            <li>사망률 증가 근거 없음(SAGhE 연구의 신호는 GH 용량과 무관하여 치료효과로 해석되지 않음)</li>
+            <li>탄수화물대사: 일시적 인슐린저항 증가 가능하나 영구적 베타세포 기능 손상 근거 없음</li>
+            <li>대동맥질환 위험 증가에 대한 근거는 현재 불충분함</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌸</span> 사춘기 유도·에스트로겐 대체 (R3.1–R3.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="rgrade">R3.1 ⊕⊕⊕○</span> 8–9세부터 11–12세까지 매년 LH·FSH·AMH를 측정하여 가임력 보존을 위한 시의적절한 의뢰 시점을 놓치지 않는다.</li>
+        <li><span class="rgrade">R3.2 ⊕⊕⊕○</span> 연속 2회 이상 FSH 상승 확인 시 11–12세에 저용량 에스트로겐 대체를 시작하고, <strong>2–4년</strong>에 걸쳐 성인 대체용량까지 서서히 증량한다.</li>
+        <li><span class="rgrade">R3.3 ⊕○○○</span> 12세 이후 늦게 진단되었고 저신장·성장잠재력이 남아있으면 저용량 17β-에스트라디올(E2)을 GH와 동시 시작을 고려한다.</li>
+        <li><span class="rgrade">R3.4 ⊕⊕○○</span> 가능하면 <strong>경피(TD) E2</strong>를 우선하고 경구 E2를 차선으로 한다. 에티닐에스트라디올은 위험이 더 크지만 무치료보다는 낫다.</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>TS 여아의 1/3 이상이 사춘기 징후를 보이며(45,X가 아닌 경우 2배 흔함), 자연월경은 5명 중 1명, 자연임신 가능성은 약 10%다(모자이시즘에서 더 흔함).</div></div>
+
+      <div class="tbl-wrap" style="margin-top:10px">
+        <table class="tbl">
+          <tr><th>시기</th><th>TD E2 용량</th><th>경구 E2 용량</th><th>유방발달 목표</th><th>혈청 E2 목표</th></tr>
+          <tr><td>1년차(1–12개월)</td><td>7μg (패치 1/2 또는 1/4)</td><td>0.025mg/day</td><td>Tanner 2</td><td>&lt;50 pmol/L (13 pg/mL)</td></tr>
+          <tr><td>2년차(13–24개월)</td><td>12.5–14μg/day</td><td>0.5mg/day</td><td>Tanner 3</td><td>50–150 pmol/L (12–30 pg/mL)</td></tr>
+          <tr><td>3년차(25–36개월)</td><td>25–37.5μg/day</td><td>1mg/day</td><td>Tanner 4</td><td>150–450 pmol/L (30–120 pg/mL)</td></tr>
+          <tr><td>4년차(37–48개월)</td><td>50–200μg/day</td><td>2–4mg/day</td><td>Tanner 4–5</td><td>375 pmol/L (100 pg/mL)</td></tr>
+        </table>
+      </div>
+      <small>Table 4 요약 — 늦은 진단(성장잠재력 있음)의 경우 1–4개월/4–12개월/12–24개월 스케줄로 단축 가능. 자궁내막선조 &gt;4–8mm 또는 E2 노출 &gt;2년 + 돌발출혈 시 프로게스테론 추가를 고려한다.</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 프로게스테론 병합요법 (R3.5–R3.6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R3.5 ⊕⊕⊕⊕</span> 돌발출혈 발생 시(대개 무대응 에스트로겐 노출 18–24개월 후) 주기적 프로게스테론을 추가한다. 우선 선택은 <strong>미분화 프로게스테론 200mg, 월 10–12일</strong>.</li>
+        <li><span class="rgrade">R3.6 ⊕○○○</span> 젊은 여성은 순차 병합요법(비정상 자궁출혈 예방)을 우선 권장; 자궁내막이 안정된 이후에는 연속병합요법도 선택지.</li>
+      </ul>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>제제</th><th>순차병합-표준</th><th>순차병합-고용량</th><th>연속병합-표준</th></tr>
+          <tr><td>미분화 프로게스테론(경구/질)</td><td>200mg</td><td>≥200mg</td><td>100mg</td></tr>
+          <tr><td>디드로게스테론(경구)</td><td>10mg</td><td>20mg</td><td>5mg</td></tr>
+          <tr><td>메드록시프로게스테론아세테이트</td><td>5mg</td><td>10mg</td><td>2.5mg</td></tr>
+          <tr><td>노르에티스테론아세테이트</td><td>2.5–5mg</td><td>2.5–10mg</td><td>1.25–2.5mg</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>프로게스테론을 과소용량 투여하면 오히려 비정상 자궁출혈이 증가한다 — 에스트로겐 용량이 높을수록 프로게스테론도 비례하여 증량해야 한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> 치료 모니터링 및 성인 HRT (R3.7–R3.10)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R3.7 ⊕○○○</span> 유방발달·신장·자궁초음파·골밀도·혈청 E2 등 다중 지표로 치료효과를 평가하며, 성인 완전대체 시 E2 목표는 <strong>100–150 pg/mL (350–500 pmol/L)</strong>.</li>
+        <li><span class="rgrade">R3.8 ⊕○○○</span> 비정상 자궁출혈이 있는 청소년/여성은 자궁내막두께·혈청 E2 측정으로 용량 조정에 활용한다.</li>
+        <li><span class="rgrade">R3.9 ⊕⊕○○</span> 폐경 연령(약 50–55세)까지 주기적 E2+프로게스테론을 지속한 뒤 저용량 지속 여부를 재평가한다.</li>
+        <li><span class="rgrade">R3.10 ⊕⊕○○</span> 환자 선호를 반영한 <strong>개별화된</strong> E2+프로게스테론 대체로 순응도를 높인다.</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>제형</th><th>투여경로</th><th>성인 대체용량</th></tr>
+          <tr><td rowspan="2">에스트라디올</td><td>패치(TD)</td><td>50–200 μg/24h</td></tr>
+          <tr><td>겔</td><td>1.5–3 mg/day</td></tr>
+          <tr><td>에스트라디올</td><td>경구</td><td>2–4 mg/day</td></tr>
+          <tr><td rowspan="2">에티닐에스트라디올</td><td>패치(TD)</td><td>34 μg/24h</td></tr>
+          <tr><td>경구</td><td>20–30 μg/day</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>17β-에스트라디올(자연형)이 우선 선택 — BMD 개선, 자궁 성장, 혈압 저하, 간기능/HDL 개선 효과. 결합형 마수에스트로겐은 정맥혈전색전증 위험으로 더 이상 권장하지 않는다. 최대 37%의 51세 미만 여성이 HRT를 조기 중단하는 것으로 보고되어 순응도 관리가 중요하다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /growth -->
+
+<!-- ══════════════════ TAB 3: 심혈관 ══════════════════ -->
+<div id="tab-cv" class="panel">
+
+  <div class="alert alert-cv"><span>❤️</span><div>선천성/후천성 심혈관질환은 TS <strong>사망률 증가의 핵심 원인</strong>이다. R4.1–R4.43로 가장 많은 권고안을 포함하며, 선천성심장병, 대동맥 확장/박리, 고혈압, 부정맥, 임신 중 관리를 다룬다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💓</span> 선천성심장병 유병률 (Table 11)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>병변</th><th>TS 유병률</th><th>일반인구</th></tr>
+          <tr><td>전체 선천성심장병</td><td class="freq-vhigh">23–50%</td><td>0.8%</td></tr>
+          <tr><td>이엽대동맥판(BAV)</td><td class="freq-high">14–40%</td><td>1–2%</td></tr>
+          <tr><td>대동맥축착(CoA)</td><td class="freq-mod">4–15%</td><td>0.34%</td></tr>
+          <tr><td>대동맥궁 이상(bovine arch)</td><td class="freq-mod">6–29%</td><td>13%</td></tr>
+          <tr><td>부분폐정맥환류이상</td><td class="freq-low">4–16%</td><td>0.4–0.7%</td></tr>
+          <tr><td>좌심형성부전</td><td class="freq-low">4–5%</td><td>0.0002–0.0003%</td></tr>
+        </table>
+      </div>
+      <ul style="margin-top:8px">
+        <li><span class="rgrade">R4.1 ⊕⊕⊕○</span> TS가 강하게 의심되거나 산전 확진된 경우 태아 심초음파 시행.</li>
+        <li><span class="rgrade">R4.2 ⊕⊕⊕○</span> 여아 태아/소아에서 좌측 선천성심장병 진단 시 TS 검사 포함한 유전평가.</li>
+        <li><span class="rgrade">R4.4 ⊕⊕⊕○</span> 산전 TS 의심/확진 신생아는 생후 2–3일에 TTE 시행(CHD 의심 시 더 빨리).</li>
+        <li><span class="rgrade">R4.7 ⊕⊕⊕○</span> 진단 시점에 모든 소아·성인에서 TTE 시행(태아/신생아 검사가 정상이었어도).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📷</span> 심혈관 영상검사 스케줄 (R4.8–R4.11, Figure 2 요약)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-cv"><div class="st-num">신생아</div><div class="st-lbl">생후 2–3일<br>TTE</div></div>
+        <div class="stage-box st-cv"><div class="st-num">4–6세</div><div class="st-lbl">ECG, 혈압<br>추가영상 필요성 판단</div></div>
+        <div class="stage-box st-cv"><div class="st-num">9–11세</div><div class="st-lbl">TTE, ECG, 혈압<br>운동/스포츠 상담</div></div>
+        <div class="stage-box st-cv"><div class="st-num">15–16세 or<br>성장완료</div><div class="st-lbl">CMR 또는 CT<br>기저 대동맥 치수</div></div>
+        <div class="stage-box st-cv"><div class="st-num">전환기</div><div class="st-lbl">TTE·ECG 반복<br>임신·고혈압 상담</div></div>
+      </div>
+      <ul style="margin-top:8px">
+        <li><span class="rgrade">R4.8 ⊕⊕○○</span> 유의한 심혈관질환이 없으면 TTE는 9–11세, 성장완료/전환 시, 이후 성인기 5–10년마다 시행.</li>
+        <li><span class="rgrade">R4.10 ⊕⊕○○</span> 새로 진단된 모든 청소년·성인은 초기 선별 TTE에 더하여(또는 대신) <strong>CMR을 12개월 이내</strong> 시행.</li>
+        <li><span class="rgrade">R4.11 ⊕⊕○○</span> CMR을 견디지 못하거나 이용할 수 없으면 CT가 합리적 대안(둘 다 ECG-gated 흉부대동맥 평가 포함).</li>
+        <li><span class="rgrade">R4.12 ⊕⊕○○</span> 대동맥 확장·BAV가 있는 경우 흉통·목/어깨/등/옆구리 통증 등 대동맥박리 의심 급성 증상 시 즉시 진료받도록 교육.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 대동맥 확장·박리 (R4.13–R4.16, Table 12)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger"><span>🚨</span><div>대동맥 박리 발생률은 <strong>164/100,000 인년</strong>(일반인구 6/100,000의 약 27배). 평균 발생연령 30–35세로 젊으며, 상대적으로 <strong>작은 절대 직경에서도 박리</strong>가 발생하므로 신장으로 보정한 지표를 사용해야 한다.</div></div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>지표</th><th>산출법</th><th>확장 기준</th><th>고위험 기준</th></tr>
+          <tr><td>절대직경</td><td>직접측정(cm)</td><td>&gt;4.0</td><td>&gt;4.5</td></tr>
+          <tr><td>대동맥신장지수(AHI)</td><td>직경(mm)/신장(m)</td><td>&gt;20</td><td>&gt;25</td></tr>
+          <tr><td>대동맥크기지수(ASI)</td><td>직경(cm)/체표면적(m²)</td><td>&gt;2.0</td><td>&gt;2.5</td></tr>
+          <tr><td>Z-score</td><td>(x−μ)/σ</td><td>&gt;2.5</td><td>&gt;4</td></tr>
+        </table>
+      </div>
+      <ul style="margin-top:8px">
+        <li><span class="rgrade">R4.15 ⊕○○○</span> (성인) AHI&gt;23 / ASI&gt;2.3 / Z&gt;3.5의 중등도 확장 + 추가 위험인자(BAV, 대동맥축착, 고혈압, 연간 &gt;3mm 증가) 1개 이상이면 선택적 대동맥수술 평가. AHI&gt;25 / ASI&gt;2.5 / Z&gt;4의 중증 확장은 단독으로도 수술평가 대상.</li>
+        <li><span class="rgrade">R4.16 ⊕○○○</span> (소아) 성인보다 박리위험은 낮으나 유사한 원칙으로 개별화된 의사결정.</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>체중이 증가하면 ASI·Z-score는 오히려 낮아 보일 수 있어(체표면적 증가 때문) <strong>AHI가 실제 예측력이 가장 높다</strong>는 연구가 있다. 여러 지표를 함께 비교하는 것이 안전하다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏃</span> 운동·스포츠 참여 기준 (R4.27–R4.31)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>대동맥 상태</th><th>권고</th></tr>
+          <tr><td><span class="stage t-pref">정상(AHI&lt;20, Z&lt;2.5)</span></td><td>모든 스포츠 참여 가능</td></tr>
+          <tr><td><span class="stage t-notpref">경도~중등도 확장(AHI 20–23, Z 2.5–3.5)</span></td><td>저·중강도 경쟁스포츠는 가능하나 고강도 웨이트트레이닝은 회피</td></tr>
+          <tr><td><span class="stage t-neg">중등도~중증 확장(AHI&gt;23, Z&gt;3.5)</span></td><td>경쟁스포츠·고강도 웨이트트레이닝·흉부 접촉위험 활동 회피 권고</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-diag" style="margin-top:8px"><span>💡</span><div>대부분의 TS 여성은 운동의 이득이 매우 낮은 운동유발 박리 위험을 상회하므로, <strong>건강한 생활습관의 일환으로 유산소 운동을 적극 권장</strong>한다(R4.27, ⊕○○○).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 고혈압 (R4.17–R4.20, Figure 6)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R4.17 ⊕⊕○○</span> 모든 TS는 매년 혈압 평가(가능하면 24시간 활동혈압측정 ABPM)를 시행하고 고혈압 확인시 약물치료 시작.</li>
+        <li><span class="rgrade">R4.18 ⊕⊕○○</span> 고혈압 + 대동맥 확장(AHI≥20/ASI&gt;2.0/Z&gt;2.5)이 있으면 <strong>베타차단제, ARB 또는 병용</strong>.</li>
+        <li><span class="rgrade">R4.19 ⊕○○○</span> 고혈압이 없어도 대동맥 확장이 있으면 베타차단제/ARB 고려.</li>
+        <li><span class="rgrade">R4.20 ⊕⊕○○</span> 대동맥 확장이 없는 고혈압은 일반 소아/성인 고혈압 지침에 따라 치료(1차 ACEi 또는 ARB).</li>
+      </ul>
+      <div class="alert alert-warn"><span>⚠️</span><div>고혈압 유병률은 소아 20–40%, 성인 최대 60%로 일반인구 대비 3–4배 높으며, 정상 야간강하(nocturnal dipping)가 소실된 <strong>야간고혈압</strong>이 최대 50%에서 관찰되어 사무실 혈압만으로는 놓칠 수 있다 — ABPM을 10세경부터 권장한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🤰</span> 임신 중 심혈관 관리 (R4.32–R4.43)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R4.32 ⊕⊕○○</span> 임신/보조생식술 계획 <strong>2년 이내</strong> CMR 또는 CT로 심혈관 영상평가.</li>
+        <li><span class="rgrade">R4.33 ⊕○○○</span> 대동맥 확장 또는 위험인자 1개 이상 시 다학제팀(모체태아의학+심장내과)의 개별화된 주산기 관리.</li>
+        <li><span class="rgrade">R4.34 ⊕○○○</span> 중증 대동맥 확장(AHI&gt;25/ASI&gt;2.5/Z&gt;4) + 추가 위험인자 시 보조생식술/자연임신 자체를 회피할 것을 제안.</li>
+        <li><span class="rgrade">R4.35 ⊕⊕○○</span> 주산기 혈압을 <strong>&lt;130/80mmHg</strong>로 엄격히 관리하고 자간전증 예방 목적 저용량 아스피린 사용.</li>
+        <li><span class="rgrade">R4.36–R4.37</span> 저위험군은 임신 중 최소 1회(20주경) TTE, 위험인자 보유군은 12주마다 TTE.</li>
+        <li><span class="rgrade">R4.40 ⊕○○○</span> 중증 대동맥 확장 또는 박리 병력이 있으면 제왕절개를 선호.</li>
+        <li><span class="rgrade">R4.41 ⊕○○○</span> 분만 후에도 대동맥 박리 위험이 지속되므로 산후 심장영상·심장내과 진료 필요(중증군은 산후 2–6주 내 첫 방문).</li>
+      </ul>
+      <div class="alert alert-danger" style="margin-top:8px"><span>🚨</span><div>난자공여 임신은 <strong>자연임신·자가난자 IVF보다 합병증 위험이 더 높다</strong> — 보고된 TS 산모 사망은 대부분 TS에 대한 이해가 부족한 시술기관에서의 난자공여 임신에서 발생했다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /cv -->
+
+<!-- ══════════════════ TAB 4: 전환·가임력 ══════════════════ -->
+<div id="tab-transfert" class="panel">
+
+  <div class="alert alert-fert"><span>🔄</span><div>소아→성인 전환기 의료(R5.1–R5.4)와 가임력 평가·보존·상담(R6.1–R6.9)을 함께 다룬다. TS는 대부분 <strong>조기난소부전</strong>을 겪으므로 진단 즉시부터 가임력 논의를 시작해야 한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚪</span> 소아→성인 전환기 의료 (R5.1–R5.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-fert"><div class="st-num">12–14세</div><div class="st-lbl">전환 절차 논의 시작</div></div>
+        <div class="stage-box st-fert"><div class="st-num">14–18세</div><div class="st-lbl">전환준비도 평가<br>개별화 계획 수립</div></div>
+        <div class="stage-box st-fert"><div class="st-num">17–21세</div><div class="st-lbl">적절한 선별검사 확인<br>전환요약서 준비</div></div>
+        <div class="stage-box st-fert"><div class="st-num">18–26세</div><div class="st-lbl">성인 진료로 전환<br>성인 의료팀 편입</div></div>
+        <div class="stage-box st-fert"><div class="st-num">18–26세+</div><div class="st-lbl">전환 완료 확인<br>피드백 수집</div></div>
+      </div>
+      <ul style="margin-top:8px">
+        <li><span class="rgrade">R5.1 ⊕⊕○○</span> 청소년 초기부터 시작되는 <strong>의도적·정의된·개별화된</strong> 전환 경로.</li>
+        <li><span class="rgrade">R5.2 ⊕○○○</span> 여러 시점에서 전환준비도의 공식평가(TRAQ 등)로 필요·장벽 파악.</li>
+        <li><span class="rgrade">R5.3 ⊕⊕○○</span> 발달단계에 맞는 장기별 평가·상담을 전환 중 시행하고 인계 시 문서화.</li>
+        <li><span class="rgrade">R5.4 ⊕⊕○○</span> TS 동반질환 관리 전문성을 갖춘 성인 진료제공자에게 전환.</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>미국 전국 설문에서 성인 TS 여성 중 <strong>4%만</strong>이 권고되는 모든 정기건강검진을 받고 있었다 — 전환실패·성인 TS 전문의 부족이 핵심 원인. 담당의는 최소한 성인 내분비내과+심장내과 협진체계를 목표로 해야 한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🥚</span> 가임력 평가·상담 (R6.1–R6.4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="rgrade">R6.1 ⊕⊕⊕○</span> 가임력 저하 가능성에 대한 발달단계에 맞는 정보 제공 — 임신 가능성은 주로 46,XX 세포주 존재·자연초경 여부와 관련되며, 임신 시 모체·태아 합병증 위험이 일반인구보다 높음을 설명.</li>
+        <li><span class="rgrade">R6.2 ⊕⊕○○</span> 진단 후 가능한 한 빨리 가족구성 옵션(가임력 보존, 위탁양육, 입양, 대리모, 난자/배아공여, 무자녀 선택)에 대해 상담.</li>
+        <li><span class="rgrade">R6.3 ⊕⊕○○</span> TS 전문성을 갖춘 가임력 전문가에게 진단 시점부터 그리고 이후 지속적으로 의뢰 제공.</li>
+        <li><span class="rgrade">R6.4 ⊕○○○</span> 진단 시부터 모든 TS에게 AMH 측정을 제공하고, 가임력 보존을 고려하면 매년 추적한다.</li>
+      </ul>
+      <div class="alert alert-fert"><span>💡</span><div>자연임신 확률(약 10%)의 핵심 예측인자는 <strong>자연초경 병력</strong>과 <strong>45,X/46,XX 모자이시즘</strong>이다. 자연임신 시 유산율(29–48% vs 일반 15%), 조산·저체중아·자간전증(6.3–11% vs 3%) 위험이 모두 증가한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>❄️</span> 가임력 보존 (R6.5–R6.8)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R6.5 ⊕⊕⊕⊕</span> 임신 계획 전 <strong>철저한 심장검사·상담</strong>(모체태아의학+심장내과), 특히 난자/배아공여 고려 시.</li>
+        <li><span class="rgrade">R6.6 ⊕⊕⊕○</span> 초경 후, 심리적으로 성숙한 개인에게 <strong>난소자극+난자동결보존</strong>을 1차 가임력보존 옵션으로 권장(TS 전문성 있는 센터에서).</li>
+        <li><span class="rgrade">R6.7 ⊕○○○</span> 초경 전 소아 또는 충분히 성숙하지 않은 경우 난소자극+난자동결은 제공하지 않는다.</li>
+        <li><span class="rgrade">R6.8 ⊕○○○</span> 미성년자를 포함한 모든 TS에서 <strong>난소조직 동결보존은 기관윤리위원회 승인 연구</strong> 맥락에서만 제공.</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>예측인자</th><th>난자/난소조직에서 난포 발견 가능성 상승과 연관</th></tr>
+          <tr><td>핵형</td><td>모자이시즘(46,XX 세포주 존재) &gt; 45,X 단독</td></tr>
+          <tr><td>사춘기</td><td>자연 유방발달/초경 있음</td></tr>
+          <tr><td>AMH</td><td>측정 가능한 수치</td></tr>
+          <tr><td>FSH</td><td>&lt;10 IU/L</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>난자동결 성공 보고는 매우 제한적(생아출산 1례), 난소조직동결도 임신 1례만 보고되어 여전히 <strong>실험적 단계</strong>다 — 비현실적 기대를 갖지 않도록 상담이 중요하다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 윤리적 고려 및 공유의사결정 (R6.9)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R6.9</span> 가임력 보존·치료 논의 시 <strong>공유의사결정(shared decision-making)</strong>을 적용한다(Good Practice Statement).</li>
+        <li><b>선행(Beneficence):</b> 조기 의뢰가 결과를 개선할 수 있음; 옵션을 모두 탐색했다는 안정감 제공</li>
+        <li><b>무해(Nonmaleficence):</b> 소아 가임력 전문인력 부족, 장기결과 불확실성, 시술 내약성 우려를 인지해야 함</li>
+        <li><b>자율성(Autonomy):</b> 소아·청소년의 동의(assent)를 구하고 부모와의 소통을 촉진해야 함</li>
+        <li><b>정의(Justice):</b> 보험 비급여 등으로 접근성 불평등이 발생할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /transfert -->
+
+<!-- ══════════════════ TAB 5: 전신 건강감시 ══════════════════ -->
+<div id="tab-surv" class="panel">
+
+  <div class="alert alert-surv"><span>🩺</span><div>제7장(R7.1–R7.47)은 신생아기부터 노년까지 <strong>전신 장기별 감시 스케줄</strong>을 다룬다 — 안과·이비인후과·치과·피부/림프부종·신장·심대사질환·간질환·셀리악병·빈혈/IBD·골건강·골격이상·신생물·자가면역.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 신생아·영아기 (R7.1–R7.5)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>신생아기 사망률이 일반인구보다 10–16배 높음(특히 좌심형성부전 동반 시) — 신생아 케어 가능한 시설에서 분만 권고(R7.1, ⊕○○○)</li>
+        <li>퇴원 전 고관절 안정성·림프부종에 유의한 신체검진, 심초음파, 신장초음파 시행(R7.2, ⊕⊕○○)</li>
+        <li>생후 48시간 이내 수유전 혈당 모니터링(고인슐린성 저혈당 위험, KDM6A 반수체 부족과 연관)(R7.3, ⊕○○○)</li>
+        <li>생후 1년간 수유곤란·체중증가불량 모니터링·상담(R7.4, ⊕○○○)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👁️👂</span> 안과·이비인후과 (R7.6–R7.15)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>생후 6–12개월(또는 진단 시) 포괄적 안과검진, 이상 시 추적(사시 ~25%, 굴절이상 ~40%)(R7.6–7.7, ⊕⊕○○)</li>
+        <li>중이질환(삼출성 중이염 등) 검출 위해 소아기 매년 이경검사(R7.8, ⊕⊕○○), 5세까지 매년 고막운동성계측(R7.10, ⊕⊕○○)</li>
+        <li>신생아 청력선별검사 후 1–2세부터 소아·청소년기 2–3년마다, 성인 5년마다 행동청력검사(R7.9, ⊕⊕⊕○)</li>
+        <li>청력손실 36–84%에서 동반 — 전음성·감각신경성 모두 흔하며, 소아 초기부터 감시 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 치과·피부/림프부종·신장 (R7.16–R7.22)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>첫 치아맹출부터 평생 최소 연 1회 치과진료, 치주건강 특히 주의(R7.16, ⊕⊕⊕○)</li>
+        <li>연 1회 피부평가 — 림프부종은 출생 시 흔하며 2세경 호전되는 경과를 보이나 재발 가능(R7.19–7.20)</li>
+        <li>진단 시 신장초음파(말굽콩팥, 중복요관 각 15–20%)(R7.21, ⊕⊕⊕⊕); 신기능부전 위험인자 있으면 매년 요검사(R7.22, ⊕⊕○○)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍭</span> 심대사질환·간·자가면역 (R7.23–R7.34, R7.41–R7.42)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>10–12세부터 1–2년마다 HbA1c 또는 공복혈당으로 당뇨병 선별, 진단 시 자가항체 검사로 유형 감별(R7.24–7.25, 1형·2형 감별이 쉽지 않음)</li>
+        <li>10세부터 1–2년마다 간효소(ALT 최소) 측정, 성인은 AST·GGT·ALP 추가(R7.26, ⊕⊕○○); 정상상한 2배 이상 지속시 위장관 전문의 의뢰(R7.27, ⊕⊕⊕⊕)</li>
+        <li>2세부터 셀리악병 항체(TTG IgA+총 IgA) 선별 후 2–5년마다 반복(R7.30, ⊕⊕○○) — 유병률 약 1/22</li>
+        <li>2세부터 1–2년마다 TSH로 갑상선기능저하증 선별(R7.41, ⊕⊕○○) — 하시모토갑상선염이 가장 흔한 자가면역질환(평생 유병률 61%)</li>
+      </ul>
+      <div class="alert alert-surv"><span>💡</span><div>간효소 이상 40–80%에서 관찰되며 <strong>대사연관지방간질환(MAFLD)</strong>이 가장 흔한 원인이다. <strong>R7.29(⊕⊕⊕⊕): 간효소 이상이 있어도 HRT는 지속</strong>해야 한다 — 저성선기능 자체가 간효소이상의 위험요인이기 때문이다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골건강·골격이상 (R7.33–R7.38)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>칼슘·비타민D 섭취, 체중부하 운동, 에스트로겐 대체의 역할 상담(R7.33, ⊕⊕○○)</li>
+        <li>9–11세 비타민D 선별 후 2–3년마다 반복(R7.34, ⊕⊕○○)</li>
+        <li>성장 완료 후~21세 이전 DXA 시행, 이후 성인기 5–10년마다(R7.35, ⊕⊕○○) — <strong>FRAX는 신장보정이 안 되어 TS에서 권장하지 않음</strong></li>
+        <li>척추측만증은 골격성숙까지 최소 매년 신체검진으로 확인(R7.37, ⊕○○○)</li>
+        <li>성인 골다공증 유병률 약 23.8%, 골절률 25% 증가; 조기 에스트로겐 시작이 골밀도에 보호적</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 신생물·성선모세포종 (R7.39–R7.40)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><span class="rgrade">R7.39 ⊕⊕⊕⊕</span> 전반적 암 발생률은 일반인구와 유사하거나 소폭 증가 수준(연구별 상충) — 일반 인구 암 선별검사 지침을 그대로 따른다.</li>
+        <li><span class="rgrade">R7.40 ⊕⊕○○</span> 표준 핵형/FISH로 Y염색체 물질이 확인된 경우 <strong>성선절제술/난소난관절제술 시기</strong>를 개별화하여 결정 — 성선모세포종/이형성종 위험 대 가임력·성선기능 보존 이득을 저울질.</li>
+      </ul>
+      <div class="alert alert-warn"><span>⚠️</span><div>성선모세포종 보고빈도는 0–100%로 연구 간 편차가 매우 크며, 악성전환 위험은 비교적 낮음(1–22%)으로 보고된다 — 신뢰할 만한 추적 임상표지자/영상이 없어 상실추적 위험이 있음에 유의.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> TS 클리닉 운영 및 감시표 요약 (Table 17 발췌)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>생애주기</th><th>최소 방문주기</th><th>핵심 검사</th></tr>
+          <tr><td>영아기</td><td>3개월마다</td><td>체중/신장, 수유·저혈당 증상 확인</td></tr>
+          <tr><td>소아기(~9세)</td><td>6개월마다</td><td>신체검진, TSH·간효소·셀리악 항체(2–5년), 청력</td></tr>
+          <tr><td>사춘기전후(9–11세)</td><td>12개월마다</td><td>LH/FSH/AMH, 비타민D, 심혈관 영상</td></tr>
+          <tr><td>청소년기(12–17세)</td><td>12개월마다</td><td>E2 적정, DXA(18세 이전), CMR, 신경심리평가</td></tr>
+          <tr><td>성인 초기(18–21세)</td><td>전환 프로토콜</td><td>전환요약서, 가임력 상담, 심혈관 재평가</td></tr>
+          <tr><td>성인기</td><td>2년마다</td><td>지질(3년), 간효소(1–2년), DXA(5–10년), TTE(5–10년)</td></tr>
+        </table>
+      </div>
+      <ul style="margin-top:8px">
+        <li><span class="rgrade">R7.44 ⊕⊕⊕○</span> 모든 TS는 유전학·심장내과·내분비내과·생식의학·이비인후과·안과·신경발달·정신건강 전문가의 진료를 받아야 한다.</li>
+        <li><span class="rgrade">R7.45 ⊕⊕○○</span> 가능하면 전문 다학제클리닉 통원을 1차진료와 병행 권장.</li>
+        <li><span class="rgrade">R7.47 ⊕○○○</span> 원격의료는 TS 전문가 접근성을 높일 수 있어 의료·심리사회적 케어를 보완할 수 있다.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /surv -->
+
+<!-- ══════════════════ TAB 6: 신경인지·정신건강 ══════════════════ -->
+<div id="tab-neuro" class="panel">
+
+  <div class="alert alert-neuro"><span>🧠</span><div>제8장(R8.1–R8.7)은 신경인지 프로파일, 발달단계별 관리, 근거기반 심리사회적 개입, 심리교육, 성건강 상담을 다룬다. 지능은 약 90%에서 정상범위이나 <strong>언어능력 &gt; 시공간 추론능력</strong>의 특징적 불일치가 흔하다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 신경인지 프로파일</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><strong>강점:</strong> 언어적 추론능력, 언어 기반 학업능력</li>
+        <li><strong>약점:</strong> 시공간 추론·시지각-구성 능력, 미세운동, 수학(학습장애 유병률 10–79%로 보고 편차 큼), 처리속도, 실행기능/작업기억</li>
+        <li><strong>사회인지:</strong> 자폐스펙트럼장애(ASD) 위험 증가, 사회적 의사소통·또래관계 형성의 어려움</li>
+        <li><strong>ADHD:</strong> 일반인구 대비 유병률 증가(7–25%) — 소아기에는 과잉행동/충동형이, 성인기에는 부주의형이 더 두드러지는 경향</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>이 프로파일은 생애주기 전반에 걸쳐 <strong>안정적으로 지속</strong>되나 증상의 표현 양상은 연령에 따라 변화한다. 고리X 염색체 중 XIST 기능소실이 동반된 경우 더 중증의 인지표현형과 연관된다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 핵심 권고안 (R8.1–R8.7)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="rgrade">R8.1 ⊕⊕⊕○</span> 생애주기 전반에 걸쳐 인지/신경심리평가와 행동/사회/정서 선별검사를 진료에 통합한다.</li>
+        <li><span class="rgrade">R8.2</span> 만성질환에 동반되는 일반적 위험요인(간병부담, 학교결석, 또래관계 위협 등)에 대한 감시.</li>
+        <li><span class="rgrade">R8.3 ⊕⊕⊕○</span> 일반인구 대상 근거기반 인지/심리사회적 개입을 TS 특성에 맞춰 적용한다 — <strong>PEERS 사회기술훈련</strong> 프로그램이 TS 여아/청년에서 실현가능성 및 사회적 결과 개선 가능성을 보임.</li>
+        <li><span class="rgrade">R8.4</span> 전문의료진이 학교·지역사회 등 비의료 환경에서의 지원을 위한 <strong>"지원계획서(support plan)"</strong>를 준비한다.</li>
+        <li><span class="rgrade">R8.5</span> TS 관련 특징에 대한 개인적 이해와 의미를 강조하는 상담(비밀유지보다 개방적 소통이 자아개념 발달에 유리).</li>
+        <li><span class="rgrade">R8.6</span> 성건강·성적 웰빙에 대한 상담 제공 — 첫 연애·성경험 시기가 지연되는 경향, 신체상/유방 만족도가 성적 웰빙과 관련.</li>
+        <li><span class="rgrade">R8.7 ⊕○○○</span> 지역/국가 TS 동료지지 단체와의 네트워킹을 권장.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> ADHD 약물치료 시 유의점</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>정신자극제·아토목세틴은 <strong>심박수 증가·고혈압·부정맥 위험</strong>이 있어, TS의 높은 대동맥질환/QTc 연장 우려 유병률을 고려해 <strong>치료 시작 전 심장내과 협진 및/또는 ECG</strong>를 권장한다.</li>
+        <li>알파작용제(클로니딘, 구안파신)는 저혈압 효과를 고려하여 심장 관리와 함께 조율한다.</li>
+        <li>장기간 정신자극제 사용이 성인신장 감소와 연관될 수 있다는 최근 자료가 있어, GH 치료 중인 TS에서는 성장 목표와 ADHD 증상관리의 균형을 가족과 공유의사결정으로 정한다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💬</span> 발달단계별 접근</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><b>영유아기(0–4세):</b> 대운동 발달 다소 지연 가능; 언어·인지·기질은 대체로 정상범위</li>
+        <li><b>학령기(5–11세):</b> 언어-비언어 추론 불일치가 뚜렷해짐; 수학 학습장애·미세운동 취약성 부각; ADHD 진단 흔해짐</li>
+        <li><b>청소년기(12–17세):</b> 시공간·실행기능·사회인지 격차 지속(또래와 평행하게 발달하지만 절대적 격차는 유지); 우울 증상 부담이 서서히 증가</li>
+        <li><b>성인기(18세~):</b> 정신건강 문제(불안·우울) 부담 증가, 특히 청력장애·실업이 삶의 질과 강하게 연관; 사회적 고립·외로움 보고 증가</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /neuro -->
+
+</div><!-- /main -->
+
+<script>
+const STAT_DETAILS = {
+  prevalence: {
+    title: "터너증후군 유병률",
+    val: "여아 25–50명 / 100,000명",
+    color: "var(--diag)",
+    html: `
+      <div class="alert alert-diag"><span>📊</span><div>TS는 여성 신생아 <strong>25–50명당 1명(25–50/100,000)</strong>에서 발생하는 비교적 흔한 염색체이상 질환이다.</div></div>
+      <ul>
+        <li>NIPT 확대 도입으로 산전 우연 발견 사례가 증가하는 추세</li>
+        <li>진단 지연이 여전히 흔한 문제 — 저신장이 소아 진단의 가장 흔한 계기</li>
+        <li>미국 인구기반 코호트(2000–2017)에서도 진단 지연 양상이 지속됨이 확인됨</li>
+      </ul>
+    `
+  },
+  karyotype: {
+    title: "45,X 단일염색체 핵형 비율",
+    val: "40–50%",
+    color: "var(--diag)",
+    html: `
+      <div class="alert alert-diag"><span>🧬</span><div>가장 흔한 핵형은 <strong>45,X 단일염색체(monosomy X)</strong>로 전체의 40–50%를 차지하며, 다른 핵형보다 동반질환 빈도와 사망률이 유의하게 높다.</div></div>
+      <ul>
+        <li>45,X/46,XX 모자이시즘(15–25%)은 표현형이 경미하고 자연월경·자연임신이 더 흔함</li>
+        <li>45,X/46,XY 모자이시즘(10–12%)은 감시지침이 동일 적용되며 성선모세포종 위험 평가가 필요함</li>
+        <li>고리X 염색체는 XIST 기능소실 동반 시 더 중증의 인지표현형과 연관됨</li>
+      </ul>
+    `
+  },
+  chd: {
+    title: "선천성 심장병 동반율",
+    val: "40–60%",
+    color: "var(--cv)",
+    html: `
+      <div class="alert alert-cv"><span>❤️</span><div>연령·영상기법에 따라 다르나 TS의 <strong>40–60%</strong>에서 선천성심장병이 확인되며, 좌측 유출로 병변(이엽대동맥판·대동맥축착)이 가장 흔하다.</div></div>
+      <ul>
+        <li>이엽대동맥판(BAV) 14–40% — 일반인구의 약 20배</li>
+        <li>대동맥축착 4–15% — 여아 대동맥축착의 최소 13%가 TS로 확인됨</li>
+        <li>45,X 핵형에서 선천성심장병 빈도가 다른 핵형보다 유의하게 높음</li>
+      </ul>
+    `
+  },
+  dissection: {
+    title: "대동맥 박리 발생률",
+    val: "164 / 100,000 인년",
+    color: "var(--cv)",
+    html: `
+      <div class="alert alert-danger"><span>🚨</span><div>TS의 대동맥 박리 발생률은 <strong>164/100,000 인년</strong>으로 일반인구(6/100,000 인년)의 <strong>약 27배</strong>다.</div></div>
+      <ul>
+        <li>70%는 상행대동맥(A형), 30%는 하행흉부대동맥(B형)에서 발생</li>
+        <li>평균 발생 연령 30–35세로 다른 유전성 대동맥병증과 유사하게 젊음</li>
+        <li>상대적으로 작은 절대 직경에서도 박리가 발생하므로 신장으로 보정한 AHI/ASI/Z-score 사용이 필수</li>
+        <li>이엽대동맥판·대동맥축착·고혈압·연간 3mm 이상 증가가 추가 위험인자로 작용</li>
+      </ul>
+    `
+  },
+  fertility: {
+    title: "자연임신 가능률",
+    val: "약 10%",
+    color: "var(--fert)",
+    html: `
+      <div class="alert alert-fert"><span>🥚</span><div>TS 여성의 자연임신 가능성은 <strong>약 10%</strong>로, 조기난소부전이 있어도 완전 불임은 아니다.</div></div>
+      <ul>
+        <li>핵심 예측인자는 자연초경 병력과 45,X/46,XX 모자이시즘 여부</li>
+        <li>자연임신 시 유산율 29–48%(일반 15%), 자간전증 6.3–11%(일반 3%)로 위험 증가</li>
+        <li>난자동결·난소조직동결 등 가임력보존 기술은 아직 초기 단계이며 생아출산 성공사례가 매우 제한적</li>
+        <li>난자/배아공여를 통한 임신도 옵션이나, 임신 전 철저한 심장평가가 필수</li>
+      </ul>
+    `
+  },
+  height: {
+    title: "GH 치료 시 평균 성인신장 이득",
+    val: "+5 ~ 8 cm",
+    color: "var(--growth)",
+    html: `
+      <div class="alert alert-growth"><span>📏</span><div>무작위대조시험 근거에 따르면 GH 치료로 성인신장이 평균 <strong>5–8cm</strong> 증가한다(일부 조기 고용량 치료 연구에서는 15–17cm까지 보고).</div></div>
+      <ul>
+        <li>치료를 받지 않으면 성인신장이 일반 여성 평균보다 약 20cm(−3SD) 작음(국가별 138–147cm)</li>
+        <li>조기 치료(2–6세)와 4년 이상 사춘기 전 치료기간이 더 큰 이득과 연관</li>
+        <li>GH 1년 치료당 대략 1cm의 이득이 누적되는 것으로 추정됨</li>
+        <li>옥산드롤론 병용은 추가 2–4cm 이득이 있었으나 2023년 FDA 승인철회로 더 이상 권장되지 않음</li>
+      </ul>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"ABPM", def:"Ambulatory Blood Pressure Monitoring — 24시간 활동혈압측정" },
+  { term:"AHI",  def:"Aortic Height Index — 대동맥신장지수(직경mm/신장m)" },
+  { term:"AMH",  def:"Anti-Müllerian Hormone — 항뮐러관호르몬" },
+  { term:"ART",  def:"Assisted Reproductive Technology — 보조생식술" },
+  { term:"ASD",  def:"Autism Spectrum Disorder — 자폐스펙트럼장애" },
+  { term:"ASI",  def:"Aortic Size Index — 대동맥크기지수(직경cm/체표면적m²)" },
+  { term:"BAV",  def:"Bicuspid Aortic Valve — 이엽대동맥판" },
+  { term:"BMD",  def:"Bone Mineral Density — 골밀도" },
+  { term:"CHD",  def:"Congenital Heart Disease — 선천성심장병" },
+  { term:"CMR",  def:"Cardiovascular Magnetic Resonance — 심혈관 자기공명영상" },
+  { term:"CoA",  def:"Coarctation of the Aorta — 대동맥축착" },
+  { term:"DXA",  def:"Dual-energy X-ray Absorptiometry — 이중에너지 X선 흡수계측(골밀도검사)" },
+  { term:"E2",   def:"17β-Estradiol — 17베타-에스트라디올" },
+  { term:"ECG",  def:"Electrocardiogram — 심전도" },
+  { term:"FIB-4",def:"Fibrosis-4 score — 간섬유화 예측점수" },
+  { term:"FISH", def:"Fluorescence In Situ Hybridization — 형광제자리부합법" },
+  { term:"FSH",  def:"Follicle Stimulating Hormone — 난포자극호르몬" },
+  { term:"GH",   def:"Growth Hormone — 성장호르몬" },
+  { term:"GRADE",def:"Grading of Recommendations, Assessment, Development and Evaluation — 근거등급 평가체계" },
+  { term:"HRT",  def:"Hormone Replacement Therapy — 호르몬대체요법" },
+  { term:"IGF-1",def:"Insulin-like Growth Factor 1 — 인슐린유사성장인자-1" },
+  { term:"LFA",  def:"Liver Function Abnormality — 간기능이상" },
+  { term:"LH",   def:"Luteinizing Hormone — 황체형성호르몬" },
+  { term:"MAFLD",def:"Metabolic-Associated Fatty Liver Disease — 대사연관지방간질환" },
+  { term:"MDC",  def:"Multidisciplinary Clinic — 다학제클리닉" },
+  { term:"NIPT", def:"Non-Invasive Prenatal Testing — 비침습 산전검사" },
+  { term:"OTC",  def:"Ovarian Tissue Cryopreservation — 난소조직 동결보존" },
+  { term:"PCR",  def:"Polymerase Chain Reaction — 중합효소연쇄반응" },
+  { term:"PEERS",def:"Program for the Education and Enrichment of Relational Skills — 사회기술훈련 프로그램" },
+  { term:"PPV",  def:"Positive Predictive Value — 양성예측도" },
+  { term:"QTc",  def:"Corrected QT interval — 보정 QT간격" },
+  { term:"SHOX", def:"Short stature HOmeoboX gene — 저신장호메오박스 유전자" },
+  { term:"TD",   def:"Transdermal — 경피(투여경로)" },
+  { term:"TRAQ", def:"Transition Readiness Assessment Questionnaire — 전환준비도 평가설문" },
+  { term:"TS",   def:"Turner Syndrome — 터너증후군" },
+  { term:"TSH",  def:"Thyroid Stimulating Hormone — 갑상선자극호르몬" },
+  { term:"TTE",  def:"Transthoracic Echocardiography — 경흉부심초음파" },
+  { term:"TTG",  def:"Tissue Transglutaminase antibody — 조직트랜스글루타미나제 항체(셀리악병 선별)" },
+  { term:"Z-score", def:"연령·체격 보정 표준편차 점수(대동맥 직경 평가 등에 사용)" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+const FONT_ZOOM_STEPS = [90, 100, 110, 125, 140];
+let fontZoomIdx = 1;
+function cycleFontZoom() {
+  fontZoomIdx = (fontZoomIdx + 1) % FONT_ZOOM_STEPS.length;
+  const pct = FONT_ZOOM_STEPS[fontZoomIdx];
+  document.documentElement.style.setProperty('--fscale', pct / 100);
+  document.getElementById('font-zoom-label').textContent = pct + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

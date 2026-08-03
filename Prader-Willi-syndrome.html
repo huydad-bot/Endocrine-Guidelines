@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프래더-윌리 증후군(PWS) 소아·전환기 진료 참고자료</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev: #0f6e5c;      /* 영양·성장 — 청록 */
+    --predict: #0550ae;  /* 성장호르몬 — 청 */
+    --tx: #7c3aed;       /* 사춘기·내분비 — 보라 */
+    --monitor: #9b1c2e;  /* 신체건강 — 진홍 */
+    --behav: #b35900;    /* 발달·행동·정신건강 — 주황 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 7px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--behav); color:#fff; padding:3px 7px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(11.5px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 560px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f1; border-left: 3px solid var(--dev);  color: #0f5549; }
+  .alert-predict { background: #ddf4ff; border-left: 3px solid var(--predict); color: #0550ae; }
+  .alert-tx      { background: #ede9fe; border-left: 3px solid var(--tx);  color: #5b21b6; }
+  .alert-monitor { background: #fce8eb; border-left: 3px solid var(--monitor); color: var(--monitor); }
+  .alert-behav   { background: #fdf0e0; border-left: 3px solid var(--behav); color: #7a3d00; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev     { background: #e0f4f1; color: var(--dev); border: 1px solid var(--dev); }
+  .t-predict { background: #ddf4ff; color: var(--predict); border: 1px solid var(--predict); }
+  .t-tx      { background: #ede9fe; color: var(--tx); border: 1px solid var(--tx); }
+  .t-behav   { background: #fdf0e0; color: var(--behav); border: 1px solid var(--behav); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--monitor); border: 1px solid var(--monitor); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-gnrh { background: #e0f4f1; color: #0f5549; }
+  .drug-hcg  { background: #fce8eb; color: var(--monitor); }
+  .drug-fsh  { background: #ddf4ff; color: #0550ae; }
+  .drug-seq  { background: #ede9fe; color: #5b21b6; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(13px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-dev     { background: #e0f4f1; }
+  .st-predict { background: #e6f0fb; }
+  .st-tx      { background: #ede9fe; }
+  .st-monitor { background: #fde8eb; }
+  .st-behav   { background: #fdf0e0; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-dev     { background: #e0f4f1; border: 1.5px solid var(--dev); color: #0f5549; }
+  .gear-predict { background: #e6f0fb; border: 1.5px solid var(--predict); color: #0550ae; }
+  .gear-tx      { background: #ede9fe; border: 1.5px solid var(--tx); color: #5b21b6; }
+  .gear-monitor { background: #fde8eb; border: 1.5px solid var(--monitor); color: var(--monitor); }
+  .gear-behav   { background: #fdf0e0; border: 1.5px solid var(--behav); color: #7a3d00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 190px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+
+  .rec-tbl td:nth-child(1) { width: 30px; text-align:center; font-weight:700; color:var(--text2); }
+  .grade-strong { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#dafbe1; color:var(--green); border:1px solid var(--green); white-space:nowrap; }
+  .grade-weak   { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#fff3cd; color:#7d4e00; border:1px solid var(--yellow); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>P</span><span>W</span>
+      </div>
+      <h1>프래더-윌리 증후군(PWS) 소아·전환기 진료 참고자료</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Shaikh MG, Barrett TG, Bridges N, et al. Endocrine Connections. 2024;13:e240091. doi:10.1530/EC-24-0091 (Society for Endocrinology / European Society of Endocrinology)</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 저자·학회의 공식 승인을 받지 않은 개인 참고자료다 (This tool is not officially endorsed by the authors or any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('nutrition')">🍼 영양·성장</div>
+    <div class="tab" onclick="showTab('gh')">📈 성장호르몬</div>
+    <div class="tab" onclick="showTab('endo')">🧬 사춘기·내분비</div>
+    <div class="tab" onclick="showTab('physical')">🦴 신체건강</div>
+    <div class="tab" onclick="showTab('behav')">🧠 발달·행동·전환</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:120px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('incidence')"><div class="stat-val" style="color:var(--dev)">1/10,000<br>~1/30,000</div><div class="stat-lbl">출생 유병률</div></div>
+    <div class="stat-box" onclick="openStatModal('genetics')"><div class="stat-val" style="color:var(--predict)">결실 65–70%<br>mUPD 25–30%</div><div class="stat-lbl">주요 유전 아형</div></div>
+    <div class="stat-box" onclick="openStatModal('mortality')"><div class="stat-val" style="color:var(--tx)">비만 관련</div><div class="stat-lbl">성인기 조기사망<br>주요 원인</div></div>
+    <div class="stat-box" onclick="openStatModal('mdt')"><div class="stat-val" style="color:var(--behav)">평생<br>다학제</div><div class="stat-lbl">관리 원칙</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev">
+        <span>✅</span>
+        <div>프래더-윌리 증후군(PWS)은 15번 염색체 15q11-q13 부계 유전자 발현 소실로 발생하는 <strong>희귀 복합 유전성 신경발달질환</strong>이다. 신생아기 근긴장저하·수유곤란·성장부전이 특징이며, 소아기 이후 <strong>과식증(hyperphagia)과 급격한 체중증가 위험</strong>이 나타난다. 시상하부 기능이상에 의한 내분비질환(성장호르몬 결핍, 성선기능저하증), 척추측만증, 수면무호흡, 발달지연·행동문제·정신건강 문제가 동반되며, <strong>과식증에 대한 근본적 약물치료는 아직 없다</strong>.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">🍼 영양·성장</div>
+          단계별 영양관리·식품안전(food security)·운동<br>
+          <small>비만 예방이 평생 관리의 핵심</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">📈 성장호르몬</div>
+          가능한 생후 1세 이전 시작, 시작 전 수면다원검사 필수<br>
+          <small>체구성·근기능 개선이 주된 목적</small>
+        </div>
+        <div class="gear-box gear-tx">
+          <div class="gear-title">🧬 사춘기·내분비</div>
+          성선기능저하증은 PWS의 항상 동반되는 특징<br>
+          <small>갑상선·당뇨병 등 정기 선별 필요</small>
+        </div>
+      </div>
+      <div class="alert alert-behav" style="margin-top:8px">
+        <span>🧠</span>
+        <div>인지·행동·정신건강 문제, 통증/체온 인지저하로 인한 급성질환 위험, 성인기 전환의 어려움 등 <strong>생물-심리-사회적 전 영역</strong>에 대한 지속적 관리가 필요하다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👥</span> 다학제팀(MDT) 구성 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>가족이 여러 병원을 따로 방문하지 않도록, PWS 다학제 진료는 <strong>소아내분비과 전문의가 조율(coordinator)</strong>하며 아래 전문가들과 협진하는 것이 가장 적절하다.</div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>전문 분야</th><th>PWS에서의 역할</th></tr>
+          <tr><td>지역사회 소아과</td><td>발달, 교육계획(EHCP) 연계</td></tr>
+          <tr><td>치과</td><td>법랑질 이상·충치 관리</td></tr>
+          <tr><td>영양사</td><td>식이일지·칼로리 처방, 단계별 영양관리</td></tr>
+          <tr><td>내분비과(소아·성인)</td><td>성장·사춘기 평가, GH/성호르몬 치료, 진료 조율자</td></tr>
+          <tr><td>유전학과</td><td>유전상담</td></tr>
+          <tr><td>산부인과(필요시)</td><td>청소년기 에스트로겐 보충</td></tr>
+          <tr><td>작업치료</td><td>소근육·감각 문제</td></tr>
+          <tr><td>안과</td><td>사시·약시·굴절이상</td></tr>
+          <tr><td>정형외과/척추외과</td><td>척추측만증 위험평가·보조기/수술</td></tr>
+          <tr><td>정신건강의학과/심리/CAMHS</td><td>정신건강·행동문제</td></tr>
+          <tr><td>호흡기내과</td><td>중추성·폐쇄성 수면무호흡, 수면검사·비침습환기</td></tr>
+          <tr><td>사회복지사</td><td>조기지원·장애아동팀</td></tr>
+          <tr><td>전문간호사</td><td>상담·지지</td></tr>
+          <tr><td>언어치료사</td><td>수유지연·언어장애</td></tr>
+          <tr><td>비뇨기과</td><td>잠복고환·고환고정술</td></tr>
+          <tr><td>환자단체(PWS협회)</td><td>가족 지지·자원 제공</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 유전진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>PWS는 15q11-13 영역, 특히 <strong>SNORD116</strong> 유전자 클러스터를 포함한 부계 유전자 발현 소실로 발생</li>
+        <li>유전 아형: ① 부계 15q11-13 결실(60–70%, breakpoint에 따라 type I–IV), ② 모계 단친이염색체(mUPD, 20–40%, 최근 모계연령 증가로 비율 상승 추세), ③ 각인센터 결함/이상메틸화(&lt;5%), ④ 재배열/전위 또는 SNORD116 미세결실(&lt;1%)</li>
+        <li>1차 검사: SNRPN 유전자 메틸화 패턴 분석 — 비정상이면 PWS 확진, 정상이면 염색체 재배열이 없는 한 99% 확률로 배제</li>
+        <li>아형 세분류: FISH 또는 MLPA로 결실 평가; 결실이 없으면 부모 시료를 이용한 일배체형 분석으로 mUPD 확인; 둘 다 없으면 각인센터 결함 가능성 평가</li>
+        <li>mUPD는 결실형에 비해 <strong>자폐/정신과적 특성 위험이 높음</strong> — 유전 아형이 표현형에 영향을 줄 수 있음</li>
+        <li>de novo 부계결실·mUPD의 재발위험은 낮음(&lt;1%)이나, 염색체 재배열·각인센터 이상은 재발위험이 높음 — 환자와 부모는 최소 1회 임상유전학 상담을 받을 것을 권고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 초기평가 — 병력·진찰 항목 (Table 2·3)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">중점 병력 항목</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>임신력(태동감소/양수과다), 분만력, 출생체중, Apgar, 신생아 저혈당</li>
+            <li>영아기: 수유곤란, 근긴장저하, 소음경/잠복고환, hCG 자극검사 결과</li>
+            <li>골격/성장: 저신장, 작은 손발, 척추측만증</li>
+            <li>피부: 피부뜯기, 목욕후 홍반, 쉬운 멍</li>
+            <li>식이: 과식증, 치아우식, 비만, 음식 은닉/절도, 신체활동</li>
+            <li>호흡: 반복감염, 수면무호흡, 수면중 저환기, 기면발작</li>
+            <li>중추신경발달: 발달장애/학습장애, 행동문제, 자폐/강박 성향</li>
+            <li>교육·사회: 특수교육 필요, 주 양육자, 장애수당 수급</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">중점 진찰 항목</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>성장: 신장·체중·BMI·부모 신장</li>
+            <li>치아: 우식, 끈적한 침</li>
+            <li>골격: 척추측만증</li>
+            <li>피부: 피부뜯기, 쉬운 멍</li>
+            <li>전신: 심폐·위장관·신경(근긴장·근력)</li>
+            <li>비뇨생식기: 고환위치/소음경</li>
+            <li>사춘기: Tanner 단계</li>
+            <li>눈: 사시</li>
+            <li>발달: 대운동/소운동·시력/청력·언어/사회성</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 영양·성장 ══════════════════ -->
+<div id="tab-nutrition" class="panel">
+
+  <div class="alert alert-dev">
+    <span>🍼</span>
+    <div>PWS의 영양단계는 복잡하며 <strong>영아기 수유곤란 → 이후 과식증에 따른 체중증가</strong>로 단순화되기보다 점진적·다단계로 진행된다. 비만 예방이 평생 관리의 최우선 과제이다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 신생아기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>근긴장저하로 수유곤란·호흡문제가 흔해 신생아집중치료실 입원이 대개 필요하며, 전형적 소견에도 불구하고 진단이 지연되는 경우가 있음</li>
+        <li>구인두 근긴장저하로 흡철력 저하·연하곤란 → 비위관 수유가 흔히 필요하나 위루술까지 필요한 경우는 드묾; 생후 6–12개월경 경구영양이 충분해짐</li>
+        <li>모아유대에 중요한 옥시토신 수치가 스트레스로 저하될 수 있어, 의료진의 적극적 부모-아기 유대 지지가 중요 — 옥시토신 치료의 초기 긍정적 보고가 있으며 <strong>생후 6개월 미만이 효과의 결정적 시기</strong>일 가능성 있음</li>
+        <li>신생아기 수면무호흡 평가가 필수적임(성장호르몬 탭 참조)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📏</span> 성장 평가·영양요구량</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>국가별 표준 성장차트 사용(4세까지 WHO 차트, 이후 국가차트); PWS 전용 차트는 코호트가 작아 전체 인구에 적용하기 어려움</li>
+        <li>PWS는 영아기부터 <strong>제지방량(근육량) 감소·체지방량 증가</strong>가 나타나 BMI 해석에 주의 필요 — 신장 대비 일정한 백분위수를 유지하는 안정적 체중 궤적을 목표로 함</li>
+        <li>동일 열량 섭취에도 근긴장저하로 인한 활동량·근육량 저하로 조기소아기에 체중이 증가할 수 있음; 과식증은 대개 <strong>4–8세</strong>경 발생</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>시기</th><th>에너지요구량 특징</th></tr>
+          <tr><td>영아기</td><td>수유곤란 시기이므로 적절한 성장을 위해 요구량 증가 가능</td></tr>
+          <tr><td>2세 이후~소아기</td><td>일반적으로 감소, 정기적 성장모니터링 필수</td></tr>
+          <tr><td>소아기·청소년기</td><td>권장량의 60–80%, 체중유지 10–12 kcal/cm, 체중감량 6–8 kcal/cm</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>청소년기는 독립성 욕구 증가·비감독 음식접근·일과 변화 등으로 체중증가 위험이 특히 높다. 성인기 진입 시 비만 유병률이 82–98%로 보고되나, <strong>영아기부터의 조기·지속적 개입</strong>이 성인기 비만의 빈도·중증도를 낮춘다는 근거가 있다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 식이보충제·전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="acc" style="border:none">
+          <div class="acc-hdr open" onclick="toggleAcc(this)"><span>비타민·미네랄</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>연령에 맞는 종합비타민·미네랄 보충 권고(처방 또는 일반의약품)</li>
+              <li>비타민D·칼슘·아연·철 섭취 부족이 흔히 보고됨 — 정기 확인 필요</li>
+              <li>MCT유·코엔자임Q10·카르니틴은 근거 부족·고비용으로 <strong>일상적 사용을 권고하지 않음</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="border:none">
+          <div class="acc-hdr" onclick="toggleAcc(this)"><span>약물·수술적 접근</span><span class="acc-toggle">▾</span></div>
+          <div class="acc-body">
+            <ul>
+              <li>과식증 치료를 위한 <strong>승인된 약물은 현재 없음</strong>; 디아족사이드 콜린이 임상시험에서 유망한 결과를 보였으나 아직 표준치료 아님</li>
+              <li><strong>비만대사수술은 권고하지 않음</strong> — 5년 후 체중 재증가 등 장기성적 불량</li>
+              <li>케톤생성식이 등 특수식이는 근거 없고 영양불균형 위험 있어 권고하지 않음</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>이유식 시작 시점부터 과식증 발생 이전에 <strong>엄격한 식사 루틴과 음식접근 통제</strong>로 좋은 식습관을 확립하는 것이 핵심이다 — 소분(portion control)·칼로리 계산 등의 전략이 활용된다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔒</span> 식품안전(Food Security)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>과식증·음식탐색행동은 조기소아기에 시작해 평생 지속됨 — 모든 환경(가정·학교 등)에서 일관된 식품안전 실천이 필요</li>
+        <li>물리적 개입(냉장고·찬장 잠금), 간접적 개입(용돈 관리), 행동적 개입(식사시간 외 음식요청에 대한 일관된 대응)을 종합한 <strong>'No Hope, No Doubt, No Disappointment'</strong> 방법이 제안됨</li>
+        <li>식품안전은 물리적 통제를 넘어, 정해진 양의 음식이 정해진 시간에 제공될 것이라는 <strong>심리적 확신</strong>까지 포함하며, 확대가족·학교와의 협조가 필요함</li>
+        <li>음식 접근이 발생해 과식했을 때 처벌하지 말고, 재발 방지를 위한 논의로 접근할 것 — 흔히 타인의 실수(잠금 잊음 등)가 원인이 됨</li>
+        <li>성인기 전환 시 독립성 부여가 바람직하나, <strong>대다수 성인 PWS는 스스로 적절한 음식 선택을 하지 못하므로</strong> 평생 지지가 필요함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏃</span> 근기능·운동</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>최근 체계적 문헌고찰에서 운동이 유익하며 PWS 관리에 최적화되어야 함이 확인됨 — 체중 2–12% 감소, 알려진 부작용 없음</li>
+        <li>운동 종류를 본인이 선택하도록 돕는 등의 전략이 지속적 참여를 높임</li>
+        <li>근육량·근력 저하 외에도 구조적·기능적 근육이상, 피질 운동신호 이상이 동반됨</li>
+        <li>운동은 식이제한과 병행되어야 하며 단독으로는 체중증가를 막지 못함; 교육계획(EHCP)에 신체활동 기회를 포함할 것</li>
+        <li>성장호르몬은 근육량·기능 개선에 추가적 이점을 제공함</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /nutrition -->
+
+<!-- ══════════════════ TAB 3: 성장호르몬 ══════════════════ -->
+<div id="tab-gh" class="panel">
+
+  <div class="alert alert-predict">
+    <span>📈</span>
+    <div>성장호르몬(GH) 치료는 영국·아일랜드에서 PWS 소아에게 허가되어 있다. 최종 신장보다 <strong>체구성 개선이 주된 사용 목적</strong>이며, 시작 전 반드시 수면다원검사가 필요하다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💡</span> GH 치료의 효과·개시연령</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>진성 성장호르몬결핍은 검사방법에 따라 PWS 환자의 40–100%에서 확인되나, <strong>치료 시작 전 GH 자극검사는 필수가 아님</strong></li>
+        <li>주된 이점은 체구성 개선(제지방량 증가·체지방량 감소)이며, 운동발달·인지에도 부가적 이점 보고 — 인지·행동에 대한 효과는 연구마다 상반되어 <strong>여전히 논쟁적</strong></li>
+        <li>지질프로파일 개선 등 대사적 이점도 있음; 과식증·비만 발생 전 조기 시작이 권고됨</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px">
+        <span>📌</span>
+        <div>인지·언어·근긴장에 대한 잠재적 이점과 비만 발생 전 조기치료 필요성을 고려해, <strong>가능하면 생후 1세까지는 GH를 시작할 것을 권고</strong>한다(일부 연구는 생후 3개월부터 시작). 1세 이전 시작이 수면무호흡을 악화시킨다는 근거는 없다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>😴</span> GH 시작 전·수면검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>GH 치료는 PWS에서 드물게 급사와 연관성이 보고되어 있으며, 기전은 <strong>폐쇄성 수면무호흡(OSA)</strong>(근긴장저하·편도비대·비만의 조합)으로 추정됨 — 다만 GH를 사용하지 않은 환자에서도 조기사망이 있어 GH의 직접적 인과관계는 불확실</li>
+        <li>GH가 IGF-1 상승을 통해 아데노이드·편도림프조직을 증가시켜 OSA 위험을 높일 가능성 있음</li>
+        <li><strong>심각한 비만/지속적 체중증가, 미치료 중등도-중증 OSA, 조절되지 않는 2형당뇨병·고혈압</strong>이 있으면 GH 시작이 적절하지 않을 수 있음 — 해당 문제 조절 후 재고려</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>검사 시점</th><th>권고</th></tr>
+          <tr><td>GH 시작 전</td><td class="freq-vhigh">심폐 수면다원검사 필수(산소포화도 검사만으로는 불충분)</td></tr>
+          <tr><td>GH 시작 2–3개월 후</td><td class="freq-high">추적 수면다원검사 시행</td></tr>
+          <tr><td>5세 미만 GH 치료중</td><td class="freq-mod">최소 2–3년마다 심폐 수면다원검사(악화 우려 시 더 자주)</td></tr>
+          <tr><td>5세 이상</td><td class="freq-low">임상적 우려(체중증가·무기력·행동변화) 시 시행; 연령무관 매년 맥박산소포화도 선별 고려</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>중추성 수면무호흡은 GH 치료를 지연시켜서는 안 되며, 오히려 <strong>GH가 중추성 무호흡을 개선</strong>시킬 수 있다. 그러나 재검사에서 중등도/중증 OSA로 악화되면 OSA가 치료될 때까지 GH를 중단해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 용량·모니터링</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>시작용량: 0.5 mg/m²/일(9–15 μg/kg/day), 3–6개월에 걸쳐 1.0 mg/m²/일(35 μg/kg/day)까지 증량 — <strong>체표면적 기준</strong>으로 과체중/비만 환자의 과다용량을 피함</li>
+        <li>PWS는 GH에 민감하여 허가용량에서도 총 IGF-1이 정상범위를 초과할 수 있음; 생체이용 IGF-1(IGF-1/IGFBP-3 비)은 GH결핍 환자와 유사한 것으로 보임</li>
+        <li>IGF-1이 정상상한의 <strong>2배를 초과</strong>하면 반드시 피해야 하며 감량이 필요함 — 고혈압·말단비대 소견·혈당조절불량 등 과잉 GH신호의 맥락에서 판단</li>
+        <li>고혈압 등 부작용 외에 소아에서 고IGF-1 자체의 뚜렷한 유해작용 보고는 없으나, 상기도감염 동반 시 OSA 위험 증가와 연관될 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧑‍🦱</span> 성인기 GH 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>최종 성인 신장 도달 후, 전환기 동안 GH를 지속하며 통상 성인 용량으로 감량하는 것이 적절함 — 초기 성인 GHD 용량은 0.2 mg/일(경구 에스트로겐 복용자는 더 높은 용량 필요할 수 있음)</li>
+        <li>제지방량 증가·체지방 감소·근력 개선 등 지속적 이점의 근거가 축적되고 있으며, 중단 시 이러한 이점이 소실됨</li>
+        <li>25세 미만은 최고골량 달성 목적으로 GH 지속이 가능(NICE 기준); 25세 이상은 신경심리학적 증상이 NICE 허용 기준이며, PWS 특이적 평가는 공식적으로 검증되지 않음</li>
+        <li>GH축 평가는 최소 1개월 GH 중단 후 <strong>GHRH-arginine 검사</strong>가 비만을 고려할 때 가장 적합(인슐린내성검사는 정맥접근 어려움으로 제한적, 글루카곤자극검사는 특이도가 낮아 권고하지 않음)</li>
+        <li>성인에서 GH 사용 시 IGF-1을 연령·성별 기준 0~+2 SD 사이로 적정, BMI&gt;40 kg/m², 조절되지 않는 혈당(HbA1c&gt;58 mmol/mol)·고혈압에서는 회피 또는 지연</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /gh -->
+
+<!-- ══════════════════ TAB 4: 사춘기·내분비 ══════════════════ -->
+<div id="tab-endo" class="panel">
+
+  <div class="alert alert-tx">
+    <span>🧬</span>
+    <div>성선기능저하증은 PWS의 <strong>거의 항상 동반되는 특징(constant feature)</strong>이며, 저성선자극호르몬성·고성선자극호르몬성 저성선증이 모두 보고된다. 시상하부 기능이상으로 갑상선·부신·혈당·체온조절 이상도 동반될 수 있다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👦</span> 남성 PWS — 성선기능·고환하강</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>소고환·저테스토스테론, 사춘기 후 인히빈B 저하가 특징적; 사춘기는 정상시기에 시작될 수 있으나 조발성·지연성 모두 보고되며 일부는 사춘기 진입 자체가 안 됨</li>
+        <li>음경길이는 출생·소아기에는 정상-소경향이나 성인기에 작은 경우가 많음; 부신 안드로겐 분비는 대개 정상이라 음모 발달·체모는 정상적으로 나타남</li>
+        <li><strong>잠복고환이 최대 87%</strong>에서 보고됨 — 저형성 음낭·짧은 정삭·저형성 고환으로 고환고정술이 기술적으로 어려운 경우가 많아, 복강경 경험이 있는 전문센터에서 시행할 것을 권고; 재수술률이 일반인구(5%) 대비 약 20%로 높음</li>
+        <li>자발적으로 사춘기에 진입해도 <strong>중간사춘기 정지(mid-pubertal arrest)</strong>가 흔한 규칙임</li>
+      </ul>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>💊 남성 테스토스테론 보충 요법 상세</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>사춘기 진입 실패·중간사춘기 정지 시, 저용량 경피 2% 테스토스테론 젤로 시작해 대개 6개월마다 증량(BSPED 지침 준용)</li>
+            <li>낮은 제지방량·높은 체지방으로 인한 <strong>말초 방향화 증가</strong>로 고테스토스테론혈증 또는 고에스트라디올혈증·여성형유방이 나타날 수 있어 테스토스테론·에스트로겐·유리안드로겐지수 정기 모니터링 필요</li>
+            <li>서서히 증량하면 테스토스테론 치료가 문제행동을 유발한다는 근거는 부족하나, 공격적 행동력이 있으면 안정화 후 시작을 고려하고 학교/거주지 변경 등 사회적 변화 시기에는 시작을 지연할 것을 고려</li>
+            <li>유지용량 도달 후에는 <strong>장기지속형 근주제제</strong>(테스토스테론 운데카노에이트, Nebido 등)가 선호됨 — 단주기 제제의 주사후 최고치를 피할 수 있음; PWS 성인은 표준용량(1g/12주)보다 <strong>낮은 용량(0.5–0.66g/12주)</strong>으로 충분한 경우가 많음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👧</span> 여성 PWS — 사춘기·에스트로겐 보충</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>사춘기 개시 자체는 대개 정상(조발성 사례도 보고)이나, 이후 발달이 지연되고 초경이 훨씬 늦게 나타나는 경우가 흔함</li>
+        <li>사춘기 진입 실패 또는 중간사춘기 정지 시 에스트로겐 치료 개시를 권고</li>
+        <li>사춘기 유도에는 <strong>17β-에스트라디올 패치</strong>가 현재 선호되는 방법(BSPED 원발성 난소부전 패치 프로토콜 준용); 피부뜯기 문제와의 연관성 보고는 없음</li>
+        <li>성인에서는 패치 또는 국소 젤이 선호되며(특히 고도비만·고혈압 동반 시), 정맥혈전색전증·고혈압 위험 증가로 <strong>경구 에스트로겐(에스트라디올 발러레이트, 에티닐에스트라디올)은 피할 것</strong></li>
+        <li>프로게스테론은 병용 또는 단독으로 개별화하여 사용; 데포 프로게스테론 단독은 저에스트로겐혈증을 유발해 골건강에 해로우므로 권고하지 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👶</span> 가임력·피임·조기부신주름</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>조기부신주름(premature adrenarche)은 PWS 소아에서 흔하며 대개 치료가 필요하지 않음; 아로마타제억제제가 골연령 진행을 지연시켰다는 보고가 있으나 일상진료는 아님</li>
+        <li>여성 PWS의 임신 사례가 드물게 보고되어 있음(영국 포함) — 산모가 15q11-13 결실형이면 <strong>자녀의 Angelman 증후군 발생확률 50%</strong>이므로 양육능력을 개별적으로 평가해야 함</li>
+        <li>남성 PWS의 가임력 사례는 현재까지 보고된 바 없음 — 정조세포 수 감소·미성숙, 잠복고환·성선기능저하증이 복합적으로 기여</li>
+        <li>PWS 청소년·성인도 성적 활동을 포함한 대인관계를 가질 수 있어 성건강·피임 상담이 필요하며, <strong>취약성으로 인한 성적 착취 문제에 대한 보호조치</strong>가 모든 사회·주거·교육 환경에서 고려되어야 함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚕️</span> 부신·갑상선·당뇨병·체온조절</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>중추성 부신기능부전(CAI)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li>최근 다기관 연구들은 소아·성인 모두에서 CAI 유병률이 <strong>낮음(1–2%)</strong>을 시사 — 일상적 선별검사·마취/수술 시 일상적 스테로이드 커버는 권고하지 않음</li>
+            <li>중증 피로·어지럼·저혈압·설명되지 않는 체중감소·복통·오심·저혈당 증상이나 급성 악화 병력이 있으면 검사(표준/저용량 ACTH 자극검사 등) 고려</li>
+            <li>주술기 임상적 우려가 있으면 CAI 평가 및 하이드로코르티손 치료를 시작할 것</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>갑상선기능저하증</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>최근 연구에서 최대 16%까지 보고되며 <strong>대부분 중추성</strong> — 유리 T4·TSH를 이용한 매년 모니터링, 낮은 역치로 치료 시작을 권고</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>제2형 당뇨병(T2DM)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>성인의 최대 25%에서 발생, 연령 증가에 따라 상승; 소아·청소년(11세부터)에서도 보고됨 — 비만이 가장 큰 위험요인, 남아시아계 등 일부 인종에서 조기 발생 경향</li>
+            <li>PWS의 T2DM 병태생리는 일반 비만과 달리 <strong>인슐린저항성이 낮고</strong> 지방인자·염증프로파일이 상대적으로 양호 — 내장지방 감소와 관련 가능</li>
+            <li>1차 약물은 메트포르민; 18세 미만 승인 비인슐린 약제는 GLP-1 작용제(리라글루타이드)뿐이나 PWS 비만 자체(당뇨 없는 경우)의 체중감량 효과 근거는 없음; 성인에서는 GLP-1/DPP-4/SGLT-2 억제제 병용 고려 가능(SGLT-2는 요로생식기감염·정상혈당케톤산증 위험 유의)</li>
+            <li>인슐린 승급 시 저혈당(→ 과식 유발) 예방을 위해 속효성보다 지속형 인슐린 위주 사용을 고려; 혈당 악화 시 은밀한 음식 접근 여부를 우선 조사할 것</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>체온조절</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>갈증·체온조절 이상이 시상하부 기능이상의 일부로 나타날 수 있음 — 감염 시 정상적인 발열 반응이 나타나지 않을 수 있음</li>
+            <li>극한 기온에 적절한 의복·수분공급이 필요하며, 수분섭취 부족은 변비를 악화시킴</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /endo -->
+
+<!-- ══════════════════ TAB 5: 신체건강 ══════════════════ -->
+<div id="tab-physical" class="panel">
+
+  <div class="alert alert-monitor">
+    <span>🦴</span>
+    <div>PWS는 위장관·치과·안과·골격계 문제의 위험이 높으며, 특히 <strong>위장관 천공·위확장은 치명적일 수 있어 통증 호소나 구토 시 낮은 역치로 영상검사</strong>가 필요하다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍽️</span> 위장관 문제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>위식도역류(GOR)가 어린 소아에서 흔함(2세 미만 45%, 2세 이후 20%) — 무증상 흡인 가능성이 있어 인지·치료가 중요</li>
+        <li><strong>구토능력 저하</strong>가 소아·성인 모두에서 보고됨(횡격막·복부·늑간근 근긴장저하 관여 추정) — 질식(choking)이 고령 소아·성인 사망원인의 8%를 차지(가족보고 기반); 과식증·끈적한 침·인두근 약화·GOR이 위험인자</li>
+        <li>비디오투시조영검사에서 5–35세 환자 대다수가 인두 잔류·식도정체를 보임; 6개월 미만 영아의 13/16에서도 인두정체 확인</li>
+        <li><strong>위배출지연</strong>이 흔하며, 5세만큼 어린 나이에도 중증 위확장 사례 보고 — 위확장으로 인한 복부고혈압·쇼크는 생명을 위협할 수 있고, 젊은 성인에서 위괴사·천공 사례도 있음(사망환자의 3%가 과식 관련 위파열)</li>
+        <li>변비는 성인의 20–40%에서 보고(비만 소아에서 더 흔한 일반적 경향과 일치); 유당분해효소(락툴로오스)는 신경발달장애에서 세균과증식 위험으로 피할 것을 권고, 프로바이오틱스가 도움이 될 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦷👁️</span> 치과·안과</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">치과</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>침 분비 감소 및 점도 증가로 치아우식 위험 증가</li>
+            <li>정기적인 치과검진을 권고</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">안과</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>5세 이전에 대부분 발견되며, <strong>사시(근긴장저하 관련)</strong>가 가장 흔함 — 일반인구보다 수술적 교정이 더 필요한 경향</li>
+            <li>근시·원시·난시도 흔하며, 결실형이 mUPD형보다 근시·난시 유병률이 더 높음</li>
+            <li>시력문제 조기 선별·교정이 중요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골건강·고관절이형성증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>낮은 근긴장·낮은 활동량·성선기능저하증·GH결핍이 복합적으로 골건강에 영향 — GH 단독으로는 골건강을 개선하지 못하며, <strong>성호르몬 보충이 골밀도 유지에 더 중요</strong></li>
+        <li>성인 전환 시점에 GHD·성선기능저하증 치료 후 골건강 평가를 위한 DXA를 고려; 소아기에는 요추(L1–L4) BMD 평가가 가장 신뢰도가 높고 체격에 맞게 보정 필요</li>
+        <li>태동감소로 인해 <strong>고관절이형성증 발생률 8–30%</strong> — 출생 시 고관절 진찰 필수, 이상 소견 시 추가검사; 첫 척추 X선 촬영과 동시(생후 12–18개월경) 고관절 X선 촬영 가능, 정상이면 추가 영상은 불필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴↩️</span> 척추측만증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>척추측만증·후만증·후측만증이 소아·청소년에서 흔함(원인 불명확) — 특발성 측만증과 달리 PWS는 대개 <strong>요추 또는 흉요추부</strong>에 발생</li>
+        <li>유병률은 불확실하나 40% 이상이 일관된 보고이며 학령전기·초기 청소년기에 발생 피크</li>
+        <li>GH 치료가 측만증을 유발·악화시킨다는 근거는 없음(치료군·대조군 발생·진행 유사)</li>
+        <li>사춘기 등 급성장이 발생·진행과 연관됨 — 수영·발레 등 코어근력 강화 운동이 척추 보호에 도움될 수 있음; 심한 근긴장저하 영아는 억지로 앉히지 말고 배밀이(tummy time)로 코어강화를 유도할 것</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>시기</th><th>척추 X선 촬영 권고</th></tr>
+          <tr><td>독립적으로 앉기 가능~5세</td><td>2년마다 + 매년 임상진찰</td></tr>
+          <tr><td>10세(late childhood/early puberty)</td><td>재촬영</td></tr>
+          <tr><td>사춘기 동안</td><td>최소 2년마다, 임상적 필요 시 더 자주(성장정지까지)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>Cobb 각 &gt;10°이면 소아 척추전문팀에 의뢰·논의하고, <strong>&gt;25°는 긴급 의뢰</strong>가 필요하다. 골밀도는 Cobb 각과 역상관 관계이므로 측만증 평가 시 함께 고려해야 하나, 사춘기 이전에는 일상적 골밀도 검사가 필요하지 않다.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /physical -->
+
+<!-- ══════════════════ TAB 6: 발달·행동·전환 ══════════════════ -->
+<div id="tab-behav" class="panel">
+
+  <div class="alert alert-behav">
+    <span>🧠</span>
+    <div>PWS는 특징적인 <strong>신경행동·인지 표현형</strong>을 가지며, 인지·언어·운동발달 지연, 자폐 스펙트럼 특성, 특유의 행동문제(과식증·감정폭발·피부뜯기), 정신건강 문제(특히 mUPD의 정신병 위험)가 나타난다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 인지·언어·운동발달</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>인지</strong>: 대개 경도-중등도 학습/지적장애 범위(일부 중증); 단기기억·수학능력 저하, 언어정보 처리 속도 저하, 과제 전환의 어려움이 특징적; 과제지속력·시공간능력(특히 결실형)은 강점 영역</li>
+        <li><strong>언어</strong>: 비언어적 상태부터 정상 발달까지 편차가 크며, 조음결함·비유창성·구강운동기능 저하가 흔함; mUPD는 수용언어보다 표현언어가 상대적으로 우수한 경향</li>
+        <li><strong>운동</strong>: 영아기 심한 근긴장저하로 대운동발달이 현저히 지연되는 경우가 많으나, 대운동지연 자체가 인지장애 정도를 의미하지는 않음; 대부분 24–30개월에 독립보행; 관절이완으로 지지형 신발·발목보조기가 필요할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 사회성발달·자폐스펙트럼</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>대부분 사회적 관심은 있으나 사회적 정보 해석·반응에 약점이 있음 — 자폐스펙트럼장애(ASD)와 행동특성이 겹쳐 진단이 어려울 수 있고 연령에 따라 명확해지기도 함</li>
+        <li>ASD 추정유병률은 <strong>12–41%</strong>로 보고되며, <strong>mUPD가 결실형보다 ASD 위험이 높음</strong>; 자폐 관련 후보유전자가 15q11-q13 영역 내 위치</li>
+        <li>자폐 행동특성은 청소년기에 더 늦게 나타나는 경향이 있음 — ASD 진단 유무와 무관하게 사회적 손상은 맞춤 지원이 필요하며 교육계획에 포함되어야 함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>😤</span> 행동문제·피부뜯기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div>국제 컨센서스는 PWS의 행동특성을 <strong>과식증, 갑작스럽고 지속되는 감정폭발(temper outburst), 불안, 강박행동, 반복·의례적 행동, 경직성·경직된 사고, 사회인지 손상, 피부뜯기</strong>로 정의한다.</div>
+      <ul style="padding-left:18px;margin-top:6px;line-height:1.9">
+        <li>감정폭발은 음식 접근·일정 변화·요구사항과 관련해 주로 발생; 나이가 들수록 <strong>빈도는 감소하나 지속시간은 증가</strong>하는 경향; 계획차단, 부당함 인식, 변화 대응의 어려움이 주요 유발요인</li>
+        <li>가장 효과적인 대응은 침착한 태도 유지·과잉반응 자제이며, 향후 촉발요인(배고픔·피로·수면무호흡 영향 등)을 사후에 파악; 근본 기분장애 없는 감정폭발에 정신과약물 단독처방은 효과가 제한적</li>
+        <li><strong>피부뜯기</strong>는 흔하며 고령 환자에서 피부궤양 관련 패혈증이 사망원인이 될 수 있음 — 손톱 짧게 유지, 보습제, 경미한 병변 커버, 주의분산기법이 초기 접근; N-아세틸시스테인(소아 600mg 1일1회, 성인 1일2회)이 일부 도움된다는 개방표지 연구 있음</li>
+        <li>토피라메이트는 근거가 제한적이고 부작용 프로파일로 일상적 권고는 아니며, 구안파신 서방정이 피부뜯기·공격성/초조·ADHD 증상 개선을 보인 연구가 있음(정신병에는 효과 없음)</li>
+        <li>직장뜯기(rectal picking)도 나타날 수 있어 염증성장질환으로 오인될 수 있음 — 행동적 접근과 변비 관리가 병행되어야 함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎓</span> 학교·교육계획</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>대부분 개별화된 법정 교육계획(영국 EHCP 등)이 필요하며, 학교는 PWS의 함의(음식 접근 감독, 통증/체온 인지저하, 근긴장저하로 인한 피로, 언어·학습 지원, 특유의 인지행동 특성)를 이해해야 함</li>
+        <li>중등학교(11세 이후)는 음식·금전 접근성 증가, 사회적 고립 위험 등 추가적 도전과제가 있음</li>
+        <li>사회성·행동 문제로 인해 지적능력이 가려질 수 있어 <strong>학업성취가 IQ 대비 저평가</strong>되는 경향이 있음 — 학습잠재력이 가려지지 않도록 상세평가가 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 정신건강·정신능력</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>불안이 가장 흔한 정신과적 진단</strong>으로 절반 이상에서 나타남 — 대개 상황적·변화 관련; SSRI가 불안·반복행동에 유용하나 신중히 사용해야 하며, 양극성장애·경조증도 보고됨</li>
+        <li>항정신병약물은 <strong>대사 부작용 우려가 커 문제행동 자체에는 권고하지 않으며</strong>, 정신병적 질환 등 뚜렷한 정신과적 진단에 한해 전문 CAMHS 팀을 통해 저용량으로 시작해야 함</li>
+        <li><strong>mUPD 아형은 정동정신병 위험이 유의하게 높음</strong> — 영국 코호트에서 mUPD 62% vs 결실형 17%가 정신병적 질환을 진단받음; 환각·망상 외에 과다수면·혼란·운동증상 등 비전형적 증상이 동반되어 초기에 섬망으로 오인될 수 있음; 안정화 후에는 재발률이 낮음, 급성기에는 신속한 정신과 의뢰가 필수</li>
+        <li>정신능력법(영국) 등에 따라 16세부터 식품·금전 접근 등 특정 의사결정능력 평가가 필요할 수 있으며, 대다수 청년·성인 PWS는 복지·건강·재정·음식접근·주거 관련 의사결정능력이 부족한 것으로 평가됨(예외 존재)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏠</span> 가족·돌봄자 지원, 전환기·성인기 서비스</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>PWS 소아의 행동·정신건강 문제가 부모·형제·돌봄자에게 미치는 부담은 다른 신경장애 질환보다 클 수 있음 — 과식증·나이 증가와 돌봄부담 간 강한 양의 상관관계; 0–4세는 돌봄 자체의 부담, 고연령은 불안·감정폭발·반항행동이 돌봄부담의 주요인</li>
+        <li>형제자매의 삶의 질도 저하될 수 있어 가족 전체에 대한 정보제공·조기 개입·지지가 필요하며, 필요시 휴식돌봄(respite care)을 조기에 도입할 것을 권고</li>
+        <li>청소년기~성인기 전환은 독립성 요구 증가와 엄격한 음식환경 통제의 필요성이 충돌하는 특히 어려운 시기 — <strong>'Ready-Steady-Go' 전환 프로그램</strong>(학습장애 버전 포함)이 도움이 될 수 있음</li>
+        <li>성인 전환 시에도 내분비 전문의가 핵심 의료진 역할을 하는 다학제 지지가 필요하며, 성인 PWS는 특히 수면무호흡 등 <strong>미진단 건강문제 비율이 높음</strong> — 지속적 GH 치료·다학제 관리가 성인기에도 지속되는 것이 바람직함</li>
+        <li>전문 PWS 주거시설(식품안전 환경·신체활동·의미있는 사회적 상호작용 제공)이 가족환경보다 장기적 체중·건강관리에 더 효과적인 경향이 보고되나, 접근성·재정지원이 제한적인 경우가 많음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚑</span> 급성질환·마취 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>면역기능은 정상이나, T2DM·호흡기 문제 유병률 증가로 입원 위험이 큼; 인지적 어려움으로 완전한 병력청취가 어려울 수 있음</li>
+        <li><strong>높은 통증역치, 드문 구토, 감염/염증에도 발열이 잘 나타나지 않는 특징</strong>으로 심각한 손상·감염·위장관 문제가 상대적으로 경미해 보일 수 있어 검사계획에 이를 반영해야 함</li>
+        <li>위장관 천공·위배출지연 위험이 높아 통증 호소나 구토 시 낮은 역치로 영상검사·진단적 개입이 필요 — 이는 그때까지 발견되지 않은 생명을 위협하는 질환의 신호일 수 있음</li>
+        <li>입원 시 음식접근 관리, 학습장애를 고려한 배려(보호자 동반, 검사/절차의 사전설명, 금식이 필요한 시술은 일정 첫 순서 배정 등)가 필요</li>
+        <li>마취 시 고려사항: 증가된 BMI, 폐쇄성/중추성 수면무호흡, 까다로운 기도관리(치아상태·소하악·경부가동성 제한), 척추측만증에 의한 제한성 호흡생리, 행동적 어려움, 위장관 문제, 체온조절·혈당/스트레스반응 이상</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 진단·소아기·전환기 선별검사 요약 (Table 4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>항목</th><th>진단시</th><th>소아기</th><th>전환기</th></tr>
+          <tr><td>GH 자극검사</td><td>No</td><td>No</td><td>No(성인서비스에서 고려 가능)</td></tr>
+          <tr><td>부신기능검사</td><td>No</td><td>임상적 의심 시만</td><td>임상적 의심 시만</td></tr>
+          <tr><td>갑상선기능</td><td>Yes</td><td>매년</td><td>매년</td></tr>
+          <tr><td>전체 수면다원검사</td><td>Yes</td><td>GH 시작 2–3개월 후, 이후 2–3년마다</td><td>우려 시</td></tr>
+          <tr><td>야간 맥박산소포화도</td><td>No</td><td>매년</td><td>No</td></tr>
+          <tr><td>척추 X선</td><td>Yes</td><td>앉기 가능~5세 2년마다, 10세·사춘기중</td><td>Yes</td></tr>
+          <tr><td>DXA 골밀도</td><td>No</td><td>No</td><td>Yes</td></tr>
+          <tr><td>혈액검사(IGF-1, 갑상선, 전혈구, 영양선별, PTH, 신장/간기능, 골프로파일, 비타민D, FSH/LH/성호르몬 등)</td><td>Yes</td><td>매년</td><td>매년</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /behav -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const STAT_DETAILS = {
+  incidence: {
+    title: "출생 유병률",
+    val: "1/10,000 ~ 1/30,000",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>🧬</span><div>PWS는 15q11-q13 부계 유전자 발현 소실로 발생하는 희귀 복합 유전질환으로, 출생 유병률은 <strong>1만~3만명당 1명</strong>으로 보고된다.</div></div>
+      <ul>
+        <li>대부분 신생아기에 조기 진단되나, 전형적 임상소견이 있음에도 일부 환자는 여전히 진단이 지연됨</li>
+        <li>영아기 근긴장저하·수유곤란·성장부전이 특징적 초기 소견</li>
+        <li>소아·청소년기 영양·성장단계가 잘 기술되어 있으며, 음식 접근이 통제되지 않으면 과식증에 의한 체중증가로 이어지고, 성인기 비만관련 합병증에 의한 조기사망 위험이 있음</li>
+      </ul>
+    `
+  },
+  genetics: {
+    title: "주요 유전 아형",
+    val: "부계결실 65–70% · mUPD 25–30% · 각인결함/전위 ~1%",
+    color: "var(--predict)",
+    html: `
+      <div class="alert alert-predict"><span>🔍</span><div>PWS의 가장 흔한 원인은 <strong>부계 15q11-13 결실(65–70%)</strong>과 <strong>모계 단친이염색체(mUPD, 25–30%)</strong>이며, 각인센터 결함/전위 등 드문 원인이 약 1%를 차지한다.</div></div>
+      <ul>
+        <li>모계연령 증가와 관련해 mUPD 비율이 최근 소아 코호트에서 최대 50%까지 상승하는 경향이 보고됨</li>
+        <li>유전 아형에 따라 표현형이 달라질 수 있으며, 특히 <strong>mUPD는 자폐/정신과적 특성 위험이 더 높음</strong>(정동정신병 위험 포함)</li>
+        <li>de novo 결실·mUPD의 재발위험은 낮으나(&lt;1%), 염색체 재배열·각인센터 이상은 재발위험이 높아 유전상담이 권고됨</li>
+      </ul>
+    `
+  },
+  mortality: {
+    title: "성인기 조기사망의 주요 원인",
+    val: "과식증·비만 관련 합병증",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>⚠️</span><div>PWS 성인은 여전히 <strong>과식증과 비만관련 합병증으로 인한 사망</strong>이 보고되고 있다.</div></div>
+      <ul>
+        <li>위장관 천공·위확장·위파열이 생명을 위협하는 급성 합병증으로 나타날 수 있음(사망환자의 약 3–10%에서 위장관 관련 사망 보고)</li>
+        <li>피부뜯기로 인한 피부궤양의 패혈증도 고령 환자의 사망원인 중 하나</li>
+        <li>비만관련 심대사 합병증(2형당뇨병 등)이 장기적 이환·사망위험을 높임</li>
+        <li>다학제적 평생관리, 식품안전 실천, 조기·지속적 개입이 이러한 위험을 낮추는 데 중요함</li>
+      </ul>
+    `
+  },
+  mdt: {
+    title: "관리 원칙",
+    val: "평생 다학제 접근",
+    color: "var(--behav)",
+    html: `
+      <div class="alert alert-behav"><span>👥</span><div>PWS는 과식증에 대한 근본치료가 없는 만큼, <strong>다학제팀(MDT) 클리닉을 통한 평생 관리</strong>가 원칙이다.</div></div>
+      <ul>
+        <li>소아내분비과 전문의가 진료를 조율하며, 영양사·간호사·호흡기내과·정형외과·정신건강의학과 등 다양한 전문가의 협진이 필요</li>
+        <li>학교·사회복지·지역사회와의 연계, PWS 환자단체를 통한 가족 지원이 중요한 역할을 함</li>
+        <li>성인 전환 시에도 다학제 지지와 내분비 전문의의 핵심 역할이 지속되어야 하며, 전문 주거시설·지역사회 서비스에 대한 접근성 확보가 필요함</li>
+      </ul>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"ASD",   def:"Autism Spectrum Disorder — 자폐스펙트럼장애" },
+  { term:"BMD",   def:"Bone Mineral Density — 골밀도" },
+  { term:"BMI",   def:"Body Mass Index — 체질량지수" },
+  { term:"CAI",   def:"Central Adrenal Insufficiency — 중추성 부신기능부전" },
+  { term:"CAMHS", def:"Child and Adolescent Mental Health Services — 아동청소년 정신건강서비스" },
+  { term:"DXA",   def:"Dual-energy X-ray Absorptiometry — 이중에너지 X선 흡수계측법" },
+  { term:"EHCP",  def:"Education Health Care Plan — 교육건강돌봄계획(영국)" },
+  { term:"FISH",  def:"Fluorescent In Situ Hybridisation — 형광 제자리 부합법" },
+  { term:"GH",    def:"Growth Hormone — 성장호르몬" },
+  { term:"GHD",   def:"Growth Hormone Deficiency — 성장호르몬결핍" },
+  { term:"GHRH",  def:"Growth Hormone-Releasing Hormone — 성장호르몬분비호르몬" },
+  { term:"GLP-1", def:"Glucagon-Like Peptide-1 — 글루카곤유사펩타이드-1(당뇨병·비만 치료제 계열)" },
+  { term:"GOR",   def:"Gastro-Oesophageal Reflux — 위식도역류" },
+  { term:"hCG",   def:"Human Chorionic Gonadotropin — 사람융모성선자극호르몬" },
+  { term:"IGF-1", def:"Insulin-like Growth Factor-1 — 인슐린유사성장인자-1" },
+  { term:"IGFBP-3", def:"IGF Binding Protein-3 — IGF 결합단백질-3" },
+  { term:"LD/ID", def:"Learning/Intellectual Disability — 학습/지적장애" },
+  { term:"MDT",   def:"Multi-Disciplinary Team — 다학제팀" },
+  { term:"MLPA",  def:"Methylation-Specific Multiplex Ligation-dependent Probe Amplification — 메틸화 특이 다중결찰probe증폭법" },
+  { term:"mUPD",  def:"Maternal Uniparental Disomy — 모계 단친이염색체" },
+  { term:"NIV",   def:"Non-Invasive Ventilation — 비침습 환기" },
+  { term:"OSA",   def:"Obstructive Sleep Apnoea — 폐쇄성 수면무호흡" },
+  { term:"PWS",   def:"Prader-Willi Syndrome — 프래더-윌리 증후군" },
+  { term:"SGLT-2", def:"Sodium-Glucose Cotransporter-2 — 나트륨-포도당 공동수송체-2(당뇨병 치료제 계열)" },
+  { term:"SNRPN", def:"Small Nuclear Ribonucleoprotein Polypeptide N — PWS 진단 메틸화 검사 대상 유전자" },
+  { term:"SSRI",  def:"Selective Serotonin Reuptake Inhibitor — 선택적세로토닌재흡수억제제" },
+  { term:"T2DM",  def:"Type 2 Diabetes Mellitus — 제2형 당뇨병" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

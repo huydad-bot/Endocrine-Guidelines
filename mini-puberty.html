@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-Puberty 진료 참고자료 — Endocrine Reviews 2024</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev: #0f6e5c;      /* 생리·정상발달 — 청록 */
+    --predict: #0550ae;  /* CHH·병태생리 — 청 */
+    --tx: #7c3aed;       /* 진단·평가 — 보라 */
+    --monitor: #9b1c2e;  /* 치료·예후 — 진홍 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 7px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--monitor); color:#fff; padding:3px 7px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 11px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 560px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(18px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f1; border-left: 3px solid var(--dev);  color: #0f5549; }
+  .alert-predict { background: #ddf4ff; border-left: 3px solid var(--predict); color: #0550ae; }
+  .alert-tx      { background: #ede9fe; border-left: 3px solid var(--tx);  color: #5b21b6; }
+  .alert-monitor { background: #fce8eb; border-left: 3px solid var(--monitor); color: var(--monitor); }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev     { background: #e0f4f1; color: var(--dev); border: 1px solid var(--dev); }
+  .t-predict { background: #ddf4ff; color: var(--predict); border: 1px solid var(--predict); }
+  .t-tx      { background: #ede9fe; color: var(--tx); border: 1px solid var(--tx); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--monitor); border: 1px solid var(--monitor); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-gnrh { background: #e0f4f1; color: #0f5549; }
+  .drug-hcg  { background: #fce8eb; color: var(--monitor); }
+  .drug-fsh  { background: #ddf4ff; color: #0550ae; }
+  .drug-seq  { background: #ede9fe; color: #5b21b6; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .stage-timeline { display: flex; align-items: stretch; gap: 0; margin: 10px 0; overflow-x: auto; }
+  .stage-box {
+    flex: 1; min-width: 130px; padding: 10px 10px 12px;
+    border-right: 2px solid var(--bg); text-align: center;
+    position: relative; cursor: pointer; transition: opacity .15s;
+  }
+  .stage-box:last-child { border-right: none; }
+  .stage-box:hover { opacity: .88; }
+  .stage-box .st-num { font-size: calc(13px * var(--fscale, 1)); font-weight: 800; margin-bottom: 4px; }
+  .stage-box .st-lbl { font-size: calc(10px * var(--fscale, 1)); line-height: 1.4; }
+  .st-dev     { background: #e0f4f1; }
+  .st-predict { background: #e6f0fb; }
+  .st-tx      { background: #ede9fe; }
+  .st-monitor { background: #fde8eb; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-dev     { background: #e0f4f1; border: 1.5px solid var(--dev); color: #0f5549; }
+  .gear-predict { background: #e6f0fb; border: 1.5px solid var(--predict); color: #0550ae; }
+  .gear-tx      { background: #ede9fe; border: 1.5px solid var(--tx); color: #5b21b6; }
+  .gear-monitor { background: #fde8eb; border: 1.5px solid var(--monitor); color: var(--monitor); }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .pct-bar-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .pct-bar-label { width: 190px; font-size: calc(11px * var(--fscale, 1)); flex-shrink: 0; }
+  .pct-bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 14px; overflow: hidden; position: relative; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; }
+  .pct-bar-val { font-size: calc(10px * var(--fscale, 1)); font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>M</span><span>P</span>
+      </div>
+      <h1>Mini-Puberty 진료 참고자료 — 생리·병태생리·진단·치료</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Rohayem J, Alexander EC, Heger S, Nordenström A, Howard SR. Mini-Puberty, Physiological and Disordered: Consequences, and Potential for Therapeutic Replacement. Endocrine Reviews. 2024;45(4):460–492. doi:10.1210/endrev/bnae003</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 저자·학회의 공식 승인을 받지 않은 개인 참고자료다 (This tool is not officially endorsed by the authors or any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('physio')">🌱 생리(3파동)</div>
+    <div class="tab" onclick="showTab('chh')">🧬 CHH·병태생리</div>
+    <div class="tab" onclick="showTab('dx')">🔎 진단·평가</div>
+    <div class="tab" onclick="showTab('tx')">💉 치료(고나도트로핀)</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('waves')"><div class="stat-val" style="color:var(--dev)">3파동</div><div class="stat-lbl">태아기·미니사춘기·<br>사춘기 HPG축 활성</div></div>
+    <div class="stat-box" onclick="openStatModal('duration')"><div class="stat-val" style="color:var(--predict)">생후 6개월</div><div class="stat-lbl">남아 미니사춘기<br>지속 기간(2–3개월 peak)</div></div>
+    <div class="stat-box" onclick="openStatModal('incidence')"><div class="stat-val" style="color:var(--tx)">1:4400–30000</div><div class="stat-lbl">남성 CHH<br>출생 발생률</div></div>
+    <div class="stat-box" onclick="openStatModal('cryptorate')"><div class="stat-val" style="color:var(--monitor)">최대 50%</div><div class="stat-lbl">CHH 환아의<br>잠복고환 동반율</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev">
+        <span>✅</span>
+        <div>사람의 시상하부-뇌하수체-생식선(HPG)축은 생애 중 <strong>3번의 생리적 파동</strong>을 거친다 — ① 태아기, ② 생후 첫 수개월의 <strong>미니사춘기(mini-puberty)</strong>, ③ 사춘기. 남아에서 미니사춘기는 <strong>세르톨리세포 증식과 고환·음경 성장</strong>에 핵심적이며, 이 시기 활성이 결여되면(선천성 저성선자극호르몬성 성선기능저하증, CHH) 미세음경·잠복고환이라는 "적신호(red flag)"로 신생아기에 감지할 기회가 생긴다.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">🌱 생리적 미니사춘기</div>
+          생후 2–3개월 peak, 6개월 종료(여아는 2–4세까지)<br>
+          <small>LH→테스토스테론, FSH→세르톨리세포 증식·억제소B·AMH 상승</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">🧬 CHH·장애형 미니사춘기</div>
+          미세음경·잠복고환·발기 소실이 적신호<br>
+          <small>50개 이상 유전자, ANOS1·FGFR1·CHD7·PROKR2·GNRHR 등</small>
+        </div>
+        <div class="gear-box gear-tx">
+          <div class="gear-title">🔎 진단 window</div>
+          생후 4–26주 사이 최소 2회 LH/FSH/T 측정 권고<br>
+          <small>12주 이후 지속되는 양측 잠복고환은 특히 의미 있음</small>
+        </div>
+        <div class="gear-box gear-monitor">
+          <div class="gear-title">💉 고나도트로핀 치료</div>
+          rLH+rFSH 3–6개월 투여로 고환용적·음경길이 회복<br>
+          <small>장기 가임력·정신건강 이득은 아직 검증 중</small>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>미니사춘기 미인지·미치료 CHH는 사춘기 지연/무발현, 불임, 골밀도 저하, 부정적 자아상, 정신건강 악화로 이어질 수 있다(Figure 3). 현재 미니사춘기 고나도트로핀 대체요법은 <strong>공식 표준요법으로 확립되지 않았으며</strong>, 소아내분비 전문가의 개별 판단과 부모 상담 하에 시행된다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> HPG축 3파동 타임라인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="stage-timeline">
+        <div class="stage-box st-dev" onclick="openStatModal('fetalwave')">
+          <div class="st-num" style="color:var(--dev)">① 태아기</div>
+          <div class="st-lbl">6–26주 임신<br>고환하강·음경발달<br>(LH비의존적 hCG→LH의존)</div>
+        </div>
+        <div class="stage-box st-predict" onclick="openStatModal('miniwave')">
+          <div class="st-num" style="color:var(--predict)">② 미니사춘기</div>
+          <div class="st-lbl">생후 0–6개월<br>(peak 2–3개월)<br>세르톨리세포 증식·고환성장</div>
+        </div>
+        <div class="stage-box st-tx" onclick="openStatModal('quiescence')">
+          <div class="st-num" style="color:var(--tx)">③ 휴지기</div>
+          <div class="st-lbl">6개월–사춘기 전<br>GnRH 분비 최소<br>LH/FSH/성선호르몬 검출한계 이하</div>
+        </div>
+        <div class="stage-box st-monitor" onclick="openStatModal('pubwave')">
+          <div class="st-num" style="color:var(--monitor)">④ 사춘기</div>
+          <div class="st-lbl">남 9–14세/여 8–13세<br>정자형성 활성화<br>이후 평생 축 활성 유지</div>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <span>💡</span>
+        <div>미니사춘기 중 세르톨리세포는 <strong>1개당 18–20개 생식세포</strong>를 지지할 수 있는 니치를 형성하는 기반을 다진다. 미니사춘기 중 안드로겐수용체는 세르톨리세포에 아직 발현되지 않아(생후 1년부터 발현 시작, 4–5세 최대), 이 시기 정자형성 자체는 일어나지 않는다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚩</span> 신생아 CHH 의심 적신호(Red Flags)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid2">
+        <div>
+          <div class="alert alert-danger" style="margin-bottom:6px"><span>🔴</span><div><strong>핵심 적신호(남아)</strong></div></div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>미세음경(신장 -2SD 이상, 신생아 &lt;2.5cm)</li>
+            <li>잠복고환(편측/양측), 특히 생후 12주 이후 지속 시</li>
+            <li>기저귀 교환 시 발기 소실</li>
+          </ul>
+        </div>
+        <div>
+          <div class="alert alert-warn" style="margin-bottom:6px"><span>🟡</span><div><strong>동반 가능 소견(비특이적)</strong></div></div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>신장무발생, 구순구개열, 치아·손발가락 이상</li>
+            <li>홍채결손, 내이 청력장애, 뇌량무발생</li>
+            <li>기타 뇌하수체호르몬결핍(저혈당, 황달)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-tx" style="margin-top:8px"><span>ℹ️</span><div>여아는 외견상 특이소견이 없어 CHH가 거의 항상 미진단 상태로 남으며, 가족력이 있는 경우가 아니면 생화학적/유전학적 검사 없이는 발견 불가하다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 생리(3파동) ══════════════════ -->
+<div id="tab-physio" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧭</span> HPG축 기본 생리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>시상하부 "GnRH pulse generator"가 박동성으로 GnRH 분비 → 뇌하수체 전엽 고나도트로프 자극 → LH·FSH 공동 분비</li>
+        <li><strong>남성:</strong> LH → Leydig세포 → 테스토스테론(및 DHT) 분비. FSH → Sertoli세포 자극(미니사춘기·초기사춘기엔 유사분열 증식, 이후엔 정자형성 지지)</li>
+        <li><strong>여성:</strong> Theca세포(안드로스텐디온·T)→Granulosa세포에서 에스트로겐 합성. FSH가 에스트로겐 분비 자극 → LH surge → 배란</li>
+        <li>음성 되먹임: 테스토스테론·에스트라디올·프로게스테론·억제소(inhibin)가 GnRH/LH/FSH 억제. 액티빈(activin)은 양성 되먹임</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>①</span> 태아기 HPG축 활성화</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>GnRH 신경세포는 비강판(nasal placode)에서 기원 → 사판(lamina cribrosa)을 통해 시상하부로 이동, 임신 14주경 완료</li>
+        <li>고환하강: 상복부 후벽(비뇨생식능선)에서 음낭까지 이동 — 6주부터 Leydig세포 전구체가 테스토스테론 분비 시작</li>
+        <li>임신 15주 이전: 태반 hCG 의존적(LH 비의존적) 테스토스테론 분비. 이후: 태아 GnRH→LH 의존적으로 전환. 분비 peak는 12–16주</li>
+        <li>테스토스테론의 역할: (1) 고환하강 촉진 (2) 음경발달 유도. DHT는 음경·음낭 발달에 추가로 관여(5-α환원효소결핍 시 음경형성저하 확인됨)</li>
+        <li>INSL3(Leydig세포, LH자극)는 서혜인대(gubernaculum) 분화·성장에 필수 — CHH 환자는 INSL3 농도 저하</li>
+        <li>FSH는 자궁 내 Sertoli세포 증식과 AMH·억제소B 분비를 촉진(AMH는 8주부터 뮬러관 퇴화 유도)</li>
+        <li>여아 난소는 FSH수용체 발현이 늦어(임신 후기), 난포 발생은 중앙 HPG축과 비교적 독립적으로 진행. 원시난포는 13주부터 발생, 34주 최대(약 200만개), 이후 평생 점진 감소</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>②</span> 생후 미니사춘기(남아)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev"><span>🌱</span><div>출산과 함께 태반 에스트로겐의 뇌하수체 억제가 소실되면서 미니사춘기가 시작된다. 출생 직후 수분–수시간 내 테스토스테론이 급증(2–3시간 peak) 후 6–12시간에 감소, 이후 약 1주간 저하기를 거쳐 다시 상승한다.</div></div>
+      <ul style="padding-left:18px;line-height:1.8;margin-top:8px">
+        <li><strong>LH:</strong> 생후 2주째 상승, 2–10주 peak</li>
+        <li><strong>테스토스테론:</strong> Leydig세포 분비, 생후 2–3개월 성인 수준 도달, 6개월경 저하</li>
+        <li><strong>INSL3:</strong> 생후 1개월 peak, 고환하강 유지에 관여</li>
+        <li><strong>FSH:</strong> 2주째 상승, 10–15일 peak, 3개월 이후 저하</li>
+        <li><strong>AMH·억제소B:</strong> (Sertoli세포 증식 반영) 4개월경 peak, 이후 소아기까지 지속 상승 유지</li>
+        <li>고환용적: 생후 4–5개월 peak(출생 대비 약 40% 증가) 후 1세경 소폭 감소(미니사춘기 종료 후 출생 시보다 약간 큰 상태로 안정)</li>
+        <li>안드로겐 합성은 주로 "backdoor pathway"(Δ4 lyase 경로)를 경유하며, 개체 간 테스토스테론 농도 편차가 큼</li>
+      </ul>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>📊 Table 1 — 미니사춘기 참고치(요약, 남아)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>지표</th><th>연령</th><th>중앙값/기하평균</th><th>참고범위(2.5–97.5%ile)</th></tr>
+              <tr><td>LH (IU/L)</td><td>2.0–3.5개월</td><td>1.71</td><td>0.62–4.08</td></tr>
+              <tr><td>FSH (IU/L)</td><td>2.0–3.5개월</td><td>1.19</td><td>0.41–3.02</td></tr>
+              <tr><td>테스토스테론(LC-MS/MS, nmol/L)</td><td>2.0–3.5개월</td><td>4.75</td><td>1.35–11.3</td></tr>
+              <tr><td>억제소B (pg/mL)</td><td>2.0–3.5개월</td><td>379</td><td>229–631</td></tr>
+              <tr><td>AMH (pmol/L)</td><td>2.0–3.5개월</td><td>1013</td><td>425–1810</td></tr>
+              <tr><td>LH (IU/L)</td><td>6개월</td><td>0.36(중앙값)</td><td>0.16–1.07</td></tr>
+              <tr><td>테스토스테론(RIA, nmol/L)</td><td>6개월</td><td>&lt;0.23</td><td>—</td></tr>
+            </table>
+          </div>
+          <small>전체 원문 Table 1에는 여아 수치 및 RIA/LC-MS/MS 별 세부 참고치가 추가로 수록되어 있음(원문 참조).</small>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>📏 Table 2 — 신생아 정상 음경길이·고환용적(요약)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>연구</th><th>평균±SD</th><th>연령/인구</th></tr>
+              <tr><td>Boas 2006 (n=1962, 덴마크·핀란드)</td><td>음경길이 3.49±0.40 cm</td><td>만삭 신생아</td></tr>
+              <tr><td>van der Straaten 2020 (유럽)</td><td>음경길이 3.12±0.54 cm</td><td>0–1개월</td></tr>
+              <tr><td>Chikani 2016 (나이지리아)</td><td>고환용적 1.74±0.62 mL</td><td>만삭 신생아</td></tr>
+              <tr><td>Liu 2021 (중국, 초음파)</td><td>고환용적 0.43–0.44 mL</td><td>0–11개월</td></tr>
+            </table>
+          </div>
+          <small>미세음경 정의: 연령별 평균보다 -2SD 이상 작은 신장길이(stretched length). 신생아 하한 대략 &lt;2.5cm.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>♀️</span> 생후 미니사춘기(여아)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>여아 HPG축은 생후 2–4세까지 활성 상태 유지 가능(남아보다 훨씬 길게 지속)</li>
+        <li>원시난포 pool은 이미 출생 시 완성되어 있어, 미니사춘기의 향후 가임력에 대한 예후적 의의는 남아보다 불확실</li>
+        <li>에스트로겐 상승 → 생리적 유방·자궁 성장(대개 2–3세경 소실, 일부 중기 소아기까지 지속 = 조기유방발육증)</li>
+        <li>동물모델 근거: 고나도트로핀이 초기 난포발생, GnRH 박동성 확립, 성행동·모성행동, 자궁·유선발달에 관여할 가능성 시사</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍼</span> 조산아·부당경량아의 미니사춘기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>조산아(28–42주)는 만삭아 대비 LH·FSH 상승이 더 높고 더 오래 지속됨(남녀 공통)</li>
+        <li>조산 남아: LH·테스토스테론·FSH가 생후 1–3개월에 더 높고, 고환·음경 성장이 더 빠를 수 있음</li>
+        <li>조산 여아: FSH 상승이 더 뚜렷·장기화, 난포·AMH 증가. 극단적 조산(25–30주)에서는 조산아 난소과자극증후군(유방비대, 외음부부종, 질출혈) 보고 — 대개 자연 소실</li>
+        <li>부당경량아(SGA)도 유사하게 과장된 미니사춘기 profile 관찰됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>③</span> 휴지기 이후 사춘기·성인기</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>미니사춘기 종료 후 사춘기 시작 전까지 HPG축은 GnRH 분비 최소 상태(초고감도 분석 아니면 LH/성선호르몬 검출 불가)</li>
+        <li>부신피질 안드로겐(부신선조체증, adrenarche)은 6–8세부터 성선자극호르몬과 무관하게 시작 — 음모·액모·피지선 발달의 초기 원인. DHEAS 상승이 지표</li>
+        <li>사춘기 개시: KNDy(Kisspeptin/NeurokininB/Dynorphin) 뉴런 등 억제-흥분 균형 변화 → GnRH 박동 빈도·진폭 증가</li>
+        <li>남성: 고환용적 4mL 이상이 사춘기 개시 정의. 초기엔 Sertoli세포·근육모양세포 증식 → 이후 정자형성 활성화에 따른 세정관 신장/비후로 성장 지속</li>
+        <li>여성: 유방발육(Tanner B2)이 첫 외부 징후, 초경은 유방발육 후 2–3년</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /physio -->
+
+<!-- ══════════════════ TAB 3: CHH·병태생리 ══════════════════ -->
+<div id="tab-chh" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> CHH 유전학 개관</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>50개 이상 유전자가 CHH·미니사춘기 장애와 연관 — 연구 코호트의 최대 50%에서 변이 확인(특이 표현형 없는 성인 CHH 포함)</li>
+        <li>영국 NHS 유전체의학서비스(R148 v3.2) 패널: 고증거 유전자 22개 + 연구용 23개</li>
+        <li>대부분 상염색체 열성(biallelic), 일부 X-연관 및 상염색체 우성 패턴도 존재. 최근 digenic/oligogenic 유전 패턴 증가 보고</li>
+        <li>가장 흔한 loss-of-function 변이: <strong>FGFR1, CHD7, PROKR2, ANOS1, GNRHR</strong></li>
+        <li><strong>ANOS1(구 KAL1):</strong> X-연관, 후각신경·GnRH신경 이주 결함 → 무후각증형(Kallmann) CHH. 미세음경·잠복고환 동반율 매우 높음. 고나도트로핀 치료 반응이 가장 낮은 그룹</li>
+        <li>여아는 두 X염색체 모두에 ANOS1 병원성 변이가 있어야 무후각증형 CHH 발현</li>
+      </ul>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧬 Table 3 — 주요 CHH 유전자(요약)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>유전자</th><th>기능</th><th>CHH 내 빈도</th><th>유형</th><th>유전방식</th></tr>
+              <tr><td><strong>ANOS1</strong>(KAL1)</td><td>후각·GnRH신경 이주(Anosmin-1)</td><td>7.1%</td><td>KS</td><td>X-연관 열성</td></tr>
+              <tr><td><strong>CHD7</strong></td><td>CHARGE증후군 원인, 크로마틴 리모델링</td><td>16%</td><td>둘 다(CPHD도)</td><td>상염색체 우성</td></tr>
+              <tr><td><strong>FGFR1</strong></td><td>GnRH신경 특화·후각계 발달</td><td>9.0%</td><td>둘 다(CPHD도)</td><td>상염색체 열성</td></tr>
+              <tr><td><strong>FGF8</strong></td><td>GnRH신경 특화 신호인자</td><td>1.3%</td><td>둘 다(CPHD도)</td><td>우성/열성</td></tr>
+              <tr><td><strong>PROKR2 / PROK2</strong></td><td>GnRH신경 이주·후각구 형성</td><td>5.2% / 2.1%</td><td>둘 다(±PSIS)</td><td>상염색체 열성</td></tr>
+              <tr><td><strong>GNRHR</strong></td><td>GnRH수용체</td><td>4.7%</td><td>정상후각형(nCHH)</td><td>상염색체 열성</td></tr>
+              <tr><td><strong>KISS1R</strong></td><td>Kisspeptin수용체(GnRH박동조절)</td><td>2.0%</td><td>nCHH</td><td>상염색체 열성</td></tr>
+              <tr><td><strong>TAC3 / TACR3</strong></td><td>뉴로키닌B/수용체(GnRH분비조절)</td><td>1.0% / 2.6%</td><td>nCHH</td><td>상염색체 열성</td></tr>
+              <tr><td><strong>KLB</strong></td><td>β-Klotho, FGF21 보조수용체</td><td>4%</td><td>둘 다</td><td>상염색체 우성</td></tr>
+              <tr><td><strong>WDR11</strong></td><td>Hedgehog 경로·GnRH생성</td><td>0.9%</td><td>둘 다</td><td>상염색체 우성</td></tr>
+            </table>
+          </div>
+          <small>KS=Kallmann syndrome(무후각증형), nCHH=normosmic CHH(정상후각형), PSIS=뇌하수체줄기 단절증후군. 전체 22개 유전자는 원문 Table 3 참조.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👦</span> 남성 CHH</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>발생률: 남성 1:4,400–30,000 출생(여성보다 훨씬 흔함, 1:125,000 핀란드 자료)</li>
+        <li>중증 CHH에서는 태아기·미니사춘기·사춘기 3파동 모두 결여 → 자궁 내 고환 미성숙 심화·고환하강 결함·음경형성저하</li>
+        <li>CHH 남아 중 잠복고환 동반율 약 30%, Kallmann증후군은 약 70%, ANOS1/CHD7 변이 보유자는 90–100%</li>
+        <li>부분형 CHH는 출생 시 외부생식기가 정상일 수 있고, 자발적 사춘기 개시 후 정지(pubertal arrest)로 나타나기도 함</li>
+        <li>미치료 시 사춘기 무발현/부재, 이후 우울·불안·고립·신체이미지 문제 등 정신건강 문제로 진행 가능</li>
+        <li>잠복고환은 장기 GnRH/고나도트로핀 치료 반응의 <strong>유의한 음성 예측인자</strong> — 선천성(후천성 대비), 잠복고환 동반 시 최종 정자수가 더 낮음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👧</span> 여성 CHH</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>발생률이 남성보다 훨씬 낮게 보고(1:125,000 vs 1:30,000, 핀란드) — 과소보고·복합피임약 경험적 처방으로 인한 진단 지연 영향 가능</li>
+        <li>대부분 사춘기에 원발무월경(약 90%)으로 발현. 무후각증·신장이상·난청 등 적신호 동반율이 남성보다 낮음</li>
+        <li>신생아기 특이적 임상징후 없음 — European Consensus Statement도 여아 CHH의 신생아 특이 징후는 없다고 명시</li>
+        <li>가임력: 저용량 고나도트로핀 6주기 후 임신 성공률 약 70%, 박동성 GnRH 요법은 95% 이상 — 남성보다 미니사춘기 결여의 영향이 적음(난소예비력은 출생 시 이미 완성)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 복합뇌하수체호르몬결핍(CPHD)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>핀란드 인구연구: CPHD 발생률 1:16,000. 60.4% 특발성, 14.6% 유전진단(PROP1, SOX3, SOX2, OTX2, TBC1D32), 25% 시신경중격이형성증(특발성)</li>
+        <li>아르헨티나 코호트(34명): 19명이 HPG축 이상 동반 CHH — 남아 21명 중 15명이 외부생식기 이상, 12명이 미세음경+잠복고환</li>
+        <li><strong>남아 CPHD의 최대 70%가 선천성 HPG축 장애를 동반</strong> → 생후 첫 수개월 내 저성선자극호르몬·저성선호르몬 선별검사 권고</li>
+        <li>뇌 MRI 소견: 뇌하수체줄기 단절증후군(PSIS, 뇌하수체전엽 저형성·후엽 이소성·줄기 저형성), 뇌량/투명중격 결손 등</li>
+      </ul>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧬 Table 4 — CPHD 주요 전사인자 유전자(요약)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>유전자</th><th>유전방식</th><th>축 영향</th><th>주요 표현형</th></tr>
+              <tr><td>HESX1</td><td>우성/열성</td><td>GH,LH,FSH,TSH,ACTH,CPHD</td><td>시신경중격이형성증, PSIS</td></tr>
+              <tr><td>LHX3</td><td>열성</td><td>GH,TSH,LH,FSH,ACTH,PRL</td><td>뇌하수체 저/과형성, 경부회전이상, 난청</td></tr>
+              <tr><td>LHX4</td><td>우성</td><td>GH,CPHD</td><td>PSIS, 뇌량저형성, 호흡곤란</td></tr>
+              <tr><td>PROP1</td><td>열성</td><td>GH,TSH,PRL,LH,FSH,±ACTH</td><td>뇌하수체 저형성(일과성 과형성 후)</td></tr>
+              <tr><td>SOX2</td><td>열성</td><td>LH,FSH,±GH</td><td>소안구증, 지적장애, 식도폐쇄, 미세음경</td></tr>
+              <tr><td>SOX3</td><td>X-염색체</td><td>GH,CPHD</td><td>PSIS, 지적장애, 손발가락이상, 미세음경</td></tr>
+            </table>
+          </div>
+          <small>전체 22개 유전자 목록은 원문 Table 4 참조.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎭</span> CHH 동반 증후군</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>증후군</th><th>유전자</th><th>특징</th></tr>
+          <tr><td>CHARGE 증후군</td><td>CHD7(약 2/3)</td><td>coloboma, 심장기형, 후비공폐쇄, 성장/발달지연, 생식기·귀 이상. 소아 32명 중 19/20 남아가 잠복고환/미세음경</td></tr>
+          <tr><td>Waardenburg 증후군(2·4형)</td><td>SOX10</td><td>모발/눈 색소이상, 선천성 감각신경성난청(4형은 Hirschsprung병 동반). 무후각·정상후각 CHH 스펙트럼과 연속선 가능성</td></tr>
+          <tr><td>Bardet-Biedl 증후군(BBS)</td><td>다수(BBS유전자군)</td><td>비만, 망막색소변성, 다지증, 지적장애. 저성선자극/고성선자극 저성선증 모두 보고, 자연임신 사례도 있음</td></tr>
+          <tr><td>Prader-Willi 증후군</td><td>15q11-13 각인이상</td><td>거의 모든 남아에서 편측/양측 잠복고환. 중추+원발 혼합형 성선기능저하, 지적장애·비만·기타 뇌하수체호르몬결핍 동반</td></tr>
+          <tr><td>Gordon-Holmes / Boucher-Neuhäuser / Oliver-McFarlane</td><td>PNPLA6</td><td>신경퇴행성 스펙트럼, 소뇌실조 동반 CHH</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦶</span> 원발성 고환질환에서의 미니사춘기(DSD·단독 잠복고환)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>DSD(46,XY 부분남성화저하, 클라인펠터증후군, 46,XY/45,X 성선이형성 등)에서는 미니사춘기 중 FSH 등 고나도트로핀이 오히려 <strong>상승</strong>하는 경우가 많음 — 조기진단 기회</li>
+        <li>미니사춘기 이후에는 LH/FSH/T/E2만으로는 원발성 성선기능부전을 진단할 수 없음 — 대신 낮거나 검출 불가능한 AMH·억제소B가 지속적 지표가 됨</li>
+        <li>단독 잠복고환(원인미상)에서도 미니사춘기 중 상대적 테스토스테론 저하·부적절하게 낮은 LH·FSH 결핍이 관찰됨(HPG축 경도 이상 시사)</li>
+        <li>성인기 잠복고환 병력자: 정자형성장애로 인한 핍정자증/무정자증 70–90%, 미시도 임신 실패 45%, 고환종양 위험 3–8배 증가</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /chh -->
+
+<!-- ══════════════════ TAB 4: 진단·평가 ══════════════════ -->
+<div id="tab-dx" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚧</span> 진단의 걸림돌</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>희귀질환(영국·독일 연 26–88명, 스웨덴·스위스는 4–14명)이라 일반 진료의의 인지도가 낮음</li>
+        <li>대부분의 CHH는 사춘기 지연을 계기로 뒤늦게 진단됨 — 신생아기 진단은 놓치는 경우가 많음</li>
+        <li>CPHD(저혈당, 지속 황달 등으로 발현) 환아는 신생아기부터 CHH 동반 여부를 생화학적으로 평가할 기회가 있음</li>
+        <li>CHH 부모의 자녀는 불임클리닉을 통해 소아내분비로 조기 의뢰될 수 있는 경로 존재</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👦</span> 남아(표현형) 평가 접근법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="acc" style="margin:0">
+          <div class="acc-hdr open" style="cursor:default"><span>① 대상자 선별</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>신생아–생후 9개월</li>
+              <li>남성 표현형</li>
+              <li>잠복고환(편측/양측)</li>
+              <li>미세음경</li>
+              <li>기타 적신호(신장무발생, 구순구개열, 손발가락/치아이상, 홍채결손, 내이난청, 뇌량무발생, 기타 뇌하수체호르몬결핍)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc" style="margin:0">
+          <div class="acc-hdr open" style="cursor:default"><span>② 표현형 검사</span></div>
+          <div class="acc-body" style="display:block">
+            <ul>
+              <li>신장 이완 음경길이(cm) 측정</li>
+              <li>고환 위치 확인(촉지 가능/불가능-소실/복강내)</li>
+              <li>고환이 음낭에 있을 경우 orchidometer로 용적 측정</li>
+              <li>적신호 소견 확인</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sec-sep"></div>
+      <div class="grid2">
+        <div>
+          <div class="alert alert-dev"><span>🖥️</span><div><strong>영상</strong> — 고환초음파(Lambert 공식: 길이×폭×깊이×0.71)로 용적 측정. 신장 초음파(신장무발생·자궁 확인), 뇌 초음파/뇌하수체 MRI(뇌하수체·후각구 형성이상)</div></div>
+        </div>
+        <div>
+          <div class="alert alert-predict"><span>🧬</span><div><strong>유전학</strong> — CHH/Kallmann 관련 유전자 표적 NGS/패널, 핵형검사(46,XX CAH 의심 또는 모자이시즘 의심 시), 마이크로어레이(증후군성 소견 동반 시)</div></div>
+        </div>
+      </div>
+      <div class="alert alert-tx" style="margin-top:8px">
+        <span>🧪</span>
+        <div><strong>검사실 검사</strong> — Leydig세포 기능: LH, 테스토스테론, INSL3(연구용). Sertoli세포 기능: FSH, 억제소B, AMH. 필요 시 전체 뇌하수체 프로파일(ACTH, 갑상선기능, IGF-1, 프로락틴)도 함께 평가.</div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⏱️</span>
+        <div>검사 <strong>시점이 중요</strong> — 미니사춘기 window(생후 4–26주) 내 최소 <strong>2회 이상</strong> 측정 권고. GnRH 자극검사는 영아기 검증되지 않았으며, 기저 고나도트로핀이 중간 범위·진단 모호 시 일부 센터에서만 사용.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👧</span> 여아(표현형) 평가 접근법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>외부 신체소견에 차이가 없어 진단이 훨씬 더 어려움 — 생화학적/유전학적 검사 없이는 미검출</li>
+        <li>중추이상(뇌하수체호르몬결핍 동반, 중선결손)이 있는 경우가 더 잘 발견됨</li>
+        <li>부모/형제가 CHH인 경우 검사 고려할 수 있으나, 사춘기 이전 치료가 권고되지 않는 상황에서 윤리적 타당성은 논란의 여지가 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 감별진단 포인트</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>소견</th><th>시사하는 진단</th></tr>
+          <tr><td>낮거나 검출불가 LH/FSH + 낮은 성선호르몬</td><td>CHH(중추성)</td></tr>
+          <tr><td>상승된 LH/FSH</td><td>원발성 성선기능부전(DSD 가이드라인에 따라 평가)</td></tr>
+          <tr><td>미세음경 + 요도하열</td><td>CHH보다는 광범위 DSD 스펙트럼 고려(요도하열은 단독 CHH의 전형적 소견 아님)</td></tr>
+          <tr><td>미세음경 단독, 잠복고환 없음</td><td>다양한 원인 가능 — DHT/T 국소치료 반응 확인</td></tr>
+          <tr><td>신생아 저혈당·지속황달 + 생식기이상</td><td>CPHD 의심, 전체 뇌하수체호르몬 평가</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /dx -->
+
+<!-- ══════════════════ TAB 5: 치료(고나도트로핀) ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 현행 치료 옵션 개관</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="alert alert-dev">
+          <span>🧴</span>
+          <div><strong>테스토스테론/DHT 국소·근주</strong> — 미세음경 치료의 전통적 방법(5% 테스토스테론 연고 30일 요법, IM 테스토스테론 3주 간격 3개월 등). 음경 성장은 촉진하나 <strong>Sertoli세포 증식·고환성장·고환하강은 유도하지 못함</strong>.</div>
+        </div>
+        <div class="alert alert-predict">
+          <span>🔪</span>
+          <div><strong>고환고정술(Orchidopexy)</strong> — 잠복고환의 표준치료. 유럽 컨센서스는 생후 6–12개월 사이 시행 권고. 성공률 약 90%. 위축 위험 약 2%(복강내 위치 시 최고).</div>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div>단기 hCG 주사(3주) 또는 비강 GnRH(4주)로 고환하강 유도 시도 시 성공률 20–25%이나 재상승률 25%로 최종 성공률은 약 15%에 불과 — 수술적 고환고정술이 여전히 1차 치료.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧭</span> 고나도트로핀을 통한 미니사춘기 대체요법: 근거</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-tx">
+        <span>🎯</span>
+        <div>사춘기 CHH 치료에서 <strong>기저 고환 크기가 정자형성 유도 성공의 핵심 예측인자</strong>임이 확인되면서, 발달학적으로 올바른 시기(생후 6–9개월 이전)에 미니사춘기를 재현하려는 접근이 대두되었다. 이는 사춘기/성인기 hCG+rFSH 병합요법 전 rFSH 선행투여로 Sertoli세포 확장을 유도하는 원리와 동일한 논리를 영아기에 앞당겨 적용하는 것이다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> Table 5 — 주요 임상연구 요약(미니사춘기 대체요법)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>연구</th><th>n</th><th>치료개시연령</th><th>중재</th><th>단기 임상결과</th></tr>
+          <tr><td>Main 2002</td><td>1</td><td>7.9개월</td><td>rLH+rFSH 주2회, 4–6개월</td><td>고환용적 +170%, 음경길이 1.6→2.4cm</td></tr>
+          <tr><td>Bougnères 2008</td><td>2</td><td>2–5개월</td><td>rLH+rFSH SC펌프 지속주입 6개월</td><td>고환용적 0.5→2.1mL, 음경길이 증가</td></tr>
+          <tr><td>Sarfati 2015</td><td>1</td><td>1개월</td><td>SC펌프 6개월</td><td>고환용적 0.33→2.3mL, 음경 1.5→3.8cm</td></tr>
+          <tr><td>Lambert &amp; Bougnères 2016</td><td>8</td><td>평균 6.0개월</td><td>SC펌프 평균 6개월</td><td>음경길이 평균 2.02→3.74cm, 전례 고환하강</td></tr>
+          <tr><td>Stoupa 2017</td><td>5</td><td>평균 4.2개월</td><td>SC펌프 3–6개월</td><td>음경길이 평균 1.38→4.26cm</td></tr>
+          <tr><td>Kohva 2019</td><td>5</td><td>평균 2.5개월</td><td>rFSH 주2–3회+월1회 T, 3–4개월</td><td>음경길이 평균 1.7→2.9cm; 11.2±1.5년 후 억제소B는 미치료군과 유의차 없음</td></tr>
+          <tr><td>Papadimitriou(REMAP) 2019</td><td>10</td><td>중앙값 4.2개월</td><td>일일 Pergoveris(LH/FSH 75/150IU) 주사, 3개월</td><td>음경길이 중앙값 2→3.8cm; 3–10년 추적 시 전례 음낭내 위치 유지(용적은 1.0mL로 소폭 감소)</td></tr>
+          <tr><td>Avril 2023</td><td>35</td><td>평균 5.1(펌프)/13개월(주사)</td><td>펌프 vs hCG+FSH SC주사</td><td>주사군에서 음경길이·테스토스테론 증가율이 유의하게 더 큼; 고환용적·AMH·억제소B·하강은 양군 모두 개선</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:8px"><span>📈</span><div>연구 대부분에서 <strong>음경길이는 정상 평균±2SD 범위로 회복</strong>(정상 평균 3.49cm, ±2SD: 2.69–4.29cm), 고환용적도 치료 후 증가하였으나 장기 추적에서 다시 정상 범위 부근으로 소폭 감소하는 경향을 보임(건강 대조군에서도 나타나는 생리적 현상).</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 저자 제안 치료 프로토콜(Figure 6, 컨센서스 의견)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">뇌하수체 대체(고나도트로핀)</div>
+          <strong>LH:</strong> rLH 37.5–75 IU/day SC 또는 u/rhCG 200–500 IU 주1–2회<br>
+          <strong>FSH:</strong> rFSH 75–750 IU 주3회 또는 매일 SC<br>
+          <small>2–4개월 투여, 반응에 따라 용량 조정</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">시상하부 대체(GnRH 펌프)</div>
+          24시간 박동성 GnRH SC 펌프주입<br>
+          5,10,15,20,30,50 μg/1.73m² 매 90–120분<br>
+          <small>필요 시 펄스 빈도 상향 조정</small>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>⚠️</span>
+        <div><strong>CPHD 동반 남아는 GnRH 펌프가 아닌 고나도트로핀으로만 치료 가능</strong>(뇌하수체 자체 결함이므로). 단독 CHH는 GnRH 펌프 또는 고나도트로핀 모두 사용 가능하나, GNRHR 변이 환자는 GnRH에 저항성을 보여 고나도트로핀이 더 적절.</div>
+      </div>
+      <div class="alert alert-tx" style="margin-top:8px">
+        <span>📅</span>
+        <div><strong>모니터링:</strong> 치료 시작 후 2주, 4주, 이후 4주 간격으로 고환용적(초음파, Lambert 공식) 및 LH/테스토스테론/INSL3(Leydig 기능), FSH/억제소B/AMH(Sertoli 기능) 추적.</div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px">
+        <span>🚫</span>
+        <div>현재까지 <strong>어떤 국제 가이드라인도 미니사춘기 유도를 위한 고나도트로핀을 표준요법으로 공식 권고하지 않음</strong>(Endo-ERN 2022 가이드라인 포함). 치료 시작은 소아내분비 전문가의 개별 판단 + 충분한 부모 상담 하에 이루어져야 함.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 부작용 및 이론적 우려</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li><strong>국소 부작용:</strong> 피하주사 부위 통증·피부자극, 펌프 사용 시 흉터·지방비대·드물게 농양/수포</li>
+        <li><strong>hCG 항체 형성:</strong> 1예 보고, LH/FSH로 전환하여 해결</li>
+        <li><strong>여성형유방:</strong> 고용량 hCG 사용 시(사춘기·성인) 아로마화로 인한 에스트로겐 증가와 관련 — 영아 미니사춘기 용량에서는 드묾</li>
+        <li><strong>발기 빈도 증가</strong> — 테스토스테론/DHT 치료와 유사하게 관찰될 수 있음</li>
+        <li><strong>이론적 우려(생식세포 영향):</strong> 미성숙 고환에서 hCG 고용량이 생식세포 아폽토시스를 증가시킬 가능성 시사(설치류·일부 인체 연구, 다만 CHH 특이적 근거는 아님) — <strong>hCG 단독요법은 신중하게 사용</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 향후 연구 우선순위 및 남은 질문</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.8">
+        <li>대조군을 포함한 전향적·장기(사춘기 이후) 추적 연구 부재 — 정자형성·가임력에 대한 실제 효과는 아직 추정 단계</li>
+        <li>대부분 연구가 생후 4–6개월(생리적 미니사춘기 종료 시점) 이후 치료 시작 — 지연된 유도의 영향은 불명확</li>
+        <li>최적 치료 기간·용량·regimen 비교 연구 필요</li>
+        <li>여아 미니사춘기의 임상적 의의 규명은 상대적으로 시급성이 낮음(여성은 성인기 가임력 유도 반응이 더 우수)</li>
+        <li>생식-신경인지 경로의 상호연관성(다운증후군 마우스모델에서 GnRH 결핍과 인지저하 연관 근거 등) 추가 연구 필요</li>
+        <li>국제 레지스트리(I-DSD 등)를 통한 전향적 자료 수집이 현실적 대안으로 제안됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 약어 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 주요 약어 모음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div id="abbr-main-grid" class="abbr-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const STAT_DETAILS = {
+  waves: {
+    title: "HPG축 3파동",
+    val: "태아기 · 미니사춘기 · 사춘기",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>🌊</span><div>사람의 중추 시상하부-뇌하수체-생식선(HPG)축은 생애 동안 <strong>3번의 생리적 활성 파동</strong>을 거친다.</div></div>
+      <ul>
+        <li><strong>1파동(태아기):</strong> 임신 중, 고환하강·음경발달 담당</li>
+        <li><strong>2파동(미니사춘기):</strong> 생후 첫 수개월, 세르톨리세포 증식·고환/음경 성장</li>
+        <li><strong>3파동(사춘기):</strong> 청소년기, 이후 평생 축 활성 유지</li>
+        <li>사춘기 이후에는 축이 평생 활성 상태로 유지되며 노화까지 지속됨</li>
+      </ul>
+    `
+  },
+  duration: {
+    title: "남아 미니사춘기 지속기간",
+    val: "약 6개월(peak 2–3개월)",
+    color: "var(--predict)",
+    html: `
+      <div class="alert alert-predict"><span>⏳</span><div>미니사춘기는 1970년대 초 남아에서 처음 기술되었다. 출생과 함께 태반 에스트로겐 억제가 소실되며 시작된다.</div></div>
+      <ul>
+        <li>출생 직후 테스토스테론 급증(peak 2–3시간) → 6–12시간 후 감소 → 약 1주 저하기</li>
+        <li>LH: 2주째 상승, 2–10주 peak</li>
+        <li>테스토스테론: 2–3개월 성인 수준 도달, 6개월경 저하로 복귀</li>
+        <li>FSH: 2주째 상승, 10–15일 peak, 3개월 이후 감소</li>
+        <li>고환용적: 4–5개월 peak(출생대비 약 40%↑), 1세경 소폭 감소</li>
+        <li>여아는 생후 2–4세까지 축이 활성 상태로 지속될 수 있어 남아보다 훨씬 김</li>
+      </ul>
+    `
+  },
+  incidence: {
+    title: "남성 CHH 발생률",
+    val: "1:4,400–30,000 출생",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>📊</span><div>CHH는 시상하부에서 GnRH 생성·분비가 결핍되어 뇌하수체 LH/FSH 분비가 부족해지는 희귀 유전질환이다. 남성에서 더 흔하게 보고된다.</div></div>
+      <ul>
+        <li>무후각/저후각 동반 시 Kallmann증후군으로 명명 — 후각신경과 GnRH신경의 공통 이주결함에 기인</li>
+        <li>단독 발생, Kallmann증후군, 또는 CPHD(복합뇌하수체호르몬결핍)의 일부로 발생 가능</li>
+        <li>여성 CHH 발생률은 훨씬 낮게 보고(1:125,000, 핀란드) — 과소진단 가능성 있음</li>
+      </ul>
+    `
+  },
+  cryptorate: {
+    title: "CHH 환아의 잠복고환 동반율",
+    val: "전체 CHH 최대 50%, Kallmann 70%, ANOS1/CHD7 90–100%",
+    color: "var(--monitor)",
+    html: `
+      <div class="alert alert-monitor"><span>🚩</span><div>일반인구 신생아 잠복고환 유병률은 최대 5%(1년 후 1%로 감소)이나, CHH에서는 이보다 훨씬 높다.</div></div>
+      <ul>
+        <li>전체 CHH: 약 30–50%</li>
+        <li>Kallmann증후군: 약 70%</li>
+        <li>ANOS1 또는 CHD7 변이: 90–100%</li>
+        <li>비-CHH 잠복고환은 생후 3–6개월 내 자연하강 가능하나, 중증 GnRH결핍에서는 자연하강이 일어나지 않음 — 12주 이후 지속되는 양측 잠복고환이 특히 의미있는 진단단서</li>
+      </ul>
+    `
+  },
+  fetalwave: {
+    title: "① 태아기 HPG축",
+    val: "임신 6–26주",
+    color: "var(--dev)",
+    html: `<ul>
+      <li>GnRH신경 이주 완료: 임신 14주</li>
+      <li>Leydig세포 테스토스테론 분비 시작: 6주(초기엔 hCG 의존, 15주 이후 LH 의존)</li>
+      <li>테스토스테론 분비 peak: 12–16주</li>
+      <li>INSL3(LH자극)이 고환하강(서혜인대 발달) 촉진</li>
+      <li>FSH가 자궁내 Sertoli세포 증식·AMH/억제소B 분비 촉진</li>
+    </ul>`
+  },
+  miniwave: {
+    title: "② 미니사춘기",
+    val: "생후 0–6개월(peak 2–3개월)",
+    color: "var(--predict)",
+    html: `<ul>
+      <li>Sertoli세포 유사분열 증식 — 향후 정자형성능의 핵심 결정인자</li>
+      <li>고환용적 40% 증가(4–5개월 peak)</li>
+      <li>Sertoli세포 안드로겐수용체는 아직 미발현 → 이 시기 정자형성 자체는 일어나지 않음</li>
+      <li>여아는 최대 2–4세까지 지속 가능</li>
+    </ul>`
+  },
+  quiescence: {
+    title: "③ 휴지기",
+    val: "미니사춘기 종료 후 ~ 사춘기 전",
+    color: "var(--tx)",
+    html: `<ul>
+      <li>GnRH 분비 최소, LH/FSH/성선호르몬 초고감도 분석 아니면 검출 불가</li>
+      <li>부신선조체증(adrenarche)은 6–8세부터 별도 기전(성선자극호르몬 비의존적)으로 시작</li>
+      <li>이 시기 원발성 성선기능부전 진단은 AMH·억제소B로만 가능(LH/FSH/성선호르몬으로는 불가)</li>
+    </ul>`
+  },
+  pubwave: {
+    title: "④ 사춘기",
+    val: "남 9–14세 · 여 8–13세",
+    color: "var(--monitor)",
+    html: `<ul>
+      <li>고환용적 4mL 이상이 남아 사춘기 개시 정의</li>
+      <li>KNDy뉴런 등 흥분성 입력 우세로 GnRH 박동 빈도·진폭 증가</li>
+      <li>Sertoli세포 안드로겐수용체 발현 확립 → 정자형성 활성화(1개 Sertoli세포당 생식세포 18–20개 지지)</li>
+      <li>여아: 유방발육(B2) 후 2–3년 뒤 초경</li>
+      <li>이후 축은 평생 활성 상태 유지</li>
+    </ul>`
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"AMH",   def:"Anti-Müllerian Hormone — 항뮐러관호르몬, Sertoli세포 분비" },
+  { term:"CHH",   def:"Congenital Hypogonadotropic Hypogonadism — 선천성 저성선자극호르몬성 성선기능저하증" },
+  { term:"CPHD",  def:"Combined Pituitary Hormone Deficiency — 복합뇌하수체호르몬결핍" },
+  { term:"DHT",   def:"5α-Dihydrotestosterone — 디하이드로테스토스테론" },
+  { term:"DSD",   def:"Differences/Disorders of Sex Development — 성발달차이(이상)" },
+  { term:"FSH",   def:"Follicle Stimulating Hormone — 난포자극호르몬" },
+  { term:"GnRH",  def:"Gonadotropin-Releasing Hormone — 성선자극호르몬방출호르몬" },
+  { term:"hCG",   def:"Human Chorionic Gonadotropin — 사람융모성선자극호르몬" },
+  { term:"HPG",   def:"Hypothalamic-Pituitary-Gonadal axis — 시상하부-뇌하수체-생식선 축" },
+  { term:"INSL3", def:"Insulin-Like Factor 3 — Leydig세포 분비 펩타이드, 고환하강 관련" },
+  { term:"KNDy",  def:"Kisspeptin/NeurokininB/Dynorphin 뉴런 — GnRH박동생성 조절" },
+  { term:"KS",    def:"Kallmann Syndrome — 칼만증후군(무후각증 동반 CHH)" },
+  { term:"LH",    def:"Luteinizing Hormone — 황체형성호르몬" },
+  { term:"nCHH",  def:"Normosmic CHH — 정상후각형 CHH" },
+  { term:"PSIS",  def:"Pituitary Stalk Interruption Syndrome — 뇌하수체줄기 단절증후군" },
+  { term:"rFSH",  def:"Recombinant FSH — 재조합 난포자극호르몬" },
+  { term:"rLH",   def:"Recombinant LH — 재조합 황체형성호르몬" },
+  { term:"SGA",   def:"Small for Gestational Age — 부당경량아" },
+  { term:"UDT",   def:"Undescended Testes — 잠복고환(고환하강미완성)" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
