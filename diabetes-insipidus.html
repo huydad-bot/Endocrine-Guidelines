@@ -3,609 +3,790 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>요붕증(Diabetes Insipidus) — 중추성·신성 진단 및 치료 업데이트</title>
+<title>요붕증 (Diabetes Insipidus) — Frontiers in Endocrinology 2025</title>
 <style>
-  :root{
-    --main:#2b5c8a; --main-light:#e8f0f8; --accent:#0969da; --accent2:#0550ae;
-    --bg:#f7f9fc; --surface:#ffffff; --surface2:#f1f4f8; --border:#dbe3ee;
-    --text:#1c2733; --text2:#5b6b7c; --danger:#c0392b; --warn:#b7791f; --good:#1e7d4f;
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --fscale: 1;
+    --main: #2b5c8a;
+    --main-light: #e8f0f8;
   }
-  *{box-sizing:border-box;}
-  body{margin:0;font-family:'Segoe UI',-apple-system,'Malgun Gothic',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;}
-  header{background:linear-gradient(135deg,var(--main),#1c3f60);color:#fff;padding:28px 20px;text-align:center;}
-  header h1{margin:0 0 4px;font-size:22px;}
-  header .sub{font-size:13px;opacity:.85;}
-  .layout{display:flex;max-width:1250px;margin:0 auto;}
-  nav{width:270px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
-      height:calc(100vh - 84px);position:sticky;top:84px;overflow-y:auto;padding:14px;}
-  nav .chapter-title{font-weight:700;color:var(--main);font-size:13px;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.03em;}
-  nav a{display:block;font-size:12.5px;color:var(--text2);text-decoration:none;padding:4px 6px;border-radius:5px;}
-  nav a:hover{background:var(--main-light);color:var(--main);}
-  #searchBox{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;margin-bottom:6px;}
-  main{flex:1;padding:24px 32px 80px;max-width:980px;}
-  .disclaimer{background:#fff6e5;border:1px solid #e8c77a;color:#7a5200;border-radius:8px;padding:12px 16px;font-size:12.5px;line-height:1.6;margin-bottom:20px;}
-  .disclaimer strong{color:#5c3d00;}
-  h2.chapter{color:#fff;background:var(--main);padding:10px 16px;border-radius:8px;font-size:19px;margin:36px 0 14px;}
-  h2.chapter:first-of-type{margin-top:0;}
-  details.test{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
-  details.test>summary{cursor:pointer;padding:13px 16px;font-weight:700;font-size:15px;color:var(--main);list-style:none;display:flex;justify-content:space-between;align-items:center;background:var(--main-light);}
-  details.test>summary::-webkit-details-marker{display:none;}
-  details.test>summary::after{content:'▸';transition:transform .15s;color:var(--accent);font-size:13px;}
-  details.test[open]>summary::after{transform:rotate(90deg);}
-  .body-pad{padding:16px 18px 18px;}
-  .sub-title{font-weight:700;font-size:13.5px;color:var(--main);margin:14px 0 6px;padding-top:8px;border-top:1px dashed var(--border);}
-  .sub-title:first-child{border-top:none;padding-top:0;margin-top:0;}
-  p{margin:6px 0 10px;font-size:13.5px;}
-  ul,ol{font-size:13.5px;margin:6px 0 10px;padding-left:22px;}
-  li{margin-bottom:4px;}
-  table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:12.5px;}
-  th,td{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top;}
-  th{background:var(--surface2);color:var(--main);font-weight:700;}
-  tr:nth-child(even) td{background:#fafcfe;}
-  .alert{border-left:4px solid var(--accent2);background:#ddf4ff;color:#0550ae;padding:10px 12px;border-radius:6px;font-size:13px;margin:10px 0;}
-  .alert.purple{background:var(--main-light);border-left-color:var(--main);color:#17395c;}
-  .alert.warn{background:#fff6e5;border-left-color:var(--warn);color:#7a5200;}
-  .alert.danger{background:#fdecea;border-left-color:var(--danger);color:#7d211a;}
-  .alert.good{background:#e9f7ef;border-left-color:var(--good);color:#155d38;}
-  .refs{font-size:11.5px;color:var(--text2);line-height:1.7;}
-  .refs li{margin-bottom:3px;}
-  .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--main);color:#fff;margin-left:8px;vertical-align:middle;}
-  .toc-hint{font-size:11px;color:var(--text2);margin-bottom:10px;}
-  code{background:var(--surface2);padding:1px 5px;border-radius:4px;font-size:12px;}
-  .formula{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;margin:8px 0;font-family:Consolas,monospace;}
-  .flow{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12.5px;margin:10px 0;}
-  .flow .step{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin:6px 0;}
-  .flow .arrow{text-align:center;color:var(--main);font-weight:700;margin:2px 0;}
-  .hidden{display:none !important;}
-  footer{text-align:center;font-size:11.5px;color:var(--text2);padding:30px 0 60px;}
-  @media(max-width:900px){nav{display:none;} main{padding:18px;}}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: var(--main);
+    color: #fff;
+    font-size: calc(10px * var(--fscale, 1));
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 19px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--main); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; font-weight: 600;}
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: flex-start; gap: 2px; }
+  .tab {
+    padding: 8px 13px;
+    font-size: calc(12px * var(--fscale, 1));
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--main); border-bottom-color: var(--main); }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 6px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600;
+    color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform: none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; min-width:110px; text-align: center; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: var(--main); }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-hst { background: #ffebe9; color: #82071e; border: 1px solid var(--red); }
+  .grade-h { background: #fff1e5; color: #7d3f00; border: 1px solid var(--orange); }
+  .grade-mod { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-info { background: var(--main-light); color: var(--accent2); border: 1px solid var(--accent); }
+  .grade-yn { background: #dafbe1; color: #116329; border: 1px solid var(--green); }
+
+  .grade::after {
+    content: attr(data-tip); display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: #1f2328; color: #e6edf3; font-size: calc(11px * var(--fscale, 1)); font-weight: 400; line-height: 1.5;
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap; z-index: 500; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: ''; display: none; position: absolute; bottom: calc(100% + 1px); left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: #1f2328; z-index: 501; pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: wrap; max-width:60px;}
+  .rec-num { font-size: calc(10px * var(--fscale,1)); color: var(--text2); font-weight:700; margin-top:1px; flex-shrink:0; min-width:20px; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: var(--main); }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-purple { background: var(--main-light); border-left: 3px solid var(--main); color: #1c3f60; }
+
+  .ppgl-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .ppgl-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; }
+  .ppgl-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .ppgl-table tr:last-child td { border-bottom: none; }
+  .ppgl-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .ppgl-table .section-row td { background: var(--surface2); color: var(--main); font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
+
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: var(--main); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+  .sub-title { font-weight:700; font-size: calc(13px * var(--fscale,1)); color: var(--main); margin: 10px 0 4px; padding-top:6px; border-top:1px dashed var(--border);}
+  .sub-title:first-child{border-top:none; padding-top:0; margin-top:0;}
+
+  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; margin: 8px 0; }
+  .flow-mini { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin: 8px 0; font-size: calc(12px * var(--fscale, 1)); }
+  .flow-mini .fstep { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 9px; margin: 4px 0; }
+  .flow-mini .farrow { text-align: center; color: var(--main); font-weight: 700; font-size: calc(11px * var(--fscale, 1)); margin: 1px 0; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>요붕증(Diabetes Insipidus) — 중추성·신성 진단 및 치료 업데이트</h1>
-  <div class="sub">Flynn K, Hatfield J, Brown K, Vietor N, Hoang T. Central and nephrogenic diabetes insipidus: updates on diagnosis and management. <i>Front Endocrinol.</i> 2025;15:1479764.</div>
-  <div class="sub" style="margin-top:6px;opacity:.75;">※ 본 자료는 원문 리뷰 논문 내용을 정리한 임상 참고용 자료이며, 실제 진료 적용 전 원문 및 각 기관 프로토콜을 반드시 확인하시기 바랍니다.</div>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">Frontiers in Endocrinology</span>
+      <h1>요붕증 — 중추성·신성 진단 및 치료 업데이트</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.3389/fendo.2024.1479764" class="source-link" target="_blank">Flynn K, Hatfield J, Brown K, Vietor N, Hoang T. Central and nephrogenic diabetes insipidus: updates on diagnosis and management. Front Endocrinol. 2025;15:1479764 ↗</a>
+      <span class="meta"> · Walter Reed National Military Medical Center, Dept of Endocrinology</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">진료 참고용 요약 도구이며, 최신 지침 원문 확인을 대체하지 않는다</span>
+    </div>
+  </div>
 </header>
 
-<div class="layout">
-<nav>
-  <input id="searchBox" type="text" placeholder="검색 (예: 코펩틴, DDAVP, 삼상반응)...">
-
-  <div class="chapter-title" style="margin-top:0;">1. 개요 및 병태생리</div>
-  <a href="#t1-1">1.1 정의 및 역학</a>
-  <a href="#t1-2">1.2 ADH 분비-작용 경로</a>
-  <a href="#t1-3">1.3 중추성 vs 신성 DI 분류</a>
-
-  <div class="chapter-title">2. 원인</div>
-  <a href="#t2-1">2.1 중추성 DI의 원인</a>
-  <a href="#t2-2">2.2 신성 DI의 원인</a>
-
-  <div class="chapter-title">3. 임상양상</div>
-  <a href="#t3-1">3.1 증상 및 소아 특징</a>
-
-  <div class="chapter-title">4. 진단</div>
-  <a href="#t4-1">4.1 감별진단 및 초기 접근</a>
-  <a href="#t4-2">4.2 수분제한검사(Water Deprivation Test)</a>
-  <a href="#t4-3">4.3 데스모프레신 투여 반응</a>
-  <a href="#t4-4">4.4 코펩틴(Copeptin) 측정</a>
-  <a href="#t4-5">4.5 진단 알고리즘 종합</a>
-
-  <div class="chapter-title">5. 치료 — 일반원칙</div>
-  <a href="#t5-1">5.1 수분 섭취 및 치료 원칙</a>
-
-  <div class="chapter-title">6. 중추성 DI 치료</div>
-  <a href="#t6-1">6.1 데스모프레신</a>
-  <a href="#t6-2">6.2 티아지드 이뇨제(소아)</a>
-
-  <div class="chapter-title">7. 신성 DI 치료</div>
-  <a href="#t7-1">7.1 일반원칙 및 원인교정</a>
-  <a href="#t7-2">7.2 식이요법</a>
-  <a href="#t7-3">7.3 이뇨제</a>
-  <a href="#t7-4">7.4 고용량 데스모프레신</a>
-  <a href="#t7-5">7.5 신규 치료 전략</a>
-
-  <div class="chapter-title">8. 병원 내 급성기 치료</div>
-  <a href="#t8-1">8.1 고나트륨혈증 교정</a>
-
-  <div class="chapter-title">9. 요약</div>
-  <a href="#t9-1">9.1 임상 실무 권고 요약표</a>
-  <a href="#t9-2">9.2 결론</a>
-
-  <div class="chapter-title">10. 참고문헌</div>
-  <a href="#t10-1">10.1 References</a>
-</nav>
-
-<main>
-
-<div class="disclaimer">
-<strong>안내:</strong> 본 문서는 Frontiers in Endocrinology(2025)에 게재된 요붕증(DI) 리뷰 논문의 내용을 한글로 정리한 임상 참고 자료이다. 각 수치와 권고는 원 논문의 근거 수준(SOR)에 따라 다르며, 실제 처방·검사 시행 전 기관 프로토콜 및 최신 문헌을 확인해야 한다.
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('causes')">🧬 원인</div>
+    <div class="tab" onclick="showTab('clinical')">🩺 임상양상</div>
+    <div class="tab" onclick="showTab('diagnosis')">🔬 진단</div>
+    <div class="tab" onclick="showTab('treatment')">💊 치료</div>
+    <div class="tab" onclick="showTab('hospital')">🏥 입원 관리</div>
+    <div class="tab" onclick="showTab('summary')">📚 요약·약어</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:110px;min-width:110px;max-width:110px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='var(--main)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:420px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<h2 class="chapter" id="ch1">1. 개요 및 병태생리</h2>
+<div class="main">
 
-<details class="test" id="t1-1" open><summary>1.1 정의 및 역학</summary><div class="body-pad">
-<div class="sub-title">정의</div>
-<p>요붕증(DI)은 항이뇨호르몬(ADH)과 관련된 희귀 내분비질환으로, ADH에 반응하지 못하거나 ADH를 생성하지 못해 신장이 소변을 농축하지 못하는 상태이다. 그 결과 저장성 다뇨(hypotonic polyuria)가 발생하며, 수분 섭취가 충분하지 않으면 고나트륨혈증으로 진행한다. DI는 완치가 불가능하며, 희귀질환이기 때문에 많은 임상의에게 익숙하지 않은 질환이다.</p>
-<div class="sub-title">역학</div>
-<ul>
-<li>유병률: 약 25,000명 중 1명, 남녀 발생률 동일, 모든 연령에서 발생 가능</li>
-<li>DI 자체로 인한 이환율·사망률은 통상적으로 보고되지 않으며, 주로 삶의 질에 영향을 미침</li>
-<li>예외적으로 <strong>무갈증성(adipsic) 중추성 DI</strong>는 갈증 감각 소실로 인해 사망률이 증가함 — 문헌상 보고 사례는 수백 례에 불과하나, 이 중 약 40%가 파열된 전교통동맥류(anterior communicating artery aneurysm) 치료 후 발생</li>
-<li>무갈증 환자는 심한 탈수 위험이 높으며, 저나트륨혈증, 정맥혈전색전증, 경련, 급성신손상, 횡문근융해증, 뇌하수체전엽 호르몬 결핍, 수면호흡장애 등의 위험이 보고됨</li>
-</ul>
-</div></details>
+<!-- ===================== TAB: OVERVIEW ===================== -->
+<div id="tab-overview" class="panel active">
 
-<details class="test" id="t1-2"><summary>1.2 ADH 분비-작용 경로 (Figure 1)</summary><div class="body-pad">
-<div class="sub-title">생리학적 경로</div>
-<p>ADH(항이뇨호르몬, 아르기닌 바소프레신·AVP라고도 함)는 체내 수분 항상성을 조절한다. 정상적으로 자극(고장성 자극, 혈량저하 등)이 있으면 시상하부가 뇌하수체 후엽에 신호를 보내 ADH를 분비시킨다.</p>
-<div class="flow">
-<div class="step"><strong>① 시상하부(Hypothalamus)</strong> — 삼투압 변화 감지 및 신호 발생</div>
-<div class="arrow">↓</div>
-<div class="step"><strong>② 뇌하수체 후엽(Posterior Pituitary)</strong> — ADH 분비</div>
-<div class="arrow">↓ (혈류를 통해 신장 도달)</div>
-<div class="step"><strong>③ 신장 집합관 기저외측막 V2 수용체</strong>에 ADH 결합</div>
-<div class="arrow">↓</div>
-<div class="step">아데닐산 고리화효소(Adenylate Cyclase) 활성화 → 세포 내 cAMP 증가</div>
-<div class="arrow">↓</div>
-<div class="step">단백질 인산화효소 A(Protein Kinase A) 활성화</div>
-<div class="arrow">↓</div>
-<div class="step">아쿠아포린-2(AQP2) 채널이 관강측(apical) 막으로 이동·삽입 → 수분 재흡수 증가 → 소변 농축</div>
-</div>
-<p>이 자동조절(autoregulation) 기전이 어느 단계에서든 정상적으로 작동하지 않으면 소변을 농축할 수 없게 된다.</p>
-</div></details>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">1:25,000</div><div class="stat-lbl">추정 유병률</div></div>
+    <div class="stat-box"><div class="stat-val">ADH / AVP</div><div class="stat-lbl">병태생리 핵심 호르몬</div></div>
+    <div class="stat-box"><div class="stat-val">2</div><div class="stat-lbl">아형: 중추성(CDI) / 신성(NDI)</div></div>
+    <div class="stat-box"><div class="stat-val">완치 불가</div><div class="stat-lbl">치료 목표 = 삶의 질 개선</div></div>
+  </div>
 
-<details class="test" id="t1-3"><summary>1.3 중추성 vs 신성 DI 분류</summary><div class="body-pad">
-<p>DI는 병리가 발생하는 위치(뇌 vs 신장)에 따라 두 가지로 구분된다.</p>
-<table>
-<tr><th>구분</th><th>정의</th></tr>
-<tr><td><strong>중추성 DI(CDI)</strong></td><td>뇌하수체 후엽에서 ADH 분비가 결핍된 상태</td></tr>
-<tr><td><strong>신성 DI(NDI)</strong></td><td>ADH 농도는 적절하나 신장에서 V2 수용체 또는 아쿠아포린-2 반응이 결핍된 상태</td></tr>
-</table>
-<p>DI의 희귀성 때문에 임상 현장에서 그 표현형, 진단, 치료에 대한 이해가 부족한 경우가 많으며, 본 자료는 인지, 진단, 치료의 단계적 접근을 정리한다.</p>
-</div></details>
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 정의 및 분류</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-purple" style="margin-bottom:8px">
+        <span>📌</span>
+        <div>요붕증(DI)은 <strong>항이뇨호르몬(ADH)</strong>에 반응하지 못하거나 ADH를 생성하지 못해 신장이 소변을 농축하지 못하는 희귀 내분비질환이다. 그 결과 <strong>저장성 다뇨(hypotonic polyuria)</strong>가 발생하며, 수분 섭취가 불충분하면 고나트륨혈증으로 진행한다. DI는 완치가 불가능하며 희귀질환이기 때문에 많은 임상의에게 익숙하지 않다.</div>
+      </div>
+      <table class="ppgl-table">
+        <tr><th>아형</th><th>병리 위치</th><th>정의</th></tr>
+        <tr><td><strong>중추성 DI (CDI)</strong></td><td>뇌 (뇌하수체 후엽)</td><td>ADH 분비가 결핍된 상태</td></tr>
+        <tr><td><strong>신성 DI (NDI)</strong></td><td>신장 (집합관)</td><td>ADH는 적절하나 V2 수용체·아쿠아포린-2 반응이 결핍된 상태</td></tr>
+      </table>
+      <div class="rec-text" style="margin-top:6px">DI의 희귀성 때문에 임상 현장에서 임상양상, 진단, 치료에 대한 이해가 부족한 경우가 많다. 감별진단으로 <strong>일차성 다음증(primary polydipsia)</strong>과 다른 저장성 다뇨 원인을 반드시 배제해야 한다.</div>
+    </div>
+  </div>
 
-<h2 class="chapter" id="ch2">2. 원인</h2>
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> ADH 분비-작용 경로 (Figure 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="flow-mini">
+        <div class="fstep"><strong>① 시상하부</strong> — 삼투압 변화 감지, 신호 발생</div>
+        <div class="farrow">↓</div>
+        <div class="fstep"><strong>② 뇌하수체 후엽</strong> — ADH(=AVP) 분비 → 혈류 이동</div>
+        <div class="farrow">↓</div>
+        <div class="fstep"><strong>③ 신장 집합관 기저외측막 V2 수용체</strong>에 ADH 결합</div>
+        <div class="farrow">↓</div>
+        <div class="fstep">아데닐산고리화효소 활성화 → 세포 내 <strong>cAMP</strong> 증가 → 단백질 인산화효소 A(PKA) 활성화</div>
+        <div class="farrow">↓</div>
+        <div class="fstep"><strong>아쿠아포린-2(AQP2)</strong> 채널이 관강측(apical) 막으로 이동·삽입 → 수분 재흡수 증가 → 소변 농축</div>
+      </div>
+      <div class="rec-text">이 자동조절 기전이 어느 단계에서든 정상 작동하지 않으면 소변을 농축할 수 없게 된다.</div>
+    </div>
+  </div>
 
-<details class="test" id="t2-1" open><summary>2.1 중추성 DI(CDI)의 원인</summary><div class="body-pad">
-<div class="sub-title">주요 원인 개요</div>
-<ul>
-<li>CDI는 대부분 후천적으로 발생하며, 최대 36%가 두부 외상 또는 경비강/경전두엽 수술(뇌하수체·시상하부 손상)로 인함</li>
-<li>외상·수술 후 표현 양상: <strong>① 일과성</strong> — 뇌손상 후 24시간 내 ADH 분비 이상 발생, 수일 내 회복 / <strong>② 영구성</strong> — 지속되는 DI / <strong>③ 삼상반응(triphasic response)</strong> — 뇌하수체 줄기(pituitary stalk) 완전 절제 후: 축삭 쇼크(axon shock)로 인한 DI 양상(수일간) → 저장된 ADH가 무분별하게 방출되는 항이뇨기(최대 2주) → 모든 ADH 저장이 소진된 후 DI가 재발하는 최종 국면</li>
-<li>기타 원인: 침윤성 질환, 종양, 염증성 질환, 자가면역질환 등 (아래 표 참고)</li>
-<li>CDI는 유전적 원인이 상대적으로 드물지만, 55종 이상의 돌연변이가 결함성 전구호르몬 및 ADH 결핍을 유발하여 가족성 CDI를 일으키는 것으로 확인됨</li>
-</ul>
-<div class="sub-title">표 1. 중추성 요붕증(CDI)의 원인</div>
-<table>
-<tr><th>범주</th><th>세부 원인</th></tr>
-<tr><td>종양 (10–15%)</td><td>두인두종(craniopharyngioma), 배아종(germinoma), 수막종, 뇌하수체종양, 시상하부종양</td></tr>
-<tr><td>외상 (10–25%)</td><td>경전두엽/경접형동 수술, 뇌손상</td></tr>
-<tr><td>혈관성</td><td>시상하부 경색/출혈, 뇌경색/출혈, 뇌동맥류, Sheehan 증후군, 겸상적혈구병</td></tr>
-<tr><td>자가면역/염증성</td><td>림프구성 뇌하수체염, 전신홍반루푸스, 전신경화증, 다발혈관염육아종증, IgG4 질환, 황색육아종성 뇌하수체염, 항-바소프레신 신경세포 항체, 길랭-바레증후군</td></tr>
-<tr><td>육아종성</td><td>사르코이드증, 육아종성 뇌하수체염, 랑게르한스세포 조직구증, 에르드하임-체스터병</td></tr>
-<tr><td>약물/독소</td><td>페니토인, 에틸알코올, 테트로도톡신, 뱀독</td></tr>
-<tr><td>감염</td><td>수막염, 뇌염, 결핵, 톡소플라스마증, 뇌농양</td></tr>
-<tr><td>선천성/유전성</td><td>상염색체 우성 AVP-neurophysin II 유전자 돌연변이, Wolfram(DIDMOAD) 증후군, X-연관 열성 결함(ADH 저하)</td></tr>
-</table>
-</div></details>
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 무갈증성(Adipsic) 중추성 DI — 특이 위험군</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item"><div class="rec-text">DI 자체로 인한 이환율·사망률은 통상 보고되지 않으나, <strong>무갈증성 CDI</strong>(갈증 감각 소실)는 예외 — 심한 탈수로 사망률 증가</div></li>
+        <li class="rec-item"><div class="rec-text">문헌상 보고 사례는 수백 례에 불과하며, 이 중 <strong>약 40%가 파열된 전교통동맥류(anterior communicating artery aneurysm) 치료 후</strong> 발생</div></li>
+        <li class="rec-item"><div class="rec-text">동반 위험: 저나트륨혈증, 정맥혈전색전증, 경련, 급성신손상, 횡문근융해증, 뇌하수체전엽 호르몬 결핍, 수면호흡장애</div></li>
+      </ul>
+    </div>
+  </div>
 
-<details class="test" id="t2-2"><summary>2.2 신성 DI(NDI)의 원인</summary><div class="body-pad">
-<div class="sub-title">주요 원인 개요</div>
-<ul>
-<li>NDI는 대부분 AQP2 발현을 감소시키는 약물에 의해 발생하며, 가장 흔한 원인 약제는 <strong>리튬</strong></li>
-<li>리튬 치료 환자의 40–55%에서 NDI가 발생하며, 치료 시작 8주 이내에도 나타날 수 있음</li>
-<li>대부분의 NDI는 AQP2 발현에 영향을 주는 약물에 의하지만, AQP2 유전자 자체를 직접 침범하는 다양한 유전적 돌연변이와도 연관됨</li>
-</ul>
-<div class="sub-title">표 2. 신성 요붕증(NDI)의 원인</div>
-<table>
-<tr><th>범주</th><th>세부 원인</th></tr>
-<tr><td>약물</td><td>리튬, 시도포비어(cidofovir), 포스카르넷, 데메클로사이클린, 시스플라틴, 암포테리신 B</td></tr>
-<tr><td>혈관성</td><td>겸상적혈구병, 급성 세뇨관괴사</td></tr>
-<tr><td>대사성</td><td>중증 저칼륨혈증, 중증 고칼슘혈증, 기아 및 저단백 섭취</td></tr>
-<tr><td>신수질 침범 질환</td><td>사르코이드증, 아밀로이드증, 쇼그렌증후군, 다발골수종, 낭성신질환</td></tr>
-<tr><td>선천성/유전성</td><td>바소프레신 V2 수용체 유전자 돌연변이, 아쿠아포린-2 유전자 돌연변이</td></tr>
-</table>
-</div></details>
+</div><!-- /tab-overview -->
 
-<h2 class="chapter" id="ch3">3. 임상양상</h2>
+<!-- ===================== TAB: CAUSES ===================== -->
+<div id="tab-causes" class="panel">
 
-<details class="test" id="t3-1" open><summary>3.1 증상 및 소아 특징</summary><div class="body-pad">
-<div class="sub-title">주요 증상</div>
-<ul>
-<li>다뇨(polyuria), 다음(polydipsia), 야뇨(nocturia)가 가장 흔한 증상</li>
-<li><strong>다뇨</strong>: 성인 하루 소변량 &gt;3L, 소아 &gt;2L/m², 또는 24시간 동안 체중 kg당 50mL 초과</li>
-<li><strong>다음</strong>: 24시간 수분 섭취량 &gt;3L</li>
-<li>탈수 및 고나트륨혈증 증상: 쇠약감, 기면, 피로, 근육통 등이 동반될 수 있음</li>
-<li>삶의 질에 큰 영향이 없으면 환자가 정규 외래 방문 시 이러한 증상을 자발적으로 언급하지 않는 경우가 많아 진단이 지연될 수 있음 — 환자가 다뇨·다음을 명확히 호소할 때까지 진단이 늦어지는 경향</li>
-</ul>
-<div class="sub-title">소아 특징</div>
-<ul>
-<li>소아 환자는 심한 탈수, 구토, 변비, 성장 부진(failure to thrive), 성장 지연으로 흔히 발현</li>
-<li>상염색체 우성 DI는 대개 10세 이전에 발현하나, ADH 결핍의 중증도에 따라 발현 시기가 매우 다양하며 영아기에도 나타날 수 있음</li>
-<li>부분적 CDI 또는 NDI는 증상이 경미하여 인생 후반기에 발현하는 경우가 많음</li>
-</ul>
-</div></details>
-
-<h2 class="chapter" id="ch4">4. 진단</h2>
-
-<details class="test" id="t4-1" open><summary>4.1 감별진단 및 초기 접근</summary><div class="body-pad">
-<div class="sub-title">감별진단</div>
-<p>다뇨·다음을 보이는 환자에서 고려해야 할 감별진단은 다음과 같다.</p>
-<ul>
-<li>DI(중추성/신성)</li>
-<li>일차성 다음증(primary polydipsia)</li>
-<li>용질 이뇨(solute diuresis): 조절되지 않는 당뇨병, 신부전 회복기, 고나트륨 부하 투여, 만니톨, 방사선조영제, 염손실 신병증</li>
-<li>적절한 이뇨제 반응</li>
-</ul>
-<div class="sub-title">초기 병력·평가</div>
-<ul>
-<li>식이·수분 섭취력, 약물력, 두부외상 또는 수술력, 두통·시야변화, 갈증 유무, 가족력을 상세히 조사</li>
-<li>다뇨·다음의 원인을 감별하는 데 진단검사가 필수적이며, 저장성 다뇨를 확인하고 용질 이뇨 원인을 배제한 뒤 전문의에게 의뢰</li>
-<li><strong>24시간 소변 채취</strong>로 저장성 다뇨(소변 삼투압 &lt;300 mOsm/kg) 확인</li>
-</ul>
-<div class="sub-title">혈청 나트륨을 이용한 초기 감별</div>
-<table>
-<tr><th>혈청 나트륨</th><th>해석</th></tr>
-<tr><td>&gt;147 mmol/L (저장성 다뇨 동반)</td><td>DI 진단적</td></tr>
-<tr><td>&lt;135 mmol/L</td><td>일차성 다음증 진단적</td></tr>
-<tr><td>136–147 mmol/L (대부분의 환자)</td><td>갈증에 따라 물을 마시고 있어 감별 불가 — 추가 진단검사 필요</td></tr>
-</table>
-</div></details>
-
-<details class="test" id="t4-2"><summary>4.2 수분제한검사 (Water Deprivation Test) — 진단의 표준</summary><div class="body-pad">
-<div class="sub-title">원리</div>
-<p>DI 진단의 표준(gold standard)은 <strong>간접 수분제한검사</strong>이다. 정상인은 수분 제한 시 소변을 800 mOsm/kg 이상으로 적절히 농축할 수 있는 반면, DI 환자는 수분이 제한되어도 신장이 소변을 농축하지 못해 소변 삼투압이 300 mOsm/kg 미만으로 유지되면서 저장성 다뇨가 지속된다.</p>
-<div class="sub-title">시행 환경 및 종료 기준</div>
-<p>병원 또는 내분비 검사센터에서 수 시간 간격의 검사실 모니터링이 필요하며, 밀착 관찰·의학적 감독 하에 시행한다. 수분 섭취를 제한하며 다음 중 하나에 도달하면 검사를 종료한다.</p>
-<ul>
-<li>17시간 경과</li>
-<li>혈장 나트륨 농도 150 mmol/L 이상</li>
-<li>체중 3–5% 감소</li>
-<li>연속 2회 소변 삼투압 측정치의 차이가 10% 이하이면서 체중 2% 감소</li>
-<li>기립성 저혈압 발생</li>
-</ul>
-<div class="sub-title">해석</div>
-<table>
-<tr><th>소견</th><th>해석</th></tr>
-<tr><td>수분제한 후에도 다뇨 지속, 소변 삼투압 &lt;300 mOsm/kg</td><td>DI 진단</td></tr>
-<tr><td>일차성 다음증 또는 정상 신기능</td><td>소변 삼투압 &gt;800 mOsm/kg까지 상승</td></tr>
-<tr><td>소변 삼투압 300–800 mOsm/kg (중간 영역)</td><td>부분 DI 또는 일차성 다음증 가능 — 내인성 ADH 활성/반응이 일부 존재함을 시사</td></tr>
-</table>
-<div class="sub-title">검사의 한계</div>
-<p>수분제한검사의 민감도는 프로토콜 및 대상군에 따라 80–100%, 특이도는 67–100%로 보고된다. 진단 정확도가 낮아질 수 있는 이유는 다음과 같다.</p>
-<ul>
-<li>만성 다뇨로 인한 신장 세뇨관수질 washout 또는 신장 AQP2 발현 하향조절로 인해 신장의 농축능이 저하될 수 있음</li>
-<li>사구체 기능이 저하된 CDI 환자는 AVPR2 유전자의 보상적 발현 증가로 예상보다 소변 농축능이 높게 나타날 수 있음</li>
-<li>후천성 NDI는 흔히 ADH에 대한 부분 저항만 있어 임상적으로 부분 CDI와 유사하게 보일 수 있음(혼동 요인)</li>
-</ul>
-</div></details>
-
-<details class="test" id="t4-3"><summary>4.3 데스모프레신 투여 반응 (중추성 vs 신성 감별)</summary><div class="body-pad">
-<div class="sub-title">방법</div>
-<p>수분제한검사 종료 후 <strong>데스모프레신(DDAVP)</strong> 2–4 mcg을 피하 또는 정맥으로 투여한다(비강 내 투여는 흡수가 일정하지 않아 권장되지 않음).</p>
-<div class="sub-title">해석 기준</div>
-<table>
-<tr><th>데스모프레신 후 소변 삼투압 변화</th><th>해석</th></tr>
-<tr><td>&gt;50% 증가</td><td>완전 중추성 DI에 합당 (부분 CDI에서는 그보다 낮은 정도로 증가)</td></tr>
-<tr><td>15% 미만 증가(무증가 또는 미미한 증가)</td><td>완전 신성 DI에 합당</td></tr>
-<tr><td>최대 45%까지 증가</td><td>부분 신성 DI 가능</td></tr>
-<tr><td>50% 미만 증가</td><td>부분 DI(중추성/신성 부분형)에 합당</td></tr>
-</table>
-<p>데스모프레신 검사는 CDI와 NDI 감별에 있어 민감도 97–100%, 특이도 80–100%로 보고된다.</p>
-</div></details>
-
-<details class="test" id="t4-4"><summary>4.4 코펩틴(Copeptin) 측정</summary><div class="body-pad">
-<div class="sub-title">배경</div>
-<p>부분 DI 및 오래된 일차성 다음증에서는 수분제한검사의 진단적 한계가 있으며, 이 검사는 입원 또는 외래에서의 집중적 임상 지원이 필요하다. <strong>코펩틴</strong>은 혈액에서 측정 가능한 새롭고 유망한 DI 진단 표지자이다.</p>
-<ul>
-<li>코펩틴은 프로바소프레신의 C-말단 펩타이드로, 뇌하수체 후엽에서 ADH와 함께 공동분비됨</li>
-<li>혈장 코펩틴 농도는 혈장 ADH와 강한 상관관계를 보여 대리표지자(surrogate marker)로 활용 가능</li>
-<li>ADH는 혈중 반감기가 짧아 측정이 어려운 반면, 코펩틴은 채혈 후 수일간 안정적으로 유지됨</li>
-<li>상용 혈액검사로 측정 가능하나, 아직 일상적으로 임상에서 사용되지 않으며 많은 기관에서 접근성이 제한적임</li>
-</ul>
-<div class="sub-title">측정 시점 및 해석 기준</div>
-<p>코펩틴은 <strong>기저치, 고장성 식염수 주입 후, 데스모프레신 투여 후</strong> 시점에 측정하여 진단에 활용할 수 있다.</p>
-<table>
-<tr><th>측정 조건</th><th>기준치</th><th>해석</th></tr>
-<tr><td>기저 코펩틴</td><td>&gt;21.4 pmol/L</td><td>NDI 진단 (민감도 100%, 특이도 100%)</td></tr>
-<tr><td>기저 코펩틴이 이보다 낮은 경우</td><td>고장성 식염수 주입으로 나트륨을 150 mmol/L 이상으로 삼투 자극 필요</td><td>-</td></tr>
-<tr><td>삼투 자극 후 코펩틴</td><td>&lt;4.9 pmol/L</td><td>중추성 DI 진단</td></tr>
-<tr><td>삼투 자극 후 코펩틴</td><td>≥4.9 pmol/L</td><td>일차성 다음증 진단</td></tr>
-</table>
-<div class="alert good">다기관 전향적 연구에서 삼투 자극 후 코펩틴 측정으로 CDI와 일차성 다음증을 감별한 결과, 진단 정확도 96.5%(민감도 93.2%, 특이도 100%)로 보고되었다(Fenske et al., NEJM 2018).</div>
-</div></details>
-
-<details class="test" id="t4-5"><summary>4.5 진단 알고리즘 종합 (Figure 2 요약)</summary><div class="body-pad">
-<p>저장성 다뇨 증후군의 전체 진단 흐름을 정리하면 다음과 같다.</p>
-<div class="flow">
-<div class="step"><strong>Step 1.</strong> 저장성 다뇨 확인 후 혈청 나트륨·혈장 삼투압 측정</div>
-<div class="arrow">↓</div>
-<div class="step">혈청 Na ≤135 mmol/L, 혈장 삼투압 ≤280 mOsm/kg → <strong>일차성 다음증</strong></div>
-<div class="step">혈청 Na ≥146 mmol/L, 혈장 삼투압 ≥300 mOsm/kg → <strong>중추성/신성 DI</strong></div>
-<div class="step">정상 혈청 Na·혈장 삼투압 → 추가 평가 필요(아래 경로 중 선택)</div>
-</div>
-<div class="sub-title">경로 A — 수분제한검사 경로</div>
-<div class="flow">
-<div class="step">수분제한 후 소변 삼투압 &gt;800 mOsm/kg → 일차성 다음증</div>
-<div class="step">수분제한 후 소변 삼투압 &lt;800 mOsm/kg → 데스모프레신 투여</div>
-<div class="arrow">↓ 데스모프레신 후</div>
-<div class="step">초기 소변 삼투압 &lt;300 mOsm/kg 이거나 &gt;50% 증가 → CDI</div>
-<div class="step">초기 소변 삼투압 &lt;300 mOsm/kg 이거나 &lt;50% 증가 → NDI</div>
-<div class="step">소변 삼투압 300–800 mOsm/kg 또는 &lt;50% 증가 → 치료적 데스모프레신 시도 필요(일차성 다음증·NDI·CDI 모두 가능)</div>
-</div>
-<div class="sub-title">경로 B — 기저 혈장 코펩틴 경로</div>
-<div class="flow">
-<div class="step">기저 혈장 코펩틴 ≥21.4 pmol/L → NDI</div>
-<div class="step">기저 혈장 코펩틴 &lt;2.6 pmol/L → CDI</div>
-<div class="step">기저 혈장 코펩틴 ≥2.6 pmol/L → 고장성 식염수 주입검사(hypertonic saline infusion test) 시행</div>
-</div>
-<div class="sub-title">경로 C — 고장성 식염수 주입 후 코펩틴</div>
-<div class="flow">
-<div class="step">혈장 코펩틴 &gt;4.9 pmol/L → 일차성 다음증</div>
-<div class="step">혈장 코펩틴 ≤4.9 pmol/L → CDI</div>
-</div>
-</div></details>
-
-<h2 class="chapter" id="ch5">5. 치료 — 일반원칙</h2>
-
-<details class="test" id="t5-1" open><summary>5.1 수분 섭취 및 치료 원칙</summary><div class="body-pad">
-<ul>
-<li>CDI든 NDI든 치료의 핵심은 <strong>충분한 수분 접근성</strong>이다. 갈증에 따라 물을 마시게 하는 것이 수분 손실을 상쇄하는 데 필수적</li>
-<li>경증 DI에서는 경구 수분 섭취만으로 자유수분 결핍을 보충하는 것으로 충분할 수 있으며, 모든 환자가 표적 치료를 필요로 하는 것은 아님</li>
-<li>갈증 기전이 손상된 경우(급성 질환, 의식 저하, 구토, 호흡부전) 경구 섭취로 따라잡지 못해 발생하는 고나트륨혈성 탈수 치료를 위해 입원이 필요하며, 이 경우 내분비내과 협진을 구해야 함</li>
-<li>중증 DI 또는 수분 섭취만으로 증상 조절이 안 되는 경우 아래의 특이적 치료를 고려</li>
-<li>경구 수분만으로 유지가 어려움을 시사하는 징후: 일상 검사에서 나트륨 상승, 의식 변화, 갈증 결여</li>
-<li>경구 섭취가 적절하더라도 야뇨·다뇨·수면 방해로 삶의 질이 저하된 환자도 추가 치료의 대상이 됨</li>
-<li>과도한 수분 섭취 자체도 해로울 수 있음 — 소아에서 과도한 수분 섭취로 인한 수신증, 요관확장증, 불소증(fluorosis) 발생이 보고됨</li>
-<li>적절한 치료 선택이 불분명한 경우 내분비내과 협진 권고</li>
-</ul>
-</div></details>
-
-<h2 class="chapter" id="ch6">6. 중추성 DI(CDI)의 치료</h2>
-
-<details class="test" id="t6-1" open><summary>6.1 데스모프레신(DDAVP)</summary><div class="body-pad">
-<div class="sub-title">개요</div>
-<p>CDI의 가장 흔한 치료는 합성 바소프레신인 데스모프레신(DDAVP)이다. 1970년대 도입된 이후 현재까지 CDI 치료의 근간을 이루고 있다. 데스모프레신은 ADH의 유사체이나 몇 가지 구조적 변형이 있다: 시스테인기 제거로 반감기 연장, D-아르기닌을 L-아르기닌으로 치환하여 승압 활성(pressor activity)을 제거함.</p>
-<div class="sub-title">표 3. 데스모프레신 제형별 용량</div>
-<table>
-<tr><th>제형</th><th>용량</th><th>비고</th></tr>
-<tr><td>데스모프레신 아세테이트 정제</td><td>0.1mg / 0.2mg</td><td>권장 시작 용량 0.05mg 경구 1일 1–2회, 통상 용량 범위 0.1–1.2mg을 2–3회 분복</td></tr>
-<tr><td>데스모프레신 아세테이트 비강분무</td><td>0.1mL당 10mcg</td><td>4세 이상, 통상 1일 10–40mcg(1회 또는 분할), 소아 10–30mcg</td></tr>
-<tr><td>데스모프레신 아세테이트 설하정</td><td>여성 1일 27.7mcg, 남성 1일 55.3mcg</td><td>취침 1시간 전 투여, 투여 전 1시간·투여 후 8시간 수분 제한</td></tr>
-<tr><td>데스모프레신 아세테이트 피하/정맥주사</td><td>1–2mcg 1일 2회</td><td>두부외상·수술 후 일과성 다뇨·다음 관리에 사용되는 중추성 DI 치료</td></tr>
-</table>
-<div class="sub-title">투여 및 모니터링</div>
-<ul>
-<li>보통 야간 저용량으로 시작하여 야뇨를 조절하며, 임상 반응에 따라 서서히 증량. 투여 후 1시간 내 작용 시작, 지속시간 6–8시간</li>
-<li>연령·성별에 따라 개인차가 크며, 한 달간의 안정성이 확인될 때까지 매주 용량 조정이 필요</li>
-</ul>
-<div class="sub-title">주요 합병증 — 저나트륨혈증</div>
-<p>데스모프레신 시작 시 흔한 합병증은 저나트륨혈증(대개 등용적성)이다. 데스모프레신 투여 후에는 생리적 필요량을 초과하는 수분 섭취가 신장을 통해 배출되지 못해 체내 과잉 수분이 축적되기 때문이다. 이를 예방하기 위해 <strong>아쿠아레시스(aquaresis, 전해질 손실 없는 수분 배출)</strong>를 허용하는 것이 권장되며, 충분한 아쿠아레시스에도 저나트륨혈증이 지속되면 용량을 감량해야 한다.</p>
-<div class="sub-title">아쿠아레시스 확보 방법(환자에게 제시 가능한 옵션)</div>
-<ol>
-<li>주 1–2회 데스모프레신 1회분을 지연하여 2–3회 배뇨(아쿠아레시스)가 이루어질 때까지 기다린 후 다음 용량 복용</li>
-<li>매 용량마다 약간의 아쿠아레시스가 있을 때까지 지연 후 복용 — 지속적으로 과잉 수분이 신장으로 제거되어 매우 효과적</li>
-<li>주 1회 1정을 생략 — 효과적이나 그날 하루는 다뇨 발생</li>
-</ol>
-<div class="sub-title">대체 약제</div>
-<p>데스모프레신이 이용 불가능한 지역에서는 티아지드 이뇨제, 카바마제핀, 클로르프로파미드, 클로피브레이트, 인다파미드 등이 사용되기도 하나, 이들 대체제는 각기 부작용이 있어 데스모프레신이 여전히 주된 치료로 남아있다.</p>
-</div></details>
-
-<details class="test" id="t6-2"><summary>6.2 티아지드 이뇨제(소아 중추성 DI)</summary><div class="body-pad">
-<p>2차 약제 중 티아지드 이뇨제는 액상 식이를 하는 영아·소아 중추성 DI에서 특히 언급할 가치가 있다. 원위세뇨관에서 Na-Cl 공동수송체를 억제하여 나트륨 재흡수를 감소시키고, 이는 나트륨뇨(natriuresis)와 용적 수축을 유발하여 근위세뇨관에서 수분·나트륨 재흡수를 증가시키는 방식으로 작용한다. 이는 액상 식이 중인 중추성 DI 영아에서 흔히 사용되는 치료이며, 관련 연구에서 영아·소아에서 안전하고 효과적임이 확인되었다. 환아가 성장하여 고형식 위주로 전환되면 데스모프레신으로 치료를 전환하는 것이 일반적으로 권고된다.</p>
-</div></details>
-
-<h2 class="chapter" id="ch7">7. 신성 DI(NDI)의 치료</h2>
-
-<details class="test" id="t7-1" open><summary>7.1 일반원칙 및 원인교정</summary><div class="body-pad">
-<div class="sub-title">가역적 원인 교정</div>
-<ul>
-<li>후천성 NDI는 가능한 경우 근본 원인을 교정하는 것이 우선</li>
-<li>리튬 유발 NDI는 리튬 중단 시 회복 가능할 수 있음 — 동물모델(쥐)에서는 리튬 중단 1–2주 후 AQP2 발현 증가, 임상적으로는 중단 후 약 3주부터 증상 호전 가능</li>
-<li>그러나 상당수 환자는 기저 농축능으로 완전히 회복되지 않음 — 한 연구에서 리튬 중단 1년 후에도 27명 중 17명(63%)이 농축능 800 mOsm/kg 미만으로 지속됨</li>
-<li>리튬의 장기간 사용은 비가역적 NDI의 위험을 높이나, 정확한 비가역화 시점은 명확히 확립되어 있지 않음</li>
-<li>그 외 가역적 NDI 원인: 저칼륨혈증, 고칼슘혈증, 폐쇄성 요로병증</li>
-</ul>
-<div class="sub-title">기본 치료 방향</div>
-<p>신장의 ADH 저항성은 만성 세뇨관 손상이나 선천성 돌연변이로 인해 대부분 되돌릴 수 없으므로, 치료의 근간은 탈수와 고나트륨혈증을 예방하기 위한 <strong>충분한 수분 섭취</strong>이다. 이로 인해 상당한 양의 수분 섭취가 필요할 수 있고, 이는 성가신 다뇨, 야뇨, 수면 방해, 삶의 질 저하로 이어질 수 있다. 소아·영아에서는 과도한 수분 섭취가 어려워 성장 부전 시 위루관(gastrostomy tube) 삽입이 필요할 수 있다. 이후 관리는 저용질 식이, 티아지드 이뇨제, 칼륨 보존 이뇨제, 프로스타글란딘 합성효소 억제제 등을 통한 소변량 감소를 목표로 한다. 일상생활에 지장이 있는 NDI 환자는 내분비내과·신장내과 협진을 통해 추가 치료 옵션을 고려해야 한다.</p>
-</div></details>
-
-<details class="test" id="t7-2"><summary>7.2 식이요법</summary><div class="body-pad">
-<p>NDI에서는 삼투 부하(osmotic load)를 최소화하는 것이 권고된다. 단백질·나트륨 섭취를 제한하면 배설되는 단백질 대사물·나트륨량이 감소하여 배뇨 빈도 감소로 이어질 수 있다.</p>
-<ul>
-<li>단백질 섭취: 1.0 g/kg 이하로 제한</li>
-<li>나트륨 섭취: 1일 2.3g 이하(100 mEq/day 미만)</li>
-<li>일부 저자는 목표 삼투 부하를 15 mOsm/kg/day로 권고</li>
-</ul>
-<div class="alert warn">소아 환자에서는 이러한 제한이 정상 성장·발달을 저해할 수 있어 식이 관리가 어려운 문제로 남아있다.</div>
-</div></details>
-
-<details class="test" id="t7-3"><summary>7.3 이뇨제</summary><div class="body-pad">
-<p>티아지드는 CDI에 잘 알려진 치료이며, NDI에서도 일부 효과가 확인된다. 초기 연구에서 NDI 환자에게 표준 저나트륨 식이(1일 나트륨 9 mEq)와 함께 하이드로클로로티아지드를 투여한 결과, 3일 후 소변량이 기저치의 약 50%로 감소하였다.</p>
-<ul>
-<li>하이드로클로로티아지드: 1–4 mg/kg/day, 1–2회 분할 투여로 시작 가능</li>
-<li>클로로티아지드는 액상 제형이 있어 영아에서 사용하기 유용</li>
-</ul>
-</div></details>
-
-<details class="test" id="t7-4"><summary>7.4 고용량 데스모프레신</summary><div class="body-pad">
-<p>부분 NDI 환자는 초생리적(supraphysiologic) 고용량 데스모프레신에 반응할 수 있다. 일본의 전국 조사에서는 선천성 NDI 환자의 약 25%에서 DDAVP 치료가 효과적이었다고 보고되었다. 부분 NDI에서 고용량 DDAVP 시도를 고려할 수 있으나, 언제 시도해야 하는지에 대한 명확한 합의는 없으며, 일반적으로 이뇨제에 반응이 부족하거나 금기가 있는 환자에서 예비적으로 고려된다. 후천성 및 선천성 부분 NDI 사례보고에서 DDAVP를 정맥 80mcg 1일 3–4회, 비강 20mcg 1일 4회, 경구 720mcg/day까지 사용하여 소변량 감소가 보고된 바 있다.</p>
-</div></details>
-
-<details class="test" id="t7-5"><summary>7.5 신규 치료 전략(연구 단계)</summary><div class="body-pad">
-<div class="sub-title">분자 샤페론 접근 — Vaptan</div>
-<p>선천성 NDI 환자의 약 90%는 AVPR2 유전자 돌연변이로 인해 수용체가 잘못 접힌(misfolded) 상태로 소포체(ER)에 갇히게 된다. 가장 많이 연구된 치료전략은 분자 샤페론을 이용해 이 수용체를 ER로부터 구제하는 것이다. 비펩타이드 AVPR2 길항제(vaptan)는 돌연변이 AVPR2의 AVP 결합부위에 결합하여 정상적인 접힘을 유도하고 세포막으로의 이동을 가능하게 한다. 결합력이 강할수록 수용체가 세포막으로 더 잘 도달하지만, 결합력이 너무 강하면 정상 AVP 신호전달을 위한 수용체 해리가 어려워지는 딜레마가 있다.</p>
-<ul>
-<li><strong>SR49059(relcovaptan)</strong>: X-연관 NDI 환자 5명에서 소변량을 중등도로 감소시켜 치료 전략의 가능성을 입증했으나, 시토크롬 P450 대사경로 간섭 가능성으로 임상개발이 중단됨</li>
-</ul>
-<div class="sub-title">AVPR2 작용제(agonist)</div>
-<p>ER 내 다양한 돌연변이 AVPR2 단백질을 활성화하고 AQP2의 관강측 막 이동을 유도할 수 있음이 확인됨. 다른 AVPR2 작용제는 여러 AVPR2 돌연변이를 구제하여 기능적인 ADH 의존성 cAMP 신호전달을 회복시키는 것으로 보고됨.</p>
-<div class="sub-title">AVPR2 우회 전략</div>
-<p>AVPR2 신호전달 자체를 우회하여 관강측 막에 AQP2를 발현시키는 전략도 연구 중이다. 집합관 주세포(principal cell)는 프로스타글란딘 E2 수용체(EP2, EP4), 베타-3 아드레날린수용체, 세크레틴 수용체를 발현하며, 이들 G단백질 결합 수용체 활성화를 통해 세포 내 cAMP를 증가시키는 방식이다. 동물모델에서 이들 수용체 활성화가 소변 삼투압을 증가시켰으나, 아직 임상 자료는 보고되지 않았다.</p>
-<div class="sub-title">cGMP 경로 및 기타 표적</div>
-<ul>
-<li>고리형 GMP(cGMP)는 시험관 내·동물실험에서 AQP2의 막 이동을 증가시키는 것으로 나타남 — cGMP 포스포디에스터라제 억제제(예: 실데나필)가 잠재적 치료 후보로 연구됨. 한 사례보고에서 X-연관 NDI를 가진 젊은 남성에서 실데나필이 소변 삼투압을 극적으로 증가시켰다고 보고됨</li>
-<li>스타틴은 리튬 사용자에서 NDI 위험 감소와 연관된다는 보고가 있어 연구 중</li>
-<li>AMPK(AMP-활성 단백질 인산화효소) 활성제는 AQP2를 인산화하는 것으로 알려져 있으며, 메트포르민이 대표적 AMPK 활성제임. 그러나 2021년 NDI 환자를 대상으로 한 메트포르민 연구는 효과 부재로 중단됨</li>
-</ul>
-<div class="alert warn">이들 신약 계열은 동물모델에서는 AQP2 발현 및 소변량 개선 효과가 확인되었으나, 인체 대상 연구는 소수 사례보고나 소규모 연구에 그쳐 자료가 제한적이다.</div>
-</div></details>
-
-<h2 class="chapter" id="ch8">8. 병원 내 급성기 치료</h2>
-
-<details class="test" id="t8-1" open><summary>8.1 고나트륨혈증 교정 및 입원 관리</summary><div class="body-pad">
-<div class="sub-title">입원 적응증 및 위험성</div>
-<p>부적절한 수분 섭취로 인한 고나트륨혈성 탈수가 있는 환자는 입원이 필요하다. 심한 수분 손실과 중증 고나트륨혈증은 뇌세포 탈수 및 뇌 위축을 초래할 수 있다. 서서히 진행하면 뇌가 적응할 시간이 있어 장기 합병증이 최소화되나, 급성·중증 고나트륨혈증에서는 뇌가 삼투압 변화에 적응할 시간이 없어 급성 뇌위축으로 두개내출혈, 경련, 혼수 등의 합병증이 발생할 수 있다. 입원 환자는 내분비내과 협진이 필요하다.</p>
-<p>저혈량성 쇼크가 없는 경우, 고나트륨혈성 탈수 치료는 저장성 정맥수액 투여가 필요하다. 통상 5% 포도당수(D5W)를 사용하는데, 이는 반등장식염수(0.45% saline)처럼 소변 삼투압보다 높은 삼투압을 가진 수액은 DI에서 오히려 고나트륨혈증을 악화시킬 수 있기 때문이다.</p>
-<div class="sub-title">급성 고나트륨혈증(48시간 이내 발생)</div>
-<ul>
-<li>목표: 나트륨 농도를 시간당 1–2 mEq/L씩 낮추어 24시간 이내에 정상화</li>
-<li>통상 D5W를 체중 kg당 3–6 mL/시간의 속도로 정맥 투여</li>
-<li>급성 고나트륨혈증에서의 빠른 나트륨 교정은 해로움이 입증되지 않음</li>
-<li>신부전 환자에서는 혈액투석이 안전하게 사용된 사례가 있음</li>
-</ul>
-<div class="sub-title">만성 고나트륨혈증(48시간 초과 지속)</div>
-<p>세포들이 세포 내 삼투질(osmolyte)을 상향조절하여 정상 용질 농도를 유지하고 있는 상태이므로, 급속 교정 시 뇌부종을 유발할 수 있어 피해야 한다. 소아 연구에서 고나트륨혈증 교정 속도를 시간당 0.5 mEq/L 이하로 제한하면 뇌부종, 경련, 사망을 예방할 수 있음이 확인되었다.</p>
-<p>'안전한' 교정에 필요한 시간(시간 단위)은 시작 나트륨과 목표 나트륨의 차이를 2배 하여 대략적으로 추정할 수 있다.</p>
-<div class="sub-title">자유수분 결핍(Free Water Deficit) 계산식</div>
-<div class="formula">
-남성: 자유수분 결핍(L) = 총체중(kg) × 0.6 × (혈청 Na − 140) ÷ 140<br>
-여성: 자유수분 결핍(L) = 총체중(kg) × 0.5 × (혈청 Na − 140) ÷ 140
-</div>
-<p>자유수분 결핍량을 추정된 '안전한' 교정 시간(시간)으로 나누어 적절한 시작 시간당 주입 속도를 결정할 수 있다.</p>
-<div class="sub-title">모니터링</div>
-<ul>
-<li>4시간마다 기본대사패널(BMP)로 전해질·혈당 모니터링</li>
-<li>고용량 포도당수 투여 시 당뇨(glucosuria)로 인한 삼투성 이뇨가 발생할 수 있어 인슐린 치료나 2.5% 포도당수, 1/4 등장식염수 등 대체 저장성 수액이 필요할 수 있음</li>
-<li>임상적으로 안정되고 호전되면 검사 빈도를 줄일 수 있음</li>
-<li>소변량은 엄격히 모니터링하되 특정한 목표 소변량은 없으며, 정맥 수액 속도는 시간당 소변량을 약간 초과하도록 조정하여 양성 수분 균형을 유지해야 함</li>
-</ul>
-<p>수액 선택과 주입 속도는 혈량 상태에 대한 임상 평가, 지속적 수분 손실, 포도당수 주입으로 인한 고혈당 발생 모니터링, 빈번한 검사실 평가 등 여러 요소를 종합하여 결정한다. 가능한 경우 환자가 경구로(물 또는 영아의 경우 우유) 수분을 섭취하도록 전환해야 한다.</p>
-</div></details>
-
-<h2 class="chapter" id="ch9">9. 요약</h2>
-
-<details class="test" id="t9-1" open><summary>9.1 임상 실무 권고 요약표 (Table 4)</summary><div class="body-pad">
-<table>
-<tr><th>항목</th><th>내용</th></tr>
-<tr><td>DI를 의심해야 할 때</td><td>다뇨·다음·야뇨가 있는 성인 / 탈수·구토·변비·성장부진·성장지연이 있는 소아 / 갈증에 따라 물을 마시므로 나트륨이 정상인 경우가 흔함</td></tr>
-<tr><td>DI의 주요 아형</td><td>중추성 DI / 신성 DI</td></tr>
-<tr><td>다음·다뇨의 감별진단</td><td>DI / 일차성 다음증 / 용질 이뇨(조절 안 되는 당뇨병, 신부전 회복기, 고나트륨 부하, 만니톨, 방사선조영제, 염손실 신병증) / 적절한 이뇨제 반응</td></tr>
-<tr><td>진단 <span class="badge">SOR A</span></td><td>간접 수분제한검사 / 일차성 다음증·용질 이뇨·적절한 이뇨제 반응 등 다른 다뇨·다음 원인을 반드시 배제해야 함 / 세부 진단 흐름은 Figure 2 참고</td></tr>
-<tr><td>중추성 DI 치료 <span class="badge">SOR A</span></td><td>데스모프레신 0.01–0.02mg 경구 또는 2–4mcg 비강 내, 1일 1–2회 / 데스모프레신의 부작용인 저나트륨혈증을 반드시 모니터링</td></tr>
-<tr><td>신성 DI 치료 <span class="badge">SOR B/C</span></td><td>약물 중단·전해질 교정 등 원인 교정(B) / 티아지드 이뇨제가 소변량 감소·농축능 증가에 도움될 수 있음(C)</td></tr>
-<tr><td>내분비내과 의뢰 시점</td><td>DI 합병증으로 입원이 필요한 경우 / 수분제한검사를 위한 입원이 필요한 경우 / 진단이 불명확한 경우 / 중추성 DI에서 1차 치료 실패 시 / 신성 DI에서 삶의 질 저하가 심하고 추가 치료 옵션을 원하는 경우 / 그 외 DI 관리에 도움이 필요한 모든 경우</td></tr>
-</table>
-<p class="refs">근거 수준(SOR): A = 양질의 환자중심 근거 / B = 비일관적이거나 제한적 질의 환자중심 근거 / C = 합의, 통상 진료, 전문가 의견, 질병중심 근거, 사례군 연구</p>
-</div></details>
-
-<details class="test" id="t9-2"><summary>9.2 결론</summary><div class="body-pad">
-<p>DI는 삶의 질 저하는 물론 사망률 증가로 이어질 수 있어 신속한 진단과 치료가 중요하다. 희귀질환이기 때문에 많은 임상의가 임상양상, 진단, 치료에 익숙하지 않을 수 있다. 수분제한 후 소변 삼투압 측정이 여전히 진단의 근간이지만, ADH의 대리표지자인 코펩틴에 관한 연구가 향후 DI 진단에서 더 큰 역할을 할 것으로 기대된다.</p>
-<ul>
-<li>뇌하수체 후엽이 ADH를 분비하지 못하면 중추성 DI가 발생</li>
-<li>신장 집합관 세관세포가 ADH에 반응하지 못하면 신성 DI가 발생</li>
-<li>DI는 완치가 불가능하므로 치료는 삶의 질 개선에 초점을 둠</li>
-<li>중추성·신성 DI 모두 충분한 수분 접근이 필요</li>
-<li>데스모프레신을 이용한 ADH 보충은 CDI 치료의 근간이나, NDI에서는 ADH 보충이 효과적이지 않음</li>
-<li>NDI는 복합적 질환으로 다양한 치료가 필요할 수 있으며, 표적치료에 대한 연구가 계속 진행 중</li>
-</ul>
-</div></details>
-
-<h2 class="chapter" id="ch10">10. 참고문헌</h2>
-
-<details class="test" id="t10-1"><summary>10.1 References (원문 인용 목록)</summary><div class="body-pad">
-<p class="refs">
-1. Christ-Crain M, Gaisl O. Diabetes insipidus. La Presse Médicale. 2021;50:104093.<br>
-2. Mutter CM, Smith T, Manze O, Zakharia M, Nguyen H. Diabetes insipidus: Pathogenesis, diagnosis, and clinical management. Cureus. 2021;13:e13523.<br>
-3. Capatina C, Paluzzi A, Mitchell R, Karavitaki N. Diabetes insipidus after traumatic brain injury. J Clin Med. 2015;4:1448-62.<br>
-4. Barnett MJ, Patel G, Lekprasert P, Win K, Casipit C, Syed O. When thirst ceases to exist: A case report and literature review of adipsic diabetes insipidus following coil embolization of a ruptured anterior communicating artery aneurysm. Cureus. 2024;16:e64207.<br>
-5. Christ-Crain M, Refardt J, Winzeler B. Approach to the patient: Utility of the copeptin assay. J Clin Endocrinol Metab. 2022;107:1727-38.<br>
-6. Di Iorgi N, Napoli F, Allegri AEM, et al. Diabetes insipidus – diagnosis and management. Horm Res Paediatr. 2012;77:69-84.<br>
-7. Sands JM, Bichet DG. Nephrogenic diabetes insipidus. Ann Intern Med. 2006;144:186-94.<br>
-8. Gubbi S, Hannah-Shmouni F, Koch CA, et al. Diagnostic testing for diabetes insipidus. In: Endotext. MDText.com, 2000.<br>
-9. Shrestha DB, Jasaraj RB, Dhital R, Georges E, Havrylyan A. A diagnostic enigma of central versus nephrogenic diabetes insipidus. Cureus. 2022;14:e22633.<br>
-10. Kotagiri R, Kutti G Sridharan. Primary polydipsia. In: StatPearls. StatPearls Publishing, 2023.<br>
-11. Robertson GL, Aycinena P, Zerbe RL. Neurogenic disorders of osmoregulation. Am J Med. 1982;72:339-53.<br>
-12. Miller M, Dalakos T, Moses AM, Fellerman H, Streeten DH. Recognition of partial defects in antidiuretic hormone secretion. Ann Intern Med. 1970;73:721.<br>
-13. Garofalo NA, Gennari FJ, Arlt W. Diagnosis and management of diabetes insipidus. J Clin Endocrinol Metab. 2016;101:1681-92.<br>
-14. Fenske W, Refardt J, Chifu I, et al. A copeptin-based approach in the diagnosis of diabetes insipidus. N Engl J Med. 2018;379:428-39.<br>
-15. Priya G, Kalra S, Dasgupta A, Grewal E. Diabetes insipidus: A pragmatic approach to management. Cureus. 2021;13:e12498.<br>
-16. Garrahy A, Moran C, Thompson CJ. Diagnosis and management of central diabetes insipidus in adults. Clin Endocrinol. 2019;90:23-30.<br>
-17. Dabrowski E, Kadakia R, Zimmerman D. Diabetes insipidus in infants and children. Best Pract Res Clin Endocrinol Metab. 2016;30:205-18.<br>
-18. Teare H, Argente J, Dattani M, et al. Challenges and improvement needs in the care of patients with central diabetes insipidus. Orphanet J Rare Dis. 2022;17:1.<br>
-19-22. Ferring Pharmaceuticals Inc. Desmopressin acetate prescribing information (tablets/nasal spray/sublingual/injection). Parsippany, NJ, 2018-2020.<br>
-23. Al Nofal A, Lteif A. Thiazide diuretics in the management of young children with central diabetes insipidus. J Pediatr. 2015;167:658-61.<br>
-24. Blount MA, Sim JH, Zhou R, et al. Expression of transporters involved in urine concentration recovers differently after cessation of lithium treatment. Am J Physiol Renal Physiol. 2010;298:F601-8.<br>
-25. Bucht G, Wahlin A. Renal concentrating capacity in long-term lithium treatment and after withdrawal of lithium. Acta Med Scand. 1980;207:309-14.<br>
-26. Davis J, Desmond M, Berk M. Lithium and nephrotoxicity: a literature review. BMC Nephrol. 2018;19:305.<br>
-27. Khanna A. Acquired nephrogenic diabetes insipidus. Semin Nephrol. 2006;26:244-8.<br>
-28. Sharma S, Ashton E, Iancu D, et al. Long-term outcome in inherited nephrogenic diabetes insipidus. Clin Kidney J. 2019;12:180-7.<br>
-29. D'Alessandri-Silva C, Carpenter M, Ayoob R, et al. Diagnosis, treatment, and outcomes in children with congenital nephrogenic diabetes insipidus. Front Pediatr. 2020;7:550.<br>
-30. Fujimoto M, Okada S, Kawashima Y, et al. Clinical overview of nephrogenic diabetes insipidus based on a nationwide survey in Japan. Yonago Acta Med. 2014;57:85-92.<br>
-31. Bouley R, Hasler U, Lu HA, Nunes P, Brown D. Bypassing vasopressin receptor signaling pathways in nephrogenic diabetes insipidus. Semin Nephrol. 2008;28:266-78.<br>
-32. Bockenhauer D, Bichet DG. Pathophysiology, diagnosis and management of nephrogenic diabetes insipidus. Nat Rev Nephrol. 2015;11:576-88.<br>
-33. Procino G, Milano S, Carmoniso M, et al. Hereditary nephrogenic diabetes insipidus. J Genet Syndr Gene Ther. 2014;5:1-9.<br>
-34. Kavanagh C, Uy NS. Nephrogenic diabetes insipidus. Pediatr Clin North Am. 2019;66:227-34.<br>
-35. Earley LE, Orloff J. The mechanism of antidiuresis associated with the administration of hydrochlorothiazide. J Clin Invest. 1962;41:1988-97.<br>
-36-43. 리튬/이포스파마이드 유발 신성 DI에서 데스모프레신 반응 관련 사례보고 다수(South Med J 1990; NEJM 1991; Clin Med 2013; Am J Med 2013; Acta Endocrinol 2019; Clin Nephrol Case Stud 2021; Horm Res Paediatr 2003; Clin Pediatr Endocrinol 2022 등).<br>
-44. Morello JP, Bichet DG. Nephrogenic diabetes insipidus. Annu Rev Physiol. 2001;63:607-30.<br>
-45. Bernier V, Morello JP, Zarruk A, et al. Pharmacologic chaperones as a potential treatment for X-linked nephrogenic diabetes insipidus. J Am Soc Nephrol. 2006;17:232-43.<br>
-46. Robben JH, Kortenoeven ML, Sze M, et al. Intracellular activation of vasopressin V2 receptor mutants by nonpeptide agonists. Proc Natl Acad Sci U.S.A. 2009;106:12195-200.<br>
-47. Jean-Alphonse F, Perkovska S, Frantz MC, et al. Biased agonist pharmacochaperones of the AVP V2 receptor. J Am Soc Nephrol. 2009;20:2190-203.<br>
-48. Milano S, Carmosino M, Gerbino A, Svelto M, Procino G. Hereditary nephrogenic diabetes insipidus: pathophysiology and possible treatment. Int J Mol Sci. 2017;18:2385.<br>
-49. Bouley R, Pastor-Soler N, Cohen O, et al. Stimulation of AQP2 membrane insertion by sildenafil citrate. Am J Physiol Renal Physiol. 2005;288:F1103-12.<br>
-50. Assadi F, Sharbaf FG. Sildenafil for the treatment of congenital nephrogenic diabetes insipidus. Am J Nephrol. 2015;42:65-9.<br>
-51. Elie D, Segal M, Low N, et al. Statins in the prevention of lithium-associated diabetes insipidus. Am J Geriatr Psychiatry. 2015;23:S137.<br>
-52. Klein JD, Khanna I, Pillarisetti R, et al. An AMPK activator as a therapeutic option for congenital nephrogenic diabetes insipidus. JCI Insight. 2021;6:e142013.<br>
-53. Zhou G, Myers R, Li Y, et al. Role of AMP-activated protein kinase in mechanism of metformin action. J Clin Invest. 2001;108:1167-74.<br>
-54. Mortensen LA, Bistrup C, Jensen BL, Hinrichs GRA. Mini-review of pharmacological strategies for X-linked nephrogenic diabetes insipidus. Am J Physiol Renal Physiol. 2020;319:F746-53.<br>
-55. Li W, Zhang Y, Bouley R, et al. Simvastatin enhances aquaporin-2 surface expression. Am J Physiol Renal Physiol. 2011;301:F309-18.<br>
-56. Procino G, Milano S, Carmosino M, et al. Combination of secretin and fluvastatin ameliorates polyuria in X-linked NDI mice. Kidney Int. 2014;86:127-38.<br>
-57. Klein JD, Wang Y, Blount MA, et al. Metformin stimulates phosphorylation of aquaporin 2 and urea transporter A1. Am J Physiol Renal Physiol. 2016;310:F1008-12.<br>
-58. Sterns RH. Disorders of plasma sodium – causes, consequences, and correction. N Engl J Med. 2015;372:55-65.<br>
-59. Pazmiño PA, Pazmiño P. Treatment of acute hypernatremia with hemodialysis. Am J Nephrol. 1993;13:260-5.<br>
-60. Strange K. Cellular volume homeostasis. Adv Physiol Educ. 2004;28:155-9.<br>
-61. Yancey PH. Organic osmolytes as compatible, metabolic, and counteracting cytoprotectants. J Exp Biol. 2005;208:2819-30.<br>
-62. Fang C, Mao J, Dai Y, et al. Fluid management of hypernatraemic dehydration to prevent cerebral oedema. J Paediatr Child Health. 2010;46:301-3.
-</p>
-</div></details>
-
-<div class="alert purple" style="margin-top:30px;">
-<strong>원 논문:</strong> Flynn K, Hatfield J, Brown K, Vietor N and Hoang T (2025) Central and nephrogenic diabetes insipidus: updates on diagnosis and management. <i>Front. Endocrinol.</i> 15:1479764. doi: 10.3389/fendo.2024.1479764 — CC BY 4.0 Open Access
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧠</span> 중추성 DI(CDI)의 원인</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">대부분 후천적이며, 최대 <strong>36%가 두부외상 또는 경비강/경전두엽 수술</strong>(시상하부·뇌하수체 손상)로 발생</div></li>
+      <li class="rec-item"><div class="rec-text">뇌하수체 줄기 완전 절제 시 <strong>삼상반응(triphasic response)</strong>: 축삭쇼크(수일)→ 저장 ADH 무분별 방출로 인한 항이뇨기(최대 2주) → ADH 고갈 후 DI 재발</div></li>
+      <li class="rec-item"><div class="rec-text">55종 이상의 돌연변이가 결함성 전구호르몬·ADH 결핍을 유발하여 <strong>가족성 CDI</strong>를 일으킬 수 있음(유전성은 드묾)</div></li>
+    </ul>
+    <table class="ppgl-table" style="margin-top:8px">
+      <tr><th>범주</th><th>세부 원인</th></tr>
+      <tr><td>종양 (10–15%)</td><td>두인두종, 배아종, 수막종, 뇌하수체/시상하부 종양</td></tr>
+      <tr><td>외상 (10–25%)</td><td>경전두엽/경접형동 수술, 뇌손상</td></tr>
+      <tr><td>혈관성</td><td>시상하부·뇌 경색/출혈, 뇌동맥류, Sheehan 증후군, 겸상적혈구병</td></tr>
+      <tr><td>자가면역/염증성</td><td>림프구성 뇌하수체염, SLE, 전신경화증, 다발혈관염육아종증, IgG4 질환, 항-바소프레신 신경세포 항체, 길랭-바레증후군</td></tr>
+      <tr><td>육아종성</td><td>사르코이드증, 육아종성 뇌하수체염, 랑게르한스세포 조직구증, 에르드하임-체스터병</td></tr>
+      <tr><td>약물/독소</td><td>페니토인, 에틸알코올, 테트로도톡신, 뱀독</td></tr>
+      <tr><td>감염</td><td>수막염, 뇌염, 결핵, 톡소플라스마증, 뇌농양</td></tr>
+      <tr><td>선천성/유전성</td><td>상염색체 우성 AVP-neurophysin II 유전자 돌연변이, Wolfram(DIDMOAD) 증후군, X-연관 열성 결함</td></tr>
+    </table>
+  </div>
 </div>
 
-<footer>Central and nephrogenic diabetes insipidus: updates on diagnosis and management (Flynn et al., Frontiers in Endocrinology, 2025) 원문 기반 상세 정리<br>본 자료는 임상 참고용이며 각 기관의 프로토콜 및 최신 문헌에 따라 검증 후 사용.</footer>
-
-</main>
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🩸</span> 신성 DI(NDI)의 원인</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">대부분 <strong>AQP2 발현을 감소시키는 약물</strong>에 의해 발생하며, 가장 흔한 원인은 <strong>리튬</strong> — 치료 환자의 40–55%에서 발생, 시작 8주 이내에도 발현 가능</div></li>
+      <li class="rec-item"><div class="rec-text">AQP2 유전자 자체를 직접 침범하는 다양한 유전적 돌연변이와도 연관</div></li>
+    </ul>
+    <table class="ppgl-table" style="margin-top:8px">
+      <tr><th>범주</th><th>세부 원인</th></tr>
+      <tr><td>약물</td><td>리튬, 시도포비어, 포스카르넷, 데메클로사이클린, 시스플라틴, 암포테리신 B</td></tr>
+      <tr><td>혈관성</td><td>겸상적혈구병, 급성 세뇨관괴사</td></tr>
+      <tr><td>대사성</td><td>중증 저칼륨혈증, 중증 고칼슘혈증, 기아 및 저단백 섭취</td></tr>
+      <tr><td>신수질 침범 질환</td><td>사르코이드증, 아밀로이드증, 쇼그렌증후군, 다발골수종, 낭성신질환</td></tr>
+      <tr><td>선천성/유전성</td><td>바소프레신 V2 수용체 유전자 돌연변이, 아쿠아포린-2 유전자 돌연변이</td></tr>
+    </table>
+  </div>
 </div>
+
+</div><!-- /tab-causes -->
+
+<!-- ===================== TAB: CLINICAL ===================== -->
+<div id="tab-clinical" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💧</span> 주요 증상</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <table class="ppgl-table">
+      <tr><th>증상</th><th>정의</th></tr>
+      <tr><td>다뇨(Polyuria)</td><td>성인 &gt;3L/day, 소아 &gt;2L/m², 또는 24시간 체중 kg당 50mL 초과</td></tr>
+      <tr><td>다음(Polydipsia)</td><td>24시간 수분 섭취량 &gt;3L</td></tr>
+      <tr><td>야뇨(Nocturia)</td><td>다뇨·다음과 함께 가장 흔한 증상 3요소</td></tr>
+    </table>
+    <div class="alert alert-info" style="margin-top:8px"><span>ℹ️</span><div>탈수·고나트륨혈증 증상(쇠약감, 기면, 피로, 근육통)이 동반될 수 있다. 삶의 질에 큰 영향이 없으면 환자가 정규 외래에서 자발적으로 언급하지 않는 경우가 많아 <strong>진단이 지연</strong>될 수 있다.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>👶</span> 소아 특징</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">소아는 <strong>심한 탈수, 구토, 변비, 성장 부진(failure to thrive), 성장 지연</strong>으로 흔히 발현</div></li>
+      <li class="rec-item"><div class="rec-text">상염색체 우성 DI는 대개 <strong>10세 이전</strong> 발현하나, ADH 결핍 중증도에 따라 영아기부터 발현 가능</div></li>
+      <li class="rec-item"><div class="rec-text">부분적 CDI·NDI는 증상이 경미하여 <strong>인생 후반기</strong>에 발현하는 경우가 많음</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-clinical -->
+
+<!-- ===================== TAB: DIAGNOSIS ===================== -->
+<div id="tab-diagnosis" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🔍</span> 감별진단 및 초기 접근</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">감별진단: <strong>DI, 일차성 다음증, 용질 이뇨</strong>(조절 안 되는 당뇨병, 신부전 회복기, 고나트륨 부하, 만니톨, 방사선조영제, 염손실 신병증), <strong>적절한 이뇨제 반응</strong></div></li>
+      <li class="rec-item"><div class="rec-text">병력: 식이·수분 섭취력, 약물력, 두부외상/수술력, 두통·시야변화, 갈증 유무, 가족력</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>24시간 소변 채취</strong>로 저장성 다뇨(소변 삼투압 &lt;300 mOsm/kg) 확인 후 용질 이뇨 원인 배제</div></li>
+    </ul>
+    <table class="ppgl-table" style="margin-top:8px">
+      <tr><th>혈청 나트륨</th><th>해석</th></tr>
+      <tr><td>&gt;147 mmol/L (저장성 다뇨 동반)</td><td>DI 진단적</td></tr>
+      <tr><td>&lt;135 mmol/L</td><td>일차성 다음증 진단적</td></tr>
+      <tr><td>136–147 mmol/L (대부분)</td><td>갈증에 따라 물을 마시므로 감별 불가 — 추가 검사 필요</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💦</span> 수분제한검사 (Water Deprivation Test) — 진단의 표준</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">DI 진단의 <strong>표준(gold standard)</strong>. 정상인은 수분 제한 시 소변을 800 mOsm/kg 이상으로 농축하나, DI 환자는 신장이 소변을 농축하지 못해 소변 삼투압이 300 mOsm/kg 미만으로 유지된다.</div>
+    <div class="sub-title">종료 기준 (하나 충족 시)</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">17시간 경과 / 혈장 나트륨 ≥150 mmol/L / 체중 3–5% 감소 / 연속 2회 소변 삼투압 차이 &lt;10%이면서 체중 2% 감소 / 기립성 저혈압</div></li>
+    </ul>
+    <table class="ppgl-table">
+      <tr><th>소견</th><th>해석</th></tr>
+      <tr><td>수분제한 후에도 다뇨 지속, 소변 삼투압 &lt;300 mOsm/kg</td><td>DI 진단</td></tr>
+      <tr><td>일차성 다음증/정상 신기능</td><td>소변 삼투압 &gt;800 mOsm/kg까지 상승</td></tr>
+      <tr><td>소변 삼투압 300–800 mOsm/kg</td><td>부분 DI 또는 일차성 다음증 가능</td></tr>
+    </table>
+    <div class="alert alert-warn" style="margin-top:6px"><span>⚠️</span><div>민감도 80–100%, 특이도 67–100%로 프로토콜·대상군에 따라 편차가 큼 — 만성 다뇨로 인한 신장 washout, CDI에서 AVPR2 보상적 발현, 후천성 NDI의 부분 저항 등이 혼동 요인이 될 수 있음</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💉</span> 데스모프레신 투여 반응 (CDI vs NDI 감별)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">수분제한검사 후 데스모프레신(DDAVP) 2–4mcg을 <strong>피하 또는 정맥</strong>으로 투여(비강 내는 흡수 불균일로 비권장)</div>
+    <table class="ppgl-table">
+      <tr><th>소변 삼투압 변화</th><th>해석</th></tr>
+      <tr><td>&gt;50% 증가</td><td>완전 중추성 DI (부분 CDI는 그보다 낮게 증가)</td></tr>
+      <tr><td>&lt;15% 증가(무증가/미미)</td><td>완전 신성 DI</td></tr>
+      <tr><td>최대 45%까지 증가</td><td>부분 신성 DI 가능</td></tr>
+      <tr><td>&lt;50% 증가</td><td>부분 DI(중추성/신성 부분형)</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">CDI vs NDI 감별 민감도 97–100%, 특이도 80–100%</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧪</span> 코펩틴(Copeptin) 측정</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">코펩틴은 프로바소프레신의 C-말단 펩타이드로 ADH와 공동분비되며, 혈중에서 안정적으로 측정 가능한 <strong>새로운 대리표지자(surrogate marker)</strong>이다. ADH는 반감기가 짧아 측정이 어려운 반면 코펩틴은 채혈 후 수일간 안정적이다.</div>
+    <table class="ppgl-table">
+      <tr><th>측정 조건</th><th>기준치</th><th>해석</th></tr>
+      <tr><td>기저 코펩틴</td><td>&gt;21.4 pmol/L</td><td><span class="grade grade-yn" data-tip="민감도 100%, 특이도 100%">NDI</span></td></tr>
+      <tr><td>고장성 식염수 자극 후</td><td>&lt;4.9 pmol/L</td><td>중추성 DI</td></tr>
+      <tr><td>고장성 식염수 자극 후</td><td>≥4.9 pmol/L</td><td>일차성 다음증</td></tr>
+    </table>
+    <div class="alert alert-success" style="margin-top:6px"><span>✅</span><div>다기관 전향적 연구: 삼투 자극 후 코펩틴으로 CDI-일차성 다음증 감별 시 진단 정확도 96.5%(민감도 93.2%, 특이도 100%) (Fenske et al., NEJM 2018)</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🗺️</span> 진단 알고리즘 종합 (Figure 2)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">1단계 — 혈청 Na·혈장 삼투압</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">Na ≤135 mmol/L, 삼투압 ≤280 mOsm/kg → <strong>일차성 다음증</strong></div></li>
+      <li class="rec-item"><div class="rec-text">Na ≥146 mmol/L, 삼투압 ≥300 mOsm/kg → <strong>중추성/신성 DI</strong></div></li>
+      <li class="rec-item"><div class="rec-text">정상 범위 → 아래 경로(수분제한검사 또는 코펩틴) 중 선택하여 추가 평가</div></li>
+    </ul>
+    <div class="sub-title">경로 A — 수분제한검사</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">소변삼투압 &gt;800 → 일차성 다음증 / &lt;800 → 데스모프레신 투여 → &gt;50%증가 시 CDI, &lt;50%증가 시 NDI, 300–800 구간은 치료적 데스모프레신 시도 필요</div></li>
+    </ul>
+    <div class="sub-title">경로 B/C — 코펩틴</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">기저 코펩틴 ≥21.4 → NDI / &lt;2.6 → CDI / ≥2.6 → 고장성 식염수 주입검사 시행 → 검사 후 &gt;4.9 → 일차성 다음증, ≤4.9 → CDI</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-diagnosis -->
+
+<!-- ===================== TAB: TREATMENT ===================== -->
+<div id="tab-treatment" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💧</span> 일반원칙</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">CDI·NDI 모두 치료의 핵심은 <strong>충분한 수분 접근성</strong> — 갈증에 따라 물을 마시게 하는 것이 필수</div></li>
+      <li class="rec-item"><div class="rec-text">경증에서는 경구 수분만으로 충분할 수 있음 — 모든 환자가 표적 치료가 필요한 것은 아님</div></li>
+      <li class="rec-item"><div class="rec-text">갈증 기전 손상(급성 질환, 의식 저하, 구토, 호흡부전) 시 <strong>입원 및 내분비내과 협진</strong> 필요</div></li>
+      <li class="rec-item"><div class="rec-text">경구 섭취만으로 부족함을 시사하는 징후: 나트륨 상승, 의식 변화, 갈증 결여</div></li>
+      <li class="rec-item"><div class="rec-text">과도한 수분 섭취도 해로울 수 있음 — 소아에서 수신증, 요관확장증, 불소증 보고</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>💊</span> 중추성 DI — 데스모프레신(DDAVP)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="margin-bottom:8px">CDI의 가장 흔한 치료. ADH 유사체이나 시스테인기 제거(반감기 연장), D→L-아르기닌 치환(승압 활성 제거)의 구조적 변형이 있다.</div>
+    <table class="ppgl-table">
+      <tr><th>제형</th><th>용량</th><th>비고</th></tr>
+      <tr><td>경구정</td><td>0.1/0.2mg</td><td>시작 0.05mg 1일1–2회, 통상 0.1–1.2mg 2–3회 분복</td></tr>
+      <tr><td>비강분무</td><td>10mcg/0.1mL</td><td>4세 이상, 1일 10–40mcg, 소아 10–30mcg</td></tr>
+      <tr><td>설하정</td><td>여 27.7mcg / 남 55.3mcg</td><td>취침 1시간 전, 전1시간·후8시간 수분제한</td></tr>
+      <tr><td>피하/정맥주사</td><td>1–2mcg 1일2회</td><td>두부외상·수술 후 일과성 다뇨 관리</td></tr>
+    </table>
+    <div class="alert alert-danger" style="margin-top:8px"><span>⚠️</span><div>주요 합병증: <strong>저나트륨혈증</strong>(대개 등용적성). 아쿠아레시스(전해질 손실 없는 수분 배출)를 허용하는 방식으로 대응하며, 지속 시 감량한다.</div></div>
+    <div class="sub-title">아쿠아레시스 확보 방법</div>
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">주 1–2회 용량 지연 → 2–3회 배뇨 후 복용</div></li>
+      <li class="rec-item"><div class="rec-text">매 용량마다 약간의 아쿠아레시스가 있을 때까지 지연 후 복용(가장 효과적)</div></li>
+      <li class="rec-item"><div class="rec-text">주 1회 1정 생략(효과적이나 그날 다뇨 발생)</div></li>
+    </ul>
+    <div class="rec-text">소아(액상 식이) CDI에서는 <strong>티아지드 이뇨제</strong>가 흔히 사용되며, 고형식 전환 시 데스모프레신으로 전환 권고</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧪</span> 신성 DI — 일반원칙 및 원인교정</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">가능한 경우 <strong>원인 교정</strong> 우선 — 리튬 중단 시 동물모델에서 1–2주 후 AQP2 발현 증가, 임상적으로 약 3주부터 호전 가능</div></li>
+      <li class="rec-item"><div class="rec-text">그러나 상당수는 완전 회복 안 됨 — 리튬 중단 1년 후 27명 중 17명(63%)이 농축능 &lt;800 mOsm/kg 지속</div></li>
+      <li class="rec-item"><div class="rec-text">기타 가역적 원인: 저칼륨혈증, 고칼슘혈증, 폐쇄성 요로병증</div></li>
+      <li class="rec-item"><div class="rec-text">신장 저항성은 대부분 비가역적 → 충분한 수분 섭취가 근간, 소아는 성장부전 시 위루관 필요할 수 있음</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🥗</span> 신성 DI — 식이·이뇨제·고용량 DDAVP</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="sub-title">식이</div>
+    <div class="rec-text">단백질 ≤1.0g/kg, 나트륨 ≤2.3g/day(&lt;100mEq/day), 목표 삼투 부하 15 mOsm/kg/day 권고. 소아에서는 성장·발달 저해 우려로 관리가 어려움</div>
+    <div class="sub-title">이뇨제</div>
+    <div class="rec-text">하이드로클로로티아지드(1–4mg/kg/day)로 소변량 약 50% 감소 보고. 클로로티아지드는 액상 제형이 있어 영아에 유용</div>
+    <div class="sub-title">고용량 데스모프레신</div>
+    <div class="rec-text">부분 NDI의 약 25%(일본 전국조사)에서 DDAVP 효과 — 정맥 80mcg 1일3–4회, 비강 20mcg 1일4회, 경구 720mcg/day까지 사례보고 있음. 이뇨제 반응 부족·금기 시 예비적으로 고려</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🔬</span> 신성 DI — 신약 연구 (연구 단계)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text"><strong>분자 샤페론(Vaptan)</strong>: 선천성 NDI의 약 90%는 AVPR2 misfolding → ER 갇힘. SR49059(relcovaptan)이 X-연관 NDI 5례에서 소변량 감소 확인했으나 CYP450 간섭으로 개발 중단</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>AVPR2 작용제</strong>: 돌연변이 AVPR2 활성화, AQP2 막이동 유도 (전임상)</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>AVPR2 우회 전략</strong>: EP2/EP4, β3-아드레날린수용체, 세크레틴수용체 활성화로 cAMP 증가 (동물모델만)</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>cGMP 경로</strong>: 실데나필 사례보고에서 X-연관 NDI 소변삼투압 극적 증가</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>AMPK 활성제(메트포르민)</strong>: 2021년 NDI 연구는 효과 부재로 중단됨</div></li>
+    </ul>
+    <div class="alert alert-warn"><span>⚠️</span><div>대부분 동물모델 자료이며, 인체 대상 연구는 소수 사례보고 수준으로 제한적이다.</div></div>
+  </div>
+</div>
+
+</div><!-- /tab-treatment -->
+
+<!-- ===================== TAB: HOSPITAL ===================== -->
+<div id="tab-hospital" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🏥</span> 입원 적응증 및 수액 선택</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">부적절한 수분 섭취로 인한 고나트륨혈성 탈수 → 입원 및 <strong>내분비내과 협진</strong> 필요</div></li>
+      <li class="rec-item"><div class="rec-text">급성·중증 고나트륨혈증은 뇌 적응 시간 부족 → 두개내출혈, 경련, 혼수 위험</div></li>
+      <li class="rec-item"><div class="rec-text">저혈량성 쇼크가 없다면 <strong>5% 포도당수(D5W)</strong> 사용 — 반등장식염수 등은 오히려 고나트륨혈증 악화 가능</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>⏱️</span> 급성 vs 만성 고나트륨혈증 교정</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <table class="ppgl-table">
+      <tr><th>구분</th><th>정의</th><th>교정 목표</th></tr>
+      <tr><td>급성</td><td>48시간 이내 발생</td><td>시간당 1–2 mEq/L, 24시간 내 정상화 (D5W 3–6mL/kg/hr)</td></tr>
+      <tr><td>만성</td><td>48시간 초과 지속</td><td>시간당 0.5 mEq/L 이하로 제한(급속교정 시 뇌부종 위험)</td></tr>
+    </table>
+    <div class="rec-text" style="margin-top:6px">'안전한' 교정 시간(시간)은 <strong>시작 나트륨-목표 나트륨 차이를 2배</strong>하여 추정 가능. 신부전 환자에서는 혈액투석이 안전하게 사용된 사례 있음.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🧮</span> 자유수분 결핍(Free Water Deficit) 계산식</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="formula-box">
+      남성: 자유수분 결핍(L) = 총체중(kg) × 0.6 × (혈청 Na − 140) ÷ 140<br>
+      여성: 자유수분 결핍(L) = 총체중(kg) × 0.5 × (혈청 Na − 140) ÷ 140
+    </div>
+    <div class="rec-text">자유수분 결핍량을 '안전한' 교정 시간(시간)으로 나누어 시작 시간당 주입 속도를 결정한다.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>📋</span> 모니터링</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text">4시간마다 기본대사패널(BMP)로 전해질·혈당 모니터링</div></li>
+      <li class="rec-item"><div class="rec-text">고용량 D5W로 당뇨(glucosuria)·삼투성 이뇨 시 인슐린 또는 2.5% 포도당수·1/4 등장식염수 등 대체 수액 고려</div></li>
+      <li class="rec-item"><div class="rec-text">소변량은 엄격히 모니터링하되 특정 목표치는 없음 — 정맥 수액 속도는 시간당 소변량을 약간 초과하도록 조정</div></li>
+      <li class="rec-item"><div class="rec-text">가능한 경우 조기에 경구 수분(물, 영아는 우유)으로 전환</div></li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /tab-hospital -->
+
+<!-- ===================== TAB: SUMMARY ===================== -->
+<div id="tab-summary" class="panel">
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>📋</span> 임상 실무 권고 요약 (Table 4)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <ul class="rec-list">
+      <li class="rec-item"><div class="rec-text"><strong>DI 의심 시점</strong>: 다뇨·다음·야뇨 있는 성인 / 탈수·구토·변비·성장부진 있는 소아 / 나트륨이 정상인 경우가 흔함</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-yn" data-tip="Good-quality patient-oriented evidence">A</span></div><div class="rec-text"><strong>진단</strong>: 간접 수분제한검사, 다른 원인 반드시 배제. Figure 2 알고리즘 참고</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-yn" data-tip="Good-quality patient-oriented evidence">A</span></div><div class="rec-text"><strong>중추성 DI 치료</strong>: 데스모프레신 0.01–0.02mg 경구 또는 2–4mcg 비강, 1일1–2회. 저나트륨혈증 반드시 모니터링</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-h" data-tip="Inconsistent/limited-quality evidence">B</span></div><div class="rec-text"><strong>신성 DI 치료</strong>: 원인 교정(약물 중단·전해질 교정)</div></li>
+      <li class="rec-item"><div class="rec-badges"><span class="grade grade-info" data-tip="Consensus/usual practice/expert opinion">C</span></div><div class="rec-text"><strong>신성 DI 치료</strong>: 티아지드 이뇨제가 소변량 감소·농축능 증가에 도움될 수 있음</div></li>
+      <li class="rec-item"><div class="rec-text"><strong>내분비내과 의뢰</strong>: 합병증/검사로 입원 필요 시, 진단 불명확 시, CDI 1차 치료 실패 시, NDI 삶의 질 저하 심할 시, 관리에 도움이 필요한 모든 경우</div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header open" onclick="toggleCard(this)">
+    <div class="ch-title"><span>🎯</span> 결론</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text">DI는 삶의 질 저하와 사망률 증가로 이어질 수 있어 신속한 진단·치료가 중요하다. 수분제한 후 소변 삼투압 측정이 여전히 진단의 근간이나, <strong>코펩틴</strong>이 향후 더 큰 역할을 할 것으로 기대된다. 뇌하수체 후엽 ADH 분비 결핍은 중추성, 신장 집합관의 ADH 무반응은 신성 DI를 유발한다. 치료는 완치가 아닌 <strong>삶의 질 개선</strong>에 초점을 두며, 데스모프레신은 CDI에서 효과적이나 NDI에서는 효과가 없다. NDI는 복합적 질환으로 표적치료 연구가 진행 중이다.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div id="abbr-main-grid" class="abbr-grid-main"></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="ch-title"><span>📖</span> 참고문헌 (주요)</div>
+    <span class="toggle">▾</span>
+  </div>
+  <div class="card-body">
+    <div class="rec-text" style="font-size:calc(11px * var(--fscale,1));line-height:1.8">
+    1. Christ-Crain M, Gaisl O. Diabetes insipidus. La Presse Médicale. 2021;50:104093.<br>
+    2. Mutter CM et al. Diabetes insipidus: Pathogenesis, diagnosis, and clinical management. Cureus. 2021;13:e13523.<br>
+    5. Christ-Crain M et al. Utility of the copeptin assay. J Clin Endocrinol Metab. 2022;107:1727-38.<br>
+    8. Gubbi S et al. Diagnostic testing for diabetes insipidus. Endotext. 2000.<br>
+    13. Garofalo NA et al. Diagnosis and management of diabetes insipidus. J Clin Endocrinol Metab. 2016;101:1681-92.<br>
+    14. Fenske W et al. A copeptin-based approach in the diagnosis of diabetes insipidus. N Engl J Med. 2018;379:428-39.<br>
+    16. Garrahy A et al. Diagnosis and management of central diabetes insipidus in adults. Clin Endocrinol. 2019;90:23-30.<br>
+    17. Dabrowski E et al. Diabetes insipidus in infants and children. Best Pract Res Clin Endocrinol Metab. 2016;30:205-18.<br>
+    32. Bockenhauer D, Bichet DG. Pathophysiology, diagnosis and management of nephrogenic diabetes insipidus. Nat Rev Nephrol. 2015;11:576-88.<br>
+    58. Sterns RH. Disorders of plasma sodium. N Engl J Med. 2015;372:55-65.<br>
+    <br>전체 62개 참고문헌은 원문(doi: 10.3389/fendo.2024.1479764) 참조.
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-summary -->
+
+</div><!-- /main -->
 
 <script>
-document.getElementById('searchBox').addEventListener('input', function(e){
-  var q = e.target.value.trim().toLowerCase();
-  var tests = document.querySelectorAll('main details.test');
-  var chapters = document.querySelectorAll('main h2.chapter');
-  if(!q){
-    tests.forEach(function(t){t.classList.remove('hidden');});
-    chapters.forEach(function(c){c.classList.remove('hidden');});
-    return;
-  }
-  tests.forEach(function(t){
-    var text = t.innerText.toLowerCase();
-    if(text.indexOf(q) !== -1){ t.classList.remove('hidden'); t.open = true; }
-    else { t.classList.add('hidden'); }
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) { body.classList.add('collapsed'); }
   });
 });
 
-document.querySelectorAll('nav a[href^="#"]').forEach(function(link){
-  link.addEventListener('click', function(e){
-    var id = link.getAttribute('href').slice(1);
-    var target = document.getElementById(id);
-    if(target && target.tagName === 'DETAILS'){
-      target.open = true;
-    }
+const abbrs = [
+  ['DI','Diabetes Insipidus (요붕증)'],
+  ['CDI','Central Diabetes Insipidus (중추성 요붕증)'],
+  ['NDI','Nephrogenic Diabetes Insipidus (신성 요붕증)'],
+  ['ADH','Antidiuretic Hormone (항이뇨호르몬)'],
+  ['AVP','Arginine Vasopressin (아르기닌 바소프레신, ADH와 동일)'],
+  ['V2R','Vasopressin Receptor 2 (바소프레신 수용체 2)'],
+  ['AQP2','Aquaporin-2 (아쿠아포린-2 채널)'],
+  ['cAMP','Cyclic Adenosine Monophosphate (고리형 AMP)'],
+  ['cGMP','Cyclic Guanosine Monophosphate (고리형 GMP)'],
+  ['PKA','Protein Kinase A (단백질 인산화효소 A)'],
+  ['DDAVP','Desmopressin acetate (데스모프레신)'],
+  ['AMPK','AMP-activated Protein Kinase'],
+  ['SOR','Strength Of Recommendation (권고 근거 수준)'],
+  ['BMP','Basic Metabolic Panel (기본대사패널)'],
+  ['D5W','5% Dextrose in Water (5% 포도당수)'],
+];
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 420;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
   });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
 });
+buildAbbr();
 </script>
 </body>
 </html>
