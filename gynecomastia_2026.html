@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>여성형유방(Gynecomastia) 진료 참고자료 — SIAMS 2026</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev: #0a6e6e;      /* 개요·원인 — 청록 */
+    --predict: #0550ae;  /* 평가·검사 — 청 */
+    --tx: #7c3aed;       /* 치료 — 보라 */
+    --monitor: #9b1c2e;  /* 영상·악성감별 — 진홍 */
+    --behav: #b35900;    /* 심리·수술 — 주황 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 7px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--behav); color:#fff; padding:3px 7px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(11.5px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 560px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(13px * var(--fscale, 1)); font-weight: 700; color: var(--text); }
+  .modal-head-val { font-size: calc(14px * var(--fscale, 1)); font-weight: 700; margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(16px * var(--fscale, 1)); color: var(--text2); user-select: none; }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.7; }
+  .modal-body ul { padding-left: 18px; margin: 6px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f4; border-left: 3px solid var(--dev);  color: #0a5555; }
+  .alert-predict { background: #ddf4ff; border-left: 3px solid var(--predict); color: #0550ae; }
+  .alert-tx      { background: #ede9fe; border-left: 3px solid var(--tx);  color: #5b21b6; }
+  .alert-monitor { background: #fce8eb; border-left: 3px solid var(--monitor); color: var(--monitor); }
+  .alert-behav   { background: #fdf0e0; border-left: 3px solid var(--behav); color: #7a3d00; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev     { background: #e0f4f4; color: var(--dev); border: 1px solid var(--dev); }
+  .t-predict { background: #ddf4ff; color: var(--predict); border: 1px solid var(--predict); }
+  .t-tx      { background: #ede9fe; color: var(--tx); border: 1px solid var(--tx); }
+  .t-behav   { background: #fdf0e0; color: var(--behav); border: 1px solid var(--behav); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--monitor); border: 1px solid var(--monitor); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-horm { background: #ede9fe; color: #5b21b6; }
+  .drug-anti { background: #ddf4ff; color: #0550ae; }
+  .drug-unc  { background: #fdf0e0; color: #7a3d00; }
+  .drug-neg  { background: #fce8eb; color: var(--monitor); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-dev     { background: #e0f4f4; border: 1.5px solid var(--dev); color: #0a5555; }
+  .gear-predict { background: #e6f0fb; border: 1.5px solid var(--predict); color: #0550ae; }
+  .gear-tx      { background: #ede9fe; border: 1.5px solid var(--tx); color: #5b21b6; }
+  .gear-monitor { background: #fde8eb; border: 1.5px solid var(--monitor); color: var(--monitor); }
+  .gear-behav   { background: #fdf0e0; border: 1.5px solid var(--behav); color: #7a3d00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .rec-tbl td:nth-child(1) { width: 34px; text-align:center; font-weight:700; color:var(--text2); }
+  .grade-strong { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#dafbe1; color:var(--green); border:1px solid var(--green); white-space:nowrap; }
+  .grade-weak   { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#fff3cd; color:#7d4e00; border:1px solid var(--yellow); white-space:nowrap; }
+  .grade-expert { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#e6f0fb; color:#0550ae; border:1px solid var(--predict); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>G</span><span>S</span>
+      </div>
+      <h1>여성형유방(Gynecomastia) 진료 참고자료</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Pozza C, Selice R, Barbonetti A, et al. Management of gynecomastia in adolescence and adults: the clinical practice guidelines from the Italian Society of Andrology and Sexual Medicine (SIAMS). J Endocrinol Invest. 2026. doi:10.1007/s40618-026-02915-2</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 저자·학회의 공식 승인을 받지 않은 개인 참고자료다 (This tool is not officially endorsed by the authors or any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('cause')">🧬 원인</div>
+    <div class="tab" onclick="showTab('eval')">🔍 평가</div>
+    <div class="tab" onclick="showTab('tx')">💊 치료</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:120px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('prev')"><div class="stat-val" style="color:var(--dev)">4–69%</div><div class="stat-lbl">전체 유병률<br>(연령·정의에 따라 상이)</div></div>
+    <div class="stat-box" onclick="openStatModal('drug')"><div class="stat-val" style="color:var(--predict)">10–25%</div><div class="stat-lbl">성인 발병<br>약물유발 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('puberty')"><div class="stat-val" style="color:var(--tx)">최대 70%</div><div class="stat-lbl">사춘기 소년<br>발생률(13–14세 정점)</div></div>
+    <div class="stat-box" onclick="openStatModal('idiopathic')"><div class="stat-val" style="color:var(--behav)">~25%</div><div class="stat-lbl">정밀평가에도<br>원인불명 비율</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev">
+        <span>✅</span>
+        <div>여성형유방은 남성 유방의 <strong>양성 선조직 증식</strong>으로, 남성 유방질환 중 가장 흔하다. 신생아기·사춘기·노년기 3개 생리적 호발시기가 있으며, 대부분 <strong>안드로겐-에스트로겐 균형 변화</strong>에 기인한다. 지방 침착만 있는 <strong>가성여성형유방(pseudogynecomastia)</strong>과의 감별이 진단의 출발점이다.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">🧬 생리적 vs 병리적</div>
+          신생아·사춘기·노년기는 대부분 생리적·자연관해<br>
+          <small>불필요한 정밀검사는 오히려 과잉진단 유발</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">🔍 진찰이 핵심</div>
+          병력+촉진이 1차 진단도구, 영상은 애매하거나<br>악성의심 시에만
+          <small>단측성·경성·비대칭은 유방암 감별 필요</small>
+        </div>
+        <div class="gear-box gear-tx">
+          <div class="gear-title">💊 치료 원칙</div>
+          관찰 우선, 선택적 약물치료, 섬유화 시 수술<br>
+          <small>테스토스테론은 증명된 저성선증에만</small>
+        </div>
+      </div>
+      <div class="alert alert-behav" style="margin-top:8px">
+        <span>🧠</span>
+        <div>여성형유방은 신체적 불편뿐 아니라 <strong>자존감·신체상·사회적 상호작용</strong>에 상당한 심리적 영향을 미칠 수 있어, 특히 청소년·젊은 성인에서 심리적 지지를 함께 고려해야 한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 정의·가성여성형유방 감별</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>여성형유방은 소년·성인 남성 유방에서 촉진 및/또는 육안으로 확인되는 유방조직의 <strong>양성 전신성 증식</strong>; 대부분 <strong>양측성</strong>이나 편측성도 가능</li>
+        <li><strong>가성여성형유방(지방유방증, lipomastia)</strong>: 선조직 증식 없이 지방침착만 있는 상태 — 유륜하 지방을 전액와선 등 인접 피하지방과 <strong>촉진으로 비교</strong>하여 감별</li>
+        <li>정량적 진단 기준(전문가 의견, 근거수준 낮음): 유륜하 유방조직 <strong>횡경 ≥2cm</strong>; 초음파에서는 유두-전방 피부-흉근막 사이 <strong>전후경 &gt;1cm</strong>가 제안되나 근거기반 기준은 아님</li>
+        <li>진성 여성형유방은 유두-유륜 복합체와 동심원상의 부드럽거나 탄력있거나 압통 있는(또는 단단한) 조직 덩어리로 촉진되는 반면, 가성여성형유방에서는 이러한 국한된 조직판이 만져지지 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚙️</span> 병태생리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>핵심 기전은 유방조직 수준의 <strong>안드로겐-에스트로겐 균형 변화</strong> — 에스트로겐수용체 활성화는 증식신호, 안드로겐수용체 활성화는 억제신호로 작용</li>
+        <li>고나도트로핀도 관여: <strong>LH</strong>는 Leydig세포 테스토스테론 생성 자극(1차성 저성선증에서는 LH↑로 방향화효소 활성도 증가), <strong>FSH</strong>는 정자형성 관여; <strong>hCG</strong>는 Leydig세포를 자극해 고환 에스트로겐 생성 증가(생식세포종양 등에서 병적 상승 시 여성형유방 유발 가능)</li>
+        <li>1차성 저성선증: 고환부전→LH 상승→방향화효소 활성 증가; 2차성 저성선증: 고나도트로핀 저하→테스토스테론 감소, 유사한 하위 결과</li>
+        <li>기타 관여 호르몬: <strong>프로락틴</strong>(직접적 유선증식 효과보다는 시상하부-뇌하수체-성선축 억제를 통한 2차성 저성선증이 주기전으로 추정), <strong>GH/IGF-1</strong>(에스트로겐이 유방조직 IGF-1수용체 발현 유도, IGF-1은 스테로이드생성 촉진·에스트로겐 활성 증폭 가능), <strong>프로게스테론</strong></li>
+        <li>연령 관련 변화: 노화에 따라 <strong>SHBG가 증가</strong>하며, SHBG의 안드로겐 결합친화도가 에스트로겐보다 높아 생체이용 에스트라디올/테스토스테론 비율이 상대적으로 증가 — 반드시 순환 에스트라디올의 절대적 증가를 의미하지는 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 생애주기별 특징</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="grid3">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px;color:var(--dev)">신생아·영아기</div>
+          <ul style="padding-left:16px;line-height:1.8;font-size:calc(11.5px * var(--fscale,1))">
+            <li>일시적 유방비대가 영아의 60–90%에서 발생 추정</li>
+            <li>모체 유래 에스트라디올·프로게스테론 경태반 노출, 신생아 LH 급증에 의한 안드로겐 방향화 증가가 기전</li>
+            <li>"witch's milk"(유즙성 유두분비물) 동반 가능; 미니사춘기(생후 수개월)로 에스트라디올>테스토스테론 불균형 유발 가능</li>
+            <li>대개 수 주 내 자연관해, 일부 건강한 영아에서 수개월 지속 가능</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px;color:var(--predict)">사춘기</div>
+          <ul style="padding-left:16px;line-height:1.8;font-size:calc(11.5px * var(--fscale,1))">
+            <li>청소년 남아의 <strong>최대 70%</strong>에서 발생, <strong>13–14세 또는 Tanner G3–G4</strong>에서 정점</li>
+            <li>방향화효소의 조기 성숙으로 에스트로겐이 테스토스테론보다 먼저 생성 → 에스트로겐/테스토스테론 비율 상승이 선조직 증식 촉진</li>
+            <li>75–90%는 6개월~1–2년 내 자연관해; 60%는 6개월 이내 소실(연구에 따라 상이)</li>
+            <li>20세까지 잔존하는 경우는 약 20%에 불과</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px;color:var(--tx)">노년기</div>
+          <ul style="padding-left:16px;line-height:1.8;font-size:calc(11.5px * var(--fscale,1))">
+            <li>성인 남성 유병률 약 30–50%; 건강한 노인 57%, 입원 노인 70% 이상에서 관찰</li>
+            <li>약물유발이 20–25%(일부 연구 최대 80%)를 차지</li>
+            <li>비만 증가·말초 방향화효소 활성 증가가 주요 기여인자</li>
+            <li>철저한 평가에도 불구하고 <strong>약 25%는 원인불명</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 원인 ══════════════════ -->
+<div id="tab-cause" class="panel">
+
+  <div class="alert alert-dev">
+    <span>🧬</span>
+    <div>원인은 크게 <strong>생리적</strong>, <strong>약물유발</strong>, <strong>병리적(내분비·기타 전신질환)</strong>, <strong>선천성·유전성</strong>으로 분류된다. 진단 우선순위는 유병률과 임상적 중요도에 따라 <strong>생리적 원인 → 약물/물질 → 저성선증·내분비질환 → 만성 간/신질환 → 희귀 종양</strong> 순으로 접근한다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 생리적 원인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-predict"><span>R1</span><div>생리적 원인을 배제하기 전에 광범위한 진단검사를 시작하지 않을 것을 <span class="grade-expert">제안</span> — 불필요한 검사는 과잉의료화·과잉진단으로 이어질 수 있음 (전문가 의견)</div></div>
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>생리적 여성형유방은 대개 <strong>일과성·양측성·매끄럽고 단단하며 유륜하 대칭 분포</strong> — 확대의 대부분은 선관이 아닌 <strong>기질(stroma)의 증식</strong></li>
+        <li>진행성 확대, 비대칭, 염증 징후, 기타 내분비/전신질환을 시사하는 소견이 있는 경우에만 추가 평가가 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 약물유발 여성형유방</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-predict"><span>R1</span><div>여성형유방 유발 가능 약물을 확인하기 위해 <strong>복용 약물력을 신중히 검토</strong>할 것을 <span class="grade-strong">권고</span> (1 |⊕⊕⊕○)</div></div>
+      <div style="margin-top:6px">성인 발병 여성형유방의 가장 흔한 원인 중 하나로, <strong>전체의 10–25%</strong>를 차지한다.</div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>분류</th><th>대표 약물</th><th>기전</th></tr>
+          <tr><td><span class="drug drug-horm">직접 호르몬활성</span></td><td>외인성 에스트로겐, 에스트로겐 크림, 아나볼릭스테로이드, hCG, GH</td><td>에스트로겐-안드로겐 균형 붕괴, 직접 에스트로겐 자극</td></tr>
+          <tr><td><span class="drug drug-horm">에스트로겐성 활성</span></td><td>식물성에스트로겐(대두 등), 디곡시강심배당체</td><td>에스트로겐수용체 활성화, 테스토스테론 합성 억제</td></tr>
+          <tr><td><span class="drug drug-anti">항안드로겐</span></td><td>플루타마이드, 비칼루타마이드, 엔잘루타마이드, 스피로놀락톤, 사이프로테론아세테이트</td><td>안드로겐수용체 차단, 에스트로겐 효과 증가</td></tr>
+          <tr><td><span class="drug drug-anti">5α-환원효소억제제</span></td><td>피나스테리드, 두타스테리드</td><td>DHT 합성 억제, 에스트로겐/안드로겐 비율 증가</td></tr>
+          <tr><td><span class="drug drug-anti">GnRH 작용제</span></td><td>류프로라이드, 고세렐린</td><td>고환 테스토스테론 생성 억제</td></tr>
+          <tr><td><span class="drug drug-anti">케토코나졸</span></td><td>케토코나졸</td><td>스테로이드생성 억제, 테스토스테론 합성 억제</td></tr>
+          <tr><td><span class="drug drug-unc">양성자펌프억제제</span></td><td>오메프라졸, 에소메프라졸</td><td>CYP3A4를 통한 에스트라디올 이화 억제</td></tr>
+          <tr><td><span class="drug drug-unc">소화기약물</span></td><td>시메티딘, 라니티딘</td><td>약한 안드로겐수용체 차단</td></tr>
+          <tr><td><span class="drug drug-unc">심혈관약물</span></td><td>칼슘채널차단제(딜티아젬·베라파밀·니페디핀), 디곡신, 아미오다론</td><td>2차성 저성선증, 기전 불명확</td></tr>
+          <tr><td><span class="drug drug-unc">정신과약물</span></td><td>디아제팜, 할로페리돌, 페노티아진, 삼환계항우울제</td><td>프로락틴 상승에 의한 2차성 저성선증</td></tr>
+          <tr><td><span class="drug drug-unc">항암화학요법제</span></td><td>알킬화제, 빈크리스틴, 메토트렉세이트</td><td>테스토스테론 억제, LH 상승, 에스트로겐성 효과</td></tr>
+          <tr><td><span class="drug drug-unc">남용약물</span></td><td>알코올, 대마초, 헤로인, 메타돈</td><td>에스트로겐성 활성, 테스토스테론 합성 억제</td></tr>
+          <tr><td><span class="drug drug-unc">항레트로바이러스요법(HAART)</span></td><td>다양한 HIV 치료제</td><td>직접적 유선세포 효과, 프로락틴 상승</td></tr>
+          <tr><td><span class="drug drug-unc">스타틴</span></td><td>아토르바스타틴, 심바스타틴</td><td>콜레스테롤 합성 감소로 테스토스테론 생성 저하</td></tr>
+          <tr><td><span class="drug drug-unc">기타</span></td><td>페니토인, 암페타민, 돔페리돈, 메토클로프라미드, 이소니아지드, ACE억제제, 니트레이트, 메트로니다졸</td><td>기전 불명확</td></tr>
+        </table>
+      </div>
+      <div style="margin-top:8px;color:var(--text2);font-size:calc(11px * var(--fscale,1))">도핑목적 안드로겐/아나볼릭제제, hCG, GH 사용은 약물유발 여성형유방의 가장 흔한 원인으로 꼽힌다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚕️</span> 병리적 원인 — 내분비질환/기타</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-predict"><span>R1</span><div>병력·진찰·맞춤형 진단검사를 바탕으로 다양한 호르몬·비호르몬 질환에 이차적인 병리적 원인을 배제할 것을 <span class="grade-strong">권고</span> (1 |⊕○○○)</div></div>
+      <div class="alert alert-predict" style="margin-top:6px"><span>R2</span><div>기질적·약물·호르몬유발 원인을 배제한 후, <strong>행동 관련 원인</strong>(기호용 약물·알코올 사용)에 대한 병력청취·상담을 <span class="grade-expert">제안</span> (전문가 의견)</div></div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>🧬 테스토스테론·에스트라디올 관련 저성선증</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li>1차성·2차성 저성선증 모두 낮은 테스토스테론 → 안드로겐의 유방조직 억제효과 감소 + 에스트로겐/테스토스테론 비율 상승</li>
+            <li><strong>클라인펠터증후군(KS)</strong>이 1차성 저성선증의 가장 흔한 원인 — 조기 고환부전·LH 상승·고환퇴행, 낮은 테스토스테론과 증가된 방향화효소 활성이 함께 기여</li>
+            <li>2차성 저성선증: 시상하부/뇌하수체 기질적 부전 또는 노화·동반질환·비만 같은 기능성 원인; 비만 환자에서는 방향화효소 활성 증가도 기술됨</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🎗️ 호르몬분비종양</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>여성형유방이 <strong>호르몬분비종양의 초기 지표</strong>일 수 있음 — Leydig세포종양, Sertoli세포종양, 과립막세포종, 성선/성선외 생식세포종양</li>
+            <li>Leydig세포종양은 안드로겐·에스트로겐 또는 둘 다 합성 가능; 생식세포종양은 β-hCG 분비로 에스트로겐 합성 자극 및 고나도트로핀 억제 유발 — <strong>생식세포종양의 5–7%</strong>가 여성형유방 동반(정상피종·비정상피종 유사 빈도)</li>
+            <li>파라종양성 현상으로서의 조기 인식이 임상결과에 중요한 영향을 줄 수 있음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🦋 갑상선·GH/IGF-1·프로락틴</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>갑상선기능이상</strong>은 주로 시상하부-뇌하수체-성선축 교란을 통해 여성형유방 유발 — 갑상선기능항진·저하 모두에서 동반 또는 초기 증상으로 나타날 수 있음; 중증 장기 갑상선기능저하증에서는 TRH 상승에 의한 프로락틴 증가→저성선증; 갑상선기능항진증에서는 SHBG 증가→상대적 저성선증→LH 상승·방향화 촉진</li>
+            <li><strong>말단비대증</strong>에서 여성형유방 보고, GH 치료의 부작용으로도 발생 가능; IGF-1과의 상관관계는 연구마다 상반된 결과</li>
+            <li><strong>고프로락틴혈증</strong>은 유방조직에 직접적 증식효과보다는 <strong>시상하부-뇌하수체-성선축 억제→2차성 저성선증</strong>을 통해 간접적으로 기여하는 것으로 추정(기전 여전히 논쟁 중)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🫀 기타 전신질환</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>만성신질환(CKD)</strong>: 약물 관련 부작용으로 흔히 보고되나, 저성선증·고프로락틴혈증도 독립적으로 기여</li>
+            <li><strong>간질환</strong>(HCV, 간경변): 간기능부전 남성에서 저성선증 흔함; 간대사 및 SHBG 합성 변화로 유리테스토스테론 감소·에스트로겐 상승; 간부전 사망위험이 여성형유방 동반 환자에서 5배 높다는 보고</li>
+            <li><strong>HIV 감염</strong>: HAART 시작 전·후 모두 유병률 증가(2.8–2.9%); 지방이영양증, 면역재구성, 미토콘드리아 독성, 에스트로겐수용체 조절 등 복합기전; 프로테아제억제제·에파비렌즈와 연관성 보고; HIV 남성에서 여성형유방과 동반된 <strong>악성 유방암</strong> 사례보고 있어 신중한 평가 필요</li>
+            <li><strong>알코올</strong>: 최근 대규모 코호트에서 약물 다음으로 흔한 위험인자로 확인; SHBG·Leydig세포에 대한 독립적 효과 제안</li>
+            <li><strong>대마초 등 기호용 약물</strong>: 프로락틴 상승 또는 가용 테스토스테론 감소 기전 제안되나 정확한 기전은 여전히 논쟁 중</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 선천성·유전성 원인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="alert alert-predict"><span>R1</span><div><strong>사춘기 전(prepubertal)</strong> 여성형유방에서 유전적 원인 배제를 <span class="grade-strong">권고</span> (1 |⊕○○○)</div></div>
+      <div class="alert alert-predict" style="margin-top:6px"><span>R2</span><div><strong>중증 사춘기주변(peripubertal)</strong> 여성형유방에서 유전적 원인 배제를 <span class="grade-expert">제안</span> (2 |⊕○○○)</div></div>
+      <ul style="padding-left:18px;line-height:1.9;margin-top:8px">
+        <li><strong>방향화효소과다증후군(Aromatase Excess Syndrome)</strong>: CYP19A1 유전자 기능획득 돌연변이에 의한 단일유전자 희귀질환(전세계 약 30례) — 5–7세경 발생, 에스트라디올·에스트론 상승 + 정상 안드로스텐디온 + 사춘기전 수준의 총테스토스테론이 특징; 최종 성인신장에 영향 줄 수 있는 성장가속·급성장 조기발현 동반</li>
+        <li><strong>부분안드로겐저항</strong>(Kennedy병 등 CAG 반복길이 연관 안드로겐둔감증 포함) — 순환테스토스테론 증가가 에스트라디올로의 전환을 촉진</li>
+        <li><strong>Peutz-Jeghers증후군</strong>(위장관 과오종성 용종 + 피부·점막 색소침착), <strong>Carney복합체</strong>(점액종, 여러 내분비암, 청색모반) — 둘 다 방향화효소 활성·발현 증가에 기인</li>
+        <li><strong>11β-수산화효소결핍·비전형 21-수산화효소결핍(NCCAH)</strong>: 높은 17-OH프로게스테론과 안드로겐-에스트로겐 불균형에 의해 사춘기전/주변 여성형유방 유발 가능; 부신안드로겐 상승 + 코르티솔부전 동반 가능</li>
+        <li>기타: <strong>선천성 저고나도트로핀성 저성선증</strong>, 스테로이드생합성 결함(P450 산화환원효소결핍, 17-수산화효소/17,20-분해효소결핍, 3βHSD결핍), <strong>난소고환증(ovotestis)</strong>(다른 성발달이상과 흔히 동반, 다학제 평가 필요)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /cause -->
+
+<!-- ══════════════════ TAB 3: 평가 ══════════════════ -->
+<div id="tab-eval" class="panel">
+
+  <div class="alert alert-predict">
+    <span>🔍</span>
+    <div>진단은 <strong>철저한 병력청취 + 구조화된 진찰</strong>에서 시작한다. 검사·영상은 진찰이 애매하거나 악성이 의심될 때만 추가한다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 병력·진찰</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>R1</td><td>동반질환·병용약물·식이습관·성기능 변화를 포함한 <strong>정확하고 철저한 병력</strong>청취를 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R2</td><td>여성형유방 대 가성여성형유방 감별을 위해 <strong>유방부 촉진을 포함한 구조화된 진찰</strong>(생식기 진찰 포함)을 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R3</td><td>진찰로 <strong>단측성 vs 양측성을 구분</strong>하고, 단측성에서 악성을 시사하는 임상소견 배제를 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+        </table>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🩺 병력청취 핵심 항목</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>발병 시점·양상(사춘기와의 시간 관계 포함), 약물·기호용 약물·도핑제 사용</li>
+            <li>식이(고용량 식물성에스트로겐 함유 제품 포함) 조사</li>
+            <li>성적 욕구 저하, 발기부전, 아침발기 빈도 감소 등 <strong>저성선증 시사 성기능 병력</strong></li>
+            <li>만성신질환·간부전을 시사하는 부종, 갑상선기능항진증을 시사하는 갑상선종·안구돌출 등 전신소견</li>
+            <li>여성형유방의 심리사회적 영향을 고려한 <strong>심리평가</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🖐️ 진찰 요령</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>앙와위, 양손을 머리 뒤로 깍지 낀 자세에서 액와부 노출 후 <strong>엄지-검지로 서서히 유방을 압박</strong>하여 선조직 경계·크기 평가</li>
+            <li>진성 여성형유방: 유두-유륜 복합체와 동심원상의 부드럽거나 탄력있거나 압통있는(또는 단단한) 조직이 촉진됨</li>
+            <li>가성여성형유방: 국한된 조직판이 만져지지 않음</li>
+            <li>유루(galactorrhea) 확인을 위한 유륜하 압박 병행</li>
+            <li>단측성에서는 유륜 경계를 넘는 <strong>단단하고 압통있는 종괴</strong>, 궤양·유두함몰·출혈 등 피부변화에 특히 주의</li>
+            <li>남성화 징후 평가, 원인불명 여성형유방에서는 <strong>생식기 진찰 + 종양표지자</strong>로 고환암 배제</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 검사실 검사 (Table 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>R1</td><td>1차 검사로 <strong>LH, 총테스토스테론, SHBG, 알부민, 프로락틴, β-hCG</strong> 평가를 <span class="grade-expert">제안</span>; 에스트라디올도 내분비평가의 일부로 고려할 수 있으나, 분석적 한계와 검증된 진단역치 부재로 해석에 신중을 기할 것 (전문가 의견)</td><td>—</td></tr>
+          <tr><td>R2</td><td>병력·임상양상에 따라 <strong>갑상선호르몬, IGF-1, 간·신기능</strong> 평가를 추가로 <span class="grade-expert">제안</span> (전문가 의견)</td><td>—</td></tr>
+        </table>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🩸 검사 해석 포인트</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>테스토스테론은 <strong>아침, 공복상태</strong>에서 측정; SHBG·알부민으로 <strong>Vermeulen 공식</strong>을 이용해 유리·생체이용테스토스테론 산출 권장</li>
+            <li>에스트라디올은 남성 저농도에서 <strong>상용 면역측정법의 정확도가 제한적</strong> — 가능하면 LC-MS 등 신뢰도 높은 분석법 사용; T:E2 비율이 절대값보다 더 의미있는 경우가 있음</li>
+            <li>LH 상승 = 아형성 저성선증 시사; <strong>FSH·LH 억제 + 높은 T</strong> = 아나볼릭스테로이드 사용 또는 β-hCG 자극 내인성 테스토스테론 생성(고환종양 등) 시사</li>
+            <li>고안드로겐/부신효소결함 의심 시 17-OH프로게스테론·안드로스텐디온 추가</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>항목</th><th>진단적 의의</th><th>연관 질환</th></tr>
+          <tr><td>LH</td><td>1차성/2차성/기능성 저성선증 감별; 아나볼릭스테로이드 사용 탐지</td><td>1차성 저성선증, 클라인펠터증후군, 스테로이드 남용</td></tr>
+          <tr><td>테스토스테론</td><td>안드로겐 상태 평가(아침·공복)</td><td>저성선증</td></tr>
+          <tr><td>에스트라디올</td><td>에스트로겐 과다·불균형 평가</td><td>고환종양, 방향화과다, 비만, AIS, 외인성 에스트로겐</td></tr>
+          <tr><td>SHBG</td><td>유리/생체이용테스토스테론 산출에 필요</td><td>갑상선기능항진(↑), 저하(↓)</td></tr>
+          <tr><td>알부민</td><td>유리/생체이용테스토스테론 산출에 필요</td><td>간·신기능이상</td></tr>
+          <tr><td>프로락틴</td><td>고프로락틴혈증 배제</td><td>프로락틴종, 뇌하수체선종</td></tr>
+          <tr><td>β-hCG, α-FP</td><td>종양표지자</td><td>고환종양(정상피종·비정상피종)</td></tr>
+          <tr><td>TSH, fT3, fT4</td><td>갑상선기능 평가</td><td>갑상선기능항진·저하증</td></tr>
+          <tr><td>IGF-1</td><td>사춘기 여성형유방과의 연관성</td><td>말단비대증, 성장장애</td></tr>
+          <tr><td>17-OH프로게스테론</td><td>선천성부신과다형성 배제</td><td>부신효소결핍, 부신생식기증후군</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩻</span> 영상·중심생검</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>R1</td><td>진찰이 애매하거나 유방암이 의심될 때 <strong>유방영상</strong> 시행을 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R2</td><td>남성유방의 <strong>초기 영상으로 초음파</strong>, 특히 35세 미만(경우에 따라 45세 미만)에서 <span class="grade-expert">제안</span></td><td>2 |⊕○○○</td></tr>
+          <tr><td>R3</td><td>진찰 및 증상 기간과 함께 초음파를 병행해 <strong>약물치료 계획·효과 모니터링</strong>에 활용할 것을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>R4</td><td>진찰이 강하게 의심스럽거나 초음파가 애매한 경우, 중심생검 전 <strong>유방촬영술</strong> 시행을 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R5</td><td>진찰·유방촬영술 모두 악성 강력의심 시 <strong>중심바늘생검</strong>을 <span class="grade-strong">권고</span>, 초음파로 병변 특성화·생검 유도 가능</td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R6</td><td>여성형유방 확인 시 촉지성/비촉지성 고환종양 배제를 위한 <strong>고환 임상·초음파 평가</strong>를 <span class="grade-weak">권고</span></td><td>1 |⊕○○○</td></tr>
+        </table>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🖼️ 초음파 패턴 3형</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>결절형(nodular)</strong>: 초기(florid)기, 유륜하 부채꼴/원반형 저에코 병변 — 증상기간 &lt;1년과 상관, 청소년 자연관해 가능·약물치료 반응성 높음</li>
+            <li><strong>수지형(dendritic)</strong>: 장기(quiescent)기(1년 이상), 손가락 모양 돌출 저에코 병변 — 치료 반응성 낮음</li>
+            <li><strong>미만형(diffuse)</strong>: 고용량 에스트로겐요법·외인성 호르몬 사용과 연관, 여성 유방과 유사한 부피·에코 증가</li>
+            <li>가성여성형유방: 선조직 증대 없는 유륜하 지방 증가만 관찰</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-monitor" style="margin-top:8px"><span>⚠️</span><div><strong>남성 유방암</strong>은 35세 미만에서 사실상 없으나, 35–44세 5.5%, 45세 이후 급증(진단 중앙연령 63세). 단측성·경성·유두이심성 종괴, 유두함몰/분비/궤양, 액와림프절병증이 시사소견. <strong>클라인펠터증후군</strong>은 유방암 위험이 일반남성 대비 30–50배(OR 24.7) 높아 매년 임상 유방검진과 애매 시 영상검사 권고.</div></div>
+    </div>
+  </div>
+
+</div><!-- /eval -->
+
+<!-- ══════════════════ TAB 4: 치료 ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="alert alert-tx">
+    <span>💊</span>
+    <div>치료는 <strong>관찰 대기 → 선택적 약물치료 → 수술</strong>의 단계적 접근이며, 심리적 지지는 전 과정에서 병행할 수 있다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⏳</span> 관찰 대기(Watchful Waiting)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>R1</strong> 원인이 되는 이차원인 해결 후 <strong>최소 6개월</strong> 관찰 대기를 거친 뒤에 약물·수술치료 고려를 <span class="grade-weak">권고</span>(1 |⊕⊕○○)</li>
+        <li><strong>R2</strong> 신규 발병 사춘기 여성형유방은 <strong>최대 2년까지 관찰</strong>, 심리적 부담·중증도에 따라 사례별 결정을 <span class="grade-expert">권고</span>(1 |⊕⊕⊕○)</li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⏱️</span><div>원인약물 중단 시 <strong>1개월 이내 호전</strong>이 나타나야 함; 원인이 6개월 이상 지속되면 <strong>비가역적 섬유화조직</strong> 형성으로 관해 가능성이 낮아짐. 사춘기 여성형유방은 자연경과상 1~2년 지속 가능하나, 20세까지 잔존은 약 20%에 불과.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 약물치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>R1</td><td><strong>증명된 안드로겐결핍이 있는 남성에서만</strong> 테스토스테론요법 처방을 <span class="grade-strong">권고</span></td><td>1 |⊕⊕⊕⊕</td></tr>
+          <tr><td>R2</td><td>최근발병(&lt;6개월) 특발성 여성형유방 선택 사례에서 수술 전 <strong>타목시펜(20mg/일) 3–6개월 단기치료</strong>를 <span class="grade-expert">제안</span></td><td>전문가 의견</td></tr>
+          <tr><td>R3</td><td>최근발병 특발성 여성형유방 선택 사례에서 수술 전 <strong>경피 DHT 2.5% 1–3개월 단기치료</strong>를 <span class="grade-expert">제안</span></td><td>전문가 의견</td></tr>
+          <tr><td>R4</td><td>여성형유방 치료에 <strong>방향화효소억제제(AI), 다나졸, 비방향화 안드로겐 처방을 권고하지 않음</strong></td><td>1 |⊕⊕○○</td></tr>
+          <tr><td>R5</td><td>전립선암 환자의 <strong>비칼루타마이드유발 여성형유방/유방통 예방</strong>에 타목시펜(10–20mg/일) 사용을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>R6</td><td>전립선암 환자의 비칼루타마이드유발 여성형유방 예방(유방통 예방효과는 없음)에 <strong>방사선치료(10–15Gy)</strong>를 <span class="grade-weak">제안</span></td><td>2 |⊕○○○</td></tr>
+          <tr><td>R7</td><td>전립선암 환자의 비칼루타마이드유발 유방증상 예방에 <strong>AI 처방을 권고하지 않음</strong></td><td>1 |⊕⊕○○</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>증명된 저성선증이 없는 <strong>정상성선남성</strong>에서 외인성 테스토스테론 과량 투여는 방향화를 통해 오히려 여성형유방을 <strong>악화·유발</strong>할 수 있다.</div></div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🔬 특발성 여성형유방 약물치료 근거 요약</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>타목시펜(SERM)</strong>: 오래된 2건의 소규모 교차연구에서 크기감소·통증완화 근거(각각 p&lt;0.005, 5/6 환자 통증 호전); 근거수준은 낮으나 20mg/일 단기요법이 통증완화·부분관해에 유용할 수 있음</li>
+            <li><strong>다나졸</strong>: 52명 무작위이중맹검 연구에서 압통·크기 유의 개선(P=0.022, P&lt;0.05), 수술 필요성 감소 그러나 체중증가 유의 증가</li>
+            <li><strong>아나스트로졸(AI)</strong>: 80명 사춘기 여성형유방 무작위대조시험에서 위약 대비 통계적으로 유의한 차이 없음(OR 1.51, 95%CI 0.49–4.84) — <strong>AI는 현재 방향화효소과다증후군 등 유전적 원인에만 적응증</strong></li>
+            <li>이러한 약물치료는 대부분 <strong>허가초과(off-label)</strong> 사용이므로 반드시 사전동의가 필요</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>📋 Table 3 — 비칼루타마이드유발 유방사건 예방 RCT 요약</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>타목시펜</strong>: 6건의 무작위시험(3건 위약대조 이중맹검) 모두 <strong>일관되게 여성형유방·유방통 예방효과</strong> 확인 — 예) 위약군 33% vs 아나스트로졸군 17% vs 타목시펜군 0%(Boccardo 연구); 위약 81.7% vs 타목시펜20mg군 14.7%(Fradet 연구, 용량의존성)</li>
+            <li><strong>아나스트로졸</strong>: 이용가능한 2건 RCT 모두 비칼루타마이드유발 유방사건 예방에 <strong>효과 없음</strong>으로 일치</li>
+            <li><strong>방사선치료(10–15Gy)</strong>: 여성형유방 발생 예방에는 일부 효과 있으나 <strong>유방통(mastodynia) 예방에는 효과 없음</strong> — 샴대조 RCT가 1건뿐이라 근거의 질은 제한적</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 선천성·유전성 원인의 약물치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>R8</strong> 확진된 <strong>방향화효소과다증후군</strong> 소아는 <strong>방향화효소억제제</strong>로, <strong>선천성부신과다형성</strong>은 <strong>하이드로코르티손</strong>으로 치료하여 기저 내분비질환을 교정하고 여성형유방 개선을 <span class="grade-expert">제안</span>(2 |⊕⊕⊕⊕)</li>
+        <li><strong>R9</strong> 선천성 저고나도트로핀성 저성선증·스테로이드생합성결함에서는 <strong>기저 임상상태 치료</strong>를 <span class="grade-expert">제안</span>(2 |⊕⊕⊕○)</li>
+        <li>아나스트로졸 1.0mg/일이 혈청 에스트로겐 정상화, 유전적 목표신장에 가까운 성장 촉진, 여성형유방 소실에 효과적</li>
+        <li>비전형 21-수산화효소결핍·11β-수산화효소결핍 소년에서 하이드로코르티손 12.5mg/m²/day 대체요법으로 <strong>치료 시작 5–8개월 내 여성형유방 완전 관해</strong> 가능</li>
+        <li>난소고환증(ovotestis) 환자는 최종 표현형 성별에 대한 다학제 합의에 따라 치료방향 결정 — 성인 남성 표현형으로 발달 시 유방조직 수술적 절제</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 수술치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>R1</strong> <strong>자연관해 경향 없는 장기 섬유화 여성형유방</strong>으로 적절한 약물치료에 반응이 없고, 특히 심리적 고통이 있는 경우 수술치료를 <span class="grade-weak">권고</span>(1 |⊕⊕○○)</li>
+        <li><strong>R2</strong> 중증도, 지방조직량, 수술자 경험에 따라 <strong>사례별 수술기법 맞춤화</strong>를 <span class="grade-expert">권고</span>(1 |⊕⊕⊕○)</li>
+        <li>기법: 반원형·유방하고랑·유륜내·액와절개, 지방흡입 병행 선/지방조직 절제 — <strong>유두 괴사·함몰 방지를 위해 유륜하 조직·피하혈관총 일부를 보존</strong>하는 것이 중요</li>
+        <li>6–12개월 이상 지속된 여성형유방은 섬유화로 자연관해 가능성이 낮음; 단, 사춘기 여성형유방은 최대 2년까지 관해 가능하므로 <strong>중증 심리적고통이 없는 한 사춘기 종료 후로 수술을 연기</strong>하여 재발위험을 최소화</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 심리적·미용적 치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>R1</strong> 특히 청소년·젊은 성인에서 <strong>심리적 고통 선별검사</strong>를 <span class="grade-weak">제안</span>(2 |⊕○○○)</li>
+        <li><strong>R2</strong> 수술/미용치료 전후를 포함해 선택적으로 <strong>심리상담 및 심리적 지지</strong> 제공을 <span class="grade-weak">제안</span>(2 |⊕○○○)</li>
+        <li><strong>R3</strong> 여성형유방 관련 <strong>심각한 심리적 고통</strong>이 있는 남성(특히 청소년·젊은 성인)에서 미용/재건 수술을 <span class="grade-weak">제안</span>(2 |⊕○○○)</li>
+      </ul>
+      <div class="alert alert-behav" style="margin-top:8px"><span>💭</span><div>여성형유방은 불안·우울·낮은 자존감·신체상 문제와 연관되며, 이는 <strong>부적응적 대처기전</strong>으로 이어질 수 있다. 수술치료 후 삶의 질과 여러 심리적 영역에서 개선이 보고되나, 관련 근거의 질은 전반적으로 낮다. 미용치료(피하지방+유방조직 절제, 레이저지방분해술, 진피충전제, 세포보조지방이식 등 최소침습 시술 포함)도 고려할 수 있다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const STAT_DETAILS = {
+  prev: {
+    title: "여성형유방 전체 유병률",
+    val: "4–69% (연령·정의·집단에 따라 큰 차이)",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>📊</span><div>여성형유방 유병률은 <strong>4–69%</strong>로 매우 넓게 보고되며, 연령·기저질환·약물·생활습관 요인에 따라 달라진다.</div></div>
+      <ul>
+        <li>최근 수년간 여성형유방을 호소하는 남성이 유의하게 증가; 유방통 호소율은 20년간 0.8%→2.4%로 상승 보고</li>
+        <li>연구에 따라 성인 남성의 30–65%가 촉지성 유방조직을 가짐</li>
+        <li>발생이 가장 흔한 3개 생애주기: 신생아기(60–90%), 사춘기(최대 70%), 노년기(30–65%)</li>
+      </ul>
+    `
+  },
+  drug: {
+    title: "성인 발병 약물유발 비율",
+    val: "10–25% (일부 연구 최대 80%)",
+    color: "var(--predict)",
+    html: `
+      <div class="alert alert-predict"><span>💊</span><div>약물유발 여성형유방은 <strong>성인 발병 여성형유방의 가장 흔한 원인 중 하나</strong>로, 전체의 10–25%를 차지한다.</div></div>
+      <ul>
+        <li>직접 호르몬활성(외인성 에스트로겐, 아나볼릭스테로이드), 항안드로겐(스피로놀락톤, 5α-환원효소억제제, GnRH작용제 등), 에스트로겐성 활성(식물성에스트로겐, 디곡시강심배당체) 등 다양한 기전</li>
+        <li>노년기 여성형유방에서는 약물유발 비율이 <strong>일부 연구에서 최대 80%</strong>까지 보고됨</li>
+        <li>가장 중요한 초기 대응은 <strong>철저한 약물력 검토</strong>이며, 원인약물 중단 시 1개월 내 호전이 기대됨</li>
+      </ul>
+    `
+  },
+  puberty: {
+    title: "사춘기 여성형유방 발생률",
+    val: "최대 70% (13–14세 또는 Tanner G3–G4 정점)",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>🧒</span><div>사춘기 여성형유방은 청소년 남아의 <strong>최대 70%</strong>에서 발생하는 매우 흔한 소견으로, 대개 양성·자기제한적이다.</div></div>
+      <ul>
+        <li>방향화효소의 조기 성숙으로 사춘기 에스트로겐 생성이 테스토스테론 생성보다 먼저 시작 — 에스트로겐/테스토스테론 비율 상승이 선조직 증식 촉진</li>
+        <li>75–90%는 6개월~1–2년 내 자연관해; 대부분 <strong>관찰과 재확인(observation and reassurance)</strong>만으로 충분</li>
+        <li>20세까지 잔존하는 경우는 약 20%에 불과하며, 이 경우 지속적 호르몬 불균형·비만 등 기저요인과 연관되는 경우가 많음</li>
+      </ul>
+    `
+  },
+  idiopathic: {
+    title: "정밀평가에도 원인불명인 비율",
+    val: "약 25%",
+    color: "var(--behav)",
+    html: `
+      <div class="alert alert-behav"><span>❓</span><div>철저한 평가에도 불구하고 여성형유방의 <strong>약 25%는 명확한 원인을 찾지 못한다</strong>(특발성).</div></div>
+      <ul>
+        <li>물리적 진찰에서 유방암 감별의 특이도가 낮다는 보고가 있어(양성예측도 8–55%), 진찰이 첫 진단단계이고 영상은 애매하거나 악성의심 소견에 한해 시행</li>
+        <li>특발성 여성형유방의 관리는 관찰 대기가 원칙이며, 통증·심리적 고통이 있는 선택된 사례에서 단기 약물치료(타목시펜, DHT 국소제)를 고려할 수 있음</li>
+        <li>지속적 진행이나 섬유화 소견이 있으면 수술적 치료를 고려</li>
+      </ul>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"ACE",   def:"Angiotensin-Converting Enzyme — 안지오텐신전환효소" },
+  { term:"AI",    def:"Aromatase Inhibitor — 방향화효소억제제" },
+  { term:"AIS",   def:"Androgen Insensitivity Syndrome — 안드로겐둔감증후군" },
+  { term:"CKD",   def:"Chronic Kidney Disease — 만성신질환" },
+  { term:"DHT",   def:"Dihydrotestosterone — 디하이드로테스토스테론" },
+  { term:"FSH",   def:"Follicle-Stimulating Hormone — 난포자극호르몬" },
+  { term:"GnRH",  def:"Gonadotropin-Releasing Hormone — 성선자극호르몬분비호르몬" },
+  { term:"HAART", def:"Highly Active Antiretroviral Therapy — 고강도 항레트로바이러스요법" },
+  { term:"hCG",   def:"Human Chorionic Gonadotropin — 사람융모성선자극호르몬" },
+  { term:"IGF-1", def:"Insulin-like Growth Factor-1 — 인슐린유사성장인자-1" },
+  { term:"KS",    def:"Klinefelter Syndrome — 클라인펠터증후군" },
+  { term:"LC-MS", def:"Liquid Chromatography-Mass Spectrometry — 액체크로마토그래피/질량분석법" },
+  { term:"LH",    def:"Luteinizing Hormone — 황체형성호르몬" },
+  { term:"NCCAH", def:"Nonclassic Congenital Adrenal Hyperplasia — 비전형 선천성부신과다형성" },
+  { term:"NPV",   def:"Negative Predictive Value — 음성예측도" },
+  { term:"PPI",   def:"Proton Pump Inhibitor — 양성자펌프억제제" },
+  { term:"PPV",   def:"Positive Predictive Value — 양성예측도" },
+  { term:"SERM",  def:"Selective Estrogen Receptor Modulator — 선택적에스트로겐수용체조절제(예: 타목시펜)" },
+  { term:"SHBG",  def:"Sex Hormone-Binding Globulin — 성호르몬결합글로불린" },
+  { term:"US",    def:"Ultrasound — 초음파" },
+  { term:"17-OHP", def:"17-Hydroxyprogesterone — 17-하이드록시프로게스테론" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

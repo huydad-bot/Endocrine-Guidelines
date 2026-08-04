@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가임기 여성 다모증(Hirsutism) 진료 참고자료</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev: #0f6e5c;      /* 개요·진단 — 청록 */
+    --predict: #0550ae;  /* 경구피임제 — 청 */
+    --tx: #7c3aed;       /* 항안드로겐·기타약물 — 보라 */
+    --monitor: #9b1c2e;  /* 모발제거 — 진홍 */
+    --behav: #b35900;    /* 안드로겐검사 — 주황 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 980px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 7px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--behav); color:#fff; padding:3px 7px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 980px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(11.5px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 980px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 560px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(13px * var(--fscale, 1)); font-weight: 700; color: var(--text); }
+  .modal-head-val { font-size: calc(14px * var(--fscale, 1)); font-weight: 700; margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(16px * var(--fscale, 1)); color: var(--text2); user-select: none; }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.7; }
+  .modal-body ul { padding-left: 18px; margin: 6px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f1; border-left: 3px solid var(--dev);  color: #0f5549; }
+  .alert-predict { background: #ddf4ff; border-left: 3px solid var(--predict); color: #0550ae; }
+  .alert-tx      { background: #ede9fe; border-left: 3px solid var(--tx);  color: #5b21b6; }
+  .alert-monitor { background: #fce8eb; border-left: 3px solid var(--monitor); color: var(--monitor); }
+  .alert-behav   { background: #fdf0e0; border-left: 3px solid var(--behav); color: #7a3d00; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 3px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev     { background: #e0f4f1; color: var(--dev); border: 1px solid var(--dev); }
+  .t-predict { background: #ddf4ff; color: var(--predict); border: 1px solid var(--predict); }
+  .t-tx      { background: #ede9fe; color: var(--tx); border: 1px solid var(--tx); }
+  .t-behav   { background: #fdf0e0; color: var(--behav); border: 1px solid var(--behav); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--monitor); border: 1px solid var(--monitor); }
+
+  .drug { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; margin: 1px; }
+  .drug-oc   { background: #ddf4ff; color: #0550ae; }
+  .drug-anti { background: #ede9fe; color: #5b21b6; }
+  .drug-neg  { background: #fce8eb; color: var(--monitor); }
+  .drug-hair { background: #e0f4f1; color: #0f5549; }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  .gear-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .gear-box { flex: 1; min-width: 140px; border-radius: 6px; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
+  .gear-dev     { background: #e0f4f1; border: 1.5px solid var(--dev); color: #0f5549; }
+  .gear-predict { background: #e6f0fb; border: 1.5px solid var(--predict); color: #0550ae; }
+  .gear-tx      { background: #ede9fe; border: 1.5px solid var(--tx); color: #5b21b6; }
+  .gear-monitor { background: #fde8eb; border: 1.5px solid var(--monitor); color: var(--monitor); }
+  .gear-behav   { background: #fdf0e0; border: 1.5px solid var(--behav); color: #7a3d00; }
+  .gear-title { font-weight: 700; font-size: calc(13px * var(--fscale, 1)); margin-bottom: 4px; }
+
+  .rec-tbl td:nth-child(1) { width: 30px; text-align:center; font-weight:700; color:var(--text2); }
+  .grade-strong { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#dafbe1; color:var(--green); border:1px solid var(--green); white-space:nowrap; }
+  .grade-weak   { display:inline-block; padding:1px 6px; border-radius:3px; font-size:calc(10px * var(--fscale,1)); font-weight:700; background:#fff3cd; color:#7d4e00; border:1px solid var(--yellow); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr">
+        <span>H</span><span>S</span>
+      </div>
+      <h1>가임기 여성 다모증(Hirsutism) 진료 참고자료</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Martin KA, Anderson RR, Chang RJ, et al. Evaluation and Treatment of Hirsutism in Premenopausal Women: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2018;103(4):1233–1257. doi:10.1210/jc.2018-00241</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 저자·학회의 공식 승인을 받지 않은 개인 참고자료다 (This tool is not officially endorsed by the authors or any society)</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('dx')">🔍 진단</div>
+    <div class="tab" onclick="showTab('tx')">💊 약물치료</div>
+    <div class="tab" onclick="showTab('hair')">✂️ 모발제거</div>
+    <div class="tab" onclick="showTab('assay')">🧪 안드로겐검사</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:120px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 1: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('pcos')"><div class="stat-val" style="color:var(--dev)">70–80%</div><div class="stat-lbl">다모증 여성 중<br>PCOS 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('idiopathic')"><div class="stat-val" style="color:var(--predict)">5–20%</div><div class="stat-lbl">특발성 다모증<br>비율</div></div>
+    <div class="stat-box" onclick="openStatModal('nccah')"><div class="stat-val" style="color:var(--tx)">4.2%<br>(중동 5–10%)</div><div class="stat-lbl">고안드로겐혈증 여성 중<br>NCCAH 유병률</div></div>
+    <div class="stat-box" onclick="openStatModal('fgcut')"><div class="stat-val" style="color:var(--behav)">FG ≥8</div><div class="stat-lbl">미국·영국 여성<br>다모증 기준(인종별 상이)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-dev">
+        <span>✅</span>
+        <div>다모증은 여성에서 안드로겐 의존 부위(sexual hair)에 남성형 패턴으로 나타나는 과도한 말단모(terminal hair)이며, <strong>Ferriman–Gallwey(FG) 점수</strong>가 진단의 기준이다. 원인의 80% 이상이 안드로겐 과다이며 그중 대다수(70–80%)가 <strong>PCOS</strong>다. <strong>환자에게 중요한 다모증(patient-important hirsutism)</strong>이 있으면 미용적 처치 여부와 무관하게 <strong>약물치료를 우선</strong>하고, 필요시 직접 모발제거술을 추가한다.</div>
+      </div>
+      <div class="gear-row" style="margin-top:10px">
+        <div class="gear-box gear-dev">
+          <div class="gear-title">🔍 진단</div>
+          FG 점수 이상 시에만 안드로겐 검사<br>
+          <small>국소 다모증(정상변이)은 검사 불필요</small>
+        </div>
+        <div class="gear-box gear-predict">
+          <div class="gear-title">💊 1차 약물치료</div>
+          대부분 경구피임제(OC)로 시작<br>
+          <small>6개월 후 반응 불충분 시 항안드로겐 추가</small>
+        </div>
+        <div class="gear-box gear-tx">
+          <div class="gear-title">✂️ 모발제거</div>
+          갈색·검은 모발엔 광선요법, 백/금발엔 전기분해술<br>
+          <small>지중해·중동계는 역설적다모증 위험 설명</small>
+        </div>
+      </div>
+      <div class="alert alert-behav" style="margin-top:8px">
+        <span>⏱️</span>
+        <div>모발 성장주기가 길어(anagen ~4개월) 호르몬치료 효과 판정에는 <strong>최소 6개월, 최대 효과 판정에는 ~9개월</strong>이 소요된다. 모든 약물치료는 이 기간을 채운 뒤 변경을 고려한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 용어 정의 (Table 1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>용어</th><th>정의</th></tr>
+          <tr><td><strong>Hirsutism(다모증)</strong></td><td>여성의 안드로겐 의존 부위에 남성형 패턴으로 나타나는 과도한 말단모</td></tr>
+          <tr><td><strong>Ferriman–Gallwey(FG) 점수</strong></td><td>다모증 평가의 표준 방법. 안드로겐 민감 9개 부위를 0(무모)~4(완전 남성형)로 채점 후 합산</td></tr>
+          <tr><td><strong>Local hair growth(국소 다모)</strong></td><td>FG 점수는 정상이나 특정 부위에 원하지 않는 모발 성장이 있는 경우</td></tr>
+          <tr><td><strong>Patient-important hirsutism</strong></td><td>정도와 무관하게 환자가 추가 치료를 원할 만큼 고통을 유발하는 성모(sexual hair) 성장</td></tr>
+          <tr><td><strong>Hyperandrogenism(고안드로겐증)</strong></td><td>안드로겐 생성·작용 증가로 인한 임상 소견(이 지침에서의 정의)</td></tr>
+          <tr><td><strong>Idiopathic hirsutism(특발성 다모증)</strong></td><td>고안드로겐혈증이나 기타 고안드로겐 내분비질환의 증거가 없는 다모증</td></tr>
+        </table>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🌍 인종별 FG 다모증 기준(95백분위수)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>미국·영국 흑인·백인 여성: FG ≥8</li>
+            <li>지중해·히스패닉·중동계 여성: FG ≥9–10</li>
+            <li>남미 여성: FG ≥6</li>
+            <li>아시아 여성: 한족(Han) ≥6, 남중국계 ≥7 (범위 ≥2~7)</li>
+          </ul>
+          <div style="margin-top:6px;color:var(--text2);font-size:calc(11px * var(--fscale,1))">FG 점수는 주관적이며, 국소적으로 높은 점수가 총점에 반영되지 않는 한계·구레나룻·둔부 등 안드로겐 민감 부위 미포함의 한계가 있다. 자가채점은 숙련자 채점과 상관성이 낮다(중등도).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 병인·원인 분류</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>다모증은 순환 안드로겐 농도와 모낭의 안드로겐 반응성(주로 5α-환원효소에 의한 테스토스테론→DHT 전환) 간 상호작용의 결과 — FG 점수는 안드로겐 수치와 상관성이 낮음(모낭 반응성이 개인마다 다르기 때문)</li>
+        <li><strong>안드로겐 과다가 80% 이상</strong>을 차지하며, 다모증 여성의 <strong>70–80%가 PCOS</strong>(고안드로겐증 + 배란장애/희발월경 + 초음파 다낭성 난소형태 중 2가지)</li>
+        <li><strong>특발성 다모증</strong>(고안드로겐혈증 없는 정상월경 여성)은 5–20%; 경증 다모증(FG 8–15)의 약 절반이 여기 해당</li>
+        <li>드문 원인: <strong>비전형 선천성부신과다형성(NCCAH)</strong> — 고안드로겐 여성의 4.2%(중동 5–10%, 아쉬케나지 유대인 최대 37배↑); <strong>안드로겐분비종양</strong> — 고안드로겐 여성의 ~0.2%(과반수 악성)</li>
+        <li>기타 감별질환: 쿠싱증후군, 말단비대증, 갑상선기능저하증, 고프로락틴혈증(드묾); 파트너 국소 안드로겐 사용, 외인성 안드로겐/아나볼릭스테로이드, 발프로산 병력 확인 필요</li>
+        <li>다모증과 <strong>다모다생증(hypertrichosis)</strong>은 구분 — 후자는 전신성·비성모 부위(전완·하지) 분포이며 안드로겐과 무관(페니토인·시클로스포린 등 약제 유발 가능)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 2: 진단 ══════════════════ -->
+<div id="tab-dx" class="panel">
+
+  <div class="alert alert-dev">
+    <span>🔍</span>
+    <div>다모증은 <strong>임상진단</strong>이다. 관리는 상당 부분 원인과 무관하게 이루어지지만, 기저 고안드로겐 내분비질환은 가임력·대사위험·유전상담에 영향을 줄 수 있어 감별이 중요하다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1.0</span> 다모증 진단 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>1.1</td><td>FG 점수가 <strong>이상인 모든 여성</strong>에서 안드로겐 검사를 <span class="grade-weak">제안</span>. 총테스토스테론이 정상이면서 중등도~중증 다모증이거나, 경증이라도 고안드로겐 내분비질환의 임상증거(월경이상, 치료에도 진행)가 있으면 신뢰할 수 있는 특수분석법으로 이른 아침 총·유리 테스토스테론 측정을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>1.2</td><td>고안드로겐혈증 여성에서 이른 아침 난포기(또는 무월경 시 무작위) 17-hydroxyprogesterone으로 <strong>NCCAH 선별</strong>을 <span class="grade-weak">제안</span>. 가족력 양성이거나 고위험 인종군이면 테스토스테론이 정상이어도 선별</td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>1.3</td><td>정상월경이면서 FG 정상인 <strong>국소 다모</strong> 여성에서는 안드로겐 검사를 <span class="grade-weak">반대 제안</span> — 관리·결과를 바꿀 질환 발견 가능성이 낮음</td><td>2 |⊕⊕○○</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚩</span> 고안드로겐 내분비질환을 시사하는 임상소견</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">고안드로겐 질환 시사 소견</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>월경이상, 불임, 유루</li>
+            <li>중심비만, 흑색가시세포증</li>
+            <li>음핵비대</li>
+            <li>급속발병 또는 빠르게 진행하는 다모증</li>
+            <li>치료에도 불구한 다모증 진행</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">남성화(virilization) 시사 — 종양 의심 강화</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>음핵비대</li>
+            <li>목소리 굵어짐</li>
+            <li>근육량 증가</li>
+          </ul>
+          <div style="margin-top:8px;color:var(--text2);font-size:calc(11px * var(--fscale,1))">단, 일부 안드로겐분비종양은 경도 과다분비로 indolent하게 나타날 수 있음</div>
+        </div>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>🧭 평가 알고리즘 요약 (Figure 2)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>고안드로겐 내분비질환의 임상증거가 없는 국소 성모 성장 → 내분비 검사 없이 미용적/직접 모발제거 치료 진행 가능</li>
+            <li>다모증 또는 성모 성장 + 고안드로겐 내분비질환 임상증거 → 안드로겐 검사로 고안드로겐혈증 배제 필요</li>
+            <li>1차: 신뢰할 수 있는 특수분석법(질량분석법 이상적)으로 <strong>총테스토스테론</strong> 측정 — 이른 아침, 배란기(월경주기 4~10일) 기준으로 정상범위 해석</li>
+            <li>총테스토스테론 정상이면서 중등도~중증 다모증 또는 PCOS/기타 내분비질환 임상증거 → <strong>유리테스토스테론</strong> 검사(고품질 테스토스테론+SHBG 또는 평형투석법)</li>
+            <li>NCCAH 고위험군(가족력, 고위험 인종군)에서는 이른 아침 17-hydroxyprogesterone 동시 측정</li>
+            <li>정상 유리테스토스테론 상태에서 고안드로겐증이 진행하는 경우는 매우 드묾 — 재평가 필요</li>
+            <li>임신 사유가 없다면 다낭성 난소형태 확인이 관리에 영향을 주는 경우는 드묾</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧫</span> 추가 정밀검사(비정형 소견 시)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>혈청 안드로스텐디온(테스토스테론 직접 전구체) 또는 기타 스테로이드 중간대사물 측정</li>
+        <li>코신트로핀(ACTH) 자극에 대한 17-OHP·DHEA·17-hydroxypregnenolone·11-deoxycortisol 반응 평가 및/또는 CYP21A2 유전자형 분석(희귀 CAH 아형 배제)</li>
+        <li>질량분석법에 의한 요중 코르티코이드 대사물(외견상 코르티손환원효소결핍 배제)</li>
+        <li>기능성 부신원 안드로겐 억제를 위한 덱사메타손 억제검사</li>
+        <li>안드로겐분비종양 의심 시 부신 CT, 난소 초음파 또는 더 정밀한 영상검사(경질초음파로도 일부 소형 난소종양은 발견되지 않을 수 있음)</li>
+        <li>OC 또는 GnRH agonist에 대한 안드로겐 억제반응 평가</li>
+        <li>난소과다막증(ovarian hyperthecosis) 의심 시 경질초음파에서 난포 부재/다낭성 형태 지지 소견 확인</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /dx -->
+
+<!-- ══════════════════ TAB 3: 약물치료 ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="alert alert-predict">
+    <span>💊</span>
+    <div>다모증 관리는 <strong>약물치료(안드로겐 생성·작용 표적)</strong>와 <strong>직접 모발제거(전기분해·광선요법)</strong> 두 축으로 이루어지며, 병용도 가능하다. 대부분의 여성은 상담 전부터 면도·족집게·왁싱 등 미용적 처치를 병행 중이다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2.0</span> 치료 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>2.1</strong> 미용적 처치에도 불구한 환자중요다모증 → 대부분 <strong>약물치료 우선</strong> 시작(2 |⊕○○○), 추가 미용효과 원하면 직접 모발제거 추가; <strong>경증 + 내분비질환 증거 없음</strong>이면 약물·직접제거 어느 쪽으로 시작해도 무방</li>
+        <li><strong>2.2</strong> 비만 동반 다모증(PCOS 포함)에서는 <strong>생활습관 개선을 함께 권고</strong>(1 |⊕⊕○○) — 다만 다모증 자체에 대한 효과는 임상적으로 크지 않아 1차치료로 보지 않음(체중감소 시 FG 점수 소폭 개선: 평균차 −1.19)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 3.0 1차 약물치료 — 경구피임제(OC)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>3.1</td><td>임신을 원하지 않는 대다수 다모증 여성에서 <strong>OC를 1차치료</strong>로 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>3.2</td><td>대부분에서 <strong>항안드로겐 단독요법을 1차로 반대</strong>(기형유발 가능성) — 단, 성생활 없거나 영구불임술/장기지속형 피임 중인 여성은 OC 또는 항안드로겐 중 선택 가능</td><td>2 |⊕⊕⊕○</td></tr>
+          <tr><td>3.3</td><td>대부분에서 특정 OC 제형의 우위를 <span class="grade-weak">제안하지 않음</span> — 모든 OC가 다모증에 대체로 동등한 효과, 부작용 위험 낮음</td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>3.4</td><td><strong>VTE 고위험군</strong>(비만, 39세 초과)에서는 <strong>최저 유효용량 EE(보통 20 mcg)+저위험 프로게스틴</strong>으로 시작을 <span class="grade-weak">제안</span></td><td>2 |⊕○○○</td></tr>
+          <tr><td>3.5</td><td>OC 단독 <strong>6개월</strong> 치료에도 환자중요다모증 지속 시 <strong>항안드로겐 추가</strong>를 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+        </table>
+      </div>
+      <div class="acc" style="margin-top:8px">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>📋 Table 2 — OC 프로게스틴별 VTE 위험</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr><th>세대</th><th>안드로겐성</th><th>프로게스틴/용량</th><th>EE 용량(mcg)</th><th>VTE 상대위험</th></tr>
+              <tr><td>1세대</td><td>중등도</td><td>노르에티스테론 0.5–1.0 mg</td><td>20, 35</td><td>2.6</td></tr>
+              <tr><td>2세대</td><td>높음</td><td>레보노르게스트렐 0.15 mg</td><td>20, 30</td><td>2.4(가장 낮음)</td></tr>
+              <tr><td>2–3세대</td><td>낮음</td><td>노르게스티메이트 0.25 mg</td><td>35</td><td>2.5</td></tr>
+              <tr><td>3세대</td><td>낮음</td><td>게스토덴 0.075 mg</td><td>20, 30</td><td>3.6</td></tr>
+              <tr><td>3세대</td><td>낮음</td><td>데소게스트렐 0.15 mg</td><td>20, 30</td><td>4.3</td></tr>
+              <tr><td>4세대</td><td>항안드로겐(DSP)</td><td>드로스피레논 3 mg</td><td>20, 30</td><td>4.1</td></tr>
+              <tr><td>—</td><td>항안드로겐(CPA)</td><td>CPA 2 mg (미국 미시판)</td><td>35</td><td>4.3</td></tr>
+            </table>
+          </div>
+          <div style="margin-top:6px;color:var(--text2);font-size:calc(11px * var(--fscale,1))">VTE 절대위험은 임신 중보다 훨씬 낮음. 비만은 2–10배, 39세 초과는 ~4배 위험 증가(각각 OC 사용 시). 이점이 위험을 상회하는 것으로 평가됨.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 항안드로겐</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>3.6</strong> 특정 항안드로겐 간 우위는 <span class="grade-weak">제안하지 않음</span>(2 |⊕⊕○○). 단, <strong>플루타마이드는 간독성 위험으로 사용을 권고하지 않음</strong>(1 |⊕⊕○○) — 저용량(≤250mg)도 포함하여 반대</li>
+        <li><strong>3.7</strong> 모든 약물치료는 용량 변경·교체·추가 전 <strong>최소 6개월 시행</strong>을 <span class="grade-weak">제안</span>(2 |⊕○○○)</li>
+        <li><strong>3.8</strong> 정서적 고통을 유발하는 중증 다모증이거나 과거 OC 단독으로 불충분했던 경우 <strong>OC+항안드로겐 병용 시작</strong>을 <span class="grade-weak">제안</span>할 수 있으나(2 |⊕⊕○○), <strong>표준 1차요법으로는 반대</strong>(2 |⊕⊕○○)</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th>약물</th><th>용법</th><th>비고</th></tr>
+          <tr><td><span class="drug drug-anti">스피로놀락톤</span></td><td>100–200 mg/일(분복 2회)</td><td>안드로겐수용체 경쟁적 억제 + 5α-환원효소 억제; 신기능장애 시 금기; 고칼륨혈증·이뇨·기립성저혈압 가능</td></tr>
+          <tr><td><span class="drug drug-anti">피나스테리드</span></td><td>2.5–5 mg/일</td><td>2형 5α-환원효소 억제(부분효과); 7.5mg이 더 효과적이라는 자료 있으나 2.5/5mg은 동등 보고</td></tr>
+          <tr><td><span class="drug drug-neg">플루타마이드</span></td><td>250–500 mg/일(고용량), 62.5–250mg/일(저용량)</td><td><strong>간독성으로 사용 반대</strong> — 간부전·사망 보고, 일부는 간이식 필요</td></tr>
+          <tr><td><span class="drug drug-anti">CPA(미국 미시판)</span></td><td>50–100 mg/일(주기 5–15일) + EE 20–35mg(5–25일)</td><td>프로게스토겐성 항안드로겐; OC로도 처방(2mg CPA+35mcg EE)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-danger" style="margin-top:8px"><span>⚠️</span><div>모든 항안드로겐은 <strong>임신 중 남성 태아 여성화 위험</strong>이 있어, 항안드로겐 단독요법은 반드시 확실한 피임과 함께 사용해야 한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚫</span> 사용을 반대하는 기타 약물치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li><strong>3.9 인슐린저하제(메트포르민 등)</strong> — 다모증 단독 치료목적 사용을 <span class="grade-weak">반대 제안</span>(2 |⊕⊕○○); 위약 대비 효과 없음(트로글리타존·로시글리타존도 효과 없음)</li>
+        <li><strong>3.10 GnRH 작용제</strong> — 난소과다막증 등 중증 고안드로겐혈증으로 OC·항안드로겐에 반응 불충분한 경우 <strong>제외</strong>하고는 반대(2 |⊕○○○); 고가·주사제형이며 에스트로겐 add-back 없이는 심한 저에스트로겐증·골소실 유발</li>
+        <li><strong>3.11 국소 항안드로겐 크림</strong> — 효과 근거 불충분으로 반대(2 |⊕○○○); 에플로르니틴(topical)은 항안드로겐이 아니며 별도 항목 참고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> NCCAH 여성의 다모증 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>PCOS와 동일하게 <strong>OC로 시작 후 6개월 뒤 필요시 항안드로겐 추가</strong>; 임신 계획 없고 확실한 피임 중이면 항안드로겐을 초기치료로 사용 가능</li>
+        <li><strong>글루코코르티코이드는 OC/항안드로겐에 반응 불충분하거나 못 견디는 경우</strong>에만 제안 — 다모증 프레드니손 4–6 mg/일 또는 덱사메타손 0.25 mg/일</li>
+        <li><strong>배란유도</strong> 목적으로는 글루코코르티코이드가 유용 — 프레드니손 5mg/일 시작(무배란 시 7.5mg 증량), 이후 필요시 클로미펜 추가; <strong>덱사메타손은 태반 11β-HSD2에 의해 불활성화되지 않아 태아 노출 우려로 비권고</strong></li>
+        <li>부신원 고안드로겐증에서는 글루코코르티코이드보다 OC·항안드로겐이 더 효과적인 경향(연구에서 OC군 66% vs 덱사메타손군 31% 반응)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+<!-- ══════════════════ TAB 4: 모발제거 ══════════════════ -->
+<div id="tab-hair" class="panel">
+
+  <div class="alert alert-monitor">
+    <span>✂️</span>
+    <div>4.0 직접 모발제거법은 <strong>전기분해술(electrolysis)</strong>과 <strong>광선요법(photoepilation, 레이저/IPL)</strong> 두 가지이며, 약물치료와 병용하거나 단독으로 사용할 수 있다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>4.0</span> 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl rec-tbl">
+          <tr><th>#</th><th>권고</th><th>근거</th></tr>
+          <tr><td>4.1</td><td>모발색이 <strong>적갈색·갈색·검정</strong>이면 <span class="drug drug-hair">광선요법</span>, <strong>백색·금발</strong>이면 <span class="drug drug-anti">전기분해술</span>을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>4.2</td><td>유색 피부 여성의 광선요법은 <strong>장파장·긴 펄스 Nd:YAG 또는 다이오드 레이저 + 피부냉각</strong>을 <span class="grade-weak">제안</span>. 지중해·중동계 여성에게는 <strong>역설적다모증(PH) 위험</strong>을 반드시 설명하고, 국소치료나 전기분해술을 우선 고려</td><td>2 |⊕⊕○○ / ⊕○○○</td></tr>
+          <tr><td>4.3</td><td>더 빠른 반응을 원하면 <strong>에플로르니틴 국소크림 병용</strong>을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+          <tr><td>4.4</td><td>고안드로겐혈증이 확인된 여성이 모발제거를 선택할 경우 <strong>재성장 최소화를 위해 약물치료 병용</strong>을 <span class="grade-weak">제안</span></td><td>2 |⊕⊕○○</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 전기분해술 vs 광선요법</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">전기분해술(Electrolysis)</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>세밀한 전극을 모낭에 직접 삽입, 갈바닉(직류)·열분해(교류)·혼합법(blend)</li>
+            <li><strong>모발색·피부색과 무관</strong>하게 모든 모발에 사용 가능, PH 보고 없음</li>
+            <li>치료 부위가 작고 시간이 오래 걸림(레이저 대비 최대 60배)</li>
+            <li>통증 동반 — 국소마취제 도포로 경감</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">광선요법(Photoepilation)</div>
+          <ul style="padding-left:18px;line-height:1.8">
+            <li>루비·알렉산드라이트·다이오드·Nd:YAG 레이저 및 IPL(500–1200nm)</li>
+            <li>넓은 부위를 빠르게 치료(하안면·목·흉부·양측 액와 20분 내 가능)</li>
+            <li>백색·금발에는 <strong>효과 없음</strong>(멜라닌 표적이라 색소 필요)</li>
+            <li>6개월 후 평균 모발감소: 다이오드 57.5%, 알렉산드라이트 54.0%, 루비 52.8%, Nd:YAG 42.3%(통계적 유의차는 없음)</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:8px;color:var(--text2);font-size:calc(11px * var(--fscale,1))">FDA 정의: 4~12개월 이상 지속되는 말단모 30% 이상 감소를 "영구적 모발감소"로 인정. 100% 제모는 드묾.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚠️</span> 부작용·안전 이슈</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span>역설적다모증(Paradoxical Hypertrichosis, PH)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li>광선요법 후 예상과 반대로 모발이 <strong>새로 자라나는</strong> 드물지만 심리적으로 심각하고 장기 지속·영구적일 수 있는 부작용</li>
+            <li>고안드로겐 여성에서 위험이 높음(기전 불명), 남성에서는 보고 없음</li>
+            <li>주로 얼굴·목에 발생, <strong>지중해·중동계 배경</strong>에서 더 흔한 경향(대규모 전향연구 자료는 부족)</li>
+            <li>보고된 유병률 0.6–10%; 추가 광선요법으로 일부 감소 가능하나 부분제거→재PH의 반복 주기가 생길 수 있음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>피부 손상(색소침착·화상·흉터)</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>진한 피부(Fitzpatrick V–VI)일수록 표피 열손상 위험 ↑ — IPL·루비레이저(694nm)에서 위험이 더 큼</li>
+            <li>IPL 8회 이상 치료한 중동계 환자군: 색소변화 ~5%, 수포/미란 ~4%, 흉터 ~0.01%</li>
+            <li>루비레이저: 전체 색소부작용 9%, Fitzpatrick V–VI에서는 24%</li>
+            <li><strong>Nd:YAG(1064nm)</strong>는 진한 피부에서 표피손상 위험이 낮아 상대적으로 안전</li>
+            <li>피부냉각(통합 냉각장치·냉풍·투명젤)으로 위험 경감 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr" onclick="toggleAcc(this)"><span>안구 손상</span><span class="acc-toggle">▾</span></div>
+        <div class="acc-body">
+          <ul>
+            <li>망막·포도막에 멜라닌 농도가 높아 눈 주변 광선요법 시 폐쇄된 눈꺼풀을 통과한 빛으로 손상 가능</li>
+            <li>비가역적 전방 포도막·홍채·수정체 손상 사례 보고됨 — 완전 차광 공막 보호장구로 예방 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚖️</span><div>광선/IPL 시술 관련 소송의 상당수가 비의사 시술인력에게 위임된 경우이므로, <strong>의사가 운영하거나 감독하는 시설</strong>에서의 레이저 치료를 권장한다.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧴</span> 국소 에플로르니틴(Eflornithine)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>오르니틴탈탄산효소를 비가역적으로 억제하여 모낭 폴리아민 합성을 저해 — <strong>모발 성장 속도를 늦추는</strong> 기전(안드로겐 차단 아님)</li>
+        <li>13.9% 국소크림, 여성 얼굴 원치 않는 모발에 FDA 승인; 효과 발현 6–8주, 중단 후 ~8주 뒤 치료 전 수준으로 회복</li>
+        <li>전신흡수 매우 낮음; 부작용은 가려움·건조피부 정도(실험적 과다사용 시에만 자극)</li>
+        <li>레이저와 병용 시 초기 반응 향상(치료 22주까지 유의, 34주에는 차이 소실된 연구 있음) — 단독요법보다 <strong>레이저 병용</strong> 시 이득이 더 뚜렷</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /hair -->
+
+<!-- ══════════════════ TAB 5: 안드로겐검사 ══════════════════ -->
+<div id="tab-assay" class="panel">
+
+  <div class="alert alert-behav">
+    <span>🧪</span>
+    <div>5.0 테스토스테론은 여성에서 측정해야 할 핵심 안드로겐이나, <strong>여성 수준의 낮은 농도에서는 상용 면역측정법의 정확도가 떨어져</strong> 해석에 주의가 필요하다.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩸</span> 테스토스테론 측정의 함정</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>테스토스테론은 일중·주기 변동이 큼(평균 대비 ±25%, 이른 아침 최고치, 배란기 중간 정점) — <strong>이른 아침·배란기(4–10일)</strong> 채혈 기준으로 해석</li>
+        <li>병원 상용 <strong>자동면역측정법은 여성의 낮은 농도 측정에 부적합</strong> — 특수실험실의 직접 방사면역측정법·화학발광법 또는 <strong>액체크로마토그래피/질량분석법(LC-MS)</strong>이 신뢰도 높음</li>
+        <li><strong>타액테스토스테론·요중테스토스테론(글루쿠로나이드)은 권고하지 않음</strong> — 실험실 간 편차가 크거나(타액) 순환 테스토스테론을 정확히 반영하지 못함(요중)</li>
+        <li><strong>유리(비결합) 테스토스테론</strong>이 다모증 여성에서 총테스토스테론보다 더 자주 상승 — SHBG가 낮은 경우가 많아 진단민감도가 더 높음</li>
+        <li>SHBG는 에스트로겐에 의해 증가, 안드로겐·인슐린저항성 비만·갑상선기능저하증에 의해 감소; 유리테스토스테론에 대한 표준화된 검사실 기준이 없어 검사법마다 결과가 다름 — 직접 검사보다 <strong>총테스토스테론+SHBG로 계산</strong>하거나 평형투석법 권장</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 기타 안드로겐·전구체 검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>17-OHP, 안드로스텐디온, DHEA, DHT, androstenediol 등 <strong>다른 안드로겐 성 스테로이드의 일상적 측정은 대부분 인구에서 추가 진단가치가 낮음</strong></li>
+        <li>DHEAS는 총·유리테스토스테론이 정상인 다모증 여성의 ≤17%에서 상승 — 유리테스토스테론이 정상이면서 DHEAS만 경도 상승한 경우 관리에 영향을 주지 않는 경우가 많음</li>
+        <li>안드로겐 수치의 절대적 크기는 종양 예측력이 낮으나, <strong>성인남성 범위의 매우 높은 테스토스테론</strong> 또는 <strong>DHEAS &gt;700 μg/dL</strong>는 종양을 시사</li>
+        <li>최근 <strong>11-oxy-C19 스테로이드(11-ketotestosterone 등)</strong>가 안드로겐 작용에 상당히 기여할 수 있다는 근거가 대두(테스토스테론 대비 역가 20–75%) — 아직 일상검사는 아님</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> NCCAH 선별 상세</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul style="padding-left:18px;line-height:1.9">
+        <li>전세계 NCCAH 유병률(고안드로겐 여성 중) 4.2% — 미국 백인/히스패닉 1–2%, 스페인·프랑스·이탈리아·캐나다 3–6%, 중동 5–10%, <strong>아쉬케나지 유대인은 일반 백인 대비 37배</strong> 위험</li>
+        <li><strong>17-hydroxyprogesterone &gt;170–200 ng/dL(5.15–6.0 nmol/L)</strong>: NCCAH에 대해 민감도 약 95%, 특이도 약 90%</li>
+        <li>확진에는 기저치 또는 코신트로핀 자극 후 <strong>17-OHP ≥1000–1500 ng/dL(30–45 nmol/L)</strong>이 필요하며, 1000–1500 범위는 <strong>CYP21A2 유전자 분석으로 확인</strong> 권고</li>
+        <li>테스토스테론이 정상이어도 변동성으로 인해 일부 NCCAH 사례를 놓칠 수 있음 — 고위험군에서는 총·유리 테스토스테론이 정상이어도 17-OHP 선별을 시행</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /assay -->
+
+</div><!-- /main -->
+
+<script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
+const STAT_DETAILS = {
+  pcos: {
+    title: "다모증 여성 중 PCOS 비율",
+    val: "70–80%",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>🔬</span><div>다모증의 <strong>80% 이상이 안드로겐 과다</strong>에 의하며, 이 중 대다수인 <strong>70–80%가 PCOS</strong>다.</div></div>
+      <ul>
+        <li>PCOS는 ① 원인불명 만성 고안드로겐증, ② 배란장애, ③ 초음파상 다낭성 난소형태 중 2가지 조합으로 정의(Rotterdam 기준)</li>
+        <li>PCOS 고안드로겐혈증의 대부분은 <strong>성선자극호르몬 의존성 기능성 난소 고안드로겐증</strong>이며, 일부는 경도의 ACTH의존성 기능성 부신 고안드로겐증을 동반</li>
+        <li>PCOS는 인슐린저항 및/또는 중심비만에 의한 대사증후군을 자주 동반 — 비만이 PCOS 표현형을 악화시키거나 유발할 수 있음</li>
+      </ul>
+    `
+  },
+  idiopathic: {
+    title: "특발성 다모증 비율",
+    val: "5–20%",
+    color: "var(--predict)",
+    html: `
+      <div class="alert alert-predict"><span>🔍</span><div><strong>특발성 다모증</strong>은 고안드로겐혈증이나 다른 고안드로겐 내분비질환의 증거가 없는 정상월경 여성의 다모증으로, 전체 다모증의 <strong>5–20%</strong>를 차지한다.</div></div>
+      <ul>
+        <li>경증 다모증(FG 8–15)인 정상월경 여성 중 대략 <strong>절반이 특발성 다모증</strong></li>
+        <li>일부는 초음파상 다낭성 난소형태를 보여 "배란성 PCOS"(ovulatory PCOS)로 분류될 수 있으나, 이 하위군의 비율은 아직 불명확</li>
+        <li>모낭의 안드로겐 작용 기전 이상(피부고안드로겐증) 때문인지 다른 모발생물학적 이상 때문인지는 불분명; 테스토스테론 외 다른 안드로겐성 스테로이드 측정은 대부분 진단적 가치가 낮음</li>
+      </ul>
+    `
+  },
+  nccah: {
+    title: "고안드로겐혈증 여성 중 NCCAH 유병률",
+    val: "전세계 4.2% (중동 5–10%, 아쉬케나지 유대인 최대 37배↑)",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>🧬</span><div>21-수산화효소결핍에 의한 <strong>비전형 선천성부신과다형성(NCCAH)</strong>은 고안드로겐 여성에서 가장 흔한 감별질환으로, 전세계 유병률은 <strong>4.2%</strong>다.</div></div>
+      <ul>
+        <li>미국 백인·히스패닉 1–2%, 스페인·프랑스·이탈리아·캐나다 3–6%, 중동 5–10%, <strong>아쉬케나지 유대인은 일반 백인집단 대비 37배</strong></li>
+        <li>가족력 양성이거나 고위험 인종군이면 테스토스테론이 정상이어도 이른 아침 17-hydroxyprogesterone 선별을 권고</li>
+        <li>가임력에 대한 유전적 함의가 커서 진단이 특히 중요; 안드로겐분비종양은 상대적으로 드묾(고안드로겐 여성의 ~0.2%, 과반수 악성)</li>
+      </ul>
+    `
+  },
+  fgcut: {
+    title: "다모증 진단 기준(Ferriman–Gallwey)",
+    val: "인종에 따라 FG ≥6~10 (아시아 여성은 낮게 적용)",
+    color: "var(--behav)",
+    html: `
+      <div class="alert alert-behav"><span>📏</span><div><strong>Ferriman–Gallwey(FG) 점수</strong>는 안드로겐 민감 9개 신체부위를 0(무모)~4(완전 남성형)로 채점해 합산하는 다모증 평가의 표준 방법이며, 인구집단 95백분위수를 넘으면 다모증으로 진단한다.</div></div>
+      <ul>
+        <li>미국·영국 흑인·백인: FG ≥8 / 지중해·히스패닉·중동계: FG ≥9–10 / 남미: FG ≥6 / 아시아: 한족 ≥6~남중국계 ≥7(범위 2–7)</li>
+        <li>흑인·백인 여성 633명 대상 연구에서 FG ≥3인 여성의 약 70%가 스스로 다모증으로 인식하고 미용적 처치를 시행 — <strong>낮은 FG 점수도 임상적으로 의미</strong>가 있을 수 있음</li>
+        <li>구레나룻·둔부 등 안드로겐 민감 부위를 반영하지 못하는 한계, 채점의 주관성, 미용처치로 인한 채점 왜곡 등 여러 제한점이 있음</li>
+      </ul>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStatModal();
+});
+
+const ABBR_DATA = [
+  { term:"CPA",   def:"Cyproterone Acetate — 사이프로테론아세테이트(항안드로겐성 프로게스토겐, 미국 미시판)" },
+  { term:"DHEA",  def:"Dehydroepiandrosterone — 디하이드로에피안드로스테론" },
+  { term:"DHEAS", def:"DHEA Sulfate — DHEA 황산염" },
+  { term:"DHT",   def:"Dihydrotestosterone — 디하이드로테스토스테론" },
+  { term:"DSP",   def:"Drospirenone — 드로스피레논(항안드로겐성 프로게스틴)" },
+  { term:"EE",    def:"Ethinyl Estradiol — 에티닐에스트라디올" },
+  { term:"FDA",   def:"Food and Drug Administration — 미국식품의약국" },
+  { term:"FG score", def:"Ferriman–Gallwey Score — 다모증 평가 표준 점수체계" },
+  { term:"GnRH",  def:"Gonadotropin-Releasing Hormone — 성선자극호르몬분비호르몬" },
+  { term:"IPL",   def:"Intense Pulsed Light — 강한 광선(광선치료 기기)" },
+  { term:"LC-MS", def:"Liquid Chromatography-Mass Spectrometry — 액체크로마토그래피/질량분석법" },
+  { term:"NCCAH", def:"Nonclassic Congenital Adrenal Hyperplasia — 비전형 선천성부신과다형성" },
+  { term:"Nd:YAG", def:"Neodymium-doped Yttrium Aluminum Garnet — 광선요법용 레이저 파장(1064nm)" },
+  { term:"OC",    def:"Oral Contraceptive — 경구피임제(에스트로겐-프로게스틴 복합)" },
+  { term:"PCOS",  def:"Polycystic Ovary Syndrome — 다낭성난소증후군" },
+  { term:"PH",    def:"Paradoxical Hypertrichosis — 역설적다모증(광선요법의 드문 부작용)" },
+  { term:"RCT",   def:"Randomized Controlled Trial — 무작위대조시험" },
+  { term:"SHBG",  def:"Sex Hormone-Binding Globulin — 성호르몬결합글로불린" },
+  { term:"17-OHP", def:"17-Hydroxyprogesterone — NCCAH 선별에 사용되는 스테로이드 중간대사물" },
+  { term:"VTE",   def:"Venous Thromboembolism — 정맥혈전색전증" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
