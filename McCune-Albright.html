@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>섬유형성이상/맥쿤-올브라이트 증후군(FD/MAS) 모범진료지침 2019</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --dev:     #0f6e5c;  /* 개요 — 청록 */
+    --diag:    #0550ae;  /* 정의·진단 — 청 */
+    --stage:   #7c3aed;  /* 병기평가 — 보라 */
+    --tx:      #9b1c2e;  /* 치료 — 진홍 */
+    --surg:    #b35900;  /* 수술·두개안면 — 주황 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 1020px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--dev); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--tx); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); text-align:center; }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 1020px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--dev); border-bottom-color: var(--dev); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 1020px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform:none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 620px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(16px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-dev     { background: #e0f4f1; border-left: 3px solid var(--dev);  color: #0f5549; }
+  .alert-diag    { background: #ddf4ff; border-left: 3px solid var(--diag); color: #0550ae; }
+  .alert-stage   { background: #ede9fe; border-left: 3px solid var(--stage);  color: #5b21b6; }
+  .alert-tx      { background: #fce8eb; border-left: 3px solid var(--tx); color: var(--tx); }
+  .alert-surg    { background: #fdf0e0; border-left: 3px solid var(--surg); color: #7a3d00; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 4px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-dev    { background: #e0f4f1; color: var(--dev); border: 1px solid var(--dev); }
+  .t-diag   { background: #ddf4ff; color: var(--diag); border: 1px solid var(--diag); }
+  .t-stage  { background: #ede9fe; color: var(--stage); border: 1px solid var(--stage); }
+  .t-tx     { background: #fce8eb; color: var(--tx); border: 1px solid var(--tx); }
+  .t-surg   { background: #fdf0e0; color: var(--surg); border: 1px solid var(--surg); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr"><span>F</span><span>D</span></div>
+      <h1>섬유형성이상/맥쿤-올브라이트 증후군(FD/MAS) 모범진료 국제컨센서스 (2019)</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Javaid MK, Boyce A, Appelman-Dijkstra N, et al. Best practice management guidelines for fibrous dysplasia/McCune-Albright syndrome: a consensus statement from the FD/MAS international consortium. Orphanet J Rare Dis. 2019;14:139. doi:10.1186/s13023-019-1102-9</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 승인을 받지 않은 개인 참고자료이며, 실제 진료는 원문 및 최신 근거를 함께 확인할 것</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diag')">🔍 정의·진단</div>
+    <div class="tab" onclick="showTab('stage')">📋 병기평가</div>
+    <div class="tab" onclick="showTab('tx')">💊 치료</div>
+    <div class="tab" onclick="showTab('surg')">🔧 수술·두개안면</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--dev)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 0: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('omim')"><div class="stat-val" style="color:var(--dev)">OMIM#174800</div><div class="stat-lbl">FD/MAS<br>희귀질환 등재번호</div></div>
+    <div class="stat-box" onclick="openStatModal('gnas')"><div class="stat-val" style="color:var(--dev)">GNAS 체세포<br>모자이크 돌연변이</div><div class="stat-lbl">병인 — Gsα<br>기능획득 변이</div></div>
+    <div class="stat-box" onclick="openStatModal('subtypes')"><div class="stat-val" style="color:var(--diag)">단발성/다발성/MAS</div><div class="stat-lbl">FD/MAS<br>3대 진단 범주</div></div>
+    <div class="stat-box" onclick="openStatModal('cobb')"><div class="stat-val" style="color:var(--tx)">Cobb &gt;30°</div><div class="stat-lbl">척추측만 수술<br>고려 기준</div></div>
+    <div class="stat-box" onclick="openStatModal('vas')"><div class="stat-val" style="color:var(--tx)">VAS &gt;3/10</div><div class="stat-lbl">비스포스포네이트<br>치료 고려 기준</div></div>
+    <div class="stat-box" onclick="openStatModal('adrenal')"><div class="stat-val" style="color:var(--stage)">생후 1년 이내</div><div class="stat-lbl">고코르티솔증의<br>유일한 호발 시기</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>FD/MAS는 <strong>Gsα 신호단백(GNAS 유전자)</strong>의 접합 후(post-zygotic) 체세포 모자이크 기능획득 돌연변이에 의한 광범위한 질환 스펙트럼이다.</li>
+        <li>돌연변이는 Gsα의 내인성 GTPase 활성을 방해해 아데닐산고리화효소(adenylyl cyclase)를 지속적으로 자극하고 cAMP 및 하위신호가 조절이상되어 나타난다.</li>
+        <li>질환은 모자이크성이므로 우연히 발견된 사소한 방사선학적 소견부터 중증의 장애를 초래하는 질환까지 <strong>매우 넓은 임상스펙트럼</strong>을 보인다.</li>
+        <li>고전적으로 골격·피부·내분비계 침범으로 정의되지만, Gs 신호가 편재하는 특성상 사실상 <strong>모든 조직이 영향</strong>을 받을 수 있다.</li>
+        <li>희귀질환이며 다과별 진료가 필요해 진단·치료의 일관성 확보가 어려워, 51명의 임상·환자전문가로 구성된 국제컨소시엄이 근거·경험·환자의견을 종합해 본 지침을 개발했다(2015년 옥스포드, 2016년 리옹 컨센서스 회의 기반, 수정델파이 방식, 70% 이상 합의 진술만 최종 채택).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌐</span> 관련 국제 레지스트리·네트워크</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>Fibrous Dysplasia Foundation Registry(fibrousdysplasia.org)</li>
+        <li>RUDY study(rudystudy.org) — 희귀 근골격질환 환자주도 연구 플랫폼</li>
+        <li>James Lind Alliance Priority Setting Partnership for Rare Musculoskeletal Diseases in Adulthood</li>
+        <li>European Reference Networks — 희귀골질환(ERN BOND), 희귀내분비질환(Endo-ERN)</li>
+        <li>컨소시엄은 최소 5년마다(또는 획기적 근거 발표 시 더 조기에) 본 지침을 재검토하기로 함</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 1: 정의·진단 ══════════════════ -->
+<div id="tab-diag" class="panel">
+
+  <div class="alert alert-diag"><span>🔍</span><div>FD/MAS 아형 진단은 <strong>골격침범 범위(단발성/다발성)</strong>와 <strong>골외 증상 유무</strong>를 종합적으로 평가한 후에만 확정할 수 있다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 정의 — 진단 범주</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>범주</th><th>정의</th></tr>
+          <tr><td><strong>단발성(monostotic) FD</strong></td><td>골격 1개 부위에만 섬유형성이상 존재</td></tr>
+          <tr><td><strong>다발성(polyostotic) FD</strong></td><td>골외 증상 없이 2개 이상 골격부위에 섬유형성이상 존재</td></tr>
+          <tr><td><strong>맥쿤-올브라이트증후군(MAS)</strong></td><td>FD + 1개 이상의 골외 소견, <strong>또는</strong> 2개 이상의 골외 소견(FD 없이도 진단 가능) — 분자병인에 대한 이해 확장을 반영</td></tr>
+          <tr><td><strong>Mazabraud 증후군</strong></td><td>FD + 근육 내 점액종(myxoma) — 단발성/다발성/MAS 어느 유형과도 동반 가능한 골외 소견으로 정의</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-diag" style="margin-top:8px"><span>📌</span><div><strong>골외(extra-skeletal) 소견</strong>: ① 특징적 카페오레 반점(들쭉날쭉한 경계 "Coast of Maine", 정중선을 "존중"하는 분포) ② 성선자극호르몬비의존성 성호르몬 생산(성조숙증, 여아 재발성 난소낭종, 남아/남성 자율적 테스토스테론 생산) ③ 비자가면역성 갑상선기능항진증을 동반/비동반한 갑상선병변 ④ 성장호르몬과다 ⑤ 신생아기 고코르티솔증. <strong>FGF-23 관련 저인혈증은 MAS의 골외소견이 아니라 골격 FD 중증도의 표지자</strong>로 간주됨.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 감별진단 — 부위별 유사질환</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>부위</th><th>감별질환</th></tr>
+          <tr><td>일반</td><td>암(원발/전이, 혈액암 포함 고립형질세포종·육종), 연골종증, 단순골낭종(단방성), 거대세포종, 동맥류성골낭종, Paget병, 제1형 신경섬유종증</td></tr>
+          <tr><td>피부·골격</td><td>저인혈증 증후군, 랑게르한스세포조직구증, 유동섬유형성증(melorrheostosis), 골괴사, 낭성섬유성골염(Recklinghausen)</td></tr>
+          <tr><td>두개안면골</td><td>골화성섬유종, 섬유골성병변, cherubism, 무균성 하악골염(SAPHO 증후군), 중심거대세포육아종, 전두-접형골 수막종</td></tr>
+          <tr><td>경골</td><td>아다만티노마, 골섬유형성이상(osteofibrous dysplasia)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📷</span> 영상학적 특징</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><strong>단순촬영</strong>: 간유리(ground-glass) 음영; 완전 방사선투과성(낭성) 병변, 경화성 병변, 혼합형; 경계가 뚜렷한(지도상) 변연(경화연 유무); 얇거나 두껍거나 미세천공이 있는 팽창성 피질/골내막 조가비모양. <strong>연조직 종괴는 FD의 영상소견이 아니며</strong> 발견 시 추가 검사 필요</li>
+        <li><strong>CT</strong>: 안면·골반·척추 등 복잡한 해부구조 평가, 미세 비전위골절 발견에 유용. 골파괴를 동반한 골외 연조직종괴는 악성전환 시사</li>
+        <li><strong>MRI</strong>: FD 자체는 비특이적이나 낭성병변과의 감별에 유용 — 병변 내 액체/액체층 가능하나 연조직종괴는 없어야 함. T1·T2에서 저~중등도 신호, 소아에서는 T2에서 고신호 가능; 반전회복영상에서 고신호, 조영증강은 반점상</li>
+        <li><strong>핵의학</strong>: 99mTc-MDP(± SPECT) 또는 18F-NaF PET/CT에서 병소부위 추적자 섭취 증가</li>
+      </ul>
+      <div class="alert alert-diag" style="margin-top:8px"><span>🦴</span><div>부위별 특이 영상소견: <strong>골반·늑골</strong> — 늑골의 양성 팽창성 병변의 가장 흔한 원인, 방추형 늑골비대, 미세석회화; <strong>사지</strong> — 특히 대퇴골 근위부의 만곡변형("목동의 지팡이" shepherd's crook 변형), Looser 구역, 동반 성조숙증으로 성장판 조기융합·저신장; <strong>두개안면골</strong> — 간유리양상의 골팽창, 안구돌출을 유발하는 두개관 변형.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 조직·유전학적 확진</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>골생검·조직학적 평가는 <strong>비전형적이거나 진단이 의심스러운 경우, 악성이 의심되는 경우</strong>에만 필요 — 생검이 FD의 재성장을 유발하지 않는다는 점을 포함해 위험/이득을 명확히 설명</li>
+        <li>명확한 임상진단이 있는 환자에서 유전자검사의 이득은 불확실 — 진단이 불확실할 때(특히 다른 골격/피부/내분비 소견 배제 후 두개골의 단발성/단발부위 병변) 권고</li>
+        <li>진단생검은 <strong>GNAS 돌연변이 검사를 위해 신선/신선동결 검체로 처리</strong>해야 함 — 정상조직 포함 시 위음성 가능(재생검 필요할 수 있음), 파라핀포매 검체도 가능하나 위음성 위험 더 높음</li>
+        <li><strong>차세대염기서열분석(NGS)</strong>이 Sanger 시퀀싱보다 위음성률이 낮고, 위양성 보고 없음; 골육종과의 감별에 활용 가능</li>
+        <li>혈액을 이용한 돌연변이 분석은 단발성 FD를 배제할 수 없으나, <strong>양성 결과는 진단적 의미</strong>가 있음</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /diag -->
+
+<!-- ══════════════════ TAB 2: 병기평가 ══════════════════ -->
+<div id="tab-stage" class="panel">
+
+  <div class="alert alert-stage"><span>📋</span><div>병기평가의 목적은 진단 시점에 <strong>질환의 전체 범위와 영향을 파악</strong>하여 검사·치료를 안내하고 합병증 위험을 최소화하는 것이다. 연령과 임상양상을 고려해 진단 즉시 고려해야 한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골격계 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>완전한 병력·신체검사·검사실검사·영상/핵의학영상 필요; 골통증·관절통·골관절변형 부위를 표시한 골격지도, 골절력(부위·날짜·외상수준·치유상태), 이전 정형외과 시술(금속삽입물 위치/종류), 골특이치료 사용력(성분명·시작/최종사용일·총 사용연수), 임상시험 참여력 기록</li>
+        <li><strong>통증평가</strong>: VAS 0–10 및 Brief Pain Inventory(성인)/Wong-Baker Facies(소아); <strong>야간통증은 임박골절·낭종내출혈·(드물게) 악성전환</strong>의 적신호; 신경병증성 통증 가능성은 PainDetect 설문으로 평가; 수술흉터통증·인접관절방사통·국소건병증·섬유근육통 등 기여요인도 평가</li>
+        <li>국소·급성발생통은 급성/임박골절, 동맥류성골낭종, 응력골절(특히 변형된 장골) 의심; 회전스트레스검사(근위대퇴)·FABER검사가 기계적 통증 유발에 유용</li>
+        <li>드물지만 <strong>만성적·진행성·야간에도 지속되는 미만성 통증</strong>은 육종성 변화를 고려 — CT/MRI 추가평가 및 지역 육종팀 논의 필요</li>
+        <li><strong>골관련 검사실검사</strong>: 신기능검사, 총 알칼리성인산분해효소(ALP), 중탄산염, 알부민보정 혈청칼슘, 인, 25(OH)비타민D, PTH</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚡</span> 인 항상성 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>비정상 인 항상성(신장 인손실→저인혈증)은 <strong>향후 골절위험의 중요한 예측인자</strong>이므로 진단이 중요</li>
+        <li>다발성 질환이 의심되는 모든 환자에서 <strong>기저 공복 인수치</strong>를 확인; 인보충제 복용 중이면 최소 1일 이상 중단 후 측정; 연령별 정상범위와 비교</li>
+        <li>공복상태에서 혈청 인·크레아티닌 및 2차뇨 인·크레아티닌을 동시 채취해 <strong>세뇨관 인재흡수(TmP/GFR)</strong>를 계산하고 연령별 기준치와 비교</li>
+        <li>부갑상선기능항진증·신세뇨관산증 등 다른 신인손실 원인을 배제(요당 딥스틱, 혈청중탄산염, 요아미노산 측정 등)해야 함; 저인혈증은 간헐적일 수 있어 골격증상 변화 시·선형성장기에 재평가 필요</li>
+        <li>혈청 FGF-23 측정 시 최소 <strong>7일간 인/비타민D 보충제 중단</strong> 후, 공인된 검사실에서 시행</li>
+        <li>골전환표지자: <strong>총ALP가 최소 권장 지표</strong>; 선택적으로 골특이ALP(연령별기준치), P1NP, CTX-I; 측정 불가 시 −20°C 혈청 보관 고려</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩻</span> 전신 골격영상·측만증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>모든 골격 병소는 15세까지 검출 가능하며 임상적으로 유의한 병소는 5세까지 검출됨</li>
+        <li>≥5세 전 환자에서 골스캔·전신MRI·저선량 2D/3D촬영(예: EOS)으로 전신영상을 고려(단, EOS는 두개저 병소를 놓칠 수 있음); 무증상 소아에서는 위음성 가능성으로 <strong>5세까지 전신영상을 지연</strong>하는 것이 원칙(조기진단 이득이 클 경우 예외)</li>
+        <li>골격부담 점수화는 <strong>Collins의 검증된 방법</strong>을 사용</li>
+        <li>골스캔상 임상적으로 유의한 축성/사지 FD 부위는 전체 뼈의 2방향 단순촬영으로 추가평가; 신경포착이 의심되면 국소 세밀절편 CT 선호</li>
+        <li><strong>척추 FD</strong>: 신체검사상 측만증 소견은 단순촬영으로 확인; 이후 정기적 방사선촬영·폐기능검사로 진행 추적; <strong>Cobb각 &gt;30°</strong>이면 진행속도·만곡위치에 따라 수술고정 고려, 척추팀 조기협진 권고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👤</span> 두개안면·치아 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>두개안면FD(CFFD) 병기평가 목표는 범위·분포·영향 파악 — 임상사진/3D사진으로 안면비대칭 객관평가, Craniofacial Experience Index로 심리적 영향 평가; 표준안면·교합방사선촬영 및 1mm 이하 세밀절편 CT</li>
+        <li>신경/구조 인접 병소는 두개안면외과·성형외과·안과·이비인후과/청각과·구강악안면외과·신경외과 의뢰 고려; 신경손상/기능장애 증거 시 전문 두개안면서비스 의뢰</li>
+        <li><strong>치과영역</strong>: 파노라마·구내(치근단·교익)방사선사진으로 양측 치열궁 및 상악동·비강·이공·하악관 등 인접구조 평가, 우식·치주질환·근단주위질환(악골괴사 위험인자) 파악; CBCT·MRI·99mTc-MDP골스캔·PET 등 추가 영상기법 활용 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> 내분비계 평가(5개 축)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>축</th><th>평가 내용</th></tr>
+          <tr><td><strong>난소</strong></td><td>유방발달·질출혈·에스트로겐화 징후(&lt;8세)·난소낭종·월경불순(주기 &lt;21일 또는 &gt;35일) 병력·신체검사; 모든 소아는 성장곡선·골연령 검토; 증상 시 무작위 FSH·LH·에스트라디올, 골반초음파</td></tr>
+          <tr><td><strong>고환</strong></td><td>사춘기발달력·Tanner단계(고환용적 포함) 신체검사; 모든 남성은 기저 및 5세 이후 고환초음파(아형질 MAS 침범 특성화); 증상 시 FSH·LH·유리테스토스테론</td></tr>
+          <tr><td><strong>갑상선</strong></td><td>병력·신체검사, TSH·유리T4·총/유리T3, 갑상선초음파. FD/MAS의 갑상선기능항진증은 <strong>탈요오드효소 활성증가에 의한 T3주도형</strong> 질환 — T3/T4비 &gt;20이면 시사적</td></tr>
+          <tr><td><strong>뇌하수체(GH과다)</strong></td><td>신장측정·중간부모신장 비교; 성장곡선·사춘기단계·머리둘레SDS 검토; 골연령평가(Bayley-Pinneau법으로 예측성인신장); 무작위 IGF-1·GH·프로락틴; 이상 시 IGF-1 추가측정, 필요시 경구당부하검사/야간GH검사, 뇌하수체MRI(정상MRI가 GH과다를 배제하지 않음)</td></tr>
+          <tr><td><strong>부신(고코르티솔증)</strong></td><td>영아기 질병력·발달지연·과다체중증가를 동반한 저성장; 임상의심 시 24시간 요유리코르티솔, 저용량덱사메타손억제검사, 일중코르티솔변동, 부신CT; <strong>생후 1년에만 발생</strong>하며 자연관해 가능; 신생아기 고코르티솔증 기왕력자는 ACTH자극검사로 부신부전 평가</td></tr>
+        </table>
+      </div>
+      <p style="margin-top:8px">내분비질환이 있는 환자는 해당질환별 표준선별프로그램(예: 말단비대증 환자의 대장신생물 선별)을 함께 준수해야 함.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>😊</span> 삶의 질 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>성인: 언어별 EQ-5D-5L, SF-36 / 소아: PEDS-QL</li>
+        <li>선택적으로 불안·우울(Hospital Anxiety and Depression Scale), 수면(Epworth Sleepiness Scale 또는 Pittsburgh Sleep Quality Index) 평가 고려</li>
+        <li>CFFD에서는 Craniofacial Experience Index로 심리적 영향 평가 고려</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /stage -->
+
+<!-- ══════════════════ TAB 3: 치료 ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="alert alert-tx"><span>💊</span><div>FD/MAS는 <strong>완치법도 승인된 치료제도 없는</strong> 희귀질환이므로, 환자·가족에 대한 충분한 정보제공과 다학제 관리가 치료의 근간이다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📖</span> 일반원칙 — 정보제공·생활습관</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>비유전성(non-inherited) 질환임을 설명; 악성전환은 매우 드물고 병변은 대부분 양성이며 특정 노출요인은 알려져 있지 않음을 안내</li>
+        <li>서면정보, 지역/국가/국제 환자그룹(소셜미디어 기반 포함), "전문가환자" 및 전문클리닉/네트워크(예: European Reference Networks) 정보 제공; 연구 우선순위가 높으므로 임상연구·시험 정보도 안내</li>
+        <li><strong>생활습관</strong>: 연령별 적정 칼슘섭취, 국가지침에 따른 25-OH비타민D 충분수준 유지(특히 항흡수제 치료 고려 시), 금연, 알코올 &lt;3단위/일, 적정체중 유지, 안전한 운동, 필요시 물리치료 의뢰</li>
+        <li>국가지침에 따른 정기 치과검진(약물 시작 전 점검 포함), 구강위생 관리로 구강감염 위험 감소; 중등도~중증 질환, 특히 신체장애·두개안면 영향이 있는 경우 심리사 의뢰 고려; 필요시 사회복지사 의뢰</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="stage t-tx">FGF-23 매개 신장 인손실</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body" style="display:block">
+      <ul>
+        <li>특히 소아 환자는 인손실질환 경험이 있는 대사골전문가에게 의뢰; 혈청인 해석은 연령별 기준 적용; 성인·소아 모두 <strong>저인혈증은 골절위험 증가와 연관되어 치료대상</strong>임</li>
+        <li>치료 시작 전 기저혈액(PTH, 보정칼슘, eGFR), 공복뇨 칼슘/크레아티닌비, 신초음파(신석회증/신결석 사전평가) 확인</li>
+        <li><strong>활성비타민D대사물</strong>로 치료 시작: 칼시트리올(EU+US) 1μg/day 분할투여 또는 알파칼시돌(EU만) 1.5μg/day 1일1회(성인); 소아는 15–60ng/kg/day 분할 2회. 저작뇨칼슘/크레아티닌 또는 24시간뇨칼슘을 정기 모니터링하며 필요시 증량 — 목표는 <strong>부갑상선기능항진증 억제 + 요칼슘배출을 정상범위 상한 바로 아래로 유지</strong>. 지속적 고칼슘뇨 시 또는 활성비타민D+인보충 중이면 매년 신초음파 권고</li>
+        <li><strong>인보충제</strong>: 1mmol/mL 농도 액상제제를 하루 여러 회 분할(성인 5–10mL tid, 소아 1–3mL/kg qid); 소아연령에서는 15–60mg/kg/day(4–5회분할)로도 표현 가능. 혈청인을 정상범위 하한 또는 그 바로 아래로 유지하도록 적정, <strong>과다치료 회피</strong>; 위장관 불편 가능성 안내, 소량씩 자주 복용 권고</li>
+        <li>장기 인보충은 PTH 만성자극→4선증식·자율성 부갑상선기능항진증(활성비타민D 사용 제한, 수술적 절제 필요) 위험이 있어 <strong>치료 1개월 후 및 이후 필요시 PTH 모니터링</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="stage t-tx">골통증 관리</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <p>전략은 <strong>증상관해 유도</strong>이다. 야간통증은 임박골절·낭종내출혈·악성전환 가능성에 대한 적신호이며, 국소/급성발생통은 급성/임박골절 또는 동맥류성골낭종을 시사할 수 있음(응력골절 시 정렬교정·수술 고려).</p>
+      <ul>
+        <li><strong>1단계(약물)</strong>: 저인혈증이 있다면 보충(교정이 아닌 보충) + 비타민D 충분화 우선; 진통제는 파라세타몰/아세트아미노펜 1차, 이득이 심혈관·신장·위장관위험을 상회하면 NSAID; 트라마돌 등 오피오이드 전에 <strong>골치료를 우선 시도</strong>; 작열감·찌르는 듯한 신경병증성 양상엔 아미트립틸린·가바펜틴·프레가발린·둘록세틴 등 비정형진통제 사다리 고려(단, FD 특이적 임상시험 근거는 없음). 복잡한 경우 통증전문가 의뢰, 인지치료·수면위생 중재, 물리치료 의뢰</li>
+        <li><strong>2단계(비스포스포네이트)</strong>: <strong>VAS &gt;3/10의 지속적 중등도~중증 통증</strong>에서 고려. FD 병소크기·진행에 대한 영향은 불명확하며 국소골밀도 증가·합병증예방 효과도 입증되지 않음. 사용 전 정상칼슘혈증·적정 칼슘섭취·적정 25OH비타민D·크레아티닌청소율 ≥35mL/min 확인; <strong>저인혈증은 비스포스포네이트 시작 최소 6개월 전에 최대한 교정</strong></li>
+        <li><strong>경구 비스포스포네이트는 권장하지 않음</strong> — 고용량 알렌드로네이트(40mg/day) 대조시험에서 통증 개선 없었음</li>
+        <li><strong>정맥 파미드로네이트·졸레드로네이트</strong>는 동등하게 고려 가능(용법은 아래 표 참조); 초기 여러 회 투여로 진통효과 확인 후, 이후 투여간격은 필요성·반응에 따라 결정하며 <strong>시간이 지날수록 투여간격을 늘리는 것</strong>이 원칙</li>
+        <li>비스포스포네이트 사용 전후 위험·이득 상담, 골전환표지자·골밀도 등 모니터링, <strong>치료 전 치과평가</strong>로 악골괴사(ONJ) 위험 최소화; 대규모 증례군에서 장기 고용량 사용에도 비전형대퇴골절 보고는 없었음</li>
+        <li>충분한 진통효과가 없으면 다른(비골성) 통증원인을 배제한 후 다른 정맥 비스포스포네이트로 전환; 그래도 효과 없으면 <strong>비스포스포네이트 중단</strong>, 다른 원인 재평가·다른 진통전략 고려</li>
+        <li><strong>데노수맙</strong> 등 기타 항흡수제는 용량·유효성·안전성 근거가 부족해 전문센터 밖(가급적 임상연구 맥락)에서는 권장하지 않음 — 소아에서 중단 후 중증 고칼슘혈증 위험, 성인 골다공증 환자에서 중단 후 골절률 반등 보고 있음</li>
+      </ul>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table class="tbl">
+          <tr><th></th><th>파미드로네이트</th><th>졸레드로네이트</th></tr>
+          <tr><td><strong>소아<br>(3세 이상)</strong></td><td>1mg/kg×2일 연속, 총 90mg까지; 무반응 시 8주째 반복 고려. 2주기 후 무반응이면 중단</td><td>0.025mg/kg, 무반응 시 8주째 0.025mg/kg, 여전히 무반응이면 24주째 0.05mg/kg; 3회 무반응 시 중단</td></tr>
+          <tr><td><strong>공통 참고</strong></td><td colspan="2">첫 주사 후 4일간 칼시트리올 20–30ng/kg/day 또는 알파칼시돌 30–50ng/kg/day(최대 1μg/day)+칼슘보충 고려(특히 질환부담 높은 경우 칼슘항상성 유지 목적)</td></tr>
+          <tr><td><strong>성인</strong></td><td>90mg×2일 연속, 6개월마다; 2주기 후 무반응 시 중단</td><td>월1회 최대 5mg(반응 도달 시 유지용량으로 전환); 월간 투여는 골격부담이 매우 높은 중증례에 주로 예약, 대부분은 연1~2회 투여로 충분; 3회 투여 후 통증 개선 없으면 중단</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="stage t-tx">Mazabraud 증후군</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>점액종은 대부분 무증상이며 중재 불필요; 통증 유발 시 수술절제 권고(국소재발위험 최대 25%)</li>
+        <li>MRI 추적촬영은 임상증상에 따라 결정; 다발성FD 및 MAS의 다른 골외소견 동반 시 장기 추적·타 소견 검사 권고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="stage t-tx">내분비병증 치료</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li><strong>난소</strong>: 대개 양측성이므로 낭종에 대한 난소수술은 회피; 난소절제는 염전위험이 있고 전문가 합의가 있을 때만; 골연령 진행+빈번한 출혈 시 성조숙증 치료(1차 레트로졸, 2차/보조로 타목시펜·풀베스트란트) — 중심성사춘기로 진행 시 GnRH유사체(류프로라이드) 추가 고려; 성인 여성은 기능이상성 자궁출혈 모니터링, 유방암 위험증가 가능성 고려해 피임/HRT 시 추가 에스트로겐성 화합물 회피 신중검토</li>
+        <li><strong>고환</strong>: 수술 회피가 원칙, 구조적병변은 대개 임상적 의미 낮음; 혈청테스토스테론상승/골연령진행 동반 시 테스토스테론수용체차단제+아로마타제억제제 병용, 중심성조숙 동반 시 GnRHa 추가; 촉지병변/고환크기증가 병변은 매년 초음파, 성인기는 병변 변화 없으면 정기초음파 불필요</li>
+        <li><strong>갑상선</strong>: 단기 갑상선기능항진증엔 카비마졸/메티마졸; 5년 이상 지속되면 갑상선절제 또는 방사성요오드파괴 고려(I-131 사용 전 결절 완전평가 필요); 재성장 가능성으로 매년 장기추적, &lt;10세 소아에서 US이상+TFT정상이면 6–12개월마다 재평가</li>
+        <li><strong>성장호르몬과다</strong>: 소마토스타틴유사체 1차, 페그비소만트(±옥트레오타이드/란레오타이드) 2차; 약물저항 시 뇌하수체수술(두개저FD 동반이 흔해 항상 어려움, 전절제 필요 — 선종만 제거로는 불충분); 최대약물치료가 표준이며 방사선치료는 두개저FD의 악성전환 위험으로 최후수단; 목표 IGF-1 Z점수 −2~+1; 성장중 소아는 매년 성장속도·머리둘레·IGF-1 추적, 뇌하수체절제/방사선치료 후 다른 뇌하수체호르몬결핍 평가 권고</li>
+        <li><strong>부신(고코르티솔증)</strong>: 메티라폰 1차, 중증환자는 에토미데이트; 기타 미토탄·케토코나졸(간독성 주의); 대개 양측부신절제 필요하나 안정적 단측질환양상이면 단측절제 고려 가능; 최대 1/3에서 자연관해 — 안정적이면 긴밀모니터링하며 절제 연기 가능; 약물치료 이득·위험과 지속고코르티솔증의 발달위험을 저울질; 고코르티솔증 해소 후 부신기능부전 평가 권고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="stage t-tx">기타 골외 증상 관리</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li><strong>혈액학</strong>: 출혈력이 있으면 혈소판기능활성검사 시행, 이상 시 수술전 혈소판수혈로 교정 가능</li>
+        <li><strong>위장관</strong>: 위장관용종·간담도신생물 보고(임상의의 불명확); 췌관내유두상점액종양 등 췌장병변도 기술(악성전환 증례 1건 보고); 복통력이 있으면 혈청아밀라아제 측정; 모든 환자 위장관증상 평가, 증상환자·췌장염력 환자는 영상평가 고려</li>
+        <li><strong>악성종양</strong>: 돌연변이보유조직·고회전병소에서 악성종양 위험이 소폭 증가할 가능성; 유방암·전립선암 등 일반인구 표준선별프로그램 준수 권고(FD환자에서 위험증가 관찰); 내분비병증 동반 환자는 해당질환별 추가선별(예: 말단비대증의 대장신생물 선별) 준수; 과도한 방사선노출·흡연·과음 등 추가위험요인 회피 권고</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+<!-- ══════════════════ TAB 4: 수술·두개안면 ══════════════════ -->
+<div id="tab-surg" class="panel">
+
+  <div class="alert alert-surg"><span>🔧</span><div>정형외과적 관리는 <strong>다학제팀</strong> 내에서 최적의 인상태 확보 및 골질환을 악화시키는 내분비이상(GH과다, T3갑상선중독증 등) 배제와 함께 이루어져야 한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 사지·정형외과적 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>골절, 기계적/종양성 골통증, 사지변형은 전문정형외과의 진료 필요; 사지변형은 변형악화·통증·골절예방을 위한 예방적수술 조기평가 필요; 다리길이차이는 보조기·교정수술 필요성 평가</li>
+        <li>관절통증은 물리치료·진통제·(특히 변형 동반 시)골절단술 및/또는 관절성형술 의뢰가 필요할 수 있음</li>
+        <li>매우 소량의 병소에서는 소파술이 효과적일 수 있으나, <strong>골(자가/동종)이식을 채운 소파술은 비효과적이고 합병증 위험</strong>이 있어 권장하지 않음</li>
+        <li>외고정은 원칙적으로 <strong>일시적 교정/고정용</strong>으로만 사용하며 더 정밀한 맞춤형 임플란트를 기다리는 동안 활용; 선호되는 내고정은 <strong>티타늄 골수강내못</strong>(가능하면 이환골 전체를 가교); 특수상황에서는 금속판고정 고려 — 강철금속판보다 티타늄금속판에서 골절률이 낮은 경향(탄성계수 차이 관련 추정)</li>
+        <li>동종피질지주이식(경골/비골)은 소규모 FD병소의 가교에 사용되었으나 불완전/완전골절 후에는 권장하지 않음</li>
+        <li>FD병소는 혈관이 풍부해 출혈이 상당할 수 있어, 다수술이 계획된 경우 단계적 시행으로 수혈필요성 최소화; 매우 높은 혈류 병소는 색전술 또는 풍선카테터를 이용한 중재영상의학적 조절 고려; <strong>수술전 비스포스포네이트로 병소 혈관성을 낮추는 것에 대한 근거는 아직 없음</strong>(향후 정식연구 필요)</li>
+        <li>소아 또는 중증 성인은 변형재발 가능성으로 중장기 적극적 추적관찰 필요; 수술 후 물리치료·수치료·보행보조기구 등 재활 필요시 제공</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👤</span> 두개안면FD(CFFD) 관리 원칙</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>CFFD는 거동이 다양해 다학제팀의 통합 전문성이 필요; 모든 수술계획은 관련 전문의들과 세심히 조율</li>
+        <li>목표: ① 기능손실(특히 청력·시력) 예방 ② 신체변형의 진행저지/완화 ③ 이차변형 예방 ④ CFFD 및 그 치료로 인한 장기이환 최소화</li>
+        <li><strong>적극적 관찰(watch-and-wait)</strong>이 흔히 선호되는 전략 — 재성장·통증에 관한 장기결과가 매우 가변적이고 예측이 어렵기 때문</li>
+        <li>CFFD 확인 시 CFFD 경험이 있는 두개안면서비스에 정식 의뢰; 소아는 통상 2년(또는 더 자주, 병소 위치·중증도에 따라) 간격 기저·정기 두부CT; 성인은 정기영상이 권장되지 않으며 증상기반, 무증상이면 최대 5년 간격</li>
+        <li>고급영상기법·스캔의 3차원분석, 가상수술계획, 환자맞춤형임플란트의 컴퓨터지원설계/제작이 표준진료로 간주됨; <strong>단순소파술은 비효과적이며 합병증 위험을 높여 권장하지 않음</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> 부위별 CFFD 수술 전략</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><strong>두개관(cranial vault)</strong>: 대개 종괴·비대칭 등 물리적변형으로 발현. 옵션: 병소삭발(burring)로 부피감소·대칭화; 부분절제+재건; 완전절제+두개관결손 재건</li>
+        <li><strong>두개저(skull base)</strong>: 두개안면팀의 정기평가로 모니터링; 두개저 통과구조의 기능장애 증거가 있으면 두개저외과의 검토; <strong>기능결손이 없으면 수술 회피</strong>; 두개저질환자는 매년 청력평가</li>
+        <li><strong>전두골</strong>: 물리적변형·비대칭으로 발현, 안와형태·안구위치 변화로 유의한 변형 가능. 복시는 흔치 않으나 수술 관련 합병증일 수 있어 <strong>수술전 안과평가로 수술후 복시가능성·융합범위 확인 필수</strong>. 예방적 시신경감압술은 권장하지 않음 — 순차적 안과평가로 입증된 시력악화가 있어야 두개안면전문의의 긴급평가 필요</li>
+        <li><strong>비사골(naso-ethmoid)영역</strong>: 기도·안구위치 영향 가능 — 이비인후과·안과 상세평가 권고; 치료목표는 기도폐쇄 감소, 안구위치·시기능 교정, 물리적변형 교정; 옵션: 제한적접근/경비강 부분절제, 두개저·안와 재건을 동반한 근치절제</li>
+        <li><strong>상악골</strong>: 안와형태·내용물 및 치아교합에 모두 영향 — 교합기능·치열(치아싹 포함) 보존, 안구위치·시기능 교정, 이차변형 감소, 최소침습절개(stealth incision)가 원칙; 옵션: 삭발, 부분절제+안와바닥/상악재건, 근치절제+안와·상악궁재건(치과재활 가능하도록)</li>
+        <li><strong>하악골</strong>: 하악하연 종괴로 흔히 발현하나 진행하면 기능장애 초래 — 상악과 마찬가지로 교합기능·치열 보존, 이차변형 감소, 최소침습절개 원칙; 옵션: 삭발, 부분절제+재건, 근치절제+재건</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦷</span> 구강·치과 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>CFFD를 포함한 FD 환자는 특별한 치과관리 없이 일반적 치과·교정치료를 받을 수 있으며 이것이 두개안면병소를 악화시키지 않음 — 단, 부정교합·치아혼잡·흡연은 불량한 구강위생에 기여</li>
+        <li>CFFD 환자의 28%에서 결손치, 법랑질형성부전, 상아질이형성, taurodontic pulp, 치아종, 치아변위, 부정교합, 높은 우식활성 등 <strong>치과이상이 보고</strong> — 성장기 CFFD 환자는 이런 이상 발생에 대한 세심한 모니터링 필요</li>
+        <li>ONJ 관리는 병기·병소크기·병용약물치료·동반질환에 따라 결정; 예방전략의 핵심은 <strong>양호한 구강위생 유지, 항흡수제 치료시작 전 구강질환 안정화, 치료 중 침습적 치과시술 회피(가능한 한)</strong>; 치태조절을 위한 잦은 재내원(스케일링·치근활택)이 필요할 수 있음</li>
+        <li>FD가 있는 악골에서 <strong>교정적 치아이동이 빠르게 일어나는 경향</strong>이 있고, 교정장치 제거 후 불량한 FD골질로 인해 치아가 원위치로 되돌아가는 재발도 더 흔함</li>
+        <li>교정치료 전 방사선평가로 재형성부위 확인 필요; 가능하면 <strong>가철식 기능성장치가 우선</strong>, 고정식장치는 우수한 구강위생 유지가 전제; 대다수 CFFD에서 악교정수술은 불필요하며 관찰이 적절한 접근; 수술 적응증은 문서화된 진행성 중증통증 또는 심각한 외형손상 — 성인수술은 안정적 결과·재발없음이 보고됨</li>
+        <li>악교정수술은 안정적 교합·안모미용 회복에 도움되나, <strong>성장중인 환자에서는 회피</strong>해야 함(성장활성기에 수술받은 젊은 환자에서 비정상 안면성장 보고)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /surg -->
+
+</div><!-- /main -->
+
+<script>
+const STAT_DETAILS = {
+  omim: {
+    title: "FD/MAS 희귀질환 등재번호",
+    val: "OMIM #174800",
+    color: "var(--dev)",
+    html: `<div class="alert alert-dev"><span>📖</span><div>섬유형성이상/맥쿤-올브라이트증후군(FD/MAS)은 골격병소, 피부과다색소침착, 기능항진성 내분비병증을 특징으로 하는 희귀질환이다(OMIM#174800). GNAS 유전자의 접합후 체세포 기능획득 돌연변이에서 기인하며, 질환은 모자이크성으로 매우 넓은 임상스펙트럼(우연히 발견되는 사소한 방사선소견부터 중증 장애까지)을 보인다.</div></div>`
+  },
+  gnas: {
+    title: "병인 — GNAS 체세포 모자이크 돌연변이",
+    val: "Gsα 기능획득(GTPase 활성 저해)",
+    color: "var(--dev)",
+    html: `
+      <div class="alert alert-dev"><span>🧬</span><div>GNAS 유전자는 Gs신호단백의 α소단위를 암호화한다. 이 돌연변이는 Gsα의 내인성 GTPase 활성을 방해해 아데닐산고리화효소를 지속적으로 자극하고 cAMP 및 하위신호전달을 조절이상 상태로 만든다.</div></div>
+      <ul>
+        <li>접합 후(post-zygotic) 발생하므로 유전되지 않으며, 침범조직에 모자이크로 존재</li>
+        <li>Gs신호는 편재하는 특성상 골격·피부·내분비계 외에도 다양한 조직이 영향받을 수 있음</li>
+        <li>진단검사는 신선/신선동결 조직에서 GNAS 돌연변이 검사가 원칙이며, NGS가 Sanger시퀀싱보다 위음성률이 낮음</li>
+      </ul>
+    `
+  },
+  subtypes: {
+    title: "FD/MAS 3대 진단 범주",
+    val: "단발성 / 다발성 / MAS",
+    color: "var(--diag)",
+    html: `
+      <ul>
+        <li><strong>단발성(monostotic) FD</strong>: 골격 1개 부위에만 존재</li>
+        <li><strong>다발성(polyostotic) FD</strong>: 골외 증상 없이 2개 이상 골격부위 침범</li>
+        <li><strong>MAS</strong>: FD+1개 이상 골외소견, 또는 2개 이상 골외소견(FD 없이도 진단 가능) — 분자병인 이해 확장을 반영해 FD를 필수요건에서 제외</li>
+      </ul>
+      <div class="alert alert-diag" style="margin-top:6px"><span>📌</span><div>골외소견: 카페오레반점, 성선자극호르몬비의존성 성호르몬생산(성조숙증 등), 비자가면역성 갑상선기능항진증 동반/비동반 갑상선병변, 성장호르몬과다, 신생아기 고코르티솔증. FGF-23 관련 저인혈증은 골외소견이 아닌 골격 FD 중증도 표지자로 간주.</div></div>
+    `
+  },
+  cobb: {
+    title: "척추측만 수술 고려 기준",
+    val: "Cobb각 > 30°",
+    color: "var(--tx)",
+    html: `<div class="alert alert-tx"><span>🩻</span><div>신체검사상 측만증 증거는 단순촬영으로 확인하며, 이후 진행 정도에 따라 정기 방사선촬영·폐기능검사로 추적한다. 진행속도와 만곡위치를 고려해 <strong>Cobb각 &gt;30°</strong>이면 척추팀 조기협진과 함께 수술고정을 고려한다.</div></div>`
+  },
+  vas: {
+    title: "비스포스포네이트 치료 고려 기준",
+    val: "VAS > 3/10 지속통증",
+    color: "var(--tx)",
+    html: `
+      <div class="alert alert-tx"><span>💊</span><div>지속적 중등도~중증 통증(VAS &gt;3/10)에서 비스포스포네이트를 고려한다. 병소크기·진행에 대한 효과는 불명확하며, 국소골밀도 증가나 합병증예방 효과도 입증되지 않았다.</div></div>
+      <ul>
+        <li>사용 전: 정상칼슘혈증, 적정 식이칼슘·25OH비타민D, 크레아티닌청소율 ≥35mL/min 확인</li>
+        <li>저인혈증은 <strong>비스포스포네이트 시작 최소 6개월 전에 최대한 교정</strong>해야 함</li>
+        <li>경구 비스포스포네이트는 통증에 효과가 입증되지 않아 권장하지 않으며, 정맥 파미드로네이트·졸레드로네이트가 사용됨</li>
+      </ul>
+    `
+  },
+  adrenal: {
+    title: "고코르티솔증 발생 시기",
+    val: "생후 1년 이내에만 발생",
+    color: "var(--stage)",
+    html: `<div class="alert alert-stage"><span>👶</span><div>MAS와 연관된 고코르티솔증은 <strong>생후 1년 동안에만 발현</strong>되며 자연관해될 수 있다. 부신침범은 이후 삶에서는 이전(해소된) 고코르티솔증을 반영하는 부신부전으로 나타날 수 있어, 신생아기 고코르티솔증 기왕력이 있는 모든 환자는 ACTH자극검사로 부신기능부전 평가가 권고된다.</div></div>`
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStatModal(); });
+
+const ABBR_DATA = [
+  { term:"FD", def:"Fibrous Dysplasia — 섬유형성이상" },
+  { term:"MAS", def:"McCune-Albright Syndrome — 맥쿤-올브라이트증후군" },
+  { term:"FD/MAS", def:"섬유형성이상/맥쿤-올브라이트증후군(통합 질환스펙트럼)" },
+  { term:"CFFD", def:"Craniofacial Fibrous Dysplasia — 두개안면 섬유형성이상" },
+  { term:"GNAS", def:"Gs단백 α소단위를 암호화하는 유전자 — FD/MAS의 병인 유전자" },
+  { term:"Gsα", def:"G단백질(자극성) α소단위 — 아데닐산고리화효소 활성화" },
+  { term:"cAMP", def:"Cyclic Adenosine Monophosphate — 고리형 AMP(2차 신호전달물질)" },
+  { term:"FGF-23", def:"Fibroblast Growth Factor 23 — 골격 FD 중증도의 표지자, 신장 인손실 매개" },
+  { term:"TmP/GFR", def:"세뇨관 인재흡수율(신장 인손실 평가지표)" },
+  { term:"ALP", def:"Alkaline Phosphatase — 알칼리성인산분해효소(골전환표지자)" },
+  { term:"P1NP", def:"Procollagen type 1 N-terminal Propeptide — 골형성표지자" },
+  { term:"CTX-I", def:"C-terminal Telopeptide of type I collagen — 골흡수표지자" },
+  { term:"GH", def:"Growth Hormone — 성장호르몬" },
+  { term:"IGF-1", def:"Insulin-like Growth Factor 1 — 인슐린유사성장인자1" },
+  { term:"ACTH", def:"Adrenocorticotropic Hormone — 부신피질자극호르몬" },
+  { term:"GnRHa", def:"Gonadotropin-Releasing Hormone agonist — 성선자극호르몬분비호르몬 작용제" },
+  { term:"FSH/LH", def:"난포자극호르몬/황체형성호르몬" },
+  { term:"TSH", def:"Thyroid-Stimulating Hormone — 갑상선자극호르몬" },
+  { term:"ONJ", def:"Osteonecrosis of the Jaw — 악골괴사" },
+  { term:"VAS", def:"Visual Analog Scale — 시각아날로그통증척도" },
+  { term:"NGS", def:"Next Generation Sequencing — 차세대염기서열분석" },
+  { term:"CBCT", def:"Cone Beam Computerized Tomography — 콘빔전산화단층촬영" },
+  { term:"SPECT", def:"Single-Photon Emission Computed Tomography — 단일광자방출전산화단층촬영" },
+  { term:"PET", def:"Positron Emission Tomography — 양전자방출단층촬영" },
+  { term:"GDG", def:"Guideline Development Group — 지침개발그룹" },
+  { term:"EQ-5D-5L", def:"삶의 질 측정도구(EuroQol 5-Dimension 5-Level)" },
+  { term:"PEDS-QL", def:"Pediatric Quality of Life Inventory — 소아 삶의 질 척도" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+const FONT_ZOOM_STEPS = [100, 125, 150];
+let fontZoomIdx = 0;
+function cycleFontZoom() {
+  fontZoomIdx = (fontZoomIdx + 1) % FONT_ZOOM_STEPS.length;
+  const pct = FONT_ZOOM_STEPS[fontZoomIdx];
+  document.documentElement.style.setProperty('--fscale', pct / 100);
+  document.getElementById('font-zoom-label').textContent = pct + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

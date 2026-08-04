@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>원발성 양측 대결절성 부신과다형성(PBMAH) 임상참고자료 (Endocrine Reviews 2023)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    --ov:     #0f6e5c;  /* 개요 — 청록 */
+    --clin:   #0550ae;  /* 임상·영상 — 청 */
+    --horm:   #7c3aed;  /* 호르몬평가 — 보라 */
+    --mech:   #b35900;  /* 병리·이상수용체 — 주황 */
+    --gene:   #9b1c2e;  /* 유전학 — 진홍 */
+    --comorb: #166534;  /* 동반질환 — 진녹 */
+    --tx:     #1e3a8a;  /* 치료 — 남색 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 1040px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--ov); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--tx); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); text-align:center; }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 1040px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--ov); border-bottom-color: var(--ov); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 1040px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform:none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+  .card-body ul { padding-left: 18px; }
+  .card-body li { margin-bottom: 5px; line-height: 1.6; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 110px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 640px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-ov      { background: #e0f4f1; border-left: 3px solid var(--ov);  color: #0f5549; }
+  .alert-clin    { background: #ddf4ff; border-left: 3px solid var(--clin); color: #0550ae; }
+  .alert-horm    { background: #ede9fe; border-left: 3px solid var(--horm);  color: #5b21b6; }
+  .alert-mech    { background: #fdf0e0; border-left: 3px solid var(--mech); color: #7a3d00; }
+  .alert-gene    { background: #fce8eb; border-left: 3px solid var(--gene); color: var(--gene); }
+  .alert-comorb  { background: #dcfce7; border-left: 3px solid var(--comorb); color: #14532d; }
+  .alert-tx      { background: #dbeafe; border-left: 3px solid var(--tx); color: #1e3a8a; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 4px; }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-ov     { background: #e0f4f1; color: var(--ov); border: 1px solid var(--ov); }
+  .t-clin   { background: #ddf4ff; color: var(--clin); border: 1px solid var(--clin); }
+  .t-horm   { background: #ede9fe; color: var(--horm); border: 1px solid var(--horm); }
+  .t-mech   { background: #fdf0e0; color: var(--mech); border: 1px solid var(--mech); }
+  .t-gene   { background: #fce8eb; color: var(--gene); border: 1px solid var(--gene); }
+  .t-comorb { background: #dcfce7; color: var(--comorb); border: 1px solid var(--comorb); }
+  .t-tx     { background: #dbeafe; color: var(--tx); border: 1px solid var(--tx); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr"><span>PB</span><span>MAH</span></div>
+      <h1>원발성 양측 대결절성 부신과다형성(PBMAH) 임상참고자료</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Bertherat J, Bourdeau I, Bouys L, Chasseloup F, Kamenický P, Lacroix A. Clinical, Pathophysiologic, Genetic, and Therapeutic Progress in Primary Bilateral Macronodular Adrenal Hyperplasia. Endocrine Reviews. 2023;44(4):567-628. doi:10.1210/endrev/bnac034</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 승인을 받지 않은 개인 참고자료이며, 실제 진료는 원문 및 최신 근거를 함께 확인할 것</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('clin')">🔍 임상·영상</div>
+    <div class="tab" onclick="showTab('horm')">🧪 호르몬평가</div>
+    <div class="tab" onclick="showTab('mech')">⚙️ 이상수용체·병리</div>
+    <div class="tab" onclick="showTab('gene')">🧬 유전학</div>
+    <div class="tab" onclick="showTab('comorb')">📊 동반질환</div>
+    <div class="tab" onclick="showTab('tx')">💊 치료</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--ov)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 0: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('def')"><div class="stat-val" style="color:var(--ov)">양측 부신 대결절</div><div class="stat-lbl">>1cm 결절 +<br>결절간 과다형성</div></div>
+    <div class="stat-box" onclick="openStatModal('prev')"><div class="stat-val" style="color:var(--ov)">전체 CS의 &lt;2%<br>양측우연종의 최대 1/3</div><div class="stat-lbl">역학</div></div>
+    <div class="stat-box" onclick="openStatModal('armc5')"><div class="stat-val" style="color:var(--gene)">ARMC5<br>산발성 20-25%</div><div class="stat-lbl">가족성의 최대 80%</div></div>
+    <div class="stat-box" onclick="openStatModal('kdm1a')"><div class="stat-val" style="color:var(--gene)">KDM1A<br>GIP의존 PBMAH의 거의 100%</div><div class="stat-lbl">ARMC5와 상호배타적</div></div>
+    <div class="stat-box" onclick="openStatModal('dst')"><div class="stat-val" style="color:var(--horm)">1mg DST<br>cortisol &gt;138nmol/L</div><div class="stat-lbl">치료개입 고려 기준</div></div>
+    <div class="stat-box" onclick="openStatModal('surgery')"><div class="stat-val" style="color:var(--tx)">단측부신절제<br>관해 77%</div><div class="stat-lbl">재발 시 완결절제 31%</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>PBMAH는 양측 부신에 <strong>1cm 이상의 양성 대결절</strong>이 존재하며 다양한 정도의 코르티솔 과다분비를 동반하는 질환으로, 1964년 Kirschner 등이 최초 기술한 이래 AIMBAD, MMAD, AIMAH, BMAH, PMAH 등 다양한 명칭으로 불려왔으며 현재 PBMAH가 가장 널리 사용됨(2022 WHO는 "BMAD" 용어를 제안).</li>
+        <li>과거에는 드문 CS 원인으로 여겨졌으나, 최근 <strong>양측 부신우연종에서 우연히 발견되는 경증 코르티솔이상분비</strong> 형태가 훨씬 흔하다는 것이 밝혀짐 — 양성 양측 우연종의 최대 1/3이 실제로는 PBMAH일 수 있음.</li>
+        <li>코르티솔 분비는 뇌하수체 ACTH에 비의존적이나 <strong>완전히 자율적이지는 않음</strong> — 부신조직에 이소성/이수위(aberrant/eutopic) G단백결합수용체(GPCR)가 발현되어 다양한 호르몬 자극에 반응하며, 부신 내 방분비(paracrine) ACTH 생성도 관여.</li>
+        <li>양측성과 가족집적 현상을 바탕으로 <strong>ARMC5</strong>(2013, 종양억제유전자, 16p11.2)와 <strong>KDM1A</strong>(2021, GIP의존 PBMAH의 원인)의 생식세포 병원성변이가 확인됨 — 두 유전자는 상호배타적.</li>
+        <li>치료는 전통적으로 양측부신절제였으나, 최근에는 <strong>단측(가장 큰 쪽) 부신절제</strong> 또는 드물게 이상수용체 차단제를 포함한 약물치료를 선호하는 추세.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📈</span> 역학</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>PBMAH 특이적 대규모 역학자료는 부족 — CS 전체 발생률은 1.8-3.2/백만/년, 유병률 57-79/백만; 부신성 CS가 전체 CS의 20-30%를 차지하나 PBMAH는 그중에서도 소수(CS 코호트 내 &lt;2%, 일부 기관 6.2%까지 보고).</li>
+        <li>부신우연종의 15-20%는 양측성이며, 경도로 조절이상된 코르티솔분비(1mg DST 후 50-138nmol/L)를 보이는 환자에서는 양측 병변이 26-30%까지 나타남 — 이 중 최대 1/3이 병리 미확진 PBMAH로 추정.</li>
+        <li>진단 시 연령은 대개 45-65세, 여성이 다소 우세(약 60%); 영아기 발현(McCune-Albright 증후군 관련 대결절과다형성)은 PBMAH와 별개 질환으로 간주.</li>
+        <li>PBMAH는 드물게 MEN1, 가족성선종폴립증(FAP), 유전성 평활근종증-신세포암증후군(HLRCC)과 같은 다발신생물증후군의 일부로 나타날 수 있음(발단증례는 드묾).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🩺</span> 진단 상황(3가지)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><strong>① 양측 부신우연종</strong>(가장 흔함) — 다른 이유로 시행한 영상에서 우연 발견, 대부분 경도 코르티솔이상분비</li>
+        <li><strong>② 코르티솔(±알도스테론/기타스테로이드) 과다의 임상징후로 진단</strong> — 소수, 진단 연령 45-65세, 전형적 쿠싱징후 &lt;25%</li>
+        <li><strong>③ 가족력 선별검사 또는 다발신생물증후군 평가 중 진단</strong> — ARMC5/KDM1A 병원성변이 보유자의 1촌 친척 선별</li>
+        <li>전형적 쿠싱 징후(체간비만, 자반, 근병증)는 오늘날 진단되는 PBMAH 환자의 &lt;25%에서만 관찰; 당뇨병 30-40%, 고혈압 65-85%에서 관찰되며 경증 예에서는 대사동반질환이 유일한 단서인 경우가 많음.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 1: 임상·영상 ══════════════════ -->
+<div id="tab-clin" class="panel">
+
+  <div class="alert alert-clin"><span>🔍</span><div>PBMAH의 확진은 원칙적으로 <strong>병리소견</strong>에 근거하나, 수술을 시행하지 않는 다수 환자에서는 임상·생화학·영상 소견의 종합 및 감별진단 배제를 통해 진단한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📷</span> 영상 소견 — CT/MRI</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>전형적으로 양측 부신이 확대되어 <strong>1cm 이상 대결절 1개 이상 + 결절간 과다형성</strong>을 동반(드물게 결절간 조직이 위축될 수도 있음); 크기는 10-130mm로 매우 다양.</li>
+        <li><strong>단일 영상지표로 확진 불가</strong> — 단측 병변의 악성위험 판정 기준(4cm 초과, 조영전 CT 밀도 &gt;10-20HU)은 PBMAH에서는 적용되지 않음; 4cm 초과·HU &gt;10-20인 경우가 흔하나 악성전환 보고는 거의 없음.</li>
+        <li><strong>MRI</strong>: 대결절은 T1강조에서 근육과 등신호, T2강조에서 간보다 고신호(뇌하수체의존성 결절과다형성은 T2에서 간과 등신호 — 감별점).</li>
+        <li>단측 우연종처럼 보이는 경우도 반드시 <strong>반대측 부신을 정밀 검토</strong> — 경도의 대측 과다형성을 놓칠 수 있음; 일부 환자는 수년의 추적 후에야 양측성이 명확해짐.</li>
+        <li>NP-59 신티그라피(북미에서는 더 이상 이용 불가), 18F-FDG PET/CT는 PBMAH 특이적 근거가 제한적이며 일상적 시행은 권고되지 않음.</li>
+      </ul>
+      <div class="alert alert-clin" style="margin-top:8px"><span>📌</span><div><strong>영상 권고 요약</strong>: 모든 의심 환자에서 조영전 CT 시행 → 결절 감쇠 ≤10HU면 추가검사 불요 → 애매하면 washout CT 또는 chemical shift MRI 고려. 18F-FDG PET/CT 일상적 시행은 권고되지 않음. 40세 미만은 방사선 노출을 줄이기 위해 MRI 우선 고려.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 감별진단</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>질환</th><th>구분 포인트</th></tr>
+          <tr><td><strong>양측 부신선종</strong></td><td>가장 어려운 감별 — 결절간 조직이 특징적으로 위축(PBMAH도 위축형 가능해 구분 어려움); 병리상 두 세포형 모두 3β-HSD·17α-hydroxylase 양성(PBMAH는 해면세포만 3β-HSD 양성)</td></tr>
+          <tr><td><strong>ACTH의존 결절과다형성</strong>(쿠싱병/이소성ACTH)</td><td>ACTH·DHEAS 비억제, desmopressin/CRH에 자극반응, 뇌하수체 MRI 또는 이소성종양 확인</td></tr>
+          <tr><td><strong>PPNAD</strong></td><td>1cm 미만 미세결절, Carney complex 동반 흔함, 6일 저용량DST에서 역설적 상승(Liddle test)</td></tr>
+          <tr><td><strong>부분 당질코르티코이드저항증후군</strong>(NR3C1 변이)</td><td>고ACTH·고UFC이나 임상적 쿠싱징후 없음; 고혈압·저칼륨혈증·다모증 가능</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>양측 부신종괴에서는 두 개의 서로 다른 병변(충돌종양)이 동시에 존재할 수 있어, <strong>각 부신 병변을 개별적으로 평가</strong>하여 부신피질암·갈색세포종 등 중증 종양을 놓치지 않도록 함.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🏥</span> 병리 소견</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>부신 합산 무게 &gt;60g(최대 200g); 대결절(&gt;1cm) — 1cm 미만은 미세결절과다형성(PPNAD/i-MAD)으로 별도 분류.</li>
+        <li>육안상 황색·다결절/소엽상 외관(고지질함량 반영); 현미경상 <strong>2가지 세포형</strong> — 저지질 소형 호산성세포(치밀세포, CYP17A1 양성)와 고지질 대형 투명세포(해면세포, 3β-HSD 양성).</li>
+        <li>스테로이드생성효소(CYP11A1, CYP21A2, CYP11B1) 발현이 대체로 <strong>감소</strong> — 이는 다수 세포의 증식(부신 크기 증가)으로 코르티솔 총생산량이 증가하는 반면 개별세포 스테로이드생성효율은 오히려 낮은 PBMAH의 역설적 특징을 설명.</li>
+        <li><strong>골수지방종(myelolipoma)</strong> 동반 가능 — 특히 KDM1A 병원성변이 보유 GIP의존 PBMAH에서 시사적(거대핵세포·적혈구계·과립구계 3계열 확인 필요).</li>
+        <li>면역조직화학: ARMC5 변이 보유자는 ARMC5 염색 감소(항상 그렇지는 않음), KDM1A 변이 보유자는 핵 KDM1A 염색 소실; 방분비 ACTH 양성세포 클러스터가 산재.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /clin -->
+
+<!-- ══════════════════ TAB 2: 호르몬평가 ══════════════════ -->
+<div id="tab-horm" class="panel">
+
+  <div class="alert alert-horm"><span>🧪</span><div>진단상황에 따라 검사 민감도가 다르다 — 명백한 CS 임상징후로 진단된 환자는 24시간 UFC/한밤중 코르티솔 상승이 흔한 반면, 우연종으로 진단된 환자는 <strong>1mg DST 이상 반응</strong>이 UFC보다 더 자주 관찰된다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 1차 선별검사</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>검사</th><th>해석</th></tr>
+          <tr><td><strong>1mg DST</strong>(자정 복용, 익일 아침 채혈)</td><td>&lt;50nmol/L 정상; 50-138nmol/L 경도 조절이상 의심; &gt;138nmol/L 경도 코르티솔과다분비 — 동반질환 평가 및 치료전략 수립 필요. 민감도&gt;95%, 특이도 80%</td></tr>
+          <tr><td>24시간 UFC</td><td>PBMAH 환자의 25-46%에서만 상승, 경증 예의 최대 63%는 정상 — 단독으로는 민감도 낮음, 최소 2회 반복 및 다른 검사와 병행 권고</td></tr>
+          <tr><td>한밤중 혈장/타액 코르티솔</td><td>일주기 소실 확인에 유용하나 PBMAH 특이적 대규모 검증자료 부족(대규모 코호트에서 한밤중 혈장코르티솔&gt;200nmol/L 32%에 불과)</td></tr>
+          <tr><td>혈장 ACTH</td><td>고전적으로 억제(&lt;2pmol/L)되나 PBMAH 환자의 약 40%에서 완전 억제되지 않음 — 방분비 ACTH 생성 가능성 시사, assay 민감도 한계 고려</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>1mg DST 위양성: 경구피임제 복용(CBG 증가) 등; 위음성: 신부전/간부전으로 dexamethasone 제거 지연. 8AM dexamethasone 농도(140-295ng/dL) 측정으로 검사 신뢰도 확인 가능.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> GIP의존성(식이의존) 코르티솔분비 선별</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>모든 PBMAH 환자에서 <strong>공복 및 혼합식후(또는 75g 경구당부하 후) 2시간 혈청 코르티솔</strong>을 측정 — <strong>재현 가능한 &gt;50% 상승</strong>이면 GIP의존성을 시사하며 KDM1A 유전자검사로 이어짐.</li>
+        <li>공복 시 ACTH 억제 + GIP 저농도 상태에서는 코르티솔이 오히려 낮을 수 있으며, 식후 GIP 생리적 분비에 반응하여 코르티솔이 이상 상승.</li>
+        <li>1mg DST만으로 선별하면 공복 코르티솔이 낮은 GIP의존 환자를 <strong>오진(위음성)</strong>할 위험이 있음에 유의.</li>
+        <li>양성이면 경구당부하·지질/단백질 식이 자극(양성), 정맥포도당 부하(무반응), 옥트레오타이드 억제 등 추가검사로 GIP수용체 관여를 확인 가능.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 이상수용체(GPCR) 체계적 선별 프로토콜</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>경증 환자는 48시간 전부터 6시간마다 1mg dexamethasone 투여로 ACTH를 억제한 상태에서 검사 진행(내인 ACTH 영향 배제).</li>
+        <li><strong>1일차</strong> — 기립자세부하(안지오텐신II/바소프레신/카테콜아민 수용체 선별); <strong>2일차</strong> — 표준 혼합식(GIP 등 위장관호르몬 수용체 선별) + ACTH 1-24 자극(기준); <strong>3일차</strong> — GnRH 100μg IV, TRH 200μg IV, 글루카곤 1mg IM, 바소프레신 10IU IM, 메토클로프라미드(HTR4작용제) 10mg 경구를 순차 투여.</li>
+        <li>기저치 대비 <strong>&gt;50% 상승 = 양성반응</strong>, 25-49% = 부분반응; 재현성 확인을 위해 반복시행 권고.</li>
+        <li>4개 주요 연구의 통합결과, PBMAH 환자의 <strong>약 80%(70/87)</strong>에서 최소 1개 자극에 이상반응 — AVPR1(54%), HTR4(35%)가 가장 흔함.</li>
+      </ul>
+      <div class="alert alert-mech" style="margin-top:8px"><span>💡</span><div>이상수용체 선별의 임상적 의의는 연구목적 외에도 <strong>비전통적 표적치료(β차단제, GnRH작용제 등)</strong>의 가능성을 제공한다는 점 — 단, 대부분 여러 수용체가 동시 발현되어 단일수용체 표적치료의 효과는 제한적인 경우가 많음.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧂</span> 알도스테론·안드로겐·에스트로겐 공동분비 평가</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>알도스테론/레닌비(ARR) 측정 — 코르티솔·알도스테론 공동분비는 고혈압·저칼륨혈증을 악화시킬 수 있음; PBMAH는 고혈압 유병률이 높아 표준화된 검사조건 확보가 어려운 경우가 많음(레닌이 억제되어 있으면 항고혈압제 washout 불필요할 수 있음).</li>
+        <li>DHEAS는 ACTH 억제를 반영해 대개 낮으나 완전히 억제되지는 않음(다른 부신성 CS 원인과 유사); ARMC5 변이 보유자에서 더 낮은 경향.</li>
+        <li>드물게 안드로겐(다모증·남성화) 또는 에스트로겐(여성형유방) 공동분비 — 초기 평가에 성선자극호르몬·부신안드로겐 포함 권고.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /horm -->
+
+<!-- ══════════════════ TAB 3: 이상수용체·병리기전 ══════════════════ -->
+<div id="tab-mech" class="panel">
+
+  <div class="alert alert-mech"><span>⚙️</span><div>PBMAH의 코르티솔분비는 뇌하수체 ACTH에는 비의존적이나 <strong>완전한 자율성은 아님</strong> — 부신조직에 발현되는 다양한 이소성/이수위 GPCR이 그 리간드에 반응하여 cAMP/PKA 경로를 활성화하고, 방분비 ACTH가 이를 증폭한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🍽️</span> GIP수용체(GIPR)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>1992년 Lacroix·Reznik이 최초 기술("식이의존 쿠싱증후군") — 정상 비변이 GIPR이 부신 zona fasciculata에 이소성 발현되어 식후 생리적 GIP분비에 반응해 코르티솔이 급증.</li>
+        <li>단일대립유전자에서의 전사활성화로 발현(단측선종에서는 19q13.32 GIPR 유전자좌의 체세포 중복/재배열이 원인이나, PBMAH에서는 <strong>KDM1A 생식세포변이 + 체세포 1p 소실(LOH)</strong>이 근본 원인).</li>
+        <li>골수지방종·단클론감마병증(MGUS)/다발골수종 동반 가능(KDM1A는 조혈분화 조절자).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💧</span> 바소프레신수용체(AVPR1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>가장 흔한 이상반응(약 54%) — 기립자세, 외인 바소프레신제제(terlipressin 등) 투여로 ACTH비의존적 코르티솔 상승.</li>
+        <li>주로 <strong>이수위(eutopic) AVPR1</strong>의 발현 증가/과결합으로 매개; AVPR2 발현도 mRNA 수준에서 보고되나 desmopressin 자극에 대한 반응은 확인되지 않음.</li>
+        <li>ARMC5 변이 유무와 무관하게 관찰 가능 — ARMC5 자체가 직접 AVPR1 발현을 조절하는지는 명확히 규명되지 않음.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧠</span> 세로토닌수용체(HTR4/HTR7), 카테콜아민수용체(ADRB), LH/hCG수용체</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><strong>HTR4</strong>(약 35%) — 피막하 비만세포에서 방출된 세로토닌에 반응, cisapride/metoclopramide 자극양성; ARMC5 변이 보유자에서 발현 증가 경향; 특이 길항제(GR113808)는 체외실험단계.</li>
+        <li><strong>ADRB(β1/β2)</strong> — isoproterenol 자극 양성, 가족성 PBMAH(ARMC5 변이)에서 특히 잘 기술됨; propranolol/nadolol로 부분/완전 관해 보고 다수.</li>
+        <li><strong>LHCGR</strong> — 폐경 후 지속적 LH상승, 임신 중 hCG상승과 연관된 코르티솔과다(임신유발 쿠싱증후군 포함); GnRH작용제(leuprolide)로 장기 관해 보고.</li>
+        <li>다수 환자에서 <strong>여러 수용체가 동시 발현</strong> — 단일 수용체 표적치료만으로는 불완전한 조절에 그칠 수 있음.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 방분비 ACTH — "ACTH비의존이나 자율적이지 않은" 조절</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>2013년 Louiset 등이 정상 부신피질에는 없는 <strong>ACTH양성 스테로이드생성세포 클러스터</strong>를 PBMAH 조직에서 확인 — POMC mRNA 검출, 부신정맥혈에서 말초보다 고농도.</li>
+        <li>ACTH 분비는 CRH·dexamethasone·미페프리스톤에 반응하지 않고 <strong>박동성으로 자발 분비</strong>; GIP·세로토닌·hCG 등 이상리간드로 관류 시 ACTH와 코르티솔이 함께 분비되며, ACTH수용체(MC2R) 길항제로 40% 억제됨.</li>
+        <li>즉 이상 GPCR이 국소 ACTH분비를 유발하고, 이 ACTH가 MC2R을 통해 코르티솔생성을 증폭시키는 <strong>자가-방분비 루프</strong>가 형성됨.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /mech -->
+
+<!-- ══════════════════ TAB 4: 유전학 ══════════════════ -->
+<div id="tab-gene" class="panel">
+
+  <div class="alert alert-gene"><span>🧬</span><div>PBMAH는 대부분 산발성으로 보이나, 실제로는 상당수가 <strong>상염색체우성 유전질환</strong>이며 확인된 원인유전자에 따라 1촌 친척 대상 유전자검사·선별검사가 권고된다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>Ⓐ</span> ARMC5 (16p11.2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>2013년 확인된 종양억제유전자 — <strong>생식세포 이형접합 불활성화변이 + 체세포 2차 사건</strong>(16p 카피중립 LOH 또는 점변이)이 결합해 완전 불활성화되는 2-hit 모델; 한 환자에서도 결절마다 서로 다른 체세포변이가 존재 가능.</li>
+        <li>빈도: 산발성 PBMAH의 <strong>20-25%</strong>(수술이 필요했던 중증환자군에서는 최대 55%까지 보고), 명확한 가족성 PBMAH의 <strong>약 80%</strong>.</li>
+        <li><strong>표현형-유전형 상관성</strong>: ARMC5 변이 보유자는 더 중증의 CS(높은 UFC, 낮은 ACTH), 더 큰 부신·많은 결절, 당뇨·고혈압 동반 多, 수술(특히 양측)의 필요성 높음 — 단, 40% 이상은 정상 UFC를 보여 임상표현형은 매우 다양.</li>
+        <li>GIP의존 PBMAH에서는 ARMC5 변이가 발견된 바 없음 — <strong>KDM1A와 상호배타적</strong>.</li>
+        <li><strong>동반종양</strong>: 수막종(가장 잘 확립됨, 뇌영상 권고), 말단비대증·췌장장액미세낭선종·송과체종·원발성부갑상선기능항진증 등 산발보고 — 다발종양증후군 가능성은 추가연구 필요.</li>
+        <li>기능: ARMC5는 CUL3/RBX1 E3유비퀴틴리가아제 복합체의 어댑터 — RPB1(RNA중합효소II 최대소단위), SREBF(콜레스테롤합성/스테로이드생성), NRF1(산화환원항상성)을 기질로 함; 불활성화 시 세포자멸감소·증식증가 및 역설적으로 스테로이드생성효소발현감소.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>Ⓑ</span> KDM1A (1p, GIP의존 PBMAH)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>2021년 확인 — <strong>생식세포 병원성변이 + 체세포 1p 소실(LOH)</strong>의 2-hit 모델(종양억제유전자); GIP의존(식이의존) PBMAH 환자의 거의 100%에서 확인.</li>
+        <li>KDM1A(LSD1)는 리신탈메틸화효소 — 소실 시 히스톤 메틸화가 지속되어 <strong>GIPR 발현이 이소성으로 증가</strong>, 일부에서 LHCGR 과발현도 동반.</li>
+        <li>병리학적 특징: <strong>골수지방종/골수화생 병소</strong> 동반, 호산구성세포 비율 &gt;30% 증가.</li>
+        <li>가족성 다발골수종/MGUS 소인유전자로도 알려져 있음 — 병원성변이 보유자는 <strong>말초혈액도말·혈청단백전기영동</strong>으로 정기 선별 권고.</li>
+        <li>선별 전략: 모든 PBMAH 환자에서 공복·식후2시간 코르티솔 검사(&gt;50% 상승) → 양성이면 KDM1A 유전자검사; 골수지방종/골수화생 병리소견이 있으면 GIP의존성이 없어도 고려.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>Ⓒ</span> 증후군성 원인(드묾)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>증후군</th><th>유전자</th><th>특징</th></tr>
+          <tr><td>MEN1</td><td>MEN1(11q13.1, 메닌)</td><td>부신병변 20.4%(대개 비기능성), PBMAH 동반은 드묾; 부갑상선/뇌하수체/췌장종양 동반</td></tr>
+          <tr><td>FAP</td><td>APC(5q22.2)</td><td>부신병변 16%, 그중 23% 양측성; Wnt/β-catenin 경로 활성화와 연관, 대장선종증 동반</td></tr>
+          <tr><td>HLRCC</td><td>FH(1q43, 푸마르산수화효소)</td><td>피부/자궁평활근종, 신세포암, 드물게 경도 PBMAH; 크렙스회로 관여 종양억제유전자</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-gene" style="margin-top:8px"><span>📌</span><div>기타 cAMP/PKA경로 관련: GNAS 체세포 활성변이(McCune-Albright양 국소모자이크), PDE11A/PDE8B 생식세포변이(cAMP분해효소 음성조절인자 결손), PRKACA 생식세포 중복(PKA촉매소단위) — 매우 드묾.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>👪</span> 유전상담 및 가족선별검사 권고</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>1cm 이상 양측부신종괴 + 1mg DST 코르티솔 &gt;50nmol/L인 <strong>모든 환자</strong>에게 ARMC5 유전자검사 제안 — ACMG/AMP 지침에 따라 신중히 해석.</li>
+        <li>ARMC5 병원성변이 보유자: <strong>뇌영상</strong>(수막종 배제)을 기저에 시행; 1촌 성인친족은 병원성변이 특이적 검사 제안, 2년(정상 시)/1년(병변 시) 간격 1mg DST 및 5년 간격 부신영상 고려.</li>
+        <li>KDM1A 병원성변이 보유자: <strong>혈청단백전기영동</strong>(MGUS/다발골수종 선별); 1촌 친족은 공복·식후코르티솔 + 혈청단백전기영동으로 평가.</li>
+        <li>원인유전자 미확인 산발예의 1촌 친족: 특히 50세 이상, 당뇨·비만·고혈압 신규발생 시 1mg DST를 이용한 신중한 임상·생화학 평가 권고.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /gene -->
+
+<!-- ══════════════════ TAB 5: 동반질환 ══════════════════ -->
+<div id="tab-comorb" class="panel">
+
+  <div class="alert alert-comorb"><span>📊</span><div>경도의 코르티솔과다분비조차도 <strong>정상인구보다 유의하게 높은 심대사·골격 동반질환 유병률</strong>과 연관되며, 이는 치료개입 여부 결정의 핵심 근거가 된다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 당뇨병·고혈압·이상지질혈증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>동반질환</th><th>PBMAH 코호트 유병률</th></tr>
+          <tr><td>당뇨병/내당능장애</td><td>당뇨 24-47%(대규모 다기관 38%), 내당능장애 19%</td></tr>
+          <tr><td>고혈압</td><td>67-91%(대규모 코호트 약 70-73%)</td></tr>
+          <tr><td>이상지질혈증</td><td>특이적 자료 부족하나 다른 CS 원인과 유사한 범위(12-72%)로 추정</td></tr>
+          <tr><td>골다공증</td><td>20-27%(ARMC5 변이 유무와 무관하게 유사)</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-comorb" style="margin-top:8px"><span>📌</span><div>비기능성으로 분류된 부신종괴군에서도 일반인구보다 고혈압(58%)·당뇨(14%) 유병률이 높게 관찰되어, 현행 진단기준으로 검출되지 않는 극경도 코르티솔과다의 영향 가능성을 시사. 코르티솔 &gt;138nmol/L(1mg DST후) 군에서 사망률 위험비 3.04까지 상승 보고.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🦴</span> 골격 합병증</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>골절위험 증가는 골밀도 저하와 항상 비례하지 않음 — 골미세구조 변화가 주된 기전; 척추 압박골절 확인을 위한 흉·요추 영상 권고.</li>
+        <li>양측우연종(초기 PBMAH 가능성)에서 단측우연종보다 척추취약골절률이 높다는 보고 있음 — 골밀도·코르티솔과다 정도와 무관하게 관찰됨에 유의.</li>
+        <li>당질코르티코이드는 조골세포생성 억제·골세포자멸유발로 골강도를 골밀도 저하보다 먼저 감소시킴; 파골세포 수명연장으로 흡수 증가.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> 심혈관 위험 및 사망률</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>알도스테론 공동분비는 고혈압을 악화시키고 좌심실비대·혈관손상을 촉진할 수 있음 — 미네랄로코르티코이드수용체길항제 병용 고려.</li>
+        <li>부신우연종 대규모 코호트(1305명) 분석에서 DST후 코르티솔 &gt;138nmol/L군은 3제 이상 항고혈압제 필요성 위험비 1.31-2.2배, 인슐린치료 필요성 위험비 1.89-3.06배 상승.</li>
+        <li>경도자율코르티솔분비 환자군의 심혈관사건·감염 관련 사망률 증가 보고 다수 — 치료개입 문턱을 낮추는 근거로 활용되고 있음.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /comorb -->
+
+<!-- ══════════════════ TAB 6: 치료 ══════════════════ -->
+<div id="tab-tx" class="panel">
+
+  <div class="alert alert-tx"><span>💊</span><div>치료 여부 결정은 <strong>코르티솔과다 정도 + 동반질환 진행상황</strong>을 종합해 개별화하며, 다학제 부신자문위원회 논의를 권고한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚦</span> 치료 개입 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><strong>명백한 UFC상승 + 임상적 CS</strong> → 치료 필요(수술 우선).</li>
+        <li>1mg DST후 코르티솔 <strong>&lt;50nmol/L</strong>, ACTH·UFC 정상, 동반질환 없음 → 수술 없이 관찰(1년 간격 1mg DST 재평가).</li>
+        <li>1mg DST후 코르티솔 <strong>50-138nmol/L</strong> → 저ACTH/DHEAS 또는 동반질환 진행이 있으면 유전상담+치료 고려, 없으면 매년 활동적 추적(1mg DST+UFC, ACTH, DHEAS, ARR, 안드로겐, 동반질환).</li>
+        <li>1mg DST후 코르티솔 <strong>&gt;138nmol/L</strong> → 동반질환·아형수용체(GIP의존성 포함) 평가 후 다학제 논의 → 수술 또는 약물치료 결정.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 수술 — 단측 vs 양측 부신절제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>방식</th><th>적응증 / 특징</th></tr>
+          <tr><td><strong>단측 부신절제</strong>(더 큰 쪽)</td><td>경도-중등도 CS에서 우선 고려되는 접근; 통합분석(286명, 31개 연구) 초기관해율 77%, 재발로 완결절제 필요 31%(중증 CS 22개월, 경증 72개월 중앙값); 3분의 1에서 일시적/영구적 부신부전 발생 — 정기적 ACTH자극검사·코르티솔 추적 필요</td></tr>
+          <tr><td><strong>양측 부신절제</strong></td><td>대칭적 양측 부신 + 중증 CS인 드문 경우 선호; 평생 당질/미네랄로코르티코이드 대체요법 필요, 부신위기 위험 상존; 합병증 18%, 사망률 3% 보고</td></tr>
+          <tr><td>부신보존수술(단측절제+대측부분절제)</td><td>스테로이드의존 회피 목적으로 시도되나 근거 제한적; 유망하나 추가연구 필요</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-tx" style="margin-top:8px"><span>📌</span><div>어느 쪽을 절제할지는 <strong>CT상 더 큰 쪽</strong>을 기준으로 결정(요오드콜레스테롤 섭취가 있으면 참고); 부신정맥채혈은 원발성알도스테론증만큼 유용하지 않음(양측성 소견이 흔해 국소화에 큰 도움 안됨). UFC는 혈중 CBG 포화로 인해 코르티솔 실제 분비율보다 더 크게 변동하므로, 큰 쪽 절제만으로도 UFC가 불균형적으로 크게 감소할 수 있음.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 약물치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>계열/약물</th><th>비고</th></tr>
+          <tr><td>스테로이드생성억제제(케토코나졸, 메티라폰, 오실로드로스타트)</td><td>수술 전 가교치료 또는 중증 합병증 시 생명유지 목적; 만성 저용량 장기사용 사례도 존재</td></tr>
+          <tr><td>미페프리스톤(당질코르티코이드수용체길항제)</td><td>혈당·혈압 개선 근거로 용량조절(코르티솔수치는 지표로 사용 불가)</td></tr>
+          <tr><td>β차단제(propranolol, nadolol)</td><td>카테콜아민의존(ADRB양성) PBMAH에서 장기 효과 보고 — 단독 또는 단측절제와 병용</td></tr>
+          <tr><td>GnRH작용제(leuprolide)</td><td>LH/hCG의존 PBMAH에서 10년 이상 장기관해 보고 — 골밀도 모니터링, 성선호르몬 대체 고려</td></tr>
+          <tr><td>소마토스타틴유사체(옥트레오타이드, 파시레오타이드)</td><td>GIP의존 PBMAH에서 일시적 효과에 그치는 경우가 많음(K세포 탈감작) — 결국 부신절제로 이행하는 경우 다수</td></tr>
+          <tr><td>미네랄로코르티코이드수용체길항제(스피로놀락톤, 에플레레논)</td><td>알도스테론 공동분비 확인 시 혈압·칼륨 조절 목적 병용</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📅</span> 수술 후 장기추적</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>모든 PBMAH 환자는 단측절제 후에도 <strong>부신부전 위험군</strong>으로 간주 — 아침 코르티솔 ± ACTH자극검사로 평가, 응급카드/팔찌 및 스트레스용량 교육 필수.</li>
+        <li>부신부전 회복 여부와 무관하게 <strong>잔여 부신의 진행성 코르티솔과다 재발</strong>을 정기 감시(기저 코르티솔·ACTH, 1mg DST, 필요시 UFC).</li>
+        <li>고혈압·이상지질혈증·당뇨는 관해 후에도 상당수(25-54%)에서 지속 — 지속적 위험인자 관리 필요; 면역억제 여파로 자가면역질환 악화·연령적합 예방접종 고려.</li>
+        <li>혈전예방: CS환자는 응고항진상태이므로 수술 후 최대 4주간 항응고예방 권고, 조기보행 권장.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tx -->
+
+</div><!-- /main -->
+
+<script>
+const STAT_DETAILS = {
+  def: {
+    title: "PBMAH 정의",
+    val: "양측 부신 대결절(>1cm) + 결절간 과다형성",
+    color: "var(--ov)",
+    html: `<div class="alert alert-ov"><span>🏥</span><div>양측 부신피질에 1cm 이상의 양성 대결절이 존재하며 다양한 정도의 코르티솔 과다분비를 동반. 2022 WHO 병리분류는 "hyperplasia" 대신 "disease(BMAD)" 용어를 제안했으나 아직 PBMAH가 문헌에서 가장 널리 사용됨.</div></div>`
+  },
+  prev: {
+    title: "역학",
+    val: "전체 CS의 <2% / 양측우연종의 최대 1/3",
+    color: "var(--ov)",
+    html: `<div class="alert alert-ov"><span>📈</span><div>CS 코호트 내 PBMAH 비율은 2% 미만으로 드문 편이나, 부신우연종의 15-20%가 양측성이고 그중 경도 코르티솔이상분비를 보이는 환자의 최대 1/3이 병리 미확진 PBMAH로 추정됨 — 실제 유병률은 과거 인식보다 훨씬 높을 가능성.</div></div>`
+  },
+  armc5: {
+    title: "ARMC5 변이 빈도",
+    val: "산발성 20-25%, 가족성 최대 80%",
+    color: "var(--gene)",
+    html: `<div class="alert alert-gene"><span>🧬</span><div>16p11.2에 위치한 종양억제유전자. 생식세포 이형접합변이 + 체세포 2차사건(LOH 또는 점변이)의 2-hit 모델. 변이 보유자는 더 중증의 CS, 더 큰 부신, 당뇨·고혈압 동반이 흔함. 수막종 동반 가능 — 뇌영상 권고.</div></div>`
+  },
+  kdm1a: {
+    title: "KDM1A 변이 빈도",
+    val: "GIP의존 PBMAH의 거의 100%",
+    color: "var(--gene)",
+    html: `<div class="alert alert-gene"><span>🧬</span><div>1p에 위치, ARMC5와 상호배타적. 생식세포변이 + 체세포 1p LOH로 GIPR 이소성발현 유발. 골수지방종/골수화생 동반 가능, MGUS·다발골수종 위험 — 혈청단백전기영동 정기선별 권고.</div></div>`
+  },
+  dst: {
+    title: "치료개입 고려 코르티솔 문턱값",
+    val: "1mg DST 후 cortisol >138nmol/L",
+    color: "var(--horm)",
+    html: `<div class="alert alert-horm"><span>🧪</span><div>1mg dexamethasone 억제검사 후 코르티솔 138nmol/L(5.0μg/dL) 초과 시 부신 우연종 관련 이상반응 위험(고혈압 중증도, 3제이상 항고혈압제 필요성, 인슐린치료 필요성 상승)이 유의하게 증가함이 대규모 코호트에서 확인됨.</div></div>`
+  },
+  surgery: {
+    title: "단측 부신절제 성적",
+    val: "초기관해 77%, 완결절제 필요 31%",
+    color: "var(--tx)",
+    html: `<div class="alert alert-tx"><span>🔪</span><div>31개 연구 286명 통합분석 결과. 재발까지의 중앙 시간은 중증CS 22개월, 경증CS 72개월. 약 1/3에서 일시적/영구적 부신부전 발생. 더 큰 쪽 부신을 절제하는 것이 원칙이며, 대측 잔여부신 부피 &gt;34mL·초기 UFC 높을수록 재발위험 증가.</div></div>`
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStatModal(); });
+
+const ABBR_DATA = [
+  { term:"PBMAH", def:"Primary Bilateral Macronodular Adrenal Hyperplasia — 원발성 양측 대결절성 부신과다형성" },
+  { term:"BMAD", def:"Bilateral Macronodular Adrenal Disease — 2022 WHO 제안 명칭" },
+  { term:"AIMAH/MMAD/PMAH", def:"과거 사용되던 PBMAH의 이명(異名)들" },
+  { term:"CS", def:"Cushing's Syndrome — 쿠싱증후군" },
+  { term:"UFC", def:"Urinary Free Cortisol — 요유리코르티솔" },
+  { term:"DST", def:"Dexamethasone Suppression Test — 덱사메타손억제검사" },
+  { term:"ACTH", def:"Adrenocorticotropic Hormone — 부신피질자극호르몬" },
+  { term:"GPCR", def:"G Protein–Coupled Receptor — G단백결합수용체" },
+  { term:"GIP", def:"Glucose-dependent Insulinotropic Peptide — 포도당의존 인슐린분비촉진펩타이드" },
+  { term:"GIPR", def:"GIP Receptor — GIP수용체" },
+  { term:"AVPR1", def:"Arginine-Vasopressin Receptor type 1 — 바소프레신 1형수용체" },
+  { term:"HTR4/HTR7", def:"5-hydroxytryptamine(세로토닌) 수용체 4형/7형" },
+  { term:"ADRB", def:"β-Adrenergic Receptor — 베타아드레날린수용체" },
+  { term:"LHCGR", def:"Luteinizing Hormone/Chorionic Gonadotropin Receptor — 황체형성호르몬/융모생식샘자극호르몬수용체" },
+  { term:"MC2R", def:"Melanocortin type 2 Receptor — ACTH수용체" },
+  { term:"ARMC5", def:"Armadillo Repeat Containing 5 — PBMAH 원인 종양억제유전자(16p11.2)" },
+  { term:"KDM1A(LSD1)", def:"Lysine-Specific Demethylase 1A — GIP의존 PBMAH 원인유전자(1p)" },
+  { term:"LOH", def:"Loss Of Heterozygosity — 이형접합소실" },
+  { term:"MEN1", def:"Multiple Endocrine Neoplasia type 1 — 다발성 내분비신생물증 1형" },
+  { term:"FAP", def:"Familial Adenomatous Polyposis — 가족성선종폴립증" },
+  { term:"HLRCC", def:"Hereditary Leiomyomatosis and Renal-cell Cancer — 유전성 평활근종증-신세포암증후군" },
+  { term:"PPNAD", def:"Primary Pigmented Nodular Adrenocortical Disease — 원발색소성 결절성 부신피질질환" },
+  { term:"MGUS", def:"Monoclonal Gammopathy of Undetermined Significance — 의미불명 단클론감마병증" },
+  { term:"DHEAS", def:"Dehydroepiandrosterone Sulfate — 디하이드로에피안드로스테론황산염" },
+  { term:"17-OHP", def:"17-Hydroxyprogesterone — 17-하이드록시프로게스테론" },
+  { term:"ARR", def:"Aldosterone/Renin Ratio — 알도스테론/레닌비" },
+  { term:"NP-59", def:"131I-6β-iodomethyl-19-norcholesterol 신티그라피 조영제" },
+  { term:"18-FDG PET/CT", def:"Fluorine-18 Fluorodeoxyglucose 양전자방출단층촬영" },
+  { term:"HU", def:"Hounsfield Unit — CT 감쇠단위" },
+  { term:"CBG", def:"Cortisol Binding Globulin — 코르티솔결합글로불린" },
+  { term:"MRA", def:"Mineralocorticoid Receptor Antagonist — 미네랄로코르티코이드수용체길항제" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+const FONT_ZOOM_STEPS = [100, 125, 150];
+let fontZoomIdx = 0;
+function cycleFontZoom() {
+  fontZoomIdx = (fontZoomIdx + 1) % FONT_ZOOM_STEPS.length;
+  const pct = FONT_ZOOM_STEPS[fontZoomIdx];
+  document.documentElement.style.setProperty('--fscale', pct / 100);
+  document.getElementById('font-zoom-label').textContent = pct + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
