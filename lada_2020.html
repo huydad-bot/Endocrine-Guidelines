@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LADA(성인잠복자가면역당뇨) 관리 컨센서스 2020</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --diag:   #0f6e5c;  /* 진단·항체 — 청록 */
+    --cpep:   #0550ae;  /* C-peptide 치료알고리즘 — 청 */
+    --drug:   #9b1c2e;  /* 약물별 근거 — 진홍 */
+    --immune: #7c3aed;  /* 면역중재·유전 — 보라 */
+    --life:   #b45309;  /* 생활습관·향후과제 — 호박색 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 1020px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--diag); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--drug); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); text-align:center; }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 1020px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--diag); border-bottom-color: var(--diag); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 1020px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform:none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 600px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-diag    { background: #e0f4f1; border-left: 3px solid var(--diag);  color: #0f5549; }
+  .alert-cpep    { background: #ddf4ff; border-left: 3px solid var(--cpep); color: #0550ae; }
+  .alert-drug    { background: #fce8eb; border-left: 3px solid var(--drug); color: var(--drug); }
+  .alert-immune  { background: #ede9fe; border-left: 3px solid var(--immune);  color: #5b21b6; }
+  .alert-life    { background: #fff1e0; border-left: 3px solid var(--life);  color: #7d4400; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 4px; }
+  .acc-body .rgrade { color: var(--text2); font-weight: 700; font-size: calc(10.5px * var(--fscale,1)); }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-diag    { background: #e0f4f1; color: var(--diag); border: 1px solid var(--diag); }
+  .t-cpep    { background: #ddf4ff; color: var(--cpep); border: 1px solid var(--cpep); }
+  .t-drug    { background: #fce8eb; color: var(--drug); border: 1px solid var(--drug); }
+  .t-immune  { background: #ede9fe; color: var(--immune); border: 1px solid var(--immune); }
+  .t-life    { background: #fff1e0; color: var(--life); border: 1px solid var(--life); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--drug); border: 1px solid var(--drug); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .dq-row { display:flex; gap:6px; flex-wrap:wrap; margin: 6px 0 2px; }
+  .dq-chip { background: var(--surface2); border:1px solid var(--border); border-radius: 5px; padding: 3px 8px; font-size: calc(10.5px * var(--fscale,1)); }
+  .dq-chip b { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr"><span>L</span><span>A</span></div>
+      <h1>LADA(성인잠복자가면역당뇨) 관리 국제전문가 컨센서스 성명 (2020)</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Buzzetti R, Tuomi T, Mauricio D, Pietropaolo M, Zhou Z, Pozzilli P, Leslie RD. Management of Latent Autoimmune Diabetes in Adults: A Consensus Statement From an International Expert Panel. Diabetes 2020;69:2037–2047. doi:10.2337/dbi20-0017</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 학회의 공식 승인을 받지 않은 개인 참고자료이며, 실제 진료는 원문 및 최신 근거를 함께 확인할 것</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('diag')">🧬 진단·항체·유전</div>
+    <div class="tab" onclick="showTab('cpep')">💉 C-peptide 치료 알고리즘</div>
+    <div class="tab" onclick="showTab('drug')">💊 약물별 근거</div>
+    <div class="tab" onclick="showTab('life')">🌱 생활습관·향후과제</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--diag)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 0: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('prevalence')"><div class="stat-val" style="color:var(--diag)">2–12%</div><div class="stat-lbl">성인발병 당뇨 중<br>LADA 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('gada')"><div class="stat-val" style="color:var(--diag)">~90%</div><div class="stat-lbl">항체양성 LADA 중<br>GADA 양성률</div></div>
+    <div class="stat-box" onclick="openStatModal('insulin6y')"><div class="stat-val" style="color:var(--cpep)">≥50%</div><div class="stat-lbl">진단 6년 후<br>인슐린 필요(UKPDS)</div></div>
+    <div class="stat-box" onclick="openStatModal('cpepcat')"><div class="stat-val" style="color:var(--cpep)">3단계</div><div class="stat-lbl">C-peptide 기반<br>치료 카테고리</div></div>
+    <div class="stat-box" onclick="openStatModal('specificity')"><div class="stat-val" style="color:var(--immune)">94→99%</div><div class="stat-lbl">GADA 특이도<br>(2010→2018)</div></div>
+    <div class="stat-box" onclick="openStatModal('cost')"><div class="stat-val" style="color:var(--life)">~$6</div><div class="stat-lbl">GADA 1회<br>검사비용</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>LADA는 진단시점에 인슐린이 필요하지 않아 임상적으로 T2D와 유사하지만, T1D 관련 면역유전학적 표지자를 가진 <strong>서서히 진행하는 자가면역당뇨</strong>이다.</li>
+        <li>진단 3대 기준: <strong>성인 발병(&gt;30세)</strong>, <strong>당뇨연관 자가항체 양성</strong>, <strong>진단 후 최소 6개월간 인슐린 불필요</strong> — 어느 기준도 절대적이지 않음.</li>
+        <li>치료의 근간은 <strong>C-peptide 수치</strong>(베타세포 기능의 대리표지자)에 따른 3단계 접근이며, 2020 ADA/EASD T2D 알고리즘에서 "이탈(deviation)"하는 방식으로 제안됨.</li>
+        <li>대규모 무작위대조시험이 부족하여(Cochrane 리뷰 기준) 근거수준은 전반적으로 낮음~중등도이며, 향후 대규모 RCT가 필요함.</li>
+        <li>패널은 신규진단 비인슐린요구 T2D 환자 전원에 대한 <strong>GADA 스크리닝</strong>을 권고함.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> LADA 대 T1D·T2D 비교 특징</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>특징</th><th>내용</th></tr>
+          <tr><td>발병연령</td><td>&gt;30세(제한적 근거지만 젊은 연령일수록 T1D 가능성↑)</td></tr>
+          <tr><td>가족력/개인력</td><td>자가면역질환 가족력/개인력 흔함</td></tr>
+          <tr><td>대사증후군 빈도</td><td>T2D보다 낮음 — 낮은 HOMA-IR, 낮은 BMI, 낮은 혈압, 정상 HDL</td></tr>
+          <tr><td>심혈관 결과</td><td>전통적 위험인자 보정 후에는 T2D와 질환특이적 차이 없음</td></tr>
+          <tr><td>C-peptide 감소속도</td><td>T1D보다 느림</td></tr>
+          <tr><td>대표 자가항체</td><td>GADA(가장 민감) &gt; ICA, IA-2A, ZnT8A, tetraspanin 7</td></tr>
+          <tr><td>진단시 인슐린 필요성</td><td>없음(정의상 비인슐린요구)</td></tr>
+        </table>
+      </div>
+      <small>Table 1 기반 — 어떤 특징도 단독으로 LADA를 확정짓지 못하며, 자가항체 측정 없이는 임상적으로 확진할 수 없다.</small>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 1: 진단·항체·유전 ══════════════════ -->
+<div id="tab-diag" class="panel">
+
+  <div class="alert alert-diag"><span>🧬</span><div>LADA는 T1D 스펙트럼에 속하지만 <strong>내표현형(endophenotype)</strong>이 이질적이다. 진단은 임상소견만으로 확정할 수 없으며 반드시 자가항체 측정이 필요하다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>1️⃣</span> 진단 기준</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><strong>성인 발병</strong> — 진단연령 &gt;30세(단, 젊은층에서도 "LADY" 형태로 보고됨)</li>
+        <li><strong>당뇨연관 자가항체 양성</strong> — GADA가 가장 민감한 표지자</li>
+        <li><strong>진단 후 최소 6개월간 인슐린 비요구</strong></li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px"><span>⚠️</span><div>세 기준 모두 <strong>절대적(categorical)이지 않음</strong>. 진단 후 1–6개월 내 인슐린을 시작한 GADA 양성 환자는 임상적으로 LADA와 구별되지 않을 수 있으며, GADA 양성이 일시적(transient)일 수도 있다.</div></div>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>도움이 되는 임상 단서: 연령 &lt;50세, 가족/개인 자가면역력, BMI &lt;25 kg/m², 발병시 급성 증상 동반. 5개 변수(연령, BMI, GADA, IA-2A, T1D 유전위험점수) 기반 진단모델은 ROC AUC 0.90(임상변수만)~0.97(전체)이나, 유럽계 18–50세에만 검증됨.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>2️⃣</span> 자가항체(Autoantibodies)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <tr><th>항체</th><th>특징</th></tr>
+          <tr><td>GADA</td><td>가장 민감한 표지자, 유럽·중국 모두 우세; Action LADA 기준 항체양성자의 ~90%; 특이도 94%(2010)→99%(2018)</td></tr>
+          <tr><td>IA-2A(IA-2IC)</td><td>소아·청소년 발병 T1D 표지로 주로 사용; 민감도~30%, 특이도~100%</td></tr>
+          <tr><td>IA-2(256–760) 단편</td><td>LADA에 신뢰도 높은 표지; 민감도 40%, 특이도 97%</td></tr>
+          <tr><td>ZnT8A, tetraspanin 7</td><td>GADA·IA-2A를 보완하는 부가적 표지자</td></tr>
+        </table>
+      </div>
+      <ul style="margin-top:8px">
+        <li>고역가 GADA → T1D 유사 표현형(낮은 BMI, 낮은 대사증후군 빈도), 인슐린 필요 위험 ↑</li>
+        <li>N-말단 절단형 GADA 양성자는 전장(full-length) GADA 양성자보다 고전적 T1D에 더 가까운 표현형 및 조기 인슐린 진행 위험이 높음</li>
+        <li>GADA는 갑상선 자가면역과 연관; IA-2 항체는 중국인에서 셀리악병 연관 자가면역 위험과 관련</li>
+        <li>일부 항체양성은 위양성(assay 변이 또는 예측력 제한)일 수 있어 예측치가 낮아질 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>3️⃣</span> 유전적 감수성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>T1D와 공유하는 감수성: <strong>HLA DQB1·DRB1</strong>, <strong>인슐린 유전자</strong>, <strong>PTPN22</strong>, <strong>SH2B3</strong>(대규모 GWAS 확인)</li>
+        <li>T2D 대표변이인 <strong>TCF7L2</strong>도 소규모 연구(특히 과체중군)에서 LADA와 연관 — 단, GWAS·중국인 연구에서는 미확인(민족차 가능)</li>
+        <li>Class I 유전자(HLA-A, HLA-B)는 소아발병 T1D와 달리 LADA와 연관 없음</li>
+        <li>유전위험점수는 인슐린의존 진행속도 계층화 및 위양성 항체 감별에 활용 가능</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /diag -->
+
+<!-- ══════════════════ TAB 2: C-peptide 치료 알고리즘 ══════════════════ -->
+<div id="tab-cpep" class="panel">
+
+  <div class="alert alert-cpep"><span>💉</span><div>패널은 <strong>혈청(혈장) C-peptide</strong>를 베타세포 기능의 대리표지자로 삼아 치료를 결정할 것을 권고한다. 채혈 시 혈당이 <strong>80–180 mg/dL</strong>인 상태에서 측정해야 하며, 공복·무작위·식후 모두 사용 가능(식후 2시간 값이 가장 표준화됨).</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧭</span> 진단 경로(스크리닝 알고리즘, Fig.1)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>모든 신규진단 T2D 환자에서 <strong>GADA 스크리닝</strong>을 우선 권고(민감도 최고 표지자, 1회 비용 약 €5/$6)</li>
+        <li>비용 문제로 어려운 경우, 다음 중 하나 이상 있으면 GADA를 측정: <strong>T1D/자가면역질환 가족력</strong>, <strong>정상~약간 과체중(BMI&lt;27)</strong>, <strong>젊은 발병연령(&lt;60세)</strong>, <strong>불량한 대사조절</strong></li>
+        <li>GADA 음성이지만 LADA 의심이 강하면 ICA, IA-2A, ZnT8A 등 다른 섬세포 자가항체를 추가 검사</li>
+        <li>GADA 역가 자체는 임상적 치료결정에 사용하지 않음(역가 기준 설정 곤란, 검사간 변이, 반정량적 특성)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📐</span> C-peptide 3단계 치료 카테고리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="stage t-drug">Category 1</span>&nbsp; C-peptide &lt;0.3 nmol/L <span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li><strong>다중 인슐린요법(multiple-insulin regimen)</strong>을 T1D에 준하여 권고</li>
+            <li>진단시점부터 이 범위이면 T1D로 간주하고 이후 승인된 국가/국제 T1D 지침을 따름</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="stage t-cpep">Category 2 — "Gray Area"</span>&nbsp; C-peptide 0.3–0.7 nmol/L <span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li>수정된 ADA/EASD T2D 알고리즘 적용 — <strong>베타세포 기능을 악화시킬 수 있는 저혈당제 사용을 피함</strong>(예: SU 회피)</li>
+            <li>당뇨합병증 조절/예방을 위해 인슐린과 타 병용요법을 고려</li>
+            <li>최소 <strong>6개월마다</strong> 추적관찰 필요</li>
+            <li>주의: 많은 성인발병 T1D 환자가 진단시 이 범위의 C-peptide를 보이므로, 고혈당이 뚜렷하면 인슐린을 조기 시작하고 자주 재평가</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc">
+        <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="stage t-life">Category 3</span>&nbsp; C-peptide &gt;0.7 nmol/L <span class="acc-toggle">▾</span></div>
+        <div class="acc-body" style="display:block">
+          <ul>
+            <li>약간 수정된 ADA/EASD T2D 알고리즘 사용 가능</li>
+            <li>유일한 차이점: 혈당조절이 악화되면 <strong>C-peptide를 반복 측정</strong>하여 진행성 LADA 여부를 재평가</li>
+            <li>일부는 위양성 자가항체로 실제 T2D일 수 있음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:6px"><span>📌</span><div>목표: <strong>대사조절 달성</strong> + <strong>잔존 베타세포 기능 보존</strong>. 개인화된 접근이 필요하며 대규모 RCT 부재로 근거수준은 제한적이다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /cpep -->
+
+<!-- ══════════════════ TAB 3: 약물별 근거 ══════════════════ -->
+<div id="tab-drug" class="panel">
+
+  <div class="alert alert-drug"><span>💊</span><div>각 약물군의 근거는 소규모·단기 연구가 대부분이며, 패널의 <strong>Data Quality Assessment</strong>(한계 일관성/관련성/충분성/전체)를 함께 제시한다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟡</span> 인슐린 감작제 (메트포르민, TZD)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>대다수 LADA는 초기 T2D로 오인되어 메트포르민을 이미 사용 중인 경우가 많음</li>
+        <li>메트포르민 근거는 부족하나 반대 근거도 없음; 체중·LDL 감소, 죽상경화 진행 위험 감소 가능성</li>
+        <li>TZD(로시글리타존) 병용시 소규모 연구(n=23)에서 베타세포 기능 보존 시사 — 반복검증 필요</li>
+        <li>중국 4군 RCT(n=54): 로시글리타존군이 SU군보다 식후·delta C-peptide 우수(18–36개월, p&lt;0.05)</li>
+        <li>TZD는 비정형골절, 황반부종, 체중증가 위험으로 사용 제한</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b>중등도</b></div><div class="dq-chip">관련성: <b>중등도</b></div><div class="dq-chip">충분성: <b>미미</b></div><div class="dq-chip">종합: <b style="color:var(--red)">낮음</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💉</span> 인슐린</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>C-peptide 검출불가 시 인슐린은 필수적</li>
+        <li>일본 RCT(인슐린 n=30 vs SU n=30, 5년): 인슐린군이 통합 C-peptide 반응 유의하게 우수, 인슐린요구 진행 낮음(p=0.003)</li>
+        <li>Thunander 연구(n=37): 조기 인슐린이 베타세포 기능 보존으로 이어지지 않았으나 대사조절은 개선(내약성 양호)</li>
+        <li>UKPDS: 자가항체 양성군(11.6%)은 배정치료와 무관하게 더 빨리 인슐린이 필요했음</li>
+        <li>조기 개입이 최적인지, 질병단계 무관하게 최적치료인지는 미확정</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b>중등도</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b>중등도</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔴</span> 설폰요소제(SU) — 권장하지 않음</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>일본 다기관 RCT: SU(글리벤클라마이드)군이 인슐린군보다 대사조절 악화·C-peptide 급감소(p=0.005)</li>
+        <li>글리메피리드 vs 리나글립틴 사후분석(n=38): 글리메피리드군은 C-peptide 감소, 리나글립틴군은 증가</li>
+        <li>중국 4군 RCT: SU군이 로시글리타존군보다 delta C-peptide 낮음(p&lt;0.05)</li>
+        <li><strong>SU는 베타세포 기능 악화 배제 불가</strong> → LADA뿐 아니라 T2D 1차약제로도 일반적으로 권장되지 않음</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b>중등도</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b>미미</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟢</span> DPP-4 억제제(DPP-4i)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>5건 RCT 통합 사후분석(n=2,709): 삭사글립틴이 GADA 양성·음성군 모두에서 HOMA2 베타세포 기능·식후 C-peptide 개선</li>
+        <li>인슐린 vs 시타글립틴 21개월 RCT(n=64, GADA양성): 대사조절·베타세포 기능 유사 — 단, 고GADA군은 치료무관 악화 뚜렷</li>
+        <li>시타글립틴 추가(인슐린+병용, n=30): 인슐린 단독보다 C-peptide 감소 완화</li>
+        <li>삭사글립틴+비타민D3 병용 소규모 연구에서 유망한 결과</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b>중등도</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b>중등도</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟠</span> SGLT2 억제제(SGLT2i)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>LADA 특이적 중재연구는 없으나 5,000명 이상 T1D 대상 다국적 RCT에서 인슐린 병용 안전성·유효성 확인(DEPICT 프로그램)</li>
+        <li>다파글리플로진은 BMI≥27 T1D 성인에서 유럽 승인(미국은 미승인)</li>
+        <li>HbA1c 감소, 혈당변동성 감소, 체중·인슐린 총량 소폭 감소</li>
+        <li><strong>당뇨병성 케톤산증 위험 증가</strong> — 특히 정상체중(BMI&lt;27)에서 특히 주의; 정기적 케톤 자가측정 권고, 수술·대사스트레스 상황 전 중단</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🟣</span> GLP-1 수용체작용제(GLP-1RA)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>AWARD-2·4·5 사후분석: 둘라글루타이드가 GADA 음성(−1.09%)·양성(−0.94%) 모두 HbA1c 감소, 저역가 항체군에서 다소 더 효과적</li>
+        <li>저 C-peptide(≤0.25 nmol/L) 항체양성군에서는 엑세나타이드/리라글루타이드 혈당반응 저하</li>
+        <li>대규모 장기 RCT 필요</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b>중등도</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 면역 중재(GAD-alum)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>유일한 LADA 면역중재 연구 — GAD-alum 피하주사, 위약대조 용량증량 2상(n=47), 5년 추적</li>
+        <li>1차 목표(안전성) 달성 — 신경학적 이상 없음, 인슐린 시작 위험 위약 대비 증가 없음</li>
+        <li>5년 후 위약군에서 공복 C-peptide 감소가 고용량군보다 큼 — 베타세포 기능에 유익 가능성 시사</li>
+        <li>대규모 임상시험이 진행 중이며 현 단계에서 임상권고는 시기상조</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">관련성: <b>중등도</b></div><div class="dq-chip">충분성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">종합: <b style="color:var(--red)">낮음</b></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /drug -->
+
+<!-- ══════════════════ TAB 4: 생활습관·향후과제 ══════════════════ -->
+<div id="tab-life" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🌱</span> 생활습관 중재</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>LADA는 인슐린저항성·T2D 위험인자와 연관: 저체중출생, 과체중/비만, 신체활동부족, 흡연, 가당음료 섭취</li>
+        <li>비만·인슐린저항성은 LADA 위험인자로 광범위하게 문서화됨</li>
+        <li>체중감량(필요시 의학적 관리), 신체활동 증가, 금연을 권장</li>
+        <li>현재까지 연구는 대부분 스칸디나비아 인구에 국한 — 중재연구 확대 필요</li>
+      </ul>
+      <div class="dq-row">
+        <div class="dq-chip">한계 일관성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">관련성: <b>높음</b></div><div class="dq-chip">충분성: <b style="color:var(--red)">낮음</b></div><div class="dq-chip">종합: <b style="color:var(--yellow)">중등도</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 향후 핵심 과제</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>a) LADA 스크리닝 확대</li>
+        <li>b) 정밀의학(personalized medicine) 접근</li>
+        <li>c) 저혈당제 대상 대규모 RCT 필요</li>
+        <li>d) 면역치료 추가 연구</li>
+        <li>e) 다양한 인구집단 대상 대규모 장기연구</li>
+        <li>f) 삶의 질·생활습관 이슈</li>
+        <li>g) 다양한 민족기원 환자 포함 연구</li>
+        <li>h) 자가항체 검사(GADA, IA-2 등)의 특성·질 개선</li>
+        <li>i) GADA·C-peptide 측정의 비용-효과 분석</li>
+      </ul>
+      <div class="alert alert-life" style="margin-top:8px"><span>💡</span><div>LADA는 전세계적으로 당뇨클리닉 환자의 최대 12%를 차지하는 것으로 추정되며("type 1.5 diabetes"), 중국에서만 약 600만 명으로 추산된다. 그럼에도 공식 관리지침이 부재했던 상황에서 본 컨센서스가 최초로 체계적 치료 프레임을 제시한다.</div></div>
+    </div>
+  </div>
+
+</div><!-- /life -->
+
+</div><!-- /main -->
+
+<script>
+const STAT_DETAILS = {
+  prevalence: {
+    title: "성인발병 당뇨 중 LADA 비율",
+    val: "2–12%",
+    color: "var(--diag)",
+    html: `
+      <div class="alert alert-diag"><span>🧬</span><div>인종, 스크리닝에 사용된 자가항체 종류, 확인방법(1차 vs 2차 진료)에 따라 상당한 편차를 보인다.</div></div>
+      <ul>
+        <li>북유럽·중국 일부 지역에서 더 높은 비율(7–14%) 보고</li>
+        <li>아프리카계 미국인·히스패닉계는 상대적으로 낮음</li>
+        <li>중국에서만 약 600만 명으로 추산(전세계적 현상)</li>
+      </ul>
+    `
+  },
+  gada: {
+    title: "항체양성 LADA 중 GADA 양성률",
+    val: "~90%",
+    color: "var(--diag)",
+    html: `<div class="alert alert-diag"><span>🧬</span><div>Action LADA 연구 기준, 당뇨연관 자가항체를 가진 LADA 대상자의 약 90%가 GADA 양성이다. GADA는 유럽·중국, 1차·2차 진료 모두에서 가장 우세한 항체로, 상업적 방사면역측정법(RIA)·ELISA로 검출 가능하다.</div></div>`
+  },
+  insulin6y: {
+    title: "진단 6년 후 인슐린 필요 비율",
+    val: "≥50%",
+    color: "var(--cpep)",
+    html: `<div class="alert alert-cpep"><span>💉</span><div>UKPDS 자료 기준 LADA 환자의 최소 50%가 진단 6년 후 인슐린 치료가 필요했다. 다만 일부 환자는 10년 이상 지나도 인슐린이 필요하지 않아, 진행속도의 개인차가 크다(연령, 항체역가, 다중항체 동반 여부에 좌우).</div></div>`
+  },
+  cpepcat: {
+    title: "C-peptide 기반 치료 카테고리",
+    val: "3단계",
+    color: "var(--cpep)",
+    html: `
+      <ul>
+        <li><strong>&lt;0.3 nmol/L</strong>: 다중 인슐린요법(T1D 준함)</li>
+        <li><strong>0.3–0.7 nmol/L("Gray area")</strong>: 수정된 ADA/EASD T2D 알고리즘 + 베타세포 손상 저혈당제 회피</li>
+        <li><strong>&gt;0.7 nmol/L</strong>: 약간 수정된 ADA/EASD T2D 알고리즘 + 반복 C-peptide 추적</li>
+      </ul>
+    `
+  },
+  specificity: {
+    title: "GADA 검사 특이도 변화",
+    val: "94% → 99%",
+    color: "var(--immune)",
+    html: `<div class="alert alert-immune"><span>🧪</span><div>국제 섬세포자가항체 표준화 프로그램(IASP) 기준, GADA 검사 특이도는 2010년 94%에서 2018년 99%로 향상되었다. 검사 특이도 향상과 LADA 농축 인구집단 선정은 양성예측도를 높이는 데 기여한다.</div></div>`
+  },
+  cost: {
+    title: "GADA 1회 검사비용",
+    val: "약 €5 / $6",
+    color: "var(--life)",
+    html: `<div class="alert alert-life"><span>💰</span><div>패널은 신규진단 T2D 환자 전원에 대한 일률적 GADA 스크리닝의 1회성 비용(약 €5, $6)이 조기진단·적절한 치료·추적관찰의 이득을 고려할 때 정당화된다고 결론지었다.</div></div>`
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStatModal(); });
+
+const ABBR_DATA = [
+  { term:"LADA", def:"Latent Autoimmune Diabetes in Adults — 성인잠복자가면역당뇨" },
+  { term:"LADY", def:"Latent Autoimmune Diabetes in the Young — 소아·청년기 잠복자가면역당뇨" },
+  { term:"T1D",  def:"Type 1 Diabetes — 제1형 당뇨병" },
+  { term:"T2D",  def:"Type 2 Diabetes — 제2형 당뇨병" },
+  { term:"GADA", def:"Glutamic Acid Decarboxylase Autoantibody — 글루탐산탈탄산효소 자가항체" },
+  { term:"ICA",  def:"Islet Cell Antibody — 섬세포 항체" },
+  { term:"IA-2A",def:"Insulinoma-Associated Antigen-2 Autoantibody — 티로신인산분해효소(IA-2) 자가항체" },
+  { term:"ZnT8A",def:"Zinc Transporter 8 Autoantibody — 아연수송체8 자가항체" },
+  { term:"C-peptide", def:"베타세포에서 인슐린과 동량 분비되는 연결펩타이드 — 잔존 인슐린분비능의 대리표지자" },
+  { term:"HOMA-IR", def:"Homeostatic Model Assessment of Insulin Resistance — 인슐린저항성 항상성모델평가" },
+  { term:"BMI",  def:"Body Mass Index — 체질량지수" },
+  { term:"BP",   def:"Blood Pressure — 혈압" },
+  { term:"SU",   def:"Sulfonylurea — 설폰요소제" },
+  { term:"TZD",  def:"Thiazolidinedione — 티아졸리딘디온" },
+  { term:"DPP-4i", def:"Dipeptidyl Peptidase-4 inhibitor — 디펩티딜펩티다제-4 억제제" },
+  { term:"SGLT2i", def:"Sodium-Glucose Cotransporter 2 inhibitor — 나트륨-포도당 공동수송체2 억제제" },
+  { term:"GLP-1RA", def:"Glucagon-Like Peptide-1 Receptor Agonist — GLP-1 수용체작용제" },
+  { term:"HbA1c", def:"Hemoglobin A1c — 당화혈색소" },
+  { term:"ADA",  def:"American Diabetes Association — 미국당뇨병학회" },
+  { term:"EASD", def:"European Association for the Study of Diabetes — 유럽당뇨병학회" },
+  { term:"UKPDS", def:"UK Prospective Diabetes Study — 영국전향적당뇨연구" },
+  { term:"HLA",  def:"Human Leukocyte Antigen — 인간백혈구항원" },
+  { term:"PTPN22", def:"Protein Tyrosine Phosphatase Non-receptor type 22 — 자가면역 감수성 유전자" },
+  { term:"TCF7L2", def:"Transcription Factor 7-Like 2 — T2D 대표 감수성 유전자" },
+  { term:"ROC AUC", def:"Receiver Operating Characteristic — Area Under Curve — 수신자조작특성곡선 하 면적(진단모델 정확도 지표)" },
+  { term:"GAD-alum", def:"Alum-formulated recombinant GAD65 — 알럼 제형 재조합 GAD65(면역중재 백신)" },
+  { term:"IASP", def:"Islet Autoantibody Standardization Program — 섬세포자가항체 표준화 프로그램" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+const FONT_ZOOM_STEPS = [90, 100, 110, 125, 140];
+let fontZoomIdx = 1;
+function cycleFontZoom() {
+  fontZoomIdx = (fontZoomIdx + 1) % FONT_ZOOM_STEPS.length;
+  const pct = FONT_ZOOM_STEPS[fontZoomIdx];
+  document.documentElement.style.setProperty('--fscale', pct / 100);
+  document.getElementById('font-zoom-label').textContent = pct + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>

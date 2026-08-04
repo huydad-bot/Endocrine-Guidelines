@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MODY(청년기발병 성인형당뇨) 치료옵션 체계적문헌고찰 2026 Update</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    /* 영역별 색 */
+    --diag:   #0f6e5c;  /* 개요·방법론 — 청록 */
+    --gene:   #0550ae;  /* 유전자별 치료 — 청 */
+    --evid:   #9b1c2e;  /* 근거수준 — 진홍 */
+    --preg:   #7c3aed;  /* 임신·특수상황 — 보라 */
+    --future: #b45309;  /* 향후과제 — 호박색 */
+    --accent: #7c3aed;
+    --green: #1a7f37;
+    --red: #cf222e;
+    --yellow: #9a6700;
+    --fscale: 1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: calc(13px * var(--fscale, 1));
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 1020px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-row { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-dr {
+    display: flex; align-items: center; gap: 0;
+    font-size: calc(11px * var(--fscale, 1)); font-weight: 800; letter-spacing: 1px;
+  }
+  .logo-dr span:nth-child(1) { background: var(--diag); color:#fff; padding:3px 6px; border-radius:4px 0 0 4px; }
+  .logo-dr span:nth-child(2) { background: var(--evid); color:#fff; padding:3px 6px; border-radius:0 4px 4px 0; }
+  header h1 { font-size: 16px; font-weight: 700; color: var(--text); text-align:center; }
+  .meta-line { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); text-align: center; line-height: 1.6; }
+  .source-link { color: var(--accent); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  .tab-bar {
+    display: flex; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .tab-bar-inner { width: 100%; max-width: 1020px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 10px; font-size: calc(12px * var(--fscale, 1)); color: var(--text2);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color .15s, border-color .15s; user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--diag); border-bottom-color: var(--diag); font-weight: 600; }
+  .tab-abbr-wrap { display: flex; align-items: center; padding: 4px 6px; margin-left: 4px; flex-shrink: 0; position: relative; }
+
+  .main { padding: 12px 16px; max-width: 1020px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 680px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2); padding: 8px 12px;
+    font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; text-transform:none; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 90px; cursor: pointer; transition: box-shadow .15s, transform .1s, border-color .15s; position: relative; }
+  .stat-box:hover { box-shadow: 0 2px 10px rgba(0,0,0,.08); transform: translateY(-1px); border-color: var(--accent); }
+  .stat-box::after { content: '자세히 ▸'; position: absolute; right: 8px; bottom: 6px; font-size: calc(9px * var(--fscale, 1)); color: var(--text2); opacity: .6; }
+
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,18,22,.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 10px; max-width: 600px; width: 100%; max-height: 82vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal-head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; position: sticky; top: 0; background: var(--surface); }
+  .modal-head-title { font-size: calc(15px * var(--fscale, 1)); font-weight: 700; }
+  .modal-head-val { font-size: calc(12px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
+  .modal-close { cursor: pointer; font-size: calc(18px * var(--fscale, 1)); color: var(--text2); line-height: 1; padding: 4px 6px; border-radius: 5px; user-select: none; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 14px 16px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.75; }
+  .modal-body ul { padding-left: 18px; margin: 4px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .alert { margin: 8px 0; }
+  .stat-val { font-size: calc(17px * var(--fscale, 1)); font-weight: 700; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; line-height: 1.35; }
+
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .alert-danger  { background: #ffebe9; border-left: 3px solid var(--red);    color: #82071e; }
+  .alert-info    { background: #ede9fe; border-left: 3px solid var(--accent); color: #5b21b6; }
+  .alert-warn    { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green);  color: #116329; }
+  .alert-diag    { background: #e0f4f1; border-left: 3px solid var(--diag);  color: #0f5549; }
+  .alert-gene    { background: #ddf4ff; border-left: 3px solid var(--gene); color: #0550ae; }
+  .alert-evid    { background: #fce8eb; border-left: 3px solid var(--evid); color: var(--evid); }
+  .alert-preg    { background: #ede9fe; border-left: 3px solid var(--preg);  color: #5b21b6; }
+  .alert-future  { background: #fff1e0; border-left: 3px solid var(--future);  color: #7d4400; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .tbl th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; text-align: left; }
+  .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(0,0,0,.02); }
+  .tbl-wrap { overflow-x: auto; }
+
+  .freq-vhigh { background: #f5c6cb; color: #721c24; font-weight: 700; text-align: center; }
+  .freq-high  { background: #ffd8a8; color: #7d3b00; font-weight: 700; text-align: center; }
+  .freq-mod   { background: #fff3cd; color: #856404; font-weight: 700; text-align: center; }
+  .freq-low   { background: #d4edda; color: #155724; font-weight: 700; text-align: center; }
+
+  .acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; overflow: hidden; }
+  .acc-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .acc-hdr:hover { background: #e5e9ef; }
+  .acc-toggle { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); transition: transform .2s; }
+  .acc-hdr.open .acc-toggle { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); line-height: 1.65; }
+  .acc-body ul { padding-left: 16px; margin: 4px 0; }
+  .acc-body li { margin-bottom: 4px; }
+  .acc-body .rgrade { color: var(--text2); font-weight: 700; font-size: calc(10.5px * var(--fscale,1)); }
+
+  .stage { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; }
+  .t-diag    { background: #e0f4f1; color: var(--diag); border: 1px solid var(--diag); }
+  .t-gene    { background: #ddf4ff; color: var(--gene); border: 1px solid var(--gene); }
+  .t-evid    { background: #fce8eb; color: var(--evid); border: 1px solid var(--evid); }
+  .t-preg    { background: #ede9fe; color: var(--preg); border: 1px solid var(--preg); }
+  .t-future  { background: #fff1e0; color: var(--future); border: 1px solid var(--future); }
+  .t-pref    { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-notpref { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-neg     { background: #fce8eb; color: var(--evid); border: 1px solid var(--evid); }
+  .t-strong  { background: #dafbe1; color: var(--green); border: 1px solid var(--green); }
+  .t-mod     { background: #fff3cd; color: #7d4e00; border: 1px solid var(--yellow); }
+  .t-limited { background: #fce8eb; color: var(--evid); border: 1px solid var(--evid); }
+  .t-prelim  { background: #f0f2f5; color: var(--text2); border: 1px solid var(--border); }
+
+  .abbr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; }
+  .abbr-term { font-weight: 700; color: var(--accent); font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; }
+  .abbr-def  { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
+
+  .gene-acc-hdr { display:flex; align-items:center; gap:8px; }
+  .gene-badge { font-family:'Courier New',monospace; font-weight:800; font-size: calc(11.5px * var(--fscale,1)); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-row">
+      <div class="logo-dr"><span>M</span><span>O</span></div>
+      <h1>MODY(청년기발병 성인형당뇨) 치료옵션 — 체계적 문헌고찰 2026 Update</h1>
+    </div>
+    <div class="meta-line">
+      <span class="source-link">Zagaroli L, Di Berardino A, Petragnano F, Lustri S, Fasciani I, Rossi M, Baroni MG, Delvecchio M. Treatment Options for Patients with Maturity-Onset Diabetes of the Young (MODY): A Systematic Review of Literature: 2026 Update. Diabetes Ther. 2026;17:959–983. doi:10.1007/s13300-026-01884-2</span><br>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">본 도구는 학회의 공식 승인을 받지 않은 개인 참고자료이며, 실제 진료는 원문 및 최신 근거를 함께 확인할 것</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
+    <div class="tab active" onclick="showTab('overview')">🏠 개요</div>
+    <div class="tab" onclick="showTab('gene')">🧬 유전자별 치료</div>
+    <div class="tab" onclick="showTab('evid')">📊 근거수준 요약표</div>
+    <div class="tab" onclick="showTab('preg')">🤰 임신·특수상황</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;"
+          onfocus="this.style.borderColor='var(--diag)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:460px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stat-modal-overlay" class="modal-overlay" onclick="if(event.target===this) closeStatModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div id="stat-modal-title" class="modal-head-title">제목</div>
+        <div id="stat-modal-val" class="modal-head-val">수치</div>
+      </div>
+      <span class="modal-close" onclick="closeStatModal()">✕</span>
+    </div>
+    <div id="stat-modal-body" class="modal-body">내용</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ TAB 0: 개요 ══════════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box" onclick="openStatModal('prevalence')"><div class="stat-val" style="color:var(--diag)">1–6%</div><div class="stat-lbl">소아·청소년 당뇨 중<br>MODY 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('dx40')"><div class="stat-val" style="color:var(--diag)">1.48%</div><div class="stat-lbl">40세 이전 진단<br>당뇨 중 MODY 비율</div></div>
+    <div class="stat-box" onclick="openStatModal('studies')"><div class="stat-val" style="color:var(--evid)">91편</div><div class="stat-lbl">포함 연구 수<br>(2020.4–2025.10)</div></div>
+    <div class="stat-box" onclick="openStatModal('subtypes')"><div class="stat-val" style="color:var(--gene)">최대 14개</div><div class="stat-lbl">역사적으로 기술된<br>MODY 아형 수</div></div>
+    <div class="stat-box" onclick="openStatModal('common')"><div class="stat-val" style="color:var(--gene)">HNF1A·GCK·HNF4A</div><div class="stat-lbl">가장 흔한<br>3대 아형</div></div>
+    <div class="stat-box" onclick="openStatModal('gckdiet')"><div class="stat-val" style="color:var(--future)">157/208</div><div class="stat-lbl">GCK-MODY 중<br>식이/운동만으로 관리</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> 핵심 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>MODY는 분자유전학적 확진을 통해 <strong>정밀의학(precision medicine)</strong>을 실현하는 대표적 단일유전자 당뇨병으로, 유전자별 맞춤치료·불필요한 치료 회피·합병증 위험 완화·유전상담·예후 예측에 기여한다.</li>
+        <li><strong>SU(설폰요소제)</strong>는 HNF1A-, HNF4A-, ABCC8-, KCNJ11-MODY의 1차 약물치료로서 강한 근거를 유지하며, 인슐린에서 SU로의 전환이 빈번히 가능하다.</li>
+        <li><strong>GCK-MODY</strong>는 임신을 제외하고는 약물치료가 대개 불필요 — 분자진단이 불필요한 평생 치료를 예방한다.</li>
+        <li>최근 문헌은 <strong>인크레틴 기반 치료(GLP-1RA, DPP-4i)</strong>와 <strong>SGLT2 억제제</strong>가 진행성 베타세포 기능장애 또는 인슐린저항성이 동반된 선택된 환자에서 보조요법으로 유망함을 시사하나, 근거는 소규모 연구·증례 기반으로 제한적이다.</li>
+        <li>가장 큰 제한점은 소규모·이질적 관찰연구 위주라는 점 — 국제 공동연구·다기관 레지스트리가 근거강화를 위해 필요하다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 연구방법(PRISMA 2020)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>PubMed 검색 — 검색기간: 2020년 4월 16일 ~ 2025년 10월 11일(직전 리뷰 이후)</li>
+        <li>PICOS: 유전학적으로 확진된 모든 연령의 MODY, 진단 후 항고혈당 치료/치료 변경, 결과지표(HbA1c, CGM 지표, 저혈당, 체중/BMI, 내약성, 임신결과, 인슐린→경구제 전환 등)</li>
+        <li>초기 검색 3,856건 → 중복제거 3,783건 → 제목/초록 심사 후 357건 전문검토 → 참고문헌 추가 6건 → 최종 <strong>91편</strong> 정성적 통합</li>
+        <li>연구의 질 평가는 Newcastle–Ottawa Scale(NOS) 사용, PROSPERO 등록번호 CRD420261328522</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+<!-- ══════════════════ TAB 1: 유전자별 치료 ══════════════════ -->
+<div id="tab-gene" class="panel">
+
+  <div class="alert alert-gene"><span>🧬</span><div>유전자별 임상양상과 치료 근거를 아코디언으로 정리했다. 항목을 눌러 펼쳐보세요. 근거수준 배지는 논문 Table 1(Strength of evidence)을 반영한다.</div></div>
+
+  <div class="acc">
+    <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">HNF4A</span> 간세포핵인자4α</span><span class="stage t-mod">근거: 중등도/일관성</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body" style="display:block">
+      <p>영유아기~10대 초반 정상~경계 내당능 유지, 청소년기~성인초기 인슐린저항성 증가와 함께 내당능 악화. 케토시스는 드묾(내인성 인슐린분비 보존).</p>
+      <ul>
+        <li><strong>SU</strong>가 1차 약물치료(SUR1 결합 → KATP채널 차단 → 탈분극 → 인슐린분비 촉진); 고SU감수성이 특징</li>
+        <li>대규모 시리즈(31명): 51.6%가 SU 단독으로 6년 추적 시 유의한 HbA1c 감소·안정적 조절 유지; 나머지 48.4%는 추가치료(더 높은 BMI, 더 긴 당뇨 유병기간과 연관) 필요</li>
+        <li>GLP-1RA/이중 GIP·GLP-1RA는 BMI가 높거나 당뇨 유병기간이 길거나 인슐린분비능이 감소한 경우 보조/대체요법으로 인슐린·경구제 감량·중단 가능(HbA1c −0.6~−3.7%)</li>
+        <li>SGLT2i도 일부 환자에서 효과적이나 요로생식기감염 위험 증가 보고</li>
+        <li>인슐린은 임신(필요시) 또는 진행된 베타세포부전에 주로 예약</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">GCK</span> 글루코키나제</span><span class="stage t-strong">근거: 중등도(보존적관리)/예비(도르자글리아틴)</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body" style="display:block">
+      <p>MODY 중 가장 흔한 아형. 출생부터 경도의 안정적 고혈당(공복혈당 ~125mg/dL, HbA1c 6–7%).</p>
+      <ul>
+        <li><strong>임신 외에는 약물치료를 하지 않는 것이 원칙</strong> — 208명 분석 중 157명 식이/운동만으로 관리, 인슐린/경구제 투여자 대부분 유전진단 후 중단</li>
+        <li>인슐린이나 경구혈당강하제(메트포르민, SU, GLP-1RA, SGLT2i) 추가는 이득이 거의 없음</li>
+        <li><strong>임신</strong>: 태아 유전형에 따라 관리 — 태아가 GCK 보인자면 모체 인슐린치료가 오히려 저출생체중 위험(과잉치료 주의); 태아가 비보인자면서 과성장 시 인슐린 고려. CGM이 개별화된 관리에 도움</li>
+        <li><strong>도르자글리아틴(dorzagliatin)</strong> — 중국에서 T2D용으로 승인된 1차 이중작용 글루코키나제 활성제. 위약대조 교차연구(n=8)에서 2단계 인슐린분비·베타세포 포도당감수성 개선; 8년 추적 증례에서 HbA1c 7.4→6.1% 감소. 근거는 아직 예비단계</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr open" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">HNF1A</span> 간세포핵인자1α</span><span class="stage t-mod">근거: 중등도/일관성</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body" style="display:block">
+      <p>청소년기~성인초기, 비비만·항체음성. 신장 포도당역치 감소로 상대적으로 낮은 혈당에서도 당뇨 발생.</p>
+      <ul>
+        <li><strong>저용량 SU로 시작</strong>(일반 시작용량의 약 1/4)하여 신중히 적정 — 예: 글리클라지드 20–40mg/day; 인슐린보다 우수한 조절 가능(소아 포함)</li>
+        <li>DPP-4i(예: 리나글립틴) 추가는 GLIMLINA RCT에서 CGM 변동계수·HbA1c·SU 용량 개선(저혈당 증가 없이) — MAGE는 유의한 개선 없음</li>
+        <li>SU 불내약 시 <strong>레팍글리니드</strong> 효과적; SGLT2i(엠파글리플로진)는 T2D와 유사한 요당배출 유도 — 무증상 케톤산증 위험 등 안전성 고려</li>
+        <li>SGLT2i/GLP-1RA는 체중·저혈당·심신장 위험이 고려요소일 때 선택적 옵션</li>
+        <li>인슐린은 임신 또는 진행된 베타세포부전에 예약</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">PDX1</span> 췌장·십이지장 호메오박스1</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>청소년~성인초기 경도~중등도 고혈당, 서서히 진행; 외분비 췌장기능이상 동반 가능</li>
+        <li>식이요법·체중관리 우선, 저용량 SU 선택적 유효; DPP-4i(시타글립틴)가 식후고혈당에 도움</li>
+        <li>인슐린저항성 동반 시 메트포르민 고려, 목표 미달 시 인슐린</li>
+        <li>DPV 레지스트리(13명): 첫해 평균 HbA1c 6.0%, 최종방문 6.5%; 인슐린 30.8%, OHA/GLP-1 38.5%, 메트포르민 15.4%, 글리나이드 15.4%, SU 15.4%, 생활습관관리만 38.5%</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">HNF1B</span> 간세포핵인자1β</span><span class="stage t-limited">근거: 제한적</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>조기발병 당뇨, 신장이상(낭종), 저마그네슘혈증, 비뇨생식기/간 침범을 동반하는 다장기 질환 — 인슐린분비 저하로 조기 인슐린 필요 빈번</li>
+        <li>SU 감수성이 낮고 인슐린 시작역치가 낮음을 예상; 신장질환 등 동반질환 적극 관리(신장내과·간담도내과·지질클리닉 협진)</li>
+        <li>GLP-1RA(및/또는 DPP-4i)가 인슐린용량 감소·TIR 개선·체중관리 보조요법으로 보고됨(위장관 부작용 모니터링 필요) — 예: 세마글루타이드로 다회인슐린 0.4IU/kg/day로 감량, HbA1c 7.0→5.9%</li>
+        <li>인슐린이 여전히 치료의 근간</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">NEUROD1</span> 신경성분화인자1</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>발병연령이 소아~성인까지 다양; 불완전 침투도로 가족 내에서도 발현 이질적</li>
+        <li>식이요법이 기본; 약 절반에서 경구제(SU, 메트포르민, DPP-4i) 단독/병용으로 효과; 목표 미달/베타세포기능 진행 시 인슐린</li>
+        <li>일본 전국 코호트에서 67명 중 단 1명만 확인될 정도로 매우 드묾</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">KLF11</span> Krüppel유사인자11</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>근거기반 희박·이질적, 조기 인슐린치료 사례부터 메트포르민만으로 충분한 경증까지 다양</li>
+        <li>경증·안정적 고혈당에서 메트포르민(±생활습관) 고려, 뚜렷/진행성 고혈당에는 인슐린</li>
+        <li>터키 소아코호트: 2명 중 1명 진단시부터 인슐린, 1명 메트포르민 시작 후 인슐린 필요; DPV 레지스트리에서는 전원 인슐린치료(1/3 메트포르민 병용, 16.7% SGLT2i)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">CEL</span> 카르복실에스터리파제</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>30~40대 발병, 췌장낭종 동반 흔함</li>
+        <li>경증에서는 식이·운동만으로 조절 가능한 경우 있음; 목표 미달/진행 시 인슐린으로 승격</li>
+        <li>외분비기능·췌장영상 소견을 정기적으로 모니터링; 근거가 희박해 사례별 관리 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">PAX4</span> Paired Box 4</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>소아~성인 발병까지 폭넓고 중증도 다양 — 식이조절부터 인슐린요구까지</li>
+        <li>희귀질환으로 치료경험 제한적; 브라질 코호트(14명)에서 무치료 유지자부터 다회인슐린주사(MDI) 필요자까지 결과 이질적</li>
+        <li>영아기 발현례에서 조기 인슐린이 필요할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">INS</span> 인슐린 유전자</span><span class="stage t-limited">근거: 제한적(신생아당뇨 근거로 뒷받침)</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>인슐린 생성·가공 결함으로 소아~성인초기 발병, 진행성 베타세포기능장애</li>
+        <li>초기 식이요법·경구제로 단기 효과 있으나 결국 인슐린이 필요한 경우 많음</li>
+        <li>CGM 기반 적정, 조기 기저-볼루스 최적화; 인슐린결핍 상태의 <strong>당케톤증(euglycemic ketosis)</strong> 위험에 유의</li>
+        <li>DPV 레지스트리: 71.4% 인슐린치료, 28.6% OHA/GLP-1기반; 중국 소아 프로그램에서 대부분 장기인슐린 관리(일부 HbA1c 극적 개선례 포함)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">BLK</span> B림프구타이로신키나제</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>혈당이상 정도가 다양 — 상당수는 결국 인슐린 필요하나 일부는 초기 식이요법·경구제로 관리 가능</li>
+        <li>근거 제한적·침투도 가변적 — 체중관리·임신 등 생애주기 트리거에 유의하며 개별화</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">ABCC8</span> ATP결합카세트 서브패밀리C member8</span><span class="stage t-mod">근거: 제한~중등도(신생아당뇨 근거로 뒷받침)</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>경증 고혈당~중증 당뇨까지 발병연령·중증도 다양; 신생아당뇨 표현형과 중첩되는 변이 존재</li>
+        <li><strong>SU에 대한 뚜렷한 감수성</strong>이 특징 — 유전진단 후 많은 환자가 인슐린(또는 타 경구제)에서 SU로 성공적 전환</li>
+        <li>3세 이전 진단된 소아 시리즈에서 대부분 인슐린→경구 SU로 성공 전환</li>
+        <li>경증에서는 식이관리만으로 충분한 경우 있음; SU 반응은 지속적이나 개인차 있고, 일부에서 용량요구가 시간에 따라 감소해 일시 중단도 가능</li>
+        <li>GLP-1RA는 비-SU 대안으로 체중감소·저혈당위험 낮음의 이점</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">KCNJ11</span> 칼륨내향정류채널 서브패밀리J member11</span><span class="stage t-mod">근거: 제한~중등도(신생아당뇨 근거로 뒷받침)</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>ABCC8과 동일 채널의 다른 서브유닛을 암호화 — 베타세포 기전·표현형이 유사</li>
+        <li>유전진단 후 인슐린/경구제에서 SU로 전환 시 혈당결과 유의하게 개선(다수 보고)</li>
+        <li>경증에서는 식이 우선 접근으로 조절 가능한 경우도 있음</li>
+        <li>뇌하수체줄기증후군, 간질환 등 전신 동반질환을 보이는 이질적 표현형 보고</li>
+        <li>임신 중 일시적 인슐린 재도입이 필요할 수 있으며, 후기 삼분기 글리벤클라마이드 재도전이 합병증 없이 보고된 사례 있음</li>
+        <li>신경학적 침범 가능성에 유의하고 상담을 개별화</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-hdr" onclick="toggleAcc(this)"><span class="gene-acc-hdr"><span class="gene-badge">APPL1</span> Adapter Protein containing PH domain 1</span><span class="stage t-prelim">근거: 예비/증례기반</span><span class="acc-toggle">▾</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>성인발병, 상염색체우성 유전, 중증도 다양 — 식이·경구제·인슐린 모두 사용됨</li>
+        <li>2개 가계(24명 보인자): 7명 인슐린 필요, 4명 식이만으로 관리, 2명 경구제 사용</li>
+        <li>APPL1이 아디포넥틴-인슐린 신호전달에 관여함을 고려하여 인슐린저항성 경로를 겨냥한 경구제 선택을 고려할 수 있음</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /gene -->
+
+<!-- ══════════════════ TAB 2: 근거수준 요약표 ══════════════════ -->
+<div id="tab-evid" class="panel">
+
+  <div class="alert alert-evid"><span>📊</span><div>논문 Table 1(Practical suggestions for management of patients with MODY)의 전체 요약. 근거강도는 SU 기반 치료(HNF1A·HNF4A·ABCC8·KCNJ11)에서 가장 일관되며, 신규 보조치료·희귀 아형에서는 제한적/탐색적이다.</div></div>
+
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tr><th>유전자</th><th>실무 권고 요약</th><th>근거수준</th></tr>
+      <tr><td class="gene-badge">HNF4A</td><td>SU 1차치료; SU불내약·저혈당위험·체중관리 필요시 GLP-1 기반 치료를 대안/추가로 고려. 인슐린은 임신 또는 진행된 베타세포부전에 예약</td><td><span class="stage t-mod">중등도/일관성</span></td></tr>
+      <tr><td class="gene-badge">GCK</td><td>어떤 혈당강하제로도 치료하지 않을 것을 권고. 임신은 태아유전형·성장에 따라 관리; 도르자글리아틴은 신흥 옵션(중국만 승인)</td><td><span class="stage t-strong">중등도(보존관리)/예비(도르자글리아틴)</span></td></tr>
+      <tr><td class="gene-badge">HNF1A</td><td>저용량 SU로 시작·신중히 적정; DPP-4i 병용, SU불내약시 레팍글리니드, 선택적으로 SGLT2i·GLP-1RA; 인슐린은 임신/진행된 부전에 예약</td><td><span class="stage t-mod">중등도/일관성</span></td></tr>
+      <tr><td class="gene-badge">PDX1</td><td>식이·체중중심 전략 우선; 식후조절엔 SU 또는 DPP-4i; 인슐린저항성 있으면 메트포르민; 목표미달/베타세포기능저하시 인슐린</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">HNF1B</td><td>SU감수성 저하·인슐린 조기시작 예상; 신장질환 등 협진관리; GLP-1RA(±DPP-4i)를 인슐린감량·TIR개선 보조로 고려</td><td><span class="stage t-limited">제한적</span></td></tr>
+      <tr><td class="gene-badge">NEUROD1</td><td>식이/생활습관 우선, 표현형·내약성에 따라 SU·메트포르민·DPP-4i 고려; 필요시 인슐린으로 승격</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">KLF11</td><td>경증 안정적 고혈당에는 메트포르민(±생활습관); 뚜렷/진행성 고혈당엔 인슐린</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">CEL</td><td>경증질환에서 생활습관 단독관리 고려; 목표미달/진행시 인슐린; 외분비기능·췌장영상 정기 모니터링</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">PAX4</td><td>의학영양요법 우선; 경증 안정적 고혈당엔 경구제 고려; 목표미달/중증·조기발병형에는 인슐린</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">INS</td><td>CGM기반 적정·조기 기저-볼루스 최적화; 보조제는 선택적으로, 인슐린결핍상태의 당케톤증 위험에 유의</td><td><span class="stage t-limited">제한적(신생아당뇨 근거 뒷받침)</span></td></tr>
+      <tr><td class="gene-badge">BLK</td><td>다수 결국 인슐린 필요하나 초기·경증형은 식이/경구제 관리 가능; 침투도 가변적이므로 개별화, 체중·임신 등 생애주기 트리거 유의</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+      <tr><td class="gene-badge">ABCC8</td><td>분자확진 후 SU전환 우선; 용량요구·장기지속성 모니터링; SU 내약불량/체중감량 필요시 GLP-1RA를 보조/대안으로 고려</td><td><span class="stage t-mod">제한~중등도(KATP채널 당뇨 근거 뒷받침)</span></td></tr>
+      <tr><td class="gene-badge">KCNJ11</td><td>유전진단 후 상당한 SU반응 기대; 저혈당 최소화하며 신중히 적정. 경증엔 식이/생활습관; 임신·간헐질환·SU반응부족시 인슐린 예약; 신경학적 침범에 유의</td><td><span class="stage t-mod">제한~중등도(KATP채널 당뇨 근거 뒷받침)</span></td></tr>
+      <tr><td class="gene-badge">APPL1</td><td>표현형·진행에 따라 식이/경구제/인슐린 개별화; 정기 재평가; APPL1의 아디포넥틴-인슐린 신호 역할을 고려해 경구제 선택시 인슐린저항성 경로 고려</td><td><span class="stage t-prelim">예비/증례기반</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:10px">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🚀</span> 최근 치료적 진전 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li><strong>인크레틴 기반 치료</strong>(GLP-1RA, DPP-4i)의 보조요법 역할 확대 — 특히 HNF1A·HNF4A·HNF1B-MODY에서 체중·HbA1c·인슐린요구량 개선 보고</li>
+        <li><strong>SGLT2i</strong>가 신흥 부가치료 옵션으로 부상 — 단, 케톤산증 위험으로 신중한 환자선정·모니터링 필요</li>
+        <li><strong>표적치료(GCK 활성제, 도르자글리아틴)</strong> 개발 — 분자결함을 직접 겨냥하는 정밀치료의 실례</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /evid -->
+
+<!-- ══════════════════ TAB 3: 임신·특수상황 ══════════════════ -->
+<div id="tab-preg" class="panel">
+
+  <div class="alert alert-preg"><span>🤰</span><div>임신은 인슐린저항성이 증가하는 특수한 상황으로, <strong>유전형을 인지한(gene-aware)</strong> 관리가 필요하다. GCK-MODY 임신관리가 가장 많이 연구되었다.</div></div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> GCK-MODY 임신 — 태아유전형 기반 관리</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>레지스트리 분석(54명 여성, 128회 임신): 인슐린치료 임신 39건 중 22건에서 저혈당(9건 중증) 발생; 무치료 임신에서는 이상반응 없음</li>
+        <li>돌연변이 양성 태아: 모체 인슐린치료가 오히려 <strong>저출생체중</strong>과 연관; 돌연변이 음성 태아에서는 치료 유무와 출생체중 차이 없음</li>
+        <li>34명 코호트: GCK 비보인자 태아는 제왕절개율·출생체중·과체중아(LGA) 빈도가 GCK보인자 태아보다 높음 — 태아가 모체혈당을 "너무 높다"고 인지해 인슐린분비·과성장 위험 증가</li>
+        <li>41회 임신 비교(인슐린 n=21 vs 식이 n=20): 인슐린군에서 신생아 저혈당 상당수 발생, 식이군에서는 저혈당·주산기합병증 없음</li>
+        <li>CGM은 식이단독 관리를 뒷받침하는 도구로, 임신 전 기간 동안 목표범위시간(TIR) 개선과 모체저혈당·신생아합병증 증가 없이 활용 가능</li>
+      </ul>
+      <div class="alert alert-preg" style="margin-top:8px"><span>📌</span><div>원칙: 태아가 <strong>GCK보인자면 인슐린은 일반적으로 비권장</strong>(성장제한 위험); 태아가 <strong>비보인자이며 과성장</strong>이면 인슐린 고려. 태아유전형 미상시 CGM 기반의 보수적·성장인지 접근(식후조절 중심, 과잉조절 회피)을 권고.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 도르자글리아틴 — GCK-MODY 표적치료</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>중국에서 T2D 치료제로 승인된 1차 이중작용 글루코키나제 활성제 — 췌장베타세포의 포도당감수성 회복 + 간의 포도당이용 증진</li>
+        <li>이중맹검 위약대조 교차연구(성인 8명, HbA1c 6.7±0.3%): 75mg 단회 경구투여 후 2시간 고혈당클램프에서 기저혈당 저하, 2단계 인슐린분비·베타세포 포도당감수성 유의하게 개선; 중대이상반응 없음(경미한 저혈당 1건)</li>
+        <li>8년 추적 증례: 도르자글리아틴 75mg 1일 2회로 HbA1c 7.4→6.3%(3개월)→6.1%(6개월), 저혈당 없음</li>
+        <li>임상경험은 아직 개념증명(proof-of-concept) 수준 — 장기 유효성·안전성·다양한 인구집단 적용가능성에 대한 추가 연구 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> 디제닉(digenic) 유전 및 기타 이질성 요인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>일부 환자는 2개 이상 MODY 관련 유전자에 병합 변이(예: GCK + HNF1A, GCK + NEUROD1)를 가져 표현형·치료반응이 더욱 이질적일 수 있음</li>
+        <li>디제닉 유전은 진단 해석·치료결정을 복잡하게 하며, 임상·유전학적 특성을 함께 고려한 개별화된 접근이 더욱 중요해짐</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> 연구 한계 및 향후 방향</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body collapsed">
+      <ul>
+        <li>근거는 대부분 관찰연구·증례군·소규모 코호트에서 도출되며, 무작위대조시험은 드묾</li>
+        <li>연구설계·결과지표·추적기간의 이질성으로 다수 아형에서 확정적 치료 알고리즘 수립이 제한됨</li>
+        <li>PubMed 단일 데이터베이스 검색이라는 방법론적 한계가 있으나, 참고문헌 수기 스크리닝으로 누락 최소화</li>
+        <li>향후: 전향적 연구, 무작위임상시험, 국제 공동 레지스트리를 통한 근거기반 강화 및 베타세포 기능장애의 분자·세포 기전 규명을 통한 새로운 치료표적 발굴이 필요</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /preg -->
+
+</div><!-- /main -->
+
+<script>
+const STAT_DETAILS = {
+  prevalence: {
+    title: "소아·청소년 당뇨 중 MODY 비율",
+    val: "1–6%",
+    color: "var(--diag)",
+    html: `
+      <div class="alert alert-diag"><span>🧬</span><div>MODY는 소아·청소년 당뇨환자의 약 <strong>1–6%</strong>를 차지하는 것으로 추정되는 드문 단일유전자(monogenic) 형태의 당뇨병이다.</div></div>
+      <ul>
+        <li>베타세포 기능을 손상시키는 단일유전자 결함에 의해 발생하며, 경도~중증의 인슐린결핍을 유발</li>
+        <li>MODY는 정밀의학(precision medicine)의 대표적 사례로 꼽힘 — 분자확진이 <strong>혈당모니터링 방식 결정, 불필요한 치료(예: 불필요한 인슐린) 회피, 유전자특이적 치료·유전상담·예후 예측</strong>을 가능하게 함</li>
+        <li>전통적으로 25세 이전 발병을 기준으로 삼아왔으나, 점점 더 늦은 연령에 진단되는 사례가 늘고 있다는 근거가 축적되고 있음</li>
+        <li>임상·유전학적으로 매우 이질적인 질환군이며, 표현형은 동일 변이를 가진 보인자 간에도, 심지어 같은 가계 내에서도 다를 수 있음</li>
+      </ul>
+    `
+  },
+  dx40: {
+    title: "40세 이전 진단 당뇨 중 MODY 비율",
+    val: "1.48%",
+    color: "var(--diag)",
+    html: `
+      <div class="alert alert-diag"><span>🧬</span><div>유전형 우선(genotype-first) 접근법 기반의 인구집단 연구에서, MODY 변이는 <strong>1,052명 중 1명 꼴</strong>로 존재했으며 40세 이전 진단된 당뇨 환자의 <strong>1.48%</strong>를 차지했다(Sharp et al. J Clin Endocrinol Metab. 2025).</div></div>
+      <ul>
+        <li>차세대염기서열분석(NGS)의 발전으로 진단 정확도가 향상되고, T1D/T2D로의 오분류가 감소함</li>
+        <li>정확한 병인 진단은 삶의 질과 혈당조절을 개선한다는 환자 관점 연구(Thanabalasingham 등)도 보고됨</li>
+        <li>진단이 늘어나면서 정밀의학 틀 안에서 표적치료 접근에 대한 임상적 인식도 높아지는 추세</li>
+      </ul>
+    `
+  },
+  studies: {
+    title: "포함 연구 수",
+    val: "91편",
+    color: "var(--evid)",
+    html: `
+      <div class="alert alert-evid"><span>📚</span><div>PRISMA 2020 기준 체계적 문헌고찰(정성적 통합, 메타분석 미실시)로 PROSPERO에 등록됨(등록번호 <strong>CRD420261328522</strong>).</div></div>
+      <ul>
+        <li>검색 데이터베이스: PubMed 단독 — 검색기간 <strong>2020년 4월 16일</strong>(직전 리뷰 마지막 포함연구일) ~ <strong>2025년 10월 11일</strong></li>
+        <li>선정기준(PICOS): 유전학적으로 확진된 모든 연령의 MODY, 진단 후 치료·치료변경, 결과지표(HbA1c, CGM 지표, 저혈당, 체중/BMI, 내약성, 임신결과, 인슐린↔경구제 전환 등)가 명확히 보고된 연구</li>
+        <li>선별 흐름: 초기검색 3,856건 → 중복제거 후 3,783건 심사 → 전문검토 357건 → 참고문헌 스크리닝으로 6건 추가 → 최종 <strong>91편</strong> 포함</li>
+        <li>제외: 전문 없는 초록, 리뷰/사설/지침, 결과 불명확, 비영어 문헌</li>
+        <li>연구의 질 평가는 <strong>Newcastle–Ottawa Scale(NOS)</strong> 사용, 증례보고·증례군을 포함하므로 서술적으로 해석</li>
+      </ul>
+    `
+  },
+  subtypes: {
+    title: "역사적으로 기술된 MODY 아형(전체 14종)",
+    val: "최대 14개",
+    color: "var(--gene)",
+    html: `
+      <div class="alert alert-gene"><span>🧬</span><div>본 문헌고찰의 검색전략에 포함된 <strong>14개 원인유전자</strong>를 MODY 번호 순으로 모두 정리했다. 대부분의 증례는 HNF1A, GCK, HNF4A 3개 유전자 변이에서 기인하며, 코호트에 따라 유병률 차이가 크다.</div></div>
+      <table class="tbl" style="margin-top:6px">
+        <tr><th>번호</th><th>유전자</th><th>비고</th></tr>
+        <tr><td>MODY1</td><td class="gene-badge">HNF4A</td><td>SU 고감수성, 신생아 대설증·저혈당 동반 가능</td></tr>
+        <tr><td>MODY2</td><td class="gene-badge">GCK</td><td>가장 흔한 아형, 임신 외 약물치료 대개 불필요</td></tr>
+        <tr><td>MODY3</td><td class="gene-badge">HNF1A</td><td>SU 고감수성, 신장포도당역치 저하</td></tr>
+        <tr><td>MODY4</td><td class="gene-badge">PDX1</td><td>경도~중등도 고혈당, 외분비췌장기능이상 동반 가능</td></tr>
+        <tr><td>MODY5</td><td class="gene-badge">HNF1B</td><td>신낭종·저마그네슘혈증 동반, 조기 인슐린 필요</td></tr>
+        <tr><td>MODY6</td><td class="gene-badge">NEUROD1</td><td>불완전 침투도, 매우 드묾</td></tr>
+        <tr><td>MODY7</td><td class="gene-badge">KLF11</td><td>근거 희박, 표현형 이질적</td></tr>
+        <tr><td>MODY8</td><td class="gene-badge">CEL</td><td>췌장낭종·외분비기능이상 동반</td></tr>
+        <tr><td>MODY9</td><td class="gene-badge">PAX4</td><td>중증도 폭넓음, 희귀</td></tr>
+        <tr><td>MODY10</td><td class="gene-badge">INS</td><td>진행성 베타세포기능장애, 당케톤증 위험</td></tr>
+        <tr><td>MODY11</td><td class="gene-badge">BLK</td><td>침투도 가변적</td></tr>
+        <tr><td>MODY12</td><td class="gene-badge">ABCC8</td><td>SU 고감수성, 신생아당뇨와 표현형 중첩</td></tr>
+        <tr><td>MODY13</td><td class="gene-badge">KCNJ11</td><td>ABCC8과 동일 KATP채널의 다른 소단위</td></tr>
+        <tr><td>MODY14</td><td class="gene-badge">APPL1</td><td>상염색체우성, 아디포넥틴-인슐린 신호 관여</td></tr>
+      </table>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>일부 환자는 2개 이상의 MODY 유전자에 걸친 <strong>디제닉(digenic) 변이</strong>(예: GCK+HNF1A, GCK+NEUROD1)를 가져 표현형·치료반응이 더 복잡해질 수 있다.</div></div>
+    `
+  },
+  common: {
+    title: "가장 흔한 3대 아형",
+    val: "HNF1A · GCK · HNF4A",
+    color: "var(--gene)",
+    html: `
+      <div class="alert alert-gene"><span>🧬</span><div>대부분의 코호트에서 MODY 증례의 다수를 차지하는 3대 유전자이며, 상대적 비율은 인구집단·의뢰경로에 따라 다르다.</div></div>
+      <ul>
+        <li><strong>HNF1A-MODY(MODY3)</strong>: 청소년기~성인초기 발병, 비비만·항체음성, 신장포도당역치 저하로 상대적으로 낮은 혈당에서도 요당 검출. 저용량 SU에 고감수성 — 1차 약물치료</li>
+        <li><strong>GCK-MODY(MODY2)</strong>: 가장 흔한 아형, 출생부터 경도의 안정적 고혈당(공복혈당 ~125mg/dL, HbA1c 6–7%). 임신을 제외하면 약물치료가 대개 불필요하며, 분자진단이 불필요한 평생 치료를 예방</li>
+        <li><strong>HNF4A-MODY(MODY1)</strong>: 영유아기~10대 초반 정상 내당능 유지 후 청소년기~성인초기 악화. SU 1차치료, 신생아기 대설증·일과성 저혈당 동반 가능</li>
+      </ul>
+      <small>세 유전자 모두 SU(GCK 제외) 또는 무약물 관리라는 뚜렷한 유전자특이적 치료전략을 가지므로, MODY 의심 시 우선적으로 감별해야 할 아형이다.</small>
+    `
+  },
+  gckdiet: {
+    title: "GCK-MODY 중 식이/운동만으로 관리되는 비율",
+    val: "157/208명(임신 제외)",
+    color: "var(--future)",
+    html: `
+      <div class="alert alert-future"><span>🥗</span><div>임신 사례를 제외한 <strong>208명</strong>의 GCK-MODY 환자를 분석한 결과, 치료분포는 다음과 같았다.</div></div>
+      <ul>
+        <li><strong>157명(75.5%)</strong> — 식이/운동만으로 관리</li>
+        <li><strong>17명(8.2%)</strong> — 무치료</li>
+        <li><strong>30명(14.4%)</strong> — 경구혈당강하제 사용(가장 흔한 것은 메트포르민, n=12)</li>
+        <li><strong>11명(5.3%)</strong> — 인슐린 사용, 유전확진 후 대부분 중단</li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:8px"><span>📌</span><div>여러 성인·소아 증례군, 코호트, 레지스트리에서 일관되게 확인된 소견으로, "임신 외 상시투약 불필요(no routine drugs)" 원칙을 뒷받침한다. 인슐린이나 경구혈당강하제(메트포르민, SU, GLP-1RA, SGLT2i) 추가는 이득이 거의 없다.</div></div>
+    `
+  }
+};
+
+function openStatModal(key) {
+  const d = STAT_DETAILS[key];
+  if (!d) return;
+  document.getElementById('stat-modal-title').textContent = d.title;
+  const valEl = document.getElementById('stat-modal-val');
+  valEl.textContent = d.val;
+  valEl.style.color = d.color;
+  valEl.style.fontWeight = '700';
+  valEl.style.fontSize = 'calc(14px * var(--fscale, 1))';
+  document.getElementById('stat-modal-body').innerHTML = d.html;
+  document.getElementById('stat-modal-overlay').classList.add('open');
+}
+function closeStatModal() {
+  document.getElementById('stat-modal-overlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStatModal(); });
+
+const ABBR_DATA = [
+  { term:"MODY", def:"Maturity-Onset Diabetes of the Young — 청년기발병 성인형당뇨(단일유전자 당뇨)" },
+  { term:"HNF4A", def:"Hepatocyte Nuclear Factor 4α — 간세포핵인자4알파(MODY1)" },
+  { term:"GCK",  def:"Glucokinase — 글루코키나제(MODY2)" },
+  { term:"HNF1A", def:"Hepatocyte Nuclear Factor 1α — 간세포핵인자1알파(MODY3)" },
+  { term:"PDX1", def:"Pancreatic and Duodenal Homeobox 1 — 췌장·십이지장 호메오박스1(MODY4)" },
+  { term:"HNF1B", def:"Hepatocyte Nuclear Factor 1β — 간세포핵인자1베타(MODY5)" },
+  { term:"NEUROD1", def:"Neurogenic Differentiation 1 — 신경성분화인자1(MODY6)" },
+  { term:"KLF11", def:"Krüppel-like Factor 11 — Krüppel유사인자11(MODY7)" },
+  { term:"CEL",  def:"Carboxyl Ester Lipase — 카르복실에스터리파제(MODY8)" },
+  { term:"PAX4", def:"Paired Box 4 — Paired Box 4 유전자(MODY9)" },
+  { term:"INS",  def:"Insulin gene — 인슐린 유전자(MODY10)" },
+  { term:"BLK",  def:"B-Lymphocyte tyrosine Kinase — B림프구 타이로신 키나제(MODY11)" },
+  { term:"ABCC8", def:"ATP-Binding Cassette subfamily C member 8 — SUR1 소단위(MODY12)" },
+  { term:"KCNJ11", def:"Potassium inwardly-rectifying channel subfamily J member 11 — Kir6.2 소단위(MODY13)" },
+  { term:"APPL1", def:"Adapter Protein containing PH domain 1 — 어댑터단백질(MODY14)" },
+  { term:"SU",   def:"Sulfonylurea — 설폰요소제" },
+  { term:"GLP-1RA", def:"Glucagon-Like Peptide-1 Receptor Agonist — GLP-1 수용체작용제" },
+  { term:"GIP",  def:"Gastric Inhibitory Peptide — 위억제펩타이드" },
+  { term:"DPP-4i", def:"Dipeptidyl Peptidase-4 inhibitor — DPP-4 억제제" },
+  { term:"SGLT2i", def:"Sodium-Glucose Cotransporter 2 inhibitor — SGLT2 억제제" },
+  { term:"OHA",  def:"Oral Hypoglycemic Agent — 경구혈당강하제" },
+  { term:"HbA1c", def:"Hemoglobin A1c — 당화혈색소" },
+  { term:"CGM",  def:"Continuous Glucose Monitoring — 연속혈당측정" },
+  { term:"TIR",  def:"Time In Range — 목표범위 시간비율" },
+  { term:"TBR",  def:"Time Below Range — 저혈당범위 시간비율" },
+  { term:"MDI",  def:"Multiple Daily Injections — 다회인슐린주사" },
+  { term:"KATP", def:"ATP-sensitive Potassium channel — ATP감수성 칼륨채널" },
+  { term:"NOS",  def:"Newcastle–Ottawa Scale — 관찰연구 질평가척도" },
+  { term:"PRISMA", def:"Preferred Reporting Items for Systematic Reviews and Meta-Analyses — 체계적문헌고찰 보고지침" },
+  { term:"DPV",  def:"Diabetes Patienten Verlaufsdokumentation — 독일·오스트리아 당뇨환자 추적 레지스트리" },
+  { term:"MAGE", def:"Mean Amplitude of Glycemic Excursions — 평균혈당변동폭" },
+  { term:"LGA",  def:"Large for Gestational Age — 부당중량아(과체중아)" },
+];
+
+function renderAbbrMain() {
+  const g = document.getElementById('abbr-main-grid');
+  if (g) g.innerHTML = ABBR_DATA.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+renderAbbrMain();
+
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') === `showTab('${id}')`) t.classList.add('active');
+  });
+}
+
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+
+function toggleAcc(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.style.display = body.style.display === 'block' ? 'none' : 'block';
+}
+
+function filterAbbr(q) {
+  const drop = document.getElementById('abbr-dropdown');
+  const grid = document.getElementById('abbr-grid-drop');
+  const cnt  = document.getElementById('abbr-count');
+  q = q.trim().toLowerCase();
+  if (!q) { drop.style.display = 'none'; cnt.textContent = ''; return; }
+  const hits = ABBR_DATA.filter(a =>
+    a.term.toLowerCase().includes(q) || a.def.toLowerCase().includes(q)
+  );
+  cnt.textContent = hits.length || '';
+  if (!hits.length) { drop.style.display = 'none'; return; }
+  drop.style.display = 'block';
+  const inp = document.getElementById('abbr-input');
+  const rect = inp.getBoundingClientRect();
+  drop.style.top  = (rect.bottom + 4) + 'px';
+  drop.style.left = Math.max(8, rect.right - 460) + 'px';
+  grid.innerHTML = hits.map(a =>
+    `<div class="abbr-item"><div class="abbr-term">${a.term}</div><div class="abbr-def">${a.def}</div></div>`
+  ).join('');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.tab-abbr-wrap')) {
+    document.getElementById('abbr-dropdown').style.display = 'none';
+    document.getElementById('abbr-count').textContent = '';
+  }
+});
+
+const FONT_ZOOM_STEPS = [100, 125, 150];
+let fontZoomIdx = 0;
+function cycleFontZoom() {
+  fontZoomIdx = (fontZoomIdx + 1) % FONT_ZOOM_STEPS.length;
+  const pct = FONT_ZOOM_STEPS[fontZoomIdx];
+  document.documentElement.style.setProperty('--fscale', pct / 100);
+  document.getElementById('font-zoom-label').textContent = pct + '%';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header:not(.open)').forEach(h => {
+    const b = h.nextElementSibling;
+    if (b) b.classList.add('collapsed');
+  });
+});
+</script>
+</body>
+</html>
