@@ -288,9 +288,86 @@
     .footer a { color: #9ca3af; text-decoration: none; }
     .footer a:hover { color: #6b7280; }
 
+    /* ══════════ Night mode (19:00–07:00 자동) ══════════ */
+    body, .card, .card-header, .link-item, .header h1, .card-title { transition: background .3s, color .3s, border-color .3s; }
+    body.night { background: #0f1420; color-scheme: dark; }
+    body.night .header h1 { color: #e5e9f2; }
+    body.night .header p,
+    body.night .header p a { color: #8b97b3 !important; }
+    body.night .card {
+      background: #1a2130;
+      box-shadow: 0 2px 12px rgba(0,0,0,.35), 0 6px 24px rgba(0,0,0,.25);
+    }
+    body.night .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.55); }
+    body.night .card-header { border-bottom-color: rgba(255,255,255,.06); }
+    body.night .card-title { color: #e5e9f2; }
+    body.night .card-count { opacity: .85; }
+    body.night .link-item { border-bottom-color: rgba(255,255,255,.05); }
+    body.night .footer, body.night .footer a { color: #6b7280; }
+    body.night .footer a:hover { color: #9ca3af; }
+
+    body.night .theme-blue .card-header      { background: linear-gradient(135deg, rgba(37,99,235,.22), rgba(37,99,235,.08)); }
+    body.night .theme-blue .card-count,
+    body.night .theme-blue .link-item        { color: #93c5fd; }
+    body.night .theme-blue .link-item:hover  { background: rgba(37,99,235,.12); }
+
+    body.night .theme-teal .card-header      { background: linear-gradient(135deg, rgba(8,145,178,.22), rgba(8,145,178,.08)); }
+    body.night .theme-teal .card-count,
+    body.night .theme-teal .link-item        { color: #67e8f9; }
+    body.night .theme-teal .link-item:hover  { background: rgba(8,145,178,.12); }
+
+    body.night .theme-teal-dark .card-header     { background: linear-gradient(135deg, rgba(15,118,110,.26), rgba(15,118,110,.10)); }
+    body.night .theme-teal-dark .card-count,
+    body.night .theme-teal-dark .link-item       { color: #5eead4; }
+    body.night .theme-teal-dark .link-item:hover { background: rgba(15,118,110,.14); }
+
+    body.night .theme-orange .card-header     { background: linear-gradient(135deg, rgba(234,88,12,.22), rgba(234,88,12,.08)); }
+    body.night .theme-orange .card-count,
+    body.night .theme-orange .link-item       { color: #fdba74; }
+    body.night .theme-orange .link-item:hover { background: rgba(234,88,12,.12); }
+
+    body.night .theme-purple .card-header     { background: linear-gradient(135deg, rgba(124,58,237,.24), rgba(124,58,237,.08)); }
+    body.night .theme-purple .card-count,
+    body.night .theme-purple .link-item       { color: #c4b5fd; }
+    body.night .theme-purple .link-item:hover { background: rgba(124,58,237,.12); }
+
+    body.night .theme-red .card-header     { background: linear-gradient(135deg, rgba(220,38,38,.22), rgba(220,38,38,.08)); }
+    body.night .theme-red .card-count,
+    body.night .theme-red .link-item       { color: #fca5a5; }
+    body.night .theme-red .link-item:hover { background: rgba(220,38,38,.12); }
+
+    body.night .theme-amber .card-header     { background: linear-gradient(135deg, rgba(217,119,6,.22), rgba(217,119,6,.08)); }
+    body.night .theme-amber .card-count,
+    body.night .theme-amber .link-item       { color: #fcd34d; }
+    body.night .theme-amber .link-item:hover { background: rgba(217,119,6,.12); }
+
+    body.night .theme-green .card-header     { background: linear-gradient(135deg, rgba(22,163,74,.22), rgba(22,163,74,.08)); }
+    body.night .theme-green .card-count,
+    body.night .theme-green .link-item       { color: #86efac; }
+    body.night .theme-green .link-item:hover { background: rgba(22,163,74,.12); }
+
+    body.night .theme-indigo .card-header     { background: linear-gradient(135deg, rgba(79,70,229,.24), rgba(79,70,229,.08)); }
+    body.night .theme-indigo .card-count,
+    body.night .theme-indigo .link-item       { color: #a5b4fc; }
+    body.night .theme-indigo .link-item:hover { background: rgba(79,70,229,.12); }
+
+
   </style>
 </head>
 <body>
+<script>
+  /* 19:00~07:00 야간 배경 자동 적용 (렌더링 전에 즉시 적용하여 깜빡임 방지) */
+  (function(){
+    var NIGHT_START = 19, NIGHT_END = 7;
+    function apply(){
+      var h = new Date().getHours();
+      document.body.classList.toggle('night', h >= NIGHT_START || h < NIGHT_END);
+    }
+    apply();
+    setInterval(apply, 60000);
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) apply(); });
+  })();
+</script>
 
 <div id="main-content">
 <div class="header">
